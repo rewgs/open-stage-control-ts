@@ -5,6 +5,7 @@
 - bug fixes
   - xy: broken `spring` property
   - macOs: add support for emulated right click via `ctrl+click`
+  - midi: messages received from a midi port now only affect widgets that send to this port
 
 ## 0.48.6
 
