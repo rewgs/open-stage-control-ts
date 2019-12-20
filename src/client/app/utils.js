@@ -23,8 +23,6 @@ module.exports = {
 
     deepEqual: function(a, b) {
 
-        // about 2,75 x faster than JSON.stringify(a) === JSON.stringify(b)
-
         var ta = typeof a,
             tb = typeof b
 
