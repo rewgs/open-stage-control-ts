@@ -117,7 +117,7 @@ module.exports = class _plots_base extends Canvas {
 
         if (this.getProp('origin') !== false) {
 
-            var origin = mapToScale(this.getProp('origin') || this.rangeY.min,[this.rangeY.min,this.rangeY.max],[this.height,0],0,this.getProp('logScaleY'),true)
+            var origin = mapToScale(this.getProp('origin'), [this.rangeY.min,this.rangeY.max],[this.height,0],0,this.getProp('logScaleY'),true)
 
             this.ctx.globalAlpha = 0.1
             this.ctx.fillStyle = this.colors.custom
@@ -152,7 +152,7 @@ module.exports = class _plots_base extends Canvas {
         var barWidth = Math.round(this.width / this.value.length),
             offset = Math.round((this.width - barWidth * this.value.length) / 2)
 
-        var origin = mapToScale(this.getProp('origin') || this.rangeY.min,[this.rangeY.min,this.rangeY.max],[this.height,0],0,this.getProp('logScaleY'),true)
+        var origin = mapToScale(this.getProp('origin') !== false ? this.getProp('origin') : this.rangeY.min, [this.rangeY.min,this.rangeY.max],[this.height,0],0,this.getProp('logScaleY'),true)
 
         this.ctx.beginPath()
 
