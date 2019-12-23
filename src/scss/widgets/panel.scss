@@ -144,6 +144,7 @@
             padding: calc(var(--spacing) / 2);
             > .widget {
                 width: auto!important;
+                min-width: auto!important;
                 max-width: 100%;
                 margin: calc(var(--spacing) / 2);
             }
@@ -157,6 +158,7 @@
             padding: calc(var(--spacing) / 2);
             > .widget {
                 height: auto!important;
+                min-height: auto!important;
                 max-height: 100%;
                 margin: calc(var(--spacing) / 2);
             }
