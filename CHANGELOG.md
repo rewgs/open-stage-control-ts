@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+- bug fixes
+  - strip: layout issues when moving widget in a strip (min width/height still active)
+
 ## 0.48.7
 
 - bug fixes
