@@ -38,7 +38,9 @@ module.exports =  {
             recentSessions = recentSessions.map(function(file){return dir + '/' + file})
         }
 
-        ipc.send('sessionList',recentSessions,clientId)
+        ipc.send('sessionList', recentSessions, clientId)
+        ipc.send('serverTargets', settings.read('targets'), clientId)
+        
     },
 
     sessionAddToHistory: function(data) {

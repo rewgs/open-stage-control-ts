@@ -11,6 +11,7 @@ var Osc = class Osc extends EventEmitter {
 
         this.syncOnly = false
         this.remoteControl = {}
+        this.serverTargets = []
 
     }
 
@@ -41,7 +42,7 @@ var Osc = class Osc extends EventEmitter {
         var [widgets, restArgs] = widgetManager.getWidgetByAddressAndArgs(data.address, data.args)
 
         for (let i in widgets) {
-            
+
             let widgetTarget = widgets[i].getProp('target'),
                 match = true
 
@@ -51,8 +52,12 @@ var Osc = class Osc extends EventEmitter {
                 match = deepEqual(widgetTarget, data.target)
             } else if (data.host === 'midi') {
                 // if the message comes from a midi port, only update widgets that send to that port
-                let widgetArrayTarget = Array.isArray(widgetTarget) ? widgetTarget : [widgetTarget]
-                match = widgetArrayTarget.includes(data.host + ':' + data.port)
+                let widgetArrayTarget = Array.isArray(widgetTarget) ? widgetTarget : [widgetTarget],
+                    strTarget = data.host + ':' + data.port
+
+                match = widgetArrayTarget.includes(strTarget) ||
+                        (!widgetArrayTarget.includes(null) && this.serverTargets.includes(strTarget))
+
             }
 
             if (match) {
