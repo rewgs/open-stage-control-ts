@@ -203,6 +203,12 @@ module.exports = {
 
         document.title = windowTitle + (data ? ' (' + data + ')' : '')
 
+    },
+
+    serverTargets: function(data) {
+
+        if (data) osc.serverTargets = data
+
     }
 
 }

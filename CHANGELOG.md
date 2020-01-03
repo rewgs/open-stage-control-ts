@@ -5,6 +5,7 @@
 - bug fixes
   - strip: layout issues when moving widget in a strip (min width/height still active)
   - tcp: prevent sending osc messages on udp port when the same port number is set as a tcp target
+  - midi: take server default targets into account to determine widget matching
 
 ## 0.48.7
 
