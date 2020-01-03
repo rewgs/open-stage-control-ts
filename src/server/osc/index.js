@@ -163,16 +163,20 @@ class OscServer {
                 return
             }
 
-            oscUDPServer.send({
-                address: data.address,
-                args: data.args
-            }, data.host, data.port)
-
             if (tcpInPort && oscTCPServer.clients[data.host] && oscTCPServer.clients[data.host][data.port]) {
+
                 oscTCPServer.clients[data.host][data.port].send({
                     address: data.address,
                     args: data.args
                 })
+
+            } else {
+
+                oscUDPServer.send({
+                    address: data.address,
+                    args: data.args
+                }, data.host, data.port)
+                
             }
 
             if (debug) console.log('OSC sent: ',{address:data.address, args: data.args}, 'To: ' + data.host + ':' + data.port)
