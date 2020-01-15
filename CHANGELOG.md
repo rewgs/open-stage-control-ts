@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.48.9
+
+- editor:
+  - convert invalid quote characters automatically to avoid errors
+
 ## 0.48.8
 
 - bug fixes
