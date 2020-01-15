@@ -100,16 +100,17 @@ module.exports = function editField(editor, widget, propName, defaultValue){
             input.blur()
 
             var v
+            var str = input.value.replace(/[‟”]/g, '"').replace(/[‘’]/g, '\'') // convert invalid quote characters
 
             try {
-                v = JSON.parseFlex(input.value)
+                v = JSON.parseFlex(str)
                 if (typeof v === 'string') {
                     // escape backslashes in simple strings only
-                    v = JSON.parseFlex(input.value.replace(/\\/g, '__BACKSLASH__'))
+                    v = JSON.parseFlex(str.replace(/\\/g, '__BACKSLASH__'))
                     v = v.replace(/__BACKSLASH__/g, '\\')
                 }
             } catch(err) {
-                v = input.value
+                v = str
             }
 
             var newWidgets = []
