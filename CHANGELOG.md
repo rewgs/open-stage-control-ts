@@ -2,6 +2,8 @@
 
 ## 0.48.9
 
+- bug fixes:
+  - missing `target` property for `plots/*` widgets, required for MIDI bindings 
 - editor:
   - convert invalid quote characters automatically to avoid errors
 
