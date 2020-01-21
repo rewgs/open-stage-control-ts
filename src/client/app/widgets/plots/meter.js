@@ -31,7 +31,7 @@ module.exports = class Meter extends Fader {
                 'Examples: `[\'blue\', \'red\']`, {\'0\': \'blue\', \'0.9\': \'blue\', \'1\': \'red\'} '
             ]},
 
-        }, ['target', 'precision', 'bypass'], {
+        }, ['precision', 'bypass'], {
 
             css: {type: 'string', value: '', help: [
                 'Available CSS variables:',

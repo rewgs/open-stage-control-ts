@@ -23,7 +23,7 @@ class Html extends Widget {
             ]},
             border: {type: 'boolean', value: true, help: 'Set to `false` to disable the borders and background-color'},
 
-        }, ['color', 'target', 'precision', 'bypass'], {})
+        }, ['color', 'precision', 'bypass'], {})
 
     }
 
