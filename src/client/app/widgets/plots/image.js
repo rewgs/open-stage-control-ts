@@ -26,7 +26,7 @@ module.exports = class Image extends Widget {
                 'When true, sending `reload` to the widget reloads its image without changing its value'
             ]}
 
-        }, ['color', 'target', 'precision', 'bypass'], {
+        }, ['color', 'precision', 'bypass'], {
 
             value: {type: 'string', value: '', help: [
                 '- File `url` or `path` (relative to the session file location by default, falling back to absolute path)',

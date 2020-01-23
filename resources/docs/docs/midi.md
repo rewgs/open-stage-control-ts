@@ -31,6 +31,10 @@ In order to send MIDI messages, a widget must have at least one `target` formatt
 
 `midi:device_name` (where `device_name` is one of the declared midi devices)
 
+!!! warning
+    Messages received from a MIDI port only affect widgets that send to this port.
+
+
 ## Supported MIDI messages
 
 !!! warning ""

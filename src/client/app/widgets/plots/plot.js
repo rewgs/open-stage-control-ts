@@ -25,7 +25,7 @@ module.exports = class Plot extends _plots_base {
             smooth: {type: 'boolean|number', value: false, help: 'Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`)'},
             pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
 
-        }, ['target', 'precision', 'bypass'], {
+        }, ['precision', 'bypass'], {
 
             value: {type: 'array|string', value: '', help: [
                 '- `Array` of `y` values',

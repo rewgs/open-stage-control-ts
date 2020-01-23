@@ -13,7 +13,7 @@ module.exports = class Led extends Widget {
             range: {type: 'object', value: {min:0,max:1}, help: 'Value to led intensity mapping range'},
             logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale (base 10). Set to a `number` to define the logarithm\'s base.'},
 
-        }, ['target', 'precision', 'bypass'], {})
+        }, ['precision', 'bypass'], {})
 
     }
 
