@@ -182,7 +182,7 @@
     @extend .toggle-container;
 
     > .label:after {
-            content:"\f0da"!important;
+            content:"\f0da";
             font-family: FontAwesome;
             transform: rotateZ(-45deg);
             font-size: 20rem;

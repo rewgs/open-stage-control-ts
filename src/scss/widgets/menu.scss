@@ -1,0 +1,123 @@
+@keyframes menu-widget-fade {
+    0%{opacity: 0; transform: scale(0.9);}
+    100%{opacity: 1;  transform: scale(1);}
+}
+.menu-container {
+    @extend .modal-container;
+
+
+    border-radius: 0!important; // border radius breaks it somehow
+    z-index: initial!important;
+
+    --size:300rem;
+
+    .menu {
+        display:none;
+        &.show {
+            display:block;
+            animation: menu-widget-fade .1s forwards;
+        }
+
+        width:var(--size);
+        height:var(--size);
+        position: fixed;
+        z-index: 999999999;
+        margin-left: calc(var(--x) - var(--size) / 2);
+        margin-top: calc(var(--y) - var(--size) / 2);
+
+        background: var(--color-fg);
+
+        border-radius: 100%;
+        overflow: hidden;
+        box-shadow: 0 0 0 1rem var(--color-light) inset, 0 0 5rem 0 var(--color-bg) ;
+
+        &:after {
+            content:"";
+            position: absolute;
+            width: calc(var(--size) / 3);
+            height: calc(var(--size) / 3);
+            top:50%;
+            left: 50%;
+            margin-left: calc(-1 * var(--size) / 6);
+            margin-top: calc(-1 * var(--size) / 6);
+            background: var(--color-raised);
+            box-shadow: 0 0 2rem 0 var(--color-bg), 0 0 0 2rem var(--color-light) inset;
+            border-radius: 100%;
+            z-index: 10;
+        }
+
+
+        .item {
+
+            position: absolute;
+            z-index: 1;
+            top: calc(-1 * var(--size) / 2);
+            left: calc(-1 * var(--size) / 2);
+            width: 100%;
+            height: 100%;
+            transform-origin: 100% 100%;
+            overflow: hidden;
+            box-shadow: 0 0 0 2.5rem var(--color-light) inset, 0 0 0 1.5rem var(--color-bg) inset;
+
+            &.on div:before {
+                content:"";
+                position: absolute;
+                width: calc(var(--size) / 3);
+                height: calc(var(--size) / 3);
+                left: calc(-1 * var(--size) / 6);
+                top: calc(-1 * var(--size) / 6);
+                border-radius: 100%;
+                pointer-events: none;
+                box-shadow: 0 0 0 4rem var(--color-custom);
+            }
+
+            &.on:before {
+                content:"";
+                position: absolute;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                pointer-events: none;
+                background: var(--color-custom);
+                opacity: 0.3;
+            }
+
+            &.active:after {
+                content:"";
+                position: absolute;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                pointer-events: none;
+                background: var(--color-light);
+            }
+
+            div {
+                position: absolute;
+                bottom:  0;
+                right: 0;
+                text-align: center;
+                pointer-events: none;
+            }
+
+            span {
+                position: absolute;
+                top: calc(-1 * var(--size) / 3);
+                width: calc(var(--size) / 2);
+                margin-left: calc(-1 * var(--size) / 4);
+            }
+
+        }
+
+    }
+}
+
+.widget.menu-container > .label:after {
+    content:"\f51f";
+    transform: none;
+    font-size: 12rem;
+    top:4rem;
+    right:6rem;
+}

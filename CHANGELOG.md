@@ -2,6 +2,8 @@
 
 ## 0.48.9
 
+- widgets:
+  - **new** `menu` widget, circular alternative to the dropdown & switch widgets
 - editor:
   - convert invalid quote characters automatically to avoid errors
 
