@@ -19,7 +19,7 @@ class Frame extends Widget {
 
             border: {type: 'boolean', value: true, help: 'Set to `false` to disable the borders and background-color'},
 
-        }, ['color', 'target', 'precision', 'bypass'], {
+        }, ['color', 'precision', 'bypass'], {
 
             label: {type: 'string|boolean', value: 'auto', help: [
                 'Set to `false` to hide completely',

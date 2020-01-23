@@ -2,6 +2,8 @@
 
 ## 0.48.9
 
+- bug fixes:
+  - missing `target` property for `plots/*` widgets, required for MIDI bindings 
 - widgets:
   - **new** `menu` widget, circular alternative to the dropdown & switch widgets
 - editor:
