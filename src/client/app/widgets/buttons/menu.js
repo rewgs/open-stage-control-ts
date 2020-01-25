@@ -137,6 +137,8 @@ class Menu extends Widget {
         this.menu.style.setProperty('--x', (e.offsetX - off[0]) / PXSCALE + 'rem')
         this.menu.style.setProperty('--y', (e.offsetY - off[1]) / PXSCALE + 'rem')
         this.menu.classList.add('show')
+        this.widget.classList.add('on')
+        this.container.classList.add('on')
 
     }
 
@@ -145,12 +147,14 @@ class Menu extends Widget {
         this.opened = false
         this.menu.classList.remove('show')
         DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
+        this.container.classList.remove('on')
+        this.widget.classList.remove('on')
 
     }
 
     selectValue(e) {
 
-        if (e.target === this.menu) {
+        if (e.target === this.menu || !this.menu.contains(e.target)) {
             DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
             this.selected = -1
         } else if (!e.target.classList.contains('active')) {
@@ -263,7 +267,10 @@ class Menu extends Widget {
 
         var i = this.values.indexOf(v)
 
-        if (i > -1) this.value = this.values[i]
+        if (i > -1) {
+            this.value = this.values[i]
+            this.selected = i
+        }
 
         DOM.each(this.menu, '.on', (el)=>{el.classList.remove('on')})
         if (i > -1) DOM.get(this.menu, '.item')[i].classList.add('on')
