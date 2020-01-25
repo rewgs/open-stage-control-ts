@@ -5,6 +5,7 @@
 - bug fixes:
   - widgets: missing `target` property for `plots/*` widgets, required for MIDI bindings
   - editor: set `label` to `auto` instead of `true` when using the toggle button
+  - modal: correct popup title color
 - widgets:
   - **new** `menu` widget, circular alternative to the dropdown & switch widgets
 - editor:
