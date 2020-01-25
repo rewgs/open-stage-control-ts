@@ -63,7 +63,7 @@
         z-index: 2;
     }
 
-    &.on {
+    &.on > .label{
         color: var(--color-custom);
     }
 
