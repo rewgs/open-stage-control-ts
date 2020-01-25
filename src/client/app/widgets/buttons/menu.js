@@ -5,21 +5,49 @@ var Widget = require('../common/widget'),
 
 class Menu extends Widget {
 
+    static description() {
+
+        return 'Drag and drop menu with a circular layout'
+
+    }
+
     static defaults() {
 
         return super.defaults({
 
             _menu:'menu',
 
-            size: {type: 'number', value: 200},
+            size: {type: 'number|array', value: 200, help: [
+                '- If `circular` is `true`: diameter (in px)',
+                '- If `circular` is `false`: square size or `[width, height]` array',
+            ]},
+            circular: {type: 'boolean', value: true, help: [
+                'Defines whether the menu should be rendered in a circle or in a box'
+            ]},
+            vertical: {type: 'boolean|number', value: false, help: [
+                'If `circular` is `false`, set this to `true` for vertical layout',
+                'Ignored when `grid` is `true`'
+            ]},
+            grid: {type: 'boolean|number', value: false, help: [
+                '- If `circular` is `false`, set this to `true` for grid layout',
+                '- Can be a `number` to define the number of columns'
+            ]},
             values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
                 '`Array` of possible values to switch between : `[1,2,3]`',
                 '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
             ]},
             weights: {type: 'array', value: '', help: [
-                '`Array` of `number` defining the weights of each value in `values`'
+                '`Array` of `number` defining the weights of each value in `values`',
+                'Ignored when `grid` is `true`'
             ]}
 
+        }, [], {
+
+            css: {type: 'string', value: '', help: [
+                'When `circular` is `false`, the layout can be altered by changing the following properties on the `.menu` selector:',
+                '- `flex-direction: column;` for a vertical layout',
+                '- `display: grid; grid-template-columns: repeat(X, 1fr);` for a X-columns grid',
+            ]}
         })
 
     }
@@ -66,9 +94,8 @@ class Menu extends Widget {
 
         }, {element: this.widget})
 
-        this.container.style.setProperty('--size', parseInt(this.getProp('size')) + 'rem')
-
-
+        this.setMode()
+        this.setSize()
 
     }
 
@@ -94,6 +121,7 @@ class Menu extends Widget {
 
         var nval = 0,
             i = 0,
+            circular = this.getProp('circular'),
             values = this.getProp('values'),
             weights = this.getProp('weights'),
             totalWeight
@@ -103,6 +131,7 @@ class Menu extends Widget {
         }
 
         this.values = []
+        this.widget.removeChild(this.menu)
         this.menu.innerHTML = ''
 
 
@@ -117,13 +146,47 @@ class Menu extends Widget {
                 skew = 90 - angle
             this.values.push(values[k])
             this.menu.appendChild(html`
-                <div class="item" style="transform: rotate(${ac}deg) skew(${skew}deg)">
-                    <div style="transform: skew(${-skew}deg) rotate(${-90 + angle / 2}deg)"><span style="transform: rotate(${-ac + 90 - angle / 2}deg)">${raw(iconify(parseFloat(k) != k ? k : values[k]))}</span></div>
+                <div class="item" style="${circular ? `transform: rotate(${ac}deg) skew(${skew}deg)` : `flex: ${weights[i]}`}">
+                    <div style="${circular ? `transform: skew(${-skew}deg) rotate(${-90 + angle / 2}deg)` : ''}"><span style="${circular ? `transform: rotate(${-ac + 90 - angle / 2}deg)` : ''}">${raw(iconify(parseFloat(k) != k ? k : values[k]))}</span></div>
                 </div>
             `)
             i++
             ac+=angle
 
+        }
+
+
+        this.setValue(this.value)
+
+        this.widget.appendChild(this.menu)
+
+        if (!this.getProp('circular') && this.getProp('grid')) {
+            this.container.style.setProperty('--grid-columns', this.getProp('grid') === true ? parseInt(nval / 2) : parseInt(this.getProp('grid')))
+        }
+
+    }
+
+    setMode() {
+
+        this.container.classList.toggle('box', !this.getProp('circular'))
+        this.container.classList.toggle('circular', this.getProp('circular'))
+        this.container.classList.toggle('grid', this.getProp('grid') && !this.getProp('circular'))
+        this.container.classList.toggle('vertical', this.getProp('vertical') && !this.getProp('circular'))
+
+    }
+
+    setSize() {
+
+        var size = this.getProp('size')
+        if (Array.isArray(size)) {
+            this.container.style.setProperty('--size', parseInt(size[0]) + 'rem')
+            this.container.style.setProperty('--size-box-w', parseInt(size[0]) + 'rem')
+            this.container.style.setProperty('--size-box-h', parseInt(size[1]) + 'rem')
+
+        } else {
+            this.container.style.setProperty('--size', parseInt(size) + 'rem')
+            this.container.style.setProperty('--size-box-w', parseInt(size) + 'rem')
+            this.container.style.setProperty('--size-box-h', parseInt(size) + 'rem')
         }
 
     }
@@ -163,9 +226,22 @@ class Menu extends Widget {
 
         switch (propName) {
 
+            case 'size':
+                this.setSize()
+                return
+            case 'vertical':
+                this.setMode()
+                return
+            case 'circular':
+                this.setMode()
+                this.parseValues()
+                return
+            case 'grid':
+                this.setMode()
+                if (this.getProp('grid') === true) this.parseValues()
+                return
             case 'values':
                 this.parseValues()
-                this.setValue(this.value)
                 return
 
         }
@@ -177,6 +253,10 @@ class Menu extends Widget {
 }
 
 Menu.dynamicProps = Menu.prototype.constructor.dynamicProps.concat(
+    'size',
+    'circular',
+    'vertical',
+    'grid',
     'values'
 )
 
