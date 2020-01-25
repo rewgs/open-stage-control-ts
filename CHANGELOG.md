@@ -3,7 +3,8 @@
 ## 0.48.9
 
 - bug fixes:
-  - missing `target` property for `plots/*` widgets, required for MIDI bindings 
+  - widgets: missing `target` property for `plots/*` widgets, required for MIDI bindings
+  - editor: set `label` to `auto` instead of `true` when using the toggle button
 - widgets:
   - **new** `menu` widget, circular alternative to the dropdown & switch widgets
 - editor:
