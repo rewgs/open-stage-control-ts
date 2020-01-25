@@ -78,7 +78,12 @@ module.exports = function editField(editor, widget, propName, defaultValue){
                `
 
                 toggle.addEventListener('click', ()=>{
-                    input.value = !widget.getProp(propName)
+                    if (propName === 'label' && !widget.getProp(propName) === true) {
+                        // special case
+                        input.value = 'auto'
+                    } else {
+                        input.value = !widget.getProp(propName)
+                    }
                     DOM.dispatchEvent(input, 'change')
                 })
 
