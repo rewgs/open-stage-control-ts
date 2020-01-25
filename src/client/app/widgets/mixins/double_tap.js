@@ -22,7 +22,9 @@ module.exports = (element, callback, options={})=>{
         ) {
 
             // execute callback at next cycle to ensure draginit events are resolved first
-            setTimeout(callback, 0)
+            setTimeout(()=>{
+                callback(event.detail)
+            }, 0)
             lastTapTime = 0
 
             // prevent touchend
