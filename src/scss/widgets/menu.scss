@@ -1,7 +1,7 @@
-@keyframes menu-widget-fade {
-    0%{opacity: 0; transform: scale(0.9);}
-    100%{opacity: 1;  transform: scale(1);}
-}
+// @keyframes menu-widget-fade {
+//     0%{opacity: 0; transform: scale(0.9);}
+//     100%{opacity: 1;  transform: scale(1);}
+// }
 .menu-container {
     @extend .modal-container;
 
@@ -17,7 +17,7 @@
         &.show {
             display:block;
         }
-        animation: menu-widget-fade .1s forwards;
+        // animation: menu-widget-fade .1s forwards;
 
         position: fixed;
         z-index: 999999999;
@@ -47,23 +47,24 @@
 
             }
 
-            &.active:after {
-                content:"";
-                position: absolute;
-                top:0;
-                left:0;
-                right:0;
-                bottom:0;
-                pointer-events: none;
-                background: var(--color-light);
-            }
-
             div {
                 text-align: center;
                 pointer-events: none;
             }
 
         }
+
+        .item.active:after, &.norelease .item:hover:after {
+            content:"";
+            position: absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            pointer-events: none;
+            background: var(--color-light);
+        }
+
 
     }
 

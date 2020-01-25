@@ -1,5 +1,6 @@
 var Widget = require('../common/widget'),
     {iconify} = require('../../ui/utils'),
+    doubletab = require('../mixins/double_tap'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw')
 
@@ -32,6 +33,8 @@ class Menu extends Widget {
                 '- If `circular` is `false`, set this to `true` for grid layout',
                 '- Can be a `number` to define the number of columns'
             ]},
+            toggle: {type: 'boolean', value: false, help: 'Set to `true` to make the menu stay opened after mouse/touch release'},
+            doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the menu require a double tap to be opened instead of a single tap'},
             values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
                 '`Array` of possible values to switch between : `[1,2,3]`',
                 '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
@@ -41,13 +44,6 @@ class Menu extends Widget {
                 'Ignored when `grid` is `true`'
             ]}
 
-        }, [], {
-
-            css: {type: 'string', value: '', help: [
-                'When `circular` is `false`, the layout can be altered by changing the following properties on the `.menu` selector:',
-                '- `flex-direction: column;` for a vertical layout',
-                '- `display: grid; grid-template-columns: repeat(X, 1fr);` for a X-columns grid',
-            ]}
         })
 
     }
@@ -69,30 +65,65 @@ class Menu extends Widget {
         this.parentScroll = [0,0]
         this.opened = false
 
-        this.on('draginit',(e)=>{
-            if (this.opened) return
-            this.open(e)
-        }, {element: this.widget})
 
-        this.on('drag',(e)=>{
-            if (e.target === this.menu) {
-                DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
-                this.selected = -1
-            } else if (!e.target.classList.contains('active')) {
-                DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
-                e.target.classList.add('active')
-                this.selected = DOM.index(e.target)
-            }
-        }, {element: this.widget})
+        if (this.getProp('doubleTap')) {
 
-        this.on('dragend',()=>{
-            if (!this.opened) return
-            this.close()
-            if (this.selected > -1) {
-                this.setValue(this.values[this.selected], {send: true, sync: true})
-            }
+            doubletab(this.widget, (e)=>{
+                if (this.opened) return
+                this.open(e)
+            })
 
-        }, {element: this.widget})
+            this.on('draginit',(e)=>{
+
+                if (this.opened && this.getProp('toggle')) {
+
+                    this.selectValue(e)
+                    this.submitValue()
+
+                }
+
+            }, {element: this.widget})
+
+
+        } else {
+
+            this.on('draginit',(e)=>{
+
+                if (this.opened && this.getProp('toggle')) {
+
+                    this.selectValue(e)
+                    this.submitValue()
+
+                } else if (!this.opened) {
+
+                    this.open(e)
+
+                }
+
+            }, {element: this.widget})
+
+        }
+
+        if (!this.getProp('toggle')) {
+
+            this.on('drag',(e)=>{
+
+                this.selectValue(e)
+
+            }, {element: this.widget})
+
+            this.on('dragend',()=>{
+
+                if (!this.opened) return
+                this.submitValue()
+
+            }, {element: this.widget})
+
+        } else {
+
+            this.menu.classList.add('norelease')
+
+        }
 
         this.setMode()
         this.setSize()
@@ -114,6 +145,28 @@ class Menu extends Widget {
         this.opened = false
         this.menu.classList.remove('show')
         DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
+
+    }
+
+    selectValue(e) {
+
+        if (e.target === this.menu) {
+            DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
+            this.selected = -1
+        } else if (!e.target.classList.contains('active')) {
+            DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
+            e.target.classList.add('active')
+            this.selected = DOM.index(e.target)
+        }
+
+    }
+
+    submitValue(e) {
+
+        this.close()
+        if (this.selected > -1) {
+            this.setValue(this.values[this.selected], {send: true, sync: true})
+        }
 
     }
 
