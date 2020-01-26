@@ -4,7 +4,7 @@ var screenfull = require('screenfull'),
 
 var fullscreen
 
-if (screenfull.enabled) {
+if (screenfull.isEnabled) {
 
     fullscreen = screenfull
 

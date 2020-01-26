@@ -16,9 +16,9 @@ var sidepanelData = [
             {
                 label: locales('sidepanel_fs') + (ELECTRON_FULLSCREEN ? ' (F11)' : ''),
                 action:()=>{
-                    if (fullscreen.enabled) fullscreen.toggle()
+                    if (fullscreen.isEnabled) fullscreen.toggle()
                 },
-                class:'toggle fullscreenToggle' + (!fullscreen.enabled ||  ELECTRON_FULLSCREEN ? ' disabled' : '')
+                class:'toggle fullscreenToggle' + (!fullscreen.isEnabled ||  ELECTRON_FULLSCREEN ? ' disabled' : '')
             }
 
         ]
@@ -270,7 +270,7 @@ sidepanel.appendChild(html`<div id="editor"></div>`)
 
 var fsToggle = DOM.get(sidepanel, '.fullscreenToggle')[0]
 
-if (fullscreen.enabled) {
+if (fullscreen.isEnabled) {
     fullscreen.on('change', ()=>{
         fsToggle.classList.toggle('on', fullscreen.isFullScreen)
     })
