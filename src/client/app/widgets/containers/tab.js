@@ -38,14 +38,14 @@ module.exports = class Tab extends Panel {
 
     hide() {
         if (this.detached) return
-        this.container.removeChild(this.widget)
+        // this.container.removeChild(this.widget)
         this.container.classList.remove('show')
         this.detached = true
 
     }
     show() {
         if (!this.detached) return
-        this.container.appendChild(this.widget)
+        // this.container.appendChild(this.widget)
         this.container.classList.add('show')
         this.detached = false
         resize.check(this.widget, true)
