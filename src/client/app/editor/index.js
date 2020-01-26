@@ -233,7 +233,7 @@ var Editor = class Editor {
                 var curWidget1 = this.selectedWidgets[0]
 
                 if (curWidget1.parent !== widgetManager) {
-                    this.select(curWidget1.parent.children)
+                    this.select([...curWidget1.parent.children])
                 }
                 break
 
