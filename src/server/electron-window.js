@@ -32,7 +32,7 @@ module.exports = function(options={}) {
     })
 
     window.webContents.on('will-prevent-unload', (event)=>{
-        var choice = dialog.showMessageBox(window, {
+        var choice = dialog.showMessageBoxSync(window, {
             type: 'question',
             buttons: ['Yes', 'No'],
             title: 'Are you sure ?',
