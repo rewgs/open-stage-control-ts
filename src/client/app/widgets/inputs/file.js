@@ -19,7 +19,8 @@ module.exports = class Input extends Widget {
 
             directory: {type: 'string', value: 'auto', help: 'Default browsing directory'},
             extension: {type: 'string', value: '*', help: 'Only display files with this extension'},
-            hidePath: {type: 'boolean', value: false, help: 'Set to `true` to only display the filename (the whole path will still be used as value)'}
+            hidePath: {type: 'boolean', value: false, help: 'Set to `true` to only display the filename (the whole path will still be used as value)'},
+            allowDir:  {type: 'boolean', value: false, help: 'Allow selecting a folder (by pressing "open" when no file is selected)'}
 
         })
 
@@ -39,7 +40,7 @@ module.exports = class Input extends Widget {
             remoteBrowse({
                 extension: this.getProp('extension').replace(/^\.?(.*)$/, '$1'),
                 directory: this.getProp('directory') === 'auto' ? undefined : this.getProp('directory'),
-                loadDir: true
+                loadDir: this.getProp('allowDir')
             }, (path)=>{
 
                 var newPath = path[1] === '' ? path[0] : path.join(path[0][0] === '/' ? '/' : '\\')
