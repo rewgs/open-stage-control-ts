@@ -2,6 +2,7 @@
 
 ## 0.49.0
 
+- **deprecation** MathJS syntax is deprecated and will be removed in the future in favor of the Javascript syntax
 - bug fixes:
   - widgets: missing `target` property for `plots/*` widgets, required for MIDI bindings
   - editor: set `label` to `auto` instead of `true` when using the toggle button

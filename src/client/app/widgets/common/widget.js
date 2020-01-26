@@ -9,8 +9,11 @@ var EventEmitter = require('../../events/event-emitter'),
     OscReceiver = require('./osc-receiver'),
     {deepCopy, deepEqual} = require('../../utils'),
     html = require('nanohtml'),
+    ipc = require('../../ipc'),
     updateWidget = ()=>{}
 
+
+var mathjsDeprecationWarned = false
 var oscReceiverState = {}
 
 var OSCProps = [
@@ -582,6 +585,11 @@ class Widget extends EventEmitter {
             try {
                 propValue = propValue.replace(/#\{(?:[^{}]|\{[^{}]*\})*\}/g, (m)=>{
                     // one bracket nesting allowed, if we need two: #\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}
+
+                    if (!mathjsDeprecationWarned) {
+                        mathjsDeprecationWarned = true
+                        ipc.send('error', 'Warning: MathJS syntax (#{}) is deprecated and will be removed in the future. Consider using the Javascript syntax instead.')
+                    }
 
                     // unescape brackets (not needed anymore, just here for backward compatibility)
                     m = m.replace(/\\(\{|\})/g, '$1')
