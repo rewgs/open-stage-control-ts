@@ -70,8 +70,20 @@ By default, osc listeners inherit the widget's `preArgs` and (these must be matc
 OSC{color, "auto", false}
 ```
 
+## Javascript: `JS{{}}`
+
+This syntax allows writing formulas in pure javascript. The code will be compiled as a function and executed a restricted context.
+
+- if no `return` statement is found, the formula will return an empty string
+- javascript [strict mode](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode) is always enabled
+- `setTimeout` and `setInterval` functions are not available
+- the `global` object is shared between all javascript formulas (changing its properties *does not* trigger any synchronisation even if the value is used somewhere else)
+
 
 ## Formulas: `#{}`
+
+!!! warning "Deprecated"
+    This syntax is deprecated and will be removed in the future. Use the javascript syntax instead.
 
 The following syntax allow writing mathematical formulas in widgets' properties:
 
@@ -101,13 +113,3 @@ Additionnal functions:
 
 !!! tip ""
     A single widget property can contain multiple formulas. Variables and functions declared in a formula are available to subsequent formulas in the same property definition.
-
-
-## Javascript: `JS{{}}`
-
-This syntax allows writing formulas in pure javascript. The code will be compiled as a function and executed a restricted context.
-
-- if no `return` statement is found, the formula will return an empty string
-- javascript [strict mode](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode) is always enabled
-- `setTimeout` and `setInterval` functions are not available
-- the `global` object is shared between all javascript formulas (changing its properties *does not* trigger any synchronisation even if the value is used somewhere else)
