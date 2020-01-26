@@ -43,8 +43,7 @@ module.exports = class Input extends Widget {
                 loadDir: this.getProp('allowDir')
             }, (path)=>{
 
-                var newPath = path[1] === '' ? path[0] : path.join(path[0][0] === '/' ? '/' : '\\')
-                this.setValue(newPath, {
+                this.setValue(path.join(path[0][0] === '/' ? '/' : '\\'), {
                     sync: true,
                     send: true
                 })
@@ -59,8 +58,16 @@ module.exports = class Input extends Widget {
 
         this.value = v
 
-        this.text.textContent = this.getProp('hidePath') ?
-            v.split(v[0] === '/' ? '/' : '\\').pop() : v
+        var sep = v[0] === '/' ? '/' : '\\'
+        if (this.getProp('hidePath')) {
+            if (v[v.length - 1] === sep) {
+                this.text.textContent = v.substr(0, v.length - 1).split(sep).pop() + sep
+            } else {
+                this.text.textContent = v.split(sep).pop()
+            }
+        } else {
+            this.text.textContent = v
+        }
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
