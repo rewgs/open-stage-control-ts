@@ -16,7 +16,6 @@ module.exports = function(options={}) {
         icon: path.resolve(__dirname + '/../assets/logo.png'),
         backgroundColor: options.color || theme.backgroundColor,
         type: options.type,
-        fullscreen: options.fullscreen,
         useContentSize: true,
         autoHideMenuBar: true,
         webPreferences: {
@@ -26,6 +25,9 @@ module.exports = function(options={}) {
     })
 
     window.once('ready-to-show', ()=>{
+        if (options.fullscreen) {
+            window.setFullScreen(true)
+        }
         window.show()
     })
 
