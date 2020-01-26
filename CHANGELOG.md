@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.48.9
+## 0.49.0
 
 - bug fixes:
   - widgets: missing `target` property for `plots/*` widgets, required for MIDI bindings
