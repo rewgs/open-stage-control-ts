@@ -130,15 +130,12 @@ npm install
 
 # TARGET_PLATFORM can be linux, win32 (windows) or darwin (os x)
 export PLATFORM=TARGET_PLATFORM
-# TARGET_ARCH can be ia32, x64 or armv7l
+# TARGET_ARCH can be ia32, x64, armv7l or arm64
 export ARCH=TARGET_ARCH
 
 npm run build
 
 npm run package
-
-# For raspberry-pi / armv7l, run this instead
-npm run package-rpi
 
 # Do one of the following if you want a deb package for debian/ubuntu
 npm run deb32

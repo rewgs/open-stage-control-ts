@@ -3,7 +3,7 @@ const packager = require('electron-packager'),
       appData = require('../app/package.json'),
       safeFFMPEG = require('electron-packager-plugin-non-proprietary-codecs-ffmpeg').default
 
-var rpi = process.argv.includes('--rpi'),
+var rpi = process.argv.includes('--old-rpi'),
     all = process.argv.includes('--all')
 
 packager({
