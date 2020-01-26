@@ -7,7 +7,7 @@ module.exports = class Input extends Widget {
 
     static description() {
 
-        return 'File selector (server-side).'
+        return 'File/Folder selector (server-side).'
 
     }
 
@@ -38,10 +38,12 @@ module.exports = class Input extends Widget {
 
             remoteBrowse({
                 extension: this.getProp('extension').replace(/^\.?(.*)$/, '$1'),
-                directory: this.getProp('directory') === 'auto' ? undefined : this.getProp('directory')
+                directory: this.getProp('directory') === 'auto' ? undefined : this.getProp('directory'),
+                loadDir: true
             }, (path)=>{
 
-                this.setValue(path.join(path[0][0] === '/' ? '/' : '\\'), {
+                var newPath = path[1] === '' ? path[0] : path.join(path[0][0] === '/' ? '/' : '\\')
+                this.setValue(newPath, {
                     sync: true,
                     send: true
                 })

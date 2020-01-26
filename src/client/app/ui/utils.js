@@ -204,7 +204,7 @@ module.exports = {
 
             var choice = DOM.get(list, ':checked')[0]
 
-            if (!choice && (!save || !saveInput.value)) return
+            if (!choice && (!save || !saveInput.value) && !options.loadDir) return
 
             if (choice && choice.classList.contains('folder') && (!save || !saveInputFocus)) {
                 ipc.send('listDir', {path: [path, choice.value]})
@@ -216,7 +216,7 @@ module.exports = {
                     callback([path, saveInput.value])
                     popup.close()
                 } else {
-                    callback([path, choice.value])
+                    callback([path, choice && options.loadDir ? choice.value : ''])
                     popup.close()
                 }
             }
@@ -260,7 +260,7 @@ module.exports = {
                         break
                     }
                 }
-                
+
                 if (index !== -1) {
                     list.childNodes[index].firstElementChild.click()
                     list.childNodes[index].firstElementChild.focus()

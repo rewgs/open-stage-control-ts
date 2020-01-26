@@ -8,6 +8,7 @@
   - modal: correct popup title color
 - widgets:
   - **new** `menu` widget, circular alternative to the dropdown & switch widgets
+  - file: allow selecting folders
 - editor:
   - convert invalid quote characters automatically to avoid errors
 
