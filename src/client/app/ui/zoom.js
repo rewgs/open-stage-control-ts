@@ -5,7 +5,7 @@ var mod = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
 document.addEventListener('mousewheel', function(event) {
     if (event.ctrlKey) event.preventDefault()
     if (event[mod]) {
-        
+
         event.preventDefault()
 
         if (event.deltaY === 0) return
@@ -17,7 +17,7 @@ document.addEventListener('mousewheel', function(event) {
 
         DOM.dispatchEvent(window, 'resize')
     }
-}, {passive: true})
+}, {passive: false})
 
 document.addEventListener('keydown', function(event){
     if (event[mod] && (event.keyCode == 96 || event.keyCode == 48)) {
