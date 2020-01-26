@@ -21,7 +21,12 @@ module.exports = function(options={}) {
         autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: !!options.node
-        }
+        },
+        show: false,
+    })
+
+    window.once('ready-to-show', ()=>{
+        window.show()
     })
 
     window.webContents.on('will-prevent-unload', (event)=>{
