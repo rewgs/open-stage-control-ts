@@ -2,6 +2,7 @@
 
 document = {
     createElement: x=>({
+        ownerDocument: document,
         style: {},
         contentWindow: {},
         nodeName: '',
