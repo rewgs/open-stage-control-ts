@@ -166,7 +166,7 @@ class Modal extends Panel {
         var parent = this.parent,
             scrollFixed = false
 
-        while (parent && parent.props) {
+        while (parent && parent.props && parent.getProp('type') !== 'modal') {
 
             // scroll
             if (!scrollFixed && parent.getProp('type') == 'tab') {
