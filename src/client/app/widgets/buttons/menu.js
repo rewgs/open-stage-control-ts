@@ -122,6 +122,11 @@ class Menu extends Widget {
         } else {
 
             this.menu.classList.add('norelease')
+            this.toggleCloseHandler = (e)=>{
+                if (!this.opened || this.menu.contains(e.target)) return
+                this.close()
+            }
+            document.addEventListener('fast-click', this.toggleCloseHandler)
 
         }
 
@@ -307,6 +312,15 @@ class Menu extends Widget {
         }
 
         return ret
+
+    }
+
+    onRemove() {
+
+        if (this.getProp('toggle')) {
+            document.removeEventListener('fast-click', this.toggleCloseHandler)
+        }
+        super.onRemove()
 
     }
 
