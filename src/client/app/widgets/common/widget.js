@@ -13,7 +13,6 @@ var EventEmitter = require('../../events/event-emitter'),
     updateWidget = ()=>{}
 
 
-var mathjsDeprecationWarned = false
 var oscReceiverState = {}
 
 var OSCProps = [
@@ -161,6 +160,7 @@ class Widget extends EventEmitter {
         }
 
         this.disabledProps = []
+        this.mathjsDeprecationWarned = false
 
         // cache precision
         if (this.props.precision != undefined) {
@@ -586,9 +586,9 @@ class Widget extends EventEmitter {
                 propValue = propValue.replace(/#\{(?:[^{}]|\{[^{}]*\})*\}/g, (m)=>{
                     // one bracket nesting allowed, if we need two: #\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}
 
-                    if (!mathjsDeprecationWarned) {
-                        mathjsDeprecationWarned = true
-                        ipc.send('error', 'Warning: MathJS syntax (#{}) is deprecated and will be removed in the future. Consider using the Javascript syntax instead.')
+                    if (!this.mathjsDeprecationWarned) {
+                        this.mathjsDeprecationWarned = true
+                        ipc.send('error', `Warning: Widget#${this.getProp('id')} MathJS syntax (#{}) is deprecated and will be removed in the future. Consider using the Javascript syntax instead.`)
                     }
 
                     // unescape brackets (not needed anymore, just here for backward compatibility)
