@@ -216,7 +216,7 @@ module.exports = {
                     callback([path, saveInput.value])
                     popup.close()
                 } else {
-                    callback([path, choice && options.loadDir ? choice.value : ''])
+                    callback([path, choice ? choice.value : ''])
                     popup.close()
                 }
             }
