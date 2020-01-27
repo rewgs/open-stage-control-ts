@@ -12,6 +12,12 @@ if (settings.read('noGpu') || (!settings.cli && settings.read('argv')['disable-g
     app.disableHardwareAcceleration()
 }
 
+if (settings.read('forceGpu') || (!settings.cli && settings.read('argv')['force-gpu'])) {
+    app.commandLine.appendSwitch('--ignore-gpu-blacklist')
+}
+
+
+
 var template = [{
     label: 'Edit',
     submenu: [
