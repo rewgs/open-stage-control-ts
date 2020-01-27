@@ -75,6 +75,7 @@ var makeDefaultConfig = function(argv){
         urlOptions: argv['url-options'] ? '?' + argv['url-options'].join('&') : '',
         noVsync: argv['disable-vsync'] || false,
         noGpu: argv['disable-gpu'] || false,
+        forceGpu: argv['force-gpu'] || false,
         readOnly: argv['read-only'] || false,
         remoteSaving: argv['remote-saving'] ? RegExp(argv['remote-saving']) : false,
         remoteRoot: argv['remote-root'] || false,

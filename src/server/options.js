@@ -65,6 +65,7 @@ module.exports = {
     },
     'disable-vsync':{type:'boolean',describe:'disable gui\'s vertical synchronization', restart: true},
     'disable-gpu':{type:'boolean',describe:'disable hardware acceleration', restart: true},
+    'force-gpu':{type:'boolean',describe:'ignore chrome\'s gpu blacklist', restart: true},
     'read-only':{type:'boolean',describe:'disable session editing and session history changes',
         check: (r, argv)=>{
             return (!r || !argv.b) ?
