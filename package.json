@@ -70,7 +70,7 @@
   },
   "optionalDependencies": {
     "electron": "7.1.10",
-    "electron-installer-debian": "github:electron-userland/electron-installer-debian#ec1dc4b"
+    "electron-installer-debian": "3.0.0"
   },
   "scripts": {
     "postinstall": "echo '\\033[36m=> Dependencies installed successfully. Run \"npm run build\" to build the assets.\\033[0m\n'",
