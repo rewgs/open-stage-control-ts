@@ -258,10 +258,11 @@ class Menu extends Widget {
         var parent = this.parent,
             scrollOffset = [0,0]
 
-        while (parent && parent.props && parent.getProp('type') !== 'tab' && parent.getProp('type') !== 'modal') {
+        while (parent && parent.props && parent.getProp('type') !== 'tab') {
             scrollOffset[0] += parent.widget.scrollLeft
             scrollOffset[1] += parent.widget.scrollTop
             parent = parent.parent
+            if (parent.getProp('type') === 'modal') break
         }
 
         return scrollOffset
