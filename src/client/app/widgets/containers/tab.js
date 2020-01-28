@@ -6,7 +6,14 @@ module.exports = class Tab extends Panel {
 
     static defaults() {
 
-        return Widget.defaults({}, ['_geometry', 'left', 'top', 'width', 'height'], {
+        return Widget.defaults({
+
+            _tab:'tab',
+
+            detached: {type: 'boolean', value: true, help: [
+            ]}
+
+        }, ['_geometry', 'left', 'top', 'width', 'height'], {
 
             _children:'children',
 
@@ -38,14 +45,14 @@ module.exports = class Tab extends Panel {
 
     hide() {
         if (this.detached) return
-        // this.container.removeChild(this.widget)
+        if (this.getProp('detached')) this.container.removeChild(this.widget)
         this.container.classList.remove('show')
         this.detached = true
 
     }
     show() {
         if (!this.detached) return
-        // this.container.appendChild(this.widget)
+        if (this.getProp('detached')) this.container.appendChild(this.widget)
         this.container.classList.add('show')
         this.detached = false
         resize.check(this.widget, true)
