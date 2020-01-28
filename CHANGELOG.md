@@ -8,6 +8,7 @@
   - editor: set `label` to `auto` instead of `true` when using the toggle button
   - editor: errors when hitting `mod + a` and unselecting widgets
   - modal: correct popup title color
+  - options: allow `midi:port_name` pairs in `--send` option
 - widgets:
   - **new** `menu` widget, circular alternative to the dropdown & switch widgets
   - file: allow selecting folders

@@ -1,8 +1,8 @@
 module.exports = {
-    's':{alias:'send',type:'array',describe:'default targets for all widgets (ip:port or domain:port pairs)',
+    's':{alias:'send',type:'array',describe:'default targets for all widgets (ip:port / domain:port / midi:port_name pairs)',
         check: (s)=>{
-            return s.some(item=>!item.match(/^[^:]*:[0-9]{4,5}$/)) ?
-                'Targets must be ip:port domain:port pairs & port must be >= 1024' : true
+            return s.some(item=>!item.match(/^[^:]*:[0-9]{4,5}$/) && !item.match(/^midi:.*$/)) ?
+                'Targets must be ip:port or domain:port pairs (udp / tcp port must be >= 1024) or midi:port_name pairs' : true
         }
     },
     'l':{alias:'load',type:'string',file:{name:'OSC Session (.json)', extensions: ['json', 'js']},describe:'session file to load'},
