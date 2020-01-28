@@ -67,15 +67,11 @@ class Canvas extends Widget {
 
         this.canvas = DOM.get(this.widget, 'canvas')[0]
 
-        this.offscreen = this.canvas.transferControlToOffscreen ?
-            this.canvas.transferControlToOffscreen() : false
-
-        this.ctx = this.offscreen ? this.offscreen.getContext('2d',{
-            singleBuffered: true,
-            lowLatency: true,
+        this.ctx = this.canvas.getContext('2d',{
             desynchronized: true,
+            lowLatency: true,
             alpha: true
-        }) : this.canvas.getContext('2d')
+        })
 
         this.height = undefined
         this.width = undefined
@@ -95,8 +91,6 @@ class Canvas extends Widget {
 
         }
 
-        if (this.offscreen) this.ctx.curve = CanvasRenderingContext2D.prototype.curve.bind(this.ctx)
-
     }
 
     resizeHandleProxy() {
@@ -115,11 +109,6 @@ class Canvas extends Widget {
 
         this.canvas.setAttribute('width', width * ratio)
         this.canvas.setAttribute('height', height * ratio)
-
-        if (this.offscreen) {
-            this.offscreen.width = width * ratio
-            this.offscreen.height = height * ratio
-        }
 
         this.clearRect = []
 
@@ -184,11 +173,7 @@ class Canvas extends Widget {
     batchDraw() {
 
         if (this.visible) {
-            if (this.offscreen) {
-                this.draw()
-            } else {
-                canvasQueue.push(this)
-            }
+            canvasQueue.push(this)
         }
 
     }
