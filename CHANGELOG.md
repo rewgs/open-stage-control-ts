@@ -12,6 +12,7 @@
 - widgets:
   - **new** `menu` widget, circular alternative to the dropdown & switch widgets
   - file: allow selecting folders
+  - text: optimize value update when there's no icon to draw
 - editor:
   - convert invalid quote characters automatically to avoid errors
 
