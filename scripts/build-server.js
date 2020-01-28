@@ -34,7 +34,7 @@ build({
             ],
             'plugins': ['@babel/plugin-proposal-object-rest-spread'],
             'global': true,
-            'only': ['**/ws/', '**/yargs/']
+            'only': ['**/ws/', '**/yargs/', '**/find-up/', '**/locate-path', '**/p-locate']
         }]
     ]
 })()
