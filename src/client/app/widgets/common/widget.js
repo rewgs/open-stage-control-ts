@@ -70,7 +70,7 @@ class Widget extends EventEmitter {
 
             label: {type: 'string|boolean', value: 'auto', help: [
                 'Set to `false` to hide completely',
-                'Insert icons using the prefix ^ followed by the icon\'s name : ^play, ^pause, etc'
+                'Insert icons using the prefix ^ followed by the icon\'s name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)'
             ]},
             color: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
             css: {type: 'string', value: '', help: 'CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/css-tips/">documentation</a>.'},
