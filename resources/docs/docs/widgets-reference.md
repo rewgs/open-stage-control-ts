@@ -13,7 +13,7 @@
 | <h4 id="width">width<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#width" title="Permanent link">#</a></h4> | `number`&vert;<br/>`percentage` | <code>"auto"</code> |  |
 | <h4 id="height">height<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#height" title="Permanent link">#</a></h4> | `number`&vert;<br/>`percentage` | <code>"auto"</code> |  |
 | <h4 class="thead2" id="style">style<a class="headerlink" href="#style" title="Permanent link">#</a></h4> ||||
-| <h4 id="label">label<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#label" title="Permanent link">#</a></h4> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/><br/>Insert icons using the prefix ^ followed by the icon's name : ^play, ^pause, etc |
+| <h4 id="label">label<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#label" title="Permanent link">#</a></h4> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/><br/>Insert icons using the prefix ^ followed by the icon's name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free) |
 | <h4 id="color">color<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#color" title="Permanent link">#</a></h4> | `string` | <code>"auto"</code> | Defines the widget's accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget. |
 | <h4 id="css">css<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#css" title="Permanent link">#</a></h4> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/css-tips/">documentation</a>. |
 | <h4 class="thead2" id="value">value<a class="headerlink" href="#value" title="Permanent link">#</a></h4> ||||
@@ -169,6 +169,22 @@ A fader with two heads for setting a range.
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="dropdown_dropdown">dropdown<a class="headerlink" href="#dropdown_dropdown" title="Permanent link">#</a></h4> ||||
 | <h4 id="dropdown_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#dropdown_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept<br/><br/>An empty option will always be prepended to values (sends an osc message without any value); it can be hidden by adding `option:first-child{display:none}` to the widget's `css` |
+
+### menu
+
+Drag and drop menu with a circular layout
+
+| property | type |default | description |
+| --- | --- | --- | --- |
+| <h4 class="thead2" id="menu_menu">menu<a class="headerlink" href="#menu_menu" title="Permanent link">#</a></h4> ||||
+| <h4 id="menu_size">size<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_size" title="Permanent link">#</a></h4> | `number`&vert;<br/>`array` | <code>200</code> | - If `circular` is `true`: diameter (in px)<br/>- If `circular` is `false`: square size or `[width, height]` array |
+| <h4 id="menu_circular">circular<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_circular" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Defines whether the menu should be rendered in a circle or in a box |
+| <h4 id="menu_vertical">vertical<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_vertical" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | If `circular` is `false`, set this to `true` for vertical layout<br/><br/>Ignored when `grid` is `true` |
+| <h4 id="menu_grid">grid<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_grid" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | - If `circular` is `false`, set this to `true` for grid layout<br/>- Can be a `number` to define the number of columns |
+| <h4 id="menu_toggle">toggle<a class="headerlink" href="#menu_toggle" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the menu stay opened after mouse/touch release |
+| <h4 id="menu_doubleTap">doubleTap<a class="headerlink" href="#menu_doubleTap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the menu require a double tap to be opened instead of a single tap |
+| <h4 id="menu_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
+| <h4 id="menu_weights">weights<a class="headerlink" href="#menu_weights" title="Permanent link">#</a></h4> | `array` | <code>""</code> | `Array` of `number` defining the weights of each value in `values`<br/><br/>Ignored when `grid` is `true` |
 
 ## Pads
 
@@ -585,7 +601,7 @@ Device motion/orientation sensor.
 
 ### file
 
-File selector (server-side).
+File/Folder selector (server-side).
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -593,6 +609,7 @@ File selector (server-side).
 | <h4 id="file_directory">directory<a class="headerlink" href="#file_directory" title="Permanent link">#</a></h4> | `string` | <code>"auto"</code> | Default browsing directory |
 | <h4 id="file_extension">extension<a class="headerlink" href="#file_extension" title="Permanent link">#</a></h4> | `string` | <code>"*"</code> | Only display files with this extension |
 | <h4 id="file_hidePath">hidePath<a class="headerlink" href="#file_hidePath" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to only display the filename (the whole path will still be used as value) |
+| <h4 id="file_allowDir">allowDir<a class="headerlink" href="#file_allowDir" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Allow selecting a folder (by pressing "open" when no file is selected) |
 
 
 <script>
