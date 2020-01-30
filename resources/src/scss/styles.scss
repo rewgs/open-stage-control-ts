@@ -66,43 +66,7 @@ hr {
         display: block;
         z-index: 2;
         position: relative;
-        cursor: pointer;
         width: 100%;
-    }
-
-    .icon-play {
-        $size:80px;
-        position: absolute;
-        z-index: 3;
-        top:50%;left:50%;
-        margin-left:-$size/2;
-        margin-top:-$size/2;
-        width: $size;
-        height: $size;
-        border-radius: 100%;
-        box-shadow: 0 0 20px 0 rgba(black, 0.2);
-        filter: saturate(0);
-        transition: filter 1s;
-        pointer-events: none;
-    }
-
-    &:hover .icon-play {
-        filter: saturate(1);
-    }
-
-    #showcase-frame {
-        z-index: 1;
-        opacity: 0;
-        position: absolute;
-        top: 0; left: 0;
-        width:100%;
-        height: 100%;
-        border: 0;
-        // transition: opacity 0.5s;
-        &.show {
-            z-index: 4;
-            opacity: 1;
-        }
     }
 
 }
