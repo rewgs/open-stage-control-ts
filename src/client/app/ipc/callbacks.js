@@ -55,7 +55,7 @@ module.exports = {
 
     stateLoad: function(data){
 
-        state.load(data.state, data.send)
+        state.load(data.state, data.send, data.path)
 
     },
 

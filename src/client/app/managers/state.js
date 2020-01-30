@@ -119,9 +119,11 @@ var StateManager = class StateManager {
 
     }
 
-    load(state, send) {
+    load(state, send, path) {
 
         if (!state) return
+
+        this.setStatePath(path)
 
         try {
             if (typeof state === 'string') {
@@ -186,6 +188,13 @@ var StateManager = class StateManager {
 
         this.load(this.quickState, true)
 
+    }
+
+    setStatePath(path) {
+
+        if (!path) return
+        this.statePath = path
+        
     }
 
     pushValueState(id, value) {
