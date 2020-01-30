@@ -1,16 +1,4 @@
 <div id="jumbotron-showcase">
     <iframe id="showcase-frame" allowfullscreen></iframe>
-    <img src="{{ "img/logo.svg"|url }}" class="icon-play"/>
     <img src="{{ config.extra.screenshot|url }}" id="jumbotron-img"/>
 </div>
-<script>
-var frame = document.getElementById('showcase-frame'),
-    play = document.getElementById('jumbotron-img')
-
-play.onclick = function(){
-    frame.src = 'https://openstagecontrol-showcase.herokuapp.com/'
-    frame.classList.add('show')
-    play.onclick = null
-}
-
-</script>
