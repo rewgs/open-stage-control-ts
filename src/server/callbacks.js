@@ -212,7 +212,7 @@ module.exports =  {
 
         module.exports.fileRead(data, clientId, true, (result)=>{
 
-            ipc.send('stateLoad', {state: result, send: true}, clientId)
+            ipc.send('stateLoad', {state: result, path: data.path, send: true}, clientId)
 
         })
 

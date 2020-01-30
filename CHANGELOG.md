@@ -9,6 +9,7 @@
   - editor: errors when hitting `mod + a` and unselecting widgets
   - modal: correct popup title color
   - options: allow `midi:port_name` pairs in `--send` option
+  - sidepanel/state: opening a state file now properly sets it as the next default save location
 - widgets:
   - **new** `menu` widget, circular alternative to the dropdown & switch widgets
   - file: allow selecting folders
