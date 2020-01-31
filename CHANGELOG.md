@@ -57,7 +57,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
   - knob: text pips support
   - fader: add css variable `--gauge-width`
 
-## 0.48.3
+## 0.48.3
 
 - bug fixes
   - widgets: prevent update errors when widgets are not fully initialized
@@ -105,7 +105,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
   - widget: error when two sibling widgets have a non-dynamic property depending on each others and on another widget at the same time
   - cli: broken `--version` option
 
-## 0.47.3
+## 0.47.3
 
 - bug fixes
   - regression causing errors with the `value` property
@@ -147,7 +147,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
   - script: `getProp(id, property)` function added in `script`execution context
   - script: `id` variable added in `script`execution context (id of the widget that triggered the script)
 
-## 0.46.1
+## 0.46.1
 
 - bug fixes
   - windows: midi debug strings not printed
@@ -190,7 +190,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
   - absolute file paths not resolved under windows
   - nested `@{}` calls issue ([#516](https://github.com/jean-emmanuel/open-stage-control/issues/516))
 
-## 0.45.4
+## 0.45.4
 
 - bug fixes
   - handle network drops correctly (notify immediately and fix reconnection mechanism)
@@ -272,7 +272,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
   - sticky header to remind selected widget's id
   - sidepanel can now be resized by dragging its edge
 
-## 0.41.7
+## 0.41.7
 
 - bug fixes
   - matrix: `$` variable not starting at `start`
@@ -284,7 +284,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
   - keys: binding conflict with editor
   - xy: drawing performance issue
 
-## 0.41.5
+## 0.41.5
 
 - bug fixes
   - editor: changes applied to wrong widget when clicking on a widget while editing another widget's property
@@ -294,7 +294,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
 - widgets
   - sliders: when `steps` is set, scrolling on the widget makes it go directly from one step to another
 
-## 0.41.4
+## 0.41.4
 
 - bug fixes
   - broken `--remote-saving` option*
@@ -402,7 +402,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
 - bug fixes
   - `modal` widgets not working since chrome v70
 
-## 0.39.5
+## 0.39.5
 
 - bug fixes
   - sliders: `steps` option not working when `range.min` is not `0`
