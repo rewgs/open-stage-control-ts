@@ -2,8 +2,12 @@
 
 ## 0.49.0
 
-- **deprecation** MathJS syntax is deprecated and will be removed in the future in favor of the Javascript syntax
+**Deprecation**
+MathJS syntax is now deprecated and will be removed in the future, sessions using it will be working for a few more versions but users are strongly encouraged to migrate to the javascript syntax.
+
+
 - bug fixes:
+  - multiclient sync not working when `targets` is empty
   - widgets: missing `target` property for `plots/*` widgets, required for MIDI bindings
   - editor: set `label` to `auto` instead of `true` when using the toggle button
   - editor: errors when hitting `mod + a` and unselecting widgets
