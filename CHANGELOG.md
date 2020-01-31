@@ -20,6 +20,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
   - text: optimize value update when there's no icon to draw
 - editor:
   - convert invalid quote characters automatically to avoid errors
+  - tab: added `detached` property (set to false to prevent iframes from reloading when the tab opens)
 
 ## 0.48.8
 
