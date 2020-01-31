@@ -16,7 +16,7 @@ module.exports = class Tab extends Panel {
 
             _tab:'tab',
 
-            detached: {type: 'boolean', value: true, help: 'Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab open '}
+            detached: {type: 'boolean', value: true, help: 'Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab opens'}
 
         }, ['_geometry', 'left', 'top', 'width', 'height'], {
 
