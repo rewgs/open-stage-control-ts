@@ -9,6 +9,13 @@ var sanitizeOptions = {
 
 class Html extends Widget {
 
+    static description() {
+
+        return 'Simple HTML parser.'
+
+    }
+
+
     static defaults() {
 
         return super.defaults({

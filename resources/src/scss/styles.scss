@@ -21,6 +21,16 @@ body {
 h1,h2,h3,h4,h5 {
     font-weight: 100;
 }
+h2 {
+    font-weight: 400;
+}
+h4 {
+    font-size: 1.1rem;
+}
+h1 + h2 {
+    // position: relative;
+    margin-top: 2rem;
+}
 
 pre, code {
     font-size: 0.7rem;
@@ -236,6 +246,38 @@ h1:first-child {
 .sp-logo {
     display:inline-block;
     margin-top:20px;
+}
+
+
+.accordion {
+    background: rgba(black, 0.05);
+    padding: 8px;
+    margin-bottom: 1rem;
+}
+.accordion h4 {
+    cursor: pointer;
+}
+
+.accordion table {
+    display: none;
+}
+.accordion.show table {
+    display: table;
+}
+.accordionlink > .headerlink {
+    opacity: 1!important;
+    color: $primary-color!important;
+    text-decoration: none;
+    display: block;
+    outline: none;
+    box-shadow: none;
+    margin-left: 0;
+}
+.accordion-description {
+    opacity: 0.8;
+}
+.accordion.show .accordion-description {
+   margin-bottom: 8px;
 }
 
 @import 'mobile';

@@ -10,7 +10,12 @@ var widgets = require('../src/client/app/widgets'),
 
 doc.push(`
 
-    ## Generic properties
+    # Widget reference
+
+    <div class="accordion" data-category="generic" markdown="1">
+
+    <h4 class="accordionlink" id="generic_properties"><a class="headerlink" href="#generic_properties">Generic properties</a></h3>
+    <div class="accordion-description">Properties shared by all widgets</div>
 
     | property | type |default | description |
     | --- | --- | --- | --- |`
@@ -39,6 +44,9 @@ for (var propName in base) {
 
 }
 
+doc.push('</div>')
+
+
 
 for (var k in widgets.categories) {
     var category = widgets.categories[k]
@@ -57,9 +65,11 @@ for (var k in widgets.categories) {
 
         doc.push(`
 
-            ### ${type}
 
-            ${description}
+            <div class="accordion" data-category="${k}" markdown="1">
+
+            <h4 class="accordionlink" id="${type}"><a class="headerlink" href="#${type}">${type}</a></h3>
+            <div class="accordion-description">${description}</div>
 
             | property | type |default | description |
             | --- | --- | --- | --- |`
@@ -91,6 +101,8 @@ for (var k in widgets.categories) {
 
         if (separator) doc.pop()
 
+        doc.push('</div>\n\n')
+
     }
 }
 
@@ -100,6 +112,23 @@ doc.push(`\n\n
         item.classList.remove('thead2')
         item.closest('tr').classList.add('thead2')
     })
+    document.querySelectorAll('.accordionlink').forEach(function(item){
+        item.addEventListener('click', function(e){
+            e.preventDefault()
+            var node = item.parentNode
+            node.classList.toggle('show')
+            if (node.classList.contains('show')){
+                history.replaceState(null, null, '#' + item.getAttribute('id'));
+            } else {
+                history.replaceState(null, null, ' ');
+            }
+        })
+    })
+    if (window.location.hash) {
+        document.querySelectorAll('[id='+window.location.hash.split("#")[1]+']').forEach(function(item){
+            item.click()
+        })
+    }
     </script>
 `)
 

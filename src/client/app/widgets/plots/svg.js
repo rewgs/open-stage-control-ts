@@ -5,6 +5,12 @@ var Widget = require('../common/widget'),
 
 class Svg extends Widget {
 
+    static description() {
+
+        return 'Svg parser.'
+
+    }
+
     static defaults() {
 
         return super.defaults({

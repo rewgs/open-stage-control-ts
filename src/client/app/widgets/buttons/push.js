@@ -5,6 +5,13 @@ var Widget = require('../common/widget'),
 
 class Push extends Widget {
 
+    static description() {
+
+        return 'On / off button that turns off when released.'
+
+    }
+
+
     static defaults() {
 
 
@@ -99,7 +106,7 @@ class Push extends Widget {
             if (!options.fromState) this.setValuePrivate(v,options)
             return
         }
-        
+
         if (typeof v == 'object' && v !== null) v = v.value
         if (v===this.getProp('on') || (this.getProp('on') != null && v === this.getProp('on').value && v !== undefined)) {
             this.widget.classList.add('on')

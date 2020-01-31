@@ -4,6 +4,12 @@ var Widget = require('../common/widget'),
 
 module.exports = class Rbgled extends Widget {
 
+    static description() {
+
+        return 'Rgb / rgba color display'
+
+    }
+
     static defaults() {
 
         return super.defaults({}, ['color', 'precision', 'bypass'], {

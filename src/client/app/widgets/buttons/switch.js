@@ -5,6 +5,12 @@ var Widget = require('../common/widget'),
 
 module.exports = class Switch extends Widget {
 
+    static description() {
+
+        return 'Value selector button.'
+
+    }
+
     static defaults() {
 
         return super.defaults({

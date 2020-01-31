@@ -1,6 +1,11 @@
 
 
-## Generic properties
+# Widget reference
+
+<div class="accordion" data-category="generic" markdown="1">
+
+<h4 class="accordionlink" id="generic_properties"><a class="headerlink" href="#generic_properties">Generic properties</a></h3>
+<div class="accordion-description">Properties shared by all widgets</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -24,13 +29,15 @@
 | <h4 id="address">address<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#address" title="Permanent link">#</a></h4> | `string` | <code>"auto"</code> | OSC address for sending messages, it must start with a / |
 | <h4 id="preArgs">preArgs<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#preArgs" title="Permanent link">#</a></h4> | `*`&vert;<br/>`array` | <code>""</code> | A value or array of values that will be prepended to the OSC messages.<br/><br/>Values can be defined as objects if the osc type tag needs to be specified: `{type: "i", value: 1}` |
 | <h4 id="target">target<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#target" title="Permanent link">#</a></h4> | `string`&vert;<br/>`array`&vert;<br/>`null` | <code>""</code> | This defines the targets of the widget's OSC messages<br/>- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:port"]`<br/>- If midi is enabled, targets can be `midi:device_name`<br/>- The special item `"self"` can be used to refer to the emitting client directly.<br/>- If no target is set, messages can still be sent if the server has default targets<br/>- The server's default targets can be bypassed by setting one of the items to `null` |
-| <h4 id="bypass">bypass<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#bypass" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to prevent the widget from sending any osc message |
+| <h4 id="bypass">bypass<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#bypass" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to prevent the widget from sending any osc message |</div>
 
 ## Sliders
 
-### fader
 
+<div class="accordion" data-category="Sliders" markdown="1">
 
+<h4 class="accordionlink" id="fader"><a class="headerlink" href="#fader">fader</a></h3>
+<div class="accordion-description">Vertical / horizontal slider.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -55,11 +62,15 @@
 | <h4 id="fader_origin">origin<a class="headerlink" href="#fader_origin" title="Permanent link">#</a></h4> | `number` | <code>"auto"</code> | Defines the starting point's value of the fader's gauge |
 | <h4 class="thead2" id="fader_osc">osc<a class="headerlink" href="#fader_osc" title="Permanent link">#</a></h4> ||||
 | <h4 id="fader_touchAddress">touchAddress<a class="headerlink" href="#fader_touchAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |
-| <h4 id="fader_meterAddress">meterAddress<a class="headerlink" href="#fader_meterAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | OSC address for the built-in meter |
-
-### knob
+| <h4 id="fader_meterAddress">meterAddress<a class="headerlink" href="#fader_meterAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | OSC address for the built-in meter |</div>
 
 
+
+
+<div class="accordion" data-category="Sliders" markdown="1">
+
+<h4 class="accordionlink" id="knob"><a class="headerlink" href="#knob">knob</a></h3>
+<div class="accordion-description">Rotative knob slider.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -81,11 +92,15 @@
 | <h4 id="knob_unit">unit<a class="headerlink" href="#knob_unit" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Unit will be appended to the displayed widget's value (it doesn't affect osc messages) |
 | <h4 id="knob_origin">origin<a class="headerlink" href="#knob_origin" title="Permanent link">#</a></h4> | `number` | <code>"auto"</code> | Defines the starting point's value of the knob's gauge |
 | <h4 class="thead2" id="knob_osc">osc<a class="headerlink" href="#knob_osc" title="Permanent link">#</a></h4> ||||
-| <h4 id="knob_touchAddress">touchAddress<a class="headerlink" href="#knob_touchAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |
+| <h4 id="knob_touchAddress">touchAddress<a class="headerlink" href="#knob_touchAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
 
-### encoder
 
-A knob that sends a relative direction infomation instead of an absolute value.
+
+
+<div class="accordion" data-category="Sliders" markdown="1">
+
+<h4 class="accordionlink" id="encoder"><a class="headerlink" href="#encoder">encoder</a></h3>
+<div class="accordion-description">A knob that sends a relative direction infomation instead of an absolute value.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -98,11 +113,15 @@ A knob that sends a relative direction infomation instead of an absolute value.
 | <h4 id="encoder_snap">snap<a class="headerlink" href="#encoder_snap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | By default, dragging the widget will modify it's value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position |
 | <h4 id="encoder_doubleTap">doubleTap<a class="headerlink" href="#encoder_doubleTap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
 | <h4 class="thead2" id="encoder_osc">osc<a class="headerlink" href="#encoder_osc" title="Permanent link">#</a></h4> ||||
-| <h4 id="encoder_touchAddress">touchAddress<a class="headerlink" href="#encoder_touchAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |
+| <h4 id="encoder_touchAddress">touchAddress<a class="headerlink" href="#encoder_touchAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
 
-### range
 
-A fader with two heads for setting a range.
+
+
+<div class="accordion" data-category="Sliders" markdown="1">
+
+<h4 class="accordionlink" id="range"><a class="headerlink" href="#range">range</a></h3>
+<div class="accordion-description">A fader with two heads for setting a range.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -121,13 +140,17 @@ A fader with two heads for setting a range.
 | <h4 id="range_sensitivity">sensitivity<a class="headerlink" href="#range_sensitivity" title="Permanent link">#</a></h4> | `number` | <code>1</code> | See fader's `sensitivity` |
 | <h4 class="thead2" id="range_osc">osc<a class="headerlink" href="#range_osc" title="Permanent link">#</a></h4> ||||
 | <h4 id="range_touchAddress">touchAddress<a class="headerlink" href="#range_touchAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | See fader's `touchAddress` |
-| <h4 id="range_split">split<a class="headerlink" href="#range_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`object` | <code>false</code> | Set to `true` to send separate osc messages for `low` and `high` handles. The `address` will be the same as the widget's with `/low` or `/high` appended to it<br/><br/>Can be set as an object to specify a different `address` : `['/osc_address_low', '/osc_address_high']`<br/><br/>Note: the widget will only respond to its original osc address, not to the splitted version |
+| <h4 id="range_split">split<a class="headerlink" href="#range_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`object` | <code>false</code> | Set to `true` to send separate osc messages for `low` and `high` handles. The `address` will be the same as the widget's with `/low` or `/high` appended to it<br/><br/>Can be set as an object to specify a different `address` : `['/osc_address_low', '/osc_address_high']`<br/><br/>Note: the widget will only respond to its original osc address, not to the splitted version |</div>
+
+
 
 ## Buttons
 
-### toggle
 
+<div class="accordion" data-category="Buttons" markdown="1">
 
+<h4 class="accordionlink" id="toggle"><a class="headerlink" href="#toggle">toggle</a></h3>
+<div class="accordion-description">On / off button.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -135,11 +158,15 @@ A fader with two heads for setting a range.
 | <h4 id="toggle_doubleTap">doubleTap<a class="headerlink" href="#toggle_doubleTap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the button require a double tap to be toggled instead of a single tap |
 | <h4 id="toggle_led">led<a class="headerlink" href="#toggle_led" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to display the toggle's state with a led |
 | <h4 id="toggle_on">on<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#toggle_on" title="Permanent link">#</a></h4> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
-| <h4 id="toggle_off">off<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#toggle_off" title="Permanent link">#</a></h4> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
-
-### push
+| <h4 id="toggle_off">off<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#toggle_off" title="Permanent link">#</a></h4> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |</div>
 
 
+
+
+<div class="accordion" data-category="Buttons" markdown="1">
+
+<h4 class="accordionlink" id="push"><a class="headerlink" href="#push">push</a></h3>
+<div class="accordion-description">On / off button that turns off when released.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -147,11 +174,15 @@ A fader with two heads for setting a range.
 | <h4 id="push_doubleTap">doubleTap<a class="headerlink" href="#push_doubleTap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the button require a double tap to be pushed instead of a single tap |
 | <h4 id="push_on">on<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#push_on" title="Permanent link">#</a></h4> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
 | <h4 id="push_off">off<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#push_off" title="Permanent link">#</a></h4> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
-| <h4 id="push_norelease">norelease<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#push_norelease" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to prevent sending any osc message when releasing the button |
-
-### switch
+| <h4 id="push_norelease">norelease<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#push_norelease" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to prevent sending any osc message when releasing the button |</div>
 
 
+
+
+<div class="accordion" data-category="Buttons" markdown="1">
+
+<h4 class="accordionlink" id="switch"><a class="headerlink" href="#switch">switch</a></h3>
+<div class="accordion-description">Value selector button.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -159,20 +190,28 @@ A fader with two heads for setting a range.
 | <h4 id="switch_horizontal">horizontal<a class="headerlink" href="#switch_horizontal" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to display values horizontally |
 | <h4 id="switch_showValues">showValues<a class="headerlink" href="#switch_showValues" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | If values is an object, set to `true` to display both values and labels instead of labels only |
 | <h4 id="switch_values">values<a class="headerlink" href="#switch_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
-| <h4 id="switch_traversing">traversing<a class="headerlink" href="#switch_traversing" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |
-
-### dropdown
+| <h4 id="switch_traversing">traversing<a class="headerlink" href="#switch_traversing" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |</div>
 
 
+
+
+<div class="accordion" data-category="Buttons" markdown="1">
+
+<h4 class="accordionlink" id="dropdown"><a class="headerlink" href="#dropdown">dropdown</a></h3>
+<div class="accordion-description">Native dropdown menu.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="dropdown_dropdown">dropdown<a class="headerlink" href="#dropdown_dropdown" title="Permanent link">#</a></h4> ||||
-| <h4 id="dropdown_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#dropdown_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept<br/><br/>An empty option will always be prepended to values (sends an osc message without any value); it can be hidden by adding `option:first-child{display:none}` to the widget's `css` |
+| <h4 id="dropdown_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#dropdown_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept<br/><br/>An empty option will always be prepended to values (sends an osc message without any value); it can be hidden by adding `option:first-child{display:none}` to the widget's `css` |</div>
 
-### menu
 
-Drag and drop menu with a circular layout
+
+
+<div class="accordion" data-category="Buttons" markdown="1">
+
+<h4 class="accordionlink" id="menu"><a class="headerlink" href="#menu">menu</a></h3>
+<div class="accordion-description">Drag and drop menu with a circular or grid layout.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -184,13 +223,17 @@ Drag and drop menu with a circular layout
 | <h4 id="menu_toggle">toggle<a class="headerlink" href="#menu_toggle" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the menu stay opened after mouse/touch release |
 | <h4 id="menu_doubleTap">doubleTap<a class="headerlink" href="#menu_doubleTap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the menu require a double tap to be opened instead of a single tap |
 | <h4 id="menu_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
-| <h4 id="menu_weights">weights<a class="headerlink" href="#menu_weights" title="Permanent link">#</a></h4> | `array` | <code>""</code> | `Array` of `number` defining the weights of each value in `values`<br/><br/>Ignored when `grid` is `true` |
+| <h4 id="menu_weights">weights<a class="headerlink" href="#menu_weights" title="Permanent link">#</a></h4> | `array` | <code>""</code> | `Array` of `number` defining the weights of each value in `values`<br/><br/>Ignored when `grid` is `true` |</div>
+
+
 
 ## Pads
 
-### xy
 
-Two-dimensional slider.
+<div class="accordion" data-category="Pads" markdown="1">
+
+<h4 class="accordionlink" id="xy"><a class="headerlink" href="#xy">xy</a></h3>
+<div class="accordion-description">Two-dimensional slider.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -210,11 +253,15 @@ Two-dimensional slider.
 | <h4 id="xy_sensitivity">sensitivity<a class="headerlink" href="#xy_sensitivity" title="Permanent link">#</a></h4> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
 | <h4 class="thead2" id="xy_osc">osc<a class="headerlink" href="#xy_osc" title="Permanent link">#</a></h4> ||||
 | <h4 id="xy_touchAddress">touchAddress<a class="headerlink" href="#xy_touchAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1`) |
-| <h4 id="xy_split">split<a class="headerlink" href="#xy_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`object` | <code>false</code> | Set to `true` to send separate osc messages for each point's x and y axis. The address will be the same as the widget's with `/x` or `/y` appended to it<br/><br/>Can be set as an `object` to specify a different address : ['/osc_address_x', '/osc_address_y']<br/><br/>Note: the widget will only respond to its original osc address, not to the splitted version |
+| <h4 id="xy_split">split<a class="headerlink" href="#xy_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`object` | <code>false</code> | Set to `true` to send separate osc messages for each point's x and y axis. The address will be the same as the widget's with `/x` or `/y` appended to it<br/><br/>Can be set as an `object` to specify a different address : ['/osc_address_x', '/osc_address_y']<br/><br/>Note: the widget will only respond to its original osc address, not to the splitted version |</div>
 
-### rgb
 
-Color picker with optional alpha slider.
+
+
+<div class="accordion" data-category="Pads" markdown="1">
+
+<h4 class="accordionlink" id="rgb"><a class="headerlink" href="#rgb">rgb</a></h3>
+<div class="accordion-description">Color picker with optional alpha slider.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -225,11 +272,15 @@ Color picker with optional alpha slider.
 | <h4 id="rgb_input">input<a class="headerlink" href="#rgb_input" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to hide the built-in input widget |
 | <h4 id="rgb_alpha">alpha<a class="headerlink" href="#rgb_alpha" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to enable alpha channel |
 | <h4 class="thead2" id="rgb_osc">osc<a class="headerlink" href="#rgb_osc" title="Permanent link">#</a></h4> ||||
-| <h4 id="rgb_split">split<a class="headerlink" href="#rgb_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`object` | <code>false</code> | Set to `true` to send separate osc messages for for r and g & b. The address will be the same as the widget's with `/r`, `/g` or `/b` appended to it<br/><br/>Can be set as an `object` to specify a different address : `['/r', '/g', 'b']`<br/><br/>Note: the widget will only respond to its original osc address, not to the splitted version |
+| <h4 id="rgb_split">split<a class="headerlink" href="#rgb_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`object` | <code>false</code> | Set to `true` to send separate osc messages for for r and g & b. The address will be the same as the widget's with `/r`, `/g` or `/b` appended to it<br/><br/>Can be set as an `object` to specify a different address : `['/r', '/g', 'b']`<br/><br/>Note: the widget will only respond to its original osc address, not to the splitted version |</div>
 
-### multixy
 
-Multi-point XY pad.
+
+
+<div class="accordion" data-category="Pads" markdown="1">
+
+<h4 class="accordionlink" id="multixy"><a class="headerlink" href="#multixy">multixy</a></h3>
+<div class="accordion-description">Multi-point XY pad.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -249,13 +300,17 @@ Multi-point XY pad.
 | <h4 id="multixy_sensitivity">sensitivity<a class="headerlink" href="#multixy_sensitivity" title="Permanent link">#</a></h4> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
 | <h4 class="thead2" id="multixy_osc">osc<a class="headerlink" href="#multixy_osc" title="Permanent link">#</a></h4> ||||
 | <h4 id="multixy_touchAddress">touchAddress<a class="headerlink" href="#multixy_touchAddress" title="Permanent link">#</a></h4> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |
-| <h4 id="multixy_split">split<a class="headerlink" href="#multixy_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`object` | <code>false</code> | Set to `true` to send separate osc messages for each point's x and y axis. The address will be the same as the widget's with `/N/x` or `/N/y` appended to it, where N is the point's id (or the point's label if points is an array)<br/><br/>Can be set as an `object` to specify a different address : `['/0/x', '/0/y', '/1/x', '/2/y']`<br/><br/>Note: the widget will only respond to its original osc address, not to the splitted version |
+| <h4 id="multixy_split">split<a class="headerlink" href="#multixy_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`object` | <code>false</code> | Set to `true` to send separate osc messages for each point's x and y axis. The address will be the same as the widget's with `/N/x` or `/N/y` appended to it, where N is the point's id (or the point's label if points is an array)<br/><br/>Can be set as an `object` to specify a different address : `['/0/x', '/0/y', '/1/x', '/2/y']`<br/><br/>Note: the widget will only respond to its original osc address, not to the splitted version |</div>
+
+
 
 ## Matrices
 
-### matrix
 
-Generic matrix for creating rows/columns of widgets.
+<div class="accordion" data-category="Matrices" markdown="1">
+
+<h4 class="accordionlink" id="matrix"><a class="headerlink" href="#matrix">matrix</a></h3>
+<div class="accordion-description">Generic matrix for creating rows/columns of widgets.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -266,11 +321,15 @@ Generic matrix for creating rows/columns of widgets.
 | <h4 id="matrix_spacing">spacing<a class="headerlink" href="#matrix_spacing" title="Permanent link">#</a></h4> | `integer` | <code>0</code> | Adds space between widgets |
 | <h4 id="matrix_traversing">traversing<a class="headerlink" href="#matrix_traversing" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |
 | <h4 id="matrix_border">border<a class="headerlink" href="#matrix_border" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disables the widgets' borders |
-| <h4 id="matrix_props">props<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h4> | `object` | <code>{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>Formulas in this field are resolved with an extra variable representing each widget's index: `$`<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |
+| <h4 id="matrix_props">props<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h4> | `object` | <code>{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>Formulas in this field are resolved with an extra variable representing each widget's index: `$`<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |</div>
 
-### keyboard
 
-Piano keyboard.
+
+
+<div class="accordion" data-category="Matrices" markdown="1">
+
+<h4 class="accordionlink" id="keyboard"><a class="headerlink" href="#keyboard">keyboard</a></h3>
+<div class="accordion-description">Piano keyboard.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -284,11 +343,15 @@ Piano keyboard.
 | <h4 id="keyboard_off">off<a class="headerlink" href="#keyboard_off" title="Permanent link">#</a></h4> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
 | <h4 id="keyboard_toggles">toggles<a class="headerlink" href="#keyboard_toggles" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make keys bahave like toggle buttons |
 | <h4 class="thead2" id="keyboard_osc">osc<a class="headerlink" href="#keyboard_osc" title="Permanent link">#</a></h4> ||||
-| <h4 id="keyboard_split">split<a class="headerlink" href="#keyboard_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`string` | <code>false</code> | `true`: the widget's index will be appended to the matrice's osc address<br/><br/>`false`: it will be prepended to the widget's preArgs<br/><br/>`string`: will be used to define the widgets' addresses, replacing dollar signs (`$`) with their respective index (to insert the actual dollar sign, it must be escaped with a backslash (`\$`)) |
+| <h4 id="keyboard_split">split<a class="headerlink" href="#keyboard_split" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`string` | <code>false</code> | `true`: the widget's index will be appended to the matrice's osc address<br/><br/>`false`: it will be prepended to the widget's preArgs<br/><br/>`string`: will be used to define the widgets' addresses, replacing dollar signs (`$`) with their respective index (to insert the actual dollar sign, it must be escaped with a backslash (`\$`)) |</div>
 
-### patchbay
 
-Connect inputs to outputs.
+
+
+<div class="accordion" data-category="Matrices" markdown="1">
+
+<h4 class="accordionlink" id="patchbay"><a class="headerlink" href="#patchbay">patchbay</a></h3>
+<div class="accordion-description">Connect inputs to outputs.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -296,13 +359,17 @@ Connect inputs to outputs.
 | <h4 id="patchbay_css">css<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#patchbay_css" title="Permanent link">#</a></h4> | `string` | <code>""</code> | The inputs/ouputs width can be adjusted by using the  `.nodes` selector:<br/><br/>`.nodes { width: 25% }` |
 | <h4 class="thead2" id="patchbay_patchbay">patchbay<a class="headerlink" href="#patchbay_patchbay" title="Permanent link">#</a></h4> ||||
 | <h4 id="patchbay_inputs">inputs<a class="headerlink" href="#patchbay_inputs" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;"input_1",<br/>&nbsp;"input_2"<br/>]</code> | - `Array` of input names : `['input_1', 'input_2']`<br/>- `Object` of `"label_1": "input_1"` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept<br/><br/><br/><br/>Patchbay inputs can be connected to one or more outputs and will send messages of the following form when they are connected/disconnected: <br/><br/>`/patchbay_address input_x output_x output_y etc`<br/><br/>If no output is connected to the input, the message will be `/patchbay_address input_x`<br/><br/>The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1` |
-| <h4 id="patchbay_outputs">outputs<a class="headerlink" href="#patchbay_outputs" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;"output_1",<br/>&nbsp;"output_2"<br/>]</code> | List of output values the inputs can connect to (see `inputs`). |
+| <h4 id="patchbay_outputs">outputs<a class="headerlink" href="#patchbay_outputs" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;"output_1",<br/>&nbsp;"output_2"<br/>]</code> | List of output values the inputs can connect to (see `inputs`). |</div>
+
+
 
 ## Plots
 
-### plot
 
-XY coordinates plot.
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="plot"><a class="headerlink" href="#plot">plot</a></h3>
+<div class="accordion-description">XY coordinates plot.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -317,11 +384,15 @@ XY coordinates plot.
 | <h4 id="plot_smooth">smooth<a class="headerlink" href="#plot_smooth" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`) |
 | <h4 id="plot_pips">pips<a class="headerlink" href="#plot_pips" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
 | <h4 class="thead2" id="plot_value">value<a class="headerlink" href="#plot_value" title="Permanent link">#</a></h4> ||||
-| <h4 id="plot_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#plot_value" title="Permanent link">#</a></h4> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values<br/>- `Array` of `[x, y]` `array` values<br/>- `String` `array`<br/>- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points' coordinates |
+| <h4 id="plot_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#plot_value" title="Permanent link">#</a></h4> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values<br/>- `Array` of `[x, y]` `array` values<br/>- `String` `array`<br/>- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points' coordinates |</div>
 
-### eq
 
-Draws frequency response between from from an array of filter objects.
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="eq"><a class="headerlink" href="#eq">eq</a></h3>
+<div class="accordion-description">Draws frequency response between from from an array of filter objects.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -333,11 +404,15 @@ Draws frequency response between from from an array of filter objects.
 | <h4 id="eq_logScaleX">logScaleX<a class="headerlink" href="#eq_logScaleX" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="eq_smooth">smooth<a class="headerlink" href="#eq_smooth" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`) |
 | <h4 class="thead2" id="eq_value">value<a class="headerlink" href="#eq_value" title="Permanent link">#</a></h4> ||||
-| <h4 id="eq_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#eq_value" title="Permanent link">#</a></h4> | `array` | <code>""</code> | Each item must be an object with the following properties<br/>- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak" or "notch")<br/>- `freq`: number (filter's resonant frequency)<br/>- `q`: number (Q factor)<br/>- `gain`: number<br/>- `on`: boolean |
+| <h4 id="eq_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#eq_value" title="Permanent link">#</a></h4> | `array` | <code>""</code> | Each item must be an object with the following properties<br/>- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak" or "notch")<br/>- `freq`: number (filter's resonant frequency)<br/>- `q`: number (Q factor)<br/>- `gain`: number<br/>- `on`: boolean |</div>
 
-### visualizer
 
-Display its value over time.
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="visualizer"><a class="headerlink" href="#visualizer">visualizer</a></h3>
+<div class="accordion-description">Display its value over time.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -347,30 +422,42 @@ Display its value over time.
 | <h4 id="visualizer_origin">origin<a class="headerlink" href="#visualizer_origin" title="Permanent link">#</a></h4> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
 | <h4 id="visualizer_logScale">logScale<a class="headerlink" href="#visualizer_logScale" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="visualizer_smooth">smooth<a class="headerlink" href="#visualizer_smooth" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`) |
-| <h4 id="visualizer_pips">pips<a class="headerlink" href="#visualizer_pips" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
-
-### led
+| <h4 id="visualizer_pips">pips<a class="headerlink" href="#visualizer_pips" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to hide the scale |</div>
 
 
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="led"><a class="headerlink" href="#led">led</a></h3>
+<div class="accordion-description">Intensity display.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="led_led">led<a class="headerlink" href="#led_led" title="Permanent link">#</a></h4> ||||
 | <h4 id="led_range">range<a class="headerlink" href="#led_range" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Value to led intensity mapping range |
-| <h4 id="led_logScale">logScale<a class="headerlink" href="#led_logScale" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale (base 10). Set to a `number` to define the logarithm's base. |
-
-### rgbled
+| <h4 id="led_logScale">logScale<a class="headerlink" href="#led_logScale" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale (base 10). Set to a `number` to define the logarithm's base. |</div>
 
 
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="rgbled"><a class="headerlink" href="#rgbled">rgbled</a></h3>
+<div class="accordion-description">Rgb / rgba color display</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="rgbled_value">value<a class="headerlink" href="#rgbled_value" title="Permanent link">#</a></h4> ||||
-| <h4 id="rgbled_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#rgbled_value" title="Permanent link">#</a></h4> | `array`&vert;<br/>`string` | <code>""</code> | - `Array`: `[r, g, b]` (`r`, `g` and `b` between `0` and `255`)<br/>- `Array`: `[r, g, b, alpha]` (`alpha` between `0` and `255`)<br/>- `String`: CSS color |
+| <h4 id="rgbled_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#rgbled_value" title="Permanent link">#</a></h4> | `array`&vert;<br/>`string` | <code>""</code> | - `Array`: `[r, g, b]` (`r`, `g` and `b` between `0` and `255`)<br/>- `Array`: `[r, g, b, alpha]` (`alpha` between `0` and `255`)<br/>- `String`: CSS color |</div>
 
-### meter
 
-Non-interactable fader.
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="meter"><a class="headerlink" href="#meter">meter</a></h3>
+<div class="accordion-description">Non-interactable fader.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -385,22 +472,30 @@ Non-interactable fader.
 | <h4 id="meter_horizontal">horizontal<a class="headerlink" href="#meter_horizontal" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | See fader's `horizontal` |
 | <h4 id="meter_pips">pips<a class="headerlink" href="#meter_pips" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | See fader's `pips` |
 | <h4 id="meter_dashed">dashed<a class="headerlink" href="#meter_dashed" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | See fader's `dashed` |
-| <h4 id="meter_gradient">gradient<a class="headerlink" href="#meter_gradient" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>[]</code> | When set, the meter's gauge will be filled with a linear color gradient<br/>- each item must be a CSS color string.<br/>- as an `object`: each key must be a number between 0 and 1<br/>- each item must be a CSS color string.<br/><br/>Examples: `['blue', 'red']`, {'0': 'blue', '0.9': 'blue', '1': 'red'}  |
+| <h4 id="meter_gradient">gradient<a class="headerlink" href="#meter_gradient" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>[]</code> | When set, the meter's gauge will be filled with a linear color gradient<br/>- each item must be a CSS color string.<br/>- as an `object`: each key must be a number between 0 and 1<br/>- each item must be a CSS color string.<br/><br/>Examples: `['blue', 'red']`, {'0': 'blue', '0.9': 'blue', '1': 'red'}  |</div>
 
-### text
 
-Display text.
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="text"><a class="headerlink" href="#text">text</a></h3>
+<div class="accordion-description">Display text.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="text_text">text<a class="headerlink" href="#text_text" title="Permanent link">#</a></h4> ||||
 | <h4 id="text_vertical">vertical<a class="headerlink" href="#text_vertical" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to display the text vertically |
 | <h4 id="text_wrap">wrap<a class="headerlink" href="#text_wrap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically.<br/><br/>This will not break overflowing words by default, word-breaking can be enabled by adding `word-break: break-all;` to the `css` property |
-| <h4 id="text_align">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Set to `left` or `right` to change text alignment (otherwise center) |
+| <h4 id="text_align">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Set to `left` or `right` to change text alignment (otherwise center) |</div>
 
-### image
 
-Load a image (url or base64-encoded).
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="image"><a class="headerlink" href="#image">image</a></h3>
+<div class="accordion-description">Load a image (url or base64-encoded).</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -411,31 +506,43 @@ Load a image (url or base64-encoded).
 | <h4 id="image_border">border<a class="headerlink" href="#image_border" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable the borders and background-color |
 | <h4 id="image_cache">cache<a class="headerlink" href="#image_cache" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to false to disable image caching (forces file reload when updating or editing the widget).<br/><br/>When true, sending `reload` to the widget reloads its image without changing its value |
 | <h4 class="thead2" id="image_value">value<a class="headerlink" href="#image_value" title="Permanent link">#</a></h4> ||||
-| <h4 id="image_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#image_value" title="Permanent link">#</a></h4> | `string` | <code>""</code> | - File `url` or `path` (relative to the session file location by default, falling back to absolute path)<br/>- Base64 encoded image : `data:image/...` |
-
-### svg
+| <h4 id="image_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#image_value" title="Permanent link">#</a></h4> | `string` | <code>""</code> | - File `url` or `path` (relative to the session file location by default, falling back to absolute path)<br/>- Base64 encoded image : `data:image/...` |</div>
 
 
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="svg"><a class="headerlink" href="#svg">svg</a></h3>
+<div class="accordion-description">Svg parser.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="svg_svg">svg<a class="headerlink" href="#svg_svg" title="Permanent link">#</a></h4> ||||
 | <h4 id="svg_svg">svg<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#svg_svg" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Svg xml definition:<br/>- will be wrapped in a `< svg />` element<br/>- `<path>` commands support a special percent notation (`%x` and `%y`) |
-| <h4 id="svg_border">border<a class="headerlink" href="#svg_border" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable the borders and background-color |
-
-### html
+| <h4 id="svg_border">border<a class="headerlink" href="#svg_border" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable the borders and background-color |</div>
 
 
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="html"><a class="headerlink" href="#html">html</a></h3>
+<div class="accordion-description">Simple HTML parser.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="html_html">html<a class="headerlink" href="#html_html" title="Permanent link">#</a></h4> ||||
 | <h4 id="html_html">html<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#html_html" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Allowed HTML tags:<br/><br/>&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,<br/><br/>&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,<br/><br/>&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre |
-| <h4 id="html_border">border<a class="headerlink" href="#html_border" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable the borders and background-color |
+| <h4 id="html_border">border<a class="headerlink" href="#html_border" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable the borders and background-color |</div>
 
-### frame
 
-Embed a page in a frame (local network only).
+
+
+<div class="accordion" data-category="Plots" markdown="1">
+
+<h4 class="accordionlink" id="frame"><a class="headerlink" href="#frame">frame</a></h3>
+<div class="accordion-description">Embed a page in a frame (local network only).</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -444,13 +551,17 @@ Embed a page in a frame (local network only).
 | <h4 class="thead2" id="frame_frame">frame<a class="headerlink" href="#frame_frame" title="Permanent link">#</a></h4> ||||
 | <h4 id="frame_border">border<a class="headerlink" href="#frame_border" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable the borders and background-color |
 | <h4 class="thead2" id="frame_value">value<a class="headerlink" href="#frame_value" title="Permanent link">#</a></h4> ||||
-| <h4 id="frame_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#frame_value" title="Permanent link">#</a></h4> | `string` | <code>""</code> | External web page URL. Only local URLs are allowed (starting with `http://127.0.0.1/`, `http://10.x.x.x/`, `http://192.168.x.x/`, etc) |
+| <h4 id="frame_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#frame_value" title="Permanent link">#</a></h4> | `string` | <code>""</code> | External web page URL. Only local URLs are allowed (starting with `http://127.0.0.1/`, `http://10.x.x.x/`, `http://192.168.x.x/`, etc) |</div>
+
+
 
 ## Containers
 
-### panel
 
-Widgets or Tabs container.
+<div class="accordion" data-category="Containers" markdown="1">
+
+<h4 class="accordionlink" id="panel"><a class="headerlink" href="#panel">panel</a></h3>
+<div class="accordion-description">Widgets or Tabs container.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -462,11 +573,15 @@ Widgets or Tabs container.
 | <h4 class="thead2" id="panel_children">children<a class="headerlink" href="#panel_children" title="Permanent link">#</a></h4> ||||
 | <h4 id="panel_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#panel_variables" title="Permanent link">#</a></h4> | `*` | <code>"@{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
 | <h4 id="panel_widgets">widgets<a class="headerlink" href="#panel_widgets" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously. |
-| <h4 id="panel_tabs">tabs<a class="headerlink" href="#panel_tabs" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |
+| <h4 id="panel_tabs">tabs<a class="headerlink" href="#panel_tabs" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |</div>
 
-### strip
 
-Widget container that display its children in a single column or row.
+
+
+<div class="accordion" data-category="Containers" markdown="1">
+
+<h4 class="accordionlink" id="strip"><a class="headerlink" href="#strip">strip</a></h3>
+<div class="accordion-description">Widget container that display its children in a single column or row.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -478,11 +593,15 @@ Widget container that display its children in a single column or row.
 | <h4 id="strip_spacing">spacing<a class="headerlink" href="#strip_spacing" title="Permanent link">#</a></h4> | `integer`&vert;<br/>`percentage` | <code>0</code> | Adds space between widgets. Percents are always relative to the strips width |
 | <h4 class="thead2" id="strip_children">children<a class="headerlink" href="#strip_children" title="Permanent link">#</a></h4> ||||
 | <h4 id="strip_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#strip_variables" title="Permanent link">#</a></h4> | `*` | <code>"@{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
-| <h4 id="strip_widgets">widgets<a class="headerlink" href="#strip_widgets" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a widget object<br/>- By default, children widgets that don't have an explicit `width`/`height` set will be shrinked to respect the sizes specified by others<br/>- Adding `flex:1;` to a children's `css` will give it the ability the fill the remaining space<br/>- Multiple children can have a `flex:x;` css property (`x` will ponderate their expansion) |
+| <h4 id="strip_widgets">widgets<a class="headerlink" href="#strip_widgets" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a widget object<br/>- By default, children widgets that don't have an explicit `width`/`height` set will be shrinked to respect the sizes specified by others<br/>- Adding `flex:1;` to a children's `css` will give it the ability the fill the remaining space<br/>- Multiple children can have a `flex:x;` css property (`x` will ponderate their expansion) |</div>
 
-### modal
 
-A toggle button that opens a popup panel. Cannot contain tabs directly.
+
+
+<div class="accordion" data-category="Containers" markdown="1">
+
+<h4 class="accordionlink" id="modal"><a class="headerlink" href="#modal">modal</a></h3>
+<div class="accordion-description">A toggle button that opens a popup panel. Cannot contain tabs directly.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -498,24 +617,32 @@ A toggle button that opens a popup panel. Cannot contain tabs directly.
 | <h4 id="modal_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#modal_value" title="Permanent link">#</a></h4> | `integer` | <code>""</code> | Defines the modal's state:`0` for closed, `1` for opened |
 | <h4 class="thead2" id="modal_children">children<a class="headerlink" href="#modal_children" title="Permanent link">#</a></h4> ||||
 | <h4 id="modal_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#modal_variables" title="Permanent link">#</a></h4> | `*` | <code>"@{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
-| <h4 id="modal_widgets">widgets<a class="headerlink" href="#modal_widgets" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a widget object |
+| <h4 id="modal_widgets">widgets<a class="headerlink" href="#modal_widgets" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a widget object |</div>
 
-### clone
 
-Widget replication with overridable properties.
+
+
+<div class="accordion" data-category="Containers" markdown="1">
+
+<h4 class="accordionlink" id="clone"><a class="headerlink" href="#clone">clone</a></h3>
+<div class="accordion-description">Widget replication with overridable properties.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="clone_clone">clone<a class="headerlink" href="#clone_clone" title="Permanent link">#</a></h4> ||||
 | <h4 id="clone_widgetId">widgetId<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#clone_widgetId" title="Permanent link">#</a></h4> | `string` | <code>""</code> | `id` of the widget to clone |
 | <h4 class="thead2" id="clone_overrides">overrides<a class="headerlink" href="#clone_overrides" title="Permanent link">#</a></h4> ||||
-| <h4 id="clone_props">props<a class="headerlink" href="#clone_props" title="Permanent link">#</a></h4> | `object` | <code>{}</code> | Cloned widget's properties to override |
+| <h4 id="clone_props">props<a class="headerlink" href="#clone_props" title="Permanent link">#</a></h4> | `object` | <code>{}</code> | Cloned widget's properties to override |</div>
+
+
 
 ## Switchers
 
-### state
 
-Save and recall the state of other widgets.
+<div class="accordion" data-category="Switchers" markdown="1">
+
+<h4 class="accordionlink" id="state"><a class="headerlink" href="#state">state</a></h3>
+<div class="accordion-description">Save and recall the state of other widgets.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -525,34 +652,46 @@ Save and recall the state of other widgets.
 | <h4 id="state_loadLabel">loadLabel<a class="headerlink" href="#state_loadLabel" title="Permanent link">#</a></h4> | `string` | <code>"Load"</code> | Label for load button |
 | <h4 id="state_horizontal">horizontal<a class="headerlink" href="#state_horizontal" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to display buttons horizontally |
 | <h4 class="thead2" id="state_value">value<a class="headerlink" href="#state_value" title="Permanent link">#</a></h4> ||||
-| <h4 id="state_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#state_value" title="Permanent link">#</a></h4> | `object`&vert;<br/>`string` | <code>""</code> | - `object`: `"widget_id": VALUE` pairs<br/>- `string`: `"save"` (trigger save action), `"load"` (trigger load action) or `""` (reset value)<br/><br/><br/><br/>Note: the widget's actual value is never `"save"` or `"load"`, it's either an empty string or an object. |
+| <h4 id="state_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#state_value" title="Permanent link">#</a></h4> | `object`&vert;<br/>`string` | <code>""</code> | - `object`: `"widget_id": VALUE` pairs<br/>- `string`: `"save"` (trigger save action), `"load"` (trigger load action) or `""` (reset value)<br/><br/><br/><br/>Note: the widget's actual value is never `"save"` or `"load"`, it's either an empty string or an object. |</div>
 
-### switcher
 
-Store other widgets' values and recall them.
+
+
+<div class="accordion" data-category="Switchers" markdown="1">
+
+<h4 class="accordionlink" id="switcher"><a class="headerlink" href="#switcher">switcher</a></h3>
+<div class="accordion-description">Store other widgets' values and recall them.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="switcher_switcher">switcher<a class="headerlink" href="#switcher_switcher" title="Permanent link">#</a></h4> ||||
 | <h4 id="switcher_linkedWidgets">linkedWidgets<a class="headerlink" href="#switcher_linkedWidgets" title="Permanent link">#</a></h4> | `string`&vert;<br/>`array` | <code>""</code> | - `String`: a widget's `id` whose state changes will be stored<br/>- `Array`: a list of widget `id` string |
 | <h4 id="switcher_horizontal">horizontal<a class="headerlink" href="#switcher_horizontal" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to display values horizontally |
-| <h4 id="switcher_values">values<a class="headerlink" href="#switcher_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | Each item represents a bank that stores the values from the widgets listed in `linkedWidgets`<br/>- `Array` of possible values to switch between : `[1,2,3]`<br/>- `Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
+| <h4 id="switcher_values">values<a class="headerlink" href="#switcher_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | Each item represents a bank that stores the values from the widgets listed in `linkedWidgets`<br/>- `Array` of possible values to switch between : `[1,2,3]`<br/>- `Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |</div>
 
-### crossfader
 
-Switcher with linear interpolation slider.
+
+
+<div class="accordion" data-category="Switchers" markdown="1">
+
+<h4 class="accordionlink" id="crossfader"><a class="headerlink" href="#crossfader">crossfader</a></h3>
+<div class="accordion-description">Switcher with linear interpolation slider.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="crossfader_crossfader">crossfader<a class="headerlink" href="#crossfader_crossfader" title="Permanent link">#</a></h4> ||||
 | <h4 id="crossfader_linkedWidgets">linkedWidgets<a class="headerlink" href="#crossfader_linkedWidgets" title="Permanent link">#</a></h4> | `string`&vert;<br/>`array` | <code>""</code> | - `String`: a widget's `id` whose state changes will be stored<br/>- `Array`: a list of widget `id` string |
-| <h4 id="crossfader_horizontal">horizontal<a class="headerlink" href="#crossfader_horizontal" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to display values horizontally |
+| <h4 id="crossfader_horizontal">horizontal<a class="headerlink" href="#crossfader_horizontal" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to display values horizontally |</div>
+
+
 
 ## Inputs
 
-### input
 
-Text input.
+<div class="accordion" data-category="Inputs" markdown="1">
+
+<h4 class="accordionlink" id="input"><a class="headerlink" href="#input">input</a></h3>
+<div class="accordion-description">Text input.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -561,11 +700,15 @@ Text input.
 | <h4 id="input_align">align<a class="headerlink" href="#input_align" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Set to `left` or `right` to change text alignment (otherwise center) |
 | <h4 id="input_unit">unit<a class="headerlink" href="#input_unit" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Unit will be appended to the displayed widget's value (it doesn't affect osc messages) |
 | <h4 id="input_editable">editable<a class="headerlink" href="#input_editable" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to make the input non-editable |
-| <h4 id="input_asYouType">asYouType<a class="headerlink" href="#input_asYouType" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the input send its value at each keystroke |
+| <h4 id="input_asYouType">asYouType<a class="headerlink" href="#input_asYouType" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the input send its value at each keystroke |</div>
 
-### keys
 
-Keyboard binding.
+
+
+<div class="accordion" data-category="Inputs" markdown="1">
+
+<h4 class="accordionlink" id="keys"><a class="headerlink" href="#keys">keys</a></h3>
+<div class="accordion-description">Keyboard binding.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -573,21 +716,29 @@ Keyboard binding.
 | <h4 id="keys_binding">binding<a class="headerlink" href="#keys_binding" title="Permanent link">#</a></h4> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation) |
 | <h4 id="keys_keydown">keydown<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#keys_keydown" title="Permanent link">#</a></h4> | `string` | <code>""</code> | This property is evaluated each time the key combo is pressed and defines the widget's own value. Formulas are given extras variables in this context:<br/>- `key`: pressed key name (usefull for handling multiple keys with a single keys widget, lowercased when referencing a character key)<br/>- `code`: pressed key code name (<a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code#Code_values">full list</a>)<br/>- `ctrl`: control key state<br/>- `alt`: alt key state<br/>- `shift`: shift key state<br/>- `meta`: command/windows key state |
 | <h4 id="keys_keyup">keyup<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#keys_keyup" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Same as `keydown`, but evaluated when releasing the key combo |
-| <h4 id="keys_repeat">repeat<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#keys_repeat" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
+| <h4 id="keys_repeat">repeat<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#keys_repeat" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |</div>
 
-### script
 
-Evaluates a script each time it receives a value.
+
+
+<div class="accordion" data-category="Inputs" markdown="1">
+
+<h4 class="accordionlink" id="script"><a class="headerlink" href="#script">script</a></h3>
+<div class="accordion-description">Evaluates a script each time it receives a value.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="script_script">script<a class="headerlink" href="#script_script" title="Permanent link">#</a></h4> ||||
 | <h4 id="script_condition">condition<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#script_condition" title="Permanent link">#</a></h4> | `string` | <code>1</code> | When the widget receives a value, if this property return a falsy value, the script property won't be evaluated. If it's non-falsy, it will be evaluated normally. Formulas are given one extra variable in this context:<br/>- `value`: the value received by the widget |
-| <h4 id="script_script">script<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#script_script" title="Permanent link">#</a></h4> | `string` | <code>""</code> | This property is evaluated each time the widget receives a value* if condition is non-falsy. Formulas are given extras variables in this context:<br/>- `value`: value received by the widget<br/>- `id`: id of the widget that triggered the script<br/>- `send(target, address, arg1, arg2, ...)`: function for sending osc messages (ignores the script's targets and the server's defaults unless `target` is `false`; ignores the script's `preArgs`)<br/>- `set(id, value)`: function for setting a widget's value<br/>- `get(id)`: function for getting a widget's value (dynamic equivalent of @{id})<br/>- `getProp(id, property)`: function for getting a widget's property value ((dynamic equivalent of @{id.property})<br/>- `httpGet(url, callback)`: function for making http requests (asynchronous "GET" request and local urls only)<br/><br/><br/><br/>* Note: `value` or `linkId` properties can be used to receive other widgets' values. The `value` property must actually change to trigger the execution, where linked widgets via `linkId` can submit the same value over and over and trigger the execution |
+| <h4 id="script_script">script<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#script_script" title="Permanent link">#</a></h4> | `string` | <code>""</code> | This property is evaluated each time the widget receives a value* if condition is non-falsy. Formulas are given extras variables in this context:<br/>- `value`: value received by the widget<br/>- `id`: id of the widget that triggered the script<br/>- `send(target, address, arg1, arg2, ...)`: function for sending osc messages (ignores the script's targets and the server's defaults unless `target` is `false`; ignores the script's `preArgs`)<br/>- `set(id, value)`: function for setting a widget's value<br/>- `get(id)`: function for getting a widget's value (dynamic equivalent of @{id})<br/>- `getProp(id, property)`: function for getting a widget's property value ((dynamic equivalent of @{id.property})<br/>- `httpGet(url, callback)`: function for making http requests (asynchronous "GET" request and local urls only)<br/><br/><br/><br/>* Note: `value` or `linkId` properties can be used to receive other widgets' values. The `value` property must actually change to trigger the execution, where linked widgets via `linkId` can submit the same value over and over and trigger the execution |</div>
 
-### gyroscope
 
-Device motion/orientation sensor.
+
+
+<div class="accordion" data-category="Inputs" markdown="1">
+
+<h4 class="accordionlink" id="gyroscope"><a class="headerlink" href="#gyroscope">gyroscope</a></h3>
+<div class="accordion-description">Device motion/orientation sensor.</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -597,11 +748,15 @@ Device motion/orientation sensor.
 | <h4 id="gyroscope_compass">compass<a class="headerlink" href="#gyroscope_compass" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to return the orientation values with respect to the actual north direction of the world instead of the head direction of the device |
 | <h4 id="gyroscope_screenAdjusted">screenAdjusted<a class="headerlink" href="#gyroscope_screenAdjusted" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to return screen adjusted values |
 | <h4 class="thead2" id="gyroscope_value">value<a class="headerlink" href="#gyroscope_value" title="Permanent link">#</a></h4> ||||
-| <h4 id="gyroscope_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#gyroscope_value" title="Permanent link">#</a></h4> | `object` | <code>""</code> | The gyroscope's value is an object containing multiple values, which can be used by other widgets via the property maths syntax<br/>- `value.do.alpha`: deviceorientation event alpha<br/>- `value.do.beta`: deviceorientation event beta<br/>- `value.do.gamma`: deviceorientation event gamma<br/>- `value.do.absolute`: deviceorientation event absolute<br/>- `value.dm.x`: devicemotion event acceleration x<br/>- `value.dm.y`: devicemotion event acceleration y<br/>- `value.dm.z`: devicemotion event acceleration z<br/>- `value.dm.gx`: devicemotion event accelerationIncludingGravity x<br/>- `value.dm.gy`: devicemotion event accelerationIncludingGravity y<br/>- `value.dm.gz`: devicemotion event accelerationIncludingGravity z<br/>- `value.dm.alpha`: devicemotion event rotationRate alpha<br/>- `value.dm.beta`: devicemotion event rotationRate beta<br/>- `value.dm.gamma`: devicemotion event rotationRate gamma |
+| <h4 id="gyroscope_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#gyroscope_value" title="Permanent link">#</a></h4> | `object` | <code>""</code> | The gyroscope's value is an object containing multiple values, which can be used by other widgets via the property maths syntax<br/>- `value.do.alpha`: deviceorientation event alpha<br/>- `value.do.beta`: deviceorientation event beta<br/>- `value.do.gamma`: deviceorientation event gamma<br/>- `value.do.absolute`: deviceorientation event absolute<br/>- `value.dm.x`: devicemotion event acceleration x<br/>- `value.dm.y`: devicemotion event acceleration y<br/>- `value.dm.z`: devicemotion event acceleration z<br/>- `value.dm.gx`: devicemotion event accelerationIncludingGravity x<br/>- `value.dm.gy`: devicemotion event accelerationIncludingGravity y<br/>- `value.dm.gz`: devicemotion event accelerationIncludingGravity z<br/>- `value.dm.alpha`: devicemotion event rotationRate alpha<br/>- `value.dm.beta`: devicemotion event rotationRate beta<br/>- `value.dm.gamma`: devicemotion event rotationRate gamma |</div>
 
-### file
 
-File/Folder selector (server-side).
+
+
+<div class="accordion" data-category="Inputs" markdown="1">
+
+<h4 class="accordionlink" id="file"><a class="headerlink" href="#file">file</a></h3>
+<div class="accordion-description">File/Folder selector (server-side).</div>
 
 | property | type |default | description |
 | --- | --- | --- | --- |
@@ -609,7 +764,9 @@ File/Folder selector (server-side).
 | <h4 id="file_directory">directory<a class="headerlink" href="#file_directory" title="Permanent link">#</a></h4> | `string` | <code>"auto"</code> | Default browsing directory |
 | <h4 id="file_extension">extension<a class="headerlink" href="#file_extension" title="Permanent link">#</a></h4> | `string` | <code>"*"</code> | Only display files with this extension |
 | <h4 id="file_hidePath">hidePath<a class="headerlink" href="#file_hidePath" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to only display the filename (the whole path will still be used as value) |
-| <h4 id="file_allowDir">allowDir<a class="headerlink" href="#file_allowDir" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Allow selecting a folder (by pressing "open" when no file is selected) |
+| <h4 id="file_allowDir">allowDir<a class="headerlink" href="#file_allowDir" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Allow selecting a folder (by pressing "open" when no file is selected) |</div>
+
+
 
 
 <script>
@@ -617,5 +774,22 @@ document.querySelectorAll('.thead2').forEach(function(item){
 item.classList.remove('thead2')
 item.closest('tr').classList.add('thead2')
 })
+document.querySelectorAll('.accordionlink').forEach(function(item){
+item.addEventListener('click', function(e){
+e.preventDefault()
+var node = item.parentNode
+node.classList.toggle('show')
+if (node.classList.contains('show')){
+history.replaceState(null, null, '#' + item.getAttribute('id'));
+} else {
+history.replaceState(null, null, ' ');
+}
+})
+})
+if (window.location.hash) {
+document.querySelectorAll('[id='+window.location.hash.split("#")[1]+']').forEach(function(item){
+item.click()
+})
+}
 </script>
 

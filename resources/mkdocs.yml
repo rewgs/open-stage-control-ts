@@ -45,6 +45,7 @@ nav:
     - Donate: donate.md
 
 markdown_extensions:
+    - markdown.extensions.extra
     - markdown.extensions.admonition
     - codehilite:
         guess_lang: False

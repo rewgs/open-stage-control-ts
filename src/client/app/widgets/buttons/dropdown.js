@@ -5,6 +5,13 @@ var Widget = require('../common/widget'),
 
 class Dropdown extends Widget {
 
+    static description() {
+
+        return 'Native dropdown menu.'
+
+    }
+
+
     static defaults() {
 
         return super.defaults({

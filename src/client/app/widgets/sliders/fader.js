@@ -5,6 +5,12 @@ var {clip} = require('../utils'),
 
 module.exports = class Fader extends Slider {
 
+    static description() {
+
+        return 'Vertical / horizontal slider.'
+
+    }
+
     static defaults() {
 
         return super.defaults({
