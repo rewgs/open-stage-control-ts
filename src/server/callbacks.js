@@ -40,7 +40,7 @@ module.exports =  {
 
         ipc.send('sessionList', recentSessions, clientId)
         ipc.send('serverTargets', settings.read('targets'), clientId)
-        
+
     },
 
     sessionAddToHistory: function(data) {
@@ -269,6 +269,9 @@ module.exports =  {
             data[k] = shortdata[k]
         }
 
+        // only rawTarget will be used
+        delete data.target
+
         data.args =  data.preArgs ? data.preArgs.concat(value) : [value]
 
         if (!data.noSync) ipc.send('receiveOsc', data, null, clientId)
@@ -357,6 +360,9 @@ module.exports =  {
                 cache[k] = widgetData[k]
             }
         }
+
+        // store raw target for client sync widget matching
+        cache._rawTarget = widgetData.target
 
     },
 

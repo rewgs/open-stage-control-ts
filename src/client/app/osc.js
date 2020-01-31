@@ -46,7 +46,7 @@ var Osc = class Osc extends EventEmitter {
             let widgetTarget = widgets[i].getProp('target'),
                 match = true
 
-            if (data.target) {
+            if (data._rawTarget) {
                 // if the message target is provided (when message comes from another client connected to the same server)
                 // then we only update the widgets that have the exact same target
                 match = deepEqual(widgetTarget, data.target)
