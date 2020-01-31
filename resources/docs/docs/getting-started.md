@@ -127,12 +127,18 @@ cd open-stage-control/
 # uncomment next line if you want the latest release
 # instead of the current development version
 # git checkout $(git describe --tags `git rev-list --tags --max-count=1`)
-npm install
 
 # TARGET_PLATFORM can be linux, win32 (windows) or darwin (os x)
 export PLATFORM=TARGET_PLATFORM
 # TARGET_ARCH can be ia32, x64, armv7l or arm64
 export ARCH=TARGET_ARCH
+
+
+npm install
+
+# run this instead if ARCH is armv7l
+# npm install --arch=armv7l
+
 
 npm run build
 
