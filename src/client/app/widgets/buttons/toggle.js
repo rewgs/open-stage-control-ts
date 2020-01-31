@@ -4,6 +4,12 @@ var Widget = require('../common/widget'),
 
 class Toggle extends Widget {
 
+    static description() {
+
+        return 'On / off button.'
+
+    }
+
     static defaults() {
 
         return super.defaults({

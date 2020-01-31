@@ -1,33 +1,20 @@
 # Advanced property syntax
 
-## Inheritance: `@{}`
+## Inheritance: `@{id.property}`
 
-Widgets can use each other's property values by using the following syntaxes:
+Widgets can use each other's properties values and update automatically when they change by using this syntax.
 
-- `@{this.propertyName}`
-- `@{parent.propertyName}`
-- `@{widgetId.propertyName}` (where `widgetId` is the target widget's `id`)
+- `id`: the target widget's `id`
+- `property`: is the target widget's property name
 
-!!! note
-    Don't use `widgetId` when targetting `this` or `parent`, it won't work.   
 
-`propertyName` can be any of the target widget's properties.
+#### Value
 
-It can be used to:
+The property name (and the dot) can be omitted and defaults to `value` (`@{widgetId}` => `@{widgetId.value}`). `value` always resolves to the target widget's current value, not its `value` property
 
-- concatenate strings: `/@{parent.id}/some_suffix`
-- define object value:   `["@{parent.id}"]`
+#### `this` & `parent`
 
-If the retreived property is an object (`[] / {}`), a subset can be defined by appending a dot and a key (array index or object key) : `@{parent.variables.key}`
-
-!!! note ""
-    The root panel's `id` is `root`.
-
-#### Using the value
-
-The special property name `value` refers to a widget's current value (which can be affected by its `value` *property*).
-
-When omitted, the property name defaults to `value` : `@{widgetId}` => `@{widgetId.value}`
+A widget can fetch its own properties or its direct parent's by using the keywords `this` or `parent` instead of `id`. When `this` or `parent` can be used, using the target widget's `id` instead won't work.
 
 #### Dynamic properties
 
@@ -41,49 +28,47 @@ Some properties have much cheaper update routines and can be considered as `dyna
 - container widgets can inherit their children's properties only to define `dynamic` properties
 - widgets can inherit their own `value`<i class="dynamic-prop-icon" title="dynamic"></i> property only to define `dynamic` properties
 
+#### Object properties
+
+If the retreived property is an object (`{}`) or an array (`[]`), a subset can be retreived directly by appending a dot and a key (array index or object key) : `@{parent.variables.key}`
+
 
 #### Nesting
 
 The inheritance syntax supports 1-level nesting : `@{fader_@{toggle_1}}`
 
-## OSC listeners: `OSC{}`
 
-The following syntax allows listening on an osc address to define a property, with an optionnal default value :
+## OSC listeners: `OSC{address, default, usePreArgs}`
 
-```
-OSC{/address, 1}
-```
-Will return `1` at first and listen for osc messages on address `/address [preArgs]`. Each time a value is received, the property will be updated.
+This syntax allows listening on an osc address to define a property.
+
+- `address`: osc address to listen to; if the leading slash (`/`) is omitted, the address will be prefixed with the widget's `address` property
+- `default` (optional): default value returned before any message is received
+- `usePreArgs` (optional): by default, osc listeners inherit the widget's `preArgs` and (these must be matched for the osc messages to be processed). Set to `false` bypass them.
 
 
-If the leading slash (`/`) is omitted, the address will be prefixed with the widget's `address` property:
+#### Dynamic address
 
-```
-OSC{color, "auto"}
-```
-Will listen for osc messages on address `/widget_address/color [preArgs]`.
-----
+The `address` can contain `@{}` blocks
 
-By default, osc listeners inherit the widget's `preArgs` and (these must be matched for the osc messages to be processed). This can be bypassed by appending a third argument to the constructor:
 
-```
-OSC{color, "auto", false}
-```
 
-## Javascript: `JS{{}}`
+## Javascript: `JS{{ <code> }}`
 
-This syntax allows writing formulas in pure javascript. The code will be compiled as a function and executed a restricted context.
+This syntax allows writing formulas in pure javascript. The code will be compiled as a function and executed in a restricted context.
 
 - if no `return` statement is found, the formula will return an empty string
 - javascript [strict mode](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode) is always enabled
 - `setTimeout` and `setInterval` functions are not available
 - the `global` object is shared between all javascript formulas (changing its properties *does not* trigger any synchronisation even if the value is used somewhere else)
 
+In this context, `@{} / OSC{}` are seen as variables, not as the value they hold,
+
 
 ## Formulas: `#{}`
 
 !!! warning "Deprecated"
-    This syntax is deprecated and will be removed in the future. Use the javascript syntax instead.
+    This syntax is now deprecated and will be removed in the future, sessions using it will be working for a few more versions but users are strongly encouraged to migrate to the javascript syntax.
 
 The following syntax allow writing mathematical formulas in widgets' properties:
 

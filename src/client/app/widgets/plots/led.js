@@ -4,6 +4,12 @@ var {mapToScale} = require('../utils'),
 
 module.exports = class Led extends Widget {
 
+    static description() {
+
+        return 'Intensity display.'
+
+    }
+
     static defaults() {
 
         return super.defaults({

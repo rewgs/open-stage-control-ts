@@ -8,7 +8,7 @@ class Menu extends Widget {
 
     static description() {
 
-        return 'Drag and drop menu with a circular layout'
+        return 'Drag and drop menu with a circular or grid layout.'
 
     }
 

@@ -3,6 +3,12 @@ var {clip} = require('../utils'),
 
 module.exports = class Knob extends Slider {
 
+    static description() {
+
+        return 'Rotative knob slider.'
+
+    }
+
     static defaults() {
 
         return super.defaults({
