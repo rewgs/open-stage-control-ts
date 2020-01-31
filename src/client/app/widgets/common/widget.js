@@ -9,7 +9,7 @@ var EventEmitter = require('../../events/event-emitter'),
     OscReceiver = require('./osc-receiver'),
     {deepCopy, deepEqual} = require('../../utils'),
     html = require('nanohtml'),
-    ipc = require('../../ipc'),
+    // ipc = require('../../ipc'),
     updateWidget = ()=>{}
 
 
