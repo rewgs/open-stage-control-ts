@@ -4,14 +4,19 @@ var Panel = require('./panel'),
 
 module.exports = class Tab extends Panel {
 
+    static description() {
+
+        return 'Tabbed panel widget'
+
+    }
+
     static defaults() {
 
         return Widget.defaults({
 
             _tab:'tab',
 
-            detached: {type: 'boolean', value: true, help: [
-            ]}
+            detached: {type: 'boolean', value: true, help: 'Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab open '}
 
         }, ['_geometry', 'left', 'top', 'width', 'height'], {
 
