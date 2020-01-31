@@ -1,12 +1,14 @@
 ## Support Open Stage Control
 
-If you would like to show your appreciation to Open Stage Control developer, you can donate to [AMMD](https://ammd.net/), a french nonprofit organization and independent music label that promotes free arts and free softwares.
+If you would like to show your appreciation, drop a line on the forums, it's always appreciated !
 
-<p><a class="btn btn-primary" href="https://www.helloasso.com/associations/ammd/formulaires/2/widget/en">Donate</a></p>
+Donations are not possible per see, but you may buy some music made by [AMMD](http://ammd.bandcamp.com), a french nonprofit organization and independent music label that promotes free arts and free softwares.
 
-## Sponsors
+If you wish to sponsor the project or hire me to build something with Open Stage Control, feel free to [contact me](mailto:jean-emmanuel@ammd.net) but please note that:
 
-If you wish to be listed as a sponsor, please [contact me](mailto:jean-emmanuel@ammd.net).
+- Sponsoring is only possible in an "altruistic" way, that is with no guarantee whatsoever of prioritizing anyone's interests
+- I'm not interested in developing dedicated solutions for proprietary softwares
+- I'm not interested in developing closed-source contents
 
 ## Infrastructure Sponsors
 

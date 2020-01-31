@@ -6,5 +6,5 @@ https://openstagecontrol.ammd.net/
 
 ----
 
-Copyleft © Jean-Emmanuel Doucet @ [AMMD](http://ammd.net) 2018.
+Copyleft © Jean-Emmanuel Doucet @ [AMMD](http://ammd.net) 2014-2020.
 This program is a free software released under the [GNU/GPL3](ttps://github.com/jean-emmanuel/open-stage-control/blob/master/LICENSE) license.
