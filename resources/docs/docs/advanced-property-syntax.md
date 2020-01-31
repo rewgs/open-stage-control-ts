@@ -64,6 +64,7 @@ This syntax allows writing formulas in pure javascript. The code will be compile
 
 In this context, `@{} / OSC{}` are seen as variables, not as the value they hold,
 
+Parsing errors can be read in the DevTool console (F12).
 
 ## Formulas: `#{}`
 

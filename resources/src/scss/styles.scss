@@ -96,6 +96,12 @@ hr {
     display: flex;
 }
 
+.nav .nav li {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .col-left {
     width:240px;
     flex-shrink: 0;
