@@ -42,7 +42,7 @@ nav:
         - Midi: docs/midi.md
         - Examples: docs/examples.md
         - Credits: docs/credits.md
-    - Donate: donate.md
+    - Support: support.md
 
 markdown_extensions:
     - markdown.extensions.extra
