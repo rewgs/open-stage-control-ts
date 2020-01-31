@@ -23,7 +23,7 @@ Below are the available command-line options. Note that when running without any
 
 || Option | Description |
 |---||---|
-| `-s` | `--send` | default targets for all widgets (ip:port pairs)|
+| `-s` | `--send` | default targets for all widgets (ip:port / domain:port  / midi:port_name pairs) |
 | `-l` | `--load` | session file to load |
 | | `--state` | state file to load (osc messages will be sent, unless there are other clients connected) |
 | `-b` | `--blank` | load a blank session and start the editor |
@@ -41,6 +41,7 @@ Below are the available command-line options. Note that when running without any
 | | `--url-options` | [url options](/docs/url-options) (opt=value pairs) |
 | |`--disable-vsync` | disable gui's vertical synchronization |
 | |`--disable-gpu` | disable hardware acceleration |
+| |`--force-gpu` | ignore chrome's gpu blacklist |
 | |`--read-only` | disable session editing and session history changes |
 | |`--remote-saving` | disable remote session saving for hosts that don\'t match the regular expresion |
 | |`--remote-root` | set remote file browsing root folder |
