@@ -23,7 +23,7 @@ setTimeout(offsetScroll, 250)
 
 
 var mobileToggle = document.getElementById('mobile-toggle'),
-    mobileMenu = document.getElementById('menu'),
+    mobileMenu = document.getElementById('mobile-menu'),
     show = false
 
 function toggleMenu(s){
