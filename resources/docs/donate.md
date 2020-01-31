@@ -7,7 +7,7 @@ Donations are not possible per see, but you may buy some music made by [AMMD](ht
 If you wish to sponsor the project or hire me to build something with Open Stage Control, feel free to [contact me](mailto:jean-emmanuel@ammd.net) but please note that:
 
 - Sponsoring is only possible in an "altruistic" way, that is with no guarantee whatsoever of prioritizing anyone's interests
-- I'm not interested in developing dedicated solutions for proprietary softwares
+- I'm not interested in developing dedicated features for proprietary softwares
 - I'm not interested in developing closed-source contents
 
 ## Infrastructure Sponsors
