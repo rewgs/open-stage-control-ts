@@ -663,7 +663,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="tab_tab">tab<a class="headerlink" href="#tab_tab" title="Permanent link">#</a></h4> ||||
-| <h4 id="tab_detached">detached<a class="headerlink" href="#tab_detached" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab open  |
+| <h4 id="tab_detached">detached<a class="headerlink" href="#tab_detached" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab opens |
 | <h4 class="thead2" id="tab_value">value<a class="headerlink" href="#tab_value" title="Permanent link">#</a></h4> ||||
 | <h4 id="tab_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#tab_value" title="Permanent link">#</a></h4> | `integer` | <code>""</code> | Defines currently opened tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
 | <h4 class="thead2" id="tab_children">children<a class="headerlink" href="#tab_children" title="Permanent link">#</a></h4> ||||
