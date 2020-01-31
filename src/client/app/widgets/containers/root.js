@@ -7,6 +7,12 @@ var Panel = require('./panel'),
 
 class Root extends Panel {
 
+    static description() {
+
+        return 'Main (unique) container'
+
+    }
+
     static defaults() {
 
         return Widget.defaults({}, ['label', '_geometry', 'left', 'top', 'width', 'height'], {

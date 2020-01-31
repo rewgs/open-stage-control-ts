@@ -54,7 +54,7 @@
 | <h4 id="fader_snap">snap<a class="headerlink" href="#fader_snap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | By default, dragging the widget will modify it's value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position |
 | <h4 id="fader_spring">spring<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#fader_spring" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
 | <h4 id="fader_doubleTap">doubleTap<a class="headerlink" href="#fader_doubleTap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
-| <h4 id="fader_range">range<a class="headerlink" href="#fader_range" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
+| <h4 id="fader_range">range<a class="headerlink" href="#fader_range" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
 | <h4 id="fader_logScale">logScale<a class="headerlink" href="#fader_logScale" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="fader_sensitivity">sensitivity<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#fader_sensitivity" title="Permanent link">#</a></h4> | `number` | <code>1</code> | Defines the fader's sensitivity when `snap` is `false`  |
 | <h4 id="fader_steps">steps<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#fader_steps" title="Permanent link">#</a></h4> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
@@ -85,7 +85,7 @@
 | <h4 id="knob_snap">snap<a class="headerlink" href="#knob_snap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | By default, dragging the widget will modify it's value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position |
 | <h4 id="knob_spring">spring<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#knob_spring" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
 | <h4 id="knob_doubleTap">doubleTap<a class="headerlink" href="#knob_doubleTap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the knob reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
-| <h4 id="knob_range">range<a class="headerlink" href="#knob_range" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
+| <h4 id="knob_range">range<a class="headerlink" href="#knob_range" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
 | <h4 id="knob_logScale">logScale<a class="headerlink" href="#knob_logScale" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="knob_sensitivity">sensitivity<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#knob_sensitivity" title="Permanent link">#</a></h4> | `number` | <code>1</code> | Defines the knob's sensitivity when `snap` is `false`  |
 | <h4 id="knob_steps">steps<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#knob_steps" title="Permanent link">#</a></h4> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
@@ -128,7 +128,7 @@
 | <h4 class="thead2" id="range_style">style<a class="headerlink" href="#range_style" title="Permanent link">#</a></h4> ||||
 | <h4 id="range_css">css<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#range_css" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Available CSS variables:<br/>- `--color-gauge: color;`<br/>- `--color-knob: color;`<br/>- `--color-pips: color;`<br/>- `--gauge-opacity: number;` |
 | <h4 class="thead2" id="range_range">range<a class="headerlink" href="#range_range" title="Permanent link">#</a></h4> ||||
-| <h4 id="range_range">range<a class="headerlink" href="#range_range" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | See fader's `range` |
+| <h4 id="range_range">range<a class="headerlink" href="#range_range" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | See fader's `range` |
 | <h4 id="range_horizontal">horizontal<a class="headerlink" href="#range_horizontal" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | See fader's `horizontal` |
 | <h4 id="range_alignRight">alignRight<a class="headerlink" href="#range_alignRight" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | See fader's `alignRight` |
 | <h4 id="range_input">input<a class="headerlink" href="#range_input" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | See fader's `input` |
@@ -189,7 +189,7 @@
 | <h4 class="thead2" id="switch_switch">switch<a class="headerlink" href="#switch_switch" title="Permanent link">#</a></h4> ||||
 | <h4 id="switch_horizontal">horizontal<a class="headerlink" href="#switch_horizontal" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to display values horizontally |
 | <h4 id="switch_showValues">showValues<a class="headerlink" href="#switch_showValues" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | If values is an object, set to `true` to display both values and labels instead of labels only |
-| <h4 id="switch_values">values<a class="headerlink" href="#switch_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
+| <h4 id="switch_values">values<a class="headerlink" href="#switch_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
 | <h4 id="switch_traversing">traversing<a class="headerlink" href="#switch_traversing" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |</div>
 
 
@@ -203,7 +203,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="dropdown_dropdown">dropdown<a class="headerlink" href="#dropdown_dropdown" title="Permanent link">#</a></h4> ||||
-| <h4 id="dropdown_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#dropdown_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept<br/><br/>An empty option will always be prepended to values (sends an osc message without any value); it can be hidden by adding `option:first-child{display:none}` to the widget's `css` |</div>
+| <h4 id="dropdown_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#dropdown_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept<br/><br/>An empty option will always be prepended to values (sends an osc message without any value); it can be hidden by adding `option:first-child{display:none}` to the widget's `css` |</div>
 
 
 
@@ -222,7 +222,7 @@
 | <h4 id="menu_grid">grid<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_grid" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | - If `circular` is `false`, set this to `true` for grid layout<br/>- Can be a `number` to define the number of columns |
 | <h4 id="menu_toggle">toggle<a class="headerlink" href="#menu_toggle" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the menu stay opened after mouse/touch release |
 | <h4 id="menu_doubleTap">doubleTap<a class="headerlink" href="#menu_doubleTap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to make the menu require a double tap to be opened instead of a single tap |
-| <h4 id="menu_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
+| <h4 id="menu_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
 | <h4 id="menu_weights">weights<a class="headerlink" href="#menu_weights" title="Permanent link">#</a></h4> | `array` | <code>""</code> | `Array` of `number` defining the weights of each value in `values`<br/><br/>Ignored when `grid` is `true` |</div>
 
 
@@ -244,8 +244,8 @@
 | <h4 id="xy_snap">snap<a class="headerlink" href="#xy_snap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
 | <h4 id="xy_spring">spring<a class="headerlink" href="#xy_spring" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
 | <h4 id="xy_pips">pips<a class="headerlink" href="#xy_pips" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
-| <h4 id="xy_rangeX">rangeX<a class="headerlink" href="#xy_rangeX" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
-| <h4 id="xy_rangeY">rangeY<a class="headerlink" href="#xy_rangeY" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
+| <h4 id="xy_rangeX">rangeX<a class="headerlink" href="#xy_rangeX" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
+| <h4 id="xy_rangeY">rangeY<a class="headerlink" href="#xy_rangeY" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
 | <h4 id="xy_logScaleX">logScaleX<a class="headerlink" href="#xy_logScaleX" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="xy_logScaleY">logScaleY<a class="headerlink" href="#xy_logScaleY" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="xy_input">input<a class="headerlink" href="#xy_input" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to false to hide the built-in input widget |
@@ -268,7 +268,7 @@
 | <h4 class="thead2" id="rgb_rgb">rgb<a class="headerlink" href="#rgb_rgb" title="Permanent link">#</a></h4> ||||
 | <h4 id="rgb_snap">snap<a class="headerlink" href="#rgb_snap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
 | <h4 id="rgb_spring">spring<a class="headerlink" href="#rgb_spring" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
-| <h4 id="rgb_range">range<a class="headerlink" href="#rgb_range" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 255<br/>}</code> | Defines the widget's output scale. |
+| <h4 id="rgb_range">range<a class="headerlink" href="#rgb_range" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 255<br/>}</code> | Defines the widget's output scale. |
 | <h4 id="rgb_input">input<a class="headerlink" href="#rgb_input" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to hide the built-in input widget |
 | <h4 id="rgb_alpha">alpha<a class="headerlink" href="#rgb_alpha" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to enable alpha channel |
 | <h4 class="thead2" id="rgb_osc">osc<a class="headerlink" href="#rgb_osc" title="Permanent link">#</a></h4> ||||
@@ -293,8 +293,8 @@
 | <h4 id="multixy_snap">snap<a class="headerlink" href="#multixy_snap" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
 | <h4 id="multixy_spring">spring<a class="headerlink" href="#multixy_spring" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
 | <h4 id="multixy_pips">pips<a class="headerlink" href="#multixy_pips" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
-| <h4 id="multixy_rangeX">rangeX<a class="headerlink" href="#multixy_rangeX" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
-| <h4 id="multixy_rangeY">rangeY<a class="headerlink" href="#multixy_rangeY" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
+| <h4 id="multixy_rangeX">rangeX<a class="headerlink" href="#multixy_rangeX" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
+| <h4 id="multixy_rangeY">rangeY<a class="headerlink" href="#multixy_rangeY" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
 | <h4 id="multixy_logScaleX">logScaleX<a class="headerlink" href="#multixy_logScaleX" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="multixy_logScaleY">logScaleY<a class="headerlink" href="#multixy_logScaleY" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="multixy_sensitivity">sensitivity<a class="headerlink" href="#multixy_sensitivity" title="Permanent link">#</a></h4> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
@@ -321,7 +321,7 @@
 | <h4 id="matrix_spacing">spacing<a class="headerlink" href="#matrix_spacing" title="Permanent link">#</a></h4> | `integer` | <code>0</code> | Adds space between widgets |
 | <h4 id="matrix_traversing">traversing<a class="headerlink" href="#matrix_traversing" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |
 | <h4 id="matrix_border">border<a class="headerlink" href="#matrix_border" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` to disables the widgets' borders |
-| <h4 id="matrix_props">props<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h4> | `object` | <code>{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>Formulas in this field are resolved with an extra variable representing each widget's index: `$`<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |</div>
+| <h4 id="matrix_props">props<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h4> | `object` | <code>\{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>Formulas in this field are resolved with an extra variable representing each widget's index: `$`<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |</div>
 
 
 
@@ -374,8 +374,8 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="plot_plot">plot<a class="headerlink" href="#plot_plot" title="Permanent link">#</a></h4> ||||
-| <h4 id="plot_rangeX">rangeX<a class="headerlink" href="#plot_rangeX" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
-| <h4 id="plot_rangeY">rangeY<a class="headerlink" href="#plot_rangeY" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
+| <h4 id="plot_rangeX">rangeX<a class="headerlink" href="#plot_rangeX" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
+| <h4 id="plot_rangeY">rangeY<a class="headerlink" href="#plot_rangeY" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
 | <h4 id="plot_logScaleX">logScaleX<a class="headerlink" href="#plot_logScaleX" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="plot_logScaleY">logScaleY<a class="headerlink" href="#plot_logScaleY" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="plot_origin">origin<a class="headerlink" href="#plot_origin" title="Permanent link">#</a></h4> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it. |
@@ -399,7 +399,7 @@
 | <h4 class="thead2" id="eq_eq">eq<a class="headerlink" href="#eq_eq" title="Permanent link">#</a></h4> ||||
 | <h4 id="eq_pips">pips<a class="headerlink" href="#eq_pips" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to false to hide the scale |
 | <h4 id="eq_resolution">resolution<a class="headerlink" href="#eq_resolution" title="Permanent link">#</a></h4> | `number` | <code>128</code> | Defines the number of points used to compute the frequency response |
-| <h4 id="eq_rangeY">rangeY<a class="headerlink" href="#eq_rangeY" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
+| <h4 id="eq_rangeY">rangeY<a class="headerlink" href="#eq_rangeY" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
 | <h4 id="eq_origin">origin<a class="headerlink" href="#eq_origin" title="Permanent link">#</a></h4> | `number`&vert;<br/>`boolean` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
 | <h4 id="eq_logScaleX">logScaleX<a class="headerlink" href="#eq_logScaleX" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="eq_smooth">smooth<a class="headerlink" href="#eq_smooth" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`) |
@@ -418,7 +418,7 @@
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="visualizer_visualizer">visualizer<a class="headerlink" href="#visualizer_visualizer" title="Permanent link">#</a></h4> ||||
 | <h4 id="visualizer_duration">duration<a class="headerlink" href="#visualizer_duration" title="Permanent link">#</a></h4> | `number` | <code>1</code> | Defines visualization duration in seconds |
-| <h4 id="visualizer_range">range<a class="headerlink" href="#visualizer_range" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
+| <h4 id="visualizer_range">range<a class="headerlink" href="#visualizer_range" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
 | <h4 id="visualizer_origin">origin<a class="headerlink" href="#visualizer_origin" title="Permanent link">#</a></h4> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
 | <h4 id="visualizer_logScale">logScale<a class="headerlink" href="#visualizer_logScale" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
 | <h4 id="visualizer_smooth">smooth<a class="headerlink" href="#visualizer_smooth" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`) |
@@ -435,7 +435,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h4 class="thead2" id="led_led">led<a class="headerlink" href="#led_led" title="Permanent link">#</a></h4> ||||
-| <h4 id="led_range">range<a class="headerlink" href="#led_range" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Value to led intensity mapping range |
+| <h4 id="led_range">range<a class="headerlink" href="#led_range" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Value to led intensity mapping range |
 | <h4 id="led_logScale">logScale<a class="headerlink" href="#led_logScale" title="Permanent link">#</a></h4> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale (base 10). Set to a `number` to define the logarithm's base. |</div>
 
 
@@ -464,7 +464,7 @@
 | <h4 class="thead2" id="meter_style">style<a class="headerlink" href="#meter_style" title="Permanent link">#</a></h4> ||||
 | <h4 id="meter_css">css<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#meter_css" title="Permanent link">#</a></h4> | `string` | <code>""</code> | Available CSS variables:<br/>- `--color-gauge: color;`<br/>- `--color-knob: color;`<br/>- `--color-pips: color;`<br/>- `--gauge-opacity: number;` |
 | <h4 class="thead2" id="meter_meter">meter<a class="headerlink" href="#meter_meter" title="Permanent link">#</a></h4> ||||
-| <h4 id="meter_range">range<a class="headerlink" href="#meter_range" title="Permanent link">#</a></h4> | `object` | <code>{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | See fader's `range` |
+| <h4 id="meter_range">range<a class="headerlink" href="#meter_range" title="Permanent link">#</a></h4> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | See fader's `range` |
 | <h4 id="meter_logScale">logScale<a class="headerlink" href="#meter_logScale" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | See fader's `logScale` |
 | <h4 id="meter_origin">origin<a class="headerlink" href="#meter_origin" title="Permanent link">#</a></h4> | `number` | <code>"auto"</code> | See fader's `origin` |
 | <h4 id="meter_unit">unit<a class="headerlink" href="#meter_unit" title="Permanent link">#</a></h4> | `string` | <code>"auto"</code> | See fader's `unit` |
@@ -571,7 +571,7 @@
 | <h4 class="thead2" id="panel_value">value<a class="headerlink" href="#panel_value" title="Permanent link">#</a></h4> ||||
 | <h4 id="panel_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#panel_value" title="Permanent link">#</a></h4> | `integer` | <code>""</code> | Defines currently opened tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
 | <h4 class="thead2" id="panel_children">children<a class="headerlink" href="#panel_children" title="Permanent link">#</a></h4> ||||
-| <h4 id="panel_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#panel_variables" title="Permanent link">#</a></h4> | `*` | <code>"@{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+| <h4 id="panel_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#panel_variables" title="Permanent link">#</a></h4> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
 | <h4 id="panel_widgets">widgets<a class="headerlink" href="#panel_widgets" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously. |
 | <h4 id="panel_tabs">tabs<a class="headerlink" href="#panel_tabs" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |</div>
 
@@ -592,7 +592,7 @@
 | <h4 id="strip_border">border<a class="headerlink" href="#strip_border" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | By default, widgets in panels/strip have their border disabled, except for panels and strips. Set to `false` to apply this rule to the panel too |
 | <h4 id="strip_spacing">spacing<a class="headerlink" href="#strip_spacing" title="Permanent link">#</a></h4> | `integer`&vert;<br/>`percentage` | <code>0</code> | Adds space between widgets. Percents are always relative to the strips width |
 | <h4 class="thead2" id="strip_children">children<a class="headerlink" href="#strip_children" title="Permanent link">#</a></h4> ||||
-| <h4 id="strip_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#strip_variables" title="Permanent link">#</a></h4> | `*` | <code>"@{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+| <h4 id="strip_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#strip_variables" title="Permanent link">#</a></h4> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
 | <h4 id="strip_widgets">widgets<a class="headerlink" href="#strip_widgets" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a widget object<br/>- By default, children widgets that don't have an explicit `width`/`height` set will be shrinked to respect the sizes specified by others<br/>- Adding `flex:1;` to a children's `css` will give it the ability the fill the remaining space<br/>- Multiple children can have a `flex:x;` css property (`x` will ponderate their expansion) |</div>
 
 
@@ -616,7 +616,7 @@
 | <h4 class="thead2" id="modal_value">value<a class="headerlink" href="#modal_value" title="Permanent link">#</a></h4> ||||
 | <h4 id="modal_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#modal_value" title="Permanent link">#</a></h4> | `integer` | <code>""</code> | Defines the modal's state:`0` for closed, `1` for opened |
 | <h4 class="thead2" id="modal_children">children<a class="headerlink" href="#modal_children" title="Permanent link">#</a></h4> ||||
-| <h4 id="modal_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#modal_variables" title="Permanent link">#</a></h4> | `*` | <code>"@{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+| <h4 id="modal_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#modal_variables" title="Permanent link">#</a></h4> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
 | <h4 id="modal_widgets">widgets<a class="headerlink" href="#modal_widgets" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a widget object |</div>
 
 
@@ -632,7 +632,44 @@
 | <h4 class="thead2" id="clone_clone">clone<a class="headerlink" href="#clone_clone" title="Permanent link">#</a></h4> ||||
 | <h4 id="clone_widgetId">widgetId<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#clone_widgetId" title="Permanent link">#</a></h4> | `string` | <code>""</code> | `id` of the widget to clone |
 | <h4 class="thead2" id="clone_overrides">overrides<a class="headerlink" href="#clone_overrides" title="Permanent link">#</a></h4> ||||
-| <h4 id="clone_props">props<a class="headerlink" href="#clone_props" title="Permanent link">#</a></h4> | `object` | <code>{}</code> | Cloned widget's properties to override |</div>
+| <h4 id="clone_props">props<a class="headerlink" href="#clone_props" title="Permanent link">#</a></h4> | `object` | <code>\{}</code> | Cloned widget's properties to override |</div>
+
+
+
+
+<div class="accordion" data-category="Containers" markdown="1">
+
+<h4 class="accordionlink" id="root"><a class="headerlink" href="#root">root</a></h3>
+<div class="accordion-description">Main (unique) container</div>
+
+| property | type |default | description |
+| --- | --- | --- | --- |
+| <h4 id="root_id">id<a class="headerlink" href="#root_id" title="Permanent link">#</a></h4> | `string` | <code>"root"</code> | Widgets sharing the same id will act as clones and update each other's value(s) without sending extra osc messages |
+| <h4 class="thead2" id="root_value">value<a class="headerlink" href="#root_value" title="Permanent link">#</a></h4> ||||
+| <h4 id="root_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#root_value" title="Permanent link">#</a></h4> | `integer` | <code>""</code> | Defines currently opened tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+| <h4 class="thead2" id="root_children">children<a class="headerlink" href="#root_children" title="Permanent link">#</a></h4> ||||
+| <h4 id="root_traversing">traversing<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#root_traversing" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+| <h4 id="root_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#root_variables" title="Permanent link">#</a></h4> | `*` | <code>\{}</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+| <h4 id="root_tabs">tabs<a class="headerlink" href="#root_tabs" title="Permanent link">#</a></h4> | `array` | <code>[<br/>&nbsp;\{}<br/>]</code> | Each element of the array must be a tab object |</div>
+
+
+
+
+<div class="accordion" data-category="Containers" markdown="1">
+
+<h4 class="accordionlink" id="tab"><a class="headerlink" href="#tab">tab</a></h3>
+<div class="accordion-description">Tabbed panel widget</div>
+
+| property | type |default | description |
+| --- | --- | --- | --- |
+| <h4 class="thead2" id="tab_tab">tab<a class="headerlink" href="#tab_tab" title="Permanent link">#</a></h4> ||||
+| <h4 id="tab_detached">detached<a class="headerlink" href="#tab_detached" title="Permanent link">#</a></h4> | `boolean` | <code>true</code> | Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab open  |
+| <h4 class="thead2" id="tab_value">value<a class="headerlink" href="#tab_value" title="Permanent link">#</a></h4> ||||
+| <h4 id="tab_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#tab_value" title="Permanent link">#</a></h4> | `integer` | <code>""</code> | Defines currently opened tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+| <h4 class="thead2" id="tab_children">children<a class="headerlink" href="#tab_children" title="Permanent link">#</a></h4> ||||
+| <h4 id="tab_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#tab_variables" title="Permanent link">#</a></h4> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+| <h4 id="tab_widgets">widgets<a class="headerlink" href="#tab_widgets" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a widget object. A tab cannot contain widgets and tabs simultaneously |
+| <h4 id="tab_tabs">tabs<a class="headerlink" href="#tab_tabs" title="Permanent link">#</a></h4> | `array` | <code>[]</code> | Each element of the array must be a tab object. A tab cannot contain widgets and tabs simultaneously |</div>
 
 
 
@@ -667,7 +704,7 @@
 | <h4 class="thead2" id="switcher_switcher">switcher<a class="headerlink" href="#switcher_switcher" title="Permanent link">#</a></h4> ||||
 | <h4 id="switcher_linkedWidgets">linkedWidgets<a class="headerlink" href="#switcher_linkedWidgets" title="Permanent link">#</a></h4> | `string`&vert;<br/>`array` | <code>""</code> | - `String`: a widget's `id` whose state changes will be stored<br/>- `Array`: a list of widget `id` string |
 | <h4 id="switcher_horizontal">horizontal<a class="headerlink" href="#switcher_horizontal" title="Permanent link">#</a></h4> | `boolean` | <code>false</code> | Set to `true` to display values horizontally |
-| <h4 id="switcher_values">values<a class="headerlink" href="#switcher_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | Each item represents a bank that stores the values from the widgets listed in `linkedWidgets`<br/>- `Array` of possible values to switch between : `[1,2,3]`<br/>- `Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |</div>
+| <h4 id="switcher_values">values<a class="headerlink" href="#switcher_values" title="Permanent link">#</a></h4> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | Each item represents a bank that stores the values from the widgets listed in `linkedWidgets`<br/>- `Array` of possible values to switch between : `[1,2,3]`<br/>- `Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |</div>
 
 
 
