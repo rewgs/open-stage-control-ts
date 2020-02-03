@@ -193,10 +193,12 @@ class Modal extends Panel {
 
     updatePopupLabel() {
 
+        if (!this.popup) return
+
         var label = this.getProp('popupLabel') ? iconify(this.getProp('popupLabel')) : DOM.get(this.container, '> .label')[0].innerHTML
         DOM.get(this.popup, '.popup-title .popup-label')[0].innerHTML = label
         this.labelChange = false
-        
+
     }
 
     onPropChanged(propName, options, oldPropValue) {
