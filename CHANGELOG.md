@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.49.1
+
+- bug fixes
+  - modal: error when `label` depends on a child's property
+
 ## 0.49.0
 
 **Deprecation**
