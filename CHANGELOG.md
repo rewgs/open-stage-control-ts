@@ -4,6 +4,7 @@
 
 - bug fixes
   - modal: error when `label` depends on a child's property
+  - custom module: `send()` function casting numbers to integers instead of floats by default 
 
 ## 0.49.0
 
