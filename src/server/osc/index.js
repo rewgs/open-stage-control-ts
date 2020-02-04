@@ -129,10 +129,10 @@ class OscServer {
         switch (typeof arg) {
             case 'number':
                 var typeTagMatch = typeof precision == 'string' ? precision.match(/[0-9]+([a-zA-Z]{1})/) : null,
-                    typeTag = typeTagMatch === null ? precision == 0 ? 'i' : 'f' : typeTagMatch[1],
+                    typeTag = typeTagMatch === null ? precision === 0 ? 'i' : 'f' : typeTagMatch[1],
                     precisionValue = parseFloat(precision) || 0
 
-                return {type: typeTag, value: parseFloat(arg.toFixed(precisionValue))}
+                return {type: typeTag, value: precision === undefined ? arg : parseFloat(arg.toFixed(precisionValue))}
             case 'boolean':
                 return {type: arg ? 'T' : 'F', value: arg}
             case 'object':
