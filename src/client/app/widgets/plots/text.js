@@ -1,8 +1,9 @@
 var {iconify} = require('../../ui/utils'),
     Widget = require('../common/widget'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Text extends Widget {
+module.exports = class Text extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 

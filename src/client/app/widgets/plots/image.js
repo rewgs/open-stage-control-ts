@@ -1,9 +1,10 @@
 var Widget = require('../common/widget'),
     ipc = require('../../ipc'),
     html = require('nanohtml'),
-    {urlParser} = require('../utils')
+    {urlParser} = require('../utils'),
+    StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Image extends Widget {
+module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 

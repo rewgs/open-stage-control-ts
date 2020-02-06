@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.49.2
+
+ - bug fixes
+   - plots: prevent `plot/*` widgets from sending messages when using the sidepanel's "send all" function 
+
 ## 0.49.1
 
 - bug fixes

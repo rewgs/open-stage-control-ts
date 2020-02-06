@@ -1,7 +1,8 @@
 var Fader = require('../sliders/fader'),
-    Widget = require('../common/widget')
+    Widget = require('../common/widget'),
+    StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Meter extends Fader {
+module.exports = class Meter extends StaticProperties(Fader, {bypass: true, compact: true, input: false}) {
 
     static description() {
 
@@ -52,8 +53,6 @@ module.exports = class Meter extends Fader {
             options.props.value = '@{' + options.props.widgetId + '}'
             delete options.props.widgetId
         }
-        options.props.compact = true
-        options.props.input = false
 
         super(options)
 
@@ -61,10 +60,6 @@ module.exports = class Meter extends Fader {
 
         this.off(/drag(.*)?/)
 
-    }
-
-    sendValue() {
-        // disabled
     }
 
 }

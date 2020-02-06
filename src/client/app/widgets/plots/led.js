@@ -1,8 +1,9 @@
 var {mapToScale} = require('../utils'),
     Widget = require('../common/widget'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Led extends Widget {
+module.exports = class Led extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 

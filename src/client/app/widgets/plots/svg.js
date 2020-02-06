@@ -1,9 +1,10 @@
 var Widget = require('../common/widget'),
     morph = require('nanomorph'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    StaticProperties = require('../mixins/static_properties')
 
 
-class Svg extends Widget {
+class Svg extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 
