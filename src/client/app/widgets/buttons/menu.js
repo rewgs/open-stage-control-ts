@@ -108,7 +108,7 @@ class Menu extends Widget {
 
             this.on('drag',(e)=>{
 
-                this.selectValue(e)
+                this.selectValue(e, true)
 
             }, {element: this.widget})
 
@@ -157,15 +157,19 @@ class Menu extends Widget {
 
     }
 
-    selectValue(e) {
+    selectValue(e, drag) {
 
-        if (e.target === this.menu || !this.menu.contains(e.target)) {
+        // touch hover fix
+        var node = drag && e.isTouch ? document.elementFromPoint(e.clientX, e.clientY)
+                    : e.target
+
+        if (node === this.menu || !this.menu.contains(node)) {
             DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
             this.selected = -1
-        } else if (!e.target.classList.contains('active')) {
+        } else if (!node.classList.contains('active')) {
             DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
-            e.target.classList.add('active')
-            this.selected = DOM.index(e.target)
+            node.classList.add('active')
+            this.selected = DOM.index(node)
         }
 
     }
