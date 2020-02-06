@@ -120,7 +120,12 @@ module.exports = function editField(editor, widget, propName, defaultValue){
 
             var newWidgets = []
             for (var w of selectedWidgets) {
-                w.props[propName] = v !== '' ? v : deepCopy(defaultValue.value)
+                if (propName === 'address' && v === '') {
+                    // special case
+                    w.props[propName] = '/' + w.props.id
+                } else {
+                    w.props[propName] = v !== '' ? v : deepCopy(defaultValue.value)
+                }
                 newWidgets.push(updateWidget(w, {changedProps: [propName], preventSelect: selectedWidgets.length > 1}))
             }
             editor.pushHistory()

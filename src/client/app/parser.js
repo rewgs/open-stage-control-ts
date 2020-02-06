@@ -65,7 +65,7 @@ var Parser = class Parser {
             props.id = id
         }
 
-        // Generate default address
+        // Generate default address (also handled in editor/edit-field)
         props.address = props.address === 'auto' ? '/' + props.id : props.address
 
 
