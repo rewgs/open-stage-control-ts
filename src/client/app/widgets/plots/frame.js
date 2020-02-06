@@ -1,9 +1,10 @@
 var Widget = require('../common/widget'),
     html = require('nanohtml'),
     {urlParser} = require('../utils'),
-    locales = require('../../locales')
+    locales = require('../../locales'),
+    StaticProperties = require('../mixins/static_properties')
 
-class Frame extends Widget {
+class Frame extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 

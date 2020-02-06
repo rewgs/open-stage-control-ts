@@ -1,13 +1,14 @@
 var Widget = require('../common/widget'),
     morph = require('nanomorph'),
     html = require('nanohtml'),
-    sanitizeHtml = require('sanitize-html')
+    sanitizeHtml = require('sanitize-html'),
+    StaticProperties = require('../mixins/static_properties')
 
 var sanitizeOptions = {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe')
 }
 
-class Html extends Widget {
+class Html extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 

@@ -1,8 +1,9 @@
 var {mapToScale} = require('../utils'),
     Canvas = require('../common/canvas'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    StaticProperties = require('../mixins/static_properties')
 
-module.exports = class _plots_base extends Canvas {
+module.exports = class _plots_base extends StaticProperties(Canvas, {bypass: true}) {
 
     constructor(options) {
 

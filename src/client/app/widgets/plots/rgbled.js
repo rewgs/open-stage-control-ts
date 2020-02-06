@@ -1,8 +1,9 @@
 var Widget = require('../common/widget'),
     {clip} = require('../utils'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Rbgled extends Widget {
+module.exports = class Rbgled extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 
