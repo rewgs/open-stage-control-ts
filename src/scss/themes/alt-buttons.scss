@@ -1,5 +1,5 @@
 .widget.push-container.on .toggle:before,
-.widget.modal-container.on .toggle:before,
+.widget.modal-container.on > .toggle:before,
 .widget.switch-container .value.on:before,
 .widget.switcher-container .value.on:before,
 .widget.crossfader-container .value.on:before,
@@ -17,6 +17,10 @@
 	background : var(--color-custom);
 	color: var(--color-bg);
 	font-weight: 900;
+}
+.widget.modal-container.on > .label,
+.widget.toggle-container.on:not(.led) > .label {
+	color: var(--color-bg);
 }
 
 .widget.push-container.active:not(.on) > .label {

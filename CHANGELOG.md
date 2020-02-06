@@ -6,6 +6,8 @@
    - plots: prevent `plot/*` widgets from sending messages when using the sidepanel's "send all" function
    - editor: assign correct `address` when emptying the field
    - sidepanel: shadow color issue
+- misc
+  - alt-buttons & flat theme tweaks
 
 ## 0.49.1
 
