@@ -3,7 +3,9 @@
 ## 0.49.2
 
  - bug fixes
-   - plots: prevent `plot/*` widgets from sending messages when using the sidepanel's "send all" function 
+   - plots: prevent `plot/*` widgets from sending messages when using the sidepanel's "send all" function
+   - editor: assign correct `address` when emptying the field
+   - sidepanel: shadow color issue
 
 ## 0.49.1
 
