@@ -55,7 +55,7 @@ Example:
 A push button might be configured as follows in order to send a MIDI note whose velocity is defined by the button's on/off value:
 
 - `address`: /note
-- `preArgs`: [1, 60] (for MIDI channel 1, and note 60 / C3)
+- `preArgs`: [1, 60] (for MIDI channel 1, and note 60 / C4)
 - `on`: 100 (for noteOn velocity of 100 on button push)
 - `off`: 0 (to send a noteOff on button release)
 - `target`: ["midi:device_name"] (where device_name is one of the declared midi devices defined during [setup](#setup))
