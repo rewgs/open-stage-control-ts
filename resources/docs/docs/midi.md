@@ -25,6 +25,9 @@ When running the app, the `-m / --midi` switch must be set; it accepts the follo
 - `device_name:virtual`: creates a virtual midi device with one input port and one output port
 - `jack`: use JACK MIDI instead of ALSA (add as extra parameter). `rtmidi` must be compiled with `--jack-midi` flag for this to work.
 
+!!! tip
+    When using the launcher window, midi devices can be listed by right-clicking and choosing `Midi > List Devices`
+
 ## Widget settings
 
 In order to send MIDI messages, a widget must have at least one `target` formatted as follows:
