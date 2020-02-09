@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.49.3
+
+- bug fixes
+  - error when closing the launcher window and keeping the client window alive
+
 ## 0.49.2
 
  - bug fixes
