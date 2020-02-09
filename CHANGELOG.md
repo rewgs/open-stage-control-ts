@@ -3,7 +3,7 @@
 ## 0.49.3
 
 - bug fixes
-  - error when closing the launcher window and keeping the client window alive
+  - windows: process not terminated properly when exiting the app
 
 ## 0.49.2
 
