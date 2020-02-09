@@ -100,31 +100,33 @@ if (settings.cli) {
         global.settings = settings
         global.midilist = require('./midi').list
         launcher = require('./electron-window')({address:address, shortcuts:dev, width:680, height:(100 + 8*3 + 29 * Object.keys(settings.options).filter(x=>settings.options[x].launcher !== false).length), node:true, color:'#253040'})
+        launcher.on('close', ()=>{
+            process.stdout.write = stdoutWrite
+            process.stderr.write = stderrWrite
+            if (process.log) process.log = processLog
+        })
     })
 
-    if (process.log) {
-        process.log = (function(write) {
-            return function(string, encoding, fd) {
-                write.apply(process, arguments)
-                launcher.webContents.send('stdout', string)
-            }
-        })(process.log)
-    }
+    let processLog = process.log,
+        stdoutWrite = process.stdout.write,
+        stderrWrite = process.stderr.write
 
-    process.stdout.write = (function(write) {
-        return function(string, encoding, fd) {
-            write.apply(process.stdout, arguments)
+    if (process.log) {
+        process.log = function(string, encoding, fd) {
+            processLog.apply(process, arguments)
             launcher.webContents.send('stdout', string)
         }
-    })(process.stdout.write)
+    }
 
-    process.stderr.write = (function(write) {
-        return function(string, encoding, fd) {
-            write.apply(process.stdout, arguments)
-            launcher.webContents.send('stderr', string)
-        }
-    })(process.stderr.write)
+    process.stdout.write = function(string, encoding, fd) {
+        stdoutWrite.apply(process.stdout, arguments)
+        launcher.webContents.send('stdout', string)
+    }
 
+    process.stderr.write = function(string, encoding, fd) {
+        stderrWrite.apply(process.stderr, arguments)
+        launcher.webContents.send('stderr', string)
+    }
 
     ipcMain.on('start',function(e, options){
 
