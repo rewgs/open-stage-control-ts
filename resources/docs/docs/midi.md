@@ -25,6 +25,9 @@ When running the app, the `-m / --midi` switch must be set; it accepts the follo
 - `device_name:virtual`: creates a virtual midi device with one input port and one output port
 - `jack`: use JACK MIDI instead of ALSA (add as extra parameter). `rtmidi` must be compiled with `--jack-midi` flag for this to work.
 
+!!! tip
+    When using the launcher window, midi devices can be listed by right-clicking and choosing `Midi > List Devices`
+
 ## Widget settings
 
 In order to send MIDI messages, a widget must have at least one `target` formatted as follows:
@@ -55,7 +58,7 @@ Example:
 A push button might be configured as follows in order to send a MIDI note whose velocity is defined by the button's on/off value:
 
 - `address`: /note
-- `preArgs`: [1, 60] (for MIDI channel 1, and note 60 / C3)
+- `preArgs`: [1, 60] (for MIDI channel 1, and note 60 / C4)
 - `on`: 100 (for noteOn velocity of 100 on button push)
 - `off`: 0 (to send a noteOff on button release)
 - `target`: ["midi:device_name"] (where device_name is one of the declared midi devices defined during [setup](#setup))
