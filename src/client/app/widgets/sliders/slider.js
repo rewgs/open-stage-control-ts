@@ -2,7 +2,6 @@ var {clip, mapToScale} = require('../utils'),
     Canvas = require('../common/canvas'),
     touchstate = require('../mixins/touch_state'),
     doubletab = require('../mixins/double_tap'),
-    Input = require('../inputs/input'),
     html = require('nanohtml')
 
 class Slider extends Canvas {
@@ -10,20 +9,13 @@ class Slider extends Canvas {
     constructor(options) {
 
         super({...options, html: html`
-            <div class="slider">
-                <div class="wrapper">
-                    <canvas></canvas>
-                </div>
-            </div>
+            <canvas></canvas>
         `})
-
-        this.wrapper = DOM.get(this.widget, '.wrapper')[0]
 
         this.value = undefined
         this.percent = 0
 
-        this.unit = this.getProp('unit') ? ' ' + this.getProp('unit') : ''
-
+        this.gaugePadding = 0
 
         this.rangeKeys = []
         this.rangeVals = []
@@ -68,48 +60,13 @@ class Slider extends Canvas {
         }
 
 
-        this.wrapper.addEventListener('mousewheel',this.mousewheelHandleProxy.bind(this))
+        this.widget.addEventListener('mousewheel',this.mousewheelHandleProxy.bind(this))
 
-        this.on('draginit', this.draginitHandleProxy.bind(this), {element:this.wrapper})
-        this.on('drag', this.dragHandleProxy.bind(this), {element:this.wrapper})
-        this.on('dragend', this.dragendHandleProxy.bind(this), {element:this.wrapper})
+        this.on('draginit', this.draginitHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
+        this.on('drag', this.dragHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
+        this.on('dragend', this.dragendHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
 
-        touchstate(this, {element: this.wrapper})
-
-
-        if (this.getProp('input')) {
-
-            this.input = new Input({
-                props:{
-                    ...Input.defaults()._props(),
-                    precision:this.getProp('precision'),
-                    unit:this.getProp('unit'),
-                    vertical: this.getProp('type') == 'fader' && this.getProp('compact') && !this.getProp('horizontal')
-                },
-                parent:this, parentNode:this.widget
-            })
-
-            this.input.sendValue = ()=>{}
-            this.widget.appendChild(this.input.widget)
-            this.input.on('change', (e)=>{
-                e.stopPropagation = true
-                this.setValue(this.input.getValue(), {sync:true, send:true})
-                this.showValue()
-            })
-
-        }
-
-        if (this.getProp('compact')) {
-            this.widget.classList.add('compact')
-            if (this.getProp('input')) {
-                this.widget.addEventListener('fast-right-click', (e)=>{
-                    if (e.detail.button == 2 && !EDITING) {
-                        // Mouse only
-                        this.input.focus()
-                    }
-                })
-            }
-        }
+        touchstate(this, {element: this.widget, multitouch: options.multitouch})
 
         this.setSteps()
 
@@ -190,8 +147,11 @@ class Slider extends Canvas {
         this.colors.pips = style.getPropertyValue('--color-pips') || this.colors.custom
         this.colors.gaugeOpacity = style.getPropertyValue('--gauge-opacity')
 
+        this.gaugePadding = this.cssVars.padding + PXSCALE
 
     }
+
+
 
     getSpringValue() {
 
@@ -249,16 +209,8 @@ class Slider extends Canvas {
 
         this.batchDraw()
 
-        this.showValue()
-
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
-
-    }
-
-    showValue() {
-
-        if (this.getProp('input')) this.input.setValue(this.value)
 
     }
 
@@ -280,9 +232,6 @@ class Slider extends Canvas {
 
         switch (propName) {
 
-            case 'color':
-                if (this.input) this.input.onPropChanged('color')
-                return
             case 'steps':
                 this.setSteps()
                 return
@@ -292,8 +241,9 @@ class Slider extends Canvas {
     }
 
     onRemove() {
-        if (this.input) this.input.onRemove()
+
         super.onRemove()
+
     }
 
 }

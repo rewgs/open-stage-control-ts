@@ -38,15 +38,9 @@ class Keys extends Widget {
 
     constructor(options) {
 
-        super({...options, html: html`
-            <div class="keys">
-                ${raw(icon('keyboard'))}
-            </div>
-        `})
+        super({...options, html: null})
 
         if (this.getProp('binding')) {
-
-            this.widget.appendChild(html`<span>${this.getProp('binding')}</span>`)
 
             this.keyDownHandler = this.keyDown.bind(this)
             this.keyUpHandler = this.keyUp.bind(this)
@@ -79,7 +73,7 @@ class Keys extends Widget {
 
     keyDown(e) {
 
-        if (e.target && e.target.classList.contains('no-keybinding')) return
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tabName === 'TEXTAREA' || e.target.tabName === 'SELECT')) return
 
         if (!this.getProp('repeat') && e) e.preventRepeat()
 
@@ -103,9 +97,6 @@ class Keys extends Widget {
             this.setValue(this.resolveProp('keydown', undefined, false, false, false, context), {sync: true, send: true})
 
         }
-
-
-        this.showKeydown()
 
     }
 
@@ -134,20 +125,6 @@ class Keys extends Widget {
             this.setValue(this.resolveProp('keyup', undefined, false, false, false, context), {sync: true, send: true})
 
         }
-
-        this.showKeyup()
-
-    }
-
-    showKeydown(){
-
-        this.widget.style.setProperty('--opacity', 1)
-
-    }
-
-    showKeyup(){
-
-        this.widget.style.setProperty('--opacity', 0.75)
 
     }
 

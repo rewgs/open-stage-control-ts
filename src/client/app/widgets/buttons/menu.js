@@ -19,23 +19,18 @@ class Menu extends Widget {
             _menu:'menu',
 
             size: {type: 'number|array', value: 200, help: [
-                '- If `circular` is `true`: diameter (in px)',
-                '- If `circular` is `false`: square size or `[width, height]` array',
+                '- If `layout` is `circular`: diameter (in px)',
+                '- Else: square size or `[width, height]` array',
             ]},
-            circular: {type: 'boolean', value: true, help: [
-                'Defines whether the menu should be rendered in a circle or in a box'
+            layout: {type: 'string', value: 'circular', choices: ['circular', 'horizontal', 'vertical', 'grid'], help: [
+                'Defines whether the menu\'s layout should be rendered in a circle or in a box'
             ]},
-            vertical: {type: 'boolean|number', value: false, help: [
-                'If `circular` is `false`, set this to `true` for vertical layout',
-                'Ignored when `grid` is `true`'
-            ]},
-            grid: {type: 'boolean|number', value: false, help: [
-                '- If `circular` is `false`, set this to `true` for grid layout',
-                '- Can be a `number` to define the number of columns'
+            columns: {type: 'number', value: '', help: [
+                'If `layout` is `grid`, defines the number of columns'
             ]},
             toggle: {type: 'boolean', value: false, help: 'Set to `true` to make the menu stay opened after mouse/touch release'},
             doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the menu require a double tap to be opened instead of a single tap'},
-            values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
+            values: {type: 'array|object', value: [1, 2, 3], help: [
                 '`Array` of possible values to switch between : `[1,2,3]`',
                 '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
             ]},
@@ -50,12 +45,19 @@ class Menu extends Widget {
 
     constructor(options) {
 
-        super({...options, html: html`<div class="toggle"></div>`})
+        super({...options, html: html`
+            <inner>
+            </inner>
 
-        this.menu = this.widget.appendChild(html`<div class="menu"></div>`)
+        `})
+
+        this.menu = html`<menu></menu>`
 
         this.opened = false
+
         this.values = []
+        this.stringValues = []
+
         this.selected = -1
         this.value = undefined
 
@@ -63,7 +65,6 @@ class Menu extends Widget {
 
 
         this.parentScroll = [0,0]
-        this.opened = false
 
 
         if (this.getProp('doubleTap')) {
@@ -121,7 +122,6 @@ class Menu extends Widget {
 
         } else {
 
-            this.menu.classList.add('norelease')
             this.toggleCloseHandler = (e)=>{
                 if (!this.opened || this.menu.contains(e.target)) return
                 this.close()
@@ -137,23 +137,22 @@ class Menu extends Widget {
 
     open(e) {
 
+        if (this.opened) return
+
         this.opened = true
-        var off = this.scrollOffset()
-        this.menu.style.setProperty('--x', (e.offsetX - off[0]) / PXSCALE + 'rem')
-        this.menu.style.setProperty('--y', (e.offsetY - off[1]) / PXSCALE + 'rem')
-        this.menu.classList.add('show')
-        this.widget.classList.add('on')
         this.container.classList.add('on')
+        this.widget.appendChild(this.menu)
 
     }
 
     close() {
 
+        if (!this.opened) return
+
         this.opened = false
-        this.menu.classList.remove('show')
         DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
         this.container.classList.remove('on')
-        this.widget.classList.remove('on')
+        this.widget.removeChild(this.menu)
 
     }
 
@@ -187,7 +186,7 @@ class Menu extends Widget {
 
         var nval = 0,
             i = 0,
-            circular = this.getProp('circular'),
+            circular = this.getProp('layout') === 'circular',
             values = this.getProp('values'),
             weights = this.getProp('weights'),
             totalWeight
@@ -197,7 +196,7 @@ class Menu extends Widget {
         }
 
         this.values = []
-        this.widget.removeChild(this.menu)
+        if (this.opened) this.widget.removeChild(this.menu)
         this.menu.innerHTML = ''
 
 
@@ -211,6 +210,11 @@ class Menu extends Widget {
             let angle = Math.min(360 * weights[i] / totalWeight, 120),
                 skew = 90 - angle
             this.values.push(values[k])
+            if (typeof values[k] == 'object') {
+                this.stringValues.push(JSON.stringify(values[k]))
+            } else {
+                this.stringValues.push(0)
+            }
             this.menu.appendChild(html`
                 <div class="item" style="${circular ? `transform: rotate(${ac}deg) skew(${skew}deg)` : `flex: ${weights[i]}`}">
                     <div style="${circular ? `transform: skew(${-skew}deg) rotate(${-90 + angle / 2}deg)` : ''}"><span style="${circular ? `transform: rotate(${-ac + 90 - angle / 2}deg)` : ''}">${raw(iconify(parseFloat(k) != k ? k : values[k]))}</span></div>
@@ -224,20 +228,18 @@ class Menu extends Widget {
 
         this.setValue(this.value)
 
-        this.widget.appendChild(this.menu)
-
-        if (!this.getProp('circular') && this.getProp('grid')) {
-            this.container.style.setProperty('--grid-columns', this.getProp('grid') === true ? parseInt(nval / 2) : parseInt(this.getProp('grid')))
-        }
+        if (this.opened) this.widget.appendChild(this.menu)
 
     }
 
     setMode() {
 
-        this.container.classList.toggle('box', !this.getProp('circular'))
-        this.container.classList.toggle('circular', this.getProp('circular'))
-        this.container.classList.toggle('grid', this.getProp('grid') && !this.getProp('circular'))
-        this.container.classList.toggle('vertical', this.getProp('vertical') && !this.getProp('circular'))
+        var layout = this.getProp('layout')
+        this.container.classList.toggle('box', layout !== 'circular')
+        this.container.classList.toggle('circular', layout === 'circular')
+        this.container.classList.toggle('grid', layout === 'grid')
+        this.container.classList.toggle('vertical', layout === 'vertical')
+        this.container.style.setProperty('--grid-columns', this.getProp('columns') === '' ? parseInt(this.values.length / 2) : parseInt(this.getProp('columns')))
 
     }
 
@@ -257,22 +259,6 @@ class Menu extends Widget {
 
     }
 
-    scrollOffset() {
-
-        var parent = this.parent,
-            scrollOffset = [0,0]
-
-        while (parent && parent.props && parent.getProp('type') !== 'tab') {
-            scrollOffset[0] += parent.widget.scrollLeft
-            scrollOffset[1] += parent.widget.scrollTop
-            parent = parent.parent
-            if (parent.getProp('type') === 'modal') break
-        }
-
-        return scrollOffset
-
-    }
-
     setValue(v,options={}) {
 
         var i = this.values.indexOf(v)
@@ -284,6 +270,7 @@ class Menu extends Widget {
 
         DOM.each(this.menu, '.on', (el)=>{el.classList.remove('on')})
         if (i > -1) DOM.get(this.menu, '.item')[i].classList.add('on')
+        this.widget.textContent = this.stringValues[i] || this.value
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
@@ -299,16 +286,12 @@ class Menu extends Widget {
             case 'size':
                 this.setSize()
                 return
-            case 'vertical':
-                this.setMode()
-                return
-            case 'circular':
-                this.setMode()
+            case 'layout':
                 this.parseValues()
-                return
-            case 'grid':
                 this.setMode()
-                if (this.getProp('grid') === true) this.parseValues()
+                return
+            case 'columns':
+                this.setMode()
                 return
             case 'values':
                 this.parseValues()
@@ -333,9 +316,8 @@ class Menu extends Widget {
 
 Menu.dynamicProps = Menu.prototype.constructor.dynamicProps.concat(
     'size',
-    'circular',
-    'vertical',
-    'grid',
+    'layout',
+    'columns',
     'values'
 )
 

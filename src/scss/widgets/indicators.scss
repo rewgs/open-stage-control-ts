@@ -1,0 +1,74 @@
+.led-container {
+
+    --color-led: var(--color-fill);
+    --alpha-fill-off: 0;
+    --alpha-fill-on: 1;
+
+    inner {
+        --color-fill: var(--color-led);
+        --alpha-fill: calc(var(--alpha-fill-off) + var(--opacity) * (var(--alpha-fill-on) - var(--alpha-fill-off)));
+
+        position: relative;
+        flex: 1;
+        padding: --widget-padding;
+
+        @include pseudo-stroke();
+        @include pseudo-fill();
+
+        &:before, &:after {
+            border-radius: var(--border-radius);
+        }
+    }
+
+}
+
+.text-container {
+
+    width: 100rem;
+    height:60rem;
+    --alpha-fill-on: 75;
+
+    inner {
+        @include pseudo-stroke();
+        @include pseudo-fill($z: -1);
+
+        padding: var(--widget-padding);
+
+        display: flex;
+
+
+    }
+
+    div {
+        color: var(--color-fill);
+        opacity: var(--alpha-fill-on);
+        flex: 1;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        white-space: pre;
+        line-height: 100%;
+        overflow: hidden;
+        text-align: center;
+        word-wrap: break-word;
+        &.right {
+            text-align: right;
+            justify-content: flex-end;
+        }
+        &.left {
+            text-align: left;
+            justify-content: flex-start;
+        }
+        &.wrap {
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        &.vertical {
+            transform: rotate(180deg);
+            text-overflow: ellipsis;
+            -webkit-writing-mode:vertical-rl;
+            writing-mode:vertical-rl;
+        }
+    }
+}

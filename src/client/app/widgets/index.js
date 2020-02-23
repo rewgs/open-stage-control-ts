@@ -11,15 +11,15 @@ module.exports.widgets = {
 
     // buttons
     toggle: require('./buttons/toggle'),
-    push: require('./buttons/push'),
     switch: require('./buttons/switch'),
-    dropdown: require('./buttons/dropdown'),
-    menu: require('./buttons/menu'),
+    dropdown: require('./buttons/dropdown'), // redo as menu derivate ?
+    menu: require('./buttons/menu'), // redo using canvas
 
     // pads
     xy: require('./pads/xy'),
     rgb: require('./pads/rgb'),
     multixy: require('./pads/multixy'),
+    canvas: require('./pads/canvas'), // implement...
 
     // matrices
     matrix: require('./matrices/matrix'),
@@ -27,21 +27,22 @@ module.exports.widgets = {
     patchbay: require('./matrices/patchbay').PatchBay,
     patchbaynode: require('./matrices/patchbay').PatchBayNode,
 
-    // plots
-    led: require('./plots/led'),
-    rgbled: require('./plots/rgbled'),
-    plot: require('./plots/plot'),
-    eq: require('./plots/eq'),
-    visualizer: require('./plots/visualizer'),
-    meter: require('./plots/meter'),
-    text: require('./plots/text'),
-    image: require('./plots/image'),
-    svg: require('./plots/svg'),
-    html: require('./plots/html'),
-    frame: require('./plots/frame'),
+    // indicators
+    led: require('./indicators/led'),
+    text: require('./indicators/text'),
+
+    // graphs
+    plot: require('./graphs/plot'),
+    eq: require('./graphs/eq'),
+    visualizer: require('./graphs/visualizer'),
+
+    // frames
+    image: require('./frames/image'),
+    svg: require('./frames/svg'),
+    html: require('./frames/html'),
+    frame: require('./frames/frame'),
 
     // containers
-    strip: require('./containers/strip'),
     panel: require('./containers/panel'),
     modal: require('./containers/modal'),
     clone: require('./containers/clone'),
@@ -61,12 +62,20 @@ module.exports.widgets = {
 }
 
 module.exports.categories = {
-    'Sliders':['fader','knob', 'encoder', 'range'],
-    'Buttons':['toggle','push','switch', 'dropdown', 'menu'],
-    'Pads':['xy','rgb','multixy'],
+    'Buttons':['toggle', 'switch', 'dropdown', 'menu'],
+    'Containers':['panel', 'modal', 'clone'],
+    'Frames':['frame', 'svg', 'html', 'image'],
+    'Graphs':['plot','eq','visualizer'],
+    'Indicator':['led', 'text'],
+    'Inputs':['input', 'keys', 'script', 'gyroscope', 'file'],
     'Matrices':['matrix', 'keyboard', 'patchbay'],
-    'Plots':['plot','eq','visualizer','led', 'rgbled','meter','text', 'image', 'svg', 'html', 'frame'],
-    'Containers':['panel','strip','modal', 'clone'],
+    'Pads':['xy','rgb','multixy', 'canvas'],
+    'Sliders':['fader','knob', 'encoder', 'range'],
     'Switchers':['state', 'switcher','crossfader'],
-    'Inputs':['input', 'keys', 'script', 'gyroscope', 'file']
 }
+
+var defaults = {}
+for (var k in module.exports.widgets) {
+    defaults[k] = module.exports.widgets[k].defaults()
+}
+module.exports.defaults = defaults

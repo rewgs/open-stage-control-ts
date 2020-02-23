@@ -14,8 +14,7 @@ var handleClick = function(event) {
     if (!EDITING) return
 
     if (!event.detail[multiSelectKey] && event.type !== 'fast-right-click' && (
-        event.target.classList.contains('ui-resizable-handle') ||
-        event.target.classList.contains('ui-draggable-handle') ||
+        event.target.classList.contains('no-widget-select') ||
         event.target.id === 'open-toggle'
     )) { return }
 
@@ -74,13 +73,6 @@ var handleClick = function(event) {
     var clickX = Math.round((eventData.offsetX + eventData.target.scrollLeft) / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH,
         clickY = Math.round((eventData.offsetY + eventData.target.scrollTop)  / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH
 
-    actions.push({
-        label: icon('expand') + ' ' + locales('editor_editparent'),
-        action: ()=>{
-            editor.select(parent)
-        }
-    })
-
     if (type === 'widget')  {
 
         actions.push({
@@ -129,7 +121,7 @@ var handleClick = function(event) {
         }
 
         actions.push({
-            label: icon('box') + ' ' + locales('editor_wrap'),
+            label: icon('layer-group') + ' ' + locales('editor_wrap'),
             action: wrapActions
         })
 

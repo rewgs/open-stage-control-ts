@@ -2,7 +2,9 @@ var Container = require('../common/container'),
     widgetManager = require('../../managers/widgets'),
     parser = require('../../parser'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw')
+    raw = require('nanohtml/raw'),
+    {enableTraversingGestures, disableTraversingGestures} = require('../../events/drag'),
+    setScrollbarColor = require('../../ui/scrollbar-color')
 
 class Panel extends Container() {
 
@@ -19,18 +21,19 @@ class Panel extends Container() {
             _panel:'panel',
 
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
-            border: {type: 'boolean', value: true, help: 'By default, widgets in panels/strip have their border disabled, except for panels and strips. Set to `false` to apply this rule to the panel too'},
+            layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal'], help:''},
+            traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
+            variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
         }, [], {
 
             _children:'children',
 
-            variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
             widgets: {type: 'array', value: [], help: 'Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously.'},
             tabs: {type: 'array', value: [], help: 'Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously'},
 
             value: {type: 'integer', value: '', help: [
-                'Defines currently opened tab in the widget',
+                'Defines currently widgeted tab in the widget',
                 'A tab can be opened only by setting its parent\'s value'
             ]},
 
@@ -44,31 +47,41 @@ class Panel extends Container() {
 
         super({...options, html: html`<div class="panel"></div>`})
 
-        if (this.getProp('scroll') === false) this.widget.classList.add('noscroll')
-        if (this.getProp('border') === false) this.container.classList.add('noborder')
-        if (this.getProp('tabs') && this.getProp('tabs').length) this.widget.classList.add('has-tabs')
+        if (this.getProp('scroll') === false) this.container.classList.add('noscroll')
+        this.container.classList.add('layout-' + this.getProp('layout'))
+
+
+        if (this.getProp('tabs') && this.getProp('tabs').length) {
+
+            this.container.classList.add('contains-tabs')
+
+        } else {
+
+            this.container.classList.add('contains-widgets')
+
+        }
+
+
+
 
         this.value = -1
         this.tabs = []
 
         if (this.getProp('tabs') && this.getProp('tabs').length) {
 
-            this.widget.appendChild(html`<div class="navigation"><ul class="tablist"></ul></div>`)
-            this.navigation = DOM.get(this.widget, '.tablist')[0]
-
-            this.wrapper = this.widget.appendChild(html`<div class="tabs-wrapper"></div>`)
+            this.navigation = this.widget.appendChild(html`<div class="navigation"></div>`)
 
             this.children = options.children || new Array(this.getProp('tabs').length)
             for (let i = 0; i < this.children.length; i++) {
                 if (this.children[i]) {
-                    this.wrapper.appendChild(this.children[i].container)
+                    this.widget.appendChild(this.children[i].container)
                     this.children[i].mounted = true
                     this.children[i].parent = this
-                    this.children[i].parentNode = this.wrapper
+                    this.children[i].parentNode = this.widget
                 } else {
                     parser.parse({
                         data: this.getProp('tabs')[i],
-                        parentNode: this.wrapper,
+                        parentNode: this.widget,
                         parent: this,
                         tab: true,
                         index: i
@@ -130,6 +143,7 @@ class Panel extends Container() {
         }
 
 
+        if (this.getProp('traversing')) this.setTraversing()
 
     }
 
@@ -138,16 +152,21 @@ class Panel extends Container() {
         this.navigation.innerHTML = ''
         this.tabs = []
 
-        DOM.each(this.wrapper, '> .widget', (tab)=>{
+        DOM.each(this.widget, '> .widget', (tab)=>{
 
             let widget = widgetManager.getWidgetByElement(tab),
-                style = widget.getProp('color') == 'auto' ? '' : `--color-custom:${widget.getProp('color')}`
+                style = ''
+
+            style += widget.getProp('colorWidget') === 'auto' ? '' : `--color-widget:${widget.getProp('colorWidget')};`
+            style += widget.getProp('colorFill') === 'auto' ? '' : `--color-fill:${widget.getProp('colorFill')};`
+
+            if (!widget.getProp('visible')) style += 'display:none;'
 
             this.tabs.push(widget)
             this.navigation.appendChild(html`
-                <li class="tablink" data-widget="${widget.hash}" style="${style}">
-                    <a><span>${raw(DOM.get(tab, '> .label')[0].innerHTML)}</span></a>
-                </li>
+                <div class="tablink" data-widget="${widget.hash}" style="${style}">
+                    ${widget.label.innerHTML}
+                </div>
             `)
 
         })
@@ -167,7 +186,7 @@ class Panel extends Container() {
             this.value = v
 
             this.tabs[v].show()
-            DOM.each(this.navigation, 'li', (el)=>{el.classList.remove('on')})[v].classList.add('on')
+            DOM.each(this.navigation, 'div', (el)=>{el.classList.remove('on')})[v].classList.add('on')
 
             if (options.send) this.sendValue()
             if (options.sync) this.changed(options)
@@ -192,12 +211,45 @@ class Panel extends Container() {
 
         switch (propName) {
 
-            case 'color':
+            case 'traversing':
+                this.setTraversing()
+                return
+
+            case 'colorWidget':
+            case 'colorFill':
+            case 'colorStroke':
+            case 'alphaStroke':
+            case 'alphaFillOff':
+            case 'alphaFillOn':
                 for (var w of this.children) {
-                    if (w) w.onPropChanged('color')
+                    if (w) w.onPropChanged(propName)
                 }
                 return
 
+        }
+
+    }
+
+    setContainerStyles(styles = ['geometry', 'label', 'css', 'color', 'visibility']) {
+
+        super.setContainerStyles(styles)
+
+        if (styles.includes('color') && this.getProp('scroll')) {
+
+            setScrollbarColor(this.container)
+
+        }
+
+    }
+
+    setTraversing(update) {
+
+        var traversing = this.getProp('traversing')
+
+        disableTraversingGestures(this.widget)
+
+        if (traversing) {
+            enableTraversingGestures(this.widget, {smart: typeof traversing === 'string' && traversing.match(/smart|auto/)})
         }
 
     }
@@ -211,7 +263,8 @@ class Panel extends Container() {
 }
 
 Panel.dynamicProps = Panel.prototype.constructor.dynamicProps.concat(
-    'variables'
+    'variables',
+    'traversing'
 )
 
 module.exports = Panel

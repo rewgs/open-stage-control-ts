@@ -26,13 +26,14 @@ class Modal extends Panel {
             popupHeight: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
             popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
             popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
+            layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal'], help:''},
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
+            variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
         }, [], {
 
             _chidlren:'children',
 
-            variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
             widgets: {type: 'array', value: [], help: 'Each element of the array must be a widget object'},
             value: {type: 'integer', value: '', help: [
                 'Defines the modal\'s state:`0` for closed, `1` for opened'
@@ -52,12 +53,13 @@ class Modal extends Panel {
             <div class="popup">
                 <div class="popup-wrapper">
                     <div class="popup-title closable"><span class="popup-label"></span><span class="closer">${raw(icon('times'))}</span></div>
-                    <div class="popup-content"></div>
+                    <div class="popup-content widget panel-container not-editable contains-widgets"></div>
                 </div>
             </div>
         `
 
         this.container.appendChild(this.popup)
+        this.popupContent = DOM.get(this.popup, '.popup-content')[0]
 
         // convert dimensions / coordinates to rem
         var geometry = {}
@@ -109,6 +111,12 @@ class Modal extends Panel {
         this.init = false
         this.labelChange = true
 
+
+        this.popupContent.classList.add('layout-' + this.getProp('layout'))
+        this.popupContent.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
+        
+
+
     }
 
     setValue(v, options={}) {
@@ -118,7 +126,7 @@ class Modal extends Panel {
         this.value = v ? 1 : 0
 
         if (!this.init && this.value) {
-            DOM.get(this.popup, '.popup-content')[0].appendChild(this.widget)
+            this.popupContent.appendChild(this.widget)
             this.init = true
         }
 
@@ -195,7 +203,7 @@ class Modal extends Panel {
 
         if (!this.popup) return
 
-        var label = this.getProp('popupLabel') ? iconify(this.getProp('popupLabel')) : DOM.get(this.container, '> .label')[0].innerHTML
+        var label = this.getProp('popupLabel') ? iconify(this.getProp('popupLabel')) : this.label.innerHTML
         DOM.get(this.popup, '.popup-title .popup-label')[0].innerHTML = label
         this.labelChange = false
 
@@ -216,6 +224,18 @@ class Modal extends Panel {
                 }
 
                 return
+
+        }
+
+    }
+
+    setContainerStyles(styles = ['geometry', 'label', 'css', 'color', 'visibility']) {
+
+        super.setContainerStyles(styles)
+
+        if (styles.includes('color') && this.popupContent) {
+
+            this.popupContent.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
 
         }
 

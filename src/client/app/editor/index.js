@@ -1,15 +1,18 @@
-var {widgets} = require('../widgets/'),
-    editField = require('./edit-field'),
+var editField = require('./edit-field'),
     {updateWidget, incrementWidget} = require('./data-workers'),
     keyboardJS = require('keyboardjs'),
     {diff, diffToWidget} = require('./diff'),
     widgetManager = require('../managers/widgets'),
     {deepCopy} = require('../utils'),
+    {defaults} = require('../widgets/'),
     macOs = (navigator.platform || '').match('Mac'),
-    SelectArea = require('./select-area'),
+    UiSelectArea = require('../ui/ui-selectarea'),
+    UiInspector = require('../ui/ui-inspector'),
+    UiTree = require('../ui/ui-tree'),
+    UiDragResize = require('../ui/ui-dragresize'),
+    sidepanel = require('../ui/ui-sidepanel'),
     html = require('nanohtml'),
     sessionManager
-
 
 const HISTORY_SIZE = 50
 
@@ -17,33 +20,68 @@ var Editor = class Editor {
 
     constructor() {
 
-        this.wrapper = html`
-            <div class="editor-container">
-                <div class="form" id="editor-form">
-                </div>
-            </div>
-        `
+        this.inspector = new UiInspector({selector: '#osc-inspector'})
+        this.inspector.on('update', (event)=>{
 
-        this.form = DOM.get(this.wrapper, '.form')[0]
-        this.form.addEventListener('fast-click', (e)=>{
-            if (e.target.classList.contains('separator')) {
-                var name = e.target.getAttribute('data-name'),
-                    foldedIndex = this.foldedCategories.indexOf(name)
-                e.target.parentNode.classList.toggle('folded', foldedIndex < 0)
-                if (foldedIndex > -1) {
-                    this.foldedCategories.splice(foldedIndex, 1)
+            var {propName, value} = event,
+                newWidgets = []
+
+            for (var w of this.selectedWidgets) {
+                if (propName === 'address' && value === '') {
+                    // special case
+                    w.props[propName] = '/' + w.props.id
                 } else {
-                    this.foldedCategories.push(name)
+                    w.props[propName] = value !== '' ? value : deepCopy(defaults[w.props.type][propName].value)
                 }
-
+                newWidgets.push(updateWidget(w, {changedProps: [propName], preventSelect: this.selectedWidgets.length > 1}))
             }
+
+            this.pushHistory()
+
+            if (newWidgets.length > 1) this.select(newWidgets)
+
         })
 
 
-        this.defaults = {}
-        for (var k in widgets) {
-            this.defaults[k] = widgets[k].defaults()
-        }
+        this.widgetTree = new UiTree({selector: '#osc-tree'})
+        this.widgetTree.on('sorted', (event)=>{
+
+            var {widget, oldIndex, newIndex} = event,
+                propName = widget.props.tabs.length ? 'tabs' : 'widgets'
+
+            if (widget.props[propName].length < 2) return
+
+            widget.props[propName].splice(newIndex, 0, widget.props[propName].splice(oldIndex, 1)[0])
+
+            var indices = [newIndex, oldIndex]
+            if (Math.abs(oldIndex - newIndex) > 1) {
+                for (var i = Math.min(newIndex, oldIndex) + 1; i < Math.max(newIndex, oldIndex); i++) {
+                    indices.push(i)
+                }
+            }
+
+            var container = updateWidget(widget, {removedIndexes: indices, addedIndexes: indices, preventSelect: true})
+
+            this.pushHistory({removedIndexes: indices, addedIndexes: indices})
+            this.select(container.children[newIndex])
+
+        })
+
+        this.oscContainer = DOM.get('#osc-container')[0]
+
+
+
+        this.widgetDragResize = new UiDragResize({})
+        this.widgetDragResize.on('move', (e)=>{
+            var dX = Math.round((e.left - e.initLeft) / GRIDWIDTH) * GRIDWIDTH,
+                dY = Math.round((e.top - e.initTop) / GRIDWIDTH) * GRIDWIDTH
+            this.moveWidget(dX, dY)
+        })
+        this.widgetDragResize.on('resize', (e)=>{
+            var dX = Math.round((e.width - e.initWidth) / GRIDWIDTH) * GRIDWIDTH,
+                dY = Math.round((e.height - e.initHeight) / GRIDWIDTH) * GRIDWIDTH
+            this.resizeWidget(dX, dY)
+        })
 
         this.selectedWidgets = []
 
@@ -61,8 +99,6 @@ var Editor = class Editor {
         this.history = []
         this.historyState = -1
         this.historySession = null
-
-        this.foldedCategories = []
 
         this.mousePosition = {x:0, y:0}
         this.mouveMoveHandler = this.mouseMove.bind(this)
@@ -128,7 +164,7 @@ var Editor = class Editor {
         })
 
 
-        this.selectarea = new SelectArea('.widget:not(.not-editable), .tablink', (elements)=>{
+        this.selectarea = new UiSelectArea('[data-widget]:not(.not-editable)', (elements)=>{
 
             elements = elements.map(e => widgetManager.getWidgetByElement(e, ':not(.not-editable)')).filter(e => e)
 
@@ -225,6 +261,7 @@ var Editor = class Editor {
                 if (!this.selectedWidgets.length) return
                 this.unselect()
                 this.selectedWidgets = []
+                this.inspector.clear()
                 break
 
             case 'mod + a':
@@ -285,15 +322,15 @@ var Editor = class Editor {
 
                 break
 
-            case 'f2':
-                var input = DOM.get(this.form, 'textarea[name="label"]')[0]
-                if (input) {
-                    var folded = input.closest('.category.folded')
-                    if (folded) DOM.dispatchEvent(DOM.get(folded, '.separator'), 'fast-click')
-                    input.focus()
-                    input.setSelectionRange(0, input.value.length)
-                }
-                break
+            // case 'f2':
+            //     var input = DOM.get(this.form, 'textarea[name="label"]')[0]
+            //     if (input) {
+            //         var folded = input.closest('.category.folded')
+            //         if (folded) DOM.dispatchEvent(DOM.get(folded, '.separator'), 'fast-click')
+            //         input.focus()
+            //         input.setSelectionRange(0, input.value.length)
+            //     }
+            //     break
 
         }
 
@@ -307,40 +344,44 @@ var Editor = class Editor {
         EDITING = true
         this.enabled = true
 
-        DOM.get('.editor-root')[0].setAttribute('data-widget', DOM.get('.root-container')[0].getAttribute('data-widget'))
-        DOM.get('.editor-root')[0].classList.remove('disabled')
-        DOM.get('.disable-editor')[0].classList.remove('on')
-        DOM.get('.enable-editor')[0].classList.add('on')
+        // DOM.get('.disable-editor')[0].classList.remove('on')
+        // DOM.get('.enable-editor')[0].classList.add('on')
+        //
         document.body.classList.add('editor-enabled')
-        document.body.classList.toggle('no-grid', GRIDWIDTH == 1)
+        // document.body.classList.toggle('no-grid', GRIDWIDTH == 1)
+        //
+        //
+        // GRIDWIDTH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
+        //
+        // var gridForm = html`
+        //     <div class="form" id="grid-width-form">
+        //         <div class="separator"><span>Grid</span></div>
+        //         <div class="input-wrapper">
+        //             <label>Width</label>
+        //             <input class="input no-keybinding" type="number" id="grid-width-input" step="1" min="1" max="100" value="${GRIDWIDTH}"/>
+        //         </div>
+        //     </div>
+        // `
+        //
+        // DOM.each(gridForm, '#grid-width-input', (input)=>{
+        //     DOM.addEventListener(input, 'keyup mouseup change mousewheel', (e)=>{
+        //         setTimeout(()=>{
+        //             var v = Math.max(Math.min(parseInt(input.value), 100), 1)
+        //             if (isNaN(v)) return
+        //             input.value = v
+        //             GRIDWIDTH = v
+        //             document.body.classList.toggle('no-grid', GRIDWIDTH == 1)
+        //             document.documentElement.style.setProperty('--grid-width', GRIDWIDTH)
+        //         })
+        //     })
+        // })
+        //
+        // DOM.get(document, '.editor-menu')[0].appendChild(gridForm)
 
+        this.widgetTree.updateTree(this.selectedWidgets)
 
-        GRIDWIDTH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
-
-        var gridForm = html`
-            <div class="form" id="grid-width-form">
-                <div class="separator"><span>Grid</span></div>
-                <div class="input-wrapper">
-                    <label>Width</label>
-                    <input class="input no-keybinding" type="number" id="grid-width-input" step="1" min="1" max="100" value="${GRIDWIDTH}"/>
-                </div>
-            </div>
-        `
-
-        DOM.each(gridForm, '#grid-width-input', (input)=>{
-            DOM.addEventListener(input, 'keyup mouseup change mousewheel', (e)=>{
-                setTimeout(()=>{
-                    var v = Math.max(Math.min(parseInt(input.value), 100), 1)
-                    if (isNaN(v)) return
-                    input.value = v
-                    GRIDWIDTH = v
-                    document.body.classList.toggle('no-grid', GRIDWIDTH == 1)
-                    document.documentElement.style.setProperty('--grid-width', GRIDWIDTH)
-                })
-            })
-        })
-
-        DOM.get(document, '.editor-menu')[0].appendChild(gridForm)
+        sidepanel.left.enable()
+        sidepanel.right.enable()
 
         keyboardJS.setContext('editing')
 
@@ -357,7 +398,6 @@ var Editor = class Editor {
 
         this.unselect()
         this.selectedWidgets = []
-        DOM.get('.editor-root')[0].classList.add('disabled')
         DOM.get('.disable-editor')[0].classList.add('on')
         DOM.get('.enable-editor')[0].classList.remove('on')
         document.body.classList.remove('editor-enabled')
@@ -369,6 +409,11 @@ var Editor = class Editor {
 
         document.body.removeEventListener('mousemove', this.mouveMoveHandler)
 
+        sidepanel.left.disable()
+        sidepanel.right.disable()
+        this.widgetTree.clear()
+        this.inspector.clear()
+
         this.selectarea.disable()
 
     }
@@ -376,16 +421,14 @@ var Editor = class Editor {
 
     unselect() {
 
-        DOM.get('#editor')[0].innerHTML = ''
-
-        this.form.innerHTML = ''
+        this.widgetDragResize.clear()
+        this.inspector.clear()
 
         DOM.each(document, '.editing', (element)=>{
             element.classList.remove('editing')
         })
 
-        $('.widget.ui-resizable').resizable('destroy')
-        $('.widget.ui-draggable').draggable('destroy').find('.ui-draggable-handle').remove()
+        this.widgetTree.select([])
 
     }
 
@@ -428,80 +471,17 @@ var Editor = class Editor {
 
         if (this.selectedWidgets.length > 0 && !options.fromLasso) {
 
-            this.createEditForm()
+            this.inspector.inspect(this.selectedWidgets)
             this.createSelectionBlock()
 
+        } else {
+
+            this.inspector.clear()
+
         }
 
     }
 
-
-    createEditForm(){
-
-        var widget = this.selectedWidgets[0],
-            props = this.defaults[widget.props.type],
-            multi = this.selectedWidgets.length > 1
-
-        this.form.appendChild(html`
-            <div class="separator">
-                <span class="${this.selectedWidgets.length > 1 ? 'accent' : ''}">
-                    Widget${multi ? 's' : ''}: ${multi ? this.selectedWidgets.length + ' selected': widget.getProp('id')}
-                </span>
-            </div>
-        `)
-
-        let category
-
-        for (let propName in props) {
-
-            let field,
-                shared = true
-
-            for (var w of this.selectedWidgets) {
-                if (this.defaults[w.props.type][propName] === undefined) {
-                    shared = false
-                }
-            }
-
-            if (!shared) continue
-
-            if (propName.indexOf('_') === 0 && propName !== '_props') {
-
-                if (category) this.form.appendChild(category)
-                category = html`<div class="category ${this.foldedCategories.indexOf(props[propName]) > -1 ? 'folded' : ''}"></div>`
-
-                field = html`<div class="separator" data-name="${props[propName]}"><span>${props[propName]}</span></div>`
-
-            } else if (widget.props[propName] === undefined) {
-
-                continue
-
-            } else {
-
-                if (widget.parent !== widgetManager && widget.parent.getProp('type') === 'strip') {
-                    // special case for widgets in strips
-                    if (propName === 'top' || propName === 'left' || propName === (widget.parent.getProp('horizontal') ? 'height' : 'width')) continue
-                }
-
-                field = editField(this, widget, propName, props[propName])
-                if (!field) continue
-
-            }
-
-            if (category) {
-                category.appendChild(field)
-            } else {
-                this.form.appendChild(field)
-            }
-
-        }
-
-        if (category) this.form.appendChild(category)
-
-        this.wrapper.appendChild(this.form)
-        DOM.get('#editor')[0].appendChild(this.wrapper)
-
-    }
 
     createSelectionBlock(){
 
@@ -510,59 +490,8 @@ var Editor = class Editor {
                 item.classList.add('editing')
             })
         }
-
-        var widget = this.selectedWidgets[0]
-
-        if (widget.props.height !== undefined || widget.props.width !== undefined) {
-
-            let $container = $(widget.container)
-            $container.resizable({
-                handles: 's, e, se',
-                helper: 'ui-helper',
-                resize: (event, ui)=>{
-                    ui.size.height = Math.round(ui.size.height / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH * PXSCALE
-                    ui.size.width = Math.round(ui.size.width / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH * PXSCALE
-                },
-                stop: (event, ui)=>{
-
-                    var deltaH = ui.size.height - ui.originalSize.height,
-                        deltaW = ui.size.width - ui.originalSize.width
-
-                    this.resizeWidget(deltaW, deltaH, ui)
-
-                },
-                grid: [GRIDWIDTH * PXSCALE, GRIDWIDTH * PXSCALE]
-            })
-
-        }
-
-        if (widget.props.top !== undefined && widget.parent.getProp('type') !== 'strip') {
-            let $container = $(widget.container)
-            $container.draggable({
-                cursor:'-webkit-grabbing',
-                drag: (event, ui)=>{
-                    ui.position.top = Math.round(ui.position.top / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH * PXSCALE
-                    ui.position.left = Math.round(ui.position.left / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH * PXSCALE
-                },
-                stop: (event, ui)=>{
-                    event.preventDefault()
-
-                    var deltaX = (ui.helper.position().left + $container.parent().scrollLeft()) / PXSCALE - widget.container.offsetLeft / PXSCALE,
-                        deltaY = (ui.helper.position().top + $container.parent().scrollTop()) / PXSCALE - widget.container.offsetTop / PXSCALE
-
-                    this.moveWidget(deltaX, deltaY)
-
-                    ui.helper.remove()
-                },
-                handle:'.ui-draggable-handle, > .label',
-                grid: [GRIDWIDTH * PXSCALE, GRIDWIDTH * PXSCALE],
-                helper:()=>{
-                    return $('<div class="ui-helper"></div>').css({height:$container.outerHeight(),width:$container.outerWidth()})
-                }
-            }).append('<div class="ui-draggable-handle"></div>')
-
-        }
-
+        this.widgetTree.select(this.selectedWidgets)
+        this.widgetDragResize.create(this.selectedWidgets)
 
     }
 
@@ -717,10 +646,12 @@ var Editor = class Editor {
             }
         }
 
-        this.select(updateWidget(parent, {
-            preventSelect: true,
-            removedIndexes
-        }))
+        var container = updateWidget(parent, {preventSelect: true, removedIndexes})
+        if (container.children.length) {
+            this.select(container.children[Math.min(index.pop(), container.children.length - 1)])
+        } else {
+            this.select(container)
+        }
         this.pushHistory({removedIndexes})
 
     }
@@ -781,13 +712,13 @@ var Editor = class Editor {
 
         for (var w of this.selectedWidgets) {
 
-            var newTop = parseInt(w.container.offsetTop) / PXSCALE + deltaY
+            var newTop = Math.max(parseInt(w.container.offsetTop) / PXSCALE + deltaY, 0)
             if (typeof w.props.top === 'string' && w.props.top.indexOf('%') > -1) {
                 w.props.top = (100 * PXSCALE * newTop / w.container.parentNode.offsetHeight).toFixed(2) + '%'
             } else {
                 w.props.top = newTop
             }
-            var newLeft = parseInt(w.container.offsetLeft) / PXSCALE + deltaX
+            var newLeft = Math.max(parseInt(w.container.offsetLeft) / PXSCALE + deltaX, 0)
             if (typeof w.props.left === 'string' && w.props.left.indexOf('%') > -1) {
                 w.props.left = (100 * PXSCALE * newLeft / w.container.parentNode.offsetWidth).toFixed(2) + '%'
             } else {
@@ -890,6 +821,9 @@ var Editor = class Editor {
         if (this.selectedWidgets[0] && !widgetManager.widgets[this.selectedWidgets[0].hash]) {
             this.unselect()
             this.selectedWidgets = []
+            this.inspector.clear()
+        } else if (this.selectedWidgets[0]) {
+            this.widgetDragResize.create(this.selectedWidgets)
         }
 
     }

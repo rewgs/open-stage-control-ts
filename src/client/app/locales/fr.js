@@ -11,15 +11,14 @@ module.exports = {
     editor_export: 'Exporter',
 
     // editor context-menu
-    editor_editparent: 'Éditer parent',
     editor_copy: 'Copier',
     editor_cut: 'Couper',
     editor_wrap: 'Grouper dans',
     editor_paste: 'Coller',
     editor_pasteindent: 'ID + 1',
     editor_clone: 'Clone',
-    editor_addwidget: 'Nouveau widget',
-    editor_addtab: 'Nouvel onglet',
+    editor_addwidget: 'Ajouter widget',
+    editor_addtab: 'Ajouter onglet',
     editor_delete: 'Supprimer',
     editor_click_for_help: 'Cliquer sur le nom de la propriété pour afficher l\'aide',
 

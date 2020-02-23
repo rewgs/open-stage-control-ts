@@ -31,7 +31,7 @@ var SessionManager = class SessionManager {
 
         this.lock = true
 
-        var container = DOM.get('#container')[0],
+        var container = DOM.get('#osc-container')[0],
             loader = loading(locales('loading_session'))
 
         setTimeout(()=>{
@@ -49,7 +49,7 @@ var SessionManager = class SessionManager {
                 parser.reset()
                 parser.parse({
                     data: this.session,
-                    parentNode: DOM.get('#container')[0]
+                    parentNode: DOM.get('#osc-container')[0]
                 })
                 editor.clearHistory()
 

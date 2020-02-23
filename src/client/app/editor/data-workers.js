@@ -3,14 +3,8 @@ var widgetManager = require('../managers/widgets'),
     stateManager = require('../managers/state'),
     parser = require('../parser'),
     Panel,
-    sidepanel,
     editor,
-    scrollState = {},
-    sidepanelScroll
-
-DOM.ready(()=>{
-    sidepanel = DOM.get('#sidepanel')[0]
-})
+    scrollState = {}
 
 function updateWidget(widget, options={}) {
 
@@ -24,6 +18,8 @@ function updateWidget(widget, options={}) {
         ) {
 
             var edited = widget.updateProps(options.changedProps, null, {fromEditor: true}) || widget
+
+            editor.widgetTree.updateTree(editor.selectedWidgets)
 
             if (editor.selectedWidgets.includes(widget) && !options.preventSelect) {
                 editor.select(edited)
@@ -67,13 +63,13 @@ function updateWidget(widget, options={}) {
     var index = widget.parent.children.indexOf(widget)
 
     // list widgets to remove
+    removedChildren = removedChildren.filter(x => x !== undefined)
     var removedWidgets = reuseChildren ?
             removedChildren.map(x => x.getAllChildren().concat(x)).concat(widget).reduce((a,b)=>a.concat(b), []) :
             widget.getAllChildren().concat(widget)
 
     // save state
     if (stateManager.queueCounter === 0) {
-        sidepanelScroll = sidepanel.scrollTop
         scrollState = {}
     }
     stateManager.incrementQueue()
@@ -135,13 +131,14 @@ function updateWidget(widget, options={}) {
     // restore state
     stateManager.decrementQueue()
     if (stateManager.queueCounter === 0) {
-        sidepanel.scrollTop = sidepanelScroll
         for (let id in scrollState) {
             for (let w of widgetManager.getWidgetById(id)) {
                 if (w.scroll) w.scroll(scrollState[id])
             }
         }
     }
+
+    editor.widgetTree.updateTree(editor.selectedWidgets)
 
     if (editor.selectedWidgets.includes(widget) && !options.preventSelect) {
         editor.select(newWidget)

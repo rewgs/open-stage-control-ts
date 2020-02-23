@@ -91,47 +91,12 @@ module.exports = {
         parser.isLocal = ()=>{
             return parser.hostname.match(localUrlRe)
         }
-        
+
         return (url)=>{
             parser.href = url
             return parser
         }
 
-    })(),
-
-    math: (()=>{
-        var math = require('mathjs/dist/math.min.js').create({
-            matrix: 'Array'
-        })
-        math.import({
-            unpack: function(a) { return Array.isArray(a) ? a.toString() : a },
-            indexOf: function(a, x) { return a.indexOf(x) },
-            pad: function(x, padding) {
-                var str = String(x),
-                    [int, dec] =  str.split('.')
-                while (int.length < padding) {
-                    int = '0' + int
-                }
-                return dec ? int + '.' + dec : int
-            },
-            length: function(x) { return x.length },
-            values: function(x) { return Object.values(x) },
-            keys: function(x) { return Object.keys(x) },
-            extend: function(x, y) { return Object.assign(x, y) },
-            timestamp: function() { return Date.now() },
-            // basic relationnal to keep alphabetical string comparison (v4 change)
-            equal:     function(a, b) { return a == b },
-            unequal:   function(a, b) { return a != b },
-            smaller:   function(a, b) { return a < b },
-            larger:    function(a, b) { return a > b },
-            smallerEq: function(a, b) { return a <= b },
-            largerEq:  function(a, b) { return a >= b }
-        }, {override:true})
-
-        // set math's parser array index base to zero
-        math.expression.mathWithTransform = Object.assign({}, math)
-
-        return math
     })(),
 
     evaljs: (function(){
@@ -162,7 +127,7 @@ module.exports = {
         sandbox.contentWindow.console = console
         sandbox.contentWindow.setTimeout =
         sandbox.contentWindow.setInterval = ()=>{
-            throw 'setTimeout and setInterval can\'t be used in formulas'
+            throw 'setTimeout and setInterval can\'t be used in the JS sandbox'
         }
         sandbox.contentWindow.global = {}
 

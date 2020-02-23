@@ -277,7 +277,7 @@ if (fullscreen.isEnabled) {
 }
 
 // open / close / toggle
-
+/*
 var sidepaneLock = false
 
 function sidepanelOpen() {
@@ -350,9 +350,11 @@ document.addEventListener('keydown', function(e){
 
 // Sidepanel resize
 
+
+
 var sidepanelWidth
 
-$('#sidepanel-handle').draggable({
+$('osc-panel-container sidepanel-handle').draggable({
     cursor:'col-resize',
     start: ()=>{
         sidepanelWidth = parseInt(sidepanelContainer.offsetWidth) / PXSCALE
@@ -376,4 +378,11 @@ module.exports = {
     open: sidepanelOpen,
     close: sidepanelClose,
     toggle: sidepanelToggle
+}
+*/
+
+module.exports = {
+    open: ()=>{},
+    close: ()=>{},
+    toggle: ()=>{}
 }

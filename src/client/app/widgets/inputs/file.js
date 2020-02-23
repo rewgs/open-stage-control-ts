@@ -3,7 +3,7 @@ var Widget = require('../common/widget'),
     raw = require('nanohtml/raw'),
     {remoteBrowse, icon} = require('../../ui/utils')
 
-module.exports = class Input extends Widget {
+module.exports = class File extends Widget {
 
     static description() {
 

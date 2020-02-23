@@ -1,0 +1,32 @@
+@mixin pseudo-stroke($z: 0) {
+    &:before {
+        content:"";
+        position: absolute;
+        border: 1rem solid var(--color-stroke);
+        opacity: var(--alpha-stroke);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        z-index: $z;
+        border-radius: inherit;
+    }
+}
+
+@mixin pseudo-fill($z: 0) {
+    &:after {
+        content:"";
+        position: absolute;
+        background: var(--color-fill);
+        opacity: var(--alpha-fill);
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        pointer-events: none;
+        margin: var(--widget-padding);
+        z-index: $z;
+        border-radius: inherit;
+    }
+}

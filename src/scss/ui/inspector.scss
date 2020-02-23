@@ -1,0 +1,226 @@
+$header-height: 22rem;
+$field-height: 22rem;
+$padding: 8rem;
+
+#osc-inspector {
+
+    // padding: $padding;
+
+    --widget-padding: -1rem;
+
+}
+
+osc-inspector-field {
+
+    display: flex;
+    flex-direction: row;
+    line-height: $field-height;
+    margin-top: 4rem;
+
+    label {
+        width: 90rem;
+        order: 35;
+        text-transform: none;
+        padding-left: 8rem;
+        cursor: help;
+    }
+
+    textarea {
+        font-family: mono;
+
+        line-height: $field-height - 8rem;
+        padding: 5rem 6rem 3rem;
+        flex: 1;
+        overflow-x: auto;
+        overflow-y: hidden;
+        resize: none;
+        white-space: pre;
+        display: block;
+        background: var(--color-foreground);
+        cursor: text;
+
+        -webkit-appearance:none;
+        -moz-appearance:none;
+        appearance:none;
+
+        --scrollbar-size: 6rem;
+
+        &::-webkit-scrollbar-thumb:horizontal {
+            // border-top: 4rem solid var(--color-foreground);
+            cursor: normal;
+        }
+
+    }
+
+
+
+}
+
+
+osc-inspector-category {
+
+    --alpha-fill: 0.25;
+    margin-top: 2rem;
+    display: block;
+    padding: 0 8rem;
+
+    &:first-child {
+        margin-top: 0
+    }
+
+    .category-header {
+        position: relative;
+        text-transform: none;
+        cursor: pointer;
+        // color: var(--color-background);
+        height: $header-height;
+        line-height: $header-height + 1;
+        // padding: 0 8rem;
+        @include pseudo-fill($z: -1);
+
+        &:after {
+            left:-($padding - 2);
+            right:-($padding - 1);
+        }
+
+        &:before {
+            position: relative;
+            font-family: FontAwesome;
+            content: "\f04b";
+            width: $field-height;
+            text-align: left;
+            display: inline-block;
+            transform-origin: 2rem 3rem;
+            font-size: 7rem;
+            width: 8rem;
+            height: 8rem;
+            line-height: 6rem;
+            margin-right: 8rem;
+            top: -2rem;
+            transform: rotate(90deg);
+            transition: top .1s, transform .1s;
+        }
+
+    }
+
+    &.folded {
+
+        --alpha-fill: 0.10;
+        margin-bottom: 0;
+
+        .category-header:before {
+            transform: rotate(0deg);
+            top: 0;
+        }
+        osc-inspector-field {
+            display: none;
+        }
+    }
+
+    .category-header + osc-inspector-field {
+        margin-top: 8rem;
+    }
+    osc-inspector-field:last-child {
+        margin-bottom: 8rem;
+    }
+}
+
+
+osc-inspector-checkbox {
+
+    line-height: $field-height;
+    height: $field-height;
+    width: $field-height;
+    cursor: pointer;
+    background: var(--color-foreground);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4rem;
+
+    i {
+        color: transparent;
+        margin-top: -1rem;
+        margin-left: 1rem;
+    }
+    &.on {
+        position: relative;
+        z-index: 1;
+        @include pseudo-fill($z: -1);
+        i {
+            color: inherit;
+        }
+    }
+
+}
+
+osc-inspector-select {
+    position: relative;
+    font-family: mono;
+    line-height: inherit;
+    padding: 0;
+    overflow: hidden;
+    height: $field-height;
+    width: $field-height;
+    background: var(--color-foreground);
+    margin-left: 4rem;
+    select {
+        background: var(--color-foreground);
+        // width: 100%;
+        line-height: $field-height - 8rem;
+        padding: 4rem 6rem;
+        -webkit-appearance:none;
+        -moz-appearance:none;
+        appearance:none;
+        position: absolute;
+        left:0;
+        opacity: 0;
+        optgroup {
+            background: var(--color-foreground);
+            font-weight: bold;
+            option {
+                background: var(--color-background);
+                color: var(--color-text);
+                margin-left: -4rem;
+                font-weight: normal;
+                text-indent: -10px;
+                margin: 0;
+            }
+        }
+    }
+    &:after{
+        content:"\f0d7";
+        font-family: FontAwesome;
+        position: absolute;
+        line-height: $field-height;
+        height: $field-height;
+        width: $field-height;
+        text-align: center;
+        right:0;
+        top:1rem;
+        font-size: 16rem;
+        pointer-events: none;
+    }
+}
+
+
+.osc-inspector-color {
+    appearance: none;
+    padding: 0;
+    border: 0;
+    box-shadow: 0;
+    outline: 0;
+    position: relative;
+    font-family: mono;
+    line-height: inherit;
+    padding: 0;
+    overflow: hidden;
+    height: $field-height;
+    width: $field-height;
+    background: var(--color-foreground);
+    margin-left: 4rem;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+}

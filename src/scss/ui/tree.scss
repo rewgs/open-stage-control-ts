@@ -1,0 +1,115 @@
+#osc-tree {
+
+    --alpha-fill: 0.5;
+    --widget-padding: -1rem;
+
+    $padding: 16rem;
+    $line-height: 22rem;
+    padding: 0 $padding;
+
+
+    text-transform: none;
+    line-height: $line-height;
+
+
+    ol {
+
+        list-style: none;
+        position: relative;
+        padding-left: 16rem;
+
+        ol:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: $line-height / 2 - 1;
+            left: -12rem;
+            border-left: 1rem solid var(--color-stroke);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+    }
+
+    li {
+
+        position: relative;user-select: none;
+        > ol {
+            display: none;
+        }
+        &.expanded > ol {
+            display: block;
+        }
+
+        li:before {
+            content: "";
+            position: absolute;
+            top: $line-height / 2;
+            left: -27rem;
+            width: 16rem;
+            border-bottom: 1rem solid var(--color-stroke);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+        .container:before {
+            width: 8rem;
+        }
+
+        &.invisible {
+            opacity: 0.5;
+            font-style: italic;
+            // &:after {
+            //     content: "\f070";
+            //     font-family: FontAwesome;
+            //     width: 12rem;
+            //     display: block;
+            //     position: absolute;
+            //     right: -12rem;
+            // }
+        }
+
+    }
+
+    .toggle {
+        &:before {
+            content: "\f054";
+            font-family: FontAwesome;
+            width: 20rem;
+            display: block;
+            position: absolute;
+            left: -21rem;
+            font-style: normal;
+            text-align: center;
+        }
+        cursor: pointer;
+    }
+
+    .container.expanded > .toggle:before {
+        content: "\f078";
+    }
+
+    .editing {
+        z-index: 1;
+        @include pseudo-fill($z: -1);
+        &:after {
+            left: calc(-1 * var(--depth) * 16rem - #{$padding});
+            right: -($padding - 1);
+            bottom: auto;
+            height: $line-height;
+            top: 0;
+        }
+
+    }
+
+    .contains-editing:not(.expanded):not(.editing) {
+        z-index: 1;
+        @include pseudo-fill($z: -1);
+        &:after {
+            left: calc(-1 * var(--depth) * 16rem - #{$padding});
+            right: -($padding - 1);
+            bottom: auto;
+            height: $line-height;
+            opacity: 0.1;
+        }
+    }
+
+}

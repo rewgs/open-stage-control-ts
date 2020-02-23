@@ -14,9 +14,9 @@ module.exports = function editField(editor, widget, propName, defaultValue){
         error = widget.errors[propName]
 
     let field = html`
-        <div class="input-wrapper ${widget.errors[propName] ? 'error' : ''} ${disabled ? 'disabled' : ''}" title="${locales('editor_click_for_help')}">
-            <label class="btn ${error ? 'error' : ''}">${propName}</label>
-        </div>
+        <osc-inspector-field class="${widget.errors[propName] ? 'error' : ''} ${disabled ? 'disabled' : ''}" title="${locales('editor_click_for_help')}">
+            <label class="${error ? 'error' : ''}">${propName}</label>
+        </osc-inspector-field>
     `
 
     let input
@@ -69,12 +69,14 @@ module.exports = function editField(editor, widget, propName, defaultValue){
                 }
             })
 
+            field.appendChild(input)
+
             if (defaultValue.type.includes('boolean')) {
 
                 let toggle = html`
-                   <span class="checkbox ${widget.getProp(propName) ? 'on' : ''}">
+                   <osc-inspector-checkbox class="${widget.getProp(propName) ? 'on' : ''}">
                        ${raw(icon('check'))}
-                   </span>
+                   </osc-inspector-checkbox>
                `
 
                 toggle.addEventListener('click', ()=>{
@@ -91,7 +93,6 @@ module.exports = function editField(editor, widget, propName, defaultValue){
 
             }
 
-            field.appendChild(input)
 
         }
         var lock,

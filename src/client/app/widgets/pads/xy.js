@@ -1,10 +1,16 @@
 var Pad = require('./pad'),
     Fader = require('./_fake_fader'),
     doubletab = require('../mixins/double_tap'),
-    Input = require('../inputs/input'),
     touchstate = require('../mixins/touch_state')
 
 var faderDefaults = Fader.defaults()._props()
+
+class XyFader extends Fader {
+
+    draw(){}
+    batchDraw(){}
+
+}
 
 module.exports = class Xy extends Pad {
 
@@ -31,7 +37,6 @@ module.exports = class Xy extends Pad {
             rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
             logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm\'s base.'},
             logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm\'s base.'},
-            input: {type: 'boolean', value: true, help: 'Set to false to hide the built-in input widget'},
             doubleTap: {type: 'boolean|string', value: false, help: [
                 'Set to `true` to make the fader reset to its default value when receiving a double tap.',
                 'Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>`'
@@ -46,13 +51,6 @@ module.exports = class Xy extends Pad {
                 'Can be set as an `object` to specify a different address : [\'/osc_address_x\', \'/osc_address_y\']',
                 'Note: the widget will only respond to its original osc address, not to the splitted version'
             ]},
-            css: {type: 'string', value: '', help: [
-                'Available CSS variables:',
-                '- `--background: background;`: sets the dragging area\'s background',
-                '- `--pips-color: color;`',
-                '- `--pips-opacity: number;`',
-                '- `--point-opacity: number;`',
-            ]}
 
         })
 
@@ -63,58 +61,36 @@ module.exports = class Xy extends Pad {
         super(options)
 
         this.faders = {
-            x: new Fader({props:{
+            x: new XyFader({props:{
                 ...faderDefaults,
                 id:0,
-                compact:true,
-                pips:false,
                 horizontal:true,
-                height:'100%',
-                width:'100%',
                 default:this.getProp('default').length === 2 ? this.getProp('default')[0] : '',
                 snap:this.getProp('snap'),
                 range:this.getProp('rangeX'),
-                origin:'auto',
                 precision:this.getProp('precision'),
                 logScale:this.getProp('logScaleX'),
                 sensitivity: this.getProp('sensitivity'),
-                input:false
-            }, cancelDraw: true, parent: this}),
-            y: new Fader({props:{
+            }, parent: this}),
+            y: new XyFader({props:{
                 ...faderDefaults,
                 id:1,
-                compact:true,
-                pips:false,
                 horizontal:false,
-                height:'100%',
-                width:'100%',
                 default:this.getProp('default').length === 2 ? this.getProp('default')[1] : '',
                 snap:this.getProp('snap'),
                 range:this.getProp('rangeY'),
-                origin:'auto',
                 precision:this.getProp('precision'),
                 logScale:this.getProp('logScaleY'),
                 sensitivity: this.getProp('sensitivity'),
-                input:false
-            }, cancelDraw: true, parent: this}),
+            }, parent: this}),
         }
 
-        this.faders.x.margin = this.faders.y.margin = this.pointSize + 1
-
-        this.value = [this.faders.x.value, this.faders.y.value]
-
-        this.wrapper.appendChild(this.faders.x.widget)
-        this.wrapper.appendChild(this.faders.y.widget)
-
-        this.faders.x.on('change',(e)=>{
+        this.on('change',(e)=>{
+            if (e.widget == this) return
             e.stopPropagation = true
         })
 
-        this.faders.y.on('change',(e)=>{
-            e.stopPropagation = true
-        })
-
-        touchstate(this, {element: this.wrapper})
+        touchstate(this, {element: this.canvas})
         this.active = false
 
         this.on('draginit',(e)=>{
@@ -123,13 +99,13 @@ module.exports = class Xy extends Pad {
             this.faders.x.trigger('draginit', e)
             this.faders.y.trigger('draginit', e)
             this.dragHandle()
-        }, {element: this.wrapper})
+        }, {element: this.canvas})
 
         this.on('drag',(e)=>{
             this.faders.x.trigger('drag', e)
             this.faders.y.trigger('drag', e)
             this.dragHandle()
-        }, {element: this.wrapper})
+        }, {element: this.canvas})
 
         this.on('dragend', (e)=>{
             e.stopPropagation = true
@@ -141,7 +117,7 @@ module.exports = class Xy extends Pad {
             } else {
                 this.batchDraw()
             }
-        }, {element: this.wrapper})
+        }, {element: this.canvas})
 
         if (this.getProp('doubleTap')) {
 
@@ -153,28 +129,13 @@ module.exports = class Xy extends Pad {
 
             } else {
 
-                doubletab(this.wrapper, ()=>{
+                doubletab(this.widget, ()=>{
                     this.faders.x.setValue(this.faders.x.getSpringValue(), {sync: false, send:false, dragged:true})
                     this.faders.y.setValue(this.faders.y.getSpringValue(), {sync: false, send:false, dragged:true})
                     this.setValue([this.faders.x.getSpringValue(),this.faders.y.getSpringValue()],{sync:true, send:true})
                 })
 
             }
-
-        }
-
-        if (this.getProp('input')) {
-
-            this.input = new Input({
-                props:{...Input.defaults()._props(), precision:this.getProp('precision'), unit:this.getProp('unit')},
-                parent:this, parentNode:this.widget
-            })
-            this.widget.appendChild(this.input.widget)
-            this.input.on('change', (e)=>{
-                e.stopPropagation = true
-                this.setValue(this.input.getValue(), {sync:true, send:true})
-                this.showValue()
-            })
 
         }
 
@@ -192,6 +153,19 @@ module.exports = class Xy extends Pad {
             this.setValue([x, y],{send:true,sync:true,dragged:true})
         } else {
             this.batchDraw()
+        }
+
+    }
+
+    resizeHandle(event){
+
+        super.resizeHandle(event)
+
+        for (var k in this.faders) {
+            this.faders[k].width = this.width
+            this.faders[k].height = this.height
+            this.faders[k].gaugePadding = this.padPadding
+
         }
 
     }
@@ -217,71 +191,96 @@ module.exports = class Xy extends Pad {
 
         this.batchDraw()
 
-        this.showValue()
-
     }
 
     draw() {
 
-        var pointSize = this.pointSize * PXSCALE,
-            margin = (this.pointSize + 1) * PXSCALE,
+        var pointSize = this.pointSize,
+            margin = this.padPadding,
             x = this.faders.x.percentToCoord(this.faders.x.percent),
             y = this.faders.y.percentToCoord(this.faders.y.percent)
 
         this.clear()
 
-        this.ctx.lineWidth = PXSCALE
-        this.ctx.fillStyle = this.colors.custom
+
+        this.ctx.fillStyle = this.cssVars.colorFill
+        this.ctx.globalAlpha = this.cssVars.alphaFillOn
+        this.ctx.beginPath()
+        this.ctx.arc(x, y, pointSize - 3 * PXSCALE, Math.PI * 2, false)
+        this.ctx.fill()
 
 
+
+
+        var pipsDrawn = false
         if (this.getProp('pips')) {
-            this.ctx.strokeStyle = this.colors.pips
-            this.ctx.globalAlpha = this.colors.pipsOpacity
+
+            var pipTexts = margin >= this.fontSize * 1.5
+
+            this.ctx.lineWidth = PXSCALE
+            this.ctx.fillStyle = this.colors.textFade
+            this.ctx.strokeStyle = this.cssVars.colorStroke
+            this.ctx.globalAlpha = 1
             this.ctx.beginPath()
-            for (var pip of this.faders.x.rangeKeys.concat(this.faders.x.valueToPercent(this.faders.x.originValue))) {
+
+            for (let i in this.faders.x.rangeKeys) {
+
+                let pip = this.faders.x.rangeKeys[i],
+                px = Math.round(0.5 * this.faders.x.percentToCoord(pip)) * 2
+
+                if (parseInt(px) === px) px -= 0.5
+
+                if (pipTexts) {
+                    this.ctx.textAlign = 'center'
+                    let label = this.faders.x.rangeLabels[i]
+                    this.ctx.fillText(label, px, this.height - margin / 2)
+                    pipsDrawn = true
+                }
+
                 if (pip == 0 || pip == 100) continue
-                var xpip = Math.round(2 * this.faders.x.percentToCoord(pip)) / 2
-                if (xpip === parseInt(xpip)) xpip -= 0.5
-                this.ctx.moveTo(xpip, margin)
-                this.ctx.lineTo(xpip, this.height - margin)
+                this.ctx.moveTo(px, margin)
+                this.ctx.lineTo(px, this.height - margin)
+                pipsDrawn = true
+
+
             }
-            for (pip of this.faders.y.rangeKeys.concat(this.faders.y.valueToPercent(this.faders.y.originValue))) {
+            for (let i in this.faders.y.rangeKeys) {
+
+                let pip = this.faders.y.rangeKeys[i],
+                py = Math.round(0.5 * this.faders.y.percentToCoord(pip)) * 2
+
+                if (parseInt(py) === py) py -= 0.5
+
+                if (pipTexts) {
+                    this.ctx.textAlign = 'right'
+                    let label = this.faders.y.rangeLabels[i]
+                    this.ctx.fillText(label, margin / 2 + this.fontSize / 2, py)
+                    pipsDrawn = true
+                }
+
                 if (pip == 0 || pip == 100) continue
-                var ypip = Math.round(2 * this.faders.y.percentToCoord(pip)) / 2
-                if (ypip === parseInt(ypip)) ypip -= 0.5
-                this.ctx.moveTo(margin, ypip)
-                this.ctx.lineTo(this.width - margin, ypip)
+                this.ctx.moveTo(margin, py)
+                this.ctx.lineTo(this.width - margin, py)
+                pipsDrawn = true
+
+
             }
+
+            this.ctx.globalAlpha = this.cssVars.alphaStroke
             this.ctx.stroke()
-
-        } else {
-
-            this.clearRect = [x - margin - PXSCALE, y - margin - PXSCALE, (margin + PXSCALE) * 2, (margin + PXSCALE) * 2]
-
         }
 
+        if (!pipsDrawn) this.clearRect = [x - this.pointSize - 2 * PXSCALE, y - this.pointSize - 2 * PXSCALE, (this.pointSize + PXSCALE) * 4, (this.pointSize + PXSCALE) * 4]
 
-        this.ctx.strokeStyle = this.colors.custom
-        this.ctx.globalAlpha = this.active ? 1 : 0.7
-        this.ctx.lineWidth = 2 * PXSCALE
+
+        this.ctx.strokeStyle = this.cssVars.colorStroke
+        this.ctx.globalAlpha = this.active ? 1 : 0.75
+        this.ctx.lineWidth = 1.5 * PXSCALE
         this.ctx.beginPath()
         this.ctx.arc(x, y, pointSize, Math.PI * 2, false)
         this.ctx.stroke()
 
 
-
-        this.ctx.fillStyle = this.colors.custom
-        this.ctx.globalAlpha = this.colors.pointOpacity
-        this.ctx.beginPath()
-        this.ctx.arc(x, y, pointSize / 1.5, Math.PI * 2, false)
-        this.ctx.fill()
-
-
-    }
-
-    showValue() {
-
-        if (this.getProp('input')) this.input.setValue(this.value)
 
     }
 
@@ -295,29 +294,12 @@ module.exports = class Xy extends Pad {
 
     }
 
-
-    onPropChanged(propName, options, oldPropValue) {
-
-        if (super.onPropChanged(...arguments)) return true
-
-        switch (propName) {
-
-            case 'color':
-                for (var w of [this.faders.x, this.faders.y]) {
-                    w.onPropChanged('color')
-                }
-                if (this.input) this.input.onPropChanged('color')
-                return
-
-        }
-
-    }
-
     onRemove() {
+
         this.faders.x.onRemove()
         this.faders.y.onRemove()
-        if (this.input) this.input.onRemove()
         super.onRemove()
+
     }
 
 }

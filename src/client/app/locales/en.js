@@ -12,7 +12,6 @@ module.exports = {
 
 
     // editor context-menu
-    editor_editparent: 'Edit parent',
     editor_copy: 'Copy',
     editor_cut: 'Cut',
     editor_wrap: 'Wrap in',

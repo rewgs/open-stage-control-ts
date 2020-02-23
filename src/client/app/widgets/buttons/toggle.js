@@ -16,8 +16,6 @@ class Toggle extends Widget {
 
             _toggle: 'toggle',
 
-            doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be toggled instead of a single tap'},
-            led: {type: 'boolean', value: false, help: 'Set to `true` to display the toggle\'s state with a led'},
             on: {type: '*', value: 1, help: [
                 'Set to `null` to send send no argument in the osc message',
                 'Can be an `object` if the type needs to be specified (see preArgs)'
@@ -25,7 +23,14 @@ class Toggle extends Widget {
             off: {type: '*', value: 0, help: [
                 'Set to `null` to send send no argument in the osc message',
                 'Can be an `object` if the type needs to be specified (see preArgs)'
-            ]}
+            ]},
+            mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'tap'], help: [
+                'Interraction mode:',
+                '- `toggle` (classic on/off switch)',
+                '- `push` (press & release)',
+                '- `tap` (no release)'
+            ]},
+            doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
 
         })
 
@@ -33,57 +38,112 @@ class Toggle extends Widget {
 
     constructor(options) {
 
-        super({...options, html: html`<div class="toggle"></div>`})
+        super({...options, html: html`<inner></inner>`})
 
         this.state = 0
         this.active = false
 
         if (this.getProp('led')) this.container.classList.add('led')
 
-        if (this.getProp('doubleTap')) {
+        var tap = this.getProp('mode') === 'tap',
+            push = this.getProp('mode') === 'push' || tap
 
-            doubletab(this.widget, ()=>{
-                var newVal = this.state?this.getProp('off'):this.getProp('on')
-                this.setValue(newVal,{sync:true,send:true})
-            })
+        if (push) {
+
+            if (this.getProp('doubleTap')) {
+
+                doubletab(this.container, ()=>{
+
+                    this.setValue(this.getProp('on'), {sync: true, send: true})
+
+                })
+
+            } else {
+
+                this.on('draginit',()=>{
+
+                    if (this.active) return
+
+                    this.active = true
+                    this.setValue(this.getProp('on'), {sync: true, send: true})
+
+                }, {element: this.container})
+
+            }
+
+            this.on('dragend',()=>{
+
+                this.active = false
+                this.setValue(this.getProp('off'), {sync: true, send: !tap})
+
+            }, {element: this.container})
 
         } else {
 
-            this.on('draginit',()=>{
-                if (this.active) return
-                this.active = true
-                var newVal = this.state?this.getProp('off'):this.getProp('on')
-                this.setValue(newVal,{sync:true,send:true})
-            }, {element: this.widget})
+            if (this.getProp('doubleTap')) {
 
-            this.on('dragend',()=>{
-                this.active = false
-            }, {element: this.widget})
+                doubletab(this.container, ()=>{
+
+                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true})
+
+                })
+
+            } else {
+
+                this.on('draginit',()=>{
+
+                    if (this.active) return
+
+                    this.active = true
+                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true})
+
+                }, {element: this.container})
+
+                this.on('dragend',()=>{
+
+                    this.active = false
+
+                }, {element: this.container})
+
+            }
 
         }
+
 
         this.value = this.getProp('off')
 
     }
 
+
+
     setValue(v,options={}) {
 
         if (typeof v == 'object' && v !== null) v = v.value
+
         if (v===this.getProp('on') || (this.getProp('on') != null && v === this.getProp('on').value && v !== undefined)) {
-            this.widget.classList.add('on')
+
             this.container.classList.add('on')
             this.state = 1
             this.value = this.getProp('on')
             if (options.send) this.sendValue()
+
         } else if (v===this.getProp('off') || (this.getProp('off') != null && v === this.getProp('off').value && v !== undefined)) {
-            this.widget.classList.remove('on')
+
             this.container.classList.remove('on')
             this.state = 0
             this.value = this.getProp('off')
             if (options.send) this.sendValue()
+
         }
 
         if (options.sync) this.changed(options)
+
+    }
+
+    onRemove() {
+
+        if (this.active && this.getProp('mode') === 'push') this.setValue(this.getProp('off'), {sync: true, send: true})
+        super.onRemove()
 
     }
 
@@ -91,7 +151,8 @@ class Toggle extends Widget {
 
 Toggle.dynamicProps = Toggle.prototype.constructor.dynamicProps.concat(
     'on',
-    'off'
+    'off',
+    'norelease'
 )
 
 module.exports = Toggle

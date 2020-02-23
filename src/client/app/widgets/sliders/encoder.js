@@ -2,32 +2,11 @@ var {clip} = require('../utils'),
     Knob = require('./knob'),
     Widget = require('../common/widget'),
     doubletab = require('../mixins/double_tap'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    StaticProperties = require('../mixins/static_properties')
 
 
-
-var EncoderKnob = class extends Knob {
-    draginitHandle(e) {
-
-        this.percent = clip(this.percent,[0,100])
-
-        this.lastOffsetX = e.offsetX
-        this.lastOffsetY = e.offsetY
-
-        if (!(e.traversing || this.getProp('snap'))) return
-
-        this.percent = this.angleToPercent(this.coordsToAngle(e.offsetX, e.offsetY))
-
-        this.setValue(this.percentToValue(this.percent), {send:true,sync:true,dragged:true, draginit:!e.traversing})
-
-    }
-    mousewheelHandle(){}
-}
-var DisplayKnob = class extends Knob {
-
-}
-
-module.exports = class Encoder extends Widget {
+module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range: {min: 0, max: 1}, sensitivity: 1, steps: ''}) {
 
     static description() {
 
@@ -37,11 +16,10 @@ module.exports = class Encoder extends Widget {
 
     static defaults() {
 
-        return super.defaults({
+        return Widget.defaults({
 
             _encoder: 'encoder',
 
-            compact: {type: 'boolean', value: false, help: 'Set to `true` to display a compact alternative for the widget.'},
             ticks: {type: 'number', value: 360, help: 'defines the granularity / verbosity of the encoder (number of step for a 360° arc)'},
             back: {type: '*', value: -1, help: 'Defines which value is sent when rotating the encoder anticlockwise'},
             forth: {type: '*', value: 1, help: 'Defines which value is sent when rotating the encoder clockwise'},
@@ -50,7 +28,11 @@ module.exports = class Encoder extends Widget {
                 '- Set to `null` to send send no argument in the osc message',
                 '- Can be an `object` if the type needs to be specified'
             ]},
-            snap: {type: 'boolean', value: false, help: 'By default, dragging the widget will modify it\'s value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position'},
+            mode: {type: 'string', value: 'circular', choices: ['circular', 'snap', 'vertical'], help: [
+                '- `circular`: relative move in circular motion',
+                '- `snap`: snap to touch position and move in vertical motion',
+                '- `vertical`: relative move in vertical motion',
+            ]},
             doubleTap: {type: 'boolean', value: false, help: [
                 'Set to `true` to make the fader reset to its `default` value when receiving a double tap.',
                 'Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)'
@@ -66,217 +48,213 @@ module.exports = class Encoder extends Widget {
 
     constructor(options) {
 
-        super({...options, html: html`
-            <div class="encoder">
-                <div class="wrapper">
-                </div>
-            </div>
-        `})
+        super(options)
 
-        this.wrapper = DOM.get(this.widget, '.wrapper')[0]
-        this.ticks = Math.abs(parseInt(this.getProp('ticks')) || 360)
+        this.previousPercent = 50
+        this.percent = 50
+        this.setValue(this.getProp('release'), {dragged: true})
 
-        this.knob = new EncoderKnob({props:{
-            label:false,
-            angle:360,
-            snap:true,
-            range:{min:0,max:this.ticks},
-            pips:false,
-        }, parent: this})
+    }
 
-        this.knob.batchDraw = ()=>{}
+    angleToPercent(angle, snap) {
 
-        this.display = new DisplayKnob({props:{
-            label:false,
-            angle:360,
-            range:{min:0,max:this.ticks},
-            origin:this.ticks/2,
-            pips:false,
-            compact: this.getProp('compact')
-        }, parent: this})
+        // knob.js without clipping
+        if (snap) return super.angleToPercent(angle)
 
-        this.knob.widget.classList.add('drag-knob')
-        this.display.widget.classList.add('display-knob')
+        var percent = angle - (360 - this.maxAngle) / 2 / this.maxAngle * 100
+        if (percent < 0) percent += 100
+        else if (percent > 100) percent -= 100
 
-        this.wrapper.appendChild(this.knob.widget)
-        this.wrapper.appendChild(this.display.widget)
+        return percent
 
-        this.knob.setValue(this.ticks/2)
-        this.display.setValue(this.ticks/2)
+    }
 
-        this.previousValue = this.ticks/2
+    percentToAngle(percent, snap) {
 
-        this.on('change',(e)=>{
+        // knob.js without clipping
+        if (snap) return super.percentToAngle(percent)
 
-            if (e.widget == this) return
+        return  2 * Math.PI * percent / 100 * (this.maxAngle / 360) // angle relative to maxAngle
+                + Math.PI / 2                                       // quarter circle offset
+                + Math.PI * (1 - this.maxAngle / 360)               // centering offset depending on maxAngle
 
-            e.stopPropagation = true
-
-            var value = this.knob.getValue()
-
-            var direction
-
-            if (value < this.previousValue)
-                direction = this.getProp('back')
-            if (value > this.previousValue)
-                direction = this.getProp('forth')
-
-            if ((this.ticks * .75 < value && value < this.ticks) && (0 < this.previousValue && this.previousValue < this.ticks / 4))
-                direction = this.getProp('back')
-            if ((0 < value && value < this.ticks / 4) && (this.ticks * .75 < this.previousValue && this.previousValue < this.ticks))
-                direction = this.getProp('forth')
+    }
 
 
-            if (direction !== undefined && (Math.round(value) != Math.round(this.previousValue))) this.setValue(direction, {sync:true, send:true, dragged: e.options.dragged, draginit: e.options.draginit})
+    draginitHandle(e) {
 
-            this.previousValue = value
+        // knob.js without clipping + extra case for snap
 
-        })
+        this.lastOffsetX = e.offsetX
+        this.lastOffsetY = e.offsetY
 
-        this.knob.on('draginit', (e)=>{
-            if (this.getProp('touchAddress') && this.getProp('touchAddress').length
-                && e.target == this.wrapper)
-                this.sendValue({
-                    address:this.getProp('touchAddress'),
-                    v:1
-                })
-        })
+        if (this.getProp('mode') === 'snap') {
 
-        this.knob.on('dragend', (e)=>{
-            if (this.getProp('release') !== '' && this.value !== this.getProp('release')) {
-                this.knob.setValue(this.ticks/2)
-                this.display.setValue(this.ticks/2)
-                this.setValue(this.getProp('release'), {sync:true, send:true, dragged:false})
-            }
-            if (
-                this.getProp('touchAddress') && this.getProp('touchAddress').length
-                && e.target == this.wrapper
-            ) {
-                this.sendValue({
-                    address:this.getProp('touchAddress'),
-                    v:0
-                })
-            }
-        })
-
-        if (this.getProp('doubleTap')) {
-
-            doubletab(this.wrapper, ()=>{
-                this.knob.setValue(this.ticks/2)
-                this.display.setValue(this.ticks/2)
-                if (this.getProp('release') !== '' && this.value !== this.getProp('release')) {
-                    this.setValue(this.getProp('release'), {sync:true, send:true, dragged:false})
-                }
-            })
+            this.setPercent(this.angleToPercent(this.coordsToAngle(e.offsetX, e.offsetY), true))
 
         }
 
-        this.wrapper.addEventListener('mousewheel', (e)=>{
 
-            if (e.wheelDeltaX || e.wheelDelta == 0) return
 
-            var direction = e.wheelDelta / Math.abs(e.wheelDelta)
+    }
 
-            this.display.setValue(this.display.value + direction)
-            this.setValue(direction < 0 ? this.getProp('back') : this.getProp('forth'), {sync:true, send:true})
+    dragHandle(e) {
 
-            if (this.getProp('release') !== '' && this.value !== this.getProp('release')) {
-                this.knob.setValue(this.ticks/2)
-                this.display.setValue(this.ticks/2)
-                this.setValue(this.getProp('release'), {sync:true, send:true, dragged:false})
+        // knob.js without clipping + extra case for snap
+
+        if ((this.getProp('mode') === 'vertical' && !e.traversing) || e.ctrlKey) {
+            // vertical
+            this.setPercent(-100 * (e.movementY / e.inertia * this.getProp('sensitivity')) / this.height + this.percent)
+
+        } else {
+            // snap or circular
+            var offsetX = this.lastOffsetX + e.movementX / e.inertia,
+                offsetY = this.lastOffsetY + e.movementY / e.inertia
+
+            if (true || e.traversing && this.getProp('mode') === 'circular') {
+                // circular
+                var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
+                if (Math.abs(diff) < 50 && diff !== 0) this.setPercent(this.percent + diff)
+
+            } else {
+
+                // snap
+                this.setPercent(this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true))
+
             }
+
+            this.lastOffsetX = offsetX
+            this.lastOffsetY = offsetY
+
+        }
+
+    }
+
+    dragendHandle(e, data, traversing) {
+
+        if (this.getProp('release') === '') return
+
+        this.previousPercent = 50
+        this.percent = 50
+        this.setValue(this.getProp('release'), {sync: true, send: true, dragged: true})
+
+    }
+
+    mousewheelHandle(e) {
+
+        if (e.wheelDeltaX) return
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        var direction = e.wheelDelta / Math.abs(e.wheelDelta),
+            increment = e.ctrlKey?0.25:1
+
+        this.setPercent(this.percent +  Math.max(increment, 10 / Math.pow(10, this.precision + 1)) * direction)
+
+    }
+
+    setPercent(percent) {
+
+        var div = 100 / this.getProp('ticks')
+        percent = Math.round(percent / div) * div
+
+        this.previousPercent = this.percent
+        this.percent = percent
+
+        if (this.percent === this.previousPercent) return
+
+        var dir = this.percent > this.previousPercent
+
+        if (
+            (this.percent >= 0 && this.percent < 25 && this.previousPercent > 75 && this.previousPercent <= 100) ||
+            (this.previousPercent >= 0 && this.previousPercent < 25 && this.percent > 75 && this.percent <= 100)
+
+        ) dir = !dir
+
+        var val = dir ? this.getProp('forth') : this.getProp('back')
+
+        this.setValue(val, {
+            sync: true,
+            send: true,
+            dragged: true,
         })
 
+    }
+
+    getSpringValue() {
+
+        return this.getProp('release')
 
     }
 
     setValue(v,options={}) {
 
-        if (this.getProp('snap') || (!this.getProp('snap') && !options.draginit)) {
+        if (options.fromLocal && v === this.getProp('release')) {
+            this.percent = 50
+            this.previousPercent = 50
+        } else if (
+            !options.dragged ||
+            (v !== this.getProp('forth') && v !== this.getProp('back') && (this.getProp('release') === '' && v !== this.getProp('release')))
 
-            var match = true
+        ) return
 
-            if (v === this.getProp('back')) {
-                this.value = this.getProp('back')
-            } else if (v === this.getProp('forth')) {
-                this.value = this.getProp('forth')
-            } else if (v === this.getProp('release') && this.getProp('release') !== '') {
-                this.value = this.getProp('release')
-            } else {
-                match = false
-            }
+        this.value = v
 
-        }
+        this.batchDraw()
 
-        if (options.sync && match) this.changed(options)
-        if (options.send && match && !(!this.getProp('snap') && options.draginit)) this.sendValue()
-
-        if (options.dragged || options.draginit) this.updateDisplay(options.draginit)
+        if (options.send) this.sendValue()
+        if (options.sync) this.changed(options)
 
     }
 
-    updateDisplay(init){
+    draw() {
 
-        if (this.getProp('snap')) {
-            this.display.setValue(this.knob.value)
-            return
+        var percent = this.percent,
+            d = this.percentToAngle(percent),
+            angle = 2 * Math.PI / 16,
+            min = this.percentToAngle(0),
+            max = this.percentToAngle(100),
+            minRadius = this.minDimension / 6,
+            maxRadius = this.minDimension / 2 - PXSCALE,
+            gaugeWidth = maxRadius - minRadius,
+            gaugeRadius = maxRadius - gaugeWidth / 2
+
+        this.clear()
+
+        // fill
+        this.ctx.globalAlpha = this.cssVars.alphaFill
+        this.ctx.strokeStyle = this.cssVars.colorFill
+        this.ctx.lineWidth = gaugeWidth - this.gaugePadding * 2
+
+        if (this.cssVars.alphaFillOff) {
+            this.ctx.globalAlpha = this.cssVars.alphaFillOff
+            this.ctx.beginPath()
+            this.ctx.arc(this.width / 2, this.height / 2, gaugeRadius, min, max)
+            this.ctx.stroke()
         }
 
-        if (init) {
-
-            this.offset = this.knob.value - this.display.value
-
-        } else {
-
-            var v = this.knob.value - this.offset,
-                updateOffset
-
-            if (v > this.ticks) {
-
-                v = this.ticks - v
-                updateOffset = true
-
-
-            } else if (v < 0) {
-
-                v = v + this.ticks
-                updateOffset = true
-
-            }
-
-            this.display.setValue(v)
-
-            if (updateOffset) {
-                this.offset = this.knob.value - this.display.value
-            }
+        if (this.cssVars.alphaFillOn) {
+            this.ctx.globalAlpha = this.cssVars.alphaFillOn
+            this.ctx.beginPath()
+            this.ctx.arc(this.width / 2, this.height / 2, gaugeRadius, d - angle, d + angle)
+            this.ctx.stroke()
         }
 
-        if (this.offset > this.ticks) this.offset = this.ticks - this.offset
-        if (this.offset < 0) this.offset = this.offset + this.ticks
+        // stroke
 
-    }
+        this.ctx.globalAlpha = this.cssVars.alphaStroke
+        this.ctx.strokeStyle = this.cssVars.colorStroke
+        this.ctx.lineWidth = PXSCALE
 
+        this.ctx.beginPath()
+        this.ctx.arc(this.width / 2, this.height / 2, minRadius, 0, 2 * Math.PI)
+        this.ctx.stroke()
 
-    onPropChanged(propName, options, oldPropValue) {
+        this.ctx.beginPath()
+        this.ctx.arc(this.width / 2, this.height / 2, maxRadius, 0, 2 * Math.PI)
+        this.ctx.stroke()
 
-        if (super.onPropChanged(...arguments)) return true
-
-        switch (propName) {
-
-            case 'color':
-                for (var w of [this.knob, this.display]) {
-                    w.onPropChanged('color')
-                }
-                return
-
-        }
-
-    }
-
-    onRemove() {
-        this.knob.onRemove()
-        this.display.onRemove()
-        super.onRemove()
     }
 
 }

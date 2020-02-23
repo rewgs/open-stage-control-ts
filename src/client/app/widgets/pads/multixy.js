@@ -50,14 +50,7 @@ module.exports = class MultiXy extends Pad {
                 'Can be set as an `object` to specify a different address : `[\'/0/x\', \'/0/y\', \'/1/x\', \'/2/y\']`',
                 'Note: the widget will only respond to its original osc address, not to the splitted version'
             ]},
-            css: {type: 'string', value: '', help: [
-                'Available CSS variables:',
-                '- `--background: background;`: sets the dragging area\'s background',
-                '- `--pips-color: color;`',
-                '- `--pips-opacity: number;`',
-                '- `--color-text: point-color;`',
-                'Pads can be targetted individually with the .pad-X selector (where X is the pad\'s index)',
-            ]}
+
         })
 
     }
@@ -88,9 +81,8 @@ module.exports = class MultiXy extends Pad {
                 sensitivity: this.getProp('sensitivity'),
                 input:false
             }, parent: this})
-            this.pads[i].sendValue = ()=>{}
-            this.pads[i].widget.classList.add('pad-' + i)
-            this.wrapper.appendChild(this.pads[i].widget)
+            this.pads[i].canvas.classList.add('pad-' + i)
+            this.widget.append(this.pads[i].canvas)
 
         }
 
@@ -100,7 +92,7 @@ module.exports = class MultiXy extends Pad {
         this.padsCoords = []
         this.touchMap = {}
 
-        touchstate(this, {element: this.wrapper, multitouch: true})
+        touchstate(this, {element: this.widget, multitouch: true})
 
         this.on('draginit',(e)=>{
 
@@ -134,7 +126,7 @@ module.exports = class MultiXy extends Pad {
 
             this.pads[id].trigger('draginit', e)
 
-        }, {element: this.wrapper, multitouch: true})
+        }, {element: this.widget, multitouch: true})
 
         this.on('drag',(e)=>{
 
@@ -144,7 +136,7 @@ module.exports = class MultiXy extends Pad {
 
             this.pads[i].trigger('drag', e)
 
-        }, {element: this.wrapper[0], multitouch: true})
+        }, {element: this.widget, multitouch: true})
 
         this.on('dragend',(e)=>{
 
@@ -158,7 +150,7 @@ module.exports = class MultiXy extends Pad {
 
             delete this.touchMap[e.pointerId]
 
-        }, {element: this.wrapper, multitouch: true})
+        }, {element: this.widget, multitouch: true})
 
         this.on('change',(e)=>{
             if (e.widget == this) return
@@ -176,9 +168,16 @@ module.exports = class MultiXy extends Pad {
 
     }
 
-    resizeHandle() {
+    resizeHandle(event){
 
-        super.resizeHandle(...arguments)
+        super.resizeHandle(event)
+
+        for (var k in this.pads) {
+            this.pads[k].width = this.width
+            this.pads[k].height = this.height
+            this.pads[k].padPadding = this.padPadding
+        }
+
         this.updateHandlesPosition()
 
     }
@@ -199,7 +198,7 @@ module.exports = class MultiXy extends Pad {
         this.clear()
 
         for (var i=0;i<this.npoints;i++) {
-            var margin = (this.pointSize + 1) * PXSCALE,
+            var margin = this.padPadding,
                 x = clip(this.pads[i].faders.x.percent,[0,100]) / 100 * (this.width - 2 * margin) + margin,
                 y = (100 - clip(this.pads[i].faders.y.percent,[0,100])) / 100 * (this.height - 2 * margin) + margin,
                 t = (this.labels ? this.getProp('points')[i] : i) + '',
@@ -207,7 +206,7 @@ module.exports = class MultiXy extends Pad {
 
             this.ctx.globalAlpha = 1
             this.ctx.fillStyle = this.pads[i].colors.text
-            this.ctx.fillText(t, x + 0.5 * PXSCALE, y + 0.5 * PXSCALE)
+            this.ctx.fillText(t, x + 0.5 * PXSCALE, y + PXSCALE)
 
             this.clearRect[i] = [x - length / 2, y - this.fontSize / 2, length, this.fontSize + 2 * PXSCALE]
 
@@ -273,9 +272,14 @@ module.exports = class MultiXy extends Pad {
 
         switch (propName) {
 
-            case 'color':
+            case 'colorWidget':
+            case 'colorFill':
+            case 'colorStroke':
+            case 'alphaStroke':
+            case 'alphaFillOff':
+            case 'alphaFillOn':
                 for (var w of this.pads) {
-                    w.onPropChanged('color')
+                    w.onPropChanged(propName)
                 }
                 return
 
