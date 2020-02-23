@@ -1,0 +1,299 @@
+.toggle-container, .push-container {
+
+    --alpha-fill-off: 0;
+    --alpha-fill-on: .75;
+    --widget-padding: -1rem;
+
+    inner {
+
+        position: absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        margin: calc(var(--widget-spacing) / 2);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        @include pseudo-stroke();
+        @include pseudo-fill();
+
+    }
+
+    > label {
+
+        flex: 1;
+        max-height: initial;
+        text-align: center;
+        pointer-events:none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        color: var(--color-text);
+
+
+    }
+
+    &.on {
+
+        --alpha-fill:var(--alpha-fill-on);
+
+        label {
+            color: var(--color-foreground)
+        }
+
+    }
+
+}
+
+.switch-container {
+
+    --alpha-fill: 0.75;
+
+    inner {
+
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        @include pseudo-stroke();
+
+    }
+
+    &.horizontal inner {
+
+        flex-direction: row;
+
+    }
+
+    value {
+
+        position: relative;
+        z-index: 1;
+        padding: 4rem;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-overflow: clip;
+        overflow: hidden;
+
+        &.on {
+            @include pseudo-fill($z: -1);
+            color: var(--color-foreground);
+        }
+
+    }
+
+}
+
+.menu-container {
+
+    --alpha-fill: 0.75;
+    --widget-padding: 1rem;
+
+    border-radius: 0!important; // border radius breaks it somehow
+    z-index: initial!important;
+    contain: style size;
+
+    --size: 300rem;
+    --grid-columns: 2;
+    overflow: hidden;
+
+    inner {
+        flex:1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        @include pseudo-stroke();
+
+        padding: 4rem;
+        &:after {
+            content:"\f0d7";
+            font-family: FontAwesome;
+            position: absolute;
+            color: var(--color-stroke);
+            right: calc(var(--widget-padding) + 8rem);
+            margin-top: -1rem;
+            font-size: 120%;
+            opacity: var(--alpha-fill)
+        }
+    }
+
+    menu {
+
+        // animation: menu-widget-fade .1s forwards;
+
+        position: fixed;
+        z-index: 999999999;
+
+
+        overflow: hidden;
+
+        background: var(--color-foreground);
+
+        @include pseudo-stroke($z: 2);
+        &:before {
+            border-width: 1rem;
+        }
+
+
+        .item {
+
+            z-index: 1;
+            overflow: hidden;
+            div {
+                text-align: center;
+                pointer-events: none;
+            }
+
+        }
+
+    }
+
+    &.circular menu {
+
+        border-radius: 100%;
+        width:var(--size);
+        height:var(--size);
+        margin-left: calc(var(--x) - var(--size) / 2);
+        margin-top: calc(var(--y) - var(--size) / 2);
+
+        &:after {
+            content:"";
+            position: absolute;
+            width: calc(var(--size) / 4 - 12rem);
+            height: calc(var(--size) / 4 - 12rem);
+            top:50%;
+            left: 50%;
+            margin-left: calc(-1 * var(--size) / 8 + 6rem);
+            margin-top: calc(-1 * var(--size) / 8 + 6rem);
+            background: var(--color-foreground);
+            box-shadow: 0 0 0 2rem var(--color-foreground), 0 0 0 3rem var(--color-stroke);
+            border-radius: 100%;
+            z-index: 10;
+            opacity: var(--alpha-stroke);
+        }
+
+        .item {
+            top: calc(-1 * var(--size) / 2);
+            left: calc(-1 * var(--size) / 2);
+            width: 100%;
+            height: 100%;
+            transform-origin: 100% 100%;
+            position: absolute;
+            box-shadow: 0 0 0 2rem var(--color-foreground);
+
+
+            div {
+                position: absolute;
+                bottom:  0;
+                right: 0;
+                &:before {
+                    content:"";
+                    position: absolute;
+                    width: calc(var(--size) / 4);
+                    height: calc(var(--size) / 4);
+                    left: calc(-1 * var(--size) / 8);
+                    top: calc(-1 * var(--size) / 8);
+                    border-radius: 100%;
+                    pointer-events: none;
+                    box-shadow: 0 0 0 4rem var(--color-fill);
+                    opacity: 0;
+                }
+            }
+
+            &.on {
+                color: var(--color-fill);
+            }
+
+            &.on div:before {
+                opacity: var(--alpha-fill)!important;
+            }
+            &.active div:before, &:hover div:before {
+                opacity: calc(var(--alpha-fill) / 2);
+            }
+
+
+            span {
+                position: absolute;
+                top: calc(-1 * var(--size) / 3);
+                width: calc(var(--size) / 2);
+                margin-left: calc(-1 * var(--size) / 4);
+            }
+
+        }
+
+
+    }
+
+    &.box menu {
+
+        width:var(--size-box-w);
+        height:var(--size-box-h);
+        margin-left: calc(var(--x) - var(--size-box-w) / 2);
+        margin-top: calc(var(--y) - var(--size-box-h) / 2);
+        // top:var(--size-box-h);
+        // margin-top: 0;
+
+        display: flex;
+
+        flex-direction: row;
+        padding: calc(var(--widget-padding) / 2 + 1rem);
+
+        .item {
+            position: relative;
+            margin: calc(var(--widget-padding) / 2);
+
+
+            div {
+                @include pseudo-fill($z: -1);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                flex: 1;
+                &:after {
+                    opacity: 0;
+                    margin: 0;
+                    top:0;left:0;right:0;bottom:0;
+                }
+            }
+
+            &.on {
+                color: var(--color-foreground);
+                div:after {
+                    opacity: var(--alpha-fill)!important;
+                }
+            }
+
+            &.active, &:hover {
+                div:after, div:after {
+                    opacity: calc(var(--alpha-fill) / 2);
+                }
+            }
+
+
+        }
+
+    }
+
+    &.grid.on menu {
+
+        display: grid;
+        grid-template-columns: repeat(var(--grid-columns), 1fr);
+
+    }
+
+    &.vertical menu {
+
+        flex-direction: column;
+
+    }
+
+}

@@ -1,4 +1,6 @@
-var Widget = require('./widget')
+var Widget = require('./widget'),
+    resize = require('../../events/resize')
+
 
 class CanvasQueue {
 
@@ -65,12 +67,13 @@ class Canvas extends Widget {
 
         super(options)
 
-        this.canvas = DOM.get(this.widget, 'canvas')[0]
+        this.canvas = DOM.get(this.container, 'canvas')[0]
 
         this.ctx = this.canvas.getContext('2d',{
             desynchronized: true,
             lowLatency: true,
-            alpha: true
+            alpha: true,
+            preserveDrawingBuffer: true // avoid flickering
         })
 
         this.height = undefined
@@ -82,6 +85,7 @@ class Canvas extends Widget {
         this.visible = false
 
         this.colors = {}
+        this.cssVars = {}
 
         this.on('resize', this.resizeHandleProxy.bind(this), {element: this.canvas})
 
@@ -121,13 +125,27 @@ class Canvas extends Widget {
 
         if (!this.visible) this.visible = true
 
-        requestAnimationFrame(this.draw.bind(this))
+        this.batchDraw()
 
     }
 
     cacheCanvasStyle(style){
 
         style = style || window.getComputedStyle(this.canvas)
+
+        this.cssVars.padding = parseFloat(style.getPropertyValue('--widget-padding')) * PXSCALE // rem unit
+
+        this.cssVars.colorWidget = style.getPropertyValue('--color-widget')
+        this.cssVars.colorFill = style.getPropertyValue('--color-fill')
+        this.cssVars.colorStroke = style.getPropertyValue('--color-stroke')
+        this.cssVars.colorForeground = style.getPropertyValue('--color-foreground')
+
+        this.cssVars.alphaStroke = parseFloat(style.getPropertyValue('--alpha-stroke'))
+        this.cssVars.alphaFillOff = parseFloat(style.getPropertyValue('--alpha-fill-off'))
+        this.cssVars.alphaFillOn = parseFloat(style.getPropertyValue('--alpha-fill-on'))
+
+
+
 
         this.colors.custom = style.getPropertyValue('--color-custom')
         this.colors.track = style.getPropertyValue('--color-track')
@@ -188,11 +206,20 @@ class Canvas extends Widget {
 
         switch (propName) {
 
-            case 'color':
-                this.cacheCanvasStyle()
-                this.batchDraw()
+            case 'css':
+            case 'colorWidget':
+            case 'colorFill':
+            case 'colorStroke':
+            case 'alphaStroke':
+            case 'alphaFillOff':
+            case 'alphaFillOn':
+                setTimeout(()=>{
+                    this.cacheCanvasStyle()
+                    this.batchDraw()
+                },10)
                 return
-
+            case 'padding':
+                resize.check(this.widget)
         }
 
         return ret

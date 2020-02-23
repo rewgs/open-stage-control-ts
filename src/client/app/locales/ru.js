@@ -11,7 +11,6 @@ module.exports = { // @https://github.com/suhr
     editor_export: 'Export',
 
     // editor context-menu
-    editor_editparent: 'К родителю',
     editor_copy: 'Копировать',
     editor_cut: 'Вырезать',
     editor_wrap: 'Обернуть в',

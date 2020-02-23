@@ -19,8 +19,29 @@
 </head>
 
 <body>
-    <div id="container"></div>
-    <div id="sidepanel" class="hide">
+    <osc-workspace>
+        <osc-panel-container class="left">
+            <div class="resize-handle left"></div>
+            <div class="toggle-button left"></div>
+            <osc-panel-inner class="left">
+                <osc-panel-header>Project</osc-panel-header>
+                <osc-panel-content class="left" id="osc-tree"></osc-panel-content>
+            </osc-panel-inner>
+        </osc-panel-container>
+        <osc-panel-container class="center">
+            <osc-panel-inner id="osc-container"></osc-panel-inner>
+        </osc-panel-container>
+        <osc-panel-container class="right">
+            <div class="resize-handle right"></div>
+            <div class="toggle-button right"></div>
+            <osc-panel-inner class="right">
+                <osc-panel-header>Inspector</osc-panel-header>
+                <osc-panel-content  class="right" id="osc-inspector"></osc-panel-content>
+            </osc-panel-inner>
+        </osc-panel-container>
+        <osc-modal-container></osc-modal-container>
+    </osc-workspace>
+    <div style="display:none" class="hide">
         <div id="sidepanel-wrapper"></div>
         <div id="sidepanel-handle"></div>
     </div>

@@ -12,7 +12,7 @@ $text: white;
     --color-text-fade: #{transparentize($text, .6)};
 
     --color-accent: #{$accent};
-    --color-grid:  #{transparentize($accent, 0.95)};
+    // --color-grid: #{transparentize($accent, 0.95)};
 
     --color-bg: #{$base};
     --color-track: #{desaturate(mix($base, $tone, 95), 2)};
@@ -37,7 +37,27 @@ $text: white;
 
     --nav-height:40rem;
     --sidepanel-size:300rem;
-    --scrollbar-size:20rem;
 
     --grid-width:10;
+
+
+
+    --color-foreground: #{$base};
+    --color-background: #{mix($base, black, 85)};
+    --color-grid: rgba(0,0,0, 0.1);
+
+    --color-context-menu: #{mix($base, white, 95)};
+    --color-context-menu-text: #{transparentize($text, .2)};
+
+    --alpha-scrollbar: 0.25;
+    --alpha-scrollbar-on: 0.5;
+    --scrollbar-size:12rem;
+
+    --color-text: #{transparentize($text, .4)};
+
+    --color-widget: var(--color-accent);
+
+
+
+
 }

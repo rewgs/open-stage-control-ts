@@ -16,8 +16,7 @@ module.exports = class Input extends Canvas {
 
             _input:'input',
 
-            vertical: {type: 'boolean', value: false, help: 'Set to `true` to display the text vertically'},
-            align: {type: 'string', value: '', help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
+            align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
             unit: {type: 'string', value: '', help: 'Unit will be appended to the displayed widget\'s value (it doesn\'t affect osc messages)'},
             editable: {type: 'boolean', value: true, help: 'Set to `false` to make the input non-editable'},
             asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'}
@@ -29,9 +28,9 @@ module.exports = class Input extends Canvas {
     constructor(options) {
 
         super({...options, html: html`
-            <div class="input">
+            <inner>
                 <canvas></canvas>
-            </div>
+            </inner>
         `})
 
         this.value = ''
@@ -104,17 +103,17 @@ module.exports = class Input extends Canvas {
 
         super.resizeHandle(event)
 
-        if (this.getProp('vertical')){
-
-            var ratio = CANVAS_SCALING * this.scaling
-
-            this.ctx.setTransform(1, 0, 0, 1, 0, 0)
-            this.ctx.rotate(-Math.PI/2)
-            this.ctx.translate(-this.height * ratio, 0)
-
-
-            if (ratio != 1) this.ctx.scale(ratio, ratio)
-        }
+        // if (this.getProp('vertical')){
+        //
+        //     var ratio = CANVAS_SCALING * this.scaling
+        //
+        //     this.ctx.setTransform(1, 0, 0, 1, 0, 0)
+        //     this.ctx.rotate(-Math.PI/2)
+        //     this.ctx.translate(-this.height * ratio, 0)
+        //
+        //
+        //     if (ratio != 1) this.ctx.scale(ratio, ratio)
+        // }
 
 
     }
@@ -138,8 +137,8 @@ module.exports = class Input extends Canvas {
     draw() {
 
         var v = this.stringValue,
-            width = this.getProp('vertical') ? this.height : this.width,
-            height = !this.getProp('vertical') ? this.height : this.width
+            width = this.width,
+            height = this.height
 
         if (this.getProp('unit') && v.length) v += ' ' + this.getProp('unit')
 

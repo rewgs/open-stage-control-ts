@@ -6,7 +6,7 @@ class ContextMenu {
     constructor(){
 
         this.menu = null
-        this.root = document.body
+        this.root = DOM.get('osc-workspace')[0]
         this.clickHandler = (e)=>{
             if (this.menu && !this.menu.contains(e.target)) this.close()
         }
@@ -116,12 +116,12 @@ class ContextMenu {
         if (width + position.left > totalWidth) {
             menu.style.right = parent ? '100%' : '0'
             menu.style.left = 'auto'
-            menu.style.marginRight = '2rem'
+            menu.style.marginRight = '1rem'
         }
 
         if (height + position.top > totalHeight) {
             menu.style.top = 'auto'
-            menu.style.bottom = '2rem'
+            menu.style.bottom = '0rem'
         }
 
     }

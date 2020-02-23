@@ -23,7 +23,12 @@ module.exports = class Switch extends Widget {
                 '`Array` of possible values to switch between : `[1,2,3]`',
                 '`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
             ]},
-            traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},
+            mode: {type: 'string', value: 'tap', choices: ['tap', 'slide', 'click'], help: [
+                'Interraction mode:',
+                '- `tap`: activates when the pointer is down but prevents further scrolling',
+                '- `slide`: same as `tap` but allows sliding between values',
+                '- `click`: activates upon click only and allows further scrolling',
+            ]},
 
         })
 
@@ -31,10 +36,9 @@ module.exports = class Switch extends Widget {
 
     constructor(options) {
 
-        super({...options, html: html`<div class="switch"></div>`})
+        super({...options, html: html`<inner></inner>`})
 
-
-        if (this.getProp('horizontal')) this.widget.classList.add('horizontal')
+        if (this.getProp('horizontal')) this.container.classList.add('horizontal')
 
         this.values = []
         this.stringValues = []
@@ -61,7 +65,7 @@ module.exports = class Switch extends Widget {
             if (this.getProp('showValues') && !isArray) label = label + ': ' + (this.stringValues[this.stringValues.length - 1] || values[k])
 
             this.widget.appendChild(html`
-                <div class="value"> ${raw(iconify(label))}</div>
+                <value> ${raw(iconify(label))}</value>
             `)
 
         }
@@ -92,10 +96,15 @@ module.exports = class Switch extends Widget {
 
         }
 
-        this.on('draginit', dragCallback , {element: this.widget})
-        this.on('drag', (e)=>{
-            if (this.getProp('traversing') || e.traversing) dragCallback(e, true)
-        } , {element: this.widget})
+        if (this.getProp('mode') === 'tap' || this.getProp('mode') === 'slide') {
+            this.on('draginit', dragCallback , {element: this.widget})
+            this.on('drag', (e)=>{
+                if (this.getProp('mode') === 'slide' || e.traversing) dragCallback(e, true)
+            } , {element: this.widget})
+        } else {
+            this.widget.addEventListener('click', dragCallback)
+
+        }
 
     }
 
@@ -109,7 +118,7 @@ module.exports = class Switch extends Widget {
 
         if (i!=-1) {
             this.value = this.values[i]
-            DOM.get(this.widget, '.value')[i].classList.add('on')
+            DOM.get(this.widget, 'value')[i].classList.add('on')
             if (options.send) this.sendValue(this.value)
             if (options.sync) this.changed(options)
         } else {

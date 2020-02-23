@@ -1,5 +1,5 @@
 var {clip} = require('../utils'),
-    Widget = require('../common/widget'),
+    Canvas = require('../common/canvas'),
     Fader = require('./fader'),
     Input = require('../inputs/input'),
     touchstate = require('../mixins/touch_state'),
@@ -7,172 +7,7 @@ var {clip} = require('../utils'),
 
 var faderDefaults = Fader.defaults()._props()
 
-var RangeFader = class RangeFader extends Fader {
-
-    constructor(options) {
-
-        super(options)
-        this.cancelDraw = options.cancelDraw
-
-    }
-
-    sendValue() {}
-
-    draginitHandle() {
-
-        this.percent = clip(this.percent,[
-            this.valueToPercent(this.rangeValsMin),
-            this.valueToPercent(this.rangeValsMax)
-        ])
-
-        super.draginitHandle(...arguments)
-    }
-
-    draw() {
-
-        if (this.cancelDraw || !this.parent.faders) return
-
-        var width = this.getProp('horizontal') ? this.height : this.width,
-            height = !this.getProp('horizontal') ? this.height : this.width
-
-        var d = Math.round(this.percentToCoord(this.valueToPercent(this.parent.faders[this.getProp('horizontal')?0:1].value))),
-            d2 = Math.round(this.percentToCoord(this.valueToPercent(this.parent.faders[this.getProp('horizontal')?1:0].value))),
-            m = Math.round(this.getProp('horizontal') ? this.height / 2 : this.width / 2)
-
-        var dashed = this.getProp('dashed')
-
-        this.clear()
-
-        if (this.getProp('compact')) {
-
-            this.ctx.globalAlpha = this.colors.gaugeOpacity || (dashed ? .3 : .2)  + 0.2 * Math.abs(d-d2) / height
-            this.ctx.strokeStyle = this.colors.gauge
-            this.ctx.beginPath()
-            this.ctx.moveTo(m, d2)
-            this.ctx.lineTo(m, d)
-            this.ctx.lineWidth = width + 2 * PXSCALE
-            if (dashed) this.ctx.setLineDash([PXSCALE, PXSCALE])
-            this.ctx.stroke()
-            if (dashed) this.ctx.setLineDash([])
-
-            this.ctx.globalAlpha = 1
-            this.ctx.beginPath()
-            this.ctx.fillStyle = this.colors.knob
-            this.ctx.rect(0, Math.min(d, height - PXSCALE), width, PXSCALE)
-            this.ctx.rect(0, Math.min(d2, height - PXSCALE), width, PXSCALE)
-            this.ctx.fill()
-
-            this.clearRect = [0, 0, width, height]
-
-        } else {
-
-            this.ctx.lineWidth = 6 * PXSCALE
-
-            this.ctx.beginPath()
-            this.ctx.globalAlpha = 1
-            this.ctx.strokeStyle = this.colors.light
-            this.ctx.moveTo(m, this.margin * PXSCALE - 2 * PXSCALE)
-            this.ctx.lineTo(m, height - this.margin * PXSCALE + 2 * PXSCALE)
-            this.ctx.stroke()
-
-            this.ctx.lineWidth = 4 * PXSCALE
-
-            this.ctx.beginPath()
-            this.ctx.globalAlpha = 1
-            this.ctx.strokeStyle = this.colors.bg
-            this.ctx.moveTo(m, this.margin * PXSCALE - 1 * PXSCALE)
-            this.ctx.lineTo(m, height - this.margin * PXSCALE + 1 * PXSCALE)
-            this.ctx.stroke()
-
-            this.ctx.lineWidth = 2 * PXSCALE
-
-            this.ctx.beginPath()
-            this.ctx.strokeStyle = this.colors.track
-            this.ctx.moveTo(m, this.margin * PXSCALE)
-            this.ctx.lineTo(m, height - this.margin * PXSCALE)
-            this.ctx.stroke()
-
-            this.ctx.beginPath()
-            this.ctx.globalAlpha = 0.7
-            this.ctx.strokeStyle = this.colors.gauge
-            this.ctx.moveTo(m, d2)
-            this.ctx.lineTo(m, d)
-            if (dashed) this.ctx.setLineDash([PXSCALE, PXSCALE])
-            this.ctx.stroke()
-            if (dashed) this.ctx.setLineDash([])
-
-            this.ctx.globalAlpha = 1
-
-            // high knob bg
-
-            this.ctx.beginPath()
-            this.ctx.rect(m - 9 * PXSCALE, d - 14 * PXSCALE, 18 * PXSCALE, 16 * PXSCALE)
-            this.ctx.lineWidth = PXSCALE
-            this.ctx.fillStyle = this.colors.bg
-            this.ctx.fill()
-
-            // low knob bg
-
-            this.ctx.beginPath()
-            this.ctx.rect(m - 9 * PXSCALE, d2 - PXSCALE, 18 * PXSCALE, 16 * PXSCALE)
-            this.ctx.lineWidth = PXSCALE
-            this.ctx.fillStyle = this.colors.bg
-            this.ctx.fill()
-
-            // high knob
-
-            this.ctx.beginPath()
-            this.ctx.rect(m - 8 * PXSCALE, d - 13 * PXSCALE, 16 * PXSCALE, 14 * PXSCALE)
-            this.ctx.fillStyle = this.colors.raised
-            this.ctx.fill()
-            this.ctx.lineWidth = PXSCALE
-
-            this.ctx.beginPath()
-            this.ctx.rect(m - 7.5 * PXSCALE, d - 12.5 * PXSCALE, 15 * PXSCALE, 13.5 * PXSCALE)
-            this.ctx.lineWidth = PXSCALE
-            this.ctx.strokeStyle = this.colors.light
-            this.ctx.stroke()
-
-            this.ctx.beginPath()
-            this.ctx.rect(m - 8 * PXSCALE, d - 13 * PXSCALE, 16 * PXSCALE, PXSCALE)
-            this.ctx.lineWidth = PXSCALE
-            this.ctx.fillStyle = this.colors.light
-            this.ctx.fill()
-
-            this.ctx.beginPath()
-            this.ctx.rect(m - 4 * PXSCALE, d, 8 * PXSCALE, PXSCALE)
-            this.ctx.fillStyle = this.colors.knob
-            this.ctx.fill()
-
-            // low knob
-
-            this.ctx.beginPath()
-            this.ctx.rect(m - 8 * PXSCALE, d2, 16 * PXSCALE, 14 * PXSCALE)
-            this.ctx.fillStyle = this.colors.raised
-            this.ctx.fill()
-            this.ctx.lineWidth = PXSCALE
-
-            this.ctx.beginPath()
-            this.ctx.rect(m - 7.5 * PXSCALE, d2, 15 * PXSCALE, 13.5 * PXSCALE)
-            this.ctx.lineWidth = PXSCALE
-            this.ctx.strokeStyle = this.colors.light
-            this.ctx.stroke()
-
-            this.ctx.beginPath()
-            this.ctx.rect(m - 4 * PXSCALE, d2, 8 * PXSCALE, PXSCALE)
-            this.ctx.fillStyle = this.colors.knob
-            this.ctx.fill()
-
-
-
-            this.clearRect = [width / 2 - 11 * PXSCALE, 0, 22 * PXSCALE, height]
-        }
-    }
-
-}
-
-
-class Range extends Widget {
+class Range extends Fader {
 
     static description() {
 
@@ -180,94 +15,43 @@ class Range extends Widget {
 
     }
 
-    static defaults() {
-
-        return super.defaults({
-
-            _range:'range',
-
-            range: {type: 'object', value: {min:0,max:1}, help: 'See fader\'s `range`'},
-            horizontal: {type: 'boolean', value: false, help: 'See fader\'s `horizontal`'},
-            alignRight: {type: 'boolean', value: false, help: 'See fader\'s `alignRight`'},
-            input: {type: 'boolean', value: true, help: 'See fader\'s `input`'},
-            compact: {type: 'boolean', value: false, help: 'See fader\'s `compact`'},
-            pips: {type: 'boolean', value: true, help: 'See fader\'s `pips`'},
-            snap: {type: 'boolean', value: false, help: 'See fader\'s `snap`'},
-            spring: {type: 'boolean', value: false, help: 'See fader\'s `spring`'},
-            logScale: {type: 'boolean', value: false, help: 'See fader\'s `logScale`'},
-            sensitivity: {type: 'number', value: 1, help: 'See fader\'s `sensitivity`'},
-
-        }, [], {
-
-            touchAddress: {type: 'string', value: '', help: 'See fader\'s `touchAddress`'},
-            split: {type: 'boolean|object', value: false, help: [
-                'Set to `true` to send separate osc messages for `low` and `high` handles. The `address` will be the same as the widget\'s with `/low` or `/high` appended to it',
-                'Can be set as an object to specify a different `address` : `[\'/osc_address_low\', \'/osc_address_high\']`',
-                'Note: the widget will only respond to its original osc address, not to the splitted version'
-            ]},
-            css: {type: 'string', value: '', help: [
-                'Available CSS variables:',
-                '- `--color-gauge: color;`',
-                '- `--color-knob: color;`',
-                '- `--color-pips: color;`',
-                '- `--gauge-opacity: number;`'
-            ]}
-
-        })
-
-    }
-
     constructor(options) {
 
+        options.multitouch = true
+
         super({...options, html: html`
-            <div class="range">
-                <div class="wrapper"></div>
-            </div>
+            <canvas></canvas>
         `})
 
-        this.wrapper = DOM.get(this.widget, '.wrapper')[0]
-
         this.faders = [
-            new RangeFader({props:{
+            new Fader({props:{
                 ...faderDefaults,
-                compact:this.getProp('compact'),
                 pips:false,
-                alignRight:false,
+                visible: false,
                 horizontal:this.getProp('horizontal'),
-                height:'100%',
-                width:'100%',
                 default:this.getProp('default').length === 2 ? this.getProp('default')[0] : this.getProp('range').min,
                 snap:this.getProp('snap'),
                 spring:this.getProp('spring'),
                 range:this.getProp('range'),
-                origin:'auto',
                 precision:this.getProp('precision'),
                 logScale:this.getProp('logScale'),
                 sensitivity:this.getProp('sensitivity'),
-                input:false
-            }, cancelDraw: true, parent: this}),
-            new RangeFader({props:{
+            }, parent: this}),
+            new Fader({props:{
                 ...faderDefaults,
-                compact:this.getProp('compact'),
-                pips:this.getProp('pips'),
-                alignRight:this.getProp('alignRight'),
+                pips:false,
+                visible: false,
                 horizontal:this.getProp('horizontal'),
-                height:'100%',
-                width:'100%',
                 default:this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
                 snap:this.getProp('snap'),
                 spring:this.getProp('spring'),
                 range:this.getProp('range'),
-                origin:'auto',
                 precision:this.getProp('precision'),
                 logScale:this.getProp('logScale'),
                 sensitivity:this.getProp('sensitivity'),
-                input:false
-            }, cancelDraw: false, parent: this})
+            }, parent: this})
         ]
 
-        this.wrapper.appendChild(this.faders[0].widget)
-        this.wrapper.appendChild(this.faders[1].widget)
 
         this.on('change',(e)=>{
 
@@ -286,110 +70,6 @@ class Range extends Widget {
 
         this.touchMap = {}
 
-        touchstate(this, {element: this.wrapper, multitouch: true})
-
-        this.on('draginit',(e)=>{
-
-            var id
-
-            if (!this.touchMap[e.pointerId]) {
-
-                var ndiff, diff = -1
-
-                for (var i in this.faders) {
-
-                    if (Object.values(this.touchMap).indexOf(i) != -1) continue
-
-                    var coord = this.faders[i].percentToCoord(this.faders[i].valueToPercent(this.faders[i].value)) - (this.getProp('horizontal') ? -1 : 1) * (i == 0 ? -20 : 20)
-
-                    ndiff = this.getProp('horizontal')?
-                        Math.abs(e.offsetX - coord) :
-                        Math.abs(e.offsetY - coord)
-
-                    if (diff == -1 || ndiff < diff) {
-                        id = i
-                        diff = ndiff
-                    }
-
-                }
-
-                this.touchMap[e.pointerId] = id
-
-
-            } else if (e.traversing) {
-
-                id = this.touchMap[e.pointerId]
-
-            }
-
-            if (!id) return
-
-            e.stopPropagation = true
-            this.faders[id].trigger('draginit', e)
-
-        }, {element: this.wrapper, multitouch: true})
-
-        this.on('drag',(e)=>{
-
-            var i = this.touchMap[e.pointerId]
-
-            if (!i) return
-
-            if (e.shiftKey) {
-                this.faders[0].trigger('drag', e)
-                this.faders[1].trigger('drag', e)
-            } else {
-                this.faders[i].trigger('drag', e)
-            }
-
-        }, {element: this.wrapper, multitouch: true})
-
-        this.on('dragend',(e)=>{
-
-            var i = this.touchMap[e.pointerId]
-
-            if (!i) return
-
-            e.stopPropagation = true
-            this.faders[i].trigger('dragend', e)
-            delete this.touchMap[e.pointerId]
-
-        }, {element: this.wrapper, multitouch: true})
-
-        if (this.getProp('input')) {
-
-            this.input = new Input({
-                props:{...Input.defaults()._props(),
-                    precision:this.getProp('precision'),
-                    unit:this.getProp('unit'),
-                    vertical: this.getProp('compact') && !this.getProp('horizontal')
-                },
-                parent:this, parentNode:this.widget,
-            })
-            this.widget.appendChild(this.input.widget)
-            this.input.on('change', (e)=>{
-                e.stopPropagation = true
-                this.setValue(this.input.getValue(), {sync:true, send:true})
-                this.showValue()
-            })
-
-        }
-
-
-        if (this.getProp('horizontal')) {
-            this.widget.classList.add('horizontal')
-            this.container.classList.add('horizontal')
-        }
-        if (this.getProp('alignRight') && !this.getProp('horizontal')) {
-            this.widget.classList.add('align-right')
-        }
-        if (this.getProp('compact')) {
-            this.widget.classList.add('compact')
-        }
-        if (this.getProp('pips')) {
-            this.widget.classList.add('has-pips')
-        }
-
         this.setValue([
             this.faders[0].rangeValsMin,
             this.faders[1].rangeValsMax
@@ -397,7 +77,96 @@ class Range extends Widget {
 
     }
 
+    resizeHandle(event){
+
+        super.resizeHandle(event)
+
+        for (var f of this.faders) {
+            f.width = this.width
+            f.height = this.height
+            f.gaugePadding = this.gaugePadding
+        }
+
+    }
+
+    draginitHandle(e) {
+
+        var id
+
+        if (!this.touchMap[e.pointerId]) {
+
+            var ndiff, diff = -1
+
+            for (var i in this.faders) {
+
+                if (Object.values(this.touchMap).indexOf(i) != -1) continue
+
+                var coord = this.faders[i].percentToCoord(this.faders[i].valueToPercent(this.faders[i].value)) - (this.getProp('horizontal') ? -1 : 1) * (i == 0 ? -20 : 20)
+
+                ndiff = this.getProp('horizontal')?
+                    Math.abs(e.offsetX - coord) :
+                    Math.abs(e.offsetY - coord)
+
+                if (diff == -1 || ndiff < diff) {
+                    id = i
+                    diff = ndiff
+                }
+
+            }
+
+            this.touchMap[e.pointerId] = id
+
+
+        } else if (e.traversing) {
+
+            id = this.touchMap[e.pointerId]
+
+        }
+
+        if (!id) return
+
+        for (var f of this.faders) {
+            f.percent = clip(f.percent,[
+                f.valueToPercent(f.rangeValsMin),
+                f.valueToPercent(f.rangeValsMax)
+            ])
+        }
+
+
+        e.stopPropagation = true
+        this.faders[id].trigger('draginit', e)
+
+    }
+
+    dragHandle(e) {
+
+        var i = this.touchMap[e.pointerId]
+
+        if (!i) return
+
+        if (e.shiftKey) {
+            this.faders[0].trigger('drag', e)
+            this.faders[1].trigger('drag', e)
+        } else {
+            this.faders[i].trigger('drag', e)
+        }
+
+    }
+
+    dragendHandle(e) {
+
+        var i = this.touchMap[e.pointerId]
+
+        if (!i) return
+
+        e.stopPropagation = true
+        this.faders[i].trigger('dragend', e)
+        delete this.touchMap[e.pointerId]
+
+    }
+
     setValue(v, options={}) {
+
         if (!v || !v.length || v.length!=2) return
 
 
@@ -408,7 +177,6 @@ class Range extends Widget {
             this.faders[0].setValue(v[0])
             this.faders[1].setValue(v[1])
         }
-
         this.value = [
             this.faders[0].getValue(),
             this.faders[1].getValue()
@@ -418,16 +186,7 @@ class Range extends Widget {
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
 
-        this.faders[1].batchDraw()
-
-        this.showValue()
-
-
-    }
-
-    showValue() {
-
-        if (this.getProp('input')) this.input.setValue(this.value)
+        this.batchDraw()
 
     }
 
@@ -441,32 +200,91 @@ class Range extends Widget {
 
     }
 
-    onPropChanged(propName, options, oldPropValue) {
+    draw() {
 
-        if (super.onPropChanged(...arguments)) return true
 
-        switch (propName) {
+        var width = this.getProp('horizontal') ? this.height : this.width,
+            height = !this.getProp('horizontal') ? this.height : this.width,
+            fader = this.faders[0]
 
-            case 'color':
-                for (var w of this.faders) {
-                    w.onPropChanged('color')
-                }
-                return
+        var d = Math.round(fader.percentToCoord(fader.valueToPercent(this.faders[this.getProp('horizontal')?0:1].value))),
+            d2 = Math.round(fader.percentToCoord(fader.valueToPercent(this.faders[this.getProp('horizontal')?1:0].value))),
+            m = Math.round(this.getProp('horizontal') ? this.height / 2 : this.width / 2)
 
+        // sharp border trick
+        if (width % 2 && parseInt(m) === m) m -= 0.5
+
+        var dashed = this.getProp('dashed')
+
+        this.clear()
+
+        this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
+        this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
+
+        if (this.cssVars.alphaFillOff) {
+            this.ctx.globalAlpha = this.cssVars.alphaFillOff
+            this.ctx.beginPath()
+            this.ctx.moveTo(m, height - this.gaugePadding)
+            this.ctx.lineTo(m, this.gaugePadding)
+            this.ctx.stroke()
         }
+
+        if (dashed) {
+            this.ctx.lineDashOffset = d % 2 ? PXSCALE : 0 // avoid flickering
+            this.ctx.setLineDash([PXSCALE, PXSCALE])
+        }
+
+        if (this.cssVars.alphaFillOn) {
+            this.ctx.globalAlpha = this.cssVars.alphaFillOn
+            this.ctx.beginPath()
+            this.ctx.moveTo(m, d)
+            this.ctx.lineTo(m, d2)
+            this.ctx.stroke()
+        }
+
+        if (dashed) this.ctx.setLineDash([])
+
+        this.ctx.globalAlpha = this.cssVars.alphaStroke
+        this.ctx.strokeStyle = this.cssVars.colorStroke
+
+        this.ctx.beginPath()
+        this.ctx.moveTo(0, 0)
+        this.ctx.lineTo(width, 0)
+        this.ctx.lineTo(width, height)
+        this.ctx.lineTo(0, height)
+        this.ctx.closePath()
+        this.ctx.lineWidth = 2 * PXSCALE
+        this.ctx.stroke()
+
+
+        this.ctx.globalAlpha = 1
+        this.ctx.fillStyle = this.cssVars.colorFill
+
+        this.ctx.beginPath()
+        this.ctx.rect(this.gaugePadding, Math.min(d, height - 3 * PXSCALE), width - this.gaugePadding * 2, PXSCALE)
+        this.ctx.fill()
+
+        this.ctx.beginPath()
+        this.ctx.rect(this.gaugePadding, Math.min(d2, height - 3 * PXSCALE), width - this.gaugePadding * 2, PXSCALE)
+        this.ctx.fill()
+
+        this.clearRect = [0, 0, width, height]
 
     }
 
     onRemove() {
+
         this.faders[0].onRemove()
         this.faders[1].onRemove()
-        if (this.input) this.input.onRemove()
         super.onRemove()
+
     }
 
 }
 
 
-Range.dynamicProps = Range.prototype.constructor.dynamicProps.filter(n => n !== 'precision')
+Range.dynamicProps = Range.prototype.constructor.dynamicProps
+    .filter(n => !['spring', 'precision'].includes(n))
+
 
 module.exports = Range

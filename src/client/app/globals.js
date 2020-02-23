@@ -33,9 +33,4 @@ window.JSON.parseFlex = require('json5').parse
 
 window.DOM = require('./dom')
 
-window.$ = require('jquery/dist/jquery.slim.min.js')
-
-require('../libs/jquery.ui')
-require('../libs/jquery.touch')
-
 require('cardinal-spline-js/curve.min.js')

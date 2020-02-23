@@ -45,13 +45,15 @@ class Widget extends EventEmitter {
 
         var defaults = {
 
+            _widget:'widget',
+
             type: {type: 'string', value: 'auto', help: ''},
             id: {type: 'string', value: 'auto', help: 'Widgets sharing the same `id` will act as clones and update each other\'s value(s) without sending extra osc messages.' },
-            linkId: {type: 'string|array', value: '', help: [
-                'Widgets sharing the same `linkId` update each other\'s value(s) AND send their respective osc messages.',
-                'When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)',
-                'When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending)'
+            label: {type: 'string|boolean', value: 'auto', help: [
+                'Set to `false` to hide completely',
+                'Insert icons using the prefix ^ followed by the icon\'s name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)'
             ]},
+            visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},
 
             _geometry:'geometry',
 
@@ -68,17 +70,29 @@ class Widget extends EventEmitter {
 
             _style:'style',
 
-            label: {type: 'string|boolean', value: 'auto', help: [
-                'Set to `false` to hide completely',
-                'Insert icons using the prefix ^ followed by the icon\'s name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)'
-            ]},
-            color: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+
+            colorWidget: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            colorStroke: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            colorFill: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            alphaStroke: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            alphaFillOff: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            alphaFillOn: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+
+            padding: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+
+
+
             css: {type: 'string', value: '', help: 'CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/css-tips/">documentation</a>.'},
 
             _value: 'value',
 
             default: {type: '*', value: '', help: 'If set, the widget will be initialized with this value when the session is loaded.'},
-            value: {type: '*', value: '', help: 'Define the widget\'s value depending on other widget\'s values / properties using property inheritance and property maths'},
+            value: {type: '*', value: '', help: 'Define the widget\'s value depending on other widget\'s values / properties using the advanced property syntax'},
+            linkId: {type: 'string|array', value: '', help: [
+                'Widgets sharing the same `linkId` update each other\'s value(s) AND send their respective osc messages.',
+                'When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)',
+                'When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending)'
+            ]},
 
             _osc: 'osc',
 
@@ -118,7 +132,8 @@ class Widget extends EventEmitter {
         }
 
         for (var m in push) {
-            alterDefaults[m] = push[m]
+            if (!alterDefaults[m]) alterDefaults[m] = []
+            Object.assign(alterDefaults[m], push[m])
         }
 
         alterDefaults._props = function() {
@@ -167,19 +182,15 @@ class Widget extends EventEmitter {
             this.precision = Math.min(20,Math.max(this.getProp('precision', undefined, false),0))
         }
 
-        if (options.container) {
 
-            this.container = html`
-                <div class="widget ${options.props.type}-container" id="${this.hash}" data-widget="${this.hash}"></div>
-            `
-            this.label = html`<div class="label"></div>`
-            this.container.appendChild(this.label)
-            this.container.appendChild(this.widget)
-            this.container._widget_instance = this
-            this.setContainerStyles()
-        } else {
-            this.container = dummyDOM
-        }
+        this.container = html`
+            <div class="widget ${options.props.type}-container" id="${this.hash}" data-widget="${this.hash}"></div>
+        `
+        this.label = html`<label></label>`
+        if (this.getProp('label') !== false) this.container.appendChild(this.label)
+        if (this.widget) this.container.appendChild(this.widget)
+        this.container._widget_instance = this
+        this.setContainerStyles()
 
     }
 
@@ -586,35 +597,9 @@ class Widget extends EventEmitter {
                 propValue = propValue.replace(/#\{(?:[^{}]|\{[^{}]*\})*\}/g, (m)=>{
                     // one bracket nesting allowed, if we need two: #\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}
 
-                    // if (!this.mathjsDeprecationWarned) {
-                    //     this.mathjsDeprecationWarned = true
-                    //     ipc.send('error', `Warning: Widget#${this.getProp('id')} MathJS syntax (#{}) is deprecated and will be removed in the future. Consider using the Javascript syntax instead.`)
-                    // }
+                    //TODO: js one-liner
 
-                    // unescape brackets (not needed anymore, just here for backward compatibility)
-                    m = m.replace(/\\(\{|\})/g, '$1')
-
-                    // espace multiline strings
-                    m = m.replace(/`([^`]*)`/g, (m)=>{
-                        return m.replace(/"/g,'\\"').replace(/\n/g,'\\n').replace(/`/g,'"')
-                    })
-
-                    if (!this.parsers[m]) this.parsers[m] = math.compile(m.substr(2, m.length - 3).trim())
-
-                    for (var k in defaultScope) {
-                        if (mathscope[k] === undefined) mathscope[k] = defaultScope[k]
-                    }
-
-                    let r = this.parsers[m].eval(mathscope)
-
-                    if (r instanceof math.type.ResultSet && !r.entries.length) {
-                        r = ''
-                    } else if (typeof r === 'object' && r !== null && r.valueOf) {
-                        r = r.valueOf()
-                        if (Array.isArray(r) && r.length == 1) r = r[0]
-                    }
-
-                    return typeof r != 'string' ? JSON.stringify(r) : r
+                    return ''
                 })
             } catch (err) {
                 console.log((this.getProp('id') || this.props.id) + '.' + propName + ': #{} error:\n' + err)
@@ -758,6 +743,11 @@ class Widget extends EventEmitter {
                 resize.check(this.container)
                 return
 
+            case 'visible':
+                this.setContainerStyles(['visibility'])
+                resize.check(this.container)
+                return
+
             case 'label':
                 this.setContainerStyles(['label'])
                 if (oldPropValue === false || this.getProp('label') === false) {
@@ -774,7 +764,13 @@ class Widget extends EventEmitter {
                 }
                 return
 
-            case 'color':
+            case 'colorWidget':
+            case 'colorFill':
+            case 'colorStroke':
+            case 'alphaStroke':
+            case 'alphaFillOff':
+            case 'alphaFillOn':
+            case 'padding':
                 this.setContainerStyles(['color'])
                 return
 
@@ -808,11 +804,16 @@ class Widget extends EventEmitter {
 
     }
 
-    setContainerStyles(styles = ['geometry', 'label', 'css', 'color']) {
+    setContainerStyles(styles = ['geometry', 'label', 'css', 'color', 'visibility']) {
+
+        if (styles.includes('visibility')) {
+            this.container.style.display = this.getProp('visible') ? '' : 'none'
+        }
 
         if (styles.includes('geometry')) {
 
             // geometry
+            var absolutePos = false
             for (let d of ['width', 'height', 'top', 'left']) {
                 let val = this.getProp(d),
                     geometry
@@ -827,9 +828,12 @@ class Widget extends EventEmitter {
                     this.container.style[d] = geometry
                     if (d === 'width') this.container.style.minWidth = geometry
                     if (d === 'height') this.container.style.minHeight = geometry
-                    this.container.classList.toggle('absolute-position', geometry && (d === 'top' || d === 'left'))
+                    absolutePos = absolutePos || geometry && (d === 'top' || d === 'left')
+
                 }
             }
+            this.container.classList.toggle('absolute-position', absolutePos)
+
 
         }
 
@@ -838,6 +842,7 @@ class Widget extends EventEmitter {
             // label
             if (this.getProp('label') === false) {
                 this.container.classList.add('nolabel')
+                this.label.innerHTML = ''
             } else {
                 this.container.classList.remove('nolabel')
                 var label = this.getProp('label') == 'auto'?
@@ -845,6 +850,7 @@ class Widget extends EventEmitter {
                     iconify(this.getProp('label'))
 
                 this.label.innerHTML = label
+                this.container.appendChild(this.label)
             }
 
         }
@@ -925,9 +931,17 @@ class Widget extends EventEmitter {
         if (styles.includes('color')) {
 
             // color
-            this.container.style.setProperty('--color-custom', this.getProp('color') && this.getProp('color') != 'auto' ? this.getProp('color') : '')
+            this.container.style.setProperty('--color-widget', this.getProp('colorWidget') != 'auto' ? this.getProp('colorWidget') : '')
+            this.container.style.setProperty('--color-fill', this.getProp('colorFill') != 'auto' ? this.getProp('colorFill') : '')
+            this.container.style.setProperty('--color-stroke', this.getProp('colorStroke') != 'auto' ? this.getProp('colorStroke') : '')
+            this.container.style.setProperty('--alpha-stroke', this.getProp('alphaStroke') != 'auto' ? parseFloat(this.getProp('alphaStroke')) : '')
+            this.container.style.setProperty('--alpha-fill-on', this.getProp('alphaFillOn') != 'auto' ? parseFloat(this.getProp('alphaFillOn')) : '')
+            this.container.style.setProperty('--alpha-fill-off', this.getProp('alphaFillOff') != 'auto' ? parseFloat(this.getProp('alphaFillOff')) : '')
+            this.container.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
 
         }
+
+        return style
 
 
     }
@@ -951,14 +965,26 @@ class Widget extends EventEmitter {
 Widget.parsersContexts = {}
 
 Widget.dynamicProps = [
+    'visible',
+    'label',
+
     'top',
     'left',
     'height',
     'width',
-    'label',
+
+
+    'colorWidget',
+    'colorFill',
+    'colorStroke',
+    'alphaStroke',
+    'alphaFillOff',
+    'alphaFillOn',
+    'padding',
     'css',
+
     'value',
-    'color',
+
     'precision',
     'address',
     'preArgs',

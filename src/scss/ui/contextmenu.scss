@@ -1,0 +1,60 @@
+$line-height: 30rem;
+
+.context-menu {
+
+    position:fixed;
+    z-index: 999999999;
+    background: var(--color-context-menu);
+    box-shadow: 0 0 0 1rem rgba(0, 0, 0, 0.1) inset;
+    text-transform: none;
+    color: var(--color-context-menu-text);
+    line-height: $line-height;
+    --widget-padding: 0rem;
+
+    .context-menu {
+        position: absolute;
+        left:100%;
+        top:0;
+        opacity:0;
+        pointer-events: none;
+        margin-left: 1rem;
+        &:before {
+            content:"";
+            position: absolute;
+            top:0;
+            bottom:0;
+            left:-2rem;
+            width:2rem;
+        }
+    }
+    > .item {
+        padding-left: 15rem;
+        padding-right: 25rem;
+        position:relative;
+        cursor: pointer;
+        i {
+            margin-right:5rem;
+            width: 15rem;
+            text-align: center;
+            margin-left: -5rem;
+        }
+        &.focus, &:focus {
+            > .context-menu {
+                pointer-events: auto;
+                opacity: 1;
+            }
+            @include pseudo-fill($z: -1);
+            color: var(--color-context-menu);
+        }
+        &.has-sub:before {
+            content:"\f105";
+            display: block;
+            font-family: FontAwesome;
+            float:right;
+            margin-right:-20rem;
+            width: 15rem;
+            text-align: center;
+            position: relative;
+        }
+    }
+}

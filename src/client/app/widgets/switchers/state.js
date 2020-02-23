@@ -1,6 +1,6 @@
 var Widget = require('../common/widget'),
-    Push = require('../buttons/push'),
-    pushDefaults = Push.defaults()._props(),
+    Toggle = require('../buttons/toggle'),
+    pushDefaults = Toggle.defaults()._props(),
     html = require('nanohtml'),
     stateManager = require('../../managers/state'),
     widgetManager = require('../../managers/widgets'),
@@ -53,8 +53,8 @@ class State extends Widget {
 
         if (this.getProp('horizontal')) this.widget.classList.add('horizontal')
 
-        this.saveButton = new Push({props: {...pushDefaults, type: 'push', label: this.getProp('saveLabel')}, parent: this, container: true})
-        this.loadButton = new Push({props: {...pushDefaults, type: 'push', label: this.getProp('loadLabel')}, parent: this, container: true})
+        this.saveButton = new Toggle({props: {...pushDefaults, type: 'toggle', mode: 'push', label: this.getProp('saveLabel')}, parent: this, container: true})
+        this.loadButton = new Toggle({props: {...pushDefaults, type: 'toggle', mode: 'push', label: this.getProp('loadLabel')}, parent: this, container: true})
 
         this.saveButton.container.classList.add('not-editable', 'value')
         this.loadButton.container.classList.add('not-editable', 'value', 'disabled')

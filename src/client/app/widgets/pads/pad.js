@@ -6,17 +6,12 @@ class Pad extends Canvas {
     constructor(options) {
 
         super({...options, html: html`
-            <div class="pad">
-                <div class="wrapper">
-                    <canvas></canvas>
-                </div>
-            </div>
+            <inner>
+                <canvas></canvas>
+            </inner>
         `})
 
-        this.wrapper = DOM.get(this.widget, '.wrapper')[0]
-
-        this.pointSize = parseInt(this.getProp('pointSize'))
-        this.widget.style.setProperty('--pointSize', this.pointSize + 'rem')
+        this.canvas.style.setProperty('--pointSize', parseInt(this.getProp('pointSize')) + 'rem')
 
     }
 
@@ -26,9 +21,8 @@ class Pad extends Canvas {
 
         super.cacheCanvasStyle(style)
 
-        this.colors.pips = style.getPropertyValue('--color-pips') || this.colors.custom
-        this.colors.pipsOpacity = style.getPropertyValue('--pips-opacity')
-        this.colors.pointOpacity = style.getPropertyValue('--point-opacity')
+        this.pointSize = parseFloat(style.getPropertyValue('--pointSize')) * PXSCALE
+        this.padPadding = (this.cssVars.padding + PXSCALE)
 
     }
 

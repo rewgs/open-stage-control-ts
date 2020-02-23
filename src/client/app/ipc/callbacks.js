@@ -93,11 +93,11 @@ module.exports = {
 
         setTimeout(()=>{
             var root = widgetManager.getWidgetById('root')[0]
-            if (root) root.reCreateWidget()
-        },100)
+            if (root) root.onPropChanged('color')
+        },200)
 
 
-        GRIDWIDTH =  getComputedStyle(document.documentElement).getPropertyValue('--grid-width')
+        GRIDWIDTH =  parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
     },
 
     readOnly: function(){
@@ -132,8 +132,6 @@ module.exports = {
                 history: editor.history,
                 historyState: editor.historyState,
                 editorEnabled: editor.enabled,
-                sidepanelOpened: document.getElementById('sidepanel').classList.contains('sidepanel-open'),
-                traversing: document.getElementById('container')._traversing
             })
 
             // reload page and hold backup id
