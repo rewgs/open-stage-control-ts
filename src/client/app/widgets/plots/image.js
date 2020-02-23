@@ -57,7 +57,7 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
 
         if (!s.length) {
 
-            this.value = this.getProp('value')
+            this.value = this.getProp('default')
 
         } else if (s != 'reload') {
 

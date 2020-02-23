@@ -1,5 +1,6 @@
 var urlparser   = require('url'),
     path        = require('path'),
+    fs          = require('fs'),
     send        = require('send'),
     http        = require('http'),
     server      = http.createServer(httpRoute),
@@ -16,7 +17,9 @@ var urlparser   = require('url'),
 function httpRoute(req, res) {
 
     res.sendFile = (path)=>{
-        send(req, path.split('?')[0]).pipe(res)
+        var fpath = path.split('?')[0]
+        if (!fs.existsSync(fpath)) throw `File "${fpath}" not found.`
+        send(req, fpath).pipe(res)
     }
 
     var url = req.url
