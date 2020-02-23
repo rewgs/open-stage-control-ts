@@ -249,6 +249,7 @@ $(document).ready(()=>{
         new MenuItem({
             label: 'List Devices',
             click: ()=>{
+                settings.write('midi', argv.midi)
                 terminal.show()
                 midilist()
             }
