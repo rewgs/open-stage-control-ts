@@ -39,13 +39,13 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
         super({...options, html: html`
             <inner>
-                <iframe src="" sandbox="allow-scripts"></iframe>
+                <iframe class="frame" src="" sandbox="allow-scripts"></iframe>
             </inner>`
         })
 
         if (!this.getProp('border')) this.container.classList.add('noborder')
 
-        this.frame = DOM.get(this.widget, 'iframe')[0]
+        this.frame = DOM.get(this.widget, '.frame')[0]
         this.errorText = html`<span>${locales('iframe_unauthorized')}<span>`
         this.errorTextMounted = false
 

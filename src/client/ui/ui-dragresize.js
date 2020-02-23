@@ -41,7 +41,7 @@ class UiDragResize extends UiWidget {
 
         this.on('draginit', (event)=>{
 
-            var node = event.target
+            var node = event.firstTarget
             if (!this.handles.includes(node)) return
 
             this.initLeft = this.left
@@ -51,7 +51,7 @@ class UiDragResize extends UiWidget {
 
             this.container.classList.add('dragging')
             this.dragging = node.getAttribute('data-action').split(',')
-            event.traversing = false // stop traversing here
+            event.traversing = false
 
         }, {element: this.container})
 
@@ -82,6 +82,9 @@ class UiDragResize extends UiWidget {
 
 
         this.on('dragend', (event)=>{
+
+            var node = event.firstTarget
+            if (!this.handles.includes(node)) return
 
             this.container.classList.remove('dragging')
             this.left = Math.max(0, this.left)

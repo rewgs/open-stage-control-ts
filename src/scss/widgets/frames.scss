@@ -1,0 +1,20 @@
+.image-container,
+.html-container,
+.svg-container,
+.frame-container {
+
+    inner {
+        position: relative;
+        flex: 1;
+        display: flex;
+        padding: var(--widget-padding);
+        background-clip: content-box;
+
+        @include pseudo-stroke();
+    }
+
+    .frame {
+        flex: 1;
+    }
+
+}

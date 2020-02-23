@@ -108,10 +108,10 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         } else {
             // snap or circular
-            var offsetX = this.lastOffsetX + e.movementX / e.inertia,
-                offsetY = this.lastOffsetY + e.movementY / e.inertia
+            var offsetX = this.lastOffsetX + e.movementX,
+                offsetY = this.lastOffsetY + e.movementY
 
-            if (true || e.traversing && this.getProp('mode') === 'circular') {
+            if (e.traversing || this.getProp('mode') === 'circular') {
                 // circular
                 var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
                 if (Math.abs(diff) < 50 && diff !== 0) this.setPercent(this.percent + diff)

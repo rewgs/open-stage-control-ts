@@ -40,13 +40,18 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
 
     constructor(options) {
 
-        super({...options, html: html`<inner></inner>`})
+        super({...options, html: html`
+            <inner>
+                <div class="frame"></div>
+            </inner>
+        `})
 
         if (!this.getProp('border')) this.container.classList.add('noborder')
+        this.frame = DOM.get(this.widget, '.frame')[0]
 
-        this.widget.style.setProperty('background-size', this.getProp('size'))
-        this.widget.style.setProperty('background-position', this.getProp('position'))
-        this.widget.style.setProperty('background-repeat', this.getProp('repeat'))
+        this.frame.style.setProperty('background-size', this.getProp('size'))
+        this.frame.style.setProperty('background-position', this.getProp('position'))
+        this.frame.style.setProperty('background-repeat', this.getProp('repeat'))
 
     }
 
@@ -82,9 +87,9 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
 
 
         if (url) {
-            this.widget.style.setProperty('background-image', `url("${url}${cache_query}")`)
+            this.frame.style.setProperty('background-image', `url("${url}${cache_query}")`)
         } else {
-            this.widget.style.setProperty('background-image', '')
+            this.frame.style.setProperty('background-image', '')
         }
 
         if (options.sync) this.changed(options)

@@ -27,8 +27,6 @@ class Panel extends Container() {
 
         }, [], {
 
-            _children:'children',
-
             widgets: {type: 'array', value: [], help: 'Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously.'},
             tabs: {type: 'array', value: [], help: 'Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously'},
 

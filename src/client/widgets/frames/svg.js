@@ -34,9 +34,11 @@ class Svg extends StaticProperties(Widget, {bypass: true}) {
 
         super({...options, html: html`
             <inner>
-                <svg></svg>
+                <svg class="frame"></svg>
             </inner>
         `})
+
+        this.frame = DOM.get(this.widget, '.frame')[0]
 
         this.height = undefined
         this.width = undefined
@@ -58,12 +60,11 @@ class Svg extends StaticProperties(Widget, {bypass: true}) {
         svg = svg.replace(/([0-9.]+%y)/gi, m=>(parseFloat(m) * this.height / 100).toFixed(2))
 
 
-        var newSvg = html`<svg></svg>`,
-            node = html`<div class="svg">${newSvg}</div>`
+        var node = this.frame.cloneNode(false)
 
-        newSvg.innerHTML = svg
+        node.innerHTML = svg
 
-        morph(this.widget, node)
+        morph(this.frame, node)
 
     }
 

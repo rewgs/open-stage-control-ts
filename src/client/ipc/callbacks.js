@@ -94,10 +94,10 @@ module.exports = {
         setTimeout(()=>{
             var root = widgetManager.getWidgetById('root')[0]
             if (root) root.onPropChanged('color')
+            GRIDWIDTH =  parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
         },200)
 
 
-        GRIDWIDTH =  parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
     },
 
     readOnly: function(){

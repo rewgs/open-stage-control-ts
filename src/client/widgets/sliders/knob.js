@@ -15,11 +15,15 @@ module.exports = class Knob extends Slider {
 
             _knob:'knob',
 
+            mode: {type: 'string', value: 'circular', choices: ['circular', 'snap', 'vertical'], help: [
+                '- `circular`: relative move in circular motion',
+                '- `snap`: snap to touch position and move in vertical motion',
+                '- `vertical`: relative move in vertical motion',
+            ]},
+            spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
             pips: {type: 'boolean', value: false, help: 'Set to `true` to show the scale\'s breakpoints'},
             dashed: {type: 'boolean', value: false, help: 'Set to `true` to display a dashed gauge'},
             angle: {type: 'number', value: 270, help: 'Defines the angle\'s width of the knob, in degrees'},
-            snap: {type: 'boolean', value: false, help: 'By default, dragging the widget will modify it\'s value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position'},
-            spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
             doubleTap: {type: 'boolean', value: false, help: [
                 'Set to `true` to make the knob reset to its `default` value when receiving a double tap.',
                 'Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)'
@@ -31,7 +35,7 @@ module.exports = class Knob extends Slider {
                 'Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`)'
             ]},
             logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale (base 10). Set to a `number` to define the logarithm\'s base.'},
-            sensitivity: {type: 'number', value: 1, help: 'Defines the knob\'s sensitivity when `snap` is `false` '},
+            sensitivity: {type: 'number', value: 1, help: 'Defines the knob\'s sensitivity when `mode` is not `snap` '},
             steps: {type: 'string|number|array', value: '', help: [
                 'Restricts the widget\'s value:',
                 '- `auto`: use values defined in `range`',
@@ -79,9 +83,7 @@ module.exports = class Knob extends Slider {
         this.lastOffsetX = e.offsetX
         this.lastOffsetY = e.offsetY
 
-        // if (!(e.traversing || this.getProp('snap'))  || e.ctrlKey) return
-
-        if (this.getProp('snap')) {
+        if (this.getProp('mode') === 'snap') {
 
             this.percent = this.angleToPercent(this.coordsToAngle(e.offsetX, e.offsetY))
 
@@ -94,18 +96,18 @@ module.exports = class Knob extends Slider {
 
     dragHandle(e) {
 
-        if (!(e.traversing || this.getProp('snap')) || e.ctrlKey) {
+        if ((this.getProp('mode') === 'vertical' && !e.traversing) || e.ctrlKey) {
             // vertical
             this.percent = -100 * (e.movementY / e.inertia * this.getProp('sensitivity')) / this.minDimension + this.percent
 
         } else {
-            //snap
-            var offsetX = this.lastOffsetX + e.movementX / e.inertia,
-                offsetY = this.lastOffsetY + e.movementY / e.inertia
+            // snap or circular
+            var offsetX = this.lastOffsetX + e.movementX,
+                offsetY = this.lastOffsetY + e.movementY
 
-            if (e.traversing && !this.getProp('snap')) {
-
-                var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
+            if (e.traversing || this.getProp('mode') === 'circular') {
+                // circular
+                var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY)) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY))
                 if (Math.abs(diff) < 50 && diff !== 0) this.percent += diff
 
             } else {
@@ -121,7 +123,7 @@ module.exports = class Knob extends Slider {
         }
 
 
-        this.percent = clip(this.percent,[0,100])
+        // this.percent = clip(this.percent,[0,100])
 
         this.setValue(this.percentToValue(this.percent), {send:true,sync:true,dragged:true})
 
@@ -137,11 +139,9 @@ module.exports = class Knob extends Slider {
 
     }
 
-    angleToPercent(angle, ignoreMaxAngle=false) {
+    angleToPercent(angle) {
 
-        return ignoreMaxAngle ?
-            clip(angle, [0, 360]) / 360 * 100 :
-            clip(angle - (360 - this.maxAngle) / 2, [0, this.maxAngle]) / this.maxAngle * 100
+        return clip(angle - (360 - this.maxAngle) / 2, [0, this.maxAngle]) / this.maxAngle * 100
 
     }
 

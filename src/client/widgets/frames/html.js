@@ -37,19 +37,24 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
 
     constructor(options) {
 
-        super({...options, html: html`<inner></inner>`})
+        super({...options, html: html`
+            <inner>
+                <div class="frame"></div>
+            </inner>
+        `})
 
         if (!this.getProp('border')) this.container.classList.add('noborder')
+        this.frame = DOM.get(this.widget, '.frame')[0]
 
     }
 
     updateHtml(){
 
-        var newHtml = html`<div class="html"></div>`
+        var newHtml = this.frame.cloneNode(false)
 
         newHtml.innerHTML = sanitizeHtml(this.getProp('html'), sanitizeOptions)
 
-        morph(this.widget, newHtml)
+        morph(this.frame, newHtml)
 
     }
 
