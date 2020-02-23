@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.49.5
+
+- bug fixes
+  - launcher: file/folder browsing not working
+
 ## 0.49.4
 
-- bug fixes:
+- bug fixes
   - image: fixed absolute paths
   - image: reset to 'default' instead of 'value' when receiving an empty value
   - launcher: use current midi config for "List devices" action

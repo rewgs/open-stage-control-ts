@@ -25,8 +25,6 @@ class Root extends StaticProperties(Panel, {scroll: false, label: false, id: 'ro
 
         }, ['label', '_geometry', 'left', 'top', 'width', 'height', 'scroll'], {
 
-            _children:'children',
-
             tabs: {type: 'array', value: [], help: 'Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously'},
 
             value: {type: 'integer', value: '', help: [

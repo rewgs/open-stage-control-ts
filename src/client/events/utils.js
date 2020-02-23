@@ -7,6 +7,7 @@ module.exports = {
         return {
 
             target: e.target,
+            firstTarget: null,
             offsetX: e.offsetX,
             offsetY: e.offsetY,
             pageX: e.pageX,
@@ -32,6 +33,8 @@ module.exports = {
     normalizeDragEvent: function(event, previousEvent) {
 
         event = module.exports.fix(event)
+
+        event.firstTarget = previousEvent ? previousEvent.firstTarget : event.target
 
         if (event.movementX === undefined) {
 

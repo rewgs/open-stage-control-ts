@@ -32,8 +32,6 @@ class Modal extends Panel {
 
         }, [], {
 
-            _chidlren:'children',
-
             widgets: {type: 'array', value: [], help: 'Each element of the array must be a widget object'},
             value: {type: 'integer', value: '', help: [
                 'Defines the modal\'s state:`0` for closed, `1` for opened'
@@ -114,7 +112,7 @@ class Modal extends Panel {
 
         this.popupContent.classList.add('layout-' + this.getProp('layout'))
         this.popupContent.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
-        
+
 
 
     }

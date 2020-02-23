@@ -1,8 +1,8 @@
-require('./app/stacktrace')
-require('./app/globals')
+require('./stacktrace')
+require('./globals')
 
-var {loading} = require('./app/ui/utils'),
-    locales = require('./app/locales')
+var {loading} = require('./ui/utils'),
+    locales = require('./locales')
 
 document.addEventListener('DOMContentLoaded', function(event) {
 
@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     setTimeout(()=>{
 
-        var ipc = require('./app/ipc/')
+        var ipc = require('./ipc/')
 
         ipc.init()
 
-        require('./app/ui/init')
+        require('./ui/init')
 
         ipc.send('ready', {backupId: ARGV.backupId})
 

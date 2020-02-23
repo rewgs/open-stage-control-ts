@@ -66,7 +66,7 @@ module.exports.categories = {
     'Containers':['panel', 'modal', 'clone'],
     'Frames':['frame', 'svg', 'html', 'image'],
     'Graphs':['plot','eq','visualizer'],
-    'Indicator':['led', 'text'],
+    'Indicators':['led', 'text'],
     'Inputs':['input', 'keys', 'script', 'gyroscope', 'file'],
     'Matrices':['matrix', 'keyboard', 'patchbay'],
     'Pads':['xy','rgb','multixy', 'canvas'],
