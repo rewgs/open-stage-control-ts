@@ -4,6 +4,7 @@
 
 - bug fixes
   - launcher: file/folder browsing not working
+  - cli: parsing issues on windows
 
 ## 0.49.4
 
