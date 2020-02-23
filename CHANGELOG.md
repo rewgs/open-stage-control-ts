@@ -6,7 +6,8 @@
   - image: fixed absolute paths
   - image: reset to 'default' instead of 'value' when receiving an empty value
   - launcher: use current midi config for "List devices" action
-  
+  - fader built-in meter: use fader's target (allows midi sync)
+
 ## 0.49.3
 
 - bug fixes

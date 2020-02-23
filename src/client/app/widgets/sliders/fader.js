@@ -99,6 +99,7 @@ module.exports = class Fader extends Slider {
                 logScale:this.getProp('logScale'),
                 address: '#{@{parent.meterAddress} ? @{parent.meterAddress} : concat(@{parent.address}, "/meter")}',
                 preArgs: '@{parent.preArgs}',
+                target: '@{parent.target}',
                 color: '@{parent.color}',
                 pips:false,
                 dashed:true
