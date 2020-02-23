@@ -74,8 +74,8 @@ $(document).ready(()=>{
                 dialog.showOpenDialog({
                     filters:[{name:option.file.name,extensions:option.file.extensions}],
                     properties: option.file.folder ? ['openDirectory'] : ['openFile']
-                },function(file){
-                    input.val(file).change()
+                }).then((file)=>{
+                    input.val(file.filePaths).change()
                 })
             })
 
