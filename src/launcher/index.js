@@ -271,15 +271,16 @@ $(document).ready(()=>{
             }
         })
     ]}))
-    menu.append(new MenuItem({type: 'submenu' , label: 'App', submenu: [
-        new MenuItem({
-            label: 'Relaunch',
-            click: ()=>{
-                app.relaunch()
-                app.exit(0)
-            }
-        }),
-    ]}))
+    // not working currently
+    // menu.append(new MenuItem({type: 'submenu' , label: 'App', submenu: [
+    //     new MenuItem({
+    //         label: 'Relaunch',
+    //         click: ()=>{
+    //             app.relaunch()
+    //             app.exit(0)
+    //         }
+    //     }),
+    // ]}))
 
 
     window.addEventListener('contextmenu', function(e) {
