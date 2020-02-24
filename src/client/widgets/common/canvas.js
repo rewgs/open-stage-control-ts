@@ -135,32 +135,22 @@ class Canvas extends Widget {
 
         this.cssVars.padding = parseFloat(style.getPropertyValue('--widget-padding')) * PXSCALE // rem unit
 
-        this.cssVars.colorWidget = style.getPropertyValue('--color-widget')
-        this.cssVars.colorFill = style.getPropertyValue('--color-fill')
-        this.cssVars.colorStroke = style.getPropertyValue('--color-stroke')
-        this.cssVars.colorForeground = style.getPropertyValue('--color-foreground')
-
-        this.cssVars.alphaStroke = parseFloat(style.getPropertyValue('--alpha-stroke'))
-        this.cssVars.alphaFillOff = parseFloat(style.getPropertyValue('--alpha-fill-off'))
-        this.cssVars.alphaFillOn = parseFloat(style.getPropertyValue('--alpha-fill-on'))
+        this.cssVars.colorText = style.getPropertyValue('--color-text').trim()
+        this.cssVars.colorWidget = style.getPropertyValue('--color-widget').trim()
+        this.cssVars.colorFill = style.getPropertyValue('--color-fill').trim()
+        this.cssVars.colorStroke = style.getPropertyValue('--color-stroke').trim()
+        this.cssVars.colorForeground = style.getPropertyValue('--color-foreground').trim()
 
 
+        this.cssVars.alphaStroke = parseFloat(style.getPropertyValue('--alpha-stroke').trim())
+        this.cssVars.alphaFillOff = parseFloat(style.getPropertyValue('--alpha-fill-off').trim())
+        this.cssVars.alphaFillOn = parseFloat(style.getPropertyValue('--alpha-fill-on').trim())
+        this.cssVars.alphaPips = parseFloat(style.getPropertyValue('--alpha-pips').trim())
 
-
-        this.colors.custom = style.getPropertyValue('--color-custom')
-        this.colors.track = style.getPropertyValue('--color-track')
-        this.colors.text = style.getPropertyValue('--color-text')
-        this.colors.textFade = style.getPropertyValue('--color-text-fade')
-        this.colors.raised = style.getPropertyValue('--color-raised')
-        this.colors.bg = style.getPropertyValue('--color-bg')
-        this.colors.fg = style.getPropertyValue('--color-fg')
-        this.colors.faded = style.getPropertyValue('--color-faded')
-        this.colors.light = style.getPropertyValue('--color-light')
-
-        this.fontFamily = style.getPropertyValue('font-family')
-        this.textAlign = style.getPropertyValue('text-align')
-        this.fontSize = parseFloat(style.getPropertyValue('font-size'))
-        this.fontWeight = parseFloat(style.getPropertyValue('font-weight'))
+        this.fontFamily = style.getPropertyValue('font-family').trim()
+        this.textAlign = style.getPropertyValue('text-align').trim()
+        this.fontSize = parseFloat(style.getPropertyValue('font-size').trim())
+        this.fontWeight = parseFloat(style.getPropertyValue('font-weight').trim())
 
         this.ctx.font = this.fontWeight + ' ' + this.fontSize + 'px ' + this.fontFamily
         this.ctx.textBaseline = 'middle'
@@ -207,6 +197,7 @@ class Canvas extends Widget {
         switch (propName) {
 
             case 'css':
+            case 'colorText':
             case 'colorWidget':
             case 'colorFill':
             case 'colorStroke':
@@ -219,7 +210,12 @@ class Canvas extends Widget {
                 },10)
                 return
             case 'padding':
-                resize.check(this.widget)
+                resize.check(this.canvas, true)
+                setTimeout(()=>{
+                    this.cacheCanvasStyle()
+                    this.batchDraw()
+                },10)
+                return
         }
 
         return ret

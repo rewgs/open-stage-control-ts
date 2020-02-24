@@ -47,11 +47,14 @@ class Menu extends Widget {
 
         super({...options, html: html`
             <inner>
+                <div class="text"></div>
+                <div class="icon"></div>
             </inner>
 
         `})
 
         this.menu = html`<menu></menu>`
+        this.text = DOM.get(this.widget, '.text')[0]
 
         this.opened = false
 
@@ -222,6 +225,8 @@ class Menu extends Widget {
 
         }
 
+        if (circular) this.menu.appendChild(html`<div class="center"></div>`)
+
 
         this.setValue(this.value)
 
@@ -267,7 +272,7 @@ class Menu extends Widget {
 
         DOM.each(this.menu, '.on', (el)=>{el.classList.remove('on')})
         if (i > -1) DOM.get(this.menu, '.item')[i].classList.add('on')
-        this.widget.textContent = this.stringValues[i] || this.value
+        this.text.textContent = this.stringValues[i] || this.value
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)

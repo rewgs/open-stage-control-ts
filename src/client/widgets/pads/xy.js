@@ -213,9 +213,9 @@ module.exports = class Xy extends Pad {
             var pipTexts = margin >= this.fontSize * 1.5
 
             this.ctx.lineWidth = PXSCALE
-            this.ctx.fillStyle = this.colors.textFade
+            this.ctx.fillStyle = this.cssVars.colorText
             this.ctx.strokeStyle = this.cssVars.colorStroke
-            this.ctx.globalAlpha = 1
+            this.ctx.globalAlpha = this.cssVars.alphaPips
             this.ctx.beginPath()
 
             for (let i in this.faders.x.rangeKeys) {

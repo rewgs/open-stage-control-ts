@@ -23,8 +23,6 @@ class Svg extends StaticProperties(Widget, {bypass: true}) {
                 '- will be wrapped in a `< svg />` element',
                 '- `<path>` commands support a special percent notation (`%x` and `%y`)'
             ]},
-            border: {type: 'boolean', value: true, help: 'Set to `false` to disable the borders and background-color'},
-
 
         }, ['precision', 'bypass'], {})
 

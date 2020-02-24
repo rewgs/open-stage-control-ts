@@ -29,7 +29,6 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
                 '&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,',
                 '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre'
             ]},
-            border: {type: 'boolean', value: true, help: 'Set to `false` to disable the borders and background-color'},
 
         }, ['precision', 'bypass'], {})
 

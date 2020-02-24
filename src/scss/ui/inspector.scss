@@ -143,6 +143,7 @@ osc-inspector-checkbox {
         color: transparent;
         margin-top: -1rem;
         margin-left: 1rem;
+        pointer-events: none;
     }
     &.on {
         position: relative;
@@ -220,7 +221,17 @@ osc-inspector-select {
     width: $field-height;
     background: var(--color-foreground);
     margin-left: 4rem;
+
+    cursor: pointer;
+
     -webkit-appearance:none;
     -moz-appearance:none;
     appearance:none;
+
+    &::-webkit-color-swatch {
+       border: none;
+    }
+    &::-webkit-color-swatch-wrapper {
+       padding: 0;
+    }
 }

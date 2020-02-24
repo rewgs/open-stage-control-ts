@@ -107,8 +107,8 @@ module.exports = class Knob extends Slider {
 
             if (e.traversing || this.getProp('mode') === 'circular') {
                 // circular
-                var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY)) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY))
-                if (Math.abs(diff) < 50 && diff !== 0) this.percent += diff
+                var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
+                if (Math.abs(diff) < 50 && diff !== 0) this.percent += diff * 360 / this.maxAngle
 
             } else {
 
@@ -139,9 +139,11 @@ module.exports = class Knob extends Slider {
 
     }
 
-    angleToPercent(angle) {
+    angleToPercent(angle, ignoreMaxAngle=false) {
 
-        return clip(angle - (360 - this.maxAngle) / 2, [0, this.maxAngle]) / this.maxAngle * 100
+        return ignoreMaxAngle ?
+            clip(angle, [0, 360]) / 360 * 100
+            : clip(angle - (360 - this.maxAngle) / 2, [0, this.maxAngle]) / this.maxAngle * 100
 
     }
 
@@ -238,9 +240,9 @@ module.exports = class Knob extends Slider {
 
         if (pips) {
 
-            this.ctx.globalAlpha = 1
             this.ctx.lineWidth = 1.5 * PXSCALE
             this.ctx.strokeStyle = this.cssVars.colorStroke
+            this.ctx.globalAlpha = this.cssVars.alphaStroke
 
             for (var pip of this.rangeKeys.concat(this.valueToPercent(this.originValue))) {
 
@@ -257,7 +259,8 @@ module.exports = class Knob extends Slider {
             }
 
             var radius = maxRadius + this.fontSize * 1.5
-            this.ctx.fillStyle = this.colors.textFade
+            this.ctx.fillStyle = this.cssVars.colorText
+            this.ctx.globalAlpha = this.cssVars.alphaPips
             for (var p in this.pipTexts) {
                 if (this.pipTexts[p] == undefined) continue
                 var angle = this.percentToAngle(p),

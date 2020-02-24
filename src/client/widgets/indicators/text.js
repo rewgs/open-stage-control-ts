@@ -3,7 +3,7 @@ var {iconify} = require('../../ui/utils'),
     html = require('nanohtml'),
     StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Text extends StaticProperties(Widget, {bypass: true}) {
+module.exports = class Text extends StaticProperties(Widget, {bypass: true, interaction: false}) {
 
     static description() {
 
@@ -24,7 +24,7 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true}) {
             ]},
             align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Css text-align property.'},
 
-        }, ['precision', 'bypass'], {})
+        }, ['interaction', 'precision', 'bypass'], {})
 
     }
 

@@ -16,10 +16,6 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
         return super.defaults({
 
-            _frame: 'frame',
-
-            border: {type: 'boolean', value: true, help: 'Set to `false` to disable the borders and background-color'},
-
         }, ['precision', 'bypass'], {
 
             label: {type: 'string|boolean', value: 'auto', help: [
@@ -39,7 +35,7 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
         super({...options, html: html`
             <inner>
-                <iframe class="frame" src="" sandbox="allow-scripts"></iframe>
+                <iframe class="frame" src="" sandbox="allow-scripts allow-same-origin"></iframe>
             </inner>`
         })
 

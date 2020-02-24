@@ -199,8 +199,8 @@ module.exports = class MultiXy extends Pad {
                 t = (this.labels ? this.getProp('points')[i] : i) + '',
                 length = this.fontSize * t.length
 
-            this.ctx.globalAlpha = 1
-            this.ctx.fillStyle = this.pads[i].colors.text
+            this.ctx.fillStyle = this.pads[i].cssVars.colorText
+            this.ctx.globalAlpha = this.cssVars.alphaPips
             this.ctx.fillText(t, x + 0.5 * PXSCALE, y + PXSCALE)
 
             this.clearRect[i] = [x - length / 2, y - this.fontSize / 2, length, this.fontSize + 2 * PXSCALE]

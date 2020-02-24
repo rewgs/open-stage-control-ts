@@ -21,7 +21,6 @@ class Dropdown extends Widget {
             values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
                 '`Array` of possible values to switch between : `[1,2,3]`',
                 '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
-                'An empty option will always be prepended to values (sends an osc message without any value); it can be hidden by adding `option:first-child{display:none}` to the widget\'s `css`'
             ]}
 
         })
@@ -30,9 +29,15 @@ class Dropdown extends Widget {
 
     constructor(options) {
 
-        super({...options, html: html`<div class="select"></div>`})
+        super({...options, html: html`
+            <inner>
+                <div class="text"></div>
+                <div class="icon"></div>
+            </inner>
+        `})
 
         this.select = this.widget.appendChild(html`<select class="no-keybinding"></select>`)
+        this.text = DOM.get(this.widget, '.text')[0]
 
         this.values = []
         this.keys = []
@@ -80,6 +85,7 @@ class Dropdown extends Widget {
         var i = this.values.indexOf(v)
 
         this.value = this.values[i]
+        this.text.textContent = this.value
 
         if (!options.fromLocal) this.select.selectedIndex = i + 1
 
