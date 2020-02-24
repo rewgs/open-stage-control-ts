@@ -193,3 +193,14 @@ npm run build
 npm run package-node
 
 ```
+
+## Running in a terminal on Windows
+
+Windows users launching the app from a terminal need to add a double dash (`--`) before their options:
+
+```bash
+open-stage-control.exe -- --port 5555 [...]
+
+# when running from sources
+npm start -- -- [options]
+```

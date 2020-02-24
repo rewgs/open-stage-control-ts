@@ -1,10 +1,16 @@
 # Changelog
 
+
+## 0.49.6
+
+- bug fixes
+  - windows users launching the app from a terminal now need to add a double dash (--) before their options
+  - launcher: disabled unstable `Relaunch` action
+
 ## 0.49.5
 
 - bug fixes
   - launcher: file/folder browsing not working
-  - cli: parsing issues on windows
 
 ## 0.49.4
 
