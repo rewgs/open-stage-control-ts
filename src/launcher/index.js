@@ -1,5 +1,5 @@
 var {remote, ipcRenderer, shell} = eval('require(\'electron\')'),
-    {dialog, Menu, MenuItem, app} = remote.require('electron'),
+    {dialog, Menu, MenuItem} = remote.require('electron'),
     menu = new Menu(),
     settings = remote.getGlobal('settings'),
     midilist = remote.getGlobal('midilist'),
