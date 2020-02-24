@@ -5,6 +5,7 @@
 
 - bug fixes
   - windows users launching the app from a terminal now need to add a double dash (--) before their options
+  - launcher: disabled unstable `Relaunch` action
 
 ## 0.49.5
 
