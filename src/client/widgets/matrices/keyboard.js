@@ -34,11 +34,6 @@ module.exports = class Keyboard extends _matrix_base {
 
         }, ['_value', 'default', 'value'], {
 
-            split: {type: 'boolean|string', value: false, help: [
-                '`true`: the widget\'s index will be appended to the matrice\'s osc address',
-                '`false`: it will be prepended to the widget\'s preArgs',
-                '`string`: will be used to define the widgets\' addresses, replacing dollar signs (`$`) with their respective index (to insert the actual dollar sign, it must be escaped with a backslash (`\\$`))'
-            ]},
             css: {type: 'string', value: '', help: [
                 'Available CSS variables:',
                 '- `--color-white:color;` (white keys color)',
@@ -86,20 +81,12 @@ module.exports = class Keyboard extends _matrix_base {
             data.target = '@{parent.target}'
             data.precision = '@{parent.precision}'
 
-            if (!this.getProp('split')) {
-                data.address = '@{parent.address}'
-                data.preArgs = `#{
-                    a = @{parent.preArgs};
-                    b = typeof(a) == 'string' and a == '' ? [] : typeof(a) == 'Array' ? a : [a];
-                    concat(b, [${i}])
-                }`
-            } else if (typeof this.getProp('split') === 'string' && this.getProp('split')[0] === '/' && /[^\\]\$/.test(this.getProp('split'))) {
-                data.address = this.getProp('split').replace(/([^\\])(\$)/g,'$1' + i).replace(/\\\$/g, '$')
-                data.preArgs = '@{parent.preArgs}'
-            } else if (this.getProp('split')) {
-                data.address = '@{parent.address}/' + i
-                data.preArgs = '@{parent.preArgs}'
-            }
+            data.address = '@{parent.address}'
+            data.preArgs = `#{
+                a = @{parent.preArgs};
+                b = typeof(a) == 'string' and a == '' ? [] : typeof(a) == 'Array' ? a : [a];
+                concat(b, [${i}])
+            }`
 
             var key = parser.parse({
                 data: data,

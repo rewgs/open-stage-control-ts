@@ -45,8 +45,6 @@ class Modal extends Panel {
 
         super(options)
 
-        this.disabledProps = []
-
         this.popup = html`
             <div class="popup">
                 <div class="popup-wrapper">
@@ -104,7 +102,6 @@ class Modal extends Panel {
             if (e.keyCode==27) this.setValue(0, {sync:true, send:true})
         }).bind(this)
 
-        this.parentScroll = [0,0]
         this.value = 0
         this.init = false
         this.labelChange = true
@@ -134,11 +131,9 @@ class Modal extends Panel {
 
         this.popup.classList.toggle('show', this.value)
         this.container.classList.toggle('on', this.value)
-        this.light.classList.toggle('on', this.value)
+
 
         this.bindEscKey(this.value)
-
-        if (this.init) this.fixParents()
 
         if (this.value) {
             resize.check(this.widget, true)
@@ -165,36 +160,6 @@ class Modal extends Panel {
         this.bindEscKey(false)
         this.setValue(0)
         super.onRemove()
-    }
-
-    fixParents() {
-
-        var parent = this.parent,
-            scrollFixed = false
-
-        while (parent && parent.props && parent.getProp('type') !== 'modal') {
-
-            // scroll
-            if (!scrollFixed && parent.getProp('type') == 'tab') {
-                if (this.value) {
-                    this.parentScroll = [parent.widget.scrollLeft, parent.widget.scrollTop]
-                }
-                parent.widget.scrollLeft = this.value ? 0 : this.parentScroll[0]
-                parent.widget.scrollTop =  this.value ? 0 : this.parentScroll[1]
-                parent.widget.style.overflow = this.value ? 'hidden' : ''
-                scrollFixed = true
-            }
-
-            // stacking
-            parent.container.style.zIndex = this.value ? 'initial' : ''
-            parent.container.style.contain = this.value ? 'style size' : ''
-
-            parent = parent.parent
-        }
-
-        this.container.style.contain = this.value ? 'style size' : ''
-
-
     }
 
     updatePopupLabel() {

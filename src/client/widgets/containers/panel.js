@@ -128,19 +128,6 @@ class Panel extends Container() {
 
         }
 
-        if (this.getProp('tabs') && !this.getProp('tabs').length) {
-            this.disabledProps.push(
-                'precision', 'address', 'preArgs', 'target', 'bypass',
-                'value', 'default'
-            )
-        }
-        if (this.getProp('widgets') && !this.getProp('widgets').length) {
-            this.disabledProps.push(
-                'scroll'
-            )
-        }
-
-
         if (this.getProp('traversing')) this.setTraversing()
 
     }

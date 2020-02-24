@@ -64,9 +64,6 @@ class Menu extends Widget {
         this.parseValues()
 
 
-        this.parentScroll = [0,0]
-
-
         if (this.getProp('doubleTap')) {
 
             doubletab(this.widget, (e)=>{

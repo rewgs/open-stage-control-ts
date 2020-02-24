@@ -12,7 +12,7 @@
     width: 100rem;
     height: 100rem;
 
-    contain: style size layout;
+    contain: strict;
     -webkit-tap-highlight-color:transparent;
 
     --widget-padding: 1rem;
@@ -77,3 +77,4 @@
 @import 'widgets/plots';
 @import 'widgets/indicators';
 @import 'widgets/frames';
+@import 'widgets/patchbay';

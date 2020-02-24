@@ -54,6 +54,7 @@ class Widget extends EventEmitter {
                 'Insert icons using the prefix ^ followed by the icon\'s name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)'
             ]},
             visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},
+            // interaction: {type: 'boolean', value: true, help: 'Set to `false` to disable pointer interactions.'},
 
             _geometry:'geometry',
 
@@ -174,7 +175,6 @@ class Widget extends EventEmitter {
             this.errors.id = 'There can only be one root'
         }
 
-        this.disabledProps = []
         // this.mathjsDeprecationWarned = false
 
         // cache precision
@@ -280,8 +280,6 @@ class Widget extends EventEmitter {
         return deepCopy(this.value, withPrecision ? this.precision : undefined)
 
     }
-
-    getSplit() {}
 
     checkLinkedProps(propNames) {
 
@@ -440,7 +438,7 @@ class Widget extends EventEmitter {
 
         var variables = {},
             defaultScope = this.constructor.parsersContexts[propName] || {},
-            mathscope = context || {},
+            jsScope = context || {},
             varnumber = 999
 
         if (typeof propValue == 'string') {
@@ -548,7 +546,7 @@ class Widget extends EventEmitter {
                         varnumber--
 
                         variables[varname] = r
-                        mathscope[varname] = r
+                        jsScope[varname] = r
 
                         return varname
 
@@ -588,7 +586,7 @@ class Widget extends EventEmitter {
                 varnumber--
 
                 variables[varname] = r
-                mathscope[varname] = r
+                jsScope[varname] = r
 
                 return varname
             })
@@ -597,12 +595,21 @@ class Widget extends EventEmitter {
                 propValue = propValue.replace(/#\{(?:[^{}]|\{[^{}]*\})*\}/g, (m)=>{
                     // one bracket nesting allowed, if we need two: #\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}
 
-                    //TODO: js one-liner
+                    var code = m.substr(2, m.length - 3).trim()
+                    
+                    if (!this.parsers[code]) this.parsers[code] = evaljs('return ' + code, defaultScope)
 
-                    return ''
+                    let r = this.parsers[code](jsScope)
+
+                    if (r === undefined) r = ''
+
+                    return typeof r !== 'string' ? JSON.stringify(r) : r
+
                 })
             } catch (err) {
-                console.log((this.getProp('id') || this.props.id) + '.' + propName + ': #{} error:\n' + err)
+                var stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
+                console.log((this.getProp('id') || this.props.id) + '.' + propName + ': #{} error:\n' + err + line)
             }
 
             try {
@@ -610,7 +617,7 @@ class Widget extends EventEmitter {
 
                     if (!this.parsers[code]) this.parsers[code] = evaljs(code, defaultScope)
 
-                    let r = this.parsers[code](mathscope)
+                    let r = this.parsers[code](jsScope)
 
                     if (r === undefined) r = ''
 
@@ -794,9 +801,6 @@ class Widget extends EventEmitter {
                         address: propName == 'address' ? oldPropValue : this.getProp('address')
                     }
                 data[propName] = this.getProp(propName)
-                if (propName === 'address' && this.getSplit()) {
-                    data['split'] = this.getSplit()
-                }
                 widgetManager.registerWidget(this, data, oldData)
                 return
 
@@ -931,13 +935,20 @@ class Widget extends EventEmitter {
         if (styles.includes('color')) {
 
             // color
-            this.container.style.setProperty('--color-widget', this.getProp('colorWidget') != 'auto' ? this.getProp('colorWidget') : '')
-            this.container.style.setProperty('--color-fill', this.getProp('colorFill') != 'auto' ? this.getProp('colorFill') : '')
-            this.container.style.setProperty('--color-stroke', this.getProp('colorStroke') != 'auto' ? this.getProp('colorStroke') : '')
-            this.container.style.setProperty('--alpha-stroke', this.getProp('alphaStroke') != 'auto' ? parseFloat(this.getProp('alphaStroke')) : '')
-            this.container.style.setProperty('--alpha-fill-on', this.getProp('alphaFillOn') != 'auto' ? parseFloat(this.getProp('alphaFillOn')) : '')
-            this.container.style.setProperty('--alpha-fill-off', this.getProp('alphaFillOff') != 'auto' ? parseFloat(this.getProp('alphaFillOff')) : '')
-            this.container.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
+            for (var cssvar of ['color-widget', 'color-fill', 'color-stroke', 'alpha-stroke', 'alpha-fill-on', 'alpha-fill-off']) {
+                var val = this.getProp(cssvar.replace(/\-([a-z])/g, (a,s)=>s.toUpperCase()))
+                this.container.style.setProperty('--' + cssvar, val !== undefined && val != 'auto' ? val : '')
+            }
+            this.container.style.setProperty('--widget-padding', this.getProp('padding') !== undefined && this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
+
+
+            // this.container.style.setProperty('--color-widget', this.getProp('colorWidget') && this.getProp('colorWidget') != 'auto' ? this.getProp('colorWidget') : '')
+            // this.container.style.setProperty('--color-fill', this.getProp('colorFill') != 'auto' ? this.getProp('colorFill') : '')
+            // this.container.style.setProperty('--color-stroke', this.getProp('colorStroke') != 'auto' ? this.getProp('colorStroke') : '')
+            // this.container.style.setProperty('--alpha-stroke', this.getProp('alphaStroke') != 'auto' ? parseFloat(this.getProp('alphaStroke')) : '')
+            // this.container.style.setProperty('--alpha-fill-on', this.getProp('alphaFillOn') != 'auto' ? parseFloat(this.getProp('alphaFillOn')) : '')
+            // this.container.style.setProperty('--alpha-fill-off', this.getProp('alphaFillOff') != 'auto' ? parseFloat(this.getProp('alphaFillOff')) : '')
+            // this.container.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
 
         }
 

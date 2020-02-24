@@ -117,8 +117,6 @@ module.exports = class Fader extends Slider {
             (e.offsetX - this.gaugePadding) / (this.width - this.gaugePadding * 2) * 100:
             (this.height - e.offsetY - this.gaugePadding) / (this.height - this.gaugePadding * 2) * 100
 
-        // this.percent = clip(this.percent,[0,100])
-
         this.setValue(this.percentToValue(this.percent), {send: true, sync: true, dragged: true})
 
     }
@@ -148,10 +146,6 @@ module.exports = class Fader extends Slider {
     resizeHandle(event) {
 
         var ratio = CANVAS_SCALING * this.scaling
-
-        // if (this.getProp('compact') && this.getProp('horizontal')) {
-        //     event.height = 1 / ratio
-        // }
 
         super.resizeHandle(event)
 
