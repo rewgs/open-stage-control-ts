@@ -1,5 +1,12 @@
 // This prevents argv parsing to be breaked when the app is packaged (executed without 'electron' prefix)
-if (process.argv[1]&&process.argv[1].indexOf('-')==0) process.argv.unshift('')
+if (process.argv[1] && process.argv[1].indexOf('-') == 0) process.argv.unshift('')
+
+// on windows, electron stops parsing after the first argument containing a colon
+// https://github.com/electron/electron/pull/13039
+// windows cli users need to add a double dash (--) before their options to avoid that
+// it must be stripped to let yargs work normally
+if (process.argv[2] == '--') process.argv.splice(2, 1)
+
 
 var infos = require('../package.json')
 
