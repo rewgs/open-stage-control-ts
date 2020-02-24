@@ -21,9 +21,14 @@ module.exports = class _matrix_base extends Container() {
 
         switch (propName) {
 
-            case 'color':
+            case 'colorWidget':
+            case 'colorFill':
+            case 'colorStroke':
+            case 'alphaStroke':
+            case 'alphaFillOff':
+            case 'alphaFillOn':
                 for (var w of this.children) {
-                    if (w) w.onPropChanged('color')
+                    if (w) w.onPropChanged(propName)
                 }
                 return
 

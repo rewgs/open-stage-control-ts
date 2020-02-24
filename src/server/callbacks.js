@@ -314,17 +314,7 @@ module.exports =  {
 
                 if (port) {
 
-                    if (data.split) {
-
-                        for (var j in data.split) {
-                            osc.send(host, port, data.split[j], data.preArgs ? data.preArgs.concat(value[j]) : [value[j]], data.precision)
-                        }
-
-                    } else {
-
-                        osc.send(host, port, data.address, data.args, data.precision)
-
-                    }
+                    osc.send(host, port, data.address, data.args, data.precision)
 
                 }
 

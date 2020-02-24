@@ -6,7 +6,7 @@ var Container = require('../common/container'),
     {diff, diffToWidget} = require('../../editor/diff'),
     html = require('nanohtml')
 
-var excludedCloneClasses =  ['widget', 'absolute-position', 'ui-resizable', 'ui-draggable', 'not-editable', 'editing']
+var excludedCloneClasses =  ['widget', 'absolute-position', 'not-editable', 'editing']
 
 class Clone extends Container() {
 
@@ -28,7 +28,12 @@ class Clone extends Container() {
 
             props: {type: 'object', value: {}, help: 'Cloned widget\'s properties to override'},
 
-        }, ['label', 'color', 'linkId', '_value', 'default', 'value', '_osc', 'precision', 'address', 'preArgs', 'target', 'bypass'])
+        }, [
+            '_style', 'colorWidget', 'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOff', 'alphaFillOn', 'padding',
+            'label', 'color', 'linkId',
+            '_value', 'default', 'value',
+            '_osc', 'precision', 'address', 'preArgs', 'target', 'bypass'
+        ])
 
     }
 

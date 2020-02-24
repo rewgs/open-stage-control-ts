@@ -15,7 +15,7 @@ module.exports = class Knob extends Slider {
 
             _knob:'knob',
 
-            mode: {type: 'string', value: 'circular', choices: ['circular', 'snap', 'vertical'], help: [
+            mode: {type: 'string', value: 'vertical', choices: ['vertical', 'circular', 'snap'], help: [
                 '- `circular`: relative move in circular motion',
                 '- `snap`: snap to touch position and move in vertical motion',
                 '- `vertical`: relative move in vertical motion',

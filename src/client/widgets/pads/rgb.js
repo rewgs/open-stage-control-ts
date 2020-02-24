@@ -33,11 +33,6 @@ module.exports = class Rgb extends Pad {
 
         }, ['color'], {
 
-            split: {type: 'boolean|object', value: false, help: [
-                'Set to `true` to send separate osc messages for for r and g & b. The address will be the same as the widget\'s with `/r`, `/g` or `/b` appended to it',
-                'Can be set as an `object` to specify a different address : `[\'/r\', \'/g\', \'b\']`',
-                'Note: the widget will only respond to its original osc address, not to the splitted version'
-            ]}
         })
 
     }

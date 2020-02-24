@@ -46,11 +46,6 @@ module.exports = class Xy extends Pad {
         }, [], {
 
             touchAddress: {type: 'string', value:'', help: 'OSC address for touched state messages: `/touchAddress [preArgs] 0/1`)'},
-            split: {type: 'boolean|object', value: false, help: [
-                'Set to `true` to send separate osc messages for each point\'s x and y axis. The address will be the same as the widget\'s with `/x` or `/y` appended to it',
-                'Can be set as an `object` to specify a different address : [\'/osc_address_x\', \'/osc_address_y\']',
-                'Note: the widget will only respond to its original osc address, not to the splitted version'
-            ]},
 
         })
 
@@ -281,16 +276,6 @@ module.exports = class Xy extends Pad {
         this.ctx.stroke()
 
 
-
-    }
-
-    getSplit() {
-
-        return this.getProp('split')?
-            typeof this.getProp('split') == 'object' && this.getProp('split').length == 2 ?
-                this.getProp('split')
-                : [this.getProp('address') + '/x', this.getProp('address') + '/y']
-            : false
 
     }
 

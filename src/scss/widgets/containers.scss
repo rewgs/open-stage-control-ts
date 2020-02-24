@@ -8,8 +8,6 @@
     background-color: var(--color-foreground);
     > .panel {
 
-        transform: rotateZ(0);
-
         flex: 1;
         flex-direction: column;
         display: flex;
@@ -123,11 +121,6 @@
         display: none;
     }
 
-    &.contains-widgets > .panel {
-
-        transform: rotateZ(0);
-
-    }
 }
 
 .panel-container {
@@ -354,6 +347,10 @@
     }
 
     &.on {
+        z-index: 9999999999999!important;
+        contain: size;
+        overflow: visible;
+        border-radius: 0!important; // border radius breaks it somehow
         > .toggle {
             --alpha-fill:var(--alpha-fill-on);
         }
@@ -382,10 +379,11 @@
             height: var(--height, 100%);
             display: flex;
             .popup-content {
+                // contain:unset; // == no restrain
                 &:before {
                     content: none;
                 }
-                // margin: -1rem;
+
                 > .panel {
                     margin: calc(var(--widget-spacing) / 2) calc(var(--widget-spacing) / 2) calc(var(--widget-spacing) / 2);
                 }
@@ -405,14 +403,6 @@
             }
         }
 
-    }
-
-    &.on {
-        z-index: initial;
-        > .toggle:after {
-            color:var(--color-custom);
-        }
-        border-radius: 0!important; // border radius breaks it somehow
     }
 
 }

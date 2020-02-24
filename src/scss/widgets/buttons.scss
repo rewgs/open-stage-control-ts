@@ -97,11 +97,19 @@
 
     border-radius: 0!important; // border radius breaks it somehow
     z-index: initial!important;
-    contain: style size;
+    // contain: style size;
 
     --size: 300rem;
     --grid-columns: 2;
     overflow: hidden;
+
+
+    &.on {
+        z-index: 9999999999999!important;
+        contain: layout;
+        overflow: visible;
+    }
+
 
     inner {
         flex:1;
@@ -161,8 +169,8 @@
         border-radius: 100%;
         width:var(--size);
         height:var(--size);
-        margin-left: calc(var(--x) - var(--size) / 2);
-        margin-top: calc(var(--y) - var(--size) / 2);
+        margin-left: calc(- var(--size) / 2);
+        margin-top: calc(- var(--size) / 2);
 
         &:after {
             content:"";

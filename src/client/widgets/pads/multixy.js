@@ -45,11 +45,6 @@ module.exports = class MultiXy extends Pad {
         }, [], {
 
             touchAddress: {type: 'string', value:'', help: 'OSC address for touched state messages: `/touchAddress [preArgs] 0/1`'},
-            split: {type: 'boolean|object', value: false, help: [
-                'Set to `true` to send separate osc messages for each point\'s x and y axis. The address will be the same as the widget\'s with `/N/x` or `/N/y` appended to it, where N is the point\'s id (or the point\'s label if points is an array)',
-                'Can be set as an `object` to specify a different address : `[\'/0/x\', \'/0/y\', \'/1/x\', \'/2/y\']`',
-                'Note: the widget will only respond to its original osc address, not to the splitted version'
-            ]},
 
         })
 
@@ -244,25 +239,6 @@ module.exports = class MultiXy extends Pad {
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
-
-    }
-
-    getSplit() {
-
-        return this.getProp('split')?
-            typeof this.getProp('split') == 'object' && this.getProp('split').length == 2 * this.npoints ?
-                this.getProp('split')
-                : (()=>{
-                    var s={},
-                        t
-                    for (var i=0; i<this.npoints * 2;i=i+2) {
-                        t = this.labels ? this.getProp('points')[i/2] : i/2
-                        s[i]=this.getProp('address') + '/' + t + '/x'
-                        s[i+1]=this.getProp('address') + '/' + t + '/y'
-                    }
-                    return s
-                })()
-            : false
 
     }
 

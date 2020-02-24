@@ -1,0 +1,54 @@
+.patchbaynode-container {
+
+    justify-content: center;
+
+
+    label {
+        flex: 1;
+        pointer-events: none;
+        display: flex;
+    }
+
+}
+.patchbay-container {
+    width: 200rem;
+    height: 200rem;
+
+
+    --alpha-fill-on: .75;
+    --alpha-fill-off: 0.25;
+
+    inner {
+        display: flex;
+        flex-direction: row;
+
+        @include pseudo-stroke();
+        padding: var(--widget-padding);
+
+        canvas {
+            flex: 1;
+            width: 0;
+        }
+        .nodes {
+            display: flex;
+            flex-direction: column;
+            align-items:stretch;
+            margin-bottom: 1rem;
+            width: 25%;
+        }
+
+        .inputs, .outputs {
+            position: relative;
+            @include pseudo-stroke();
+            top: 1rem;
+        }
+
+        .inputs:before {
+            border-width: 0 1rem 0 0;
+        }
+        .outputs:before {
+            border-width: 0 0 0 1rem;
+        }
+    }
+
+}

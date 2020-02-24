@@ -71,7 +71,7 @@
     "yargs": "15.1.0"
   },
   "optionalDependencies": {
-    "electron": "7.1.11",
+    "electron": "8.0.1",
     "electron-installer-debian": "3.0.0"
   },
   "scripts": {

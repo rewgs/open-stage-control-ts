@@ -8,10 +8,7 @@ class PatchBayNode extends Widget {
 
     constructor(options) {
 
-        super({...options, html: html`
-            <div class="node">
-            </div>
-        `})
+        super({...options, html: null})
 
         this.value = []
 
@@ -108,11 +105,11 @@ class PatchBay extends Container(Canvas) {
     constructor(options) {
 
         super({...options, html: html`
-            <div class="patchbay">
+            <inner>
                 <div class="nodes inputs"></div>
                 <canvas></canvas>
                 <div class="nodes outputs"></div>
-            </div>
+            </inner>
         `})
 
         this.inputs = PatchBay.normalizeArrayObject(this.getProp('inputs'))
@@ -148,8 +145,8 @@ class PatchBay extends Container(Canvas) {
         var outputs = DOM.get(this.widget, '.outputs')[0]
         for (let k in this.outputs) {
             var node = html`
-                <div class="widget">
-                    <div class="label">${k}</div>
+                <div class="widget patchbaynode-container">
+                    <label>${k}</label>
                 </div>
             `
             outputs.appendChild(node)
@@ -265,7 +262,8 @@ class PatchBay extends Container(Canvas) {
         if (this.connecting.length) {
 
             this.ctx.beginPath()
-            this.ctx.fillStyle = this.colors.custom
+            this.ctx.fillStyle = this.cssVars.colorFill
+            this.ctx.globalAlpha = this.cssVars.alphaFillOn
 
             var side = this.connecting[0] !== undefined ? 0 : 1,
                 cx = side === 0 ? 0 : this.width,
@@ -289,10 +287,10 @@ class PatchBay extends Container(Canvas) {
         }
 
 
-        this.ctx.strokeStyle = this.colors.custom
+        this.ctx.strokeStyle = this.cssVars.colorFill
         this.ctx.lineWidth = 2 * PXSCALE
+        this.ctx.globalAlpha = strongLines.length ? this.cssVars.alphaFillOff : this.cssVars.alphaFillOn
 
-        this.ctx.globalAlpha = strongLines.length ? 0.3 : 0.7
         this.ctx.beginPath()
         for (i in lines) {
             this.ctx.moveTo(...lines[i][0])
@@ -302,7 +300,7 @@ class PatchBay extends Container(Canvas) {
 
         if (strongLines.length) {
 
-            this.ctx.globalAlpha = 0.7
+            this.ctx.globalAlpha = this.cssVars.alphaFillOn
             this.ctx.beginPath()
             for (i in strongLines) {
                 if (strongLines[i] === null) continue
