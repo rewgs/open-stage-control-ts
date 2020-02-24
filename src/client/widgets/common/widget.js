@@ -54,7 +54,7 @@ class Widget extends EventEmitter {
                 'Insert icons using the prefix ^ followed by the icon\'s name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)'
             ]},
             visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},
-            // interaction: {type: 'boolean', value: true, help: 'Set to `false` to disable pointer interactions.'},
+            interaction: {type: 'boolean', value: true, help: 'Set to `false` to disable pointer interactions.'},
 
             _geometry:'geometry',
 
@@ -78,6 +78,7 @@ class Widget extends EventEmitter {
             alphaStroke: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
             alphaFillOff: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
             alphaFillOn: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            colorText: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
 
             padding: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
 
@@ -87,8 +88,8 @@ class Widget extends EventEmitter {
 
             _value: 'value',
 
-            default: {type: '*', value: '', help: 'If set, the widget will be initialized with this value when the session is loaded.'},
             value: {type: '*', value: '', help: 'Define the widget\'s value depending on other widget\'s values / properties using the advanced property syntax'},
+            default: {type: '*', value: '', help: 'If set, the widget will be initialized with this value when the session is loaded.'},
             linkId: {type: 'string|array', value: '', help: [
                 'Widgets sharing the same `linkId` update each other\'s value(s) AND send their respective osc messages.',
                 'When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)',
@@ -191,6 +192,8 @@ class Widget extends EventEmitter {
         if (this.widget) this.container.appendChild(this.widget)
         this.container._widget_instance = this
         this.setContainerStyles()
+
+        this.container.classList.toggle('no-interaction', !this.getProp('interaction'))
 
     }
 
@@ -596,7 +599,7 @@ class Widget extends EventEmitter {
                     // one bracket nesting allowed, if we need two: #\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}
 
                     var code = m.substr(2, m.length - 3).trim()
-                    
+
                     if (!this.parsers[code]) this.parsers[code] = evaljs('return ' + code, defaultScope)
 
                     let r = this.parsers[code](jsScope)
@@ -755,6 +758,10 @@ class Widget extends EventEmitter {
                 resize.check(this.container)
                 return
 
+            case 'interaction':
+                this.container.classList.toggle('no-interaction', !this.getProp('interaction'))
+                return
+
             case 'label':
                 this.setContainerStyles(['label'])
                 if (oldPropValue === false || this.getProp('label') === false) {
@@ -771,6 +778,7 @@ class Widget extends EventEmitter {
                 }
                 return
 
+            case 'colorText':
             case 'colorWidget':
             case 'colorFill':
             case 'colorStroke':
@@ -785,7 +793,6 @@ class Widget extends EventEmitter {
             case 'address':
             case 'preArgs':
             case 'target':
-            case 'noSync':
                 if (propName === 'address') {
                     for (var k in this.oscReceivers) {
                         var receiver = this.oscReceivers[k]
@@ -935,20 +942,11 @@ class Widget extends EventEmitter {
         if (styles.includes('color')) {
 
             // color
-            for (var cssvar of ['color-widget', 'color-fill', 'color-stroke', 'alpha-stroke', 'alpha-fill-on', 'alpha-fill-off']) {
+            for (var cssvar of ['color-text', 'color-widget', 'color-fill', 'color-stroke', 'alpha-stroke', 'alpha-fill-on', 'alpha-fill-off']) {
                 var val = this.getProp(cssvar.replace(/\-([a-z])/g, (a,s)=>s.toUpperCase()))
                 this.container.style.setProperty('--' + cssvar, val !== undefined && val != 'auto' ? val : '')
             }
             this.container.style.setProperty('--widget-padding', this.getProp('padding') !== undefined && this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
-
-
-            // this.container.style.setProperty('--color-widget', this.getProp('colorWidget') && this.getProp('colorWidget') != 'auto' ? this.getProp('colorWidget') : '')
-            // this.container.style.setProperty('--color-fill', this.getProp('colorFill') != 'auto' ? this.getProp('colorFill') : '')
-            // this.container.style.setProperty('--color-stroke', this.getProp('colorStroke') != 'auto' ? this.getProp('colorStroke') : '')
-            // this.container.style.setProperty('--alpha-stroke', this.getProp('alphaStroke') != 'auto' ? parseFloat(this.getProp('alphaStroke')) : '')
-            // this.container.style.setProperty('--alpha-fill-on', this.getProp('alphaFillOn') != 'auto' ? parseFloat(this.getProp('alphaFillOn')) : '')
-            // this.container.style.setProperty('--alpha-fill-off', this.getProp('alphaFillOff') != 'auto' ? parseFloat(this.getProp('alphaFillOff')) : '')
-            // this.container.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
 
         }
 
@@ -978,6 +976,7 @@ Widget.parsersContexts = {}
 Widget.dynamicProps = [
     'visible',
     'label',
+    'interaction',
 
     'top',
     'left',
@@ -985,6 +984,7 @@ Widget.dynamicProps = [
     'width',
 
 
+    'colorText',
     'colorWidget',
     'colorFill',
     'colorStroke',

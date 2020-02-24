@@ -3,7 +3,7 @@ var {mapToScale} = require('../utils'),
     html = require('nanohtml'),
     StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Plot extends StaticProperties(Canvas, {bypass: true}) {
+module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, interaction: false}) {
 
     static description() {
 
@@ -28,7 +28,7 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true}) {
             smooth: {type: 'boolean|number', value: false, help: 'Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`)'},
             pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
 
-        }, ['precision', 'bypass'], {
+        }, ['interaction', 'precision', 'bypass'], {
 
             value: {type: 'array|string', value: '', help: [
                 '- `Array` of `y` values',
@@ -87,8 +87,8 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true}) {
 
     draw_pips() {
 
-        this.ctx.globalAlpha = 1
-        this.ctx.fillStyle = this.colors.textFade
+        this.ctx.fillStyle = this.cssVars.colorText
+        this.ctx.globalAlpha = this.cssVars.alphaPips
 
         var margin = this.cssVars.padding
 

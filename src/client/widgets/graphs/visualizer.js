@@ -4,7 +4,7 @@ var {clip} = require('../utils'),
     StaticProperties = require('../mixins/static_properties')
 
 
-module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false}) {
+module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false, interaction: false}) {
 
     static description() {
 
@@ -24,7 +24,7 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
             logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm\'s base.'},
             pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
 
-        }, ['precision', 'bypass'], {})
+        }, ['interaction', 'precision', 'bypass'], {})
 
     }
 

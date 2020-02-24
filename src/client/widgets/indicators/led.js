@@ -3,7 +3,7 @@ var {mapToScale, clip} = require('../utils'),
     html = require('nanohtml'),
     StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Led extends StaticProperties(Widget, {bypass: true}) {
+module.exports = class Led extends StaticProperties(Widget, {bypass: true, interaction: false}) {
 
     static description() {
 
@@ -24,7 +24,7 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true}) {
             logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale (base 10). Set to a `number` to define the logarithm\'s base.'},
             borderRadius: {type: 'string', value: '', help: 'Css border-radius property.'},
 
-        }, ['precision', 'bypass'], {
+        }, ['interaction', 'precision', 'bypass'], {
 
             value: {type: 'number|array|string', value: '', help: [
                 '- `Number`: if `mode` is set to `intensity`',

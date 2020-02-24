@@ -52,7 +52,7 @@ class Toggle extends Widget {
 
             if (this.getProp('doubleTap')) {
 
-                doubletab(this.container, ()=>{
+                doubletab(this.widget, ()=>{
 
                     this.setValue(this.getProp('on'), {sync: true, send: true})
 
@@ -67,7 +67,7 @@ class Toggle extends Widget {
                     this.active = true
                     this.setValue(this.getProp('on'), {sync: true, send: true})
 
-                }, {element: this.container})
+                }, {element: this.widget})
 
             }
 
@@ -76,13 +76,13 @@ class Toggle extends Widget {
                 this.active = false
                 this.setValue(this.getProp('off'), {sync: true, send: !tap})
 
-            }, {element: this.container})
+            }, {element: this.widget})
 
         } else {
 
             if (this.getProp('doubleTap')) {
 
-                doubletab(this.container, ()=>{
+                doubletab(this.widget, ()=>{
 
                     this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true})
 
@@ -97,13 +97,13 @@ class Toggle extends Widget {
                     this.active = true
                     this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true})
 
-                }, {element: this.container})
+                }, {element: this.widget})
 
                 this.on('dragend',()=>{
 
                     this.active = false
 
-                }, {element: this.container})
+                }, {element: this.widget})
 
             }
 

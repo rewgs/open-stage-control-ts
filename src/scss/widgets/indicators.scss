@@ -4,7 +4,11 @@
     --alpha-fill-off: 0;
     --alpha-fill-on: 1;
 
+    will-change: --opacity;
+
     inner {
+
+
         --color-fill: var(--color-led);
         --alpha-fill: calc(var(--alpha-fill-off) + var(--opacity) * (var(--alpha-fill-on) - var(--alpha-fill-off)));
 
@@ -17,6 +21,7 @@
 
         &:before, &:after {
             border-radius: var(--border-radius);
+            will-change: opacity;
         }
     }
 

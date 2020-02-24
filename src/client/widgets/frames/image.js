@@ -21,7 +21,6 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
             size: {type: 'string', value: 'cover', help: 'CSS background-size'},
             position: {type: 'string', value: 'center', help: 'CSS background-position'},
             repeat: {type: 'string', value: 'no-repeat', help: 'CSS background-repeat'},
-            border: {type: 'boolean', value: true, help: 'Set to `false` to disable the borders and background-color'},
             cache: {type: 'boolean', value: true, help: [
                 'Set to false to disable image caching (forces file reload when updating or editing the widget).',
                 'When true, sending `reload` to the widget reloads its image without changing its value'

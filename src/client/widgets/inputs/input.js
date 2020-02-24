@@ -2,7 +2,7 @@ var Canvas = require('../common/canvas'),
     {deepCopy} = require('../../utils'),
     html = require('nanohtml')
 
-module.exports = class Input extends Canvas {
+class Input extends Canvas {
 
     static description() {
 
@@ -18,7 +18,6 @@ module.exports = class Input extends Canvas {
 
             align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
             unit: {type: 'string', value: '', help: 'Unit will be appended to the displayed widget\'s value (it doesn\'t affect osc messages)'},
-            editable: {type: 'boolean', value: true, help: 'Set to `false` to make the input non-editable'},
             asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'}
 
         })
@@ -43,7 +42,8 @@ module.exports = class Input extends Canvas {
         if (this.getProp('align') === 'right') this.widget.classList.add('right')
 
 
-        if (this.getProp('editable')) {
+        if (this.getProp('interaction')) {
+
             this.canvas.setAttribute('tabindex', 0)
             this.canvas.addEventListener('focus', this.focus.bind(this))
             this.input = html`<input class="no-keybinding"></input>`
@@ -62,8 +62,7 @@ module.exports = class Input extends Canvas {
                     })
                 }
             })
-        } else {
-            this.widget.classList.add('not-editable')
+
         }
 
     }
@@ -144,7 +143,7 @@ module.exports = class Input extends Canvas {
 
         this.clear()
 
-        this.ctx.fillStyle = this.colors.text
+        this.ctx.fillStyle = this.cssVars.colorText
 
         if (this.textAlign == 'center') {
             this.ctx.fillText(v, Math.round(width/2), Math.round(height/2))
@@ -166,3 +165,9 @@ module.exports = class Input extends Canvas {
     }
 
 }
+
+Input.dynamicProps = Input.prototype.constructor.dynamicProps
+    .filter(x=>x !== 'interaction')
+
+
+module.exports = Input

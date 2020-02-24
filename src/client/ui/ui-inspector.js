@@ -31,6 +31,25 @@ class UiInspector extends UiWidget {
 
         })
 
+        this.container.addEventListener('click', (e)=>{
+
+            var node = e.target
+
+            if (node.tagName === 'OSC-INSPECTOR-CHECKBOX') {
+
+                var name = node.getAttribute('name')
+
+                var textarea = DOM.get(this.container, `textarea[name="${name}"]`)
+                if (textarea) {
+                    textarea[0].value = !node.classList.contains('on')
+                    DOM.dispatchEvent(textarea[0], 'change')
+                }
+
+            }
+
+        })
+
+
         this.container.addEventListener('change', this.onChange.bind(this))
         this.container.addEventListener('keydown', this.onKeydown.bind(this))
         this.container.addEventListener('input', this.textAutoHeight.bind(this))
@@ -38,23 +57,33 @@ class UiInspector extends UiWidget {
 
 
         this.lock = false
+        this.clearTimeout = null
 
     }
 
     clear() {
 
-        this.container.innerHTML = ''
-        this.mounted = false
+        this.clearTimeout = setTimeout(()=>{
+            this.container.innerHTML = ''
+            this.mounted = false
+            this.clearTimeout = null
+        })
 
     }
 
     inspect(widgets) {
 
+        if (this.clearTimeout) {
+            clearTimeout(this.clearTimeout)
+            this.clearTimeout = null
+        }
+
         var content = html`<div></div>`
 
         var widget = widgets[0],
             props = defaults[widget.props.type],
-            multi = widgets.length > 1
+            multi = widgets.length > 1,
+            tabIndex = 1000
 
         // this.form.appendChild(html`
         //     <div class="separator">
@@ -105,7 +134,8 @@ class UiInspector extends UiWidget {
                     widget: widget,
                     name: propName,
                     value: widget.props[propName],
-                    default: defaults[w.props.type][propName]
+                    default: defaults[w.props.type][propName],
+                    tabIndex: tabIndex++
                 }).container
                 if (!field) continue
 
