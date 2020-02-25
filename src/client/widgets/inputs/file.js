@@ -1,7 +1,8 @@
 var Widget = require('../common/widget'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
-    {remoteBrowse, icon} = require('../../ui/utils')
+    uiFilebrowser = require('../../ui/ui-filebrowser'),
+    {icon} = require('../../ui/utils')
 
 module.exports = class File extends Widget {
 
@@ -37,7 +38,7 @@ module.exports = class File extends Widget {
 
             if (e.capturedByEditor === true) return
 
-            remoteBrowse({
+            uiFilebrowser({
                 extension: this.getProp('extension').replace(/^\.?(.*)$/, '$1'),
                 directory: this.getProp('directory') === 'auto' ? undefined : this.getProp('directory'),
                 loadDir: this.getProp('allowDir')

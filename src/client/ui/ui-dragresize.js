@@ -144,8 +144,8 @@ class UiDragResize extends UiWidget {
 
         var handlesVisibility = [
             !(widget instanceof Tab) && widget.parent.getProp('layout') === 'default', // nw
-            widget.parent.getProp('layout') !== 'vertical',                            // e
-            widget.parent.getProp('layout') !== 'horizontal',                          // s
+            widget.parent.getProp('layout').match(/horizontal|default/),                            // e
+            widget.parent.getProp('layout').match(/vertical|default/),                          // s
         ]
         handlesVisibility.push(handlesVisibility[1] && handlesVisibility[2])           // se
 

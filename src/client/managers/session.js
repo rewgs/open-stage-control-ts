@@ -1,8 +1,13 @@
 var ipc = require('../ipc/'),
     parser = require('../parser'),
     editor = require('../editor/'),
-    lobby = require('../ui/lobby'),
-    {loading, icon, Popup, upload, remoteBrowse} = require('../ui/utils'),
+    {icon} = require('../ui/utils'),
+    UiModal = require('../ui/ui-modal'),
+    UiModal = require('../ui/ui-modal'),
+    uiLobby = require('../ui/ui-lobby'),
+    uiFilebrowser = require('../ui/ui-filebrowser'),
+    uiFileupload = require('../ui/ui-fileupload'),
+    uiLoading = require('../ui/ui-loading'),
     {saveAs} = require('file-saver'),
     widgetManager = require('./widgets'),
     html = require('nanohtml'),
@@ -32,7 +37,7 @@ var SessionManager = class SessionManager {
         this.lock = true
 
         var container = DOM.get('#osc-container')[0],
-            loader = loading(locales('loading_session'))
+            loader = uiLoading(locales('loading_session'))
 
         setTimeout(()=>{
             try {
@@ -55,7 +60,7 @@ var SessionManager = class SessionManager {
 
             } catch (err) {
                 loader.close()
-                new Popup({title: locales('session_parsingerror'), content: err.message, icon: 'exclamation-triangle', closable:true})
+                new UiModal({title: locales('session_parsingerror'), content: err.message, icon: 'exclamation-triangle', closable:true})
                 this.lock = false
                 ipc.send('sessionSetPath', {path: this.sessionPath})
                 throw err
@@ -77,7 +82,7 @@ var SessionManager = class SessionManager {
             DOM.dispatchEvent(window, 'resize')
 
             setTimeout(()=>{
-                lobby.close()
+                uiLobby.close()
                 loader.close()
                 container.classList.add('show')
                 this.lock = false
@@ -109,7 +114,7 @@ var SessionManager = class SessionManager {
 
         if (!this.session || READ_ONLY) return
 
-        remoteBrowse({extension: 'json', save:true, directory: this.lastDir}, (path)=>{
+        uiFilebrowser({extension: 'json', save:true, directory: this.lastDir}, (path)=>{
             this.lastDir = path[0]
             this.save(path)
         })
@@ -142,7 +147,7 @@ var SessionManager = class SessionManager {
                 path = path.substr(0,Math.floor((path.length)/2)-(length-max)/2) + '...' + path.substr(Math.ceil((path.length)/2)+(length-max)/2, path.length)
             }
 
-            lobby.list.appendChild(html`
+            uiLobby.list.appendChild(html`
                 <a href="#" tabIndex="0" class="btn load" data-session="${data[i]}">
                     ${file} <em style="opacity:0.45">(${path})</em>
                     ${READ_ONLY? '' : html`<span>${raw(icon('times'))}</span>`}
@@ -151,21 +156,21 @@ var SessionManager = class SessionManager {
 
         }
 
-        lobby.list.addEventListener('click', function(e){
+        uiLobby.list.addEventListener('click', function(e){
             e.preventDefault()
             if (e.target.hasAttribute('data-session')) {
                 ipc.send('sessionOpen',{path:e.target.getAttribute('data-session')})
             } else if (!READ_ONLY && e.target.tagName == 'SPAN') {
                 ipc.send('sessionRemoveFromHistory',e.target.parentNode.getAttribute('data-session'))
-                lobby.list.removeChild(e.target.parentNode)
+                uiLobby.list.removeChild(e.target.parentNode)
             }
         })
 
         if (!READ_ONLY) {
 
-            var brw = lobby.footer.appendChild(html`<a href="#" tabindex="0" class="btn browse">${raw(icon('folder-open'))} ${locales('session_browse')}</a>`)
-            var imp = lobby.footer.appendChild(html`<a href="#" tabindex="0" class="btn import">${raw(icon('upload'))} ${locales('editor_import')}</a>`)
-            var nws = lobby.footer.appendChild(html`<a href="#" tabindex="0" class="btn new">${raw(icon('file'))} ${locales('session_new')}</a>`)
+            var brw = uiLobby.footer.appendChild(html`<a href="#" tabindex="0" class="btn browse">${raw(icon('folder-open'))} ${locales('session_browse')}</a>`)
+            var imp = uiLobby.footer.appendChild(html`<a href="#" tabindex="0" class="btn import">${raw(icon('upload'))} ${locales('editor_import')}</a>`)
+            var nws = uiLobby.footer.appendChild(html`<a href="#" tabindex="0" class="btn new">${raw(icon('file'))} ${locales('session_new')}</a>`)
 
             brw.addEventListener('click', (e)=>{
                 this.browse()
@@ -181,12 +186,12 @@ var SessionManager = class SessionManager {
 
         }
 
-        DOM.addEventListener(lobby.html, 'mousedown touchstart', function(e){
+        DOM.addEventListener(uiLobby.container, 'mousedown touchstart', function(e){
             if (e.type == 'mousedown') e.preventDefault()
             e.target.blur()
         })
 
-        lobby.open()
+        uiLobby.open()
 
     }
 
@@ -203,7 +208,7 @@ var SessionManager = class SessionManager {
 
         if (READ_ONLY) return
 
-        remoteBrowse({extension: 'json', directory: this.lastDir}, (path)=>{
+        uiFilebrowser({extension: 'json', directory: this.lastDir}, (path)=>{
             if (editor.unsavedSession && !confirm(locales('session_unsaved'))) return
             this.lastDir = path[0]
             ipc.send('sessionOpen',{path:path})
@@ -215,12 +220,12 @@ var SessionManager = class SessionManager {
 
         if (READ_ONLY) return
 
-        upload('.json', (path, result)=>{
+        uiFileupload('.json', (path, result)=>{
             var session
             try {
                 session = JSON.parse(result)
             } catch (err) {
-                new Popup({title: locales('session_parsingerror'), content: err, icon: 'exclamation-triangle', closable:true})
+                new UiModal({title: locales('session_parsingerror'), content: err, icon: 'exclamation-triangle', closable:true})
             }
             if (editor.unsavedSession && !confirm(locales('session_unsaved'))) return
             if (session) sessionManager.load(session, ()=>{
@@ -228,7 +233,7 @@ var SessionManager = class SessionManager {
             })
 
         }, ()=>{
-            new Popup({title: locales('error'), content: locales('session_uploaderror'), icon: 'exclamation-triangle', closable:true})
+            new UiModal({title: locales('error'), content: locales('session_uploaderror'), icon: 'exclamation-triangle', closable:true})
         })
 
     }

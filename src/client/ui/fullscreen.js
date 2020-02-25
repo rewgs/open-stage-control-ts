@@ -1,5 +1,5 @@
 var screenfull = require('screenfull'),
-    {Popup} = require('./utils'),
+    UiModal = require('./ui-modal'),
     locales = require('../locales')
 
 var fullscreen
@@ -21,7 +21,7 @@ if (screenfull.isEnabled) {
 
         toggle(){
 
-            new Popup({
+            new UiModal({
                 title: locales('fs_unnavailable'),
                 content: locales('fs_addtohome'),
                 closable: true

@@ -1,9 +1,8 @@
 var Panel = require('./panel'),
     Widget = require('../common/widget'),
-    StaticProperties = require('../mixins/static_properties'),
     resize = require('../../events/resize')
 
-module.exports = class Tab extends StaticProperties(Panel, {scroll: true}) {
+module.exports = class Tab extends Panel {
 
     static description() {
 
@@ -18,7 +17,9 @@ module.exports = class Tab extends StaticProperties(Panel, {scroll: true}) {
             _tab:'tab',
 
             // detached: {type: 'boolean', value: true, help: 'Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab opens'},
-            layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal'], help:''},
+            layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
+            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 

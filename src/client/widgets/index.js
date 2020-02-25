@@ -22,7 +22,6 @@ module.exports.widgets = {
     canvas: require('./pads/canvas'), // implement...
 
     // matrices
-    matrix: require('./matrices/matrix'),
     keyboard: require('./matrices/keyboard'),
     patchbay: require('./matrices/patchbay').PatchBay,
     patchbaynode: require('./matrices/patchbay').PatchBayNode,
@@ -46,6 +45,7 @@ module.exports.widgets = {
     panel: require('./containers/panel'),
     modal: require('./containers/modal'),
     clone: require('./containers/clone'),
+    matrix: require('./containers/matrix'),
 
     // state switchers
     switcher: require('./switchers/switcher'),
@@ -63,12 +63,12 @@ module.exports.widgets = {
 
 module.exports.categories = {
     'Buttons':['toggle', 'switch', 'dropdown', 'menu'],
-    'Containers':['panel', 'modal', 'clone'],
+    'Containers':['panel', 'modal', 'clone', 'matrix'],
     'Frames':['frame', 'svg', 'html', 'image'],
     'Graphs':['plot','eq','visualizer'],
     'Indicators':['led', 'text'],
     'Inputs':['input', 'keys', 'script', 'gyroscope', 'file'],
-    'Matrices':['matrix', 'keyboard', 'patchbay'],
+    'Matrices':['keyboard', 'patchbay'],
     'Pads':['xy','rgb','multixy', 'canvas'],
     'Sliders':['fader','knob', 'encoder', 'range'],
     'Switchers':['state', 'switcher','crossfader'],

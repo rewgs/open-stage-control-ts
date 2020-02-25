@@ -2,7 +2,7 @@ var UiWidget = require('./ui-widget'),
     {categories} = require('../widgets/'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
-    {icon, Popup} = require('../ui/utils'),
+    {icon} = require('../ui/utils'),
     chroma = require('chroma-js')
 
 
@@ -21,7 +21,7 @@ class UiInspectorField extends UiWidget {
         this.container = html`<osc-inspector-field></osc-inspector-field>`
         this.label = this.container.appendChild(html`<label>${this.name}</label>`)
 
-        if (this.name === 'type') this.createTypeSelect()
+        if (this.name === 'type' || this.name === 'widgetType') this.createTypeSelect()
         else this.createInput()
 
     }

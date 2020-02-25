@@ -3,13 +3,14 @@ var UiWidget = require('./ui-widget'),
     doubleClick = require('../events/double-click'),
     Sortable = require('sortablejs'),
     morph = require('nanomorph'),
-    Panel, widgetManager
+    Panel, Matrix, widgetManager
 
 class UiTree extends UiWidget {
 
     constructor(options) {
 
         Panel = require('../widgets/containers/panel')
+        Matrix = require('../widgets/containers/matrix')
         widgetManager = require('../managers/widgets')
 
         super(options)
@@ -139,7 +140,7 @@ class UiTree extends UiWidget {
                             data-id="${id}"">
                         ${id}</li>`
 
-        if (widget instanceof Panel) {
+        if (widget instanceof Panel && !(widget instanceof Matrix)) {
             node.insertBefore(html`<span class="toggle no-widget-select"></span>`, node.childNodes[0])
             node.classList.add('container')
             if (this.expanded[id]) node.classList.add('expanded')

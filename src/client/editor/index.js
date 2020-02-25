@@ -1,5 +1,4 @@
-var editField = require('./edit-field'),
-    {updateWidget, incrementWidget} = require('./data-workers'),
+var {updateWidget, incrementWidget} = require('./data-workers'),
     keyboardJS = require('keyboardjs'),
     {diff, diffToWidget} = require('./diff'),
     widgetManager = require('../managers/widgets'),

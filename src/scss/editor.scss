@@ -1,6 +1,5 @@
 .widget.editing {
     z-index: 9999!important;
-    // overflow: visible;
 }
 .widget.editing:after,
 .tablink.editing:after,
@@ -40,7 +39,7 @@
         }
     }
 
-    .widget {
+    .widget:not(.not-editable) {
         pointer-events: initial!important;
     }
 

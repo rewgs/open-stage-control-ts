@@ -1,8 +1,10 @@
 var _matrix_base = require('./_matrix_base'),
+    Panel = require('../containers/panel'),
+    Widget = require('../common/widget'),
     parser = require('../../parser')
 
 
-module.exports = class Keyboard extends _matrix_base {
+module.exports = class Keyboard extends Panel {
 
     static description() {
 
@@ -12,7 +14,7 @@ module.exports = class Keyboard extends _matrix_base {
 
     static defaults() {
 
-        return super.defaults({
+        return Widget.defaults({
 
             _matrix: 'matrix',
 
@@ -32,7 +34,7 @@ module.exports = class Keyboard extends _matrix_base {
             ]},
             toggles: {type: 'boolean', value: false, help: 'Set to `true` to make keys bahave like toggle buttons'}
 
-        }, ['_value', 'default', 'value'], {
+        }, ['_value', 'default', 'value', 'linkId'], {
 
             css: {type: 'string', value: '', help: [
                 'Available CSS variables:',
@@ -47,6 +49,8 @@ module.exports = class Keyboard extends _matrix_base {
     constructor(options) {
 
         super(options)
+
+        this.value = []
 
         this.on('change',(e)=>{
 
@@ -68,12 +72,15 @@ module.exports = class Keyboard extends _matrix_base {
             if (pattern[i % 12] == 'w') whiteKeys++
         }
 
+        this.container.style.setProperty('--nkeys', whiteKeys)
+
         for (i = start; i < keys + start && i < 109; i++) {
 
             var data = JSON.parse(strData)
 
             data.top = data.left = data.height = data.width = 'auto'
-            data.type = this.getProp('toggles') ? 'toggle' : 'push'
+            data.type = 'toggle'
+            data.mode = this.getProp('toggles') ? 'toggle' : 'push'
             data.id = this.getProp('id') + '/' + i
             data.label = false
             data.css = ''
@@ -82,11 +89,11 @@ module.exports = class Keyboard extends _matrix_base {
             data.precision = '@{parent.precision}'
 
             data.address = '@{parent.address}'
-            data.preArgs = `#{
-                a = @{parent.preArgs};
-                b = typeof(a) == 'string' and a == '' ? [] : typeof(a) == 'Array' ? a : [a];
-                concat(b, [${i}])
-            }`
+            data.preArgs = `JS{{
+                var a = @{parent.preArgs};
+                var b = typeof a === 'string' and a === '' ? [] : Array.isArray(a) ? a : [a];
+                return b.concat([${i}])
+            }}`
 
             var key = parser.parse({
                 data: data,
@@ -96,15 +103,14 @@ module.exports = class Keyboard extends _matrix_base {
 
             key._index = i - start
             key.container.classList.add('not-editable')
+            key.container.classList.add('key')
 
             if (pattern[i % 12] == 'w') {
                 key.container.classList.add('white')
-                key.container.style.width = `${100/whiteKeys}%`
                 whiteKeys2++
             } else {
                 key.container.classList.add('black')
-                key.container.style.width = `${60 / whiteKeys}%`
-                key.container.style.left = `${100 / whiteKeys * (whiteKeys2 - 3/10)}%`
+                key.container.style.setProperty('--rank', whiteKeys2)
             }
 
             this.value[i - start] = this.getProp('off')

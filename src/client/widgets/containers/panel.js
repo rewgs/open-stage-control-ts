@@ -20,8 +20,9 @@ class Panel extends Container() {
 
             _panel:'panel',
 
+            layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
+            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
-            layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal'], help:''},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
@@ -45,9 +46,13 @@ class Panel extends Container() {
 
         super({...options, html: html`<div class="panel"></div>`})
 
-        if (this.getProp('scroll') === false) this.container.classList.add('noscroll')
+        this.container.classList.toggle('noscroll', this.getProp('scroll') === false)
         this.container.classList.add('layout-' + this.getProp('layout'))
 
+        if (this.getProp('layout') === 'grid') {
+            var template = this.getProp('gridTemplate') || 2
+            this.widget.style.gridTemplate = template === parseInt(template) ? `none / repeat(${template}, 1fr)` : template
+        }
 
         if (this.getProp('tabs') && this.getProp('tabs').length) {
 
@@ -62,10 +67,11 @@ class Panel extends Container() {
 
 
 
-        this.value = -1
         this.tabs = []
 
         if (this.getProp('tabs') && this.getProp('tabs').length) {
+
+            this.value = -1
 
             this.navigation = this.widget.appendChild(html`<div class="navigation"></div>`)
 

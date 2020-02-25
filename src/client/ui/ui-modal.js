@@ -1,96 +1,99 @@
 var UiWidget = require('./ui-widget'),
+    {icon} = require('./utils'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
-    {iconify} = require('../ui/utils')
-
-
-class UiModalWindow {
-
-    constructor(options) {
-
-        this.container = html`
-            <osc-modal-window class="${options.class || ''}">
-                <inner>
-                    ${options.content}
-                </inner>
-            </osc-modal-window>
-        `
-
-        if (options.label) {
-            this.container.appendChild(html`<label>${raw(iconify(options.label))}</label>`)
-        }
-
-        this.opened = false
-    }
-
-    open(z) {
-
-        this.opened = true
-        this.container.classList.add('on')
-        this.container.style.zIndex = z
-
-    }
-
-    close() {
-
-        this.opened = false
-        this.container.classList.remove('on')
-
-    }
-
-}
+    SINGLETON = null,
+    CONTAINER = null
 
 class UiModal extends UiWidget {
 
-    constructor(options) {
+   constructor(options) {
 
-        super(options)
+       super(options)
 
-        this.modals = {}
-        this.openedModals = []
+       if (!CONTAINER) CONTAINER = DOM.get('osc-modal-container')[0]
 
-    }
+       if (options.closable) {
 
-    create(id, options) {
+           if (SINGLETON) SINGLETON.close()
+           SINGLETON = this
 
-        if (this.modals[id]) this.destroy(id)
+       }
 
-        this.modals[id] = new UiModalWindow(options)
-        this.container.appendChild(this.modals[id].container)
+       this.escKey = options.closable || options.escKey
+       this.enterKey = options.enterKey
+       this.state = 0
+
+       this.container = html`
+           <div class="popup show">
+               <div class="popup-wrapper">
+                   <div class="popup-title ${options.closable? 'closable' : ''}">
+                       <span class="title">
+                           ${options.icon ? raw(icon(options.icon)) : ''}
+                           ${options.title}
+                       </span>
+                       ${options.closable? html`<span class="closer">${raw(icon('times'))}</span>` : ''}
+                       </div>
+                   <div class="popup-content">
+                       ${options.content}
+                   </div>
+               </div>
+           </div>
+       `
+
+       if (options.closable) {
+           var closer = DOM.get(this.container, '.popup-title .closer')[0]
+           this.container.addEventListener('fast-click',(e)=>{
+               if (e.target === this.container || e.target === closer) {
+                   e.detail.preventOriginalEvent = true
+                   this.close()
+               }
+           })
+       }
+
+       if (this.escKey) {
+           this.escKeyHandler = ((e)=>{
+               if (e.keyCode==27) this.close()
+           }).bind(this)
+       }
+
+       if (this.enterKey) {
+           this.enterKeyHandler = ((e)=>{
+               if (e.keyCode == 13) this.enterKey.call(this, e)
+           }).bind(this)
+       }
+
+       if (!options.hide) this.open()
 
 
-    }
-
-    destroy(id) {
-
-        if (!this.modals[id]) return
-
-        this.close(id)
-        this.container.removeChild(this.modals[id].container)
-        delete this.modals[id]
-    }
-
-    open(id) {
-
-        if (!this.modals[id]) return
-        if (this.openedModals.includes(id)) this.close(id)
-
-        this.openedModals.push(id)
-
-        this.modals[id].open(this.openedModals.length)
-
-    }
-
-    close(id) {
-
-        if (!this.modals[id] || !this.openedModals.includes(id)) return
-
-        this.openedModals.splice(this.openedModals.indexOf(id), 1)
-        this.modals[id].close()
-
-    }
+   }
 
 
+
+   close() {
+
+       if (!this.state) return
+       this.state = 0
+
+       if (this.escKey) document.removeEventListener('keydown', this.escKeyHandler)
+       if (this.enterKey) document.removeEventListener('keydown', this.enterKeyHandler)
+       CONTAINER.removeChild(this.container)
+
+       this.trigger('close')
+
+   }
+
+   open() {
+
+       if (this.state) return
+       this.state = 1
+
+       if (this.escKey) document.addEventListener('keydown', this.escKeyHandler)
+       if (this.enterKey) document.addEventListener('keydown', this.enterKeyHandler)
+       CONTAINER.appendChild(this.container)
+
+       this.trigger('open')
+   }
 
 }
 

@@ -1,0 +1,71 @@
+
+.lobby {
+
+    width: 540rem;
+    height: 360rem;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: var(--color-background);
+    padding: 2rem 8rem 8rem;
+
+    .list {
+        overflow: auto;
+        text-transform: none;
+        flex: 1;
+        background: var(--color-foreground);
+        padding: 0 10rem;
+        a {
+            padding-right: 30rem;
+        }
+
+    }
+
+    .footer {
+        margin-top: 10rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: row;
+        a {
+            margin-left: 10rem;
+            text-align: center;
+            background: var(--color-foreground);
+            &:first-child {
+                margin: 0;
+            }
+        }
+    }
+    a {
+        padding: 0;
+        position: relative;
+        height: 40rem;
+        line-height: 40rem;
+        width: 100%;
+        display: block;
+        overflow: hidden;
+        position: relative;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        background: none;
+        em, i {
+            pointer-events: none;
+        }
+
+        span {
+            position: absolute;
+            right:0rem;
+            top:0rem;
+            z-index: 1;
+            height: 40rem;
+            line-height: 40rem;
+            opacity: 0.5;
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+    }
+}

@@ -26,7 +26,8 @@ class Modal extends Panel {
             popupHeight: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
             popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
             popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
-            layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal'], help:''},
+            layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
+            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
