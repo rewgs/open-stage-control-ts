@@ -133,19 +133,13 @@ class Canvas extends Widget {
 
         style = style || window.getComputedStyle(this.canvas)
 
-        this.cssVars.padding = parseFloat(style.getPropertyValue('--widget-padding')) * PXSCALE // rem unit
 
-        this.cssVars.colorText = style.getPropertyValue('--color-text').trim()
-        this.cssVars.colorWidget = style.getPropertyValue('--color-widget').trim()
-        this.cssVars.colorFill = style.getPropertyValue('--color-fill').trim()
-        this.cssVars.colorStroke = style.getPropertyValue('--color-stroke').trim()
-        this.cssVars.colorForeground = style.getPropertyValue('--color-foreground').trim()
+        for (var data of this.constructor.cssVariables) {
 
+            var val = style.getPropertyValue(data.css).trim()
+            this.cssVars[data.js] = data.toJs ? data.toJs(val) : val
 
-        this.cssVars.alphaStroke = parseFloat(style.getPropertyValue('--alpha-stroke').trim())
-        this.cssVars.alphaFillOff = parseFloat(style.getPropertyValue('--alpha-fill-off').trim())
-        this.cssVars.alphaFillOn = parseFloat(style.getPropertyValue('--alpha-fill-on').trim())
-        this.cssVars.alphaPips = parseFloat(style.getPropertyValue('--alpha-pips').trim())
+        }
 
         this.fontFamily = style.getPropertyValue('font-family').trim()
         this.textAlign = style.getPropertyValue('text-align').trim()
@@ -229,6 +223,10 @@ class Canvas extends Widget {
     }
 
 }
+
+Canvas.cssVariables = Canvas.prototype.constructor.cssVariables.concat(
+    {js: 'alphaPips', css: '--alpha-pips', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)}
+)
 
 Canvas.dynamicProps = Canvas.prototype.constructor.dynamicProps.concat(
     'on',

@@ -3,7 +3,7 @@ var Widget = require('../common/widget'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw')
 
-module.exports = class Switch extends Widget {
+class Switch extends Widget {
 
     static description() {
 
@@ -29,6 +29,7 @@ module.exports = class Switch extends Widget {
                 '- `slide`: same as `tap` but allows sliding between values',
                 '- `click`: activates upon click only and allows further scrolling',
             ]},
+            colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
 
         })
 
@@ -126,4 +127,11 @@ module.exports = class Switch extends Widget {
             if (options.sync) this.changed(options)
         }
 
-    }}
+    }
+}
+
+Switch.cssVariables = Switch.prototype.constructor.cssVariables.concat(
+    {js: 'colorTextOn', css: '--color-text-on'}
+)
+
+module.exports = Switch

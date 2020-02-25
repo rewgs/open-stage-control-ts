@@ -22,7 +22,10 @@ module.exports = class Tab extends StaticProperties(Panel, {scroll: true}) {
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
-        }, ['_geometry', 'left', 'top', 'width', 'height', 'scroll'], {
+        }, [
+            '_geometry', 'left', 'top', 'width', 'height',
+            'colorStroke', 'alphaStroke', 'alphaFillOff', 'alphaFillOn'
+        ], {
 
             widgets: {type: 'array', value: [], help: 'Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously.'},
             tabs: {type: 'array', value: [], help: 'Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously'},
@@ -69,6 +72,7 @@ module.exports = class Tab extends StaticProperties(Panel, {scroll: true}) {
 
             case 'visible':
             case 'label':
+            case 'colorText':
             case 'colorWidget':
             case 'colorFill':
             case 'colorStroke':

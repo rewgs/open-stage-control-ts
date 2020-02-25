@@ -81,20 +81,7 @@ class UiInspectorField extends UiWidget {
 
             this.container.appendChild(wrapper)
 
-        }
-
-        if (this.name.includes('color')) {
-
-            let style = window.getComputedStyle(this.widget.container)
-            let val = chroma(style.getPropertyValue('--' + this.name.replace(/([A-Z])/g, (a,s)=>'-' + s.toLowerCase())).trim()).hex('rgb')
-
-            let picker = html`<input class="osc-inspector-color" type="color" name="${this.name}" value="${val}"/>`
-
-            this.container.appendChild(picker)
-
-        }
-
-        if (this.default.type.includes('boolean')) {
+        } else if (this.default.type.includes('boolean')) {
 
             let toggle = html`
                <osc-inspector-checkbox name="${this.name}" class="${this.widget.getProp(this.name) ? 'on' : ''}">
@@ -103,6 +90,30 @@ class UiInspectorField extends UiWidget {
            `
 
             this.container.appendChild(toggle)
+
+        } else if (this.name.includes('color')) {
+
+            let style = window.getComputedStyle(this.widget.container),
+                cssName = this.widget.constructor.cssVariables.find(x=>x.js === this.name).css,
+                val = '#000'
+
+            try {
+                val = chroma(style.getPropertyValue('--' + this.name.replace(/([A-Z])/g, (a,s)=>'-' + s.toLowerCase())).trim()).hex('rgb')
+            } catch(e) {console.log(e)}
+
+            let picker = html`<input class="osc-inspector-color" type="color" name="${this.name}" value="${val}"/>`
+
+            this.container.appendChild(picker)
+
+        } else if (stringValue === 'auto' && this.widget.constructor.cssVariables.some(x=>x.js === this.name)) {
+
+            let style = window.getComputedStyle(this.widget.container),
+                data = this.widget.constructor.cssVariables.find(x=>x.js === this.name),
+                val = style.getPropertyValue(data.css).trim()
+
+            if (data.toJs) val = data.toJs(val)
+
+            this.container.appendChild(html`<div class="computed-value">${val}</div>`)
 
         }
 
