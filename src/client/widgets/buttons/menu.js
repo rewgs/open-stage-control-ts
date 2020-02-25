@@ -36,7 +36,7 @@ class Menu extends Widget {
             ]},
             weights: {type: 'array', value: '', help: [
                 '`Array` of `number` defining the weights of each value in `values`',
-                'Ignored when `grid` is `true`'
+                'Ignored when `mode` is `grid`'
             ]}
 
         })

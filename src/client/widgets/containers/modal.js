@@ -192,15 +192,14 @@ class Modal extends Panel {
 
     }
 
-    setContainerStyles(styles = ['geometry', 'label', 'css', 'color', 'visibility']) {
 
-        super.setContainerStyles(styles)
+    setCssVariables() {
 
-        if (styles.includes('color') && this.popupContent) {
+        super.setCssVariables()
 
-            this.popupContent.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
+        if (!this.popupContent) return
 
-        }
+        this.popupContent.style.setProperty('--widget-padding', this.getProp('padding') !== 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
 
     }
 

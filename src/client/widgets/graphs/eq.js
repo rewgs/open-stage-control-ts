@@ -1,8 +1,10 @@
 var {clip} = require('../utils'),
     Plot = require('./plot'),
-    Widget = require('../common/widget')
+    Widget = require('../common/widget'),
+    StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Eq extends Plot {
+
+module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max: 22050}}) {
 
     static description() {
 
@@ -41,17 +43,7 @@ module.exports = class Eq extends Plot {
 
     constructor(options) {
 
-        // backward compat
-        if (options.props.filters && options.props.filters.length) {
-            options.props.value = options.props.filters
-            delete options.props.filters
-        }
-
         super(options)
-
-        this.rangeX = {min:20,max:22050}
-        this.pips.x.min = '20'
-        this.pips.x.max = '22k'
 
         this.resolution = clip(this.getProp('resolution'),[64,1024])
 

@@ -72,13 +72,13 @@ class Widget extends EventEmitter {
             _style:'style',
 
 
+            colorText: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
             colorWidget: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
             colorStroke: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
             colorFill: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
             alphaStroke: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
             alphaFillOff: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
             alphaFillOn: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
-            colorText: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
 
             padding: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
 
@@ -191,9 +191,13 @@ class Widget extends EventEmitter {
         if (this.getProp('label') !== false) this.container.appendChild(this.label)
         if (this.widget) this.container.appendChild(this.widget)
         this.container._widget_instance = this
-        this.setContainerStyles()
+
 
         this.container.classList.toggle('no-interaction', !this.getProp('interaction'))
+
+        this.setContainerStyles()
+        this.setCssVariables()
+
 
     }
 
@@ -786,7 +790,7 @@ class Widget extends EventEmitter {
             case 'alphaFillOff':
             case 'alphaFillOn':
             case 'padding':
-                this.setContainerStyles(['color'])
+                this.setCssVariables()
                 return
 
             case 'precision':
@@ -815,7 +819,7 @@ class Widget extends EventEmitter {
 
     }
 
-    setContainerStyles(styles = ['geometry', 'label', 'css', 'color', 'visibility']) {
+    setContainerStyles(styles = ['geometry', 'label', 'css', 'visibility']) {
 
         if (styles.includes('visibility')) {
             this.container.style.display = this.getProp('visible') ? '' : 'none'
@@ -939,19 +943,20 @@ class Widget extends EventEmitter {
 
         }
 
-        if (styles.includes('color')) {
-
-            // color
-            for (var cssvar of ['color-text', 'color-widget', 'color-fill', 'color-stroke', 'alpha-stroke', 'alpha-fill-on', 'alpha-fill-off']) {
-                var val = this.getProp(cssvar.replace(/\-([a-z])/g, (a,s)=>s.toUpperCase()))
-                this.container.style.setProperty('--' + cssvar, val !== undefined && val != 'auto' ? val : '')
-            }
-            this.container.style.setProperty('--widget-padding', this.getProp('padding') !== undefined && this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
-
-        }
-
         return style
 
+
+    }
+
+    setCssVariables() {
+
+
+        for (var data of this.constructor.cssVariables) {
+
+            var val = this.getProp(data.js)
+            this.container.style.setProperty(data.css, val !== undefined && val !== 'auto' ? data.toCss ? data.toCss(val) : val : '')
+
+        }
 
     }
 
@@ -972,6 +977,17 @@ class Widget extends EventEmitter {
 }
 
 Widget.parsersContexts = {}
+
+Widget.cssVariables = [
+    {js: 'colorWidget', css: '--color-widget'},
+    {js: 'colorFill', css: '--color-fill'},
+    {js: 'colorStroke', css: '--color-stroke'},
+    {js: 'colorText', css: '--color-text'},
+    {js: 'padding', css: '--widget-padding', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE},
+    {js: 'alphaFillOn', css: '--alpha-fill-on', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)},
+    {js: 'alphaFillOff', css: '--alpha-fill-off', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)},
+    {js: 'alphaStroke', css: '--alpha-stroke', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)}
+]
 
 Widget.dynamicProps = [
     'visible',

@@ -167,8 +167,6 @@
     padding-bottom: 1rem;
     position: relative;
 
-    color: var(--color-text);
-
     &.main {
         :last-child, .tools {
             width:var(--nav-height);
@@ -191,8 +189,10 @@
 
     div {
 
-        --color-stroke:var(--color-widget);
+        // --color-stroke:var(--color-widget);
         --color-fill:var(--color-widget);
+
+        color: var(--color-text);
 
         line-height:calc(var(--nav-height) - 1rem);
         display:flex;

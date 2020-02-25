@@ -23,7 +23,11 @@ class Root extends StaticProperties(Panel, {scroll: false, label: false, id: 'ro
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             variables: {type: '*', value: '', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
-        }, ['label', '_geometry', 'left', 'top', 'width', 'height', 'scroll'], {
+        }, [
+            'label',
+            '_geometry', 'left', 'top', 'width', 'height',
+            'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOff', 'padding'
+        ], {
 
             tabs: {type: 'array', value: [], help: 'Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously'},
 

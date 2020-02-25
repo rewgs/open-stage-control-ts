@@ -16,6 +16,7 @@ osc-inspector-field {
     flex-direction: row;
     line-height: $field-height;
     margin-top: 4rem;
+    position: relative;
 
     label {
         width: 90rem;
@@ -53,6 +54,15 @@ osc-inspector-field {
     }
 
 
+    .computed-value {
+        position: absolute;
+        right: 94rem;
+        text-align: right;
+        pointer-events: none;
+        opacity: 0.5;
+        font-style: italic;
+        margin-top: 1rem;
+    }
 
 }
 
@@ -215,7 +225,7 @@ osc-inspector-select {
     position: relative;
     font-family: mono;
     line-height: inherit;
-    padding: 0;
+    padding: 4rem;
     overflow: hidden;
     height: $field-height;
     width: $field-height;

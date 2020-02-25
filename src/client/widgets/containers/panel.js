@@ -144,6 +144,7 @@ class Panel extends Container() {
 
             style += widget.getProp('colorWidget') === 'auto' ? '' : `--color-widget:${widget.getProp('colorWidget')};`
             style += widget.getProp('colorFill') === 'auto' ? '' : `--color-fill:${widget.getProp('colorFill')};`
+            style += widget.getProp('colorText') === 'auto' ? '' : `--color-text:${widget.getProp('colorText')};`
 
             if (!widget.getProp('visible')) style += 'display:none;'
 
@@ -200,6 +201,7 @@ class Panel extends Container() {
                 this.setTraversing()
                 return
 
+            case 'colorText':
             case 'colorWidget':
             case 'colorFill':
             case 'colorStroke':
@@ -215,15 +217,10 @@ class Panel extends Container() {
 
     }
 
-    setContainerStyles(styles = ['geometry', 'label', 'css', 'color', 'visibility']) {
+    setCssVariables() {
 
-        super.setContainerStyles(styles)
-
-        if (styles.includes('color') && this.getProp('scroll')) {
-
-            setScrollbarColor(this.container)
-
-        }
+        super.setCssVariables()
+        setScrollbarColor(this.container)
 
     }
 
