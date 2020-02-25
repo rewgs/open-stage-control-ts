@@ -1,0 +1,14 @@
+.btn {
+    background: var(--color-foreground);
+    display: block;
+    padding:15rem;
+    position: relative;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}

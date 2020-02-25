@@ -40,10 +40,6 @@ osc-inspector-field {
         background: var(--color-foreground);
         cursor: text;
 
-        -webkit-appearance:none;
-        -moz-appearance:none;
-        appearance:none;
-
         --scrollbar-size: 6rem;
 
         &::-webkit-scrollbar-thumb:horizontal {
@@ -181,9 +177,7 @@ osc-inspector-select {
         // width: 100%;
         line-height: $field-height - 8rem;
         padding: 4rem 6rem;
-        -webkit-appearance:none;
-        -moz-appearance:none;
-        appearance:none;
+
         position: absolute;
         left:0;
         opacity: 0;
@@ -217,7 +211,6 @@ osc-inspector-select {
 
 
 .osc-inspector-color {
-    appearance: none;
     padding: 0;
     border: 0;
     box-shadow: 0;
@@ -234,9 +227,7 @@ osc-inspector-select {
 
     cursor: pointer;
 
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
+
 
     &::-webkit-color-swatch {
        border: none;

@@ -1,14 +1,14 @@
 require('./stacktrace')
 require('./globals')
 
-var {loading} = require('./ui/utils'),
+var uiLoading = require('./ui/ui-loading'),
     locales = require('./locales')
 
 document.addEventListener('DOMContentLoaded', function(event) {
 
     DOM.init()
 
-    LOADING = loading(locales('loading_server'))
+    LOADING = uiLoading(locales('loading_server'))
 
     setTimeout(()=>{
 

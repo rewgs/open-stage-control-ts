@@ -25,9 +25,7 @@ class Menu extends Widget {
             layout: {type: 'string', value: 'circular', choices: ['circular', 'horizontal', 'vertical', 'grid'], help: [
                 'Defines whether the menu\'s layout should be rendered in a circle or in a box'
             ]},
-            columns: {type: 'number', value: '', help: [
-                'If `layout` is `grid`, defines the number of columns'
-            ]},
+            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             toggle: {type: 'boolean', value: false, help: 'Set to `true` to make the menu stay opened after mouse/touch release'},
             doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the menu require a double tap to be opened instead of a single tap'},
             values: {type: 'array|object', value: [1, 2, 3], help: [
@@ -241,7 +239,11 @@ class Menu extends Widget {
         this.container.classList.toggle('circular', layout === 'circular')
         this.container.classList.toggle('grid', layout === 'grid')
         this.container.classList.toggle('vertical', layout === 'vertical')
-        this.container.style.setProperty('--grid-columns', this.getProp('columns') === '' ? parseInt(this.values.length / 2) : parseInt(this.getProp('columns')))
+
+        if (layout === 'grid') {
+            var template = this.getProp('gridTemplate') || Math.round(this.values.length / 2)
+            this.menu.style.gridTemplate = template === parseInt(template) ? `none / repeat(${template}, 1fr)` : template
+        }
 
     }
 

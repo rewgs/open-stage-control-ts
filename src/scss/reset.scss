@@ -14,3 +14,10 @@
     -moz-user-select: none;
     user-select: none;
 }
+
+
+select, input, textarea {
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+}

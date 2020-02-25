@@ -41,6 +41,10 @@
         margin: calc(var(--widget-spacing) / 2) calc(1rem + var(--widget-spacing) / 2) calc(1rem + var(--widget-spacing) / 2);
     }
 
+    &.noscroll > .panel {
+        overflow: hidden;
+    }
+
     &.contains-widgets {
 
         > .panel > .widget {
@@ -76,6 +80,20 @@
                 max-width: 100%;
             }
 
+        }
+        &.layout-grid > .panel {
+            display: grid;
+            > .widget {
+                top:auto!important;
+                left:auto!important;
+                position: relative!important;
+                height: auto!important;
+                width: auto!important;
+                min-height: auto!important;
+                max-height: auto!important;
+                min-width: auto!important;
+                max-width: auto!important;
+            }
         }
 
     }
@@ -123,7 +141,8 @@
 
 }
 
-.panel-container {
+.panel-container,
+.matrix-container {
 
     @extend .widget-panel-base;
 

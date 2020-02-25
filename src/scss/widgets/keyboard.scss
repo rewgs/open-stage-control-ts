@@ -1,0 +1,68 @@
+.keyboard-container {
+
+    --widget-padding: 0;
+    --alpha-fill-off: 0;
+    --alpha-fill-on: .75;
+
+    --color-key-on: var(--color-fill);
+    --alpha-key-off: var(--alpha-fill-off);
+    --alpha-key-on: var(--alpha-fill-on);
+    --color-white-key: #ddd;
+    --color-black-key: #111;
+
+    --widget-keypad: var(--widget-padding);
+
+    .panel {
+
+        padding: var(--widget-padding);
+        flex: 1;
+        @include pseudo-stroke($z: 2);
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+    }
+
+    .key {
+
+        --alpha-fill-off: var(--alpha-key-off);
+        --alpha-fill-on: var(--alpha-key-on);
+        inner {
+            margin: 1rem 0.5rem!important;
+            --widget-padding: -1rem;
+            &:before {
+                content: none;
+            }
+            &:after {
+                background: var(--color-key-on);
+            }
+        }
+    }
+
+    .white {
+        flex: 1;
+        width: auto;
+        min-width: auto;
+        height: auto;
+        inner {
+            background: var(--color-white-key);
+        }
+    }
+
+    .black {
+        position: absolute;
+        z-index: 1;
+
+        left: calc((100% - var(--widget-keypad) * 2) / var(--nkeys) * var(--rank));
+        width: calc(100% / var(--nkeys) * 0.6);
+        margin-left: calc(100% / var(--nkeys) * -0.3 + var(--widget-keypad));
+        height: calc((100% - var(--widget-keypad) * 2) * 0.65);
+
+        inner {
+            margin-left: 0!important;
+            margin-right: 0!important;
+            background: var(--color-black-key);
+        }
+    }
+
+}

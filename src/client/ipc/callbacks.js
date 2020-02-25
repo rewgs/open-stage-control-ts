@@ -7,6 +7,7 @@ var utils = require('../ui/utils'),
     locales = require('../locales'),
     {deepCopy} = require('../utils'),
     sidepanel = require('../ui/sidepanel'),
+    UiModal = require('../ui/ui-modal'),
     notifications = require('../ui/notifications'),
     {TRAVERSING_SAMEWIDGET} = require('../events/utils'),
     raw = require('nanohtml/raw'),
@@ -82,7 +83,7 @@ module.exports = {
     },
 
     error: function(data){
-        new utils.Popup({title: raw(utils.icon('exclamation-triangle') + '&nbsp; ' + locales('error')), content: raw(data), closable:true})
+        new UiModal({title: raw(utils.icon('exclamation-triangle') + '&nbsp; ' + locales('error')), content: raw(data), closable:true})
     },
 
     reloadCss: function(){

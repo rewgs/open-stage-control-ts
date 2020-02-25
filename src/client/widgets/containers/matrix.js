@@ -1,10 +1,14 @@
-var _matrix_base = require('./_matrix_base'),
+var Panel = require('./panel'),
+    Widget = require('../common/widget'),
+    StaticProperties = require('../mixins/static_properties'),
     parser = require('../../parser'),
-    {deepCopy} = require('../../utils')
+    {deepCopy} = require('../../utils'),
+    html = require('nanohtml'),
+    {enableTraversingGestures, disableTraversingGestures} = require('../../events/drag')
 
 
 
-class Matrix extends _matrix_base {
+class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
     static description() {
 
@@ -14,16 +18,16 @@ class Matrix extends _matrix_base {
 
     static defaults() {
 
-        return super.defaults({
+        return Widget.defaults({
 
             _matrix: 'matrix',
 
             widgetType: {type: 'string', value: 'toggle', help: 'Defines the type of the widgets in the matrix'},
-            matrix: {type: 'array', value: [2,2], help: 'Defines the number of columns and and rows in the matrix'},
+            layout: {type: 'string', value: 'horizontal', choices: ['horizontal', 'vertical', 'grid'], help:''},
+            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
             start: {type: 'integer', value: 0, help: 'First widget\'s index'},
-            spacing: {type: 'integer', value: 0, help: 'Adds space between widgets'},
             traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},
-            border: {type: 'boolean', value: true, help: 'Set to `false` to disables the widgets\' borders'},
             props: {type: 'object', value: {}, help: [
                 'Defines a set of property to override the widgets\' defaults.',
                 'Formulas in this field are resolved with an extra variable representing each widget\'s index: `$`',
@@ -36,7 +40,9 @@ class Matrix extends _matrix_base {
 
     constructor(options) {
 
-        super(options)
+        super({...options, html: html`<div class="panel"></div>`})
+
+        this.value = []
 
         this.on('change',(e)=>{
 
@@ -61,17 +67,13 @@ class Matrix extends _matrix_base {
 
         })
 
-        this.widget.style.setProperty('--columns', this.getProp('matrix')[0])
-        this.widget.style.setProperty('--rows', this.getProp('matrix')[1])
-        this.widget.style.setProperty('--spacing', this.getProp('spacing') + 'rem')
 
-        if (this.getProp('borders') === false) this.widget.classList.add('noborders')
 
         this.start = parseInt(this.getProp('start'))
 
         if (parser.widgets[this.getProp('widgetType')]) {
 
-            for (let i = 0; i < this.getProp('matrix')[0] * this.getProp('matrix')[1]; i++) {
+            for (let i = 0; i < this.getProp('quantity'); i++) {
 
                 var props = this.resolveProp('props', undefined, false, false, false, {'$':i + this.start})
                 var data = this.defaultProps(i + this.start)
@@ -98,6 +100,8 @@ class Matrix extends _matrix_base {
             this.errors.widgetType = this.getProp('widgetType') + ' is not a valid widget type'
 
         }
+
+
 
     }
 

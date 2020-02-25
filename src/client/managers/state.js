@@ -1,6 +1,7 @@
 var ipc = require('../ipc'),
     widgetManager = require('./widgets'),
-    {upload, remoteBrowse} = require('../ui/utils'),
+    uiFilebrowser = require('../ui/ui-filebrowser'),
+    uiFileupload = require('../ui/ui-fileupload'),
     notifications = require('../ui/notifications'),
     {saveAs} = require('file-saver'),
     locales = require('../locales'),
@@ -103,7 +104,7 @@ var StateManager = class StateManager {
 
     saveAs() {
 
-        remoteBrowse({extension: 'state', save:true, directory: this.lastDir}, (path)=>{
+        uiFilebrowser({extension: 'state', save:true, directory: this.lastDir}, (path)=>{
             this.lastDir = path[0]
             this.save(path)
         })
@@ -112,7 +113,7 @@ var StateManager = class StateManager {
 
     browse() {
 
-        remoteBrowse({extension: 'state', directory: this.lastDir}, (path)=>{
+        uiFilebrowser({extension: 'state', directory: this.lastDir}, (path)=>{
             this.lastDir = path[0]
             ipc.send('stateOpen',{path: path})
         })
@@ -162,7 +163,7 @@ var StateManager = class StateManager {
 
     import() {
 
-        upload('.state', (path, result)=>{
+        uiFileupload('.state', (path, result)=>{
             this.load(result, true)
         }, (e)=>{
             this.loadError()
@@ -194,7 +195,7 @@ var StateManager = class StateManager {
 
         if (!path) return
         this.statePath = path
-        
+
     }
 
     pushValueState(id, value) {

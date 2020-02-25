@@ -27,6 +27,7 @@
     }
     .popup-title {
         position: relative;
+        min-height: var(--nav-height);
         height: var(--nav-height);
         display: flex;
         padding:0 15rem;
