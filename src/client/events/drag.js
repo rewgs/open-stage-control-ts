@@ -216,7 +216,7 @@ module.exports = {
             this._customBindings['drag'] !== 0 ||
             this._customBindings['draginit'] !== 0 ||
             this._customBindings['dragend'] !== 0 ||
-            !options
+            !options || options.ignoreCustomBindings
         ) {
             return
         }
@@ -243,7 +243,7 @@ module.exports = {
             this._customBindings['drag'] !== 0 ||
             this._customBindings['draginit'] !== 0 ||
             this._customBindings['dragend'] !== 0 ||
-            !options
+            !options || options.ignoreCustomBindings
         ) {
             return
         }

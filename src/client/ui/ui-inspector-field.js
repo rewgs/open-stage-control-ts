@@ -101,7 +101,7 @@ class UiInspectorField extends UiWidget {
                 val = chroma(style.getPropertyValue('--' + this.name.replace(/([A-Z])/g, (a,s)=>'-' + s.toLowerCase())).trim()).hex('rgb')
             } catch(e) {console.log(e)}
 
-            let picker = html`<input class="osc-inspector-color" type="color" name="${this.name}" value="${val}"/>`
+            let picker = html`<osc-inspector-color type="text" name="${this.name}" value="${val}" style="--color-picker-value: ${val}"></osc-inspector-color>`
 
             this.container.appendChild(picker)
 

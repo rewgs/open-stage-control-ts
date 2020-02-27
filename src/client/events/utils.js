@@ -1,4 +1,6 @@
 const Touch = window.Touch || class Touch {}
+// const cssTransformCoords = require('./transform-coords')
+
 
 module.exports = {
 
@@ -76,6 +78,12 @@ module.exports = {
         }
 
 
+        // if (!event.traversing) {
+        //     // css transfom fix (doesn't work well with traversing gestures)
+        //     var transformedCoords  = cssTransformCoords(event.firstTarget, event.movementX, event.movementY)
+        //     event.movementX = transformedCoords.x
+        //     event.movementY = transformedCoords.y
+        // }
 
         return event
 
@@ -87,6 +95,13 @@ module.exports = {
 
         event.offsetX = event.pageX - off.left
         event.offsetY = event.pageY - off.top
+
+        // if (!event.traversing) {
+        //     // css transfom fix (doesn't work well with traversing gestures)
+        //     var transformedCoords  = cssTransformCoords(event.firstTarget, event.offsetX, event.offsetY)
+        //     event.offsetX = transformedCoords.x
+        //     event.offsetY = transformedCoords.y
+        // }
 
     },
 

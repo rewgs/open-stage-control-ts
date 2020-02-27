@@ -13,7 +13,13 @@
     height: 100rem;
 
     contain: strict;
+    @supports not (contain: strict) {
+        transform: rotateZ(0); // force new stacking context
+    }
+
     -webkit-tap-highlight-color:transparent;
+
+    // transform-origin: top left;
 
     --widget-padding: 1rem;
 
@@ -60,13 +66,16 @@
 
     canvas {
         flex: 1;
+        height: auto;
         min-height: 0;
+        min-width: 0;
     }
 
     > inner {
         overflow: hidden;
         position: relative;
         flex: 1;
+        border-radius: inherit;
     }
 
     &.no-interaction {

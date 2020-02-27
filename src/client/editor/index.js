@@ -399,12 +399,8 @@ var Editor = class Editor {
 
         this.unselect()
         this.selectedWidgets = []
-        DOM.get('.disable-editor')[0].classList.add('on')
-        DOM.get('.enable-editor')[0].classList.remove('on')
-        document.body.classList.remove('editor-enabled')
 
-        var gridForm = DOM.get('#grid-width-form')[0]
-        if (gridForm) gridForm.parentNode.removeChild(gridForm)
+        document.body.classList.remove('editor-enabled')
 
         keyboardJS.setContext('global')
 

@@ -20,6 +20,13 @@
 
     --widget-padding: 1rem;
 
+    &.alt {
+        --widget-padding: 10rem;
+        --alpha-fill-off: 0.25;
+        --alpha-fill-on: 1;
+
+    }
+
 }
 
 .knob-container,

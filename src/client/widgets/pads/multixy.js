@@ -248,12 +248,14 @@ module.exports = class MultiXy extends Pad {
 
         switch (propName) {
 
+            case 'colorText':
             case 'colorWidget':
             case 'colorFill':
             case 'colorStroke':
             case 'alphaStroke':
             case 'alphaFillOff':
             case 'alphaFillOn':
+            case 'padding':
                 for (var w of this.pads) {
                     w.onPropChanged(propName)
                 }

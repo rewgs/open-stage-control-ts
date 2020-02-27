@@ -2,8 +2,9 @@ var UiWidget = require('./ui-widget'),
     {icon} = require('./utils'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
-    SINGLETON = null,
-    CONTAINER = null
+    MODAL_SINGLETON = null,
+    MODAL_CONTAINER = null,
+    OPENED_MODALS = 0
 
 class UiModal extends UiWidget {
 
@@ -11,12 +12,12 @@ class UiModal extends UiWidget {
 
        super(options)
 
-       if (!CONTAINER) CONTAINER = DOM.get('osc-modal-container')[0]
+       if (!MODAL_CONTAINER) MODAL_CONTAINER = DOM.get('osc-modal-container')[0]
 
        if (options.closable) {
 
-           if (SINGLETON) SINGLETON.close()
-           SINGLETON = this
+           if (MODAL_SINGLETON) MODAL_SINGLETON.close()
+           MODAL_SINGLETON = this
 
        }
 
@@ -77,7 +78,11 @@ class UiModal extends UiWidget {
 
        if (this.escKey) document.removeEventListener('keydown', this.escKeyHandler)
        if (this.enterKey) document.removeEventListener('keydown', this.enterKeyHandler)
-       CONTAINER.removeChild(this.container)
+
+
+       if (--OPENED_MODALS === 0) MODAL_CONTAINER.classList.remove('backdrop')
+
+       MODAL_CONTAINER.removeChild(this.container)
 
        this.trigger('close')
 
@@ -90,7 +95,10 @@ class UiModal extends UiWidget {
 
        if (this.escKey) document.addEventListener('keydown', this.escKeyHandler)
        if (this.enterKey) document.addEventListener('keydown', this.enterKeyHandler)
-       CONTAINER.appendChild(this.container)
+
+       if (++OPENED_MODALS === 1) MODAL_CONTAINER.classList.add('backdrop')
+
+       MODAL_CONTAINER.appendChild(this.container)
 
        this.trigger('open')
    }

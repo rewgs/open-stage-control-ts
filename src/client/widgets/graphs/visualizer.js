@@ -1,7 +1,8 @@
 var {clip} = require('../utils'),
     Widget = require('../common/widget'),
     Plot = require('./plot'),
-    StaticProperties = require('../mixins/static_properties')
+    StaticProperties = require('../mixins/static_properties'),
+    canvasQueue = require('../common/queue')
 
 
 module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false, interaction: false}) {
@@ -42,6 +43,8 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
         this.watchDuration = 1000 * this.getProp('duration')
         this.ticks = 0
 
+        this.bindedLoop = this.loop.bind(this)
+
     }
 
     startLoop() {
@@ -49,9 +52,9 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
         this.clock = Date.now()
         if (!this.looping) {
             this.lastUpdate = Date.now()
+            canvasQueue.on('frame', this.bindedLoop)
             this.looping = true
             this.ticks = 0
-            this.loop()
         }
     }
 
@@ -59,11 +62,12 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
 
         var t = Date.now()
 
-        if (t -this.clock >= this.watchDuration) {
+        if (t - this.clock >= this.watchDuration) {
+            canvasQueue.off('frame', this.bindedLoop)
             this.looping = false
         }
 
-        this.ticks += (t - this.lastUpdate) / (1000/this.fps)
+        this.ticks += (t - this.lastUpdate) / (1000 / this.fps)
 
         if (Math.floor(this.ticks) > 0) {
             this.shiftData(Math.floor(this.ticks))
@@ -73,17 +77,11 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
 
         this.lastUpdate = t
 
-        if (!this.looping) return
-
-        setTimeout(()=>{
-            this.loop()
-        }, (1000/this.fps))
-
     }
 
     shiftData(n) {
 
-        for (var i=0; i<n; i++) {
+        for (var i = 0; i < n; i++) {
             this.value.push(this.value[this.length - 1])
             this.value.splice(0,1)
         }
@@ -98,15 +96,8 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
 
     setValue(v, options={}) {
 
-        if (Array.isArray(v) && v.length == this.length) {
 
-            this.value = v
-            this.startLoop()
-
-            if (options.sync) this.changed(options)
-
-
-        } else if (typeof(v) == 'number'){
+        if (typeof(v) === 'number') {
 
             this.value[this.length - 1] = v
             this.startLoop()
@@ -114,7 +105,24 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
             if (options.sync) this.changed(options)
 
 
+        } else if (Array.isArray(v) && v.length === this.length) {
+
+            this.value = v
+            this.startLoop()
+
+            if (options.sync) this.changed(options)
+
+
         }
+
+    }
+
+    onRemove() {
+
+        if (this.looping) {
+            canvasQueue.off('frame', this.bindedLoop)
+        }
+        super.onRemove()
 
     }
 

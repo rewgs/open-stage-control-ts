@@ -91,7 +91,7 @@ module.exports = class Keyboard extends Panel {
             data.address = '@{parent.address}'
             data.preArgs = `JS{{
                 var a = @{parent.preArgs};
-                var b = typeof a === 'string' and a === '' ? [] : Array.isArray(a) ? a : [a];
+                var b = typeof a === 'string' && a === '' ? [] : Array.isArray(a) ? a : [a];
                 return b.concat([${i}])
             }}`
 

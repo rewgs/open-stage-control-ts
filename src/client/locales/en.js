@@ -33,6 +33,11 @@ module.exports = {
     fs_unnavailable: 'Fullscreen not available',
     fs_addtohome: 'You must add this page to your home screen to launch it in fullscreen',
 
+    // inspector
+    inspector_title: 'Inspector',
+    inspector_color_confirm: 'Confirm',
+    inspector_color_apply: 'Apply',
+
     // remote save
     remotesave_open: 'Open (on the server)',
     remotesave_save: 'Save (on the server)',

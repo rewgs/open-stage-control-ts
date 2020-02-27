@@ -32,6 +32,11 @@ module.exports = { // @https://github.com/suhr
     fs_unnavailable: 'Полный экран не доступен',
     fs_addtohome: 'Необходимо добавить эту страницу на главный экран чтобы запустить её в полноэкранном режиме',
 
+    // inspector
+    inspector_title: 'Inspector',
+    inspector_color_confirm: 'Confirm',
+    inspector_color_apply: 'Apply',
+
     // remote save
     remotesave_open: 'Open (on the server)',
     remotesave_save: 'Save (on the server)',

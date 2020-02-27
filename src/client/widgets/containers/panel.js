@@ -22,8 +22,8 @@ class Panel extends Container() {
 
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
-            scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
+            scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
         }, [], {
@@ -44,9 +44,9 @@ class Panel extends Container() {
     constructor(options) {
 
 
-        super({...options, html: html`<div class="panel"></div>`})
+        super({...options, html: html`<inner></inner>`})
 
-        this.container.classList.toggle('noscroll', this.getProp('scroll') === false)
+        this.container.classList.toggle('no-scroll', this.getProp('scroll') === false)
         this.container.classList.add('layout-' + this.getProp('layout'))
 
         if (this.getProp('layout') === 'grid') {
@@ -157,7 +157,7 @@ class Panel extends Container() {
             this.tabs.push(widget)
             this.navigation.appendChild(html`
                 <div class="tablink" data-widget="${widget.hash}" style="${style}">
-                    ${widget.label.innerHTML}
+                    ${raw(widget.label.innerHTML)}
                 </div>
             `)
 

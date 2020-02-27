@@ -1,64 +1,6 @@
 var Widget = require('./widget'),
-    resize = require('../../events/resize')
-
-
-class CanvasQueue {
-
-    constructor() {
-
-        this.queue = {}
-        this.flushed = 0
-        this.running = false
-        this.frameLength = 1000 / CANVAS_FRAMERATE
-        this.lastFrame = 0
-        this.bindedLoop = this.loop.bind(this)
-
-    }
-
-    push(widget) {
-
-        this.queue[widget.hash] = widget
-        this.flushed = 0
-
-        if (!this.running) {
-            this.running = true
-            requestAnimationFrame(this.bindedLoop)
-        }
-
-    }
-
-    flush() {
-
-        for (var h in this.queue) {
-            this.queue[h].draw()
-        }
-
-        this.queue = {}
-        this.flushed++
-
-    }
-
-    loop(timestamp) {
-
-        if (this.flushed >= 10) {
-            this.running = false
-            return
-        }
-
-        requestAnimationFrame(this.bindedLoop)
-
-        var delta = timestamp - this.lastFrame
-
-        if (delta > this.frameLength) {
-            this.lastFrame = timestamp - (delta % this.frameLength)
-            this.flush()
-        }
-
-    }
-
-}
-
-var canvasQueue = new CanvasQueue()
+    resize = require('../../events/resize'),
+    canvasQueue = require('./queue')
 
 
 class Canvas extends Widget {
@@ -82,7 +24,7 @@ class Canvas extends Widget {
 
         this.clearRect = []
 
-        this.visible = false
+        this.hasSize = false
 
         this.colors = {}
         this.cssVars = {}
@@ -123,7 +65,10 @@ class Canvas extends Widget {
 
         this.cacheCanvasStyle(style)
 
-        if (!this.visible) this.visible = true
+        if (!this.hasSize) {
+            this.hasSize = true
+            this.setVisibility()
+        }
 
         this.batchDraw()
 
@@ -172,11 +117,15 @@ class Canvas extends Widget {
 
     }
 
+    isVisible() {
+
+        return this.hasSize && super.isVisible()
+
+    }
+
     batchDraw() {
 
-        if (this.visible) {
-            canvasQueue.push(this)
-        }
+        if (this.visible) canvasQueue.push(this)
 
     }
 

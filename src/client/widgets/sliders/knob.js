@@ -56,8 +56,6 @@ module.exports = class Knob extends Slider {
 
         super(options)
 
-        this.widget.classList.add('knob')
-
         this.lastOffsetX = 0
         this.lastOffsetY = 0
         this.minDimension = 0

@@ -32,6 +32,12 @@ module.exports = {
     fs_unnavailable: 'Plein écran indisponible',
     fs_addtohome: 'Vous devez ajouter cette page à votre écran d\'accueil pour pouvoir l\'ouvrir en plein écran.',
 
+
+    // inspector
+    inspector_title: 'Inspecteur',
+    inspector_color_confirm: 'Confirmer',
+    inspector_color_apply: 'Appliquer',
+
     // remote save
     remotesave_open: 'Ouvrir (sur le serveur)',
     remotesave_save: 'Enregistrer (sur le serveur)',

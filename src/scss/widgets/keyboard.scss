@@ -1,18 +1,18 @@
 .keyboard-container {
 
-    --widget-padding: 0;
+    --widget-padding: 0rem;
     --alpha-fill-off: 0;
     --alpha-fill-on: .75;
 
     --color-key-on: var(--color-fill);
     --alpha-key-off: var(--alpha-fill-off);
     --alpha-key-on: var(--alpha-fill-on);
-    --color-white-key: #ddd;
-    --color-black-key: #111;
+    --color-white-key: #ccc;
+    --color-black-key: #1A1A1A;
 
     --widget-keypad: var(--widget-padding);
 
-    .panel {
+    > inner {
 
         padding: var(--widget-padding);
         flex: 1;

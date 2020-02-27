@@ -6,7 +6,6 @@ var utils = require('../ui/utils'),
     editor = require('../editor/'),
     locales = require('../locales'),
     {deepCopy} = require('../utils'),
-    sidepanel = require('../ui/sidepanel'),
     UiModal = require('../ui/ui-modal'),
     notifications = require('../ui/notifications'),
     {TRAVERSING_SAMEWIDGET} = require('../events/utils'),
@@ -167,8 +166,6 @@ module.exports = {
             editor.history = data.history
             editor.historyState = data.historyState
             if (data.editorEnabled) editor.enable()
-
-            if (data.sidepanelOpened) sidepanel.open()
 
             if (data.traversing === TRAVERSING_SAMEWIDGET) {
                 DOM.get('.traversingSmart')[0].click()

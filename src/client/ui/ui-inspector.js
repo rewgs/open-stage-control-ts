@@ -1,9 +1,13 @@
 var UiWidget = require('./ui-widget'),
     UiInspectorField = require('./ui-inspector-field'),
+    UiColorPicker = require('./ui-colorpicker'),
     morph = require('nanomorph'),
     {widgets, defaults} = require('../widgets/'),
     {deepCopy} = require('../utils'),
     html = require('nanohtml')
+
+
+
 
 class UiInspector extends UiWidget {
 
@@ -31,6 +35,15 @@ class UiInspector extends UiWidget {
 
         })
 
+        this.colorPicker = new UiColorPicker()
+        this.colorPicker.on('change', ()=>{
+            var textarea = DOM.get(this.container, `textarea[name="${this.colorPicker.name}"]`)
+            if (textarea) {
+                textarea[0].value = this.colorPicker.value
+                DOM.dispatchEvent(textarea[0], 'change')
+            }
+        })
+
         this.container.addEventListener('click', (e)=>{
 
             var node = e.target
@@ -44,6 +57,12 @@ class UiInspector extends UiWidget {
                     textarea[0].value = !node.classList.contains('on')
                     DOM.dispatchEvent(textarea[0], 'change')
                 }
+
+            } else if (node.tagName === 'OSC-INSPECTOR-COLOR') {
+
+                this.colorPicker.setName(node.getAttribute('name'))
+                this.colorPicker.setValue(node.getAttribute('value'))
+                this.colorPicker.open()
 
             }
 
@@ -67,6 +86,7 @@ class UiInspector extends UiWidget {
             this.container.innerHTML = ''
             this.mounted = false
             this.clearTimeout = null
+            this.colorPicker.close()
         })
 
     }
@@ -124,11 +144,6 @@ class UiInspector extends UiWidget {
 
             } else {
 
-                // if (widget.parent !== widgetManager && widget.parent.getProp('type') === 'strip') {
-                //     // special case for widgets in strips
-                //     if (propName === 'top' || propName === 'left' || propName === (widget.parent.getProp('horizontal') ? 'height' : 'width')) continue
-                // }
-
                 field = new UiInspectorField({
                     parent: this,
                     widget: widget,
@@ -137,6 +152,7 @@ class UiInspector extends UiWidget {
                     default: defaults[w.props.type][propName],
                     tabIndex: tabIndex++
                 }).container
+
                 if (!field) continue
 
             }
@@ -145,6 +161,7 @@ class UiInspector extends UiWidget {
             } else {
                 content.appendChild(field)
             }
+
 
         }
 
@@ -158,6 +175,17 @@ class UiInspector extends UiWidget {
         }
 
         this.mounted = true
+
+        if (this.colorPicker.opened) {
+
+            var picker = DOM.get(this.container, `osc-inspector-color[name="${this.colorPicker.name}"]`)
+            if (picker) {
+                this.colorPicker.setValue(picker[0].getAttribute('value'))
+            } else {
+                this.colorPicker.close()
+            }
+
+        }
 
     }
 

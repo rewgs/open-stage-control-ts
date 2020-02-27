@@ -62,6 +62,10 @@ class UiTree extends UiWidget {
             })
         }
 
+        widgetManager.on('prop-changed', (e)=>{
+            console.log(e)
+        })
+
     }
 
     clear() {
