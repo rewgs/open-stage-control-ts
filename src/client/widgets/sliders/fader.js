@@ -17,7 +17,7 @@ module.exports = class Fader extends Slider {
 
             _fader:'fader',
 
-            mode: {type: 'string', value: 'flat', choices: ['flat', 'line'], help: 'Design style'},
+            mode: {type: 'string', value: 'compact', choices: ['compact', 'classic', 'round'], help: 'Design style'},
             horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
             alignRight: {type: 'boolean', value: false, help: 'Set to `true` to invert the pip\'s and fader\'s position'},
             pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
@@ -65,7 +65,7 @@ module.exports = class Fader extends Slider {
 
         this.gaugeGradient = null
 
-        this.container.classList.toggle('alt', this.getProp('mode') !== 'flat')
+        this.container.classList.add('design-' + this.getProp('mode'))
 
         if (false && this.getProp('pips')) {
 
@@ -200,7 +200,7 @@ module.exports = class Fader extends Slider {
             o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
             dashed = this.getProp('dashed'),
-            flat = this.getProp('mode') === 'flat'
+            compact = this.getProp('mode') === 'compact'
 
         // sharp border trick
         if (width % 2 && parseInt(m) === m) m -= 0.5
@@ -211,7 +211,7 @@ module.exports = class Fader extends Slider {
 
         this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
 
-        if (flat) {
+        if (compact) {
             this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
         } else {
             this.ctx.lineWidth = 2 * PXSCALE
@@ -242,7 +242,7 @@ module.exports = class Fader extends Slider {
 
         if (dashed) this.ctx.setLineDash([])
 
-        if (flat) {
+        if (compact) {
 
             // stroke
 
@@ -265,11 +265,44 @@ module.exports = class Fader extends Slider {
             this.ctx.fillStyle = this.cssVars.colorFill
 
             this.ctx.beginPath()
-            this.ctx.rect(this.gaugePadding, Math.min(d, height - 3 * PXSCALE), width - this.gaugePadding * 2, PXSCALE)
+            this.ctx.rect(this.gaugePadding, Math.min(d, height - this.gaugePadding - PXSCALE), width - this.gaugePadding * 2, PXSCALE)
             this.ctx.fill()
 
             this.clearRect = [0, 0, width, height]
 
+
+        } else if (this.getProp('mode') === 'classic') {
+
+
+            if (this.cssVars.alphaStroke) {
+
+                this.ctx.globalAlpha = 1
+                this.ctx.fillStyle = this.cssVars.colorForegroud
+
+                this.ctx.beginPath()
+                this.ctx.rect(m - 6 * PXSCALE, d - 10 * PXSCALE, 12 * PXSCALE, 20 * PXSCALE)
+                this.ctx.fill()
+
+
+                this.ctx.globalAlpha = this.cssVars.alphaStroke
+                this.ctx.strokeStyle = this.cssVars.colorStroke
+
+                this.ctx.beginPath()
+                this.ctx.lineWidth = PXSCALE
+                this.ctx.rect(m - 5.5 * PXSCALE, d - 9.5 * PXSCALE, 11 * PXSCALE, 19 * PXSCALE)
+                this.ctx.stroke()
+
+            }
+
+            this.ctx.globalAlpha = 1
+            this.ctx.fillStyle = this.cssVars.colorWidget
+
+            this.ctx.beginPath()
+            this.ctx.rect(m - 3 * PXSCALE, d, 6 * PXSCALE, PXSCALE)
+            this.ctx.fill()
+
+
+            this.clearRect = [m - 10 * PXSCALE, this.gaugePadding - 10 * PXSCALE, 20 * PXSCALE, height - 2 * this.gaugePadding + 20 * PXSCALE]
 
         } else {
 
@@ -280,12 +313,15 @@ module.exports = class Fader extends Slider {
             this.ctx.arc(m, d, 3 * PXSCALE, 0, 2 * Math.PI)
             this.ctx.fill()
 
-            this.ctx.globalAlpha = 0.25
-            this.ctx.fillStyle = this.cssVars.colorFill
 
-            this.ctx.beginPath()
-            this.ctx.arc(m, d, 10 * PXSCALE, 0, 2 * Math.PI)
-            this.ctx.fill()
+            if (this.cssVars.alphaStroke) {
+                this.ctx.globalAlpha = this.cssVars.alphaStroke
+                this.ctx.fillStyle = this.cssVars.colorFill
+
+                this.ctx.beginPath()
+                this.ctx.arc(m, d, 10 * PXSCALE, 0, 2 * Math.PI)
+                this.ctx.fill()
+            }
 
             this.clearRect = [m - 10 * PXSCALE, this.gaugePadding - 10 * PXSCALE, 20 * PXSCALE, height - 2 * this.gaugePadding + 20 * PXSCALE]
 
