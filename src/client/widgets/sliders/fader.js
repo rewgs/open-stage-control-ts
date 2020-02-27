@@ -17,6 +17,7 @@ module.exports = class Fader extends Slider {
 
             _fader:'fader',
 
+            mode: {type: 'string', value: 'flat', choices: ['flat', 'line'], help: 'Design style'},
             horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
             alignRight: {type: 'boolean', value: false, help: 'Set to `true` to invert the pip\'s and fader\'s position'},
             pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
@@ -62,17 +63,9 @@ module.exports = class Fader extends Slider {
 
         super(options)
 
-        this.widget.classList.add('fader')
         this.gaugeGradient = null
 
-        if (this.getProp('horizontal')) {
-            this.widget.classList.add('horizontal')
-            this.container.classList.add('horizontal')
-        }
-
-        if (this.getProp('alignRight') && !this.getProp('horizontal')) {
-            this.widget.classList.add('align-right')
-        }
+        this.container.classList.toggle('alt', this.getProp('mode') !== 'flat')
 
         if (false && this.getProp('pips')) {
 
@@ -205,28 +198,41 @@ module.exports = class Fader extends Slider {
         var percent = this.getProp('steps') ? this.valueToPercent(this.value) : this.percent,
             d = Math.round(this.percentToCoord(percent)),
             o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
-            m = this.getProp('horizontal') ? this.height / 2 : this.width / 2
+            m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
+            dashed = this.getProp('dashed'),
+            flat = this.getProp('mode') === 'flat'
 
         // sharp border trick
         if (width % 2 && parseInt(m) === m) m -= 0.5
 
-        var dashed = this.getProp('dashed')
-
         this.clear()
 
+
+
         this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
-        this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
+
+        if (flat) {
+            this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
+        } else {
+            this.ctx.lineWidth = 2 * PXSCALE
+        }
+
 
         if (dashed) this.ctx.setLineDash([PXSCALE, PXSCALE])
 
+
         if (this.cssVars.alphaFillOff) {
+            // gaugo off
             this.ctx.globalAlpha = this.cssVars.alphaFillOff
             this.ctx.beginPath()
             this.ctx.moveTo(m, height - this.gaugePadding)
             this.ctx.lineTo(m, this.gaugePadding)
             this.ctx.stroke()
         }
+
+
         if (this.cssVars.alphaFillOn) {
+            // gaugo on
             this.ctx.globalAlpha = this.cssVars.alphaFillOn
             this.ctx.beginPath()
             this.ctx.moveTo(m, o)
@@ -236,27 +242,57 @@ module.exports = class Fader extends Slider {
 
         if (dashed) this.ctx.setLineDash([])
 
-        this.ctx.globalAlpha = this.cssVars.alphaStroke
-        this.ctx.strokeStyle = this.cssVars.colorStroke
+        if (flat) {
 
-        this.ctx.beginPath()
-        this.ctx.moveTo(0, 0)
-        this.ctx.lineTo(width, 0)
-        this.ctx.lineTo(width, height)
-        this.ctx.lineTo(0, height)
-        this.ctx.closePath()
-        this.ctx.lineWidth = 2 * PXSCALE
-        this.ctx.stroke()
+            // stroke
+
+            this.ctx.globalAlpha = this.cssVars.alphaStroke
+            this.ctx.strokeStyle = this.cssVars.colorStroke
+
+            this.ctx.beginPath()
+            this.ctx.moveTo(0, 0)
+            this.ctx.lineTo(width, 0)
+            this.ctx.lineTo(width, height)
+            this.ctx.lineTo(0, height)
+            this.ctx.closePath()
+            this.ctx.lineWidth = 2 * PXSCALE
+            this.ctx.stroke()
 
 
-        this.ctx.globalAlpha = 1
-        this.ctx.fillStyle = this.cssVars.colorFill
+            // flat knob
 
-        this.ctx.beginPath()
-        this.ctx.rect(this.gaugePadding, Math.min(d, height - 3 * PXSCALE), width - this.gaugePadding * 2, PXSCALE)
-        this.ctx.fill()
+            this.ctx.globalAlpha = 1
+            this.ctx.fillStyle = this.cssVars.colorFill
 
-        this.clearRect = [0, 0, width, height]
+            this.ctx.beginPath()
+            this.ctx.rect(this.gaugePadding, Math.min(d, height - 3 * PXSCALE), width - this.gaugePadding * 2, PXSCALE)
+            this.ctx.fill()
+
+            this.clearRect = [0, 0, width, height]
+
+
+        } else {
+
+            this.ctx.globalAlpha = 1
+            this.ctx.fillStyle = this.cssVars.colorFill
+
+            this.ctx.beginPath()
+            this.ctx.arc(m, d, 3 * PXSCALE, 0, 2 * Math.PI)
+            this.ctx.fill()
+
+            this.ctx.globalAlpha = 0.25
+            this.ctx.fillStyle = this.cssVars.colorFill
+
+            this.ctx.beginPath()
+            this.ctx.arc(m, d, 10 * PXSCALE, 0, 2 * Math.PI)
+            this.ctx.fill()
+
+            this.clearRect = [m - 10 * PXSCALE, this.gaugePadding - 10 * PXSCALE, 20 * PXSCALE, height - 2 * this.gaugePadding + 20 * PXSCALE]
+
+        }
+
+
+
 
     }
 

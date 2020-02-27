@@ -66,6 +66,12 @@ class Root extends StaticProperties(Panel, {scroll: false, label: false, id: 'ro
 
     }
 
+    isVisible() {
+
+        return true
+
+    }
+
 
 }
 

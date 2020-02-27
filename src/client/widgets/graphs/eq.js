@@ -4,7 +4,7 @@ var {clip} = require('../utils'),
     StaticProperties = require('../mixins/static_properties')
 
 
-module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max: 22050}}) {
+module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max: 22000}}) {
 
     static description() {
 

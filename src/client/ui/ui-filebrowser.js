@@ -4,13 +4,15 @@ var locales = require('../locales'),
     ipc = require('../ipc'),
     doubleClick = require('../events/double-click'),
     {icon} = require('./utils'),
-    UiModal = require('./ui-modal')
+    UiModal = require('./ui-modal'),
+    keyboardJS = require('keyboardjs')
 
 
 module.exports = function UiFilebrowser(options, callback) {
 
     var save = options.save,
-        saveInputFocus = undefined
+        saveInputFocus = undefined,
+        previousKbContext = keyboardJS.getContext()
 
     var popup = new UiModal({
         closable: true,
@@ -192,6 +194,7 @@ module.exports = function UiFilebrowser(options, callback) {
         ipc.off('listDir', null, popup)
         document.removeEventListener('keydown', keyDownHandler)
         document.removeEventListener('keyup', keyUpHandler)
+        keyboardJS.setContext(previousKbContext)
     })
 
     browser.appendChild(ariane)
@@ -202,5 +205,6 @@ module.exports = function UiFilebrowser(options, callback) {
     ipc.send('listDir', {extension: options.extension, path: options.directory ? [options.directory] : null})
 
     popup.open()
+    keyboardJS.setContext('filebrowser')
 
 }

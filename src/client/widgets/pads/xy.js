@@ -1,16 +1,9 @@
 var Pad = require('./pad'),
-    Fader = require('./_fake_fader'),
+    Fader = require('../sliders/fader'),
     doubletab = require('../mixins/double_tap'),
     touchstate = require('../mixins/touch_state')
 
 var faderDefaults = Fader.defaults()._props()
-
-class XyFader extends Fader {
-
-    draw(){}
-    batchDraw(){}
-
-}
 
 module.exports = class Xy extends Pad {
 
@@ -56,9 +49,10 @@ module.exports = class Xy extends Pad {
         super(options)
 
         this.faders = {
-            x: new XyFader({props:{
+            x: new Fader({props:{
                 ...faderDefaults,
                 id:0,
+                visible:false,
                 horizontal:true,
                 default:this.getProp('default').length === 2 ? this.getProp('default')[0] : '',
                 snap:this.getProp('snap'),
@@ -67,9 +61,10 @@ module.exports = class Xy extends Pad {
                 logScale:this.getProp('logScaleX'),
                 sensitivity: this.getProp('sensitivity'),
             }, parent: this}),
-            y: new XyFader({props:{
+            y: new Fader({props:{
                 ...faderDefaults,
                 id:1,
+                visible:false,
                 horizontal:false,
                 default:this.getProp('default').length === 2 ? this.getProp('default')[1] : '',
                 snap:this.getProp('snap'),
@@ -89,10 +84,9 @@ module.exports = class Xy extends Pad {
         this.active = false
 
         this.on('draginit',(e)=>{
-            e.stopPropagation = true
             this.active = true
-            this.faders.x.trigger('draginit', e)
-            this.faders.y.trigger('draginit', e)
+            this.faders.x.trigger('draginit', {...e, stopPropagation: true})
+            this.faders.y.trigger('draginit', {...e, stopPropagation: true})
             this.dragHandle()
         }, {element: this.canvas})
 
@@ -103,10 +97,9 @@ module.exports = class Xy extends Pad {
         }, {element: this.canvas})
 
         this.on('dragend', (e)=>{
-            e.stopPropagation = true
             this.active = false
-            this.faders.x.trigger('dragend', e)
-            this.faders.y.trigger('dragend', e)
+            this.faders.x.trigger('dragend', {...e, stopPropagation: true})
+            this.faders.y.trigger('dragend', {...e, stopPropagation: true})
             if (this.getProp('spring')) {
                 this.setValue([this.faders.x.getSpringValue(),this.faders.y.getSpringValue()],{sync:true,send:true})
             } else {
@@ -261,8 +254,9 @@ module.exports = class Xy extends Pad {
 
             }
 
-            this.ctx.globalAlpha = this.cssVars.alphaStroke
+            this.ctx.globalAlpha = this.cssVars.alphaFillOn
             this.ctx.stroke()
+
         }
 
         if (!pipsDrawn) this.clearRect = [x - this.pointSize - 2 * PXSCALE, y - this.pointSize - 2 * PXSCALE, (this.pointSize + PXSCALE) * 4, (this.pointSize + PXSCALE) * 4]

@@ -28,6 +28,7 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
             quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
             start: {type: 'integer', value: 0, help: 'First widget\'s index'},
             traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},
+            restrainModals: {type: 'boolean', value: true, help: 'Set to `false` to let modal widgets ignore this container\'s boundaries.'},
             props: {type: 'object', value: {}, help: [
                 'Defines a set of property to override the widgets\' defaults.',
                 'Formulas in this field are resolved with an extra variable representing each widget\'s index: `$`',
@@ -40,7 +41,7 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
     constructor(options) {
 
-        super({...options, html: html`<div class="panel"></div>`})
+        super(options)
 
         this.value = []
 

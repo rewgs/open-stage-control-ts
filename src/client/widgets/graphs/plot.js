@@ -56,8 +56,8 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
         this.logScaleY = this.getProp('logScaleY')
         this.pips = {
             x : {
-                min: Math.abs(this.rangeX.min)>=1000?this.rangeY.min/1000+'k':this.rangeX.min,
-                max: Math.abs(this.rangeX.max)>=1000?this.rangeY.max/1000+'k':this.rangeX.max
+                min: Math.abs(this.rangeX.min)>=1000?this.rangeX.min/1000+'k':this.rangeX.min,
+                max: Math.abs(this.rangeX.max)>=1000?this.rangeX.max/1000+'k':this.rangeX.max
             },
             y : {
                 min: Math.abs(this.rangeY.min)>=1000?this.rangeY.min/1000+'k':this.rangeY.min,

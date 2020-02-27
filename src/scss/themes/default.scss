@@ -6,45 +6,32 @@ $text: white;
 
 :root {
 
-    ////////////////////// COLOR SCHEME
+    ////////////////////// old colors
 
-    --color-text: #{transparentize($text, .4)};
-    --color-text-fade: #{transparentize($text, .6)};
-
-    --color-accent: #{$accent};
-    // --color-grid: #{transparentize($accent, 0.95)};
-
-    --color-bg: #{$base};
-    --color-track: #{desaturate(mix($base, $tone, 95), 2)};
-    --color-fg: #{desaturate(mix($base, $tone, 88), 5)};
-    --color-raised: #{desaturate(mix($base, $tone, 75), 5)};
-    --color-light: #{desaturate(transparentize($tone, 0.90), 50)};
-
+    --color-text-fade: pink;
+    --color-bg: pink;
+    --color-track: pink;
+    --color-fg: pink;
+    --color-raised: pink;
+    --color-light: pink;
+    --color-custom: pink;
     --color-white: white;
-
-    --color-notification: #{rgba(black, 0.8)};
-
-    ////////////////////// AUTO
-
-    --color-custom: var(--color-accent);
-
-
-    ////////////////////// GLASS EFFET
-
-    --glass-opacity: 0.15;
 
     ////////////////////// MISC
 
-    --nav-height:40rem;
-    --sidepanel-size:300rem;
-
-    --grid-width:10;
+    --nav-height: 40rem;
+    --grid-width: 10;
 
 
+    --color-text: #{transparentize($text, .4)};
+
+    --color-accent: #{$accent};
 
     --color-foreground: #{$base};
     --color-background: #{mix($base, black, 85)};
+
     --color-grid: rgba(0,0,0, 0.1);
+    --color-notification: #{rgba(black, 0.8)};
 
     --color-context-menu: #{mix($base, white, 95)};
     --color-context-menu-text: #{transparentize($text, .2)};

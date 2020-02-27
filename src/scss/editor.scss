@@ -3,7 +3,7 @@
 }
 .widget.editing:after,
 .tablink.editing:after,
-.modal-container.editing .popup-wrapper:after {
+.modal-container.editing > .popup > .popup-wrapper:after {
     content:"";
     z-index: 999!important;
     position: absolute;
@@ -29,13 +29,18 @@
 
 .editor-enabled {
     &:not(.no-grid) {
-        .panel {
-            background-image: linear-gradient(to bottom, var(--color-grid)  1rem,  transparent 1rem),
-            linear-gradient(to right, var(--color-grid)  1rem,  transparent 1rem);
-            --size: calc(var(--grid-width) * 1rem);
-            background-size: var(--size) var(--size);
-            background-attachment: local;
-            background-position: 0rem 0;
+        .root-container,
+        .tab-container,
+        .modal-container,
+        .panel-container {
+            > inner {
+                background-image: linear-gradient(to bottom, var(--color-grid)  1rem,  transparent 1rem),
+                linear-gradient(to right, var(--color-grid)  1rem,  transparent 1rem);
+                --size: calc(var(--grid-width) * 1rem);
+                background-size: var(--size) var(--size);
+                background-attachment: local;
+                background-position: 0rem 0;
+            }
         }
     }
 

@@ -168,6 +168,7 @@ class Widget extends EventEmitter {
         this.reCreateOptions = options.reCreateOptions
         this.removed = false
         this.mounted = false
+        this.visible = true
 
         this.createPropsCache()
 
@@ -197,6 +198,7 @@ class Widget extends EventEmitter {
 
         this.setContainerStyles()
         this.setCssVariables()
+        this.setVisibility()
 
 
     }
@@ -758,7 +760,7 @@ class Widget extends EventEmitter {
                 return
 
             case 'visible':
-                this.setContainerStyles(['visibility'])
+                this.setVisibility()
                 resize.check(this.container)
                 return
 
@@ -775,7 +777,6 @@ class Widget extends EventEmitter {
 
             case 'css':
                 this.setContainerStyles(['css'])
-                this.onPropChanged('color')
                 var re = /width|height|display/
                 if (re.test(oldPropValue) || re.test(this.getProp('css'))) {
                     resize.check(this.container)
@@ -820,10 +821,6 @@ class Widget extends EventEmitter {
     }
 
     setContainerStyles(styles = ['geometry', 'label', 'css', 'visibility']) {
-
-        if (styles.includes('visibility')) {
-            this.container.style.display = this.getProp('visible') ? '' : 'none'
-        }
 
         if (styles.includes('geometry')) {
 
@@ -941,6 +938,19 @@ class Widget extends EventEmitter {
                 this.extraCssClasses = extraCssClasses
             }
 
+
+            // store transform matrix if any
+            // if (css.includes('transform')) {
+            //     setTimeout(()=>{
+            //         var style = window.getComputedStyle(this.container)
+            //         this.cssTransform = style.transform || 'none'
+            //         this.cssTransformOrigin = style.transformOrigin
+            //     })
+            // } else {
+            //     this.cssTransform = 'none'
+            // }
+
+
         }
 
         return style
@@ -955,6 +965,28 @@ class Widget extends EventEmitter {
 
             var val = this.getProp(data.js)
             this.container.style.setProperty(data.css, val !== undefined && val !== 'auto' ? data.toCss ? data.toCss(val) : val : '')
+
+        }
+
+    }
+
+    isVisible() {
+
+        return this.getProp('visible') && this.parent.isVisible()
+
+    }
+
+    setVisibility() {
+
+
+        var visible = this.isVisible()
+        if (visible !== this.visible) {
+            this.visible = visible
+            this.container.style.display = this.getProp('visible') ? '' : 'none'
+
+            for (var c of this.children) {
+                c.setVisibility()
+            }
 
         }
 

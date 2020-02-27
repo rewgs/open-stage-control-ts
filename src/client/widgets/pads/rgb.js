@@ -1,14 +1,14 @@
-var Pad = require('./pad'),
+var Widget = require('../common/widget'),
     Xy = require('./xy'),
-    Fader = require('./_fake_fader'),
+    Fader = require('../sliders/fader'),
     {clip, mapToScale, hsbToRgb, rgbToHsb} = require('../utils'),
-    Input = require('../inputs/input'),
     html = require('nanohtml')
 
 var faderDefaults = Fader.defaults()._props(),
     xyDefaults = Xy.defaults()._props()
 
-module.exports = class Rgb extends Pad {
+
+module.exports = class Rgb extends Widget {
 
     static description() {
 
@@ -28,8 +28,8 @@ module.exports = class Rgb extends Pad {
             ]},
             spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its default value when released'},
             range: {type: 'object', value: {min: 0, max: 255}, help: 'Defines the widget\'s output scale.'},
-            input: {type: 'boolean', value: true, help: 'Set to `false` to hide the built-in input widget'},
-            alpha:{type: 'boolean', value: false, help: 'Set to `true` to enable alpha channel'}
+            alpha:{type: 'boolean', value: false, help: 'Set to `true` to enable alpha channel'},
+            rangeAlpha: {type: 'object', value: {min: 0, max: 1}, help: 'Defines the widget\'s output scale for the alpha channel.'},
 
         }, ['color'], {
 
@@ -39,82 +39,81 @@ module.exports = class Rgb extends Pad {
 
     constructor(options) {
 
-        options.props.pointSize = 10
+        super({...options, html: html`<inner></inner>`})
 
-        super(options)
-
-        this.hueWrapper = this.widget.appendChild(html`<div class="hue-wrapper"></div>`)
-
-        this.hue = new Fader({props:{
-            ...faderDefaults,
-            id:'h',
-            compact:true,
-            pips:false,
-            horizontal:true,
-            snap:this.getProp('snap'),
-            range:{min:0,max:360},
-            input:false,
-            precision:2
-        }, cancelDraw: false, parent: this})
-        this.hue.sendValue = ()=>{}
-        this.hueWrapper.appendChild(this.hue.widget)
-        this.hue.on('change',(e)=>{
-            e.stopPropagation = true
-            this.dragHandle(true)
-        })
+        this.container.classList.toggle('contains-alpha', this.getProp('alpha'))
 
         this.pad = new Xy({props:{
             ...xyDefaults,
+            type: 'xy',
+            label: false,
             snap:this.getProp('snap'),
-            spring:this.getProp('spring'),
             rangeX:{min:0,max:100},
             rangeY:{min:0,max:100},
             precision:2,
-            pointSize: this.getProp('pointSize'),
+            pointSize: 10,
             pips: false,
-            input:false
         }, parent: this})
         this.pad.sendValue = ()=>{}
-        this.wrapper.appendChild(this.pad.widget)
+        this.pad.container.classList.add('not-editable', 'pad')
+        this.widget.appendChild(this.pad.container)
         this.pad.on('change',(e)=>{
             e.stopPropagation = true
             this.dragHandle()
         })
 
+        this.hue = new HueFader({props:{
+            ...faderDefaults,
+            type: 'fader',
+            mode: 'line',
+            label: false,
+            pips:false,
+            horizontal:false,
+            snap:this.getProp('snap'),
+            range:{min:0,max:360},
+            precision:2
+        }, parent: this})
+        this.hue.container.classList.add('not-editable', 'hue')
+        this.widget.appendChild(this.hue.container)
+        this.hue.on('change',(e)=>{
+            e.stopPropagation = true
+            this.dragHandle(true)
+        })
+
         if (this.getProp('alpha')) {
-            this.alphaWrapper = this.widget.appendChild(html`<div class="alpha-wrapper"></div>`)
             this.alpha = new Fader({props:{
                 ...faderDefaults,
-                id:'a',
-                compact:true,
+                type: 'fader',
+                label:false,
                 pips:false,
                 horizontal:true,
                 snap:this.getProp('snap'),
-                range:{min:0,max:255},
+                range: this.getProp('rangeAlpha'),
                 default: 255,
                 input:false,
                 precision:2
-            }, cancelDraw: false, parent: this})
-            this.alpha.sendValue = ()=>{}
-            this.alphaWrapper.appendChild(this.alpha.widget)
+            }, parent: this})
+            this.alpha.container.classList.add('not-editable', 'alpha')
+            this.widget.appendChild(this.alpha.container)
             this.alpha.on('change',(e)=>{
                 e.stopPropagation = true
                 this.dragAlphaHandle()
             })
         }
 
-        if (this.getProp('input')) {
+        var initValue = Array.isArray(this.getProp('default')) && this.getProp('default').length >= 3 ? this.getProp('default') : Array(3).fill(this.getProp('range').min)
+        if (this.getProp('alpha') && initValue.length < 4) {
+            initValue[3] = this.getProp('rangeAlpha').min
+        }
 
-            this.input = new Input({
-                props:{...Input.defaults()._props(), precision:this.getProp('precision'), unit:this.getProp('unit')},
-                parent:this, parentNode:this.widget
-            })
-            this.widget.appendChild(this.input.widget)
-            this.input.on('change', (e)=>{
+        if (this.getProp('spring')) {
+
+            this.on('dragend', (e)=>{
+
                 e.stopPropagation = true
-                this.setValue(this.input.getValue(), {sync:true, send:true})
-                this.showValue()
-            })
+                this.setValue(initValue, {sync:true,send:true})
+
+            }, {element: this.widget, ignoreCustomBindings: true})
 
         }
 
@@ -123,7 +122,7 @@ module.exports = class Rgb extends Pad {
 
         this.hsb = {h:0,s:0,b:0}
 
-        this.setValue([this.getProp('range').min, this.getProp('range').min, this.getProp('range').min])
+        this.setValue(initValue)
 
     }
 
@@ -178,11 +177,14 @@ module.exports = class Rgb extends Pad {
         if (this.touched && !options.dragged) return this.setValueTouchedQueue = [v, options]
 
         var value = Array(this.getProp('alpha') ? 4 : 3)
-        for (var i = 0; i < value.length; i++) {
+
+        for (var i = 0; i < 3; i++) {
             value[i] = clip(v[i], [this.getProp('range').min, this.getProp('range').max])
         }
 
-        if (value.length === 4 && value[3] === undefined) value[3] = this.alpha.value
+        if (value.length === 4) {
+            value[3] = v[3] === undefined ? this.alpha.value : clip(v[3], [this.getProp('rangeAlpha').min, this.getProp('rangeAlpha').max])
+        }
 
         var hsb = rgbToHsb({
             r: value[0],
@@ -211,32 +213,12 @@ module.exports = class Rgb extends Pad {
         if (!options.nohue && !options.dragged) {
             var hue = hsbToRgb({h:this.hsb.h,s:100,b:100}),
                 hueStr = `rgb(${Math.round(hue.r)},${Math.round(hue.g)},${Math.round(hue.b)})`
-            this.canvas.setAttribute('style',`background-color:${hueStr}`)
+            this.pad.container.setAttribute('style',`background-color:${hueStr}`)
             this.hue.setValue(this.hsb.h, {sync: false, send:false, dragged:false})
         }
 
-
-        this.showValue()
-
     }
 
-    draw() {}
-
-    showValue() {
-
-        if (this.getProp('input')) this.input.setValue(this.value)
-
-    }
-
-    getSplit() {
-
-        return this.getProp('split')?
-            typeof this.getProp('split') == 'object' && this.getProp('split').length == 3 ?
-                this.getProp('split')
-                : [this.getProp('address') + '/r', this.getProp('address') + '/g', this.getProp('address') + '/b']
-            : false
-
-    }
 
     onPropChanged(propName, options, oldPropValue) {
 
@@ -244,24 +226,83 @@ module.exports = class Rgb extends Pad {
 
         switch (propName) {
 
-            case 'color':
+            case 'colorText':
+            case 'colorWidget':
+            case 'colorFill':
+            case 'colorStroke':
+            case 'alphaStroke':
+            case 'alphaFillOff':
+            case 'alphaFillOn':
                 for (var w of [this.hue, this.pad]) {
-                    w.onPropChanged('color')
+                    w.onPropChanged(propName)
                 }
-                if (this.input) this.input.onPropChanged('color')
-                if (this.alpha) this.alpha.onPropChanged('color')
+                if (this.alpha) this.alpha.onPropChanged(propName)
                 return
 
         }
 
     }
 
+    setVisibility() {
+
+        super.setVisibility()
+
+        for (var w of [this.hue, this.pad]) {
+            if (w) w.setVisibility()
+        }
+        if (this.alpha) this.alpha.setVisibility()
+
+    }
+
     onRemove() {
         this.hue.onRemove()
         this.pad.onRemove()
-        if (this.input) this.input.onRemove()
         if (this.alpha) this.alpha.onRemove()
         super.onRemove()
+    }
+
+}
+
+class HueFader extends Fader {
+
+    draw() {
+
+        var width = this.getProp('horizontal') ? this.height : this.width,
+            height = !this.getProp('horizontal') ? this.height : this.width
+
+        var percent = this.getProp('steps') ? this.valueToPercent(this.value) : this.percent,
+            d = Math.round(this.percentToCoord(percent)),
+            o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
+            m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
+            dashed = this.getProp('dashed'),
+            flat = this.getProp('mode') === 'flat'
+
+        // sharp border trick
+        if (width % 2 && parseInt(m) === m) m -= 0.5
+
+        this.clear()
+
+
+        this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
+
+        if (flat) {
+            this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
+        } else {
+            this.ctx.lineWidth = 2 * PXSCALE
+        }
+
+
+        // flat knob
+
+        this.ctx.globalAlpha = 1
+        this.ctx.fillStyle = this.cssVars.colorFill
+
+        this.ctx.beginPath()
+        this.ctx.rect(this.gaugePadding, Math.min(d, height - 2 * PXSCALE), width - this.gaugePadding * 2, 2 * PXSCALE)
+        this.ctx.fill()
+
+        this.clearRect = [0, 0, width, height]
+
     }
 
 }

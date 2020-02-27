@@ -14,7 +14,6 @@ class UiDragResize extends UiWidget {
 
         this.container = html`
             <div id="drag-resize">
-                <div class="position-handle"></div>
                 <div class="helper"></div>
                 <div class="no-widget-select handle nw" data-action="left,top"></div>
                 <div class="no-widget-select handle e" data-action="width"></div>
@@ -42,12 +41,13 @@ class UiDragResize extends UiWidget {
         this.on('draginit', (event)=>{
 
             var node = event.firstTarget
-            if (!this.handles.includes(node)) return
+            if (event.shiftKey || !this.handles.includes(node)) return
 
             this.initLeft = this.left
             this.initTop = this.top
             this.initWidth = this.width
             this.initHeight = this.height
+            this.matrix = ''
 
             this.container.classList.add('dragging')
             this.dragging = node.getAttribute('data-action').split(',')
@@ -94,28 +94,13 @@ class UiDragResize extends UiWidget {
 
         }, {element: this.container})
 
-
-        // handles appear on top of modal widgets
-        // very special case fix here...
-        this.watchedModalWidget = null
-        this.checkModalState = (e)=>{
-            if (e.widget !== this.watchedModalWidget) return
-            console.log(e.widget.value)
-            this.container.style.display = e.widget.value ? 'none' : ''
-        }
+        // this.handles[0]._ignore_css_transforms = true
 
     }
 
     clear() {
 
         if (!this.mounted) return
-
-        if (this.watchedModalWidget) {
-            // reset modal widget fix
-            this.watchedModalWidget.off('change', this.checkModalState)
-            this.watchedModalWidget = null
-            this.container.style.display = ''
-        }
 
         this.container.parentNode.removeChild(this.container)
         this.mounted = false
@@ -128,13 +113,6 @@ class UiDragResize extends UiWidget {
         this.clear()
 
         var widget = widgets[0]
-
-        if (widget instanceof Modal) {
-            // modal widget fix
-            this.watchedModalWidget = widget
-            widget.on('change', this.checkModalState)
-            if (widget.getValue()) this.container.style.display = 'none'
-        }
 
         if (
             widget instanceof Tab ||
@@ -153,8 +131,6 @@ class UiDragResize extends UiWidget {
             this.handles[i].style.display = handlesVisibility[i] ? '' : 'none'
         }
 
-
-
         var parent = widget.parentNode,
             lefts = widgets.map(w => w.container.offsetLeft),
             tops = widgets.map(w => w.container.offsetTop),
@@ -165,6 +141,9 @@ class UiDragResize extends UiWidget {
         this.top = Math.min(...tops) / PXSCALE
         this.width = (Math.max(...rights) - Math.min(...lefts)) / PXSCALE
         this.height = (Math.max(...bottoms) - Math.min(...tops)) / PXSCALE
+
+        // this.cssTransform = widget.cssTransform || 'none'
+        // this.cssTransformOrigin = widget.cssTransformOrigin
 
         this.updateCss()
 
@@ -183,6 +162,9 @@ class UiDragResize extends UiWidget {
             if (grid) val = Math.round(val / GRIDWIDTH) * GRIDWIDTH
 
             this.container.style.setProperty('--' + k, val  + 'rem')
+
+            // this.container.style.transform = this.cssTransform
+            // this.container.style.transformOrigin = this.cssTransformOrigin
 
         }
 

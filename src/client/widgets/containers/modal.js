@@ -28,6 +28,7 @@ class Modal extends Panel {
             popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
@@ -47,7 +48,7 @@ class Modal extends Panel {
         super(options)
 
         this.popup = html`
-            <div class="popup">
+            <div class="popup backdrop">
                 <div class="popup-wrapper">
                     <div class="popup-title closable"><span class="popup-label"></span><span class="closer">${raw(icon('times'))}</span></div>
                     <div class="popup-content widget panel-container not-editable contains-widgets"></div>
@@ -77,14 +78,14 @@ class Modal extends Panel {
             this.popup.classList.add('y-positionned')
         }
 
-        this.light = this.container.appendChild(html`<div class="toggle"></div>`)
+        this.toggle = this.container.appendChild(html`<div class="toggle"></div>`)
 
         if (this.getProp('doubleTap')) {
-            doubletab(this.light, ()=>{
+            doubletab(this.toggle, ()=>{
                 this.setValue(1, {sync:true, send:true})
             })
         } else {
-            this.light.addEventListener('fast-click',(e)=>{
+            this.toggle.addEventListener('fast-click',(e)=>{
                 if (e.capturedByEditor === true) return
                 e.detail.preventOriginalEvent = true
                 this.setValue(1, {sync:true, send:true})
@@ -115,6 +116,13 @@ class Modal extends Panel {
 
     }
 
+
+    isVisible() {
+
+        return this.value && super.isVisible()
+
+    }
+
     setValue(v, options={}) {
 
         if (this.init === undefined) return
@@ -132,7 +140,7 @@ class Modal extends Panel {
 
         this.popup.classList.toggle('show', this.value)
         this.container.classList.toggle('on', this.value)
-
+        // this.setVisibility()
 
         this.bindEscKey(this.value)
 

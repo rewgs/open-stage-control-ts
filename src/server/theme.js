@@ -10,7 +10,7 @@ class Theme {
         this.files = []
         this.css = []
 
-        this.defaultColor = '#191f2a'
+        this.defaultColor = '#151a24'
         this.backgroundColor = this.defaultColor
 
     }

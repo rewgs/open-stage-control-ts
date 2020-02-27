@@ -44,7 +44,7 @@ osc-panel-container {
         ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
             border-color: var(--color-background)!important;
         }
-        
+
     }
     &.left:after {
         right: -1rem;
@@ -158,8 +158,7 @@ osc-panel-inner {
     overflow: hidden;
     z-index: 3;
     min-width: 0;
-
-
+    position: relative;
 
 }
 

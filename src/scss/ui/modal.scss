@@ -1,4 +1,26 @@
+@keyframes popup-backdrop-fade-in {
+    0% {opacity: 0}
+    100% {opacity: .1}
+}
+
 .popup {
+
+    &:before {
+
+        content: "";
+        position: fixed;
+        top:0rem;
+        left:0;
+        right:0;
+        bottom:0;
+        background: black;
+        opacity: .1;
+        pointer-events: none;
+        animation: popup-backdrop-fade-in .25s forwards;
+
+    }
+
+    // backdrop-filter: blur(1rem);
 
     position: fixed;
     top:0;
@@ -10,21 +32,11 @@
     justify-content: center;
     z-index: 99999999;
     display: none;
-    // backdrop-filter: blur(1rem); // perf hit
 
     &.show {
         display: flex;
     }
-    &:before {
-        content: "";
-        position: absolute;
-        top:0rem;
-        left:0;
-        right:0;
-        bottom:0;
-        background: black;
-        opacity: .1;
-    }
+
     .popup-title {
         position: relative;
         min-height: var(--nav-height);

@@ -52,13 +52,10 @@
         caret-color: var(--color-fill);
 
 
-        &:focus {
-            color:var(--color-text-fade);
-        }
 
         &:focus::selection {
-            color:var(--color-fill);
-            background: transparent;
+            background: var(--color-fill);
+            color: var(--color-foreground);
         }
 
     }
