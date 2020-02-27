@@ -20,11 +20,18 @@
 
     --widget-padding: 1rem;
 
-    &.alt {
+    &.design-classic {
         --widget-padding: 10rem;
+        --alpha-stroke: 0.5;
         --alpha-fill-off: 0.25;
         --alpha-fill-on: 1;
+    }
 
+    &.design-round {
+        --widget-padding: 10rem;
+        --alpha-stroke: 0.25;
+        --alpha-fill-off: 0.25;
+        --alpha-fill-on: 1;
     }
 
 }
