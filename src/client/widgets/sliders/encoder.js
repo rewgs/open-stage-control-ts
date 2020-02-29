@@ -150,7 +150,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
         var direction = e.wheelDelta / Math.abs(e.wheelDelta),
             increment = e.ctrlKey?0.25:1
 
-        this.setPercent(this.percent +  Math.max(increment, 10 / Math.pow(10, this.precision + 1)) * direction)
+        this.setPercent(this.percent +  Math.max(increment, 10 / Math.pow(10, this.decimals + 1)) * direction)
 
     }
 

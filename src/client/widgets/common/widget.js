@@ -7,18 +7,18 @@ var EventEmitter = require('../../events/event-emitter'),
     {iconify} = require('../../ui/utils'),
     resize = require('../../events/resize'),
     OscReceiver = require('./osc-receiver'),
-    {deepCopy, deepEqual} = require('../../utils'),
+    {deepCopy, deepEqual, isJSON} = require('../../utils'),
     html = require('nanohtml'),
-    // ipc = require('../../ipc'),
     updateWidget = ()=>{}
 
 
 var oscReceiverState = {}
 
 var OSCProps = [
-    'precision',
+    'decimals',
     'address',
     'preArgs',
+    'typeTags',
     'target',
     'bypass'
 ]
@@ -96,17 +96,22 @@ class Widget extends EventEmitter {
                 'When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending)'
             ]},
 
+
             _osc: 'osc',
 
-            precision: {type: 'integer|string', value: 2, help: [
-                'Defines the number of decimals to display and to send.',
-                'Set to `0` to send integers only.',
-                'Data type can be specified by appending a valid osc type tag to the precision value, for example : `3d` will make the widget send double precision numbers rounded to three decimals'
-            ]},
             address: {type: 'string', value: 'auto', help: 'OSC address for sending messages, it must start with a /'},
             preArgs: {type: '*|array', value: '', help: [
                 'A value or array of values that will be prepended to the OSC messages.',
                 'Values can be defined as objects if the osc type tag needs to be specified: `{type: "i", value: 1}`'
+            ]},
+            typeTags: {type: 'string', value: '', help: [
+                'Defines the osc argument types, one letter per argument (including preArgs)',
+                '- If empty, the types are infered automatically from the values (with numbers casted to floats by default)',
+                '- If there are more arguments than type letters, the last type is used for the extra arguments',
+                'See http://opensoundcontrol.org/spec-1_0 for existing typetags'
+            ]},
+            decimals: {type: 'integer', value: 2, help: [
+                'Defines the number of decimals to send.',
             ]},
             target: {type: 'string|array|null', value: '', help: [
                 'This defines the targets of the widget\'s OSC messages',
@@ -179,9 +184,9 @@ class Widget extends EventEmitter {
 
         // this.mathjsDeprecationWarned = false
 
-        // cache precision
-        if (this.props.precision != undefined) {
-            this.precision = Math.min(20,Math.max(this.getProp('precision', undefined, false),0))
+        // cache decimals
+        if (this.props.decimals !== undefined) {
+            this.decimals = Math.min(20, Math.max(this.getProp('decimals'), 0))
         }
 
 
@@ -260,8 +265,8 @@ class Widget extends EventEmitter {
         if (this.getProp('bypass') && !options.force) return
 
         var data = {
-            h:this.hash,
-            v:this.value
+            h: this.hash,
+            v: this.getValue(true)
         }
 
         if (overrides) {
@@ -284,9 +289,9 @@ class Widget extends EventEmitter {
 
     setValue() {}
 
-    getValue(withPrecision) {
+    getValue(withdecimals) {
 
-        return deepCopy(this.value, withPrecision ? this.precision : undefined)
+        return deepCopy(this.value, withdecimals ? this.decimals : undefined)
 
     }
 
@@ -644,11 +649,7 @@ class Widget extends EventEmitter {
                 propValue = propValue.replace(new RegExp(k, 'g'), v)
             }
 
-            // heuristic to avoid using JSON when unnecessary
-            // if the string doesn't starts with one of these chars
-            // it's going to fail
-            // ref in source: https://github.com/douglascrockford/JSON-js
-            if (' 	\n+-eE{([0123456789tfn"'.indexOf(propValue[0]) !== -1) {
+            if (isJSON(propValue)) {
                 try {
                     propValue = JSON.parse(propValue)
                 } catch (err) {}
@@ -756,7 +757,8 @@ class Widget extends EventEmitter {
             case 'height':
             case 'width':
                 this.setContainerStyles(['geometry'])
-                resize.check(this.container)
+                var container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
+                resize.check(container)
                 return
 
             case 'visible':
@@ -777,9 +779,10 @@ class Widget extends EventEmitter {
 
             case 'css':
                 this.setContainerStyles(['css'])
-                var re = /width|height|display/
+                var re = /width|height|display|margin|padding|flex/
                 if (re.test(oldPropValue) || re.test(this.getProp('css'))) {
-                    resize.check(this.container)
+                    var container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
+                    resize.check(container)
                 }
                 return
 
@@ -794,9 +797,13 @@ class Widget extends EventEmitter {
                 this.setCssVariables()
                 return
 
-            case 'precision':
+            case 'decimals':
+                this.decimals = Math.min(20, Math.max(this.getProp('decimals'), 0))
+                return
+
             case 'address':
             case 'preArgs':
+            case 'typeTags':
             case 'target':
                 if (propName === 'address') {
                     for (var k in this.oscReceivers) {
@@ -806,7 +813,6 @@ class Widget extends EventEmitter {
                         }
                     }
                 }
-                if (propName === 'precision') this.precision = Math.min(20,Math.max(this.getProp('precision', undefined, false),0))
                 var data = {},
                     oldData = {
                         preArgs: propName == 'preArgs' ? oldPropValue : this.getProp('preArgs'),
@@ -1015,11 +1021,11 @@ Widget.cssVariables = [
     {js: 'colorFill', css: '--color-fill'},
     {js: 'colorStroke', css: '--color-stroke'},
     {js: 'colorText', css: '--color-text'},
+    {js: 'colorPanel', css: '--color-background'},
     {js: 'padding', css: '--widget-padding', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE},
     {js: 'alphaFillOn', css: '--alpha-fill-on', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)},
     {js: 'alphaFillOff', css: '--alpha-fill-off', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)},
     {js: 'alphaStroke', css: '--alpha-stroke', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)},
-    {js: 'colorForegroud', css: '--color-foreground'}
 ]
 
 Widget.dynamicProps = [
@@ -1045,9 +1051,10 @@ Widget.dynamicProps = [
 
     'value',
 
-    'precision',
+    'decimals',
     'address',
     'preArgs',
+    'typeTags',
     'target',
     'bypass'
 ]

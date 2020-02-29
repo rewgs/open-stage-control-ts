@@ -20,7 +20,7 @@ module.exports = class Fader extends Slider {
             mode: {type: 'string', value: 'compact', choices: ['compact', 'classic', 'round'], help: 'Design style'},
             horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
             alignRight: {type: 'boolean', value: false, help: 'Set to `true` to invert the pip\'s and fader\'s position'},
-            pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
+            pips: {type: 'boolean', value: false, help: 'Set to `true` to show range breakpoints'},
             dashed: {type: 'boolean', value: false, help: 'Set to `true` to display a dashed gauge'},
             gradient: {type: 'array|object', value: [], help: [
                 'When set, the meter\'s gauge will be filled with a linear color gradient',
@@ -66,35 +66,6 @@ module.exports = class Fader extends Slider {
         this.gaugeGradient = null
 
         this.container.classList.add('design-' + this.getProp('mode'))
-
-        if (false && this.getProp('pips')) {
-
-            this.widget.classList.add('has-pips')
-
-
-            var pipTexts = {}
-            for (var k in this.rangeKeys) {
-                pipTexts[this.rangeKeys[k]]=this.rangeLabels[k]
-            }
-
-            var pips = html`<div class="pips"></div>`
-            for (var i=0;i<=100;i++) {
-                if (pipTexts[i]==undefined) continue
-
-                var pos = this.getProp('horizontal')?'left':'bottom'
-
-                pips.appendChild(html`
-                    <div class="pip val" style="${pos}:${i}%">
-                        <span>${Math.abs(pipTexts[i])>=1000?pipTexts[i]/1000+'k':pipTexts[i]}</span>
-                    </div>
-                `)
-
-            }
-
-            this.widget.appendChild(pips)
-
-        }
-
 
     }
 
@@ -187,6 +158,15 @@ module.exports = class Fader extends Slider {
 
         }
 
+
+    }
+
+    cacheCanvasStyle(style) {
+
+        super.cacheCanvasStyle(style)
+
+        if (this.getProp('pips')) this.drawPips()
+
     }
 
 
@@ -202,11 +182,16 @@ module.exports = class Fader extends Slider {
             dashed = this.getProp('dashed'),
             compact = this.getProp('mode') === 'compact'
 
-        // sharp border trick
-        if (width % 2 && parseInt(m) === m) m -= 0.5
-
         this.clear()
 
+        if (this.getProp('pips') && !compact) m -= 10 * PXSCALE
+
+        // sharp border trick
+        if (compact) {
+            if (width % 2 && parseInt(m) === m) m -= 0.5
+        } else {
+            if (width % 2 && parseInt(m) !== m) m -= 0.5
+        }
 
 
         this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
@@ -277,7 +262,7 @@ module.exports = class Fader extends Slider {
             if (this.cssVars.alphaStroke) {
 
                 this.ctx.globalAlpha = 1
-                this.ctx.fillStyle = this.cssVars.colorForegroud
+                this.ctx.fillStyle = this.cssVars.colorPanel
 
                 this.ctx.beginPath()
                 this.ctx.rect(m - 6 * PXSCALE, d - 10 * PXSCALE, 12 * PXSCALE, 20 * PXSCALE)
@@ -301,7 +286,6 @@ module.exports = class Fader extends Slider {
             this.ctx.rect(m - 3 * PXSCALE, d, 6 * PXSCALE, PXSCALE)
             this.ctx.fill()
 
-
             this.clearRect = [m - 10 * PXSCALE, this.gaugePadding - 10 * PXSCALE, 20 * PXSCALE, height - 2 * this.gaugePadding + 20 * PXSCALE]
 
         } else {
@@ -323,11 +307,114 @@ module.exports = class Fader extends Slider {
                 this.ctx.fill()
             }
 
-            this.clearRect = [m - 10 * PXSCALE, this.gaugePadding - 10 * PXSCALE, 20 * PXSCALE, height - 2 * this.gaugePadding + 20 * PXSCALE]
+            this.clearRect = [m - 11 * PXSCALE, this.gaugePadding - 11 * PXSCALE, 22 * PXSCALE, height - 2 * this.gaugePadding + 22 * PXSCALE]
 
         }
 
+        if (this.getProp('pips')) {
+            this.ctx.globalAlpha = 1
+            this.ctx.drawImage(this.pips, 0, 0);
+            if (!compact) this.clearRect = [this.clearRect, [m + 10 * PXSCALE, 0, 10 * PXSCALE + this.pipsTextSize, height]]
+        }
 
+
+    }
+
+    drawPips() {
+
+        this.pips = this.canvas.cloneNode()
+        this.pips.width = this.getProp('horizontal') ? this.height : this.width
+        this.pips.height = !this.getProp('horizontal') ? this.height : this.width
+        this.pipsTextSize = this.fontSize
+
+
+        var ctx = this.pips.getContext('2d',{
+            desynchronized: true,
+            lowLatency: true,
+            alpha: true,
+            preserveDrawingBuffer: true
+        })
+
+        ctx.font = this.ctx.font
+        ctx.textBaseline = this.ctx.textBaseline
+        ctx.textAlign = this.ctx.textAlign
+
+        var width = this.getProp('horizontal') ? this.height : this.width,
+            height = !this.getProp('horizontal') ? this.height : this.width,
+            m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
+            compact = this.getProp('mode') === 'compact'
+
+        if (width % 2 && parseInt(m) !== m) m -= 0.5
+
+        if (!compact) m -= 10 * PXSCALE
+
+
+        ctx.lineWidth = PXSCALE
+        ctx.fillStyle = this.cssVars.colorWidget
+        ctx.strokeStyle = this.cssVars.colorWidget
+
+        var i = 0
+
+        for (var pip of this.rangeKeys) {
+
+            let d = Math.round(this.percentToCoord(pip)),
+                y = compact ? Math.min(d, height - this.gaugePadding - PXSCALE) : d,
+                pipWidth = 4 * PXSCALE
+
+            y += 0.5
+
+
+            ctx.globalAlpha = this.cssVars.alphaPips
+
+            ctx.beginPath()
+
+            if (compact) {
+
+
+                ctx.moveTo(width - pipWidth - PXSCALE, y)
+                ctx.lineTo(width - PXSCALE, y - pipWidth / 2)
+                ctx.lineTo(width - PXSCALE, y + pipWidth / 2)
+                ctx.closePath()
+                ctx.fill()
+
+            } else {
+
+                ctx.moveTo(m + 10 * PXSCALE, y)
+                ctx.lineTo(m + 10 * PXSCALE + pipWidth, y)
+                ctx.stroke()
+
+
+
+                var textX = m + 10 * PXSCALE + pipWidth + 5 * PXSCALE,
+                    textY = y + PXSCALE
+
+                ctx.fillStyle = this.cssVars.colorText
+                ctx.globalAlpha = this.cssVars.alphaPipsText
+
+
+                if (this.getProp('horizontal')) {
+
+                    ctx.save()
+                    ctx.translate(textX + 3 *  PXSCALE, textY - 0.5 * PXSCALE)
+                    ctx.rotate(Math.PI/2)
+                    ctx.textAlign = "center"
+                    ctx.fillText(this.rangeLabels[i], 0, 0)
+                    ctx.restore()
+
+                } else {
+
+                    this.pipsTextSize  = Math.max(this.pipsTextSize , ctx.measureText(this.rangeLabels[i]).width)
+                    ctx.fillText(this.rangeLabels[i], textX, textY)
+
+                }
+
+
+
+            }
+
+            i++
+
+        }
 
 
     }

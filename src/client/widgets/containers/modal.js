@@ -26,6 +26,7 @@ class Modal extends Panel {
             popupHeight: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
             popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
             popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
+            colorPanel: {type: 'string', value: 'auto', help:''},
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},

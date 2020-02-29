@@ -50,7 +50,7 @@ module.exports = class Rgb extends Widget {
             snap:this.getProp('snap'),
             rangeX:{min:0,max:100},
             rangeY:{min:0,max:100},
-            precision:2,
+            decimals:2,
             pointSize: 10,
             pips: false,
         }, parent: this})
@@ -71,7 +71,7 @@ module.exports = class Rgb extends Widget {
             horizontal:false,
             snap:this.getProp('snap'),
             range:{min:0,max:360},
-            precision:2
+            decimals:2
         }, parent: this})
         this.hue.container.classList.add('not-editable', 'hue')
         this.widget.appendChild(this.hue.container)
@@ -91,7 +91,7 @@ module.exports = class Rgb extends Widget {
                 range: this.getProp('rangeAlpha'),
                 default: 255,
                 input:false,
-                precision:2
+                decimals:2
             }, parent: this})
             this.alpha.container.classList.add('not-editable', 'alpha')
             this.widget.appendChild(this.alpha.container)

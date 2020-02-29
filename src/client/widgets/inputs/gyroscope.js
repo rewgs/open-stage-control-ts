@@ -62,7 +62,7 @@ class Gyroscope extends Widget {
             frequency: 1000 / clip(this.getProp('frequency'), [0.01, 60]),
             gravityNormalized: this.getProp('normalize'),
             orientationBase: this.getProp('compass') ? GyroNorm.WORLD : GyroNorm.GAME,
-            decimalCount: this.getProp('precision'),
+            decimalCount: this.getProp('decimals'),
             screenAdjusted: this.getProp('screenAdjusted'),
             logger: null
 

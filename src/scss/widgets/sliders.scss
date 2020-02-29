@@ -18,7 +18,14 @@
 .fader-container,
 .range-container {
 
+    width: 50rem;
+    height: 200rem;
+
     --widget-padding: 1rem;
+
+    canvas {
+        text-align: left;
+    }
 
     &.design-classic {
         --widget-padding: 10rem;
@@ -38,6 +45,9 @@
 
 .knob-container,
 .encoder-container {
+
+    width: 100rem;
+    height: 100rem;
 
     --widget-padding: 1rem;
     --alpha-stroke: 0.75;

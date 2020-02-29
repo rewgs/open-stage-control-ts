@@ -3,15 +3,25 @@ var {clip} = require('../utils'),
     Fader = require('./fader'),
     Input = require('../inputs/input'),
     touchstate = require('../mixins/touch_state'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    StaticProperties = require('../mixins/static_properties')
 
 var faderDefaults = Fader.defaults()._props()
 
-class Range extends Fader {
+class Range extends StaticProperties(Fader, {mode: 'compact'}) {
 
     static description() {
 
         return 'A fader with two heads for setting a range.'
+
+    }
+
+    static defaults() {
+
+        var defaults = super.defaults()
+        delete defaults.mode
+
+        return defaults
 
     }
 
@@ -33,7 +43,7 @@ class Range extends Fader {
                 snap:this.getProp('snap'),
                 spring:this.getProp('spring'),
                 range:this.getProp('range'),
-                precision:this.getProp('precision'),
+                decimals:this.getProp('decimals'),
                 logScale:this.getProp('logScale'),
                 sensitivity:this.getProp('sensitivity'),
             }, parent: this}),
@@ -46,7 +56,7 @@ class Range extends Fader {
                 snap:this.getProp('snap'),
                 spring:this.getProp('spring'),
                 range:this.getProp('range'),
-                precision:this.getProp('precision'),
+                decimals:this.getProp('decimals'),
                 logScale:this.getProp('logScale'),
                 sensitivity:this.getProp('sensitivity'),
             }, parent: this})
@@ -274,7 +284,7 @@ class Range extends Fader {
 
 
 Range.dynamicProps = Range.prototype.constructor.dynamicProps
-    .filter(n => !['spring', 'precision'].includes(n))
+    .filter(n => !['spring', 'decimals'].includes(n))
 
 
 module.exports = Range

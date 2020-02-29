@@ -314,7 +314,7 @@ module.exports =  {
 
                 if (port) {
 
-                    osc.send(host, port, data.address, data.args, data.precision)
+                    osc.send(host, port, data.address, data.args, data.typeTags)
 
                 }
 

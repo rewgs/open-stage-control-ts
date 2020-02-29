@@ -12,7 +12,7 @@ module.exports = {
     },
 
     // map a value from a scale to another input and output must be range arrays
-    mapToScale: function(value,rangeIn,rangeOut,precision,log,revertlog) {
+    mapToScale: function(value,rangeIn,rangeOut,decimals,log,revertlog) {
 
         // clip in
         value = module.exports.clip(value,[rangeIn[0],rangeIn[1]])
@@ -34,8 +34,8 @@ module.exports = {
         // clip out
         value = module.exports.clip(value,[rangeOut[0],rangeOut[1]])
 
-        // precision
-        if (precision !== false) value = parseFloat(value.toFixed(precision))
+        // decimals
+        if (decimals !== false) value = parseFloat(value.toFixed(decimals))
 
         return value
 

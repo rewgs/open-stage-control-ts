@@ -1,3 +1,4 @@
+$padding: 8rem;
 
 .lobby {
 
@@ -7,15 +8,15 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    background: var(--color-background);
-    padding: 2rem 8rem 8rem;
+    background: var(--color-ui-background);
+    padding: 2rem $padding $padding;
 
     .list {
         overflow: auto;
         text-transform: none;
         flex: 1;
-        background: var(--color-foreground);
-        padding: 0 10rem;
+        background: var(--color-background);
+        padding: 0 $padding;
         a {
             padding-right: 30rem;
         }
@@ -23,16 +24,16 @@
     }
 
     .footer {
-        margin-top: 10rem;
+        margin-top: $padding;
         white-space: nowrap;
         text-overflow: ellipsis;
         flex-grow: 0;
         display: flex;
         flex-direction: row;
         a {
-            margin-left: 10rem;
+            margin-left: $padding;
             text-align: center;
-            background: var(--color-foreground);
+            background: var(--color-background);
             &:first-child {
                 margin: 0;
             }

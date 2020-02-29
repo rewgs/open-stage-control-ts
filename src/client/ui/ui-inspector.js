@@ -179,7 +179,7 @@ class UiInspector extends UiWidget {
         if (this.colorPicker.opened) {
 
             var picker = DOM.get(this.container, `osc-inspector-color[name="${this.colorPicker.name}"]`)
-            if (picker) {
+            if (picker && picker[0]) {
                 this.colorPicker.setValue(picker[0].getAttribute('value'))
             } else {
                 this.colorPicker.close()

@@ -20,6 +20,7 @@ class Panel extends Container() {
 
             _panel:'panel',
 
+            colorPanel: {type: 'string', value: 'auto', help:''},
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
@@ -214,6 +215,8 @@ class Panel extends Container() {
             case 'alphaStroke':
             case 'alphaFillOff':
             case 'alphaFillOn':
+            case 'colorPanel':
+            case 'padding':
                 for (var w of this.children) {
                     if (w) w.onPropChanged(propName)
                 }

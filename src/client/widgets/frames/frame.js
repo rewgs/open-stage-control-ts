@@ -16,7 +16,7 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
         return super.defaults({
 
-        }, ['precision', 'bypass'], {
+        }, ['decimals', 'bypass'], {
 
             label: {type: 'string|boolean', value: 'auto', help: [
                 'Set to `false` to hide completely',

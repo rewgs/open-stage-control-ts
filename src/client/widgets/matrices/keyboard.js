@@ -86,7 +86,7 @@ module.exports = class Keyboard extends Panel {
             data.css = ''
 
             data.target = '@{parent.target}'
-            data.precision = '@{parent.precision}'
+            data.decimals = '@{parent.decimals}'
 
             data.address = '@{parent.address}'
             data.preArgs = `JS{{

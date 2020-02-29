@@ -28,6 +28,6 @@ class Pad extends Canvas {
 
 }
 
-Pad.dynamicProps = Pad.prototype.constructor.dynamicProps.filter(n => n !== 'precision')
+Pad.dynamicProps = Pad.prototype.constructor.dynamicProps.filter(n => n !== 'decimals')
 
 module.exports = Pad

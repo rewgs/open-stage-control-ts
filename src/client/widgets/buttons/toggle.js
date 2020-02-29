@@ -1,6 +1,7 @@
 var Widget = require('../common/widget'),
     doubletab = require('../mixins/double_tap'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    {deepEqual, isJSON} = require('../../utils')
 
 class Toggle extends Widget {
 
@@ -19,11 +20,9 @@ class Toggle extends Widget {
 
             on: {type: '*', value: 1, help: [
                 'Set to `null` to send send no argument in the osc message',
-                'Can be an `object` if the type needs to be specified (see preArgs)'
             ]},
             off: {type: '*', value: 0, help: [
-                'Set to `null` to send send no argument in the osc message',
-                'Can be an `object` if the type needs to be specified (see preArgs)'
+                'Set to `null` to send send no argument in the osc message. Must be different from `on`.',
             ]},
             mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'tap'], help: [
                 'Interraction mode:',
@@ -56,6 +55,7 @@ class Toggle extends Widget {
 
                 doubletab(this.widget, ()=>{
 
+                    this.active = true
                     this.setValue(this.getProp('on'), {sync: true, send: true})
 
                 })
@@ -75,6 +75,8 @@ class Toggle extends Widget {
 
             this.on('dragend',()=>{
 
+                if (!this.active) return
+
                 this.active = false
                 this.setValue(this.getProp('off'), {sync: true, send: !tap})
 
@@ -86,6 +88,8 @@ class Toggle extends Widget {
 
                 doubletab(this.widget, ()=>{
 
+
+                    this.active = true
                     this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true})
 
                 })
@@ -118,27 +122,38 @@ class Toggle extends Widget {
 
 
 
-    setValue(v,options={}) {
+    setValue(v, options={}) {
 
-        if (typeof v == 'object' && v !== null) v = v.value
+        if (typeof v === 'string' && isJSON(v)) {
+            try {
+                v = JSON.parse(v    )
+            } catch (err) {}
+        }
 
-        if (v===this.getProp('on') || (this.getProp('on') != null && v === this.getProp('on').value && v !== undefined)) {
+        var newstate
 
-            this.container.classList.add('on')
-            this.state = 1
-            this.value = this.getProp('on')
-            if (options.send) this.sendValue()
+        if (deepEqual(v, this.getProp('on'))) {
 
-        } else if (v===this.getProp('off') || (this.getProp('off') != null && v === this.getProp('off').value && v !== undefined)) {
+            newstate = 1
 
-            this.container.classList.remove('on')
-            this.state = 0
-            this.value = this.getProp('off')
-            if (options.send) this.sendValue()
+        } else if (deepEqual(v, this.getProp('off'))) {
+
+            newstate = 0
 
         }
 
-        if (options.sync) this.changed(options)
+        if (newstate !== undefined) {
+
+            this.state = newstate
+            this.container.classList.toggle('on', this.state)
+            this.value = this.getProp(this.state ? 'on' : 'off')
+
+            if (options.send) this.sendValue()
+            if (options.sync) this.changed(options)
+
+        }
+
+
 
     }
 

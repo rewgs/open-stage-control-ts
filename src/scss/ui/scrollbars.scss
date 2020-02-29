@@ -4,12 +4,12 @@
 }
 
 ::-webkit-scrollbar-track-piece {
-    background: var(--color-foreground);
+    background: var(--color-background);
     &:vertical {
-        border-left: 1rem solid var(--color-foreground);
+        border-left: 1rem solid var(--color-background);
     }
     &:horizontal {
-        border-top: 1rem solid var(--color-foreground);
+        border-top: 1rem solid var(--color-background);
     }
 }
 
@@ -19,10 +19,10 @@
         background: var(--color-scrollbar-on);
     }
     &:vertical {
-        border-left: 1rem solid var(--color-foreground);
+        border-left: 1rem solid var(--color-background);
     }
     &:horizontal {
-        border-top: 1rem solid var(--color-foreground);
+        border-top: 1rem solid var(--color-background);
     }
 }
 
@@ -34,7 +34,7 @@
 ::-webkit-scrollbar-corner {
     height: 0rem;
     width: 0rem;
-    background: var(--color-foreground);
+    background: var(--color-background);
 }
 
 

@@ -1,6 +1,6 @@
 module.exports = {
 
-    deepCopy: function(obj, precision) {
+    deepCopy: function(obj) {
 
         var copy = obj
 
@@ -11,10 +11,8 @@ module.exports = {
         if (typeof obj === 'object') {
             copy = Array.isArray(obj) ? [] : {}
             for (let key in obj) {
-                copy[key] = module.exports.deepCopy(obj[key], precision)
+                copy[key] = module.exports.deepCopy(obj[key])
             }
-        } else if (typeof obj == 'number') {
-            return precision === undefined ? copy : parseFloat(copy.toFixed(precision))
         }
 
         return copy

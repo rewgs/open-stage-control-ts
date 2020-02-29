@@ -175,7 +175,7 @@ module.exports = class Knob extends Slider {
             dashed = this.getProp('dashed'),
             pips = this.getProp('pips'),
             minRadius = this.minDimension / 6,
-            maxRadius = this.minDimension / 2 - (pips ? this.fontSize * 1.5 : PXSCALE),
+            maxRadius = this.minDimension / 2 - (pips ? this.fontSize * 2 : PXSCALE),
             gaugeWidth = maxRadius - minRadius,
             gaugeRadius = maxRadius - gaugeWidth / 2
 
@@ -240,9 +240,9 @@ module.exports = class Knob extends Slider {
 
             this.ctx.lineWidth = 1.5 * PXSCALE
             this.ctx.strokeStyle = this.cssVars.colorStroke
-            this.ctx.globalAlpha = this.cssVars.alphaStroke
+            this.ctx.globalAlpha = this.cssVars.alphaPips
 
-            for (var pip of this.rangeKeys.concat(this.valueToPercent(this.originValue))) {
+            for (var pip of this.rangeKeys) {
 
                 let r1 = maxRadius,
                     r2 = r1 + 4 * PXSCALE,
@@ -256,11 +256,11 @@ module.exports = class Knob extends Slider {
 
             }
 
-            var radius = maxRadius + this.fontSize * 1.5
+            var radius = maxRadius + (this.fontSize + 2 * PXSCALE)
             this.ctx.fillStyle = this.cssVars.colorText
-            this.ctx.globalAlpha = this.cssVars.alphaPips
+            this.ctx.globalAlpha = this.cssVars.alphaPipsText
             for (var p in this.pipTexts) {
-                if (this.pipTexts[p] == undefined) continue
+                if (this.pipTexts[p] === undefined || (this.maxAngle === 360 && p === '100')) continue
                 var angle = this.percentToAngle(p),
                     size = this.ctx.measureText(this.pipTexts[p]),
                     x = this.width / 2 + radius * Math.cos(angle) - size.width / 2,

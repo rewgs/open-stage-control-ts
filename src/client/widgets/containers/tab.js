@@ -69,7 +69,7 @@ module.exports = class Tab extends Panel {
 
     isVisible() {
 
-        return !this.detached && super.isVisible() 
+        return !this.detached && super.isVisible()
 
     }
 
