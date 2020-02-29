@@ -5,7 +5,7 @@
 
     width: 100%;
     height: 100%;
-    background-color: var(--color-foreground);
+    background-color: var(--color-background);
     > inner {
 
         flex: 1;
@@ -29,8 +29,7 @@
 
     --widget-padding: 4rem;
 
-    background-color: var(--color-foreground);
-    background-clip: content-box;
+    background-color: var(--color-background);
 
 
     > inner {
@@ -64,7 +63,9 @@
                 position: relative!important;
                 height: auto!important;
                 min-height: auto!important;
+                min-width: auto!important;
                 max-height: 100%;
+                max-width: 100%;
             }
         }
         &.layout-vertical > inner {
@@ -76,7 +77,9 @@
                 left:auto!important;
                 position: relative!important;
                 width: auto!important;
+                min-height: auto!important;
                 min-width: auto!important;
+                max-height: 100%;
                 max-width: 100%;
             }
 
@@ -129,7 +132,7 @@
     width: 100%;
     flex: 1;
     height: 100%;
-    background-color: var(--color-foreground);
+    background-color: var(--color-background);
 
     &:not(.show) {
         display:none
@@ -141,8 +144,7 @@
 
 }
 
-.panel-container,
-.matrix-container {
+.panel-container {
 
     @extend .widget-panel-base;
 
@@ -156,7 +158,7 @@
     > label {
 
         position: relative;
-        // background-color: var(--color-foreground);
+        // background-color: var(--color-background);
         @include pseudo-stroke($z: 10);
         &:before {
             border-width: 0 0 1rem 0;
@@ -165,7 +167,7 @@
     }
 
     &.contains-widgets.nolabel > inner {
-        border-top: 1rem solid var(--color-foreground);
+        border-top: 1rem solid var(--color-background);
     }
 
     &.contains-tabs > inner > .navigation {
@@ -178,7 +180,7 @@
 
 .navigation {
 
-    background-color: var(--color-background);
+    background-color: var(--color-ui-background);
 
     height:calc(var(--nav-height) - 1rem);
     flex-shrink:0;
@@ -274,6 +276,11 @@
             content:"clone"
         }
     }
+
+    &:before {
+        content: none
+    }
+
 
     > label {
         display: none;
@@ -378,7 +385,7 @@
             --alpha-fill:var(--alpha-fill-on);
         }
         > label, > label:after {
-            color: var(--color-foreground);
+            color: var(--color-background);
             opacity: 1;
         }
 
@@ -426,6 +433,20 @@
             }
         }
 
+    }
+
+}
+
+
+.matrix-container {
+
+    @extend .panel-container;
+
+
+    &.layout-vertical, &.layout-horizontal {
+        > inner > .widget {
+            flex: 1;
+        }
     }
 
 }

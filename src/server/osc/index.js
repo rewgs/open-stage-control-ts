@@ -113,36 +113,41 @@ class OscServer {
 
     }
 
-    parseType(type){
-        var t = type[0].match(/[bhtdscrmifTFNI]/)
+    parseArg(arg, type){
 
-        if (t!==null) {
-            return t[0]
-        } else {
-            return 's'
+        if (arg === null) return null
+
+        if (type && type[0].match(/[bhtdscrmifTFNI]/)) {
+
+            type = type[0]
+
+            switch (type) {
+                case 'i':
+                    return {type: type, value: parseInt(arg)}
+                case 'd':
+                case 'f':
+                    return {type: type, value: parseFloat(arg)}
+                case 'T':
+                case 'F':
+                case 'N':
+                    return {type: type}
+                default:
+                    return {type: type, value: arg}
+
+
+            }
+
         }
 
-    }
-
-    parseArg(arg, precision){
-        if (arg==null) return null
         switch (typeof arg) {
             case 'number':
-                var typeTagMatch = typeof precision == 'string' ? precision.match(/[0-9]+([a-zA-Z]{1})/) : null,
-                    typeTag = typeTagMatch === null ? precision === 0 ? 'i' : 'f' : typeTagMatch[1],
-                    precisionValue = parseFloat(precision) || 0
-
-                return {type: typeTag, value: precision === undefined ? arg : parseFloat(arg.toFixed(precisionValue))}
+                return {type: 'f', value: arg}
             case 'boolean':
-                return {type: arg ? 'T' : 'F', value: arg}
-            case 'object':
-                if (arg.type) {
-                    return {type: this.parseType(arg.type), value: arg.value}
-                } else {
-                    return {type: 's', value:JSON.stringify(arg)}
-                }
+                return {type: arg ? 'T' : 'F'}
             case 'string':
                 return {type: 's', value:arg}
+            case 'object':
+                if (arg.type) return arg
             default:
                 return {type: 's', value:JSON.stringify(arg)}
         }
@@ -176,7 +181,7 @@ class OscServer {
                     address: data.address,
                     args: data.args
                 }, data.host, data.port)
-                
+
             }
 
             if (debug) console.log('OSC sent: ',{address:data.address, args: data.args}, 'To: ' + data.host + ':' + data.port)
@@ -272,15 +277,24 @@ oscServer.init()
 
 module.exports = {
     server: oscServer,
-    send: function(host,port,address,args,precision) {
+    send: function(host, port, address, args, typeTags) {
 
         var message = []
 
         if (!Array.isArray(args)) args = [args]
-        if (typeof args=='object' && args!==null) {
-            for (var i in args) {
-                var arg = oscServer.parseArg(args[i],precision)
-                if (arg!=null) message.push(arg)
+
+        if (typeof args === 'object' && args !== null) {
+
+            var typeTag,
+                arg
+
+            for (var i = 0; i < args.length; i++) {
+
+                typeTag = typeTags[i] || typeTag
+                arg = oscServer.parseArg(args[i], typeTag)
+
+                if (arg !== null) message.push(arg)
+
             }
         }
 

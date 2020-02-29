@@ -24,7 +24,7 @@ class Svg extends StaticProperties(Widget, {bypass: true}) {
                 '- `<path>` commands support a special percent notation (`%x` and `%y`)'
             ]},
 
-        }, ['precision', 'bypass'], {})
+        }, ['decimals', 'bypass'], {})
 
     }
 

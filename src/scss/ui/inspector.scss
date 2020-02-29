@@ -4,8 +4,6 @@ $padding: 8rem;
 
 #osc-inspector {
 
-    // padding: $padding;
-
     --widget-padding: -1rem;
 
 }
@@ -37,13 +35,13 @@ osc-inspector-field {
         resize: none;
         white-space: pre;
         display: block;
-        background: var(--color-foreground);
+        background: var(--color-background);
         cursor: text;
 
         --scrollbar-size: 6rem;
 
         &::-webkit-scrollbar-thumb:horizontal {
-            // border-top: 4rem solid var(--color-foreground);
+            // border-top: 4rem solid var(--color-background);
             cursor: normal;
         }
 
@@ -78,7 +76,7 @@ osc-inspector-category {
         position: relative;
         text-transform: none;
         cursor: pointer;
-        // color: var(--color-background);
+        // color: var(--color-ui-background);
         height: $header-height;
         line-height: $header-height + 1;
         // padding: 0 8rem;
@@ -138,7 +136,7 @@ osc-inspector-checkbox {
     height: $field-height;
     width: $field-height;
     cursor: pointer;
-    background: var(--color-foreground);
+    background: var(--color-background);
     text-align: center;
     display: flex;
     align-items: center;
@@ -170,10 +168,10 @@ osc-inspector-select {
     overflow: hidden;
     height: $field-height;
     width: $field-height;
-    background: var(--color-foreground);
+    background: var(--color-background);
     margin-left: 4rem;
     select {
-        background: var(--color-foreground);
+        background: var(--color-background);
         // width: 100%;
         line-height: $field-height - 8rem;
         padding: 4rem 6rem;
@@ -182,10 +180,10 @@ osc-inspector-select {
         left:0;
         opacity: 0;
         optgroup {
-            background: var(--color-foreground);
+            background: var(--color-background);
             font-weight: bold;
             option {
-                background: var(--color-background);
+                background: var(--color-ui-background);
                 color: var(--color-text);
                 margin-left: -4rem;
                 font-weight: normal;
@@ -221,7 +219,7 @@ osc-inspector-color {
     overflow: hidden;
     height: $field-height;
     width: $field-height;
-    background: var(--color-foreground);
+    background: var(--color-background);
     margin-left: 4rem;
 
     cursor: pointer;
@@ -238,10 +236,10 @@ osc-inspector-color {
 
 .color-picker-modal {
     padding: 8rem;
-    background: var(--color-background);
+    background: var(--color-ui-background);
 
     .widget {
-        background: var(--color-foreground);
+        background: var(--color-background);
     }
 
     .actions {

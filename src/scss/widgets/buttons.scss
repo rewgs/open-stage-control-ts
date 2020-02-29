@@ -3,7 +3,7 @@
     --alpha-fill-off: 0;
     --alpha-fill-on: .75;
     --widget-padding: -1rem;
-    --color-text-on: var(--color-foreground);
+    --color-text-on: var(--color-background);
 
     inner {
 
@@ -53,7 +53,7 @@
 
     --alpha-fill-on: 0.75;
     --alpha-fill: var(--alpha-fill-off);
-    --color-text-on: var(--color-foreground);
+    --color-text-on: var(--color-background);
 
     inner {
 
@@ -173,7 +173,7 @@
 
         overflow: hidden;
 
-        background: var(--color-foreground);
+        background: var(--color-background);
 
         @include pseudo-stroke($z: 2);
         &:before {
@@ -211,8 +211,8 @@
             left: 50%;
             margin-left: calc(-1 * var(--size) / 8 + 6rem);
             margin-top: calc(-1 * var(--size) / 8 + 6rem);
-            background: var(--color-foreground);
-            box-shadow: 0 0 0 2rem var(--color-foreground), 0 0 0 3rem var(--color-stroke);
+            background: var(--color-background);
+            box-shadow: 0 0 0 2rem var(--color-background), 0 0 0 3rem var(--color-stroke);
             border-radius: 100%;
             z-index: 10;
             opacity: var(--alpha-stroke);
@@ -225,7 +225,7 @@
             height: 100%;
             transform-origin: 100% 100%;
             position: absolute;
-            box-shadow: 0 0 0 2rem var(--color-foreground);
+            box-shadow: 0 0 0 2rem var(--color-background);
 
 
             div {
@@ -304,7 +304,7 @@
             }
 
             &.on {
-                color: var(--color-foreground);
+                color: var(--color-background);
                 div:after {
                     opacity: var(--alpha-fill)!important;
                 }
@@ -403,7 +403,7 @@
         -webkit-appearance:none;
         -moz-appearance:none;
         appearance:none;
-        background: var(--color-foreground);
+        background: var(--color-background);
         opacity: 0;
     }
 

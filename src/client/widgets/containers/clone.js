@@ -32,7 +32,7 @@ class Clone extends Container() {
             'colorText', 'colorWidget', 'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOff', 'alphaFillOn', 'padding',
             'label', 'color', 'linkId',
             '_value', 'default', 'value',
-            '_osc', 'precision', 'address', 'preArgs', 'target', 'bypass'
+            '_osc', 'decimals', 'address', 'preArgs', 'typeTags', 'target', 'bypass'
         ])
 
     }

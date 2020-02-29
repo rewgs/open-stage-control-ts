@@ -55,7 +55,7 @@
 
         &:focus::selection {
             background: var(--color-fill);
-            color: var(--color-foreground);
+            color: var(--color-background);
         }
 
     }

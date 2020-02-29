@@ -1,6 +1,6 @@
 module.exports = {
 
-    deepCopy: function(obj, precision) {
+    deepCopy: function(obj, decimals) {
 
         var copy = obj
 
@@ -11,10 +11,10 @@ module.exports = {
         if (typeof obj === 'object') {
             copy = Array.isArray(obj) ? [] : {}
             for (let key in obj) {
-                copy[key] = module.exports.deepCopy(obj[key], precision)
+                copy[key] = module.exports.deepCopy(obj[key], decimals)
             }
         } else if (typeof obj == 'number') {
-            return precision === undefined ? copy : parseFloat(copy.toFixed(precision))
+            return decimals === undefined ? copy : parseFloat(copy.toFixed(decimals))
         }
 
         return copy
@@ -33,6 +33,15 @@ module.exports = {
         } else {
             return a === b
         }
+
+    },
+
+    isJSON: function(str) {
+        // heuristic to avoid using JSON when unnecessary
+        // if the string doesn't starts with one of these chars
+        // it's going to fail
+        // ref in source: https://github.com/douglascrockford/JSON-js
+        return ' 	\n+-eE{([0123456789tfn"'.indexOf(str[0]) !== -1
 
     }
 

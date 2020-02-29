@@ -94,11 +94,11 @@ class UiInspectorField extends UiWidget {
         } else if (this.name.includes('color')) {
 
             let style = window.getComputedStyle(this.widget.container),
-                cssName = this.widget.constructor.cssVariables.find(x=>x.js === this.name).css,
+                colorData = this.widget.constructor.cssVariables.find(x=>x.js === this.name),
                 val = '#000'
 
             try {
-                val = chroma(style.getPropertyValue('--' + this.name.replace(/([A-Z])/g, (a,s)=>'-' + s.toLowerCase())).trim()).hex('rgb')
+                val = chroma(style.getPropertyValue(colorData.css).trim()).hex('rgb')
             } catch(e) {console.log(e)}
 
             let picker = html`<osc-inspector-color type="text" name="${this.name}" value="${val}" style="--color-picker-value: ${val}"></osc-inspector-color>`

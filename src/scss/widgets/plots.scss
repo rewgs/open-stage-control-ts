@@ -2,6 +2,9 @@
 .visualizer-container,
 .plot-container {
 
+    width: 200rem;
+    height: 200rem;
+
     --alpha-fill-off: 0.05;
     --alpha-fill-on: 0.1;
     --widget-padding: 20rem;

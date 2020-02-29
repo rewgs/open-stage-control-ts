@@ -28,7 +28,7 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
             smooth: {type: 'boolean|number', value: false, help: 'Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`)'},
             pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
 
-        }, ['interaction', 'precision', 'bypass'], {
+        }, ['interaction', 'decimals', 'typeTags', 'bypass'], {
 
             value: {type: 'array|string', value: '', help: [
                 '- `Array` of `y` values',
@@ -180,7 +180,7 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
 
         this.ctx.globalAlpha = 1
         this.ctx.fillStyle = this.cssVars.colorWidget
-        this.ctx.strokeStyle = this.cssVars.colorForeground
+        this.ctx.strokeStyle = this.cssVars.colorBackground
         this.ctx.lineWidth = 2 * PXSCALE
         for (var i = 0; i < points.length; i += 2) {
             this.ctx.beginPath()

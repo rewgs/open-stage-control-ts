@@ -26,7 +26,7 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
                 'When true, sending `reload` to the widget reloads its image without changing its value'
             ]}
 
-        }, ['precision', 'bypass'], {
+        }, ['decimals', 'bypass'], {
 
             value: {type: 'string', value: '', help: [
                 '- File `url` or `path` (relative to the session file location by default, falling back to absolute path)',

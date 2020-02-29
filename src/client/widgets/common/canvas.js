@@ -139,7 +139,6 @@ class Canvas extends Widget {
 
         switch (propName) {
 
-            case 'css':
             case 'colorText':
             case 'colorWidget':
             case 'colorFill':
@@ -147,11 +146,13 @@ class Canvas extends Widget {
             case 'alphaStroke':
             case 'alphaFillOff':
             case 'alphaFillOn':
+            case 'colorPanel':
                 setTimeout(()=>{
                     this.cacheCanvasStyle()
                     this.batchDraw()
                 },10)
                 return
+            case 'css':
             case 'padding':
                 resize.check(this.canvas, true)
                 setTimeout(()=>{
@@ -174,12 +175,8 @@ class Canvas extends Widget {
 }
 
 Canvas.cssVariables = Canvas.prototype.constructor.cssVariables.concat(
-    {js: 'alphaPips', css: '--alpha-pips', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)}
-)
-
-Canvas.dynamicProps = Canvas.prototype.constructor.dynamicProps.concat(
-    'on',
-    'off'
+    {js: 'alphaPips', css: '--alpha-pips', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)},
+    {js: 'alphaPipsText', css: '--alpha-pips-text', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)}
 )
 
 module.exports = Canvas

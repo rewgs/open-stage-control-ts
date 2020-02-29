@@ -1,6 +1,6 @@
 osc-workspace {
 
-    background: var(--color-background);
+    background: var(--color-ui-background);
 
     --color-fill: var(--color-widget);
     --color-stroke: var(--color-widget);
@@ -42,7 +42,7 @@ osc-panel-container {
         }
 
         ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
-            border-color: var(--color-background)!important;
+            border-color: var(--color-ui-background)!important;
         }
 
     }
@@ -76,7 +76,7 @@ osc-panel-container {
         width: 25rem;
         margin-top: -25rem;
         cursor: pointer;
-        background: var(--color-background);
+        background: var(--color-ui-background);
         font-size: 14rem;
         z-index: 2;
         transition: transform 0.2s ease-out 0.1s;
@@ -213,7 +213,7 @@ osc-panel-content {
     overflow-y: auto;
 
     &.left, &.right {
-        border-right: 1rem solid var(--color-background);
+        border-right: 1rem solid var(--color-ui-background);
     }
 
 

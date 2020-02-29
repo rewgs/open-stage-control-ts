@@ -113,7 +113,7 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
             address: '@{parent.address}/' + i,
             preArgs: '@{parent.preArgs}',
             target: '@{parent.target}',
-            precision: '@{parent.precision}',
+            decimals: '@{parent.decimals}',
             bypass: '@{parent.bypass}',
             label: i,
             top: 'auto',
@@ -176,7 +176,7 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
 
 Matrix.overriddenDefaults = [
-    'type', 'id', 'address', 'preArgs', 'target', 'precision', 'bypass',
+    'type', 'id', 'address', 'preArgs', 'target', 'decimals', 'bypass',
     'label', 'top', 'left', 'height', 'width'
 ]
 

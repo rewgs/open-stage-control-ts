@@ -30,6 +30,8 @@ class Slider extends Canvas {
                     Object.keys(this.getProp('range')[k])[0]:
                     val
 
+            if (Math.abs(label) >= 1000) label = Math.round(label / 1000) + 'k'
+
             this.rangeKeys.push(key)
             this.rangeVals.push(val)
             this.rangeLabels.push(label)
@@ -62,9 +64,9 @@ class Slider extends Canvas {
 
         this.widget.addEventListener('mousewheel',this.mousewheelHandleProxy.bind(this))
 
-        this.on('draginit', this.draginitHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
-        this.on('drag', this.dragHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
-        this.on('dragend', this.dragendHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
+        this.on('draginit', this.draginitHandleProxy.bind(this), {element:this.container, multitouch: options.multitouch})
+        this.on('drag', this.dragHandleProxy.bind(this), {element:this.container, multitouch: options.multitouch})
+        this.on('dragend', this.dragendHandleProxy.bind(this), {element:this.container, multitouch: options.multitouch})
 
         touchstate(this, {element: this.widget, multitouch: options.multitouch})
 
@@ -114,7 +116,7 @@ class Slider extends Canvas {
                 this.setValue(this.steps[i + direction], {sync: true, send: true, fromLocal: true})
             }
         } else {
-            this.percent = clip(this.percent +  Math.max(increment,10/Math.pow(10,this.precision + 1)) * direction, [0,100])
+            this.percent = clip(this.percent +  Math.max(increment,10/Math.pow(10,this.decimals + 1)) * direction, [0,100])
             this.setValue(this.percentToValue(this.percent), {sync: true, send: true, dragged: true})
         }
 
@@ -138,14 +140,7 @@ class Slider extends Canvas {
 
     cacheCanvasStyle(style) {
 
-        style = style || window.getComputedStyle(this.canvas)
-
         super.cacheCanvasStyle(style)
-
-        this.colors.gauge = style.getPropertyValue('--color-gauge') || this.colors.custom
-        this.colors.knob = style.getPropertyValue('--color-knob') || this.colors.custom
-        this.colors.pips = style.getPropertyValue('--color-pips') || this.colors.custom
-        this.colors.gaugeOpacity = style.getPropertyValue('--gauge-opacity')
 
         this.gaugePadding = this.cssVars.padding + PXSCALE
 
@@ -191,7 +186,7 @@ class Slider extends Canvas {
 
         var value = clip(v,[this.rangeValsMin,this.rangeValsMax])
 
-        if ((options.dragged || options.fromLocal) && this.value.toFixed(this.precision) == value.toFixed(this.precision)) options.send = false
+        if ((options.dragged || options.fromLocal) && this.value.toFixed(this.decimals) == value.toFixed(this.decimals)) options.send = false
 
         this.value = value
 
@@ -249,7 +244,6 @@ class Slider extends Canvas {
 }
 
 Slider.dynamicProps = Slider.prototype.constructor.dynamicProps
-    .filter(n => n !== 'precision')
     .concat([
         'steps',
         'spring',

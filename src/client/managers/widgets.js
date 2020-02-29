@@ -136,11 +136,10 @@ var WidgetManager = class WidgetManager extends EventEmitter {
         ipc.send('addWidget', {
             hash: widget.hash,
             data: updatedData || {
-                precision: widget.getProp('precision'),
                 preArgs: widget.getProp('preArgs'),
                 target: widget.getProp('target'),
+                typeTags: widget.getProp('typeTags'),
                 address: widget.getProp('address'),
-                noSync: widget.getProp('noSync'),
             }
         })
 

@@ -160,7 +160,7 @@ class Input extends Canvas {
     getStringValue() {
         if (this.value === undefined) return ''
         return typeof this.value != 'string' ?
-            JSON.stringify(deepCopy(this.value, this.precision)).replace(/,/g, ', ') :
+            JSON.stringify(deepCopy(this.value, this.decimals)).replace(/,/g, ', ') :
             this.value
     }
 

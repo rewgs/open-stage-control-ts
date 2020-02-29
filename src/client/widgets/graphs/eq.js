@@ -25,7 +25,7 @@ module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max:
             logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm\'s base.'},
             smooth: {type: 'boolean|number', value: false, help: 'Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`)'},
 
-        }, ['interaction', 'precision', 'bypass'], {
+        }, ['interaction', 'decimals', 'typeTags', 'bypass'], {
 
             value: {type: 'array', value: '', help: [
                 'Each item must be an object with the following properties',

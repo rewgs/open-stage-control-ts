@@ -30,7 +30,7 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
                 '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre'
             ]},
 
-        }, ['precision', 'bypass'], {})
+        }, ['decimals', 'bypass'], {})
 
     }
 
