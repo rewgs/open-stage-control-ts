@@ -1,7 +1,7 @@
 var EventEmitter = require('../events/event-emitter'),
     ipc = require('../ipc/')
 
-var WidgetManager = class WidgetManager extends EventEmitter {
+class WidgetManager extends EventEmitter {
 
     constructor() {
 
@@ -28,6 +28,10 @@ var WidgetManager = class WidgetManager extends EventEmitter {
                 this.registerWidget(this.widgets[hash])
             }
         })
+        setInterval(()=>{
+
+            this.trigger('root-nav-changed')
+        }, 1000)
 
     }
 

@@ -2,7 +2,7 @@ var EventEmitter = require('../events/event-emitter')
 
 class UiWidget extends EventEmitter {
 
-    constructor(options) {
+    constructor(options={}) {
 
         super()
 

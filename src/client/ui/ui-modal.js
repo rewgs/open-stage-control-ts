@@ -3,9 +3,8 @@ var UiWidget = require('./ui-widget'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     MODAL_SINGLETON = null,
-    MODAL_CONTAINER = null,
-    OPENED_MODALS = 0
-
+    MODAL_CONTAINER = null
+    
 class UiModal extends UiWidget {
 
    constructor(options) {
@@ -79,9 +78,6 @@ class UiModal extends UiWidget {
        if (this.escKey) document.removeEventListener('keydown', this.escKeyHandler)
        if (this.enterKey) document.removeEventListener('keydown', this.enterKeyHandler)
 
-
-       if (--OPENED_MODALS === 0) MODAL_CONTAINER.classList.remove('backdrop')
-
        MODAL_CONTAINER.removeChild(this.container)
 
        this.trigger('close')
@@ -95,8 +91,6 @@ class UiModal extends UiWidget {
 
        if (this.escKey) document.addEventListener('keydown', this.escKeyHandler)
        if (this.enterKey) document.addEventListener('keydown', this.enterKeyHandler)
-
-       if (++OPENED_MODALS === 1) MODAL_CONTAINER.classList.add('backdrop')
 
        MODAL_CONTAINER.appendChild(this.container)
 

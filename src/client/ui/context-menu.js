@@ -1,14 +1,21 @@
 var html = require('nanohtml'),
-    raw = require('nanohtml/raw')
+    raw = require('nanohtml/raw'),
+    UiWidget = require('./ui-widget'),
+    MENU_CONTAINER
 
-class ContextMenu {
+class ContextMenu extends UiWidget {
 
-    constructor(){
+    constructor(options){
 
-        this.menu = null
-        this.root = DOM.get('osc-workspace')[0]
+        super(options)
+
+        if (!MENU_CONTAINER) MENU_CONTAINER = DOM.get('osc-modal-container')[0]
+
+
+        this.container = null
+        MENU_CONTAINER = DOM.get('osc-workspace')[0]
         this.clickHandler = (e)=>{
-            if (this.menu && !this.menu.contains(e.target)) this.close()
+            if (this.container && !this.container.contains(e.target)) this.close()
         }
 
     }
@@ -19,7 +26,11 @@ class ContextMenu {
 
         for (let action of actions) {
 
-            if (Array.isArray(action.action)) {
+            if (action.separator) {
+
+                menu.appendChild(html`<div class="separator"></div>`)
+
+            } else if (Array.isArray(action.action)) {
 
                 let item = html`<div class="item has-sub" tabIndex="1">${raw(action.label)}</div>`
 
@@ -60,9 +71,9 @@ class ContextMenu {
 
         if (!parent) {
 
-            this.menu = menu
+            this.container = menu
 
-            this.root.appendChild(menu)
+            MENU_CONTAINER.appendChild(menu)
 
             DOM.each(menu, '.item', (item)=>{
                 item.addEventListener('mouseenter', ()=>{
@@ -90,19 +101,24 @@ class ContextMenu {
         document.addEventListener('fast-click', this.clickHandler, true)
         document.addEventListener('fast-right-click', this.clickHandler, true)
 
+        this.trigger('open')
+
     }
 
     close() {
 
-        if (this.menu) {
+        if (this.container) {
 
-            this.menu.parentNode.removeChild(this.menu)
-            this.menu = null
+            this.container.parentNode.removeChild(this.container)
+            this.container = null
 
         }
 
         document.removeEventListener('fast-click', this.clickHandler, true)
         document.removeEventListener('fast-right-click', this.clickHandler, true)
+
+        this.trigger('close')
+
     }
 
     correctPosition(menu, parent) {
@@ -110,8 +126,8 @@ class ContextMenu {
         var position = DOM.offset(menu),
             width = menu.offsetWidth,
             height = menu.offsetHeight,
-            totalWidth = this.root.offsetWidth,
-            totalHeight = this.root.offsetHeight
+            totalWidth = MENU_CONTAINER.offsetWidth,
+            totalHeight = MENU_CONTAINER.offsetHeight
 
         if (width + position.left > totalWidth) {
             menu.style.right = parent ? '100%' : '0'
@@ -128,4 +144,4 @@ class ContextMenu {
 
 }
 
-module.exports = new ContextMenu()
+module.exports = ContextMenu

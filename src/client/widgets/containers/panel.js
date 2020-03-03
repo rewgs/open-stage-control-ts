@@ -47,7 +47,7 @@ class Panel extends Container() {
 
         super({...options, html: html`<inner></inner>`})
 
-        this.container.classList.toggle('no-scroll', this.getProp('scroll') === false)
+        this.container.classList.toggle('no-scroll', !this.getProp('scroll'))
         this.container.classList.add('layout-' + this.getProp('layout'))
 
         if (this.getProp('layout') === 'grid') {
