@@ -2,6 +2,9 @@ $line-height: 30rem;
 
 .context-menu {
 
+    --widget-padding: 0rem;
+    --alpha-fill: 0.75;
+
     position:fixed;
     z-index: 999999999;
     background: var(--color-context-menu);
@@ -9,7 +12,6 @@ $line-height: 30rem;
     text-transform: none;
     color: var(--color-context-menu-text);
     line-height: $line-height;
-    --widget-padding: 0rem;
 
     .context-menu {
         position: absolute;
@@ -56,5 +58,11 @@ $line-height: 30rem;
             text-align: center;
             position: relative;
         }
+    }
+    .separator{
+        margin: 2rem 1rem;
+        height: 1rem;
+        background-color: var(--color-ui-background);
+        opacity: 0.5;
     }
 }

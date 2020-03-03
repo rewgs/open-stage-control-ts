@@ -49,7 +49,7 @@ class Modal extends Panel {
         super(options)
 
         this.popup = html`
-            <div class="popup backdrop">
+            <div class="popup">
                 <div class="popup-wrapper">
                     <div class="popup-title closable"><span class="popup-label"></span><span class="closer">${raw(icon('times'))}</span></div>
                     <div class="popup-content widget panel-container not-editable contains-widgets"></div>

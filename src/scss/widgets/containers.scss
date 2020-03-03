@@ -188,16 +188,6 @@
     padding-bottom: 1rem;
     position: relative;
 
-    &.main {
-        :last-child, .tools {
-            width:var(--nav-height);
-            max-width:var(--nav-height);
-            min-width:var(--nav-height);
-            margin-left: 1rem;
-            text-align: center;
-        }
-    }
-
     &:before {
         content:"";
         position: absolute;

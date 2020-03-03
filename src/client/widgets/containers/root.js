@@ -48,21 +48,17 @@ class Root extends StaticProperties(Panel, {scroll: false, label: false, id: 'ro
 
         this.widget.classList.add('root')
 
+
         DOM.each(this.widget, '> .navigation', (el)=>{
             el.classList.add('main')
         })
+        this.trigger('root-nav-changed')
 
     }
 
     createNavigation() {
 
         super.createNavigation()
-
-        this.navigation.appendChild(html`
-            <div class="tools not-editable">${raw(icon('expand'))}></div>
-            <div class="tools not-editable">${raw(icon('pen'))}></div>
-            <div class="tools not-editable">${raw(icon('ellipsis-v'))}></div>
-        `)
 
     }
 

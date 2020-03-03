@@ -14,7 +14,7 @@ class UiSidePanel extends UiWidget {
         this.minWidth = 250
         this.width = 250
 
-        this.disabled = true
+        this.disabled = false
         this.minimized = false
         this.init = false
 
@@ -40,6 +40,8 @@ class UiSidePanel extends UiWidget {
             else this.minimize()
 
         })
+
+        this.disable()
 
     }
 

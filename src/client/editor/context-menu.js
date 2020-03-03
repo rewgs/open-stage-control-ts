@@ -4,7 +4,8 @@ var {updateWidget} = require('./data-workers'),
     {icon} = require('../ui/utils'),
     editor = require('./'),
     locales = require('../locales'),
-    contextMenu = require('../ui/context-menu')
+    ContextMenu = require('../ui/context-menu'),
+    contextMenu = new ContextMenu()
 
 
 var multiSelectKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'

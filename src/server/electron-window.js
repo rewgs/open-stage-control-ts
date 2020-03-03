@@ -1,8 +1,9 @@
 var path = require('path'),
-    {BrowserWindow, dialog, shell} = require('electron'),
+    {BrowserWindow, dialog, shell, screen} = require('electron'),
     shortcut = require('electron-localshortcut'),
     settings = require('./settings'),
-    theme = require('./theme')
+    theme = require('./theme'),
+    screenSize = screen.getPrimaryDisplay().size
 
 
 module.exports = function(options={}) {
@@ -10,8 +11,8 @@ module.exports = function(options={}) {
     var window
 
     window = new BrowserWindow({
-        width: options.width || 800,
-        height: options.height || 600,
+        width: options.width || screenSize.width,
+        height: options.height || screenSize.height,
         title: options.title || settings.read('appName'),
         icon: path.resolve(__dirname + '/../assets/logo.png'),
         backgroundColor: options.color || theme.backgroundColor,
