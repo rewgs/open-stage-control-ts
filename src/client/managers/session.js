@@ -4,7 +4,6 @@ var ipc = require('../ipc/'),
     {icon} = require('../ui/utils'),
     UiModal = require('../ui/ui-modal'),
     UiModal = require('../ui/ui-modal'),
-    uiLobby = require('../ui/ui-lobby'),
     uiFilebrowser = require('../ui/ui-filebrowser'),
     uiFileupload = require('../ui/ui-fileupload'),
     uiLoading = require('../ui/ui-loading'),
@@ -82,9 +81,7 @@ var SessionManager = class SessionManager {
             DOM.dispatchEvent(window, 'resize')
 
             setTimeout(()=>{
-                uiLobby.close()
                 loader.close()
-                container.classList.add('show')
                 this.lock = false
                 editor.unsavedSession = false
                 this.setSessionPath('')
@@ -132,75 +129,19 @@ var SessionManager = class SessionManager {
 
     }
 
-    list(data) {
-
-        for (let i in data) {
-
-            var max = 50
-            var path = data[i],
-                file = path.split('\\').pop().split('/').pop(),
-                length = data[i].length
-
-            path = path.replace(file,'')
-
-            if (length > max - 3) {
-                path = path.substr(0,Math.floor((path.length)/2)-(length-max)/2) + '...' + path.substr(Math.ceil((path.length)/2)+(length-max)/2, path.length)
-            }
-
-            uiLobby.list.appendChild(html`
-                <a href="#" tabIndex="0" class="btn load" data-session="${data[i]}">
-                    ${file} <em style="opacity:0.45">(${path})</em>
-                    ${READ_ONLY? '' : html`<span>${raw(icon('times'))}</span>`}
-                </a>
-            `)
-
-        }
-
-        uiLobby.list.addEventListener('click', function(e){
-            e.preventDefault()
-            if (e.target.hasAttribute('data-session')) {
-                ipc.send('sessionOpen',{path:e.target.getAttribute('data-session')})
-            } else if (!READ_ONLY && e.target.tagName == 'SPAN') {
-                ipc.send('sessionRemoveFromHistory',e.target.parentNode.getAttribute('data-session'))
-                uiLobby.list.removeChild(e.target.parentNode)
-            }
-        })
-
-        if (!READ_ONLY) {
-
-            var brw = uiLobby.footer.appendChild(html`<a href="#" tabindex="0" class="btn browse">${raw(icon('folder-open'))} ${locales('session_browse')}</a>`)
-            var imp = uiLobby.footer.appendChild(html`<a href="#" tabindex="0" class="btn import">${raw(icon('upload'))} ${locales('editor_import')}</a>`)
-            var nws = uiLobby.footer.appendChild(html`<a href="#" tabindex="0" class="btn new">${raw(icon('file'))} ${locales('session_new')}</a>`)
-
-            brw.addEventListener('click', (e)=>{
-                this.browse()
-            })
-
-            imp.addEventListener('click', (e)=>{
-                this.import()
-            })
-
-            nws.addEventListener('click', (e)=>{
-                this.create()
-            })
-
-        }
-
-        DOM.addEventListener(uiLobby.container, 'mousedown touchstart', function(e){
-            if (e.type == 'mousedown') e.preventDefault()
-            e.target.blur()
-        })
-
-        uiLobby.open()
-
-    }
-
     open(data) {
 
         this.load(data.session, ()=>{
             this.setSessionPath(data.path)
             ipc.send('sessionOpened', {path: data.path})
         })
+
+    }
+
+    requestOpen(path) {
+
+        if (editor.unsavedSession && !confirm(locales('session_unsaved'))) return
+        ipc.send('sessionOpen', {path: path})
 
     }
 
@@ -239,6 +180,9 @@ var SessionManager = class SessionManager {
     }
 
     create() {
+
+        if (editor.unsavedSession && !confirm(locales('session_unsaved'))) return
+
         this.load({type: 'root'},function(){
             editor.enable()
             editor.select(widgetManager.getWidgetById('root'))

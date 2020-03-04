@@ -90,6 +90,7 @@ var Editor = class Editor {
         this.idClipboard = null
 
         this.enabled = false
+        this.grid = true
 
         this.unsavedSession = false
         window.onbeforeunload = ()=>{
@@ -338,6 +339,17 @@ var Editor = class Editor {
 
     }
 
+    toggleGrid() {
+
+        this.grid = !this.grid
+
+        GRIDWIDTH = this.grid ? 10 : 1
+
+        document.documentElement.style.setProperty('--grid-width', GRIDWIDTH)
+        document.body.classList.toggle('no-grid', GRIDWIDTH == 1)
+
+    }
+
     enable() {
 
         if (READ_ONLY) return
@@ -345,39 +357,7 @@ var Editor = class Editor {
         EDITING = true
         this.enabled = true
 
-        // DOM.get('.disable-editor')[0].classList.remove('on')
-        // DOM.get('.enable-editor')[0].classList.add('on')
-        //
         document.body.classList.add('editor-enabled')
-        // document.body.classList.toggle('no-grid', GRIDWIDTH == 1)
-        //
-        //
-        // GRIDWIDTH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
-        //
-        // var gridForm = html`
-        //     <div class="form" id="grid-width-form">
-        //         <div class="separator"><span>Grid</span></div>
-        //         <div class="input-wrapper">
-        //             <label>Width</label>
-        //             <input class="input no-keybinding" type="number" id="grid-width-input" step="1" min="1" max="100" value="${GRIDWIDTH}"/>
-        //         </div>
-        //     </div>
-        // `
-        //
-        // DOM.each(gridForm, '#grid-width-input', (input)=>{
-        //     DOM.addEventListener(input, 'keyup mouseup change mousewheel', (e)=>{
-        //         setTimeout(()=>{
-        //             var v = Math.max(Math.min(parseInt(input.value), 100), 1)
-        //             if (isNaN(v)) return
-        //             input.value = v
-        //             GRIDWIDTH = v
-        //             document.body.classList.toggle('no-grid', GRIDWIDTH == 1)
-        //             document.documentElement.style.setProperty('--grid-width', GRIDWIDTH)
-        //         })
-        //     })
-        // })
-        //
-        // DOM.get(document, '.editor-menu')[0].appendChild(gridForm)
 
         this.widgetTree.updateTree(this.selectedWidgets)
 

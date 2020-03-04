@@ -15,7 +15,7 @@ var StateManager = class StateManager {
         this.statePath = ''
         this.lastDir = null
 
-        this.quickState = []
+        this.quickState = null
 
         this.valueStateQueue = {}
         this.valueOldPropQueue = {}

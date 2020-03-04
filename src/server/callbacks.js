@@ -12,7 +12,11 @@ var widgetHashTable = {},
 module.exports =  {
 
     ready: function(data,clientId) {
+
         ipc.send('connected')
+
+        var recentSessions = settings.read('recentSessions')
+        ipc.send('sessionList', recentSessions, clientId)
 
         if (settings.read('readOnly')) {
             ipc.send('readOnly')
@@ -30,7 +34,6 @@ module.exports =  {
 
         if (settings.read('sessionFile')) return this.sessionOpen({path:settings.read('sessionFile')},clientId)
 
-        var recentSessions = settings.read('recentSessions')
 
         if (settings.read('examples')) {
             var dir = path.resolve(__dirname + '/../examples')
@@ -38,36 +41,44 @@ module.exports =  {
             recentSessions = recentSessions.map(function(file){return dir + '/' + file})
         }
 
-        ipc.send('sessionList', recentSessions, clientId)
         ipc.send('serverTargets', settings.read('targets'), clientId)
 
     },
 
     sessionAddToHistory: function(data) {
-        var sessionlist = settings.read('recentSessions')
+
+        var recentSessions = settings.read('recentSessions')
 
         fs.lstat(data,(err, stats)=>{
 
             if (err || !stats.isFile()) return
 
             // add session to history
-            sessionlist.unshift(path.resolve(data))
+            recentSessions.unshift(path.resolve(data))
             // remove doubles from history
-            sessionlist = sessionlist.filter(function(elem, index, self) {
+            recentSessions = recentSessions.filter(function(elem, index, self) {
                 return index == self.indexOf(elem)
             })
+            // history size limit
+            if (recentSessions.length > 10) recentSessions = recentSessions.slice(0, 10)
+
             // save history
-            settings.write('recentSessions',sessionlist)
+            settings.write('recentSessions',recentSessions)
+
+            ipc.send('sessionList', recentSessions)
 
         })
     },
 
     sessionRemoveFromHistory: function(data) {
-        var sessionlist = settings.read('recentSessions')
-        if (sessionlist.indexOf(data) > -1) {
-            sessionlist.splice(sessionlist.indexOf(data),1)
-            settings.write('recentSessions',sessionlist)
+
+        var recentSessions = settings.read('recentSessions')
+        if (recentSessions.indexOf(data) > -1) {
+            recentSessions.splice(recentSessions.indexOf(data),1)
+            settings.write('recentSessions',recentSessions)
+            ipc.send('sessionList', recentSessions)
         }
+
     },
 
     sessionSetPath: function(data, clientId) {

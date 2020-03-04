@@ -3,87 +3,145 @@ var UiWidget = require('./ui-widget'),
     ContextMenu = require('./context-menu'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
-    {icon} = require('./utils')
+    {icon} = require('./utils'),
+    ipc = require('../ipc'),
+    locales = require('../locales'),
+    notifications = require('./notifications'),
+    fullscreen = require('./fullscreen'),
+    editor = require('../editor'),
+    sessionManager = require('../managers/session'),
+    stateManager = require('../managers/state'),
+    uiSidePanel = require('./ui-sidepanel')
 
-
-var menu = [
+var recentSessions = []
+var menuEntries = [
 
     {
-        label: 'Session',
+        label: locales('session'),
         action: [
             {
-                label: 'new'
+                label: locales('session_new'),
+                action: sessionManager.create.bind(sessionManager)
             },
             {
                 separator: true
             },
             {
-                label: 'open'
+                label: locales('file_open'),
+                action: sessionManager.browse.bind(sessionManager)
             },
             {
-                label: 'save'
-            },
-            {
-                label: 'save as'
+                label: locales('file_open_recent'),
+                action: recentSessions
             },
             {
                 separator: true
             },
             {
-                label: 'import'
+                label: locales('file_save'),
+                action: sessionManager.save.bind(sessionManager)
             },
             {
-                label: 'export'
+                label: locales('file_save_as'),
+                action: sessionManager.saveAs.bind(sessionManager)
+            },
+            {
+                separator: true
+            },
+            {
+                label: locales('file_import'),
+                action: sessionManager.import.bind(sessionManager)
+            },
+            {
+                label: locales('file_export'),
+                action: sessionManager.export.bind(sessionManager)
             },
 
         ]
     },
     {
-        label: 'State',
+        label: locales('state'),
+        class: ()=>{return sessionManager.session === null ? 'disabled' : ''},
         action: [
             {
-                label: 'store'
+                label: locales('state_store'),
+                action: stateManager.quickSave.bind(stateManager)
             },
             {
-                label: 'recall'
+                label: locales('state_recall'),
+                class: ()=>{return stateManager.quickState === null ? 'disabled' : ''},
+                action: stateManager.quickLoad.bind(stateManager)
+            },
+            {
+                label: locales('state_send'),
+                action: ()=>{
+                    stateManager.send()
+                    notifications.add({
+                        icon: 'sliders-h',
+                        message: locales('state_sendsuccess')
+                    })
+                }
             },
             {
                 separator: true
             },
             {
-                label: 'open'
+                label: locales('file_open'),
+                action: stateManager.browse.bind(stateManager)
             },
             {
-                label: 'save'
+                label: locales('file_save'),
+                action: stateManager.save.bind(stateManager)
             },
             {
-                label: 'save as'
+                label: locales('file_save_as'),
+                action: stateManager.saveAs.bind(stateManager)
             },
             {
                 separator: true
             },
             {
-                label: 'import'
+                label: locales('file_import'),
+                action: stateManager.import.bind(stateManager)
             },
             {
-                label: 'export'
+                label: locales('file_export'),
+                action: stateManager.export.bind(stateManager)
             },
         ]
     },
     {
-        label: 'Editor',
+        label: locales('editor'),
+        class: ()=>{return sessionManager.session === null ? 'disabled' : ''},
         action: [
             {
-                label: 'enabled'
+                label: locales('editor_enabled'),
+                class: ()=>{return 'toggle ' + (editor.enabled ? 'on' : 'off')},
+                action: ()=>{
+                    if (editor.enabled) editor.disable()
+                    else editor.enable()
+                }
             },
             {
-                label: 'grid'
+                separator: true
             },
             {
-                label: 'project tree'
+                label: locales('editor_grid'),
+                class: ()=>{return 'toggle ' + (editor.grid ? 'on' : 'off')},
+                action: editor.toggleGrid.bind(editor)
+
             },
             {
-                label: 'inspector'
+                label: locales('editor_tree'),
+                class: ()=>{return 'toggle ' + (uiSidePanel.left.minimized ? 'off' : 'on')},
+                action: ()=>{return uiSidePanel.left.minimized ? uiSidePanel.left.restore() : uiSidePanel.left.minimize()},
+
+
+            },
+            {
+                label: locales('editor_inspector'),
+                class: ()=>{return 'toggle ' + (uiSidePanel.right.minimized ? 'off' : 'on')},
+                action: ()=>{return uiSidePanel.right.minimized ? uiSidePanel.right.restore() : uiSidePanel.right.minimize()},
             }
         ]
     },
@@ -91,11 +149,36 @@ var menu = [
         separator: true
     },
     {
-        label: 'Fullscreen',
-        action: ()=>{}
+        label: locales('fullscreen'),
+        class: ()=>{return 'toggle ' + (fullscreen.isFullscreen ? 'on' : 'off')},
+        action: ()=>{
+            if (fullscreen.isEnabled) fullscreen.toggle()
+        }
     },
 
 ]
+
+if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
+
+    var NoSleep = require('nosleep.js'),
+        noSleep = new NoSleep(),
+        noSleepState = false
+
+    menuEntries.push({
+        label: locales('nosleep'),
+        class: ()=>{return 'toggle ' + (noSleepState ? 'on' : 'off')},
+        action:()=>{
+            noSleepState = !noSleepState
+            if (noSleepState) noSleep.disable()
+            else noSleep.enable()
+        }
+    })
+
+}
+
+
+
+
 
 
 class UiToolbar extends UiWidget {
@@ -106,6 +189,19 @@ class UiToolbar extends UiWidget {
 
         this.menu = new ContextMenu()
         this.opened = false
+
+
+        ipc.on('sessionList', (data)=>{
+            if (recentSessions.length) {
+                recentSessions.splice(0, 10)
+            }
+            for (let s of data) [
+                recentSessions.push({
+                    label: s,
+                    action: ()=>{sessionManager.requestOpen(s)}
+                })
+            ]
+        })
 
         this.container.addEventListener('fast-click', (e)=>{
             if (this.opened) this.close()
@@ -129,7 +225,7 @@ class UiToolbar extends UiWidget {
             target: e.detail.target,
             pageX: e.detail.pageX - e.detail.offsetX + PXSCALE,
             pageY: e.detail.pageY - e.detail.offsetY + e.detail.target.offsetHeight + 5 * PXSCALE
-        }, menu)
+        }, menuEntries)
 
         this.opened = true
         this.toggleState()

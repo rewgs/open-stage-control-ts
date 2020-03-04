@@ -29,12 +29,6 @@ module.exports = {
         LOADING.close()
     },
 
-    sessionList: function(data){
-
-        session.list(data)
-
-    },
-
     sessionOpen: function(data){
 
         session.open(data)

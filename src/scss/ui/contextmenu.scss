@@ -30,15 +30,17 @@ $line-height: 30rem;
         }
     }
     > .item {
-        padding-left: 15rem;
-        padding-right: 25rem;
+        padding-left: 30rem;
+        padding-right: 30rem;
         position:relative;
         cursor: pointer;
         i {
-            margin-right:5rem;
-            width: 15rem;
+            position: absolute;
+            left: 10rem;
+            width: 10rem;
             text-align: center;
-            margin-left: -5rem;
+            line-height: $line-height - 2;
+            font-size: 90%;
         }
         &.focus, &:focus {
             > .context-menu {
@@ -53,10 +55,32 @@ $line-height: 30rem;
             display: block;
             font-family: FontAwesome;
             float:right;
-            margin-right:-20rem;
+            margin-right:-25rem;
             width: 15rem;
             text-align: center;
             position: relative;
+        }
+        &.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        &.toggle:before  {
+            content: "";
+            display: block;
+            font-family: FontAwesome;
+            position: absolute;
+            width: 10rem;
+            height: 10rem;
+            left: 10rem;
+            top: 8rem;
+            border: 1rem solid;
+            opacity: 0.75;
+            line-height: 10rem;
+            font-size: 8rem;
+            text-align: right;
+        }
+        &.toggle.on:before {
+            content:"\f00c";
         }
     }
     .separator{

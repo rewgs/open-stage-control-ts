@@ -9,11 +9,10 @@ class ContextMenu extends UiWidget {
 
         super(options)
 
-        if (!MENU_CONTAINER) MENU_CONTAINER = DOM.get('osc-modal-container')[0]
+        if (!MENU_CONTAINER) MENU_CONTAINER = DOM.get('osc-workspace')[0]
 
 
         this.container = null
-        MENU_CONTAINER = DOM.get('osc-workspace')[0]
         this.clickHandler = (e)=>{
             if (this.container && !this.container.contains(e.target)) this.close()
         }
@@ -32,7 +31,9 @@ class ContextMenu extends UiWidget {
 
             } else if (Array.isArray(action.action)) {
 
-                let item = html`<div class="item has-sub" tabIndex="1">${raw(action.label)}</div>`
+                let label = typeof action.label === 'function' ? action.label() : action.label,
+                    iclass = typeof action.class === 'function' ? action    .class() : action.class,
+                    item = html`<div class="item has-sub ${iclass}" tabIndex="1">${raw(label)}</div>`
 
                 menu.appendChild(item)
 
@@ -41,11 +42,13 @@ class ContextMenu extends UiWidget {
 
             } else {
 
-                let item = html`<div class="item">${raw(action.label)}</div>`
+                let label = typeof action.label === 'function' ? action.label() : action.label,
+                    iclass = typeof action.class === 'function' ? action.class() : action.class,
+                    item = html`<div class="item ${iclass}">${raw(label)}</div>`
 
                 menu.appendChild(item)
 
-                if (action.click) {
+                // if (action.click) {
 
                     item.addEventListener('click', (e)=>{
                         e.preventDefault()
@@ -53,15 +56,15 @@ class ContextMenu extends UiWidget {
                         this.close()
                     })
 
-                } else {
-
-                    item.addEventListener('fast-click', (e)=>{
-                        e.detail.preventOriginalEvent = true
-                        action.action()
-                        this.close()
-                    })
-
-                }
+                // } else {
+                //
+                //     item.addEventListener('fast-click', (e)=>{
+                //         e.detail.preventOriginalEvent = true
+                //         action.action()
+                //         this.close()
+                //     })
+                //
+                // }
 
             }
 
@@ -87,8 +90,8 @@ class ContextMenu extends UiWidget {
                 })
             })
 
-            menu.style.top = e.pageY + 'px'
-            menu.style.left = e.pageX + 'px'
+            menu.style.top = e.pageY / PXSCALE + 'rem'
+            menu.style.left = e.pageX / PXSCALE + 'rem'
 
             this.correctPosition(menu)
 
@@ -130,12 +133,16 @@ class ContextMenu extends UiWidget {
             totalHeight = MENU_CONTAINER.offsetHeight
 
         if (width + position.left > totalWidth) {
-            menu.style.right = parent ? '100%' : '0'
-            menu.style.left = 'auto'
-            menu.style.marginRight = '1rem'
+            if (position.left - width > 0) {
+                menu.style.right = parent ? '100%' : '0'
+                menu.style.left = 'auto'
+                menu.style.marginRight = '1rem'
+            } else {
+                menu.style.left =  (parent.offsetWidth + (totalWidth  - width - position.left)) / PXSCALE + 'rem'
+            }
         }
 
-        if (height + position.top > totalHeight) {
+        if (height + position.top > totalHeight && position.top - height > 0) {
             menu.style.top = 'auto'
             menu.style.bottom = '0rem'
         }
