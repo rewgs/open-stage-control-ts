@@ -1,4 +1,5 @@
-var UiWidget = require('./ui-widget')
+var UiWidget = require('./ui-widget'),
+    locales = require('../locales')
 
 class UiSidePanel extends UiWidget {
 
@@ -6,6 +7,7 @@ class UiSidePanel extends UiWidget {
 
         super(options)
 
+        DOM.get(this.container, 'osc-panel-header')[0].textContent = options.label
         this.resizeDirection = this.container.classList.contains('left') ? 1 : -1
         this.resizeHandle = DOM.get(this.container, '.resize-handle')[0]
         this.toggleButton = DOM.get(this.container, '.toggle-button')[0]
@@ -105,8 +107,8 @@ class UiSidePanel extends UiWidget {
 
 }
 
-var leftUiSidePanel = new UiSidePanel({selector: 'osc-panel-container.right'}),
-    rightUiSidePanel = new UiSidePanel({selector: 'osc-panel-container.left'})
+var leftUiSidePanel = new UiSidePanel({selector: 'osc-panel-container.left', label: locales('editor_tree')}),
+    rightUiSidePanel = new UiSidePanel({selector: 'osc-panel-container.right', label: locales('editor_inspector')})
 
 module.exports = {
     left: leftUiSidePanel,

@@ -192,27 +192,6 @@ var sidepanelData = [
 ]
 
 
-if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
-
-    var NoSleep = require('nosleep.js'),
-        noSleep = new NoSleep(),
-        noSleepState = false
-
-    sidepanelData[0].actions.push({
-        label: locales('sidepanel_nosleep'),
-        class: 'toggle',
-        action:(el)=>{
-            noSleepState = el.classList.toggle('on')
-            if (noSleepState) {
-                noSleep.enable()
-            } else {
-                noSleep.disable()
-            }
-        }
-    })
-
-}
-
 
 
 var options = html`<ul id="options"></ul>`

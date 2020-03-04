@@ -22,8 +22,8 @@ if (screenfull.isEnabled) {
         toggle(){
 
             new UiModal({
-                title: locales('fs_unnavailable'),
-                content: locales('fs_addtohome'),
+                title: locales('fullscreen_unnavailable'),
+                content: locales('fullscreen_addtohome'),
                 closable: true
             })
 

@@ -53,28 +53,28 @@ var handleClick = function(event) {
         actions = []
 
     // case root: only "add tab" option
-    if (parent === widgetManager) {
-        actions.push({
-            label: icon('plus') + ' ' + locales('editor_addtab'),
-            action: ()=>{
-                data[0].tabs.push({})
-
-                var indexes = {addedIndexes: [data[0].tabs.length -1]}
-                updateWidget(editor.selectedWidgets[0], indexes)
-                editor.pushHistory(indexes)
-            }
-        })
-        contextMenu.open(eventData, actions)
-
-        return
-    }
+    // if (parent === widgetManager) {
+    //     actions.push({
+    //         label: icon('plus') + ' ' + locales('editor_addtab'),
+    //         action: ()=>{
+    //             data[0].tabs.push({})
+    //
+    //             var indexes = {addedIndexes: [data[0].tabs.length -1]}
+    //             updateWidget(editor.selectedWidgets[0], indexes)
+    //             editor.pushHistory(indexes)
+    //         }
+    //     })
+    //     contextMenu.open(eventData, actions)
+    //
+    //     return
+    // }
 
     // case !root
 
     var clickX = Math.round((eventData.offsetX + eventData.target.scrollLeft) / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH,
         clickY = Math.round((eventData.offsetY + eventData.target.scrollTop)  / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH
 
-    if (type === 'widget')  {
+    if (type === 'widget' && parent !== widgetManager)  {
 
         actions.push({
             label: icon('copy') + ' ' + locales('editor_copy'),
@@ -86,45 +86,45 @@ var handleClick = function(event) {
             action: editor.cutWidget.bind(editor)
         })
 
-        var wrapActions = []
-        for (let c of categories.Containers) {
-            if (c === 'clone') continue
-            wrapActions.push({
-                label: c,
-                action: ()=>{
-                    var wrap =  {type: c, widgets:[], label: c === 'modal' ? 'auto' : false}
-
-                    wrap.widgets = data
-
-                    var minTop = Math.min(...data.map(x=>isNaN(x.top) ? x.top == 'auto' ? 0 : Infinity : x.top))
-                    var minLeft = Math.min(...data.map(x=>isNaN(x.left) ? x.left == 'auto' ? 0 : Infinity : x.left))
-
-                    wrap.top = minTop === Infinity ? data[0].top : minTop
-                    wrap.left= minLeft === Infinity ? data[0].left : minLeft
-
-                    for (var w of wrap.widgets) {
-                        if (!isNaN(w.top)) w.top = Math.max(w.top - minTop, 0)
-                        if (!isNaN(w.left)) w.left = Math.max(w.left - minLeft, 0)
-                    }
-
-                    var i
-                    for (i of index) {
-                        parent.props.widgets.splice(i,1)
-                    }
-
-                    parent.props.widgets = parent.props.widgets.slice(0, i).concat(wrap, parent.props.widgets.slice(i, parent.props.widgets.length))
-
-                    editor.select(updateWidget(parent, {preventSelect: true, removedIndexes: index, addedIndexes: [i]}))
-                    editor.pushHistory({removedIndexes: index, addedIndexes: [i]})
-
-                }
-            })
-        }
-
-        actions.push({
-            label: icon('layer-group') + ' ' + locales('editor_wrap'),
-            action: wrapActions
-        })
+        // var wrapActions = []
+        // for (let c of categories.Containers) {
+        //     if (c === 'clone') continue
+        //     wrapActions.push({
+        //         label: c,
+        //         action: ()=>{
+        //             var wrap =  {type: c, widgets:[], label: c === 'modal' ? 'auto' : false}
+        //
+        //             wrap.widgets = data
+        //
+        //             var minTop = Math.min(...data.map(x=>isNaN(x.top) ? x.top == 'auto' ? 0 : Infinity : x.top))
+        //             var minLeft = Math.min(...data.map(x=>isNaN(x.left) ? x.left == 'auto' ? 0 : Infinity : x.left))
+        //
+        //             wrap.top = minTop === Infinity ? data[0].top : minTop
+        //             wrap.left= minLeft === Infinity ? data[0].left : minLeft
+        //
+        //             for (var w of wrap.widgets) {
+        //                 if (!isNaN(w.top)) w.top = Math.max(w.top - minTop, 0)
+        //                 if (!isNaN(w.left)) w.left = Math.max(w.left - minLeft, 0)
+        //             }
+        //
+        //             var i
+        //             for (i of index) {
+        //                 parent.props.widgets.splice(i,1)
+        //             }
+        //
+        //             parent.props.widgets = parent.props.widgets.slice(0, i).concat(wrap, parent.props.widgets.slice(i, parent.props.widgets.length))
+        //
+        //             editor.select(updateWidget(parent, {preventSelect: true, removedIndexes: index, addedIndexes: [i]}))
+        //             editor.pushHistory({removedIndexes: index, addedIndexes: [i]})
+        //
+        //         }
+        //     })
+        // }
+        //
+        // actions.push({
+        //     label: icon('layer-group') + ' ' + locales('editor_wrap'),
+        //     action: wrapActions
+        // })
 
     }
 
