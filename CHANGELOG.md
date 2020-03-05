@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.49.7
+
+- bug fixes
+  - sync issues when widgets have a single target set 
 
 ## 0.49.6
 
