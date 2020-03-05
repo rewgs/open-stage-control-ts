@@ -1,9 +1,14 @@
 # Changelog
 
+## 0.49.8
+
+- bug fixes
+  - rgb: range not applied when receiving value
+
 ## 0.49.7
 
 - bug fixes
-  - sync issues when widgets have a single target set 
+  - sync issues when widgets have a single target set
 
 ## 0.49.6
 
