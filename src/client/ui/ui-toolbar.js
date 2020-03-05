@@ -13,6 +13,7 @@ var UiWidget = require('./ui-widget'),
     stateManager = require('../managers/state'),
     uiSidePanel = require('./ui-sidepanel')
 
+
 var recentSessions = []
 var menuEntries = [
 
@@ -28,7 +29,8 @@ var menuEntries = [
             },
             {
                 label: locales('file_open'),
-                action: sessionManager.browse.bind(sessionManager)
+                action: sessionManager.browse.bind(sessionManager),
+                shortcut: 'mod + o'
             },
             {
                 label: locales('file_open_recent'),
@@ -39,11 +41,13 @@ var menuEntries = [
             },
             {
                 label: locales('file_save'),
-                action: sessionManager.save.bind(sessionManager)
+                action: sessionManager.save.bind(sessionManager),
+                shortcut: 'mod + s'
             },
             {
                 label: locales('file_save_as'),
-                action: sessionManager.saveAs.bind(sessionManager)
+                action: sessionManager.saveAs.bind(sessionManager),
+                shortcut: 'mod + shift + s'
             },
             {
                 separator: true
@@ -120,7 +124,8 @@ var menuEntries = [
                 action: ()=>{
                     if (editor.enabled) editor.disable()
                     else editor.enable()
-                }
+                },
+                shortcut: 'mod + e'
             },
             {
                 separator: true
@@ -128,13 +133,15 @@ var menuEntries = [
             {
                 label: locales('editor_grid'),
                 class: ()=>{return 'toggle ' + (editor.grid ? 'on' : 'off')},
-                action: editor.toggleGrid.bind(editor)
+                action: editor.toggleGrid.bind(editor),
+                // shortcut: 'mod + g'
 
             },
             {
                 label: locales('editor_tree'),
                 class: ()=>{return 'toggle ' + (uiSidePanel.left.minimized ? 'off' : 'on')},
                 action: ()=>{return uiSidePanel.left.minimized ? uiSidePanel.left.restore() : uiSidePanel.left.minimize()},
+                // shortcut: 'mod + t'
 
 
             },
@@ -142,6 +149,7 @@ var menuEntries = [
                 label: locales('editor_inspector'),
                 class: ()=>{return 'toggle ' + (uiSidePanel.right.minimized ? 'off' : 'on')},
                 action: ()=>{return uiSidePanel.right.minimized ? uiSidePanel.right.restore() : uiSidePanel.right.minimize()},
+                // shortcut: 'mod + i'
             }
         ]
     },
@@ -153,7 +161,8 @@ var menuEntries = [
         class: ()=>{return 'toggle ' + (fullscreen.isFullscreen ? 'on' : 'off')},
         action: ()=>{
             if (fullscreen.isEnabled) fullscreen.toggle()
-        }
+        },
+        shortcut: 'f11'
     },
 
 ]
@@ -180,16 +189,17 @@ if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
 
 
 
-
 class UiToolbar extends UiWidget {
 
     constructor(options) {
 
         super(options)
 
-        this.menu = new ContextMenu()
+        this.menu = new ContextMenu({
+            position: [39, 1]
+        })
         this.opened = false
-
+        this.menu.bindShortcuts(menuEntries)
 
         ipc.on('sessionList', (data)=>{
             if (recentSessions.length) {
@@ -221,11 +231,7 @@ class UiToolbar extends UiWidget {
 
         if (this.opened) return
 
-        this.menu.open({
-            target: e.detail.target,
-            pageX: e.detail.pageX - e.detail.offsetX + PXSCALE,
-            pageY: e.detail.pageY - e.detail.offsetY + e.detail.target.offsetHeight + 5 * PXSCALE
-        }, menuEntries)
+        this.menu.open(e, menuEntries)
 
         this.opened = true
         this.toggleState()

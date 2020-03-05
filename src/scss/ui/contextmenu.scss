@@ -8,7 +8,7 @@ $line-height: 30rem;
     position:fixed;
     z-index: 999999999;
     background: var(--color-context-menu);
-    box-shadow: 0 0 0 1rem rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 0 0 0.5rem rgba(0, 0, 0, 0.15) inset;
     text-transform: none;
     color: var(--color-context-menu-text);
     line-height: $line-height;
@@ -19,7 +19,7 @@ $line-height: 30rem;
         top:0;
         opacity:0;
         pointer-events: none;
-        margin-left: 1rem;
+        margin-left: -0.5rem;
         &:before {
             content:"";
             position: absolute;
@@ -34,6 +34,8 @@ $line-height: 30rem;
         padding-right: 30rem;
         position:relative;
         cursor: pointer;
+        display: flex;
+        flex-direction: row;
         i {
             position: absolute;
             left: 10rem;
@@ -42,7 +44,7 @@ $line-height: 30rem;
             line-height: $line-height - 2;
             font-size: 90%;
         }
-        &.focus, &:focus {
+        &.focus {
             > .context-menu {
                 pointer-events: auto;
                 opacity: 1;
@@ -54,11 +56,12 @@ $line-height: 30rem;
             content:"\f105";
             display: block;
             font-family: FontAwesome;
-            float:right;
-            margin-right:-25rem;
-            width: 15rem;
-            text-align: center;
+            text-align: right;
+            margin-right: -20rem;
             position: relative;
+            flex: 1;
+            order: 1;
+            margin-left: 10rem;
         }
         &.disabled {
             pointer-events: none;
@@ -81,6 +84,17 @@ $line-height: 30rem;
         }
         &.toggle.on:before {
             content:"\f00c";
+        }
+        .shortcut {
+            display: inline-block;
+            margin-left: 20rem;
+            margin-right: -20rem;
+            position: relative;
+            text-align: right;
+            position: relative;
+            flex: 1;
+            text-transform: capitalize;
+            opacity: 0.5;
         }
     }
     .separator{

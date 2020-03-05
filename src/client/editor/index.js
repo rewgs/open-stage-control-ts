@@ -141,31 +141,6 @@ var Editor = class Editor {
 
         })
 
-        keyboardJS.bind('mod + s', (e)=>{
-            e.preventDefault()
-            sessionManager.save()
-        })
-
-        keyboardJS.bind('mod + shift + s', (e)=>{
-            e.preventDefault()
-            sessionManager.saveAs()
-        })
-
-        keyboardJS.bind('mod + o', (e)=>{
-            e.preventDefault()
-            sessionManager.browse()
-        })
-
-        keyboardJS.bind('mod + e', (e)=>{
-            e.preventDefault()
-            if (this.enabled) {
-                this.disable()
-            } else {
-                if (sessionManager.session.type) this.enable()
-            }
-        })
-
-
         this.selectarea = new UiSelectArea('[data-widget]:not(.not-editable)', (elements)=>{
 
             elements = elements.map(e => widgetManager.getWidgetByElement(e, ':not(.not-editable)')).filter(e => e)
@@ -323,16 +298,6 @@ var Editor = class Editor {
                 }
 
                 break
-
-            // case 'f2':
-            //     var input = DOM.get(this.form, 'textarea[name="label"]')[0]
-            //     if (input) {
-            //         var folded = input.closest('.category.folded')
-            //         if (folded) DOM.dispatchEvent(DOM.get(folded, '.separator'), 'fast-click')
-            //         input.focus()
-            //         input.setSelectionRange(0, input.value.length)
-            //     }
-            //     break
 
         }
 
