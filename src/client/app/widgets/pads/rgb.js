@@ -190,9 +190,9 @@ module.exports = class Rgb extends Pad {
         if (value.length === 4 && value[3] === undefined) value[3] = this.alpha.value
 
         var hsb = rgbToHsb({
-            r: value[0],
-            g: value[1],
-            b: value[2]
+            r: mapToScale(value[0], [this.getProp('range').min, this.getProp('range').max], [0, 255], false),
+            g: mapToScale(value[1], [this.getProp('range').min, this.getProp('range').max], [0, 255], false),
+            b: mapToScale(value[2], [this.getProp('range').min, this.getProp('range').max], [0, 255], false)
         })
 
         if (!options.dragged) {
