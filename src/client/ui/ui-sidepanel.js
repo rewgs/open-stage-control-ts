@@ -59,7 +59,7 @@ class UiSidePanel extends UiWidget {
     disable() {
 
         this.container.classList.add('disabled')
-        this.disabled = false
+        this.disabled = true
 
         this.close()
 
@@ -70,7 +70,8 @@ class UiSidePanel extends UiWidget {
         if (this.minimized) return
 
         this.minimized = true
-        this.close()
+
+        if (!this.disabled) this.close()
 
 
     }
@@ -80,7 +81,8 @@ class UiSidePanel extends UiWidget {
         if (!this.minimized) return
 
         this.minimized = false
-        this.open()
+
+        if (!this.disabled) this.open()
 
 
     }

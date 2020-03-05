@@ -1,105 +1,131 @@
 var html = require('nanohtml'),
     raw = require('nanohtml/raw'),
+    keyboardJS = require('keyboardjs'),
     UiWidget = require('./ui-widget'),
+    mod = (navigator.platform || '').match('Mac') ? 'cmd' : 'ctrl',
     MENU_CONTAINER
+
 
 class ContextMenu extends UiWidget {
 
-    constructor(options){
+    constructor(options={}){
 
         super(options)
 
         if (!MENU_CONTAINER) MENU_CONTAINER = DOM.get('osc-workspace')[0]
 
 
-        this.container = null
+        this.container = html`<div class="context-menu"></div>`
         this.clickHandler = (e)=>{
-            if (this.container && !this.container.contains(e.target)) this.close()
+            if (this.container && !this.container.contains(e.target)) {
+                this.close()
+            }
         }
+
+
+        this.position = options.position
+        if (this.position) {
+            this.container.style.top = this.position[0] + 'rem'
+            this.container.style.left = this.position[1] + 'rem'
+        }
+
+        this.container.addEventListener('click', (e)=>{
+            e.preventDefault()
+            if (e.target._action){
+                e.target._action()
+                this.close()
+            }
+        })
+
+        this.hoverNode = null
+        this.container.addEventListener('mousemove', (e)=>{
+            if (this.hoverNode === e.target) return
+            this.hoverNode = e.target
+            if (!e.target.classList.contains('focus')) {
+                DOM.each(e.target.parentNode, '.focus', (el)=>{
+                    el.classList.remove('focus')
+                })
+                e.target.classList.add('focus')
+            }
+        })
+
+        this.container.addEventListener('touchstart', (e)=>{
+            if (!e.target.classList.contains('focus')) {
+                DOM.each(e.target.parentNode, '.focus', (el)=>{
+                    el.classList.remove('focus')
+                })
+                e.target.classList.add('focus')
+            } else {
+                e.target.classList.remove('focus')
+                DOM.each(e.target, '.focus', (el)=>{
+                    el.classList.remove('focus')
+                })
+            }
+        })
+
 
     }
 
-    open(e, actions, parent) {
-
-        var menu = html`<div class="context-menu"></div>`
+    parse(actions, node) {
 
         for (let action of actions) {
 
             if (action.separator) {
 
-                menu.appendChild(html`<div class="separator"></div>`)
+                node.appendChild(html`<div class="separator"></div>`)
 
             } else if (Array.isArray(action.action)) {
 
-                let label = typeof action.label === 'function' ? action.label() : action.label,
+                let submenu = html`<div class="context-menu"></div>`,
+                    label = typeof action.label === 'function' ? action.label() : action.label,
                     iclass = typeof action.class === 'function' ? action    .class() : action.class,
-                    item = html`<div class="item has-sub ${iclass}" tabIndex="1">${raw(label)}</div>`
+                    item = html`<div class="item has-sub ${iclass || ''}" tabIndex="1">${raw(label)}</div>`
 
-                menu.appendChild(item)
+                item.appendChild(submenu)
+                node.appendChild(item)
 
-                this.open(e, action.action, item)
+                this.parse(action.action, submenu)
 
 
             } else {
 
                 let label = typeof action.label === 'function' ? action.label() : action.label,
                     iclass = typeof action.class === 'function' ? action.class() : action.class,
-                    item = html`<div class="item ${iclass}">${raw(label)}</div>`
+                    item = html`<div class="item ${iclass || ''}">${raw(label)}</div>`
 
-                menu.appendChild(item)
+                item._action = action.action
+                node.appendChild(item)
 
-                // if (action.click) {
+                if (action.shortcut) {
 
-                    item.addEventListener('click', (e)=>{
-                        e.preventDefault()
-                        action.action()
-                        this.close()
-                    })
+                    item.appendChild(html`<div class="shortcut">${action.shortcut.replace('mod', mod)}</div>`)
 
-                // } else {
-                //
-                //     item.addEventListener('fast-click', (e)=>{
-                //         e.detail.preventOriginalEvent = true
-                //         action.action()
-                //         this.close()
-                //     })
-                //
-                // }
+                }
 
             }
 
         }
 
-        if (parent) parent.appendChild(menu)
+    }
 
-        if (!parent) {
+    open(e, actions, parent) {
 
-            this.container = menu
+        this.container.innerHTML = ''
+        this.parse(actions, this.container)
 
-            MENU_CONTAINER.appendChild(menu)
+        MENU_CONTAINER.appendChild(this.container)
 
-            DOM.each(menu, '.item', (item)=>{
-                item.addEventListener('mouseenter', ()=>{
-                    DOM.each(item.parentNode, '.focus', (focused)=>{
-                        focused.classList.remove('focus')
-                    })
-                    item.classList.add('focus')
-                })
-                item.addEventListener('mouseleave', ()=>{
-                    if (!item.classList.contains('has-sub')) item.classList.remove('focus')
-                })
-            })
-
-            menu.style.top = e.pageY / PXSCALE + 'rem'
-            menu.style.left = e.pageX / PXSCALE + 'rem'
-
-            this.correctPosition(menu)
-
-            DOM.each(menu, '.context-menu', (m)=>{
-                this.correctPosition(m, m.parentNode)
-            })
-
+        if (!this.position) {
+            this.container.style.top = e.pageY / PXSCALE + 'rem'
+            this.container.style.left = e.pageX / PXSCALE + 'rem'
         }
+
+
+        this.correctPosition(this.container)
+
+        DOM.each(this.container, '.context-menu', (m)=>{
+            this.correctPosition(m, m.parentNode)
+        })
 
         document.addEventListener('fast-click', this.clickHandler, true)
         document.addEventListener('fast-right-click', this.clickHandler, true)
@@ -113,12 +139,13 @@ class ContextMenu extends UiWidget {
         if (this.container) {
 
             this.container.parentNode.removeChild(this.container)
-            this.container = null
 
         }
 
         document.removeEventListener('fast-click', this.clickHandler, true)
         document.removeEventListener('fast-right-click', this.clickHandler, true)
+
+        this.hoverNode = null
 
         this.trigger('close')
 
@@ -136,7 +163,7 @@ class ContextMenu extends UiWidget {
             if (position.left - width > 0) {
                 menu.style.right = parent ? '100%' : '0'
                 menu.style.left = 'auto'
-                menu.style.marginRight = '1rem'
+                menu.style.marginRight = '-0.5rem'
             } else {
                 menu.style.left =  (parent.offsetWidth + (totalWidth  - width - position.left)) / PXSCALE + 'rem'
             }
@@ -145,6 +172,27 @@ class ContextMenu extends UiWidget {
         if (height + position.top > totalHeight && position.top - height > 0) {
             menu.style.top = 'auto'
             menu.style.bottom = '0rem'
+        }
+
+    }
+
+    bindShortcuts(actions) {
+
+        for (let action of actions) {
+
+            if (Array.isArray(action.action)) {
+
+                this.bindShortcuts(action.action)
+
+            } else if (action.shortcut && action.action) {
+
+                keyboardJS.bind(action.shortcut, (e)=>{
+                    e.preventDefault()
+                    action.action()
+                })
+
+            }
+
         }
 
     }
