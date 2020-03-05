@@ -49,7 +49,7 @@ var Osc = class Osc extends EventEmitter {
             if (data._rawTarget) {
                 // if the message target is provided (when message comes from another client connected to the same server)
                 // then we only update the widgets that have the exact same target
-                match = deepEqual(widgetTarget, data.target)
+                match = deepEqual(widgetTarget, data._rawTarget)
             } else if (data.host === 'midi') {
                 // if the message comes from a midi port, only update widgets that send to that port
                 let widgetArrayTarget = Array.isArray(widgetTarget) ? widgetTarget : [widgetTarget],
