@@ -4,7 +4,6 @@
 
 @import 'ui';
 
-@import 'editor';
 @import 'widgets';
 
 input,
@@ -313,7 +312,6 @@ body {
         cursor: initial;
     }
     overflow:auto;
-    background: var(--color-bg);
     white-space:pre;
     font-family: monospace;
     font-weight:bold;

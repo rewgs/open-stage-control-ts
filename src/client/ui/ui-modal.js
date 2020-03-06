@@ -4,7 +4,7 @@ var UiWidget = require('./ui-widget'),
     raw = require('nanohtml/raw'),
     MODAL_SINGLETON = null,
     MODAL_CONTAINER = null
-    
+
 class UiModal extends UiWidget {
 
    constructor(options) {
@@ -40,6 +40,9 @@ class UiModal extends UiWidget {
                </div>
            </div>
        `
+
+       if (options.width) this.container.style.setProperty('--width', options.width + 'rem')
+       if (options.height) this.container.style.setProperty('--height', options.height + 'rem')
 
        if (options.closable) {
            var closer = DOM.get(this.container, '.popup-title .closer')[0]
