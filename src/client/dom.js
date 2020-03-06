@@ -82,7 +82,7 @@ module.exports = {
         return parent ? Array.prototype.indexOf.call(parent.children, element) : -1
     },
 
-    offset: function(element) {
+    offset: function(element, container) {
 
         var offsetLeft = 0,
             offsetTop = 0
@@ -95,7 +95,7 @@ module.exports = {
                 if (!isNaN(element.offsetTop)) {
                     offsetTop += element.offsetTop - element.scrollTop
                 }
-            } while ((element = element.offsetParent))
+            } while ((element = element.offsetParent) && element !== container)
         }
 
         return {

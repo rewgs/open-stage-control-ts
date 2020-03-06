@@ -12,6 +12,11 @@ osc-workspace {
     flex-direction: row;
     overflow: hidden;
 
+    background-image: url(../assets/logo.png);
+    background-size: 80rem;
+    background-position: center;
+    background-repeat: no-repeat;
+
 }
 
 osc-panel-container {

@@ -12,6 +12,8 @@ class Slider extends Canvas {
             <canvas></canvas>
         `})
 
+        this.container.classList.add('design-' + this.getProp('design'))
+
         this.value = undefined
         this.percent = 0
 

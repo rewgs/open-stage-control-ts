@@ -22,7 +22,9 @@ class Panel extends Container() {
 
             colorPanel: {type: 'string', value: 'auto', help:''},
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
+            justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
@@ -50,14 +52,24 @@ class Panel extends Container() {
         this.container.classList.toggle('no-scroll', !this.getProp('scroll'))
         this.container.classList.add('layout-' + this.getProp('layout'))
 
-        if (this.getProp('layout') === 'grid') {
+        var layout = this.getProp('layout')
+        if (layout === 'grid') {
+
             var template = this.getProp('gridTemplate') || 2
             this.widget.style.gridTemplate = template === parseInt(template) ? `none / repeat(${template}, 1fr)` : template
+
+        } else if (layout === 'vertical' || layout === 'horizontal'){
+
+            var justify = this.getProp('justify')
+            if (justify === 'start' || justify === 'end') justify = 'flex-' + justify
+            this.widget.style.justifyContent = justify
+
         }
 
         if (this.getProp('tabs') && this.getProp('tabs').length) {
 
             this.container.classList.add('contains-tabs')
+            this.container.classList.toggle('vertical-tabs', this.getProp('verticalTabs'))
 
         } else {
 
@@ -74,7 +86,7 @@ class Panel extends Container() {
 
             this.value = -1
 
-            this.navigation = this.widget.appendChild(html`<div class="navigation"></div>`)
+            this.navigation = this.widget.appendChild(html`<div class="navigation ${this.getProp('verticalTabs') ? 'vertical' : ''}"></div>`)
 
             this.children = options.children || new Array(this.getProp('tabs').length)
             for (let i = 0; i < this.children.length; i++) {
@@ -156,11 +168,12 @@ class Panel extends Container() {
             if (!widget.getProp('visible')) style += 'display:none;'
 
             this.tabs.push(widget)
-            this.navigation.appendChild(html`
+            var label = html`
                 <div class="tablink" data-widget="${widget.hash}" style="${style}">
-                    ${raw(widget.label.innerHTML)}
                 </div>
-            `)
+            `
+            label.innerHTML = widget.label.innerHTML
+            this.navigation.appendChild(label)
 
         })
 

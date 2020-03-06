@@ -40,6 +40,9 @@
                 max-height: 100%;
                 max-width: 100%;
             }
+            > .flex-expand {
+                flex: 1
+            }
         }
         &.layout-vertical > inner {
             display: flex;
@@ -55,7 +58,9 @@
                 max-height: 100%;
                 max-width: 100%;
             }
-
+            > .flex-expand {
+                flex: 1
+            }
         }
         &.layout-grid > inner {
             display: grid;
@@ -91,6 +96,14 @@
                 height: auto;
                 padding: 0;
             }
+        }
+
+        &.vertical-tabs {
+
+            > inner {
+                flex-direction: row;
+            }
+
         }
     }
 
@@ -139,12 +152,15 @@
         }
     }
 
-    &.contains-widgets.nolabel > inner {
+    &.contains-widgets.no-label > inner {
         border-top: 1rem solid var(--color-background);
     }
 
     &.contains-tabs > inner > .navigation {
         margin: 0 1rem;
+        &.vertical {
+            margin: 1rem 0;
+        }
     }
 
 
@@ -154,7 +170,6 @@
 
     @extend .widget-panel-base;
 
-    --widget-padding: 1rem;
     --alpha-fill-on: 0.75;
 
     width: 100%;
@@ -209,6 +224,8 @@
         text-overflow: ellipsis;
         padding: 0 8rem;
         overflow: hidden!important;
+        white-space: pre-wrap;
+        text-align: center;
 
         i {
             pointer-events: none;
@@ -228,13 +245,6 @@
                 background: var(--color-fill);
                 z-index: 101;
             }
-            &:last-child {
-                margin-right:0;
-                margin-left: auto;
-                i {
-                    font-size: 14rem;
-                }
-            }
             &:first-child:before {
                 margin-left: 1rem;
             }
@@ -242,6 +252,43 @@
                 margin-right: 1rem;
             }
 
+        }
+    }
+
+    &.vertical {
+        flex-direction: column;
+        height: 100%;
+        padding-bottom: 0;
+        padding-right: 1rem;
+
+        div {
+            height: 100%;
+            padding: 0 12rem;
+            line-height: normal;
+            // justify-content: flex-start;
+            // text-align: left;
+
+            &.on:before {
+                content: "";
+                position: absolute;
+                left: auto;
+                top: 0rem;
+                right: 0rem;
+                bottom: 0rem;
+                opacity: var(--alpha-fill-on);
+                width: 4rem;
+                height: auto;
+                background: var(--color-fill);
+                z-index: 101;
+            }
+            &:first-child:before {
+                margin-top: 1rem;
+                margin-left: 0;
+            }
+            &:last-child:before {
+                margin-bottom: 1rem;
+                margin-right: 0;
+            }
         }
     }
 }

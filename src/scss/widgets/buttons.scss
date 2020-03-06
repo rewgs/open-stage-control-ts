@@ -66,11 +66,18 @@
 
     }
 
-    &.horizontal inner {
+    &.layout-horizontal inner {
 
         flex-direction: row;
 
     }
+
+    &.layout-grid inner {
+
+        display:grid;
+
+    }
+
 
     value {
 

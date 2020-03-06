@@ -22,7 +22,9 @@ class Root extends StaticProperties(Panel, {scroll: false, label: false, id: 'ro
 
             colorPanel: {type: 'string', value: 'auto', help:''},
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
+            justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             variables: {type: '*', value: '', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 

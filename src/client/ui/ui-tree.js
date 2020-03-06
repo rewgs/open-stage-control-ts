@@ -118,6 +118,22 @@ class UiTree extends UiWidget {
 
     }
 
+    showWidget(widget) {
+
+        var node = DOM.get(this.list, `[data-widget="${widget.hash}"]`)
+        if (node) {
+            var parent = node[0].parentNode
+            while (parent !== this.list) {
+                if (parent.classList.contains('container')) {
+                    parent.classList.add('expanded')
+                }
+                parent = parent.parentNode
+            }
+            node[0].scrollIntoView({block: 'center'})
+        }
+
+    }
+
     select() {
 
         // hint selection in folded containers

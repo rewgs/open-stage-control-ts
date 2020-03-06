@@ -9,6 +9,7 @@ var {updateWidget, incrementWidget} = require('./data-workers'),
     UiInspector = require('../ui/ui-inspector'),
     UiTree = require('../ui/ui-tree'),
     UiDragResize = require('../ui/ui-dragresize'),
+    Panel = require('../widgets/containers/panel'),
     sidepanel = require('../ui/ui-sidepanel'),
     html = require('nanohtml'),
     sessionManager
@@ -500,6 +501,7 @@ var Editor = class Editor {
     pasteWidget(x, y, increment) {
 
         if (!this.selectedWidgets.length || this.clipboard === null) return
+        if (!(this.selectedWidgets[0] instanceof Panel)) return
 
         var data = this.selectedWidgets.map((w)=>w.props)
 
@@ -618,7 +620,7 @@ var Editor = class Editor {
                 nH = w.container.offsetHeight + deltaH
             }
 
-            if (w.props.width !== undefined) {
+            if (w.props.width !== undefined && w.parent.getProp('layout') !== 'vertical') {
                 var newWidth = Math.max(nW, GRIDWIDTH) / PXSCALE
                 if (typeof w.props.width === 'string' && w.props.width.indexOf('%') > -1) {
                     w.props.width = (100 * PXSCALE * newWidth / w.container.parentNode.offsetWidth).toFixed(2) + '%'
@@ -627,7 +629,7 @@ var Editor = class Editor {
                 }
             }
 
-            if (w.props.height !== undefined) {
+            if (w.props.height !== undefined && w.parent.getProp('layout') !== 'horizontal') {
                 var newHeight = Math.max(nH, GRIDWIDTH) / PXSCALE
                 if (typeof w.props.height === 'string' && w.props.height.indexOf('%') > -1) {
                     w.props.height = (100 * PXSCALE * newHeight / w.container.parentNode.offsetHeight).toFixed(2) + '%'
