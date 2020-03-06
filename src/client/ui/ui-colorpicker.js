@@ -21,15 +21,16 @@ class ColorPicker extends UiWidget {
             ...Rgb.defaults()._props(),
             type: 'rgb',
             label: false,
-            width: 250,
-            height: 200,
+            width: 'auto',
+            height: 'auto',
             alphaStroke: 0,
-            snap: true
-            // height: '100%',
+            snap: true,
         }, parent: this})
         this.rgb.container.classList.add('not-editable')
 
         this.modal = new UiModal({
+            width: 280,
+            height: 280,
             closable: true,
             title: '',
             hide: true,

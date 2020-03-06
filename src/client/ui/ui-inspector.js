@@ -1,10 +1,12 @@
 var UiWidget = require('./ui-widget'),
     UiInspectorField = require('./ui-inspector-field'),
     UiColorPicker = require('./ui-colorpicker'),
+    UiModal = require('./ui-modal'),
     morph = require('nanomorph'),
     {widgets, defaults} = require('../widgets/'),
     {deepCopy} = require('../utils'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    raw = require('nanohtml/raw')
 
 
 
@@ -18,6 +20,8 @@ class UiInspector extends UiWidget {
         this.mounted = false
 
         this.foldedCategories = []
+
+        this.widget = null
 
         this.container.addEventListener('fast-click', (e)=>{
 
@@ -64,6 +68,10 @@ class UiInspector extends UiWidget {
                 this.colorPicker.setValue(node.getAttribute('value'))
                 this.colorPicker.open()
 
+            } else if (node.tagName === 'LABEL') {
+
+                this.help(node.textContent)
+
             }
 
         })
@@ -83,6 +91,7 @@ class UiInspector extends UiWidget {
     clear() {
 
         this.clearTimeout = setTimeout(()=>{
+            this.widget = null
             this.container.innerHTML = ''
             this.mounted = false
             this.clearTimeout = null
@@ -104,6 +113,8 @@ class UiInspector extends UiWidget {
             props = defaults[widget.props.type],
             multi = widgets.length > 1,
             tabIndex = 1000
+
+        this.widget = widget
 
         // this.form.appendChild(html`
         //     <div class="separator">
@@ -238,6 +249,45 @@ class UiInspector extends UiWidget {
 
         input.setAttribute('rows',0)
         input.setAttribute('rows', input.value.split('\n').length)
+
+    }
+
+    help(name) {
+
+        var defaultValue = defaults[this.widget.getProp('type')][name],
+            dynamic =  this.widget.isDynamicProp(name),
+            htmlHelp = Array.isArray(defaultValue.help) ? defaultValue.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : defaultValue.help
+
+        htmlHelp = htmlHelp ? html`<p class="help">${raw(htmlHelp.replace(/`([^`]*)`/g, '<code>$1</code>'))}</p>` : ''
+
+        DOM.each(htmlHelp, 'a', (el)=>{
+            el.target = '_blank'
+        })
+
+        var htmlError = false ? html`<p class="error">${error}</p>` : '',
+            computedValue = this.widget.getProp(name)
+
+        if (typeof computedValue === 'string') {
+            try {
+                computedValue = JSON.stringify(JSON.parse(computedValue), null, ' ')
+            } catch(e) {}
+        } else {
+            computedValue = JSON.stringify(computedValue, null, ' ')
+        }
+
+        new UiModal({closable: true, title: html`<span class="editor-help-title">${name}</span>`, content: html`
+            <div class="inspector-help">
+
+                <p>Type: <code>${defaultValue.type}</code></p>
+                <p>Default: <code>${JSON.stringify(defaultValue.value)}</code></p>
+                <p>Dynamic: <code>${dynamic ? 'true' : 'false'}</code></p>
+                <p>Computed: <code class="pre">${computedValue}</code></p>
+
+                ${htmlError}
+
+                ${htmlHelp}
+            </div>
+        `})
 
     }
 

@@ -765,7 +765,8 @@ class Widget extends EventEmitter {
 
             case 'visible':
                 this.setVisibility()
-                resize.check(this.container)
+                var container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
+                resize.check(container)
                 return
 
             case 'interaction':

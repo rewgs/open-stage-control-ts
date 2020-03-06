@@ -15,6 +15,7 @@ module.exports = function UiFilebrowser(options, callback) {
         previousKbContext = keyboardJS.getContext()
 
     var popup = new UiModal({
+        height: 360,
         closable: true,
         title: locales(save ? 'remotesave_save' : 'remotesave_open'),
         hide: true

@@ -1,15 +1,10 @@
 $padding: 8rem;
 
 .file-browser {
-
-    width: 540rem;
-    height: 360rem;
-    max-width: 100%;
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 2rem $padding $padding;
-    background: var(--color-ui-background);
+
 
     .ariane {
         height: 40rem;

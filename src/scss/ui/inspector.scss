@@ -235,11 +235,15 @@ osc-inspector-color {
 }
 
 .color-picker-modal {
-    padding: 8rem;
-    background: var(--color-ui-background);
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
     .widget {
         background: var(--color-background);
+        flex: 1;
+        width: 100%;
     }
 
     .actions {
@@ -255,4 +259,40 @@ osc-inspector-color {
         }
     }
 
+}
+
+.inspector-help {
+
+    width: 100%;
+    padding: 8rem;
+    background: var(--color-background);
+
+    .error {
+        color: red;
+        margin-top: 10rem;
+    }
+    em {
+        font-style: italic;
+    }
+    code {
+        color: var(--color-accent);
+        padding: 1rem 3rem;
+        background: rgba(black, 0.2);
+        display: inline-block;
+        user-select: auto;
+        cursor: auto;
+        ::selection{/* reset */}
+    }
+    a {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .pre {
+        white-space: pre;
+        vertical-align: text-top;
+    }
+    .help {
+        margin-top: 10rem;
+        white-space: normal;
+    }
 }
