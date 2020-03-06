@@ -49,6 +49,8 @@ class Panel extends Container() {
 
         super({...options, html: html`<inner></inner>`})
 
+        this.childrenType = ''
+
         this.container.classList.toggle('no-scroll', !this.getProp('scroll'))
         this.container.classList.add('layout-' + this.getProp('layout'))
 
@@ -83,6 +85,8 @@ class Panel extends Container() {
         this.tabs = []
 
         if (this.getProp('tabs') && this.getProp('tabs').length) {
+
+            this.childrenType = 'tab'
 
             this.value = -1
 
@@ -124,6 +128,8 @@ class Panel extends Container() {
             this.setValue(this.getProp('value') || 0)
 
         } else if (this.getProp('widgets') && this.getProp('widgets').length) {
+
+            this.childrenType = 'widget'
 
             this.children = options.children || new Array(this.getProp('widgets').length)
             for (let i = 0; i < this.children.length; i++) {

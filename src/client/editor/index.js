@@ -9,7 +9,6 @@ var {updateWidget, incrementWidget} = require('./data-workers'),
     UiInspector = require('../ui/ui-inspector'),
     UiTree = require('../ui/ui-tree'),
     UiDragResize = require('../ui/ui-dragresize'),
-    Panel = require('../widgets/containers/panel'),
     sidepanel = require('../ui/ui-sidepanel'),
     html = require('nanohtml'),
     sessionManager
@@ -449,18 +448,14 @@ var Editor = class Editor {
 
         if (!this.selectedWidgets.length) return
 
-        var data = this.selectedWidgets.map((w)=>w.props),
-            type = this.selectedWidgets[0].props.type == 'tab' ? 'tab' : 'widget'
+        var data = this.selectedWidgets.map((w)=>w.props)
 
-
-        if (type !== 'widget') return
-
-        this.clipboard = JSON.stringify(data)
+        this.clipboard = deepCopy(data)
 
         if (data.length == 1) {
             this.idClipboard = this.selectedWidgets[0].getProp('id')
         } else {
-            this.idClipboard =null
+            this.idClipboard = null
         }
 
     }
@@ -469,20 +464,17 @@ var Editor = class Editor {
 
         if (!this.selectedWidgets.length) return
 
-        var type = this.selectedWidgets[0].props.type == 'tab' ? 'tab' : 'widget',
-            parent = this.selectedWidgets[0].parent,
+        var parent = this.selectedWidgets[0].parent,
             index = this.selectedWidgets.map(w => parent.children.indexOf(w)).sort((a,b)=>{return b-a}),
             data = this.selectedWidgets.map((w)=>w.props),
             removedIndexes = []
 
-        if (type !== 'widget') return
-
-        this.clipboard = JSON.stringify(data)
+        this.clipboard = deepCopy(data)
 
         if (data.length == 1) {
             this.idClipboard = this.selectedWidgets[0].getProp('id')
         } else {
-            this.idClipboard =null
+            this.idClipboard = null
         }
 
         for (var i of index) {
@@ -501,13 +493,19 @@ var Editor = class Editor {
     pasteWidget(x, y, increment) {
 
         if (!this.selectedWidgets.length || this.clipboard === null) return
-        if (!(this.selectedWidgets[0] instanceof Panel)) return
+        if (
+            this.selectedWidgets[0].childrenType === undefined ||
+            this.clipboard[0].type === 'tab' && this.selectedWidgets[0].childrenType === 'widget' ||
+            this.clipboard[0].type !== 'tab' && this.selectedWidgets[0].childrenType === 'tab'
+        ) return
+
 
         var data = this.selectedWidgets.map((w)=>w.props)
 
-        var pastedData = JSON.parse(this.clipboard),
+        var pastedData = deepCopy(this.clipboard),
             minTop = Infinity,
-            minLeft = Infinity
+            minLeft = Infinity,
+            store = this.clipboard[0].type === 'tab' ? 'tabs' : 'widgets'
 
         for (let i in pastedData) {
             if (increment) pastedData[i] = incrementWidget(pastedData[i])
@@ -526,12 +524,12 @@ var Editor = class Editor {
 
         }
 
-        data[0].widgets = data[0].widgets || []
-        data[0].widgets = data[0].widgets.concat(pastedData)
+        data[0][store] = data[0][store] || []
+        data[0][store] = data[0][store].concat(pastedData)
 
         var indexes = {addedIndexes: []}
         for (let i = 0; i < pastedData.length; i++) {
-            indexes.addedIndexes.push(data[0].widgets.length - 1 - i )
+            indexes.addedIndexes.push(data[0][store].length - 1 - i )
         }
         updateWidget(this.selectedWidgets[0], indexes)
         this.pushHistory(indexes)
@@ -540,17 +538,22 @@ var Editor = class Editor {
 
     pasteWidgetAsClone(x, y) {
 
-        if (!this.selectedWidgets.length) return
+        if (!this.selectedWidgets.length || this.clipboard === null) return
+        if (!this.idClipboard || !widgetManager.getWidgetById(this.idClipboard).length) return
 
-        if (this.clipboard === null || !(this.idClipboard && widgetManager.getWidgetById(this.idClipboard).length)) return
+        if (
+            this.selectedWidgets[0].childrenType === undefined ||
+            this.clipboard[0].type === 'tab' ||
+            this.clipboard[0].type !== 'tab' && this.selectedWidgets[0].childrenType === 'tab'
+        ) return
 
         var data = this.selectedWidgets.map((w)=>w.props)
 
         var clone = {type: 'clone', widgetId: this.idClipboard},
-            pastedData = JSON.parse(this.clipboard)
+            pastedData = deepCopy(this.clipboard)
 
         clone.width = pastedData.width
-        clone.height = pastedData.width
+        clone.height = pastedData.height
         clone.css = pastedData.css
 
 

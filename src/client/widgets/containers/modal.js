@@ -114,6 +114,7 @@ class Modal extends Panel {
         this.popupContent.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
 
 
+        this.childrenType = 'widget'
 
     }
 

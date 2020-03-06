@@ -42,6 +42,8 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
         super(options)
 
+        this.childrenType = undefined
+
         this.value = []
 
         this.on('change',(e)=>{
