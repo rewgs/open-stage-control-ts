@@ -210,7 +210,7 @@
     width: 100rem;
     height:60rem;
     padding:1rem;
-    &.nolabel {
+    &.no-label {
         --color-border:var(--color-bg);
         padding: 0;
         .file {

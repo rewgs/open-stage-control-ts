@@ -8,6 +8,7 @@ module.exports = {
     editor_inspector: 'Inspector',
 
     // editor context-menu
+    editor_show_in_tree: 'Show in tree',
     editor_copy: 'Copy',
     editor_cut: 'Cut',
     editor_wrap: 'Wrap in',

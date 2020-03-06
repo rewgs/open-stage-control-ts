@@ -18,7 +18,9 @@ module.exports = class Tab extends Panel {
 
             // detached: {type: 'boolean', value: true, help: 'Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab opens'},
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
+            justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},

@@ -17,9 +17,8 @@ module.exports = class Fader extends Slider {
 
             _fader:'fader',
 
-            mode: {type: 'string', value: 'compact', choices: ['compact', 'classic', 'round'], help: 'Design style'},
+            design: {type: 'string', value: 'compact', choices: ['compact', 'classic', 'round'], help: 'Design style'},
             horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
-            alignRight: {type: 'boolean', value: false, help: 'Set to `true` to invert the pip\'s and fader\'s position'},
             pips: {type: 'boolean', value: false, help: 'Set to `true` to show range breakpoints'},
             dashed: {type: 'boolean', value: false, help: 'Set to `true` to display a dashed gauge'},
             gradient: {type: 'array|object', value: [], help: [
@@ -64,8 +63,6 @@ module.exports = class Fader extends Slider {
         super(options)
 
         this.gaugeGradient = null
-
-        this.container.classList.add('design-' + this.getProp('mode'))
 
     }
 
@@ -180,7 +177,7 @@ module.exports = class Fader extends Slider {
             o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
             dashed = this.getProp('dashed'),
-            compact = this.getProp('mode') === 'compact'
+            compact = this.getProp('design') === 'compact'
 
         this.clear()
 
@@ -256,7 +253,7 @@ module.exports = class Fader extends Slider {
             this.clearRect = [0, 0, width, height]
 
 
-        } else if (this.getProp('mode') === 'classic') {
+        } else if (this.getProp('design') === 'classic') {
 
 
             if (this.cssVars.alphaStroke) {
@@ -342,7 +339,7 @@ module.exports = class Fader extends Slider {
         var width = this.getProp('horizontal') ? this.height : this.width,
             height = !this.getProp('horizontal') ? this.height : this.width,
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
-            compact = this.getProp('mode') === 'compact'
+            compact = this.getProp('design') === 'compact'
 
         if (width % 2 && parseInt(m) !== m) m -= 0.5
 

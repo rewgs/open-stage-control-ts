@@ -17,7 +17,8 @@ class Switch extends Widget {
 
             _switch:'switch',
 
-            horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display values horizontally'},
+            layout: {type: 'string', value: 'vertical', choices: ['vertical', 'horizontal', 'grid'], help:''},
+            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             showValues: {type: 'boolean', value: false, help: 'If values is an object, set to `true` to display both values and labels instead of labels only'},
             values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
                 '`Array` of possible values to switch between : `[1,2,3]`',
@@ -39,7 +40,13 @@ class Switch extends Widget {
 
         super({...options, html: html`<inner></inner>`})
 
-        if (this.getProp('horizontal')) this.container.classList.add('horizontal')
+        this.container.classList.add('layout-' + this.getProp('layout'))
+
+        if (this.getProp('layout') === 'grid') {
+            var template = this.getProp('gridTemplate') || 2
+            this.widget.style.gridTemplate = template === parseInt(template) ? `none / repeat(${template}, 1fr)` : template
+        }
+
 
         this.values = []
         this.stringValues = []

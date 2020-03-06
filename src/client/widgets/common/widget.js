@@ -68,6 +68,7 @@ class Widget extends EventEmitter {
             ]},
             width: {type: 'number|percentage', value: 'auto', help: ''},
             height: {type: 'number|percentage', value: 'auto', help: ''},
+            expand: {type: 'boolean|number', value: 'false', help: 'If parent\'s layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically.'},
 
             _style:'style',
 
@@ -756,6 +757,7 @@ class Widget extends EventEmitter {
 
             case 'height':
             case 'width':
+            case 'expand':
                 this.setContainerStyles(['geometry'])
                 var container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                 resize.check(container)
@@ -851,6 +853,7 @@ class Widget extends EventEmitter {
                 }
             }
             this.container.classList.toggle('absolute-position', absolutePos)
+            this.container.classList.toggle('flex-expand', this.getProp('expand'))
 
 
         }
@@ -859,13 +862,13 @@ class Widget extends EventEmitter {
 
             // label
             if (this.getProp('label') === false) {
-                this.container.classList.add('nolabel')
+                this.container.classList.add('no-label')
                 this.label.innerHTML = ''
             } else {
-                this.container.classList.remove('nolabel')
+                this.container.classList.remove('no-label')
                 var label = this.getProp('label') == 'auto'?
                     this.getProp('id'):
-                    iconify(this.getProp('label'))
+                    iconify(this.getProp('label').replace(/</g, '&lt;'))
 
                 this.label.innerHTML = label
                 this.container.appendChild(this.label)
@@ -1037,6 +1040,7 @@ Widget.dynamicProps = [
     'left',
     'height',
     'width',
+    'expand',
 
 
     'colorText',

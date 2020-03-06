@@ -2,7 +2,8 @@ var {updateWidget} = require('./editor/data-workers'),
     editor = require('./editor'),
     widgetManager = require('./managers/widgets'),
     stateManager = require('./managers/state'),
-    deepExtend = require('deep-extend')
+    deepExtend = require('deep-extend'),
+    notifications = require('./ui/notifications')
 
 var callbacks = {
     '/EDIT': function(args) {
@@ -213,25 +214,17 @@ var callbacks = {
         stateManager.quickLoad()
 
     },
-    '/TABS': function(args) {
+    '/NOTIFY': function(args) {
 
         if (!Array.isArray(args)) args = [args]
+        console.log(args)
+        notifications.add({
+            message: args.join('\n')
+        })
 
-        for (let id of args) {
-            let ws = widgetManager.getWidgetById(id)
-            for (let w of ws) {
-                if (w.getProp('type') === 'tab') {
-                    var index = w.parent.children.indexOf(w)
-                    w.parent.setValue(index, {sync: true, send: false})
-                }
-            }
-        }
+    },
 
-    }
 }
-
-// backward-compatibility
-callbacks['/EDIT_SOFT'] = callbacks['/EDIT/MERGE']
 
 module.exports = {
     exec: function(name, args){

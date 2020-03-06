@@ -3,25 +3,15 @@ var {clip} = require('../utils'),
     Fader = require('./fader'),
     Input = require('../inputs/input'),
     touchstate = require('../mixins/touch_state'),
-    html = require('nanohtml'),
-    StaticProperties = require('../mixins/static_properties')
+    html = require('nanohtml')
 
 var faderDefaults = Fader.defaults()._props()
 
-class Range extends StaticProperties(Fader, {mode: 'compact'}) {
+class Range extends Fader {
 
     static description() {
 
         return 'A fader with two heads for setting a range.'
-
-    }
-
-    static defaults() {
-
-        var defaults = super.defaults()
-        delete defaults.mode
-
-        return defaults
 
     }
 
@@ -209,19 +199,36 @@ class Range extends StaticProperties(Fader, {mode: 'compact'}) {
 
         var d = Math.round(fader.percentToCoord(fader.valueToPercent(this.faders[this.getProp('horizontal')?0:1].value))),
             d2 = Math.round(fader.percentToCoord(fader.valueToPercent(this.faders[this.getProp('horizontal')?1:0].value))),
-            m = Math.round(this.getProp('horizontal') ? this.height / 2 : this.width / 2)
-
-        // sharp border trick
-        if (width % 2 && parseInt(m) === m) m -= 0.5
-
-        var dashed = this.getProp('dashed')
+            m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
+            dashed = this.getProp('dashed'),
+            compact = this.getProp('design') === 'compact'
 
         this.clear()
 
+        if (this.getProp('pips') && !compact) m -= 10 * PXSCALE
+
+        // sharp border trick
+        if (compact) {
+            if (width % 2 && parseInt(m) === m) m -= 0.5
+        } else {
+            if (width % 2 && parseInt(m) !== m) m -= 0.5
+        }
+
+
         this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
-        this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
+
+        if (compact) {
+            this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
+        } else {
+            this.ctx.lineWidth = 2 * PXSCALE
+        }
+
+
+        if (dashed) this.ctx.setLineDash([PXSCALE, PXSCALE])
+
 
         if (this.cssVars.alphaFillOff) {
+            // gaugo off
             this.ctx.globalAlpha = this.cssVars.alphaFillOff
             this.ctx.beginPath()
             this.ctx.moveTo(m, height - this.gaugePadding)
@@ -229,12 +236,9 @@ class Range extends StaticProperties(Fader, {mode: 'compact'}) {
             this.ctx.stroke()
         }
 
-        if (dashed) {
-            this.ctx.lineDashOffset = d % 2 ? PXSCALE : 0 // avoid flickering
-            this.ctx.setLineDash([PXSCALE, PXSCALE])
-        }
 
         if (this.cssVars.alphaFillOn) {
+            // gaugo on
             this.ctx.globalAlpha = this.cssVars.alphaFillOn
             this.ctx.beginPath()
             this.ctx.moveTo(m, d)
@@ -244,31 +248,114 @@ class Range extends StaticProperties(Fader, {mode: 'compact'}) {
 
         if (dashed) this.ctx.setLineDash([])
 
-        this.ctx.globalAlpha = this.cssVars.alphaStroke
-        this.ctx.strokeStyle = this.cssVars.colorStroke
+        if (compact) {
 
-        this.ctx.beginPath()
-        this.ctx.moveTo(0, 0)
-        this.ctx.lineTo(width, 0)
-        this.ctx.lineTo(width, height)
-        this.ctx.lineTo(0, height)
-        this.ctx.closePath()
-        this.ctx.lineWidth = 2 * PXSCALE
-        this.ctx.stroke()
+            // stroke
+
+            this.ctx.globalAlpha = this.cssVars.alphaStroke
+            this.ctx.strokeStyle = this.cssVars.colorStroke
+
+            this.ctx.beginPath()
+            this.ctx.moveTo(0, 0)
+            this.ctx.lineTo(width, 0)
+            this.ctx.lineTo(width, height)
+            this.ctx.lineTo(0, height)
+            this.ctx.closePath()
+            this.ctx.lineWidth = 2 * PXSCALE
+            this.ctx.stroke()
 
 
-        this.ctx.globalAlpha = 1
-        this.ctx.fillStyle = this.cssVars.colorFill
+            // flat knob
 
-        this.ctx.beginPath()
-        this.ctx.rect(this.gaugePadding, Math.min(d, height - 3 * PXSCALE), width - this.gaugePadding * 2, PXSCALE)
-        this.ctx.fill()
+            this.ctx.globalAlpha = 1
+            this.ctx.fillStyle = this.cssVars.colorFill
 
-        this.ctx.beginPath()
-        this.ctx.rect(this.gaugePadding, Math.min(d2, height - 3 * PXSCALE), width - this.gaugePadding * 2, PXSCALE)
-        this.ctx.fill()
+            this.ctx.beginPath()
+            this.ctx.rect(this.gaugePadding, Math.min(d, height - this.gaugePadding - PXSCALE), width - this.gaugePadding * 2, PXSCALE)
+            this.ctx.fill()
 
-        this.clearRect = [0, 0, width, height]
+            // extra knob
+            this.ctx.beginPath()
+            this.ctx.rect(this.gaugePadding, Math.min(d2, height - this.gaugePadding - PXSCALE), width - this.gaugePadding * 2, PXSCALE)
+            this.ctx.fill()
+
+
+            this.clearRect = [0, 0, width, height]
+
+
+        } else if (this.getProp('design') === 'classic') {
+
+            for (let _d of [d, d2]) {
+
+                if (this.cssVars.alphaStroke) {
+
+                    this.ctx.globalAlpha = 1
+                    this.ctx.fillStyle = this.cssVars.colorPanel
+
+                    this.ctx.beginPath()
+                    this.ctx.rect(m - 6 * PXSCALE, _d - 10 * PXSCALE, 12 * PXSCALE, 20 * PXSCALE)
+                    this.ctx.fill()
+
+                    this.ctx.globalAlpha = this.cssVars.alphaStroke
+                    this.ctx.strokeStyle = this.cssVars.colorStroke
+                    this.ctx.lineWidth = PXSCALE
+
+                    this.ctx.beginPath()
+                    this.ctx.rect(m - 5.5 * PXSCALE, _d - 9.5 * PXSCALE, 11 * PXSCALE, 19 * PXSCALE)
+                    this.ctx.stroke()
+
+                }
+
+                this.ctx.globalAlpha = 1
+                this.ctx.fillStyle = this.cssVars.colorWidget
+
+                this.ctx.beginPath()
+                this.ctx.rect(m - 3 * PXSCALE, _d, 6 * PXSCALE, PXSCALE)
+                this.ctx.fill()
+
+            }
+
+            this.clearRect = [m - 10 * PXSCALE, this.gaugePadding - 10 * PXSCALE, 20 * PXSCALE, height - 2 * this.gaugePadding + 20 * PXSCALE]
+
+        } else {
+
+            this.ctx.globalAlpha = 1
+            this.ctx.fillStyle = this.cssVars.colorFill
+
+            this.ctx.beginPath()
+            this.ctx.arc(m, d, 3 * PXSCALE, 0, 2 * Math.PI)
+            this.ctx.fill()
+
+            // extra knob
+            this.ctx.beginPath()
+            this.ctx.arc(m, d2, 3 * PXSCALE, 0, 2 * Math.PI)
+            this.ctx.fill()
+
+
+            if (this.cssVars.alphaStroke) {
+                this.ctx.globalAlpha = this.cssVars.alphaStroke
+                this.ctx.fillStyle = this.cssVars.colorFill
+
+                this.ctx.beginPath()
+                this.ctx.arc(m, d, 10 * PXSCALE, 0, 2 * Math.PI)
+                this.ctx.fill()
+
+                // extra knob
+                this.ctx.beginPath()
+                this.ctx.arc(m, d2, 10 * PXSCALE, 0, 2 * Math.PI)
+                this.ctx.fill()
+            }
+
+            this.clearRect = [m - 11 * PXSCALE, this.gaugePadding - 11 * PXSCALE, 22 * PXSCALE, height - 2 * this.gaugePadding + 22 * PXSCALE]
+
+        }
+
+        if (this.getProp('pips')) {
+            this.ctx.globalAlpha = 1
+            this.ctx.drawImage(this.pips, 0, 0);
+            if (!compact) this.clearRect = [this.clearRect, [m + 10 * PXSCALE, 0, 10 * PXSCALE + this.pipsTextSize, height]]
+        }
+
 
     }
 

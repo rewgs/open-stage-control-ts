@@ -20,11 +20,12 @@ class Toast {
         var toast = html`
             <div class="toast ${data.class || ''}">
                 <i class="fa fa-fw fa-${data.icon || (data.class === 'error' ? 'exclamation' : 'bell')}"></i>
-                <div class="content">
-                    ${data.message}
-                </div>
+                <div class="content"></div>
             </div>
         `
+
+        DOM.get(toast, '.content')[0].textContent = data.message
+
         if (this.html) {
             this.html = morph(this.html, toast)
         } else {
