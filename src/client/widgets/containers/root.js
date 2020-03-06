@@ -30,7 +30,7 @@ class Root extends StaticProperties(Panel, {scroll: false, label: false, id: 'ro
 
         }, [
             'label',
-            '_geometry', 'left', 'top', 'width', 'height',
+            '_geometry', 'left', 'top', 'width', 'height', 'expand',
             'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOff',
         ], {
 

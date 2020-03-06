@@ -69,6 +69,9 @@ class Toggle extends Widget {
                     this.active = true
                     this.setValue(this.getProp('on'), {sync: true, send: true})
 
+                    if (tap) this.container.classList.add('active')
+
+
                 }, {element: this.widget})
 
             }
@@ -78,7 +81,9 @@ class Toggle extends Widget {
                 if (!this.active) return
 
                 this.active = false
-                this.setValue(this.getProp('off'), {sync: true, send: !tap})
+
+                if (!tap) this.setValue(this.getProp('off'), {sync: true, send: true})
+                if (tap) this.container.classList.remove('active')
 
             }, {element: this.widget})
 
@@ -150,6 +155,10 @@ class Toggle extends Widget {
 
             if (options.send) this.sendValue()
             if (options.sync) this.changed(options)
+
+            if (newstate && this.getProp('mode') === 'tap') {
+                this.setValue(this.getProp('off'), {sync: false, send: false})
+            }
 
         }
 

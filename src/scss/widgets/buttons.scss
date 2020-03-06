@@ -37,7 +37,7 @@
 
     }
 
-    &.on {
+    &.on, &.active {
 
         --alpha-fill:var(--alpha-fill-on);
 
