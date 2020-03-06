@@ -140,6 +140,11 @@ class ContextMenu extends UiWidget {
 
             this.container.parentNode.removeChild(this.container)
 
+            // remove position fix
+            this.container.style.bottom = ''
+            this.container.style.right = ''
+            this.container.style.marginRight = ''
+
         }
 
         document.removeEventListener('fast-click', this.clickHandler, true)

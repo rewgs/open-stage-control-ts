@@ -1,5 +1,6 @@
 var {updateWidget} = require('./data-workers'),
     {categories} = require('../widgets/'),
+    Panel = require('../widgets/containers/panel'),
     widgetManager = require('../managers/widgets'),
     {icon} = require('../ui/utils'),
     editor = require('./'),
@@ -48,16 +49,14 @@ var handleClick = function(event) {
 
     var index = editor.selectedWidgets.map((w)=>DOM.index(w.container)).sort((a,b)=>{return b-a}),
         data = editor.selectedWidgets.map((w)=>w.props),
-        type = editor.selectedWidgets[0].props.type == 'tab' ? 'tab' : 'widget',
-        parent = editor.selectedWidgets[0].parent,
+        widget = editor.selectedWidgets[0],
+        parent = widget.parent,
         actions = []
-
-    // case !root
 
     var clickX = Math.round((eventData.offsetX + eventData.target.scrollLeft) / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH,
         clickY = Math.round((eventData.offsetY + eventData.target.scrollTop)  / (GRIDWIDTH * PXSCALE)) * GRIDWIDTH
 
-    if (type === 'widget' && parent !== widgetManager)  {
+    if (parent !== widgetManager)  {
 
         if (event.target.tagName !== 'LI') actions.push({
             label: icon('project-diagram') + ' ' + locales('editor_show_in_tree'),
@@ -78,38 +77,48 @@ var handleClick = function(event) {
 
     }
 
-
-    if (data.length == 1 && (!data[0].tabs || !data[0].tabs.length) && (data[0].widgets)) {
+    if (widget.childrenType !== undefined) {
 
         if (editor.clipboard !== null) {
 
-            var pasteActions = []
+            var pasteActions = [],
+                canPaste = true
 
-            pasteActions.push({
-                label: icon('paste') + ' ' + locales('editor_paste'),
-                action: ()=>{
-                    editor.pasteWidget(clickX, clickY)
-                }
-            })
-            pasteActions.push({
-                label: icon('plus-square') + ' ' + locales('editor_pasteindent'),
-                action: ()=>{
-                    editor.pasteWidget(clickX, clickY, true)
-                }
-            })
+            if (
+                editor.clipboard[0].type === 'tab' && widget.childrenType === 'widget' ||
+                editor.clipboard[0].type !== 'tab' && widget.childrenType === 'tab'
+            ) canPaste = false
 
-            if (editor.idClipboard && widgetManager.getWidgetById(editor.idClipboard).length) {
+            if (canPaste) {
+
                 pasteActions.push({
-                    label: icon('clone') + ' ' + locales('editor_clone'),
+                    label: icon('paste') + ' ' + locales('editor_paste'),
                     action: ()=>{
-                        editor.pasteWidgetAsClone(clickX, clickY)
+                        editor.pasteWidget(clickX, clickY)
                     }
                 })
+                pasteActions.push({
+                    label: icon('plus-square') + ' ' + locales('editor_pasteindent'),
+                    action: ()=>{
+                        editor.pasteWidget(clickX, clickY, true)
+                    }
+                })
+
+                if (editor.idClipboard && widgetManager.getWidgetById(editor.idClipboard).length && editor.clipboard[0].type !== 'tab') {
+                    pasteActions.push({
+                        label: icon('clone') + ' ' + locales('editor_clone'),
+                        action: ()=>{
+                            editor.pasteWidgetAsClone(clickX, clickY)
+                        }
+                    })
+                }
+
             }
 
             actions.push({
                 label: icon('paste') + ' ' + locales('editor_paste'),
-                action: pasteActions
+                action: pasteActions,
+                class: canPaste ? '' : 'disabled'
             })
 
         }

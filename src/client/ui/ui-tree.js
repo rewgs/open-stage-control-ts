@@ -126,6 +126,7 @@ class UiTree extends UiWidget {
             while (parent !== this.list) {
                 if (parent.classList.contains('container')) {
                     parent.classList.add('expanded')
+                    this.expanded[parent.getAttribute('data-id')] = true
                 }
                 parent = parent.parentNode
             }
