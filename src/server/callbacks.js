@@ -7,7 +7,8 @@ var path = require('path'),
     theme = require('./theme')
 
 var widgetHashTable = {},
-    sessionBackups = {}
+    sessionBackups = {},
+    clipboard = {clipboard: null, idClipboard: null}
 
 module.exports =  {
 
@@ -16,7 +17,9 @@ module.exports =  {
         ipc.send('connected')
 
         var recentSessions = settings.read('recentSessions')
+        
         ipc.send('sessionList', recentSessions, clientId)
+        ipc.send('clipboard', clipboard, clientId)
 
         if (settings.read('readOnly')) {
             ipc.send('readOnly')
@@ -457,6 +460,13 @@ module.exports =  {
             }
         })
 
+
+    },
+
+    clipboard: function(data, clientId) {
+
+        clipboard = data
+        ipc.send('clipboard', data, null, clientId)
 
     }
 

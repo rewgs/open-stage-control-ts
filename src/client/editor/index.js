@@ -10,12 +10,13 @@ var {updateWidget, incrementWidget} = require('./data-workers'),
     UiTree = require('../ui/ui-tree'),
     UiDragResize = require('../ui/ui-dragresize'),
     sidepanel = require('../ui/ui-sidepanel'),
+    ipc = require('../ipc'),
     html = require('nanohtml'),
     sessionManager
 
 const HISTORY_SIZE = 50
 
-var Editor = class Editor {
+class Editor {
 
     constructor() {
 
@@ -88,6 +89,11 @@ var Editor = class Editor {
 
         this.clipboard = null
         this.idClipboard = null
+        ipc.on('clipboard', (data)=>{
+            this.clipboard = data.clipboard
+            this.idClipboard = data.idClipboard
+        })
+
 
         this.enabled = false
         this.grid = true
@@ -102,8 +108,9 @@ var Editor = class Editor {
         this.historyState = -1
         this.historySession = null
 
-        this.mousePosition = {x:0, y:0}
+        this.mousePosition = {}
         this.mouveMoveHandler = this.mouseMove.bind(this)
+        this.mouveLeaveHandler = this.mouseLeave.bind(this)
 
         keyboardJS.withContext('editing', ()=>{
 
@@ -331,7 +338,8 @@ var Editor = class Editor {
 
         keyboardJS.setContext('editing')
 
-        document.body.addEventListener('mousemove', this.mouveMoveHandler)
+        this.oscContainer.addEventListener('mousemove', this.mouveMoveHandler)
+        this.oscContainer.addEventListener('mouseleave', this.mouveLeaveHandler)
 
         this.selectarea.enable()
 
@@ -349,7 +357,8 @@ var Editor = class Editor {
 
         keyboardJS.setContext('global')
 
-        document.body.removeEventListener('mousemove', this.mouveMoveHandler)
+        this.oscContainer.removeEventListener('mousemove', this.mouveMoveHandler)
+        this.oscContainer.removeEventListener('mouseleave', this.mouveLeaveHandler)
 
         sidepanel.left.disable()
         sidepanel.right.disable()
@@ -444,19 +453,23 @@ var Editor = class Editor {
 
     }
 
+    mouseLeave(e) {
+
+        this.mousePosition = {}
+
+    }
+
     copyWidget() {
 
         if (!this.selectedWidgets.length) return
 
-        var data = this.selectedWidgets.map((w)=>w.props)
+        this.clipboard = deepCopy(this.selectedWidgets.map((w)=>w.props))
+        this.idClipboard = this.selectedWidgets[0].getProp('id')
 
-        this.clipboard = deepCopy(data)
-
-        if (data.length == 1) {
-            this.idClipboard = this.selectedWidgets[0].getProp('id')
-        } else {
-            this.idClipboard = null
-        }
+        ipc.send('clipboard', {
+            clipboard: this.clipboard,
+            idClipboard: this.idClipboard
+        })
 
     }
 
@@ -464,18 +477,12 @@ var Editor = class Editor {
 
         if (!this.selectedWidgets.length) return
 
+        this.copyWidget()
+
         var parent = this.selectedWidgets[0].parent,
             index = this.selectedWidgets.map(w => parent.children.indexOf(w)).sort((a,b)=>{return b-a}),
             data = this.selectedWidgets.map((w)=>w.props),
             removedIndexes = []
-
-        this.clipboard = deepCopy(data)
-
-        if (data.length == 1) {
-            this.idClipboard = this.selectedWidgets[0].getProp('id')
-        } else {
-            this.idClipboard = null
-        }
 
         for (var i of index) {
             removedIndexes.push(i)
@@ -499,39 +506,53 @@ var Editor = class Editor {
             this.clipboard[0].type !== 'tab' && this.selectedWidgets[0].childrenType === 'tab'
         ) return
 
-
-        var data = this.selectedWidgets.map((w)=>w.props)
-
         var pastedData = deepCopy(this.clipboard),
             minTop = Infinity,
-            minLeft = Infinity,
-            store = this.clipboard[0].type === 'tab' ? 'tabs' : 'widgets'
+            minLeft = Infinity
 
-        for (let i in pastedData) {
-            if (increment) pastedData[i] = incrementWidget(pastedData[i])
-            if (!isNaN(pastedData[i]).top && pastedData[i].top < minTop) {
-                minTop = pastedData[i].top
-            }
-            if (!isNaN(pastedData[i]).left && pastedData[i].left < minLeft) {
-                minLeft = pastedData[i].left
-            }
+        if (increment) {
+            pastedData = pastedData.map(x=>incrementWidget(x))
         }
 
-        for (let i in pastedData) {
 
-            if (!isNaN(pastedData[i].left)) pastedData[i].left = pastedData[i].left - minLeft + x
-            if (!isNaN(pastedData[i].top)) pastedData[i].top  = pastedData[i].top - minTop + y
+        if (x !== undefined) {
+
+            for (let i in pastedData) {
+
+                if (!isNaN(pastedData[i]).top && pastedData[i].top < minTop) {
+                    minTop = pastedData[i].top
+                }
+
+                if (!isNaN(pastedData[i]).left && pastedData[i].left < minLeft) {
+                    minLeft = pastedData[i].left
+                }
+
+            }
+
+            for (let i in pastedData) {
+
+                if (!isNaN(pastedData[i].left)) pastedData[i].left = pastedData[i].left - minLeft + x
+                if (!isNaN(pastedData[i].top)) pastedData[i].top  = pastedData[i].top - minTop + y
+
+            }
 
         }
 
-        data[0][store] = data[0][store] || []
-        data[0][store] = data[0][store].concat(pastedData)
+
+        // paste data
+
+        var store = this.clipboard[0].type === 'tab' ? 'tabs' : 'widgets'
+
+        this.selectedWidgets[0].props[store] = this.selectedWidgets[0].props[store] || []
+        this.selectedWidgets[0].props[store] = this.selectedWidgets[0].props[store].concat(pastedData)
 
         var indexes = {addedIndexes: []}
         for (let i = 0; i < pastedData.length; i++) {
-            indexes.addedIndexes.push(data[0][store].length - 1 - i )
+            indexes.addedIndexes.push(this.selectedWidgets[0].props[store].length - 1 - i )
         }
+
         updateWidget(this.selectedWidgets[0], indexes)
+
         this.pushHistory(indexes)
 
     }
@@ -547,23 +568,25 @@ var Editor = class Editor {
             this.clipboard[0].type !== 'tab' && this.selectedWidgets[0].childrenType === 'tab'
         ) return
 
-        var data = this.selectedWidgets.map((w)=>w.props)
-
         var clone = {type: 'clone', widgetId: this.idClipboard},
             pastedData = deepCopy(this.clipboard)
 
-        clone.width = pastedData.width
-        clone.height = pastedData.height
-        clone.css = pastedData.css
+        clone.width = pastedData[0].width
+        clone.height = pastedData[0].height
 
 
-        clone.left = x
-        clone.top  = y
+        if (x !== undefined) {
 
-        data[0].widgets = data[0].widgets || []
-        data[0].widgets.push(clone)
+            clone.left = x
+            clone.top  = y
 
-        var indexes = {addedIndexes: [data[0].widgets.length -1]}
+        }
+
+        this.selectedWidgets[0].props.widgets = this.selectedWidgets[0].props.widgets || []
+        this.selectedWidgets[0].props.widgets.push(clone)
+
+        var indexes = {addedIndexes: [this.selectedWidgets[0].props.widgets.length -1]}
+
         updateWidget(this.selectedWidgets[0], indexes)
         this.pushHistory(indexes)
 

@@ -79,7 +79,7 @@ module.exports = function(options={}) {
             window.reload()
         })
 
-        shortcut.register(window,'F11',function(){
+        if (options.fullscreen) shortcut.register(window,'F11',function(){
             window.setFullScreen(!window.isFullScreen())
         })
 
