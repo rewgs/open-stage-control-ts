@@ -18,8 +18,14 @@ function pointerDownHandler(event) {
 
     targets[event.pointerId] = event.target
 
-    if (event.traversing === TRAVERSING_SAMEWIDGET) {
-        event.traversingType = event.target.closest('.drag-event')._drag_widget.getProp('type')
+    if (event.traversingStack) {
+        event.traversingStack.firstType = event.target.closest('.drag-event')._drag_widget.getProp('type')
+        var local = event.traversingStack.stack[event.traversingStack.stack.length - 1]
+        if (local.mode === TRAVERSING_SAMEWIDGET && local.type && local.type !== event.traversingStack.firstType) {
+            event.traversing = false
+        } else {
+            event.traversing = true
+        }
     }
 
     previousPointers[event.pointerId] = event
@@ -43,12 +49,24 @@ function pointerMoveHandler(event) {
 
         if (target) target = target.closest('.drag-event')
 
-        if (
-            target && event.traversing === TRAVERSING_SAMEWIDGET
-        &&  event.traversingType !== target._drag_widget.getProp('type')
-        ) {
-            target = null
+        var local = null
+        if (target && event.traversingStack) {
+            for (var i = event.traversingStack.stack.length - 1; i > -1; i--) {
+                if (event.traversingStack.stack[i].container.contains(target)) {
+                    local = event.traversingStack.stack[i]
+                    break
+                }
+            }
+            if (!local) {
+                target = null
+            } else if (local.mode === TRAVERSING_SAMEWIDGET && local.type) {
+                var widget = target.closest('.drag-event')._drag_widget
+                if (widget.getProp && local.type !== widget.getProp('type')) target = null
+            }
         }
+
+
+
 
         if (target && event.isTouch) {
             resetEventOffset(event, target)
@@ -59,10 +77,8 @@ function pointerMoveHandler(event) {
         }
 
 
-        if (target) {
-            if (event.traversingContainer.contains(target)) {
-                triggerWidgetEvent(target, previousTarget !== target ? 'draginit' : 'drag', event)
-            }
+        if (target && event.traversing) {
+            triggerWidgetEvent(target, previousTarget !== target ? 'draginit' : 'drag', event)
         }
 
         targets[event.pointerId] = target
@@ -268,21 +284,27 @@ module.exports = {
 
         if (element._traversing) return
 
-        var traversing = options.smart ? TRAVERSING_SAMEWIDGET : true
+        var traversing = options.type ? TRAVERSING_SAMEWIDGET : true,
+            traversingType = options.type === 'auto' ? '' : options.type
 
         element._traversing = traversing
 
         function makeEventTraversing(event) {
             if (event.ctrlKey) return
-            event.traversing = traversing
-            if (!event.traversingContainer) event.traversingContainer = element
+            if (!event.traversingStack) event.traversingStack = {firstType: '', stack: []}
+            event.traversingStack.stack.push({
+                container: element,
+                mode: traversing,
+                type: traversingType
+            })
+
         }
 
         if (!iOS) element.addEventListener('mousedown', makeEventTraversing, true)
         element.addEventListener('touchstart', makeEventTraversing, true)
 
-        element.addEventListener('disableTraversingGestures', ()=>{
-
+        element.addEventListener('disableTraversingGestures', (e)=>{
+            e.stopPropagation()
             if (!iOS) element.removeEventListener('mousedown', makeEventTraversing, true)
             element.removeEventListener('touchstart', makeEventTraversing, true)
 

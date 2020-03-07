@@ -259,7 +259,7 @@ class Panel extends Container() {
         disableTraversingGestures(this.widget)
 
         if (traversing) {
-            enableTraversingGestures(this.widget, {smart: typeof traversing === 'string' && traversing.match(/smart|auto/)})
+            enableTraversingGestures(this.widget, {type: typeof traversing === 'string' ? traversing : undefined})
         }
 
     }
