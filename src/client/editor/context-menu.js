@@ -58,12 +58,18 @@ var handleClick = function(event) {
 
     if (parent !== widgetManager)  {
 
-        if (event.target.tagName !== 'LI') actions.push({
-            label: icon('project-diagram') + ' ' + locales('editor_show_in_tree'),
-            action: ()=>{
-                editor.widgetTree.showWidget(editor.selectedWidgets[0])
-            }
-        })
+        if (event.target.tagName !== 'LI') {
+            actions.push({
+                label: icon('project-diagram') + ' ' + locales('editor_show_in_tree'),
+                action: ()=>{
+                    editor.widgetTree.showWidget(editor.selectedWidgets[0])
+                }
+            })
+            actions.push({
+                separator: true
+            })
+
+        }
 
         actions.push({
             label: icon('copy') + ' ' + locales('editor_copy'),
