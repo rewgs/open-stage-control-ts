@@ -283,7 +283,7 @@ class HueFader extends Fader {
         this.clear()
 
 
-        this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
+        this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
 
         if (flat) {
             this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)

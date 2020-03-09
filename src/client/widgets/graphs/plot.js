@@ -25,7 +25,6 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
             origin: {type: 'number', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it.'},
             dots: {type: 'boolean', value: true, help: ''},
             bars: {type: 'boolean', value: false, help: 'Set to `true` to use draw bars instead (disables `logScaleX` and forces `x axis` even spacing)'},
-            smooth: {type: 'boolean|number', value: false, help: 'Set to `true` to make the line smooth. Float values are also acceptable (works fine between `0` and `0.5`)'},
             pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
 
         }, ['interaction', 'decimals', 'typeTags', 'bypass'], {
@@ -141,18 +140,11 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
 
         this.ctx.beginPath()
 
-        if (this.getProp('smooth')) {
-            this.ctx.curve(points, this.smooth, Math.round(this.width/(points.length/2 - 1)))
-        } else {
-            this.ctx.moveTo(points[0], points[1])
-            let i
-            for (i = 2; i < points.length - 2; i += 2) {
-                this.ctx.lineTo(points[i], points[i + 1])
-            }
+        this.ctx.moveTo(points[0], points[1])
+        for (let i = 2; i < points.length - 2; i += 2) {
             this.ctx.lineTo(points[i], points[i + 1])
         }
-
-
+        this.ctx.lineTo(points[i], points[i + 1])
 
         this.ctx.globalAlpha = 1
         this.ctx.lineWidth = 2 * PXSCALE

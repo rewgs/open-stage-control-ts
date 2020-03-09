@@ -116,14 +116,6 @@ class UiInspector extends UiWidget {
 
         this.widget = widget
 
-        // this.form.appendChild(html`
-        //     <div class="separator">
-        //         <span class="${this.selectedWidgets.length > 1 ? 'accent' : ''}">
-        //             Widget${multi ? 's' : ''}: ${multi ? this.selectedWidgets.length + ' selected': widget.getProp('id')}
-        //         </span>
-        //     </div>
-        // `)
-
         let category
 
         for (let propName in props) {
@@ -147,7 +139,7 @@ class UiInspector extends UiWidget {
 
                 category = html`<osc-inspector-category class="${this.foldedCategories.indexOf(props[propName]) > -1 ? 'folded' : ''}"></osc-inspector-category>`
 
-                field = html`<div class="category-header" data-name="${props[propName]}">${props[propName]}</div>`
+                field = html`<div class="category-header" data-name="${props[propName]}">${props[propName]}${propName === '_widget' && widgets.length > 1 ? `s (${widgets.length})` : ''}</div>`
 
             } else if (widget.props[propName] === undefined) {
 

@@ -2,7 +2,7 @@
   "name": "open-stage-control",
   "productName": "Open Stage Control",
   "description": "Libre and modular OSC / MIDI controller",
-  "version": "0.49.7",
+  "version": "1.0.0-alpha",
   "author": {
     "name": "Jean-Emmanuel Doucet",
     "email": "jean-emmanuel@ammd.net"
@@ -29,7 +29,6 @@
     "babelify": "10.0.0",
     "bonjour": "github:jean-emmanuel/bonjour",
     "browserify": "16.5.0",
-    "cardinal-spline-js": "2.3.10",
     "chroma-js": "2.1.0",
     "core-js": "3.6.4",
     "cpr": "3.0.1",
@@ -71,7 +70,7 @@
     "yargs": "15.1.0"
   },
   "optionalDependencies": {
-    "electron": "8.0.1",
+    "electron": "8.1.0",
     "electron-installer-debian": "3.0.0"
   },
   "scripts": {
@@ -92,6 +91,8 @@
     "watch-client": "npm run build-client-js -- --watch",
     "watch-browser": "npm run build-client-js -- --watch",
     "watch-css": "nodemon --watch src/scss -e scss -x \"npm run build-css -- --reload\"",
+    "watch-server": "nodemon --watch src/server/ -e js -x \"npm run build-server-js\"",
+    "watch-launcher": "nodemon --watch src/ -e js -x \"npm run build-launcher-js\"",
     "build-docs": "node scripts/build-widgets-reference.js > resources/docs/docs/widgets-reference.md && cd resources && npm run build",
     "test": "eslint src && npm run build && node tests/test.js"
   },

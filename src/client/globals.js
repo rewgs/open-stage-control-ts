@@ -3,20 +3,13 @@ location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, (s,k,v)=>{
     ARGV[k]=v
 })
 
-window.ELECTRON_FULLSCREEN = window.ELECTRON_FULLSCREEN || false
-
 window.LANG = ARGV.lang === 'debug' ? 'debug' : (ARGV.lang || navigator.language || '').substr(0, 2).toLowerCase()
 
 window.PACKAGE = require('../../package.json')
-document.title = PACKAGE.productName + ' v' + PACKAGE.version
 
 window.LOADING = null
 
-
-window.CLIPBOARD = null
-
 window.READ_ONLY = false
-window.EDITING = false
 window.GRIDWIDTH = 10
 
 
@@ -33,4 +26,4 @@ window.JSON.parseFlex = require('json5').parse
 
 window.DOM = require('./dom')
 
-require('cardinal-spline-js/curve.min.js')
+window.TITLE = PACKAGE.productName + ' v' + PACKAGE.version

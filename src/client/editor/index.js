@@ -9,7 +9,7 @@ var {updateWidget, incrementWidget} = require('./data-workers'),
     UiInspector = require('../ui/ui-inspector'),
     UiTree = require('../ui/ui-tree'),
     UiDragResize = require('../ui/ui-dragresize'),
-    sidepanel = require('../ui/ui-sidepanel'),
+    {leftUiSidePanel, rightUiSidePanel} = require('../ui/'),
     ipc = require('../ipc'),
     html = require('nanohtml'),
     sessionManager
@@ -326,15 +326,14 @@ class Editor {
 
         if (READ_ONLY) return
 
-        EDITING = true
         this.enabled = true
 
         document.body.classList.add('editor-enabled')
 
         this.widgetTree.updateTree(this.selectedWidgets)
 
-        sidepanel.left.enable()
-        sidepanel.right.enable()
+        leftUiSidePanel.enable()
+        rightUiSidePanel.enable()
 
         keyboardJS.setContext('editing')
 
@@ -347,8 +346,6 @@ class Editor {
 
     disable() {
 
-        EDITING = false
-        this.enabled = false
 
         this.unselect()
         this.selectedWidgets = []
@@ -360,12 +357,14 @@ class Editor {
         this.oscContainer.removeEventListener('mousemove', this.mouveMoveHandler)
         this.oscContainer.removeEventListener('mouseleave', this.mouveLeaveHandler)
 
-        sidepanel.left.disable()
-        sidepanel.right.disable()
+        leftUiSidePanel.disable()
+        rightUiSidePanel.disable()
         this.widgetTree.clear()
         this.inspector.clear()
 
         this.selectarea.disable()
+
+        this.enabled = false
 
     }
 
@@ -384,6 +383,8 @@ class Editor {
     }
 
     select(widget, options={}){
+
+        if (!this.enabled) return
 
         if (Array.isArray(widget)) {
 

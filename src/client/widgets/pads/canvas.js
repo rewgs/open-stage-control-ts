@@ -100,7 +100,7 @@ class CanvasWidget extends Canvas {
 
     setValue(v, options={}) {
 
-        if (v === null || v === undefined || ((v.length || 1) !== this.getProp('valueLength'))) return
+        if (v === null || v === undefined || ((v.length || 1) !== this.getProp('valueLength'))) return
 
         this.value = v
 

@@ -4,13 +4,23 @@ var iOS
 
 if (navigator.platform.match(/iPhone|iPod|iPad/)) {
 
+    var supportsPassiveOption = false;
+    try {
+        document.createElement("div").addEventListener("test", function() {}, {
+            get passive() {
+                supportsPassiveOption = true
+                return false
+            }
+        })
+    } catch(e) {}
+
     iOS = true
 
     var preventNextMove = false
 
     document.addEventListener('touchstart', (e)=>{
         if (e.touches.length === 1 && !e.target._drag_widget) preventNextMove = true
-    }, false)
+    }, supportsPassiveOption ? {passive: false} : false)
 
     document.addEventListener('touchmove', (e)=>{
         // preventDefault the first overscrolling touchmove
@@ -18,7 +28,7 @@ if (navigator.platform.match(/iPhone|iPod|iPad/)) {
             preventNextMove = false
             e.preventDefault()
         }
-    }, false)
+    }, supportsPassiveOption ? {passive: false} : false)
 
 }
 

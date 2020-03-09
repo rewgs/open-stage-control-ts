@@ -17,7 +17,7 @@ module.exports =  {
         ipc.send('connected')
 
         var recentSessions = settings.read('recentSessions')
-        
+
         ipc.send('sessionList', recentSessions, clientId)
         ipc.send('clipboard', clipboard, clientId)
 
@@ -183,7 +183,7 @@ module.exports =  {
 
             var root = settings.read('remoteRoot')
             if (root && !data.path.includes(root)) {
-                console.error('Could not save: path outside of remote-root')
+                console.error('(ERROR) Could not save: path outside of remote-root')
                 return ipc.send('notify', {
                     class: 'error',
                     locale: 'remotesave_fail',
@@ -194,7 +194,7 @@ module.exports =  {
             try {
                 JSON.parse(data.session)
             } catch(e) {
-                return console.error('Could not save: invalid file')
+                return console.error('(ERROR) Could not save: invalid file')
             }
 
             fs.writeFile(data.path, data.session, function(err, fdata) {
@@ -236,11 +236,11 @@ module.exports =  {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
-        if (!path.basename(data.path).match(/.*\.json$/)) return console.error('Sessions must be saved as .json files')
+        if (!path.basename(data.path).match(/.*\.json$/)) return console.error('(ERROR) Sessions must be saved as .json files')
 
         module.exports.fileSave(data, clientId, true, ()=>{
 
-            console.log('Session file saved in '+ data.path)
+            console.log('(INFO) Session file saved in '+ data.path)
 
             ipc.send('sessionSaved', clientId)
 
@@ -261,11 +261,11 @@ module.exports =  {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
-        if (!path.basename(data.path).match(/.*\.state/)) return console.error('Statesaves must be saved as .state files')
+        if (!path.basename(data.path).match(/.*\.state/)) return console.error('(ERROR) Statesaves must be saved as .state files')
 
         module.exports.fileSave(data, clientId, true, ()=>{
 
-            console.log('State file saved in '+ data.path)
+            console.log('(INFO) State file saved in '+ data.path)
 
         })
 

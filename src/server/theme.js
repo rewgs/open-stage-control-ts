@@ -27,7 +27,7 @@ class Theme {
             } else if (!theme.includes('.css') && fs.existsSync(path.resolve(__dirname + '/../assets/themes/' + theme + '.css'))) {
                 this.files.push(path.resolve(__dirname + '/../assets/themes/' + theme + '.css'))
             } else {
-                console.error('Theme error: "' + theme + '" not found.')
+                console.error('(ERROR) Theme not found: "' + theme)
             }
         }
 
@@ -46,7 +46,7 @@ class Theme {
             try {
                 this.css.push(fs.readFileSync(this.files[i],'utf-8'))
             } catch(err) {
-                console.error('Theme error: could not load "' + this.files[i] + '".')
+                console.error('(ERROR) Could not load theme "' + this.files[i])
             }
 
         }

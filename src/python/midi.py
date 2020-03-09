@@ -99,7 +99,7 @@ def create_callback(name):
             ipc_send('osc', osc)
 
             if debug:
-                ipc_send('log','MIDI received: %s From: midi:%s' % (midi_str(message), name))
+                ipc_send('log','(MIDI) in: %s From: midi:%s' % (midi_str(message), name))
 
 
     def callback_error_wrapper(event, data):
@@ -107,7 +107,7 @@ def create_callback(name):
         try:
             receive_midi(event, data)
         except:
-            ipc_send('log', 'ERROR: MIDI: %s' % traceback.format_exc())
+            ipc_send('log', '(ERROR, MIDI) %s' % traceback.format_exc())
 
     return callback_error_wrapper
 
@@ -138,11 +138,11 @@ sysexRegex = re.compile(r'([^0-9A-Fa-f])\1(\1\1)*')
 def send_midi(name, event, *args):
 
     if name not in outputs:
-        ipc_send('log','ERROR: MIDI: unknown output (%s)' % name)
+        ipc_send('log','(ERROR, MIDI) unknown output (%s)' % name)
         return
 
     if event not in OSC_TO_MIDI:
-        ipc_send('log','ERROR: MIDI: invalid address (%s)' % event)
+        ipc_send('log','(ERROR, MIDI) invalid address (%s)' % event)
         return
 
     m = None
@@ -190,7 +190,7 @@ def send_midi(name, event, *args):
 
     if m is None:
 
-        ipc_send('log','ERROR: MIDI: could not convert osc to midi (%s %s)' % (event, " ".join([str(x) for x in args])))
+        ipc_send('log','(ERROR, MIDI) could not convert osc to midi (%s %s)' % (event, " ".join([str(x) for x in args])))
 
     else:
 
@@ -198,7 +198,7 @@ def send_midi(name, event, *args):
 
         if debug:
 
-            ipc_send('log','MIDI sent: %s To: midi:%s' % (midi_str(m), name))
+            ipc_send('log','(MIDI) out: %s To: midi:%s' % (midi_str(m), name))
 
 
 while True:
@@ -213,4 +213,4 @@ while True:
         msg[1] = msg[1].lower()
         send_midi(*msg)
     except:
-        ipc_send('log', 'ERROR: MIDI: %s' % traceback.format_exc())
+        ipc_send('log', '(ERROR, MIDI) %s' % traceback.format_exc())

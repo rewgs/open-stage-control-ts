@@ -50,6 +50,7 @@ module.exports = class Keyboard extends Panel {
 
         super(options)
 
+        this.childrenType = undefined
         this.value = []
 
         this.on('change',(e)=>{

@@ -20,17 +20,22 @@ module.exports = function(options={}) {
         useContentSize: true,
         autoHideMenuBar: true,
         webPreferences: {
-            nodeIntegration: !!options.node
+            nodeIntegration: !!options.node,
+
         },
         show: false,
     })
 
     window.once('ready-to-show', ()=>{
-        if (options.fullscreen) {
-            window.setFullScreen(true)
-        }
         window.show()
+
     })
+    window.webContents.once('page-title-updated', ()=>{
+        if (options.fullscreen) {
+            window.webContents.sendInputEvent({keyCode: 'F11', type: 'keyDown'})
+        }
+    })
+
 
     window.webContents.on('will-prevent-unload', (event)=>{
         var choice = dialog.showMessageBoxSync(window, {
@@ -77,10 +82,6 @@ module.exports = function(options={}) {
 
         shortcut.register(window,'CmdOrCtrl+R',function(){
             window.reload()
-        })
-
-        if (options.fullscreen) shortcut.register(window,'F11',function(){
-            window.setFullScreen(!window.isFullScreen())
         })
 
         shortcut.register(window,'F12',function(){
