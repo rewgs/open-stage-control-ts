@@ -56,6 +56,7 @@ var SessionManager = class SessionManager {
                     parentNode: DOM.get('#osc-container')[0]
                 })
                 editor.clearHistory()
+                DOM.get(document, '#osc-greeting-header')[0].classList.add('hidden')
 
             } catch (err) {
                 loader.close()

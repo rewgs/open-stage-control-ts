@@ -47,7 +47,7 @@ class Toggle extends Widget {
         if (this.getProp('led')) this.container.classList.add('led')
 
         var tap = this.getProp('mode') === 'tap',
-            push = this.getProp('mode') === 'push' || tap
+            push = this.getProp('mode') === 'push' || tap
 
         if (push) {
 
@@ -57,6 +57,8 @@ class Toggle extends Widget {
 
                     this.active = true
                     this.setValue(this.getProp('on'), {sync: true, send: true})
+
+                    if (tap) this.container.classList.add('active')
 
                 })
 

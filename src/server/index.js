@@ -12,11 +12,11 @@ function nodeMode() {
     if (!settings.read('noGui')) {
         settings.cli = true
         settings.write('noGui', true, true)
-        console.warn('Headless mode (--no-gui) enabled automatically')
+        console.warn('(INFO) Headless mode (--no-gui) enabled automatically')
     }
 
     process.on('uncaughtException', (err)=>{
-        console.error('A JavaScript error occurred in the main process:')
+        console.error('(ERROR) A JavaScript error occurred in the main process:')
         console.error(err.stack)
     })
 
@@ -42,9 +42,9 @@ if (process.title === 'node' || process.title === 'node.exe') {
 
 }
 
-var start = function(readyApp) {
+function start() {
 
-    if (!settings.read('guiOnly') && !serverStarted) {
+    if (!serverStarted) {
 
         var server = require('./server'),
             osc = require('./osc'),
@@ -61,32 +61,34 @@ var start = function(readyApp) {
 
     }
 
-    if (!settings.read('noGui')) {
+}
 
-        var app = require('./electron-app')
-        var address = typeof settings.read('guiOnly')=='string'? 'http://' + settings.read('guiOnly') : settings.read('appAddresses')[0]
-        address += settings.read('urlOptions')
+function openClient() {
 
-        var launch = ()=>{
-            var win = require('./electron-window')({address:address, shortcuts:true, zoom:false, fullscreen: settings.read('fullScreen')})
-            return win
-        }
-        if (app.isReady()) {
-            return launch()
-        } else {
-            app.on('ready',function(){
-                launch()
-            })
-        }
+    var app = require('./electron-app')
+    var address = settings.read('appAddresses')[0]
+    address += settings.read('urlOptions')
+
+    var launch = ()=>{
+        var win = require('./electron-window')({address:address, shortcuts:true, zoom:false, fullscreen: settings.read('fullScreen')})
+        return win
+    }
+    if (app.isReady()) {
+        return launch()
+    } else {
+        app.on('ready',function(){
+            launch()
+        })
     }
 
 }
 
 
-
 if (settings.cli) {
 
     start()
+    if (!settings.read('noGui')) openClient()
+
 
 } else {
 
@@ -99,7 +101,7 @@ if (settings.cli) {
     app.on('ready',function(){
         global.settings = settings
         global.midilist = require('./midi').list
-        launcher = require('./electron-window')({address:address, shortcuts:dev, width:680, height:(100 + 8*3 + 29 * Object.keys(settings.options).filter(x=>settings.options[x].launcher !== false).length), node:true, color:'#151a24'})
+        launcher = require('./electron-window')({address:address, shortcuts:dev, width:680, height:(40 + 200 + 20 + 24 * Object.keys(settings.options).filter(x=>settings.options[x].launcher !== false).length / 2), node:true, color:'#151a24'})
         launcher.on('close', ()=>{
             process.stdout.write = stdoutWrite
             process.stderr.write = stderrWrite
@@ -130,17 +132,15 @@ if (settings.cli) {
 
     ipcMain.on('start',function(e, options){
 
-        var gui = start()
+        start()
+        if (!settings.read('noGui')) openClient()
 
-        if (settings.read('guiOnly')) {
-            launcher.hide()
-            gui.on('close',()=>{
-                launcher.close()
-            })
-        } else {
-            launcher.webContents.send('started')
-        }
+    })
 
+
+    ipcMain.on('openClient',function(e, options){
+
+        openClient()
 
     })
 

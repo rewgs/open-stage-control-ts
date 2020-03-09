@@ -1,5 +1,4 @@
-var UiWidget = require('./ui-widget'),
-    locales = require('../locales')
+var UiWidget = require('./ui-widget')
 
 class UiSidePanel extends UiWidget {
 
@@ -7,14 +6,16 @@ class UiSidePanel extends UiWidget {
 
         super(options)
 
-        DOM.get(this.container, 'osc-panel-header')[0].textContent = options.label
+        if (options.label) DOM.get(this.container, 'osc-panel-header')[0].textContent = options.label
+
+        this.vertical = this.container.classList.contains('bottom') || this.container.classList.contains('tpop')
         this.resizeDirection = this.container.classList.contains('left') ? 1 : -1
         this.resizeHandle = DOM.get(this.container, '.resize-handle')[0]
         this.toggleButton = DOM.get(this.container, '.toggle-button')[0]
-        this.content = DOM.get(this.container, 'osc-panel-inner')[0]
+        this.content = DOM.get(this.container, 'osc-panel-content')[0]
 
-        this.minWidth = 250
-        this.width = 250
+        this.minWidth = options.size || 250
+        this.width = options.size || 250
 
         this.disabled = false
         this.minimized = false
@@ -22,14 +23,14 @@ class UiSidePanel extends UiWidget {
 
         this.on('drag', (event)=>{
 
-            this.width += this.resizeDirection * event.movementX / PXSCALE
-            this.container.style.width = this.width + 'rem'
+            this.width += this.resizeDirection * event[this.vertical ? 'movementY' : 'movementX'] / PXSCALE
+            this.container.style[this.vertical ? 'height' : 'width'] = this.width + 'rem'
 
         }, {element: this.resizeHandle})
 
         this.on('dragend', (event)=>{
 
-            this.width = parseInt(this.container.offsetWidth) / PXSCALE
+            this.width = parseInt(this.container[this.vertical ? 'offsetHeight' : 'offsetWidth']) / PXSCALE
             DOM.dispatchEvent(window, 'resize')
 
         }, {element: this.resizeHandle})
@@ -89,8 +90,8 @@ class UiSidePanel extends UiWidget {
 
     open() {
 
-        this.container.style.width = this.width + 'rem'
-        this.container.style.minWidth = this.minWidth + 'rem'
+        this.container.style[this.vertical ? 'height' : 'width'] = this.width + 'rem'
+        this.container.style[this.vertical ? 'minHeight' : 'minWidth'] = this.minWidth + 'rem'
         this.container.classList.remove('minimized')
 
         DOM.dispatchEvent(window, 'resize')
@@ -99,8 +100,8 @@ class UiSidePanel extends UiWidget {
 
     close() {
 
-        this.container.style.width = 0
-        this.container.style.minWidth = 0
+        this.container.style[this.vertical ? 'height' : 'width'] = 0
+        this.container.style[this.vertical ? 'minHeight' : 'minWidth'] = 0
         this.container.classList.add('minimized')
 
         DOM.dispatchEvent(window, 'resize')
@@ -109,10 +110,6 @@ class UiSidePanel extends UiWidget {
 
 }
 
-var leftUiSidePanel = new UiSidePanel({selector: 'osc-panel-container.left', label: locales('editor_tree')}),
-    rightUiSidePanel = new UiSidePanel({selector: 'osc-panel-container.right', label: locales('editor_inspector')})
 
-module.exports = {
-    left: leftUiSidePanel,
-    right: rightUiSidePanel
-}
+
+module.exports = UiSidePanel

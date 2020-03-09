@@ -1,11 +1,3 @@
-var popupSingleton = null,
-    uploadSingleton = null,
-    locales = require('../locales'),
-    html = require('nanohtml'),
-    raw = require('nanohtml/raw'),
-    ipc = require('../ipc'),
-    EventEmitter = require('../events/event-emitter'),
-    doubleTap = require('../widgets/mixins/double_tap')
 
 module.exports = {
 

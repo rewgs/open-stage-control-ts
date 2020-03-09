@@ -36,7 +36,7 @@ class OscServer {
                     try {
                         return fs.readFileSync(customModule[0], 'utf8')
                     } catch(err) {
-                        console.log('CustomModule Error: File not found: ' + customModule[0])
+                        console.log('(ERROR) Custom module not found: ' + customModule[0])
                         return false
                     }
                 })(),
@@ -64,11 +64,11 @@ class OscServer {
                                 url = path.resolve(path.dirname(customModule[0]), url)
                                 return JSON.parse(fs.readFileSync(url, 'utf8'))
                             } catch(e) {
-                                console.error('ERROR: could not load json file from ' + url)
+                                console.error('(ERROR) could not load json file from ' + url)
                                 console.error(e.message)
                             }
                         } else {
-                            console.error('ERROR: unauthorized file type for loadJSON')
+                            console.error('(ERROR) unauthorized file type for loadJSON')
                         }
                     },
                     saveJSON: (url, data)=>{
@@ -77,11 +77,11 @@ class OscServer {
                             try {
                                 return fs.writeFileSync(url, JSON.stringify(data, null, '  '))
                             } catch(e) {
-                                console.error('ERROR: could not save json file to ' + url)
+                                console.error('(ERROR) could not save json file to ' + url)
                                 console.error(e.message)
                             }
                         } else {
-                            console.error('ERROR: unauthorized file type for saveJSON')
+                            console.error('(ERROR) unauthorized file type for saveJSON')
                         }
                     },
                     app: this.customModuleEventEmitter,
@@ -164,7 +164,7 @@ class OscServer {
         } else {
 
             if (typeof data.address !== 'string' || data.address[0] !== '/') {
-                console.error('OSC error: malformed address: "' + data.address + '')
+                console.error('(ERROR, OSC) Malformed address: ' + data.address)
                 return
             }
 
@@ -184,7 +184,7 @@ class OscServer {
 
             }
 
-            if (debug) console.log('OSC sent: ',{address:data.address, args: data.args}, 'To: ' + data.host + ':' + data.port)
+            if (debug) console.log('(OSC) Out: ',{address:data.address, args: data.args}, 'To: ' + data.host + ':' + data.port)
 
         }
 
@@ -203,7 +203,7 @@ class OscServer {
 
         ipc.send('receiveOsc',data)
 
-        if (debug) console.log('OSC received: ', {address:data.address, args: data.args}, 'From: ' + data.host + ':' + data.port)
+        if (debug) console.log('(OSC) In: ', {address:data.address, args: data.args}, 'From: ' + data.host + ':' + data.port)
 
     }
 

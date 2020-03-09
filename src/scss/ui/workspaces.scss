@@ -12,17 +12,13 @@ osc-workspace {
     flex-direction: row;
     overflow: hidden;
 
-    background-image: url(../assets/logo.png);
-    background-size: 80rem;
-    background-position: center;
-    background-repeat: no-repeat;
-
 }
 
 osc-panel-container {
 
     position: relative;
     display:flex;
+    flex-direction: column;
 
 
     &.center {
@@ -58,6 +54,24 @@ osc-panel-container {
         left: -1rem;
     }
 
+    &.bottom {
+        z-index: 2;
+        min-height: 0;
+        height: 0;
+        &:after {
+            // hover trap to display toggle-button when closed
+            content: "";
+            position: absolute;
+            top: -1rem;
+            height: 1rem;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+
+    }
+
     .resize-handle {
         position: absolute;
         top: 0;
@@ -70,6 +84,14 @@ osc-panel-container {
         }
         &.left {
             right: 0;
+        }
+        &.bottom {
+            top:0;
+            left:0;
+            right:0;
+            height: 4rem;
+            width: auto;
+            cursor: ns-resize;
         }
     }
 
@@ -120,11 +142,33 @@ osc-panel-container {
             }
         }
 
+        &.bottom {
+            border-top-left-radius: 25rem;
+            border-top-right-radius: 25rem;
+            top: -25rem;
+            height: 25rem;
+            width: 50rem;
+            left: 50%;
+            margin-left: -25rem;
+            margin-top: 0;
+            cursor: pointer;
+            transform: translateY(25rem);
+
+            &:after {
+                content:"\f107";
+                margin-top: 2rem;
+                width: 50rem;
+                height: 25rem;
+                line-height: 25rem;
+
+            }
+        }
+
     }
 
     &:hover .toggle-button, .toggle-button:hover {
         transition: transform 0.2s ease-out 0s;
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
         &:after {
             transition: opacity 0.1s ease-in 0.1s;
             opacity: 1;
@@ -137,6 +181,9 @@ osc-panel-container {
         }
         &.right:after {
             content:"\f104";
+        }
+        &.bottom:after {
+            content:"\f106";
         }
     }
 
@@ -222,4 +269,21 @@ osc-panel-content {
     }
 
 
+}
+
+
+#osc-greeting-header {
+    --alpha-fill: 0.75;
+    span {
+        opacity: 0.5;
+        position: absolute;
+        right: 12rem;
+    }
+    &.hidden {
+        display: none;
+    }
+}
+
+#osc-container {
+    background: var(--color-background)
 }

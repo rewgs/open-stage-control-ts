@@ -15,7 +15,7 @@ try:
     API = rtmidi.API_UNIX_JACK if 'jack' in argv else rtmidi.API_UNSPECIFIED
     if API is rtmidi.API_UNIX_JACK and rtmidi.API_UNIX_JACK not in rtmidi.get_compiled_api():
         API = rtmidi.API_UNSPECIFIED
-        ipc_send('log', 'python-rtmidi was not compiled with jack midi support, falling back to default API')
+        ipc_send('log', '(ERROR, MIDI) python-rtmidi was not compiled with jack midi support, falling back to default API')
 
     JACK = API == rtmidi.API_UNIX_JACK
 
@@ -23,7 +23,7 @@ try:
     out_dev = rtmidi.MidiOut(API, 'OSC->MIDI probe')
 
 except:
-    ipc_send('log', 'ERROR: MIDI: python-rtmidi not found (or wrong version)\nRunning with python version %s' % version)
+    ipc_send('log', '(ERROR, MIDI) python-rtmidi not found (or wrong version)\nRunning with python version %s' % version)
     ipc_send('log', '\nGet python-rtmidi at https://spotlightkid.github.io/python-rtmidi/')
     exit()
 

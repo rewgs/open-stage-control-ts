@@ -2,9 +2,12 @@ require('./stacktrace')
 require('./globals')
 
 var uiLoading = require('./ui/ui-loading'),
-    locales = require('./locales')
+    locales = require('./locales'),
+    html = require('nanohtml')
 
 document.addEventListener('DOMContentLoaded', function(event) {
+
+    DOM.get(document, '#osc-greeting-header')[0].appendChild(html`${PACKAGE.productName} <span class="version">v${PACKAGE.version}</span>`)
 
     DOM.init()
 
@@ -17,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
         ipc.init()
 
         require('./ui/init')
+
+        document.title = TITLE
 
         ipc.send('ready', {backupId: ARGV.backupId})
 

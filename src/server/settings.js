@@ -37,6 +37,8 @@ argv.getUsageInstance().help = ()=>{
 }
 
 argv = argv.argv
+delete argv._
+delete argv.$0
 
 // are we in a terminal ?
 var cli = false,

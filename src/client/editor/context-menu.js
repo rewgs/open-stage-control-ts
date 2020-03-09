@@ -13,7 +13,7 @@ var multiSelectKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrl
 
 var handleClick = function(event) {
 
-    if (!EDITING) return
+    if (!editor.enabled) return
 
     if (!event.detail[multiSelectKey] && event.type !== 'fast-right-click' && (
         event.target.classList.contains('no-widget-select') ||
@@ -171,6 +171,10 @@ var handleClick = function(event) {
 
         }
 
+        if (actions.length) actions.push({
+            separator: true
+        })
+
         actions.push({
             label: icon('plus') + ' ' + locales('editor_addwidget'),
             action: addActions
@@ -195,10 +199,18 @@ var handleClick = function(event) {
 
     }
 
-    actions.push({
-        label: icon('trash') + ' ' + locales('editor_delete'),
-        action: editor.deleteWidget.bind(editor)
-    })
+    if (parent !== widgetManager)  {
+
+        actions.push({
+            separator: true
+        })
+
+        actions.push({
+            label: icon('trash') + ' ' + locales('editor_delete'),
+            action: editor.deleteWidget.bind(editor)
+        })
+
+    }
 
     contextMenu.open(eventData, actions)
 

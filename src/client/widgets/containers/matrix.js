@@ -22,7 +22,7 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
             widgetType: {type: 'string', value: 'toggle', help: 'Defines the type of the widgets in the matrix'},
             layout: {type: 'string', value: 'horizontal', choices: ['horizontal', 'vertical', 'grid'], help:''},
-            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
             start: {type: 'integer', value: 0, help: 'First widget\'s index'},
             traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},

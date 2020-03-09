@@ -215,7 +215,7 @@ class Range extends Fader {
         }
 
 
-        this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
+        this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
 
         if (compact) {
             this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)

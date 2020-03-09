@@ -22,8 +22,8 @@ class Panel extends Container() {
 
             colorPanel: {type: 'string', value: 'auto', help:''},
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:''},
-            justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
-            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
+            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
@@ -63,7 +63,7 @@ class Panel extends Container() {
         } else if (layout === 'vertical' || layout === 'horizontal'){
 
             var justify = this.getProp('justify')
-            if (justify === 'start' || justify === 'end') justify = 'flex-' + justify
+            if (justify === 'start' || justify === 'end') justify = 'flex-' + justify
             this.widget.style.justifyContent = justify
 
         }

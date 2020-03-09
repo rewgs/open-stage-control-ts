@@ -25,13 +25,13 @@ class OscTCPClient extends EventEmitter {
         this.port = new osc.TCPSocketPort(this.options)
 
         this.port.on('error', (err)=>{
-            console.error(`TCP: Error: ${err.message}`)
+            console.error(`(ERROR, TCP) ${err.message}`)
         })
 
         this.port.on('close', (hadErr)=>{
-            console.log(`TCP: connection closed (${this.remoteAddress}:${this.remotePort})`)
+            console.log(`(TCP) Connection closed (${this.remoteAddress}:${this.remotePort})`)
             if (!this.options.socket) {
-                console.log(`TCP: attempting reconnection in 5s (${this.remoteAddress}:${this.remotePort})`)
+                console.log(`(TCP) Attempting reconnection in 5s (${this.remoteAddress}:${this.remotePort})`)
                 this.reconnect()
             } else {
                 this.emit('die')
@@ -43,7 +43,7 @@ class OscTCPClient extends EventEmitter {
         })
 
         this.port.on('ready', ()=>{
-            console.log(`TCP: connection established (${this.remoteAddress}:${this.remotePort})`)
+            console.log(`(TCP) Connection established (${this.remoteAddress}:${this.remotePort})`)
         })
 
         if (!this.options.socket) {

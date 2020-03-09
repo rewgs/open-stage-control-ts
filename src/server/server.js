@@ -75,6 +75,14 @@ function httpRoute(req, res) {
     }
 }
 
+server.on('error', (e)=>{
+    if (e.code === 'EADDRINUSE') {
+        console.error(`(ERROR, HTTP) Could not open port ${oscInPort} (already in use) `)
+    } else {
+        console.error(`(ERROR, HTTP) ${e.message}`)
+    }
+})
+
 server.listen(settings.read('httpPort'))
 
 http.get(settings.read('appAddresses')[0] + '/osc-ping', ()=>{}).on('error', ()=>{httpCheck(false)})
@@ -84,9 +92,9 @@ function httpCheck(ok){
     clearTimeout(httpCheckTimeout)
     httpCheckTimeout = null
     if (ok) {
-        console.log('App available at ' + appAddresses.join(' & '))
+        console.log('(INFO) App available at ' + appAddresses.join(' & '))
     } else {
-        console.error('Error: could not setup http server, maybe try a different port ?')
+        console.error('(ERROR, HTTP) Could not setup http server, maybe try a different port ?')
     }
 }
 
@@ -95,7 +103,7 @@ zeroconf.publish({
     type: 'http',
     port: settings.read('httpPort')
 }).on('error', (e)=>{
-    console.error(`Error: Zeroconf: ${e.message}`)
+    console.error(`(ERROR, ZEROCONF) ${e.message}`)
 })
 
 var bindCallbacks = function(callbacks) {

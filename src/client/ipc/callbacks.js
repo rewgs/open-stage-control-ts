@@ -10,8 +10,7 @@ var utils = require('../ui/utils'),
     notifications = require('../ui/notifications'),
     {TRAVERSING_SAMEWIDGET} = require('../events/utils'),
     raw = require('nanohtml/raw'),
-    ipc = require('./'),
-    windowTitle = document.title
+    ipc = require('./')
 
 module.exports = {
 
@@ -96,8 +95,6 @@ module.exports = {
 
     readOnly: function(){
         READ_ONLY = true
-        $('.editor-menu .btn').remove()
-        $('.editor-menu .title').addClass('disabled')
         if (editor.enabled) editor.disable()
     },
 
@@ -191,7 +188,7 @@ module.exports = {
 
     setTitle: function(data) {
 
-        document.title = windowTitle + (data ? ' (' + data + ')' : '')
+        document.title = TITLE + (data ? ' (' + data + ')' : '')
 
     },
 

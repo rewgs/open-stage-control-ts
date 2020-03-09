@@ -19,13 +19,18 @@ function pointerDownHandler(event) {
     targets[event.pointerId] = event.target
 
     if (event.traversingStack) {
-        event.traversingStack.firstType = event.target.closest('.drag-event')._drag_widget.getProp('type')
-        var local = event.traversingStack.stack[event.traversingStack.stack.length - 1]
+
+        var widget = event.target.closest('.drag-event')._drag_widget,
+            local = event.traversingStack.stack[event.traversingStack.stack.length - 1]
+
+        if (widget.getProp) event.traversingStack.firstType = widget.getProp('type')
+
         if (local.mode === TRAVERSING_SAMEWIDGET && local.type && local.type !== event.traversingStack.firstType) {
             event.traversing = false
         } else {
             event.traversing = true
         }
+
     }
 
     previousPointers[event.pointerId] = event
@@ -156,6 +161,8 @@ function touchMultiWrapper(event) {
 }
 
 function touchDownCapture(event, multitouch) {
+    console.log('down')
+
     event.preventDefault()
     for (var i in event.changedTouches) {
         if (isNaN(i) || !event.changedTouches[i]) continue
@@ -216,7 +223,6 @@ function triggerWidgetEvent(target, name, event) {
 // init
 
 DOM.ready(()=>{
-
     if (!iOS) document.addEventListener('mousemove', mouseMoveCapture, true)
     if (!iOS) document.addEventListener('mouseup', mouseUpCapture, true)
     document.addEventListener('touchmove', touchMoveCapture, true)

@@ -24,7 +24,7 @@ osc-inspector-field {
         cursor: help;
     }
 
-    textarea {
+    textarea, input {
         font-family: mono;
 
         line-height: $field-height - 8rem;

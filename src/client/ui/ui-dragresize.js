@@ -41,7 +41,7 @@ class UiDragResize extends UiWidget {
         this.on('draginit', (event)=>{
 
             var node = event.firstTarget
-            if (event.shiftKey || !this.handles.includes(node)) return
+            if (event.shiftKey || !this.handles.includes(node)) return
 
             this.initLeft = this.left
             this.initTop = this.top
@@ -51,7 +51,8 @@ class UiDragResize extends UiWidget {
 
             this.container.classList.add('dragging')
             this.dragging = node.getAttribute('data-action').split(',')
-            event.traversing = false
+            delete event.traversingStack
+            delete event.traversing
 
         }, {element: this.container})
 

@@ -66,7 +66,7 @@ class MidiConverter {
         } else if (name ==  'osc') {
             instance.receiveOsc(data)
         } else if (name == 'error') {
-            console.error('ERROR: MIDI: ' + data)
+            console.error('(ERROR, MIDI) ' + data)
             if (instance) instance.stop()
         }
 

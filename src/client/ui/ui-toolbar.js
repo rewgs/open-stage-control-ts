@@ -11,7 +11,7 @@ var UiWidget = require('./ui-widget'),
     editor = require('../editor'),
     sessionManager = require('../managers/session'),
     stateManager = require('../managers/state'),
-    uiSidePanel = require('./ui-sidepanel')
+    {leftUiSidePanel, rightUiSidePanel} = require('../ui/')
 
 
 var recentSessions = []
@@ -22,7 +22,8 @@ var menuEntries = [
         action: [
             {
                 label: locales('session_new'),
-                action: sessionManager.create.bind(sessionManager)
+                action: sessionManager.create.bind(sessionManager),
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 separator: true
@@ -30,7 +31,8 @@ var menuEntries = [
             {
                 label: locales('file_open'),
                 action: sessionManager.browse.bind(sessionManager),
-                shortcut: 'mod + o'
+                shortcut: 'mod + o',
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_open_recent'),
@@ -42,23 +44,27 @@ var menuEntries = [
             {
                 label: locales('file_save'),
                 action: sessionManager.save.bind(sessionManager),
-                shortcut: 'mod + s'
+                shortcut: 'mod + s',
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_save_as'),
                 action: sessionManager.saveAs.bind(sessionManager),
-                shortcut: 'mod + shift + s'
+                shortcut: 'mod + shift + s',
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 separator: true
             },
             {
                 label: locales('file_import'),
-                action: sessionManager.import.bind(sessionManager)
+                action: sessionManager.import.bind(sessionManager),
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_export'),
-                action: sessionManager.export.bind(sessionManager)
+                action: sessionManager.export.bind(sessionManager),
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
 
         ]
@@ -91,32 +97,37 @@ var menuEntries = [
             },
             {
                 label: locales('file_open'),
-                action: stateManager.browse.bind(stateManager)
+                action: stateManager.browse.bind(stateManager),
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_save'),
-                action: stateManager.save.bind(stateManager)
+                action: stateManager.save.bind(stateManager),
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_save_as'),
-                action: stateManager.saveAs.bind(stateManager)
+                action: stateManager.saveAs.bind(stateManager),
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 separator: true
             },
             {
                 label: locales('file_import'),
-                action: stateManager.import.bind(stateManager)
+                action: stateManager.import.bind(stateManager),
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_export'),
-                action: stateManager.export.bind(stateManager)
+                action: stateManager.export.bind(stateManager),
+                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
         ]
     },
     {
         label: locales('editor'),
-        class: ()=>{return sessionManager.session === null ? 'disabled' : ''},
+        class: ()=>{return sessionManager.session === null || READ_ONLY ? 'disabled' : ''},
         action: [
             {
                 label: locales('editor_enabled'),
@@ -139,16 +150,16 @@ var menuEntries = [
             },
             {
                 label: locales('editor_tree'),
-                class: ()=>{return 'toggle ' + (uiSidePanel.left.minimized ? 'off' : 'on')},
-                action: ()=>{return uiSidePanel.left.minimized ? uiSidePanel.left.restore() : uiSidePanel.left.minimize()},
+                class: ()=>{return 'toggle ' + (leftUiSidePanel.minimized ? 'off' : 'on')},
+                action: ()=>{return leftUiSidePanel.minimized ? leftUiSidePanel.restore() : leftUiSidePanel.minimize()},
                 // shortcut: 'mod + t'
 
 
             },
             {
                 label: locales('editor_inspector'),
-                class: ()=>{return 'toggle ' + (uiSidePanel.right.minimized ? 'off' : 'on')},
-                action: ()=>{return uiSidePanel.right.minimized ? uiSidePanel.right.restore() : uiSidePanel.right.minimize()},
+                class: ()=>{return 'toggle ' + (rightUiSidePanel.minimized ? 'off' : 'on')},
+                action: ()=>{return rightUiSidePanel.minimized ? rightUiSidePanel.restore() : rightUiSidePanel.minimize()},
                 // shortcut: 'mod + i'
             }
         ]
@@ -163,7 +174,7 @@ var menuEntries = [
             if (fullscreen.isEnabled) fullscreen.toggle()
         },
         shortcut: 'f11'
-    },
+    }
 
 ]
 
