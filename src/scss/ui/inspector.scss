@@ -63,7 +63,7 @@ osc-inspector-field {
 
 osc-inspector-category {
 
-    --alpha-fill: 0.25;
+    --alpha-fill: 0.5;
     margin-top: 2rem;
     display: block;
     padding: 0 8rem;
@@ -144,7 +144,8 @@ osc-inspector-checkbox {
     margin-left: 4rem;
 
     i {
-        color: transparent;
+        // color: transparent;
+        opacity: 0.25;
         margin-top: -1rem;
         margin-left: 1rem;
         pointer-events: none;
@@ -154,7 +155,7 @@ osc-inspector-checkbox {
         z-index: 1;
         @include pseudo-fill($z: -1);
         i {
-            color: inherit;
+            opacity: 1;
         }
     }
 

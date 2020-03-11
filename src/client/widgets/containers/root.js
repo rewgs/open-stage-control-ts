@@ -5,7 +5,7 @@ var Panel = require('./panel'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw')
 
-class Root extends StaticProperties(Panel, {scroll: false, label: false, id: 'root'}) {
+class Root extends StaticProperties(Panel, {scroll: false, visible: true, label: false, id: 'root'}) {
 
     static description() {
 
@@ -29,7 +29,7 @@ class Root extends StaticProperties(Panel, {scroll: false, label: false, id: 'ro
             variables: {type: '*', value: '', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
         }, [
-            'label',
+            'visible', 'label',
             '_geometry', 'left', 'top', 'width', 'height', 'expand',
             'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOff',
         ], {
