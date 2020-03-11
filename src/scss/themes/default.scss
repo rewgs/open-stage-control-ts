@@ -40,7 +40,8 @@ $text: white;
     --alpha-scrollbar-on: 0.5;
     --scrollbar-size:12rem;
 
-    --color-text: #{mix($base, $text, 40)};
+    // --color-text: #{mix($base, $text, 40)};
+    --color-text: #{transparentize($text, .4)};
 
     --color-widget: var(--color-accent);
 
