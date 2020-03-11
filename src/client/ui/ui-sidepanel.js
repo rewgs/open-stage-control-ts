@@ -8,8 +8,8 @@ class UiSidePanel extends UiWidget {
 
         if (options.label) DOM.get(this.container, 'osc-panel-header')[0].textContent = options.label
 
-        this.vertical = this.container.classList.contains('bottom') || this.container.classList.contains('tpop')
-        this.resizeDirection = this.container.classList.contains('left') ? 1 : -1
+        this.vertical = this.container.classList.contains('bottom') || this.container.classList.contains('top')
+        this.resizeDirection = this.container.classList.contains('left') || this.container.classList.contains('top') ? 1 : -1
         this.resizeHandle = DOM.get(this.container, '.resize-handle')[0]
         this.toggleButton = DOM.get(this.container, '.toggle-button')[0]
         this.content = DOM.get(this.container, 'osc-panel-content')[0]
@@ -20,6 +20,13 @@ class UiSidePanel extends UiWidget {
         this.disabled = false
         this.minimized = false
         this.init = false
+
+
+        this.on('draginit', (event)=>{
+
+            this.width = parseInt(this.container[this.vertical ? 'offsetHeight' : 'offsetWidth']) / PXSCALE
+
+        }, {element: this.resizeHandle})
 
         this.on('drag', (event)=>{
 

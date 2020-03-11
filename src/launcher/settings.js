@@ -8,7 +8,6 @@ var {remote, ipcRenderer, shell} = eval('require(\'electron\')'),
     terminal = require('./terminal'),
     argv_remote = settings.read('argv')
 
-
 class Settings {
 
     constructor() {
@@ -32,7 +31,7 @@ class Settings {
         fs.writeFile(this.configPath, JSON.stringify(this.argv), (err, fdata)=>{
 
             if (err) console.error(err)
-            else terminal.log('Config saved in ' + this.configPath)
+            else terminal.log('(INFO) Config saved in ' + this.configPath)
 
         })
 
@@ -63,7 +62,7 @@ class Settings {
             this.argv = JSON.parse(fs.readFileSync(file.filePaths[0], 'utf-8'))
             this.create()
             this.write()
-            terminal.log('Config loaded from ' + file.filePaths[0])
+            terminal.log('(INFO) Config loaded from ' + file.filePaths[0])
             this.configPath = file.filePaths[0]
         })
 
@@ -179,8 +178,10 @@ class Settings {
                 }
 
                 if (fail || v !== '' && data.check && data.check(v, this.argv) !== true) {
-                    field.classList.add('error')
-                    terminal.log(`(ERROR) --${name}: ${fail || data.check(v, this.argv)}`, 'error')
+                    if (!field.classList.contains('error')) {
+                        field.classList.add('error')
+                        terminal.log(`(ERROR) --${name}: ${fail || data.check(v, this.argv)}`, 'error')
+                    }
                 } else {
                     field.classList.remove('error')
                     this.argv[name] = v
@@ -189,7 +190,7 @@ class Settings {
                 if (data.restart && !field.classList.contains('restart') && v != value) {
                     field.classList.add('restart')
                     field.classList.add('warning')
-                    terminal.log(`(WARNING) --${name}: The app must be restarted for this change to take effect.`, 'warning')
+                    terminal.log(`(WARNING) --${name}: The launcher must be restarted for this change to take effect.`, 'warning')
                 } else if (data.restart && field.classList.contains('restart') && v == value) {
                     field.classList.remove('restart')
                     field.classList.remove('warning')
@@ -219,6 +220,15 @@ class Settings {
         this.container.classList.add('disabled')
         DOM.each(this.container, 'input', (el)=>{
             el.setAttribute('disabled', true)
+        })
+
+    }
+
+    enable() {
+
+        this.container.classList.remove('disabled')
+        DOM.each(this.container, 'input', (el)=>{
+            el.removeAttribute('disabled')
         })
 
     }

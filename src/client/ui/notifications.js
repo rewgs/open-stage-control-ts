@@ -28,6 +28,7 @@ class Toast {
 
         if (this.html) {
             this.html = morph(this.html, toast)
+            this.html.style.height = this.html.offsetHeight + 'px'
         } else {
             this.html = toast
         }

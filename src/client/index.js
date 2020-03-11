@@ -1,8 +1,7 @@
 require('./stacktrace')
 require('./globals')
 
-var uiLoading = require('./ui/ui-loading'),
-    locales = require('./locales'),
+var locales = require('./locales'),
     html = require('nanohtml')
 
 document.addEventListener('DOMContentLoaded', function(event) {
@@ -11,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     DOM.init()
 
-    LOADING = uiLoading(locales('loading_server'))
+    var uiLoading = require('./ui/ui-loading')
+    uiLoading(locales('loading_server'))
 
     setTimeout(()=>{
 

@@ -35,8 +35,9 @@ var SessionManager = class SessionManager {
 
         this.lock = true
 
-        var container = DOM.get('#osc-container')[0],
-            loader = uiLoading(locales('loading_session'))
+        var container = DOM.get('#osc-container')[0]
+
+        uiLoading(locales('loading_session'))
 
         setTimeout(()=>{
             try {
@@ -59,7 +60,7 @@ var SessionManager = class SessionManager {
                 DOM.get(document, '#osc-greeting-header')[0].classList.add('hidden')
 
             } catch (err) {
-                loader.close()
+                uiLoading(false)
                 new UiModal({title: locales('session_parsingerror'), content: err.message, icon: 'exclamation-triangle', closable:true})
                 this.lock = false
                 ipc.send('sessionSetPath', {path: this.sessionPath})
@@ -82,7 +83,7 @@ var SessionManager = class SessionManager {
             DOM.dispatchEvent(window, 'resize')
 
             setTimeout(()=>{
-                loader.close()
+                uiLoading(false)
                 this.lock = false
                 editor.unsavedSession = false
                 this.setSessionPath('')

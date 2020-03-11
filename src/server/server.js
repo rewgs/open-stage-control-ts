@@ -92,7 +92,7 @@ function httpCheck(ok){
     clearTimeout(httpCheckTimeout)
     httpCheckTimeout = null
     if (ok) {
-        console.log('(INFO) App available at ' + appAddresses.join(' & '))
+        console.log('(INFO) Server started, app available at \n    ' + appAddresses.join('\n    '))
     } else {
         console.error('(ERROR, HTTP) Could not setup http server, maybe try a different port ?')
     }

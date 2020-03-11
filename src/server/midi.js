@@ -20,6 +20,14 @@ class MidiConverter {
             pythonPath
         }, pythonOptions))
 
+        this.py.childProcess.on('error', (e)=>{
+            if (e.code === 'ENOENT') {
+                console.error(`(ERROR, MIDI) Could not find python binary: ${e.message.replace(/spawn (.*) ENOENT/, '$1')}`)
+            } else {
+                console.error(`(ERROR, MIDI) ${e.message}`)
+            }
+        })
+
     }
 
     send(data) {
@@ -58,7 +66,7 @@ class MidiConverter {
             // console.log(err)
         }
         if (name == 'log') {
-            if (data.indexOf('ERROR') === 0) {
+            if (data.indexOf('ERROR') > -1) {
                 console.error(data)
             } else {
                 console.log(data)
@@ -76,8 +84,15 @@ class MidiConverter {
 
         var pythonPath = settings.read('midi') ? settings.read('midi').filter(x=>x.includes('path=')).map(x=>x.split('=')[1])[0] : undefined
 
-        PythonShell.run('python/list.py', Object.assign({pythonPath}, pythonOptions), function(err, results) {
-            if (err) console.error(err)
+        PythonShell.run('python/list.py', Object.assign({pythonPath}, pythonOptions), function(e, results) {
+            if (e) {
+                if (e.code === 'ENOENT') {
+                    console.error(`(ERROR, MIDI) Could not find python binary: ${e.message.replace(/spawn (.*) ENOENT/, '$1')}`)
+                } else {
+                    console.error(`(ERROR, MIDI) ${e.message}`)
+                }
+            }
+
             MidiConverter.parseIpc(results)
         })
 

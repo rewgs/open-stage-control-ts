@@ -6,22 +6,31 @@ var {remote, ipcRenderer, shell} = eval('require(\'electron\')'),
     settings = require('./settings'),
     midilist = remote.getGlobal('midilist')
 
-menu.append(new MenuItem({
+
+var start = new MenuItem({
     label: 'Start',
     click: ()=>{
         ipcRenderer.send('start')
         settings.disable()
-        menu.items[0].visible = false
-        menu.items[1].visible = true
     }
-}))
-menu.append(new MenuItem({
+})
+var stop = new MenuItem({
+    label: 'Stop',
+    click: ()=>{
+        ipcRenderer.send('stop')
+        settings.enable()
+    }
+})
+var newWindow = new MenuItem({
     label: 'New window',
     visible: false,
     click: ()=>{
         ipcRenderer.send('openClient')
     }
-}))
+})
+menu.append(start)
+menu.append(stop)
+menu.append(newWindow)
 menu.append(new MenuItem({
     type: 'separator'
 }))
@@ -91,6 +100,10 @@ class Toolbar {
 
         this.container.addEventListener('click', (e)=>{
             this.container.classList.add('on')
+            var serverProcess = remote.getGlobal('serverProcess')
+            start.visible = !serverProcess
+            stop.visible = !!serverProcess
+            newWindow.visible = !!serverProcess
             menu.popup({window: remote.getCurrentWindow(), x: parseInt(PXSCALE), y: parseInt(40 * PXSCALE)})
         })
 
