@@ -36,7 +36,7 @@ class OscServer {
                     try {
                         return fs.readFileSync(customModule[0], 'utf8')
                     } catch(err) {
-                        console.log('(ERROR) Custom module not found: ' + customModule[0])
+                        console.error('(ERROR) Custom module not found: ' + customModule[0])
                         return false
                     }
                 })(),

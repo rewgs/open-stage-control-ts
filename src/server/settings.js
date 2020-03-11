@@ -59,7 +59,7 @@ var baseDir = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'
     defaultConfig
 
 if (!configPath) {
-    console.warn('Home directory not found, settings and session history will not be saved.')
+    console.warn('(WARNING) Home directory not found, settings and session history will not be saved.')
 }
 
 

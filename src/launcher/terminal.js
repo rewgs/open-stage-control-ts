@@ -1,19 +1,15 @@
-var UiSidePanel = require('../client/ui/ui-sidepanel'),
-    {ipcRenderer} = eval('require(\'electron\')'),
+var {ipcRenderer} = eval('require(\'electron\')'),
     ansiHTML = require('ansi-html'),
     html = require('nanohtml')
 
-class Terminal extends UiSidePanel {
+class Terminal {
 
     constructor(options) {
 
-        super(options)
-
+        this.content = DOM.get(options.selector)[0]
         this.autoSroll = true
         this.length = 0
         this.maxLength = 500
-
-        this.enable()
 
         ipcRenderer.on('stdout', (e, msg)=>{
             this.log(ansiHTML(msg), 'log')
@@ -59,4 +55,4 @@ class Terminal extends UiSidePanel {
 
 }
 
-module.exports = new Terminal({selector: 'osc-panel-container.bottom', size: 200})
+module.exports = new Terminal({selector: '#osc-terminal'})

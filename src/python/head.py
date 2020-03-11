@@ -23,8 +23,8 @@ try:
     out_dev = rtmidi.MidiOut(API, 'OSC->MIDI probe')
 
 except:
-    ipc_send('log', '(ERROR, MIDI) python-rtmidi not found (or wrong version)\nRunning with python version %s' % version)
-    ipc_send('log', '\nGet python-rtmidi at https://spotlightkid.github.io/python-rtmidi/')
+    ipc_send('log', '(ERROR, MIDI) python-rtmidi not found (or wrong version) (running with python %s)' % ".".join(map(str, version_info[:3])))
+    ipc_send('log', '(INFO, MIDI) Get python-rtmidi at https://spotlightkid.github.io/python-rtmidi/')
     exit()
 
 if version_info.major == 3:

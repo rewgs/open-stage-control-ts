@@ -324,7 +324,7 @@ class Editor {
 
     enable() {
 
-        if (READ_ONLY) return
+        if (READ_ONLY || sessionManager.session === null) return
 
         this.enabled = true
 

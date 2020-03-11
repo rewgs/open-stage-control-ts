@@ -7,7 +7,6 @@ module.exports = {
     },
     'l':{alias:'load',type:'string',file:{name:'OSC Session (.json)', extensions: ['json', 'js']},describe:'session file to load'},
     'state':{type:'string',file:{name:'OSC State (.state)', extensions: ['state']},describe:'state file to load'},
-    // 'b':{alias:'blank',type:'boolean',describe:'load a blank session and start the editor'},
     'c':{alias:'custom-module',type:'array',file:{name:'OSC Custom module (.js)', extensions: ['js']},describe:'custom module file to load (custom options can be passed after the filename)'},
     'p':{alias:'port',type:'number',describe:'http port of the server (default to 8080)',
         check: (p)=>{
@@ -44,19 +43,7 @@ module.exports = {
                 true : 'no-gui and gui-only can\'s be enabled simultaneously'
         }
     },
-    // 'g':{alias:'gui-only',type:'string',describe:'app server\'s url. If true, local port (--port) is used',
-    //     check: (g,argv)=>{
-    //         return (!g || !argv.n) ?
-    //             true : 'no-gui and gui-only can\'s be enabled simultaneously'
-    //     }
-    // },
     't':{alias:'theme',type:'array',describe:'theme name or path (mutliple values allowed)'},
-    // 'e':{alias:'examples',type:'boolean',describe:'list examples instead of recent sessions',
-    //     check: (e,argv)=>{
-    //         return (!e || !argv.l) ?
-    //             true : 'examples can\'t be listed if --load is set'
-    //     }
-    // },
     'url-options':{type:'array',describe:'url options (opt=value pairs)',
         check: (u, argv)=>{
             return (!u || !argv.n) ?

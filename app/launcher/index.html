@@ -13,17 +13,17 @@
 <body>
     <osc-workspace id="osc-launcher">
         <osc-toolbar></osc-toolbar>
-        <osc-panel-container class="center">
+        <osc-panel-container class="main">
+            <div class="resize-handle top" style=""></div>
+            <div class="toggle-button top"></div>
             <osc-panel-inner>
                 <osc-panel-header id="osc-greeting-header"></osc-panel-header>
                 <osc-panel-content id="osc-container"></osc-panel-content>
             </osc-panel-inner>
         </osc-panel-container>
         <osc-panel-container class="bottom">
-            <div class="resize-handle bottom"></div>
-            <div class="toggle-button bottom"></div>
-            <osc-panel-inner class="bottom">
-                <osc-panel-content class="bottom" id="osc-terminal"></osc-panel-content>
+            <osc-panel-inner>
+                <osc-panel-content id="osc-terminal"></osc-panel-content>
             </osc-panel-inner>
         </osc-panel-container>
     </osc-workspace>

@@ -57,13 +57,11 @@ module.exports = function(options={}) {
         shell.openExternal(url)
     })
 
-    if (options.fullscreen) {
-        window.webContents.on('dom-ready', ()=>{
-            window.webContents.executeJavaScript(`
-                window.ELECTRON_FULLSCREEN = true
-            `)
-        })
-    }
+    // window.webContents.on('dom-ready', ()=>{
+    //     window.webContents.executeJavaScript(`
+    //         window.ELECTRON = true
+    //     `)
+    // })
 
     if (options.zoom === false) {
         window.webContents.setVisualZoomLevelLimits(1, 1)

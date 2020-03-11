@@ -54,7 +54,7 @@ osc-panel-container {
         left: -1rem;
     }
 
-    &.bottom {
+    &.bottom, &.top {
         z-index: 2;
         min-height: 0;
         height: 0;
@@ -68,8 +68,10 @@ osc-panel-container {
             right: 0;
             z-index: 1;
         }
-
-
+        &.top:after {
+            bottom: -1rem;
+            top: auto;
+        }
     }
 
     .resize-handle {
@@ -87,6 +89,15 @@ osc-panel-container {
         }
         &.bottom {
             top:0;
+            left:0;
+            right:0;
+            height: 4rem;
+            width: auto;
+            cursor: ns-resize;
+        }
+        &.top {
+            top: auto;
+            bottom:0;
             left:0;
             right:0;
             height: 4rem;
@@ -164,6 +175,29 @@ osc-panel-container {
             }
         }
 
+        &.top {
+            border-bottom-left-radius: 25rem;
+            border-bottom-right-radius: 25rem;
+            top: auto;
+            bottom: -25rem;
+            height: 25rem;
+            width: 50rem;
+            left: 50%;
+            margin-left: -25rem;
+            margin-top: 0;
+            cursor: pointer;
+            transform: translateY(- 25rem);
+
+            &:after {
+                content:"\f106";
+                margin-bottom: 2rem;
+                width: 50rem;
+                height: 25rem;
+                line-height: 25rem;
+
+            }
+        }
+
     }
 
     &:hover .toggle-button, .toggle-button:hover {
@@ -184,6 +218,9 @@ osc-panel-container {
         }
         &.bottom:after {
             content:"\f106";
+        }
+        &.top:after {
+            content:"\f107";
         }
     }
 

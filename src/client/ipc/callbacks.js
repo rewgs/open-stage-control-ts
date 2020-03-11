@@ -7,6 +7,7 @@ var utils = require('../ui/utils'),
     locales = require('../locales'),
     {deepCopy} = require('../utils'),
     UiModal = require('../ui/ui-modal'),
+    uiLoading = require('../ui/ui-loading'),
     notifications = require('../ui/notifications'),
     {TRAVERSING_SAMEWIDGET} = require('../events/utils'),
     raw = require('nanohtml/raw'),
@@ -25,7 +26,7 @@ module.exports = {
     },
 
     connected:function(){
-        LOADING.close()
+        uiLoading(false)
     },
 
     sessionOpen: function(data){
