@@ -3,6 +3,7 @@ var urlparser   = require('url'),
     fs          = require('fs'),
     send        = require('send'),
     http        = require('http'),
+    replaceStream = require('replacestream'),
     server      = http.createServer(httpRoute),
     Ipc         = require('./ipc/server'),
     ipc         = new Ipc(server),
@@ -19,14 +20,19 @@ function httpRoute(req, res) {
     res.sendFile = (path)=>{
         var fpath = path.split('?')[0]
         if (!fs.existsSync(fpath)) throw `File "${fpath}" not found.`
-        send(req, fpath).pipe(res)
+        return send(req, fpath).pipe(res)
     }
 
     var url = req.url
 
     if (url === '/' || url.indexOf('/?') === 0) {
 
-        res.sendFile(path.resolve(__dirname + '/../client/index.html'))
+        fs.createReadStream(path.resolve(__dirname + '/../client/index.html'))
+          .pipe(replaceStream('</body>', `<script>window.ENV=${JSON.stringify(settings.read('clientOptions'))}</script></body>`))
+          .pipe(res);
+
+        // res.sendFile(path.resolve(__dirname + '/../client/index.html'))
+
 
     } else {
 
