@@ -1,6 +1,4 @@
-var html = require('nanohtml'),
-    UiModal = require('./ui-modal'),
-    notifications = require('./notifications'),
+var notifications = require('./notifications'),
     loading = null, timeout = null
 
 module.exports = function uiLoading(title) {
@@ -8,7 +6,6 @@ module.exports = function uiLoading(title) {
     if (title === false && loading) {
         clearTimeout(timeout)
         timeout = setTimeout(()=>{
-            console.log('stop')
             notifications.remove(loading)
             loading = null
         }, 500)

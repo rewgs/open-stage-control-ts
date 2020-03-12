@@ -103,7 +103,7 @@ class Keys extends Widget {
 
     keyUp(e) {
 
-        if (e.target && e.target.classList.contains('no-keybinding')) return
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tabName === 'TEXTAREA' || e.target.tabName === 'SELECT')) return
 
         e.preventDefault()
 

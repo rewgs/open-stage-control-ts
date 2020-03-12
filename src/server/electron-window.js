@@ -57,16 +57,8 @@ module.exports = function(options={}) {
         shell.openExternal(url)
     })
 
-    // window.webContents.on('dom-ready', ()=>{
-    //     window.webContents.executeJavaScript(`
-    //         window.ELECTRON = true
-    //     `)
-    // })
 
-    if (options.zoom === false) {
-        window.webContents.setVisualZoomLevelLimits(1, 1)
-    }
-
+    window.webContents.setVisualZoomLevelLimits(1, 1)
 
     window.on('closed', function() {
         window = null
@@ -75,6 +67,13 @@ module.exports = function(options={}) {
     window.setMenu(null)
 
     window.loadURL(options.address)
+
+    if (process.platform !== 'darwin') {
+        // already registered in app menu on macOs
+        shortcut.register(window,'CmdOrCtrl+W',function(){
+            window.close()
+        })
+    }
 
     if (options.shortcuts) {
 
