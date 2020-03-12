@@ -70,6 +70,7 @@ module.exports = function(options={}) {
 
     if (process.platform !== 'darwin') {
         // already registered in app menu on macOs
+        // ISSUE seems to bind ctrl+z as well (FR keyboard ?)
         shortcut.register(window,'CmdOrCtrl+W',function(){
             window.close()
         })

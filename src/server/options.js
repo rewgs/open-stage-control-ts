@@ -37,28 +37,18 @@ module.exports = {
     },
     'm':{alias:'midi',type:'array',describe:'midi router settings'},
     'd':{alias:'debug',type:'boolean',describe:'log received osc messages in the console'},
-    'n':{alias:'no-gui',type:'boolean',describe:'disable default gui',
-        check: (n,argv)=>{
-            return (!n || !argv.g) ?
-                true : 'no-gui and gui-only can\'s be enabled simultaneously'
-        }
-    },
+    'n':{alias:'no-gui',type:'boolean',describe:'disable default gui'},
     't':{alias:'theme',type:'array',describe:'theme name or path (mutliple values allowed)'},
-    'url-options':{type:'array',describe:'url options (opt=value pairs)',
-        check: (u, argv)=>{
-            return (!u || !argv.n) ?
-                true : 'url options can\'t be passed in no-gui mode'
+    'client-options':{type:'array',describe:'client options (opt=value pairs)',
+        check: (o)=>{
+            return o.some(item=>!item.match(/^[^=]*=[^=]*$/)) ?
+                'Options must be key=value pairs' : true
         }
     },
     'disable-vsync':{type:'boolean',describe:'disable gui\'s vertical synchronization', restart: true},
     // 'disable-gpu':{type:'boolean',describe:'disable hardware acceleration', restart: true},
     'force-gpu':{type:'boolean',describe:'ignore chrome\'s gpu blacklist', restart: true},
-    'read-only':{type:'boolean',describe:'disable session editing and session history changes',
-        check: (r, argv)=>{
-            return (!r || !argv.b) ?
-                true : 'blank session can\'t be started in read-only mode'
-        }
-    },
+    'read-only':{type:'boolean',describe:'disable session editing and session history changes'},
     'remote-saving':{type:'string',describe:'disable remote session saving for hosts that don\'t match the regular expresion',
         check: (r, argv)=>{
             var msg = true

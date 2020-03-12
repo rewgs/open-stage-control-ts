@@ -81,7 +81,15 @@ var makeDefaultConfig = function(argv){
         fullScreen: argv['fullscreen'] || false,
         noGui: argv['no-gui'] || false,
         guiOnly: typeof argv['gui-only'] == 'string' ? argv['gui-only'].length ? argv['gui-only'] : true : false,
-        urlOptions: argv['url-options'] ? '?' + argv['url-options'].join('&') : '',
+        clientOptions: argv['client-options'] ? (function(){
+            var opts = {}
+            for (var o of argv['client-options']) {
+                if (!o.includes('=')) continue
+                var [k, v] = o.split('=')
+                opts[k] = v
+            }
+            return opts
+        })() : false,
         noVsync: argv['disable-vsync'] || false,
         noGpu: argv['disable-gpu'] || false,
         forceGpu: argv['force-gpu'] || false,

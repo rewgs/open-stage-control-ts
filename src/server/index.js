@@ -67,7 +67,6 @@ function openClient() {
 
     var app = require('./electron-app')
     var address = settings.read('appAddresses')[0]
-    address += settings.read('urlOptions')
 
     var launch = ()=>{
         var win = require('./electron-window')({address:address, shortcuts:true, fullscreen: settings.read('fullScreen')})
