@@ -70,7 +70,7 @@ function openClient() {
     address += settings.read('urlOptions')
 
     var launch = ()=>{
-        var win = require('./electron-window')({address:address, shortcuts:true, zoom:false, fullscreen: settings.read('fullScreen')})
+        var win = require('./electron-window')({address:address, shortcuts:true, fullscreen: settings.read('fullScreen')})
         win.on('error', ()=>{
             console.log('ERR')
         })

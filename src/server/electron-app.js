@@ -1,4 +1,4 @@
-var {app, Menu, shell} = require('electron'),
+var {app, Menu, shell, BrowserWindow} = require('electron'),
     settings = require('./settings'),
     infos = require('../package.json')
 
@@ -31,7 +31,7 @@ var template = [{
 }]
 
 if (process.platform === 'darwin') {
-    // Add app menu (OS X)
+    // Add app menu (macOs)
     template.unshift({
         label: settings.read('appName'),
         submenu: [
@@ -54,7 +54,7 @@ if (process.platform === 'darwin') {
             },
             {
                 label: 'Quit',
-                accelerator: 'Command+Q',
+                accelerator: 'CmdOrCtrl+Q',
                 click: ()=>app.quit()
             }
         ]
@@ -73,9 +73,20 @@ if (process.platform === 'darwin') {
                     type: 'separator'
                 },
                 {
+                    label: 'Close',
+                    accelerator: 'CmdOrCtrl+W',
+                    click: ()=>{
+                        var win = BrowserWindow.getFocusedWindow()
+                        if (win) win.close()
+                    }
+                },
+                {
+                    type: 'separator'
+                },
+                {
                     label: 'Bring All to Front',
                     role: 'front'
-                }
+                },
             ]
         },
         {
