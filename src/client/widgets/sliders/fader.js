@@ -17,9 +17,9 @@ module.exports = class Fader extends Slider {
 
             _fader:'fader',
 
-            design: {type: 'string', value: 'compact', choices: ['compact', 'classic', 'round'], help: 'Design style'},
+            design: {type: 'string', value: 'default', choices: ['default', 'round', 'compact'], help: 'Design style'},
             horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
-            pips: {type: 'boolean', value: false, help: 'Set to `true` to show range breakpoints'},
+            pips: {type: 'boolean', value: false, help: 'Set to `true` to show range breakpoints (ignored if `design` is `compact`)'},
             dashed: {type: 'boolean', value: false, help: 'Set to `true` to display a dashed gauge'},
             gradient: {type: 'array|object', value: [], help: [
                 'When set, the meter\'s gauge will be filled with a linear color gradient',
@@ -162,7 +162,7 @@ module.exports = class Fader extends Slider {
 
         super.cacheCanvasStyle(style)
 
-        if (this.getProp('pips')) this.drawPips()
+        if (this.getProp('pips') && this.getProp('design') !== 'compact') this.drawPips()
 
     }
 
@@ -253,7 +253,7 @@ module.exports = class Fader extends Slider {
             this.clearRect = [0, 0, width, height]
 
 
-        } else if (this.getProp('design') === 'classic') {
+        } else if (this.getProp('design') === 'default') {
 
 
             if (this.cssVars.alphaStroke) {
@@ -300,7 +300,7 @@ module.exports = class Fader extends Slider {
                 this.ctx.fillStyle = this.cssVars.colorFill
 
                 this.ctx.beginPath()
-                this.ctx.arc(m, d, 10 * PXSCALE, 0, 2 * Math.PI)
+                this.ctx.arc(m, d, 9 * PXSCALE, 0, 2 * Math.PI)
                 this.ctx.fill()
             }
 
@@ -308,7 +308,7 @@ module.exports = class Fader extends Slider {
 
         }
 
-        if (this.getProp('pips')) {
+        if (this.getProp('pips') && !compact) {
             this.ctx.globalAlpha = 1
             this.ctx.drawImage(this.pips, 0, 0);
             if (!compact) this.clearRect = [this.clearRect, [m + 10 * PXSCALE, 0, 10 * PXSCALE + this.pipsTextSize, height]]

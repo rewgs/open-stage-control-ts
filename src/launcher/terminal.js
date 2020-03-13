@@ -16,7 +16,16 @@ class Terminal {
         })
 
         ipcRenderer.on('stderr', (e, msg)=>{
+            if (msg.includes('\n    at') && msg.split('\n    at').length > 2) {
+                msg = msg.replace('\n    at', '<div class="trace"><div class="trace-button"></div>    at') + '</div>'
+            }
             this.log(ansiHTML(msg), 'error')
+        })
+
+        this.content.addEventListener('click', (e)=>{
+            if (e.target.classList.contains('trace-button')) {
+                e.target.parentNode.classList.toggle('show')
+            }
         })
 
     }

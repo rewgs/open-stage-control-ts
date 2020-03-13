@@ -89,6 +89,8 @@ class UiTree extends UiWidget {
 
         var content = this.parseWidgets(widgetManager.getWidgetById('root')[0], selectedWidgets)
 
+        if (!content) return
+
         // morph DOM
         if (this.mounted) {
             morph(this.list.firstChild, content)
@@ -155,6 +157,8 @@ class UiTree extends UiWidget {
 
     parseWidgets(widget, selectedWidgets, depth = 1) {
 
+        if (!widget) return
+
         var selected = selectedWidgets.includes(widget),
             id = widget.getProp('id'),
             node = html`<li class="${selected ? 'editing' : ''} ${!widget.getProp('visible') ? 'invisible' : ''}"
@@ -168,7 +172,7 @@ class UiTree extends UiWidget {
             if (this.expanded[id]) node.classList.add('expanded')
             var sublist = node.appendChild(html`<ol style="--depth:${++depth};"></ol>`)
             for (let child of widget.children) {
-                sublist.appendChild(this.parseWidgets(child, selectedWidgets, depth))
+                if (child) sublist.appendChild(this.parseWidgets(child, selectedWidgets, depth))
             }
 
         }

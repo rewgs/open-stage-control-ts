@@ -52,7 +52,8 @@ $padding: 8rem;
             overflow: hidden;
         }
         > i {
-            margin-right: 5rem;
+            display: block;
+            margin-right: 10rem;
         }
         &.closable {
             padding-right: 0;

@@ -59,9 +59,12 @@ module.exports =  {
             // add session to history
             recentSessions.unshift(path.resolve(data))
             // remove doubles from history
+            recentSessions = recentSessions.reverse()
             recentSessions = recentSessions.filter(function(elem, index, self) {
                 return index == self.indexOf(elem)
             })
+            recentSessions = recentSessions.reverse()
+            
             // history size limit
             if (recentSessions.length > 10) recentSessions = recentSessions.slice(0, 10)
 
