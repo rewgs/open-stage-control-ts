@@ -72,7 +72,7 @@ module.exports = function(options={}) {
         // already registered in app menu on macOs
         // ISSUE seems to bind ctrl+z as well (FR keyboard ?)
         shortcut.register(window,'CmdOrCtrl+W',function(){
-            window.close()
+            // window.close()
         })
     }
 

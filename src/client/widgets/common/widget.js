@@ -498,9 +498,6 @@ class Widget extends EventEmitter {
 
                 }
 
-                // backward compat
-                if (k === '_value') k = 'value'
-
                 var widgets = id == 'parent' && this.parent ?
                     [this.parent] : id == 'this' ? [this] :
                         widgetManager.getWidgetById(id)
@@ -869,7 +866,7 @@ class Widget extends EventEmitter {
                 this.container.classList.remove('no-label')
                 var label = this.getProp('label') == 'auto'?
                     this.getProp('id'):
-                    iconify(this.getProp('label').replace(/</g, '&lt;'))
+                    iconify(String(this.getProp('label')).replace(/</g, '&lt;'))
 
                 this.label.innerHTML = label
                 this.container.appendChild(this.label)

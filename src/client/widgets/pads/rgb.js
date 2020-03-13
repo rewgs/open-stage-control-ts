@@ -65,7 +65,7 @@ module.exports = class Rgb extends Widget {
         this.hue = new HueFader({props:{
             ...faderDefaults,
             type: 'fader',
-            mode: 'line',
+            design: 'default',
             label: false,
             pips:false,
             horizontal:false,
@@ -84,6 +84,7 @@ module.exports = class Rgb extends Widget {
             this.alpha = new Fader({props:{
                 ...faderDefaults,
                 type: 'fader',
+                design: 'compact',
                 label:false,
                 pips:false,
                 horizontal:true,

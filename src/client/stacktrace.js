@@ -17,11 +17,11 @@ window.onerror = function(msg,url,row,col, error) {
 
         }).join('\n')
 
-        ipc.send('errorLog', `[Renderer process error]\n${msg}\n${stringifiedStack}`)
+        ipc.send('errorLog', `(ERROR, CLIENT) ${msg}\n${stringifiedStack}`)
 
     }).catch(()=>{
 
-        ipc.send('errorLog', `[Renderer process error]\n${msg}\n    at ${url}:${row}:${col}\n    (no stacktrace available)`)
+        ipc.send('errorLog', `(ERROR, CLIENT) ${msg}\n    at ${url}:${row}:${col}\n    (no stacktrace available)`)
 
     })
 
