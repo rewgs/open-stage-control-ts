@@ -2,7 +2,9 @@ var EventEmitter = require('../../events/event-emitter'),
     osc = require('../../osc'),
     nanoid = require('nanoid/generate'),
     widgetManager = require('../../managers/widgets'),
-    {math, evaljs, urlParser} = require('../utils'),
+    {urlParser} = require('../utils'),
+    Vm = require('../vm'),
+    vm = new Vm(),
     scopeCss = require('scope-css'),
     {iconify} = require('../../ui/utils'),
     resize = require('../../events/resize'),
@@ -166,7 +168,6 @@ class Widget extends EventEmitter {
         this.widget = options.html
         this.props = options.props
         this.errors = {}
-        this.parsers = {}
         this.parent = options.root ? widgetManager : options.parent
         this.parentNode = options.parentNode
         this.hash = nanoid('abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ', 10)
@@ -176,14 +177,15 @@ class Widget extends EventEmitter {
         this.mounted = false
         this.visible = true
 
+        this.parsers = {}
+        this.parsersLocalScope = {}
+
         this.createPropsCache()
 
         if (this.getProp('id') == 'root' && !options.root) {
             this.cachedProps.id = '_root'
             this.errors.id = 'There can only be one root'
         }
-
-        // this.mathjsDeprecationWarned = false
 
         // cache decimals
         if (this.props.decimals !== undefined) {
@@ -609,9 +611,9 @@ class Widget extends EventEmitter {
 
                     var code = m.substr(2, m.length - 3).trim()
 
-                    if (!this.parsers[code]) this.parsers[code] = evaljs('return ' + code, defaultScope)
+                    if (!this.parsers[code]) this.parsers[code] = vm.compile('return ' + code, defaultScope)
 
-                    let r = this.parsers[code](jsScope)
+                    let r = this.parsers[code](jsScope, this.parsersLocalScope)
 
                     if (r === undefined) r = ''
 
@@ -627,9 +629,9 @@ class Widget extends EventEmitter {
             try {
                 propValue = propValue.replace(/JS\{\{([\s\S]*)\}\}/g, (m, code)=>{
 
-                    if (!this.parsers[code]) this.parsers[code] = evaljs(code, defaultScope)
+                    if (!this.parsers[code]) this.parsers[code] = vm.compile(code, defaultScope)
 
-                    let r = this.parsers[code](jsScope)
+                    let r = this.parsers[code](jsScope, this.parsersLocalScope)
 
                     if (r === undefined) r = ''
 

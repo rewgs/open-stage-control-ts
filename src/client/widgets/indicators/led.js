@@ -64,7 +64,7 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true, inter
         if (typeof v != 'number') return false
 
         this.value = v
-        this.container.style.setProperty('--opacity', mapToScale(v,[this.getProp('range').min,this.getProp('range').max],[0,1],false,this.getProp('logScale'),true))
+        this.container.style.setProperty('--opacity', mapToScale(v, [this.getProp('range').min, this.getProp('range').max], [0, 1], -1, this.getProp('logScale'), true))
 
 
     }
