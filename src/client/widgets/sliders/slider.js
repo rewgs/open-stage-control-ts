@@ -66,9 +66,9 @@ class Slider extends Canvas {
 
         this.widget.addEventListener('mousewheel',this.mousewheelHandleProxy.bind(this))
 
-        this.on('draginit', this.draginitHandleProxy.bind(this), {element:this.container, multitouch: options.multitouch})
-        this.on('drag', this.dragHandleProxy.bind(this), {element:this.container, multitouch: options.multitouch})
-        this.on('dragend', this.dragendHandleProxy.bind(this), {element:this.container, multitouch: options.multitouch})
+        this.on('draginit', this.draginitHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
+        this.on('drag', this.dragHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
+        this.on('dragend', this.dragendHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
 
         touchstate(this, {element: this.widget, multitouch: options.multitouch})
 
@@ -162,7 +162,7 @@ class Slider extends Canvas {
         var h = clip(percent,[0,100])
         for (var i=0;i<this.rangeKeys.length-1;i++) {
             if (h <= this.rangeKeys[i+1] && h >= this.rangeKeys[i]) {
-                return mapToScale(h,[this.rangeKeys[i],this.rangeKeys[i+1]],[this.rangeVals[i],this.rangeVals[i+1]],false,this.getProp('logScale'))
+                return mapToScale(h, [this.rangeKeys[i], this.rangeKeys[i + 1]], [this.rangeVals[i], this.rangeVals[i + 1]], -1, this.getProp('logScale'))
             }
         }
 
@@ -175,7 +175,7 @@ class Slider extends Canvas {
                 (this.rangeVals[i+1] > this.rangeVals[i] && value <= this.rangeVals[i+1] && value >= this.rangeVals[i]) ||
                 (this.rangeVals[i+1] < this.rangeVals[i] && value >= this.rangeVals[i+1] && value <= this.rangeVals[i])
             ) {
-                return mapToScale(value,[this.rangeVals[i],this.rangeVals[i+1]],[this.rangeKeys[i],this.rangeKeys[i+1]],false,this.getProp('logScale'),true)
+                return mapToScale(value, [this.rangeVals[i], this.rangeVals[i + 1]], [this.rangeKeys[i], this.rangeKeys[i + 1]], -1, this.getProp('logScale'), true)
             }
         }
 

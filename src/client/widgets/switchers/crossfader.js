@@ -116,7 +116,7 @@ module.exports = class Crossfader extends Switcher {
 
                         if (!isNaN(s['A'][i][k])) {
 
-                            a[i][k] = mapToScale(v, [0,1], [s['A'][i][k], s['B'][i][k]], false)
+                            a[i][k] = mapToScale(v, [0,1], [s['A'][i][k], s['B'][i][k]], -1)
 
                         }
 
@@ -124,7 +124,7 @@ module.exports = class Crossfader extends Switcher {
 
                 } else if (!isNaN(s['A'][i])) {
 
-                    a[i] = mapToScale(v, [0,1], [s['A'][i], s['B'][i]], false)
+                    a[i] = mapToScale(v, [0,1], [s['A'][i], s['B'][i]], -1)
                 }
             }
 

@@ -7,15 +7,22 @@ module.exports = {
         value = parseFloat(value)
 
         if (isNaN(value)) value = range[0]
-        return Math.max(Math.min(range[0],range[1]),Math.min(value,Math.max(range[0],range[1])))
+
+        return Math.max(Math.min(range[0], range[1]), Math.min(value, Math.max(range[0], range[1])))
 
     },
 
-    // map a value from a scale to another input and output must be range arrays
-    mapToScale: function(value,rangeIn,rangeOut,decimals,log,revertlog) {
+    // map a value from a scale to another
+    //     value: number
+    //     rangeIn: [number, number]
+    //     rangeOut: [number, number]
+    //     decimals: number (-1 to bypass)
+    //     log: boolean
+    //     revertLog: boolean
+    mapToScale: function(value, rangeIn, rangeOut, decimals, log, revertlog) {
 
         // clip in
-        value = module.exports.clip(value,[rangeIn[0],rangeIn[1]])
+        value = module.exports.clip(value,[rangeIn[0], rangeIn[1]])
 
         // normalize
         value = (value - rangeIn[0]) / (rangeIn[1] - rangeIn[0])
@@ -32,10 +39,10 @@ module.exports = {
         value = value * (rangeOut[1] - rangeOut[0]) + rangeOut[0]
 
         // clip out
-        value = module.exports.clip(value,[rangeOut[0],rangeOut[1]])
+        value = module.exports.clip(value, [rangeOut[0], rangeOut[1]])
 
         // decimals
-        if (decimals !== false) value = parseFloat(value.toFixed(decimals))
+        if (decimals !== -1) value = parseFloat(value.toFixed(decimals))
 
         return value
 
@@ -96,120 +103,6 @@ module.exports = {
             parser.href = url
             return parser
         }
-
-    })(),
-
-    evaljs: (function(){
-
-        var sandbox = document.createElement('iframe'),
-            loopProtect = require('loop-protect')
-
-        sandbox.style.display = 'none'
-        sandbox.sandbox = 'allow-same-origin'
-        document.documentElement.appendChild(sandbox)
-
-        // block requests
-        sandbox.contentWindow.document.open()
-        sandbox.contentWindow.document.write('<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'unsafe-eval\';">')
-        sandbox.contentWindow.document.close()
-
-        // init infinite loop guard
-        loopProtect.alias = '__protect'
-        loopProtect.hit = function(line){
-            throw 'Potential infinite loop found on line ' + line
-        }
-        sandbox.contentWindow.__protect = loopProtect
-
-
-        var _Function = sandbox.contentWindow.Function,
-            parsers = {}
-
-        sandbox.contentWindow.console = console
-        sandbox.contentWindow.setTimeout =
-        sandbox.contentWindow.setInterval = ()=>{
-            throw 'setTimeout and setInterval can\'t be used in the JS sandbox'
-        }
-        sandbox.contentWindow.global = {}
-
-        function nuke(o) {
-            // non-primitives created outside the sandbox context can leak
-            // the host window object... let's nuke that !
-            // (we only nuke function and objects/arrays because we don't pass anything else)
-            var t = typeof o
-            if (t === 'function' || (t === 'object' && o !== null)) {
-                if (o.__proto__) {
-                    if (t === 'function') {
-                        o.__proto__.constructor = _Function
-                    } else {
-                        o.__proto__.constructor.constructor = _Function
-                    }
-                }
-                for (var k in o) {
-                    nuke(o[k])
-                }
-            }
-        }
-
-        for (var imports of ['__protect', 'console', 'setTimeout', 'setInterval', 'global']) {
-            nuke(sandbox.contentWindow[imports])
-        }
-
-        document.documentElement.removeChild(sandbox)
-
-        function evaljs(code, defaultContext) {
-
-            var contextInit = '',
-                contextKeys = ['__VARS'],
-                contextValues = [{}]
-
-            if  (defaultContext) {
-                for (var k in defaultContext) {
-                    contextInit += `var ${k} = ${k} || ${JSON.stringify(defaultContext[k])};`
-                    contextKeys.push(k)
-                    contextValues.push(defaultContext[k])
-                }
-            }
-
-            parsers[code] = new _Function(
-                ...contextKeys,
-                loopProtect('"use strict";' + contextInit + code)
-                .replace(/;\n(if \(__protect.*break;)\n/g, ';$1') // prevent loop protect from breaking stack linenumber
-                .replace(/(VAR_[0-9]+)/g, '__VARS.$1')
-            )
-
-            return (context)=>{
-
-                var ret, err, k
-
-                var __contextValues = deepCopy(contextValues)
-                var __VARS = __contextValues[0]
-                for (k in context) {
-                    var index = contextKeys.indexOf(k)
-                    if (index !== -1) {
-                        __contextValues[index] = context[k]
-                    } else {
-                        __VARS[k] = context[k]
-                    }
-                }
-
-                nuke(contextValues)
-
-                // evaluate
-                try {
-                    ret = parsers[code].apply(null, __contextValues)
-                } catch(e) {
-                    err = e
-                }
-
-                if (err) throw err
-
-                return ret
-
-            }
-
-        }
-
-        return evaljs
 
     })()
 

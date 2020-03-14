@@ -130,7 +130,7 @@ class Panel extends Container() {
         } else if (this.getProp('widgets') && this.getProp('widgets').length) {
 
             this.value = -1
-            
+
             this.childrenType = 'widget'
 
             this.children = options.children || new Array(this.getProp('widgets').length)

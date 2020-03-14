@@ -142,7 +142,7 @@ module.exports = class Rgb extends Widget {
 
             var rgb = hsbToRgb(this.hsb)
             for (var k in rgb) {
-                rgb[k] = mapToScale(rgb[k], [0, 255], [this.getProp('range').min, this.getProp('range').max], false)
+                rgb[k] = mapToScale(rgb[k], [0, 255], [this.getProp('range').min, this.getProp('range').max], -1)
             }
 
             if (rgb.r != this.value[0] || rgb.g != this.value[1] || rgb.b != this.value[2]) {
@@ -188,9 +188,9 @@ module.exports = class Rgb extends Widget {
         }
 
         var hsb = rgbToHsb({
-            r: mapToScale(value[0], [this.getProp('range').min, this.getProp('range').max], [0, 255], false),
-            g: mapToScale(value[1], [this.getProp('range').min, this.getProp('range').max], [0, 255], false),
-            b: mapToScale(value[2], [this.getProp('range').min, this.getProp('range').max], [0, 255], false)
+            r: mapToScale(value[0], [this.getProp('range').min, this.getProp('range').max], [0, 255], -1),
+            g: mapToScale(value[1], [this.getProp('range').min, this.getProp('range').max], [0, 255], -1),
+            b: mapToScale(value[2], [this.getProp('range').min, this.getProp('range').max], [0, 255], -1)
         })
 
         if (!options.dragged) {
