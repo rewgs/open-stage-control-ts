@@ -42,7 +42,7 @@ delete argv.$0
 
 // are we in a terminal ?
 var cli = false,
-    ignored = ['_', '$0', 'no-sandbox', 'noSandbox', 'cache-dir', 'cacheDir', 'config-file', 'configFile']
+    ignored = ['_', '$0', 'no-sandbox', 'noSandbox', 'cache-dir', 'cacheDir', 'config-file', 'configFile', 'disable-gpu', 'disableGpu', 'inspect']
 
 for (i in argv) {
     if (!ignored.includes(i) && (argv[i]!=undefined && argv[i]!==false)) cli = true

@@ -11,7 +11,7 @@ class UiTree extends UiWidget {
 
         Panel = require('../widgets/containers/panel')
         Matrix = require('../widgets/containers/matrix')
-        Keyboard = require('../widgets/matrices/keyboard')
+        Keyboard = require('../widgets/containers/keyboard')
         widgetManager = require('../managers/widgets')
 
         super(options)
