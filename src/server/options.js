@@ -46,7 +46,6 @@ module.exports = {
         }
     },
     'disable-vsync':{type:'boolean',describe:'disable gui\'s vertical synchronization', restart: true},
-    // 'disable-gpu':{type:'boolean',describe:'disable hardware acceleration', restart: true},
     'force-gpu':{type:'boolean',describe:'ignore chrome\'s gpu blacklist', restart: true},
     'read-only':{type:'boolean',describe:'disable session editing and session history changes'},
     'remote-saving':{type:'string',describe:'disable remote session saving for hosts that don\'t match the regular expresion',
@@ -63,6 +62,9 @@ module.exports = {
     'remote-root':{type:'string', describe:'set remote file browsing root folder', file:{folder: true}},
     'instance-name':{type:'string',describe:'used to differenciate multiple instances in a zeroconf network'},
     'fullscreen':{type:'boolean', describe:'launch in fullscreen mode (only affects the default client gui)'},
+
+    // cli only
+    'disable-gpu':{type:'boolean',describe:'disable hardware acceleration', launcher: false},
     'inspect':{type:'boolean', describe:'enable node/electron inspector', launcher: false},
     'cache-dir':{type:'string', describe:'override default cache directory', launcher: false},
     'config-file':{type:'string', describe:'override default config file (defaults to cache-dir/config.json)', launcher: false}
