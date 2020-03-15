@@ -12,7 +12,7 @@ class Canvas extends Widget {
         this.canvas = DOM.get(this.container, 'canvas')[0]
 
         this.ctx = this.canvas.getContext('2d',{
-            desynchronized: true,
+            desynchronized: ELECTRON_NOGPU ? false : true,
             lowLatency: true,
             alpha: true,
             preserveDrawingBuffer: true // avoid flickering

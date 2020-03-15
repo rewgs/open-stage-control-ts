@@ -1,6 +1,7 @@
 var path = require('path'),
     {BrowserWindow, dialog, shell, screen} = require('electron'),
     shortcut = require('electron-localshortcut'),
+    app = require('./electron-app'),
     settings = require('./settings'),
     theme = require('./theme'),
     screenSize = screen.getPrimaryDisplay().size
@@ -28,11 +29,16 @@ module.exports = function(options={}) {
 
     window.once('ready-to-show', ()=>{
         window.show()
-
     })
+    
     window.webContents.once('page-title-updated', ()=>{
         if (options.fullscreen) {
             window.webContents.sendInputEvent({keyCode: 'F11', type: 'keyDown'})
+        }
+        if (app._noGpu) {
+            window.webContents.executeJavaScript(`
+                window.ELECTRON_NOGPU = true
+            `)
         }
     })
 
