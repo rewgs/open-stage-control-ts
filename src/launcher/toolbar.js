@@ -75,6 +75,14 @@ menu.append(new MenuItem({type: 'submenu' , label: 'Console', submenu: [
         click: function(e){
             terminal.autoSroll = e.checked
         }
+    }),
+    new MenuItem({
+        label: 'Check for updates at startup',
+        type: 'checkbox',
+        checked: settings.remote.read('checkForUpdates'),
+        click: (e)=>{
+            settings.remote.write('checkForUpdates', e.checked)
+        }
     })
 ]}))
 menu.append(new MenuItem({

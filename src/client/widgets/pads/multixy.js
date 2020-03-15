@@ -81,7 +81,6 @@ module.exports = class MultiXy extends Pad {
 
         }
 
-
         this.value = []
 
         this.padsCoords = []
@@ -119,6 +118,13 @@ module.exports = class MultiXy extends Pad {
 
             e.stopPropagation = true
 
+            if (this.getProp('touchAddress')) {
+                this.sendValue({
+                    address: this.getProp('touchAddress'),
+                    v: [parseInt(id), 1],
+                })
+            }
+
             this.pads[id].trigger('draginit', e)
 
         }, {element: this.widget, multitouch: true})
@@ -143,6 +149,13 @@ module.exports = class MultiXy extends Pad {
 
             this.pads[i].trigger('dragend', e)
 
+            if (this.getProp('touchAddress')) {
+                this.sendValue({
+                    address: this.getProp('touchAddress'),
+                    v: [parseInt(this.touchMap[e.pointerId]), 0],
+                })
+            }
+
             delete this.touchMap[e.pointerId]
 
         }, {element: this.widget, multitouch: true})
@@ -152,7 +165,6 @@ module.exports = class MultiXy extends Pad {
             e.stopPropagation = true
             this.setValue(this.getValue(), e.options)
         })
-
 
         var v = []
         for (let i = 0; i < this.npoints * 2; i = i + 2) {

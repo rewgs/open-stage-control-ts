@@ -22,6 +22,7 @@ class Menu extends Widget {
                 '- If `layout` is `circular`: diameter (in px)',
                 '- Else: square size or `[width, height]` array',
             ]},
+            align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
             layout: {type: 'string', value: 'circular', choices: ['circular', 'horizontal', 'vertical', 'grid'], help: [
                 'Defines whether the menu\'s layout should be rendered in a circle or in a box'
             ]},
@@ -50,6 +51,9 @@ class Menu extends Widget {
             </inner>
 
         `})
+
+        if (this.getProp('align') === 'left') this.widget.classList.add('left')
+        if (this.getProp('align') === 'right') this.widget.classList.add('right')
 
         this.menu = html`<menu></menu>`
         this.text = DOM.get(this.widget, '.text')[0]

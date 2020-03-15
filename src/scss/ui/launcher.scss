@@ -119,7 +119,7 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
     &.on {
         --alpha-fill: 0.5;
         i {
-            color: white;
+            color: var(--color-text-solid);
             opacity: 1;
         }
     }

@@ -1,7 +1,6 @@
 var {clip} = require('../utils'),
     Canvas = require('../common/canvas'),
     Fader = require('./fader'),
-    Input = require('../inputs/input'),
     touchstate = require('../mixins/touch_state'),
     html = require('nanohtml')
 
@@ -144,6 +143,13 @@ class Range extends Fader {
 
         if (!i) return
 
+        if (this.getProp('touchAddress')) {
+            this.sendValue({
+                address: this.getProp('touchAddress'),
+                v: [parseInt(i), 1],
+            })
+        }
+
         if (e.shiftKey) {
             this.faders[0].trigger('drag', e)
             this.faders[1].trigger('drag', e)
@@ -161,6 +167,15 @@ class Range extends Fader {
 
         e.stopPropagation = true
         this.faders[i].trigger('dragend', e)
+
+
+        if (this.getProp('touchAddress')) {
+            this.sendValue({
+                address: this.getProp('touchAddress'),
+                v: [parseInt(i), 0],
+            })
+        }
+
         delete this.touchMap[e.pointerId]
 
     }

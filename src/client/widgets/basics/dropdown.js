@@ -18,6 +18,7 @@ class Dropdown extends Widget {
 
             _dropdown:'dropdown',
 
+            align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
             values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
                 '`Array` of possible values to switch between : `[1,2,3]`',
                 '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
@@ -35,6 +36,9 @@ class Dropdown extends Widget {
                 <div class="icon"></div>
             </inner>
         `})
+
+        if (this.getProp('align') === 'left') this.widget.classList.add('left')
+        if (this.getProp('align') === 'right') this.widget.classList.add('right')
 
         this.select = this.widget.appendChild(html`<select class="no-keybinding"></select>`)
         this.text = DOM.get(this.widget, '.text')[0]

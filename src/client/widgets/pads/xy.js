@@ -80,7 +80,10 @@ module.exports = class Xy extends Pad {
             e.stopPropagation = true
         })
 
+        this.value = []
+        
         touchstate(this, {element: this.canvas})
+
         this.active = false
 
         this.on('draginit',(e)=>{

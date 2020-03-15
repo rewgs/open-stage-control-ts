@@ -1,5 +1,4 @@
-var _matrix_base = require('./_matrix_base'),
-    Panel = require('../containers/panel'),
+var Panel = require('./panel'),
     Widget = require('../common/widget'),
     parser = require('../../parser')
 

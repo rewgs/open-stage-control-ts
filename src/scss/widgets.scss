@@ -91,13 +91,9 @@
 }
 
 
+@import 'widgets/basics';
 @import 'widgets/containers';
-@import 'widgets/sliders';
-@import 'widgets/inputs';
-@import 'widgets/buttons';
-@import 'widgets/pads';
-@import 'widgets/plots';
+@import 'widgets/graphs';
 @import 'widgets/indicators';
-@import 'widgets/frames';
-@import 'widgets/patchbay';
-@import 'widgets/keyboard';
+@import 'widgets/pads';
+@import 'widgets/sliders';

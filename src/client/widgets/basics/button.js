@@ -3,7 +3,7 @@ var Widget = require('../common/widget'),
     html = require('nanohtml'),
     {deepEqual, isJSON} = require('../../utils')
 
-class Toggle extends Widget {
+class Button extends Widget {
 
     static description() {
 
@@ -16,7 +16,7 @@ class Toggle extends Widget {
         return super.defaults({
 
 
-            _toggle: 'toggle',
+            _button: 'button',
 
             on: {type: '*', value: 1, help: [
                 'Set to `null` to send send no argument in the osc message',
@@ -177,14 +177,14 @@ class Toggle extends Widget {
 
 }
 
-Toggle.cssVariables = Toggle.prototype.constructor.cssVariables.concat(
+Button.cssVariables = Button.prototype.constructor.cssVariables.concat(
     {js: 'colorTextOn', css: '--color-text-on'}
 )
 
-Toggle.dynamicProps = Toggle.prototype.constructor.dynamicProps.concat(
+Button.dynamicProps = Button.prototype.constructor.dynamicProps.concat(
     'on',
     'off',
     'norelease'
 )
 
-module.exports = Toggle
+module.exports = Button
