@@ -2,8 +2,8 @@
   "presets": [
     ["@babel/env", {
       "targets": {
-        "ios": "9.3",
-        "chrome": "50"
+        "ios": "10.3",
+        "chrome": "60"
       },
       "useBuiltIns": "usage",
       "corejs": 3
