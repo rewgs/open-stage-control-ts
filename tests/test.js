@@ -47,7 +47,7 @@ setTimeout(()=>{
 }, 5000)
 
 function end(fail){
-    process.kill(-proc.pid)
+    proc.kill()
     fs.unlinkSync(sessionPath)
     process.exit(fail ? 1 : 0)
 }
