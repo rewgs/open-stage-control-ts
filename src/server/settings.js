@@ -42,7 +42,7 @@ delete argv.$0
 
 // are we in a terminal ?
 var cli = false,
-    ignored = ['_', '$0', 'no-sandbox', 'noSandbox']
+    ignored = ['_', '$0', 'no-sandbox', 'noSandbox', 'cache-dir', 'cacheDir', 'config-file', 'configFile']
 
 for (i in argv) {
     if (!ignored.includes(i) && (argv[i]!=undefined && argv[i]!==false)) cli = true
@@ -52,18 +52,8 @@ var fs = require('fs'),
     ifaces = require('os').networkInterfaces()
 
 
-var baseDir = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'],
-    configPath = baseDir ? require('path').join(baseDir, '.open-stage-control') : '',
-    configFile = configPath ? function(){try {return JSON.parse(fs.readFileSync(configPath,'utf-8'))} catch(err) {return {}}}() : {},
-    config = JSON.parse(JSON.stringify(configFile)),
-    defaultConfig
-
-if (!configPath) {
-    console.warn('(WARNING) Home directory not found, settings and session history will not be saved.')
-}
-
-
-var makeDefaultConfig = function(argv){
+var defaultConfig,
+    makeDefaultConfig = function(argv){
     defaultConfig = {
         argv:argv,
         recentSessions: [],
@@ -118,21 +108,68 @@ var makeDefaultConfig = function(argv){
 
 makeDefaultConfig(argv)
 
+
+
+var path = require('path'),
+    baseDir, configPath, configPathExists = true
+
+if (argv['cache-dir']) {
+    baseDir = path.isAbsolute(argv['cache-dir']) ? argv['cache-dir'] : path.resolve(process.cwd(), argv['cache-dir'])
+} else {
+    envPaths = require('env-paths')
+    baseDir = envPaths(infos.name, {
+        suffix: ''
+    }).config
+}
+
+if (!fs.existsSync(baseDir)) {
+    try {
+        fs.mkdirSync(baseDir)
+    } catch(e) {
+        configPathExists = false
+        console.error('(ERROR) Could not create config folder:' + baseDir)
+        console.error(e)
+    }
+}
+
+var configPath,
+    configFile = {},
+    config = {}
+
+if (configPathExists) {
+    if (argv['config-file']) {
+        configPath = path.isAbsolute(argv['config-file']) ? argv['config-file'] : path.resolve(process.cwd(), argv['config-file'])
+    } else {
+        configPath = path.join(baseDir, 'config.json')
+    }
+    configFile = function(){try {return JSON.parse(fs.readFileSync(configPath,'utf-8'))} catch(err) {return {}}}()
+    config = JSON.parse(JSON.stringify(configFile))
+}
+console.log(configPath)
+if (!configPath) {
+    console.warn('(WARNING) Config directory not found, settings and session history will not be saved.')
+}
+
+
 module.exports = {
-    argv:argv,
-    options:options,
-    makeDefaultConfig:makeDefaultConfig,
-    read:function(key){
+    argv: argv,
+    options: options,
+    makeDefaultConfig: makeDefaultConfig,
+    read: function(key){
         var x = config[key] !== undefined ? config[key] : defaultConfig[key]
         return x
     },
     write:function(key,value,tmp) {
+
         config[key] = value
-        if (tmp || !configPath) return
+        if (tmp || !configPathExists) return
+
         configFile[key] = value
-        fs.writeFile(configPath,JSON.stringify(configFile,null,4), function(err, data) {
+
+        fs.writeFile(configPath, JSON.stringify(configFile, null, 4), function(err, data) {
             if (err) throw err
         })
     },
-    cli: cli
+    cli: cli,
+    configPath: baseDir,
 }

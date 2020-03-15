@@ -2,6 +2,8 @@ var {app, Menu, shell, BrowserWindow} = require('electron'),
     settings = require('./settings'),
     infos = require('../package.json')
 
+app.setPath('userData', settings.configPath)
+
 app.commandLine.appendSwitch('--touch-events')
 
 if (settings.read('noVsync') || (!settings.cli && settings.read('argv')['disable-vsync'])) {
