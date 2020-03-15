@@ -6,7 +6,7 @@ var terminal = require('./terminal')
 
 DOM.get(document, '#osc-greeting-header')[0].appendChild(html`${window.PACKAGE.productName} <span class="version">v${window.PACKAGE.version}</span>`)
 
-if (navigator.onLine) {
+if (settings.remote.read('checkForUpdates') && navigator.onLine) {
 
     var request = new XMLHttpRequest()
     request.open('GET', 'https://api.github.com/repos/jean-emmanuel/open-stage-control/tags', true)

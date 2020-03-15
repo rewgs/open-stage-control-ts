@@ -18,6 +18,7 @@ module.exports = class File extends Widget {
 
             _input:'input',
 
+            align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
             directory: {type: 'string', value: 'auto', help: 'Default browsing directory'},
             extension: {type: 'string', value: '*', help: 'Only display files with this extension'},
             hidePath: {type: 'boolean', value: false, help: 'Set to `true` to only display the filename (the whole path will still be used as value)'},
@@ -30,10 +31,16 @@ module.exports = class File extends Widget {
     constructor(options) {
 
         super({...options, html: html`
-            <div class="file btn">${raw(icon('folder-open'))}<span></span></div>
+            <inner>
+                <div class="text"></div>
+                <div class="icon"></div>
+            </inner>
         `})
 
-        this.text = DOM.get(this.widget, 'span')[0]
+        if (this.getProp('align') === 'left') this.widget.classList.add('left')
+        if (this.getProp('align') === 'right') this.widget.classList.add('right')
+
+        this.text = DOM.get(this.widget, '.text')[0]
         this.widget.addEventListener('fast-click', (e)=>{
 
             if (e.capturedByEditor === true) return

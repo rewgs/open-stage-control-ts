@@ -12,6 +12,7 @@ class Settings {
 
     constructor() {
 
+        this.remote = settings
         this.container = DOM.get('#osc-container')[0].appendChild(html`<osc-settings></osc-settings>`)
         this.names = []
         this.argv = {}

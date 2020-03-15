@@ -28,21 +28,31 @@ class Vm {
         this.sandbox.contentWindow.__protect = loopProtect
 
         // global context
+        this.registerGlobals()
+
+        // detach sandbox
+        document.documentElement.appendChild(this.sandbox)
+
+    }
+
+    registerGlobals() {
+
         this.sandbox.contentWindow.console = console
         this.sandbox.contentWindow.setTimeout =
         this.sandbox.contentWindow.setInterval = ()=>{
             throw 'setTimeout and setInterval can\'t be used in the JS sandbox'
         }
-        this.sandbox.contentWindow.globals = {}
-
+        this.sandbox.contentWindow.globals = {
+            screen: {width: screen.width, height: screen.height},
+            env: deepCopy(ENV),
+            url: document.location.host,
+            platform: navigator.platform
+        }
 
         // sanitize globals
         for (var imports of ['__protect', 'console', 'setTimeout', 'setInterval', 'globals']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
-
-        // detach sandbox
-        document.documentElement.appendChild(this.sandbox)
 
     }
 

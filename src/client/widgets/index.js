@@ -1,39 +1,23 @@
 module.exports.widgets = {
-    // tabs
-    tab: require('./containers/tab'),
+
+    // basics
+    button: require('./basics/button'),
+    switch: require('./basics/switch'),
+    dropdown: require('./basics/dropdown'),
+    menu: require('./basics/menu'),
+    input: require('./basics/input'),
+    file: require('./basics/file'),
+
+    // containers
+    panel: require('./containers/panel'),
     root: require('./containers/root'),
-
-    // sliders
-    fader: require('./sliders/fader'),
-    knob: require('./sliders/knob'),
-    encoder: require('./sliders/encoder'),
-    range: require('./sliders/range'),
-
-    // buttons
-    toggle: require('./buttons/toggle'),
-    switch: require('./buttons/switch'),
-    dropdown: require('./buttons/dropdown'), // redo as menu derivate ?
-    menu: require('./buttons/menu'), // redo using canvas
-
-    // pads
-    xy: require('./pads/xy'),
-    rgb: require('./pads/rgb'),
-    multixy: require('./pads/multixy'),
-    canvas: require('./pads/canvas'), // implement...
-
-    // matrices
-    keyboard: require('./matrices/keyboard'),
-    patchbay: require('./matrices/patchbay').PatchBay,
-    patchbaynode: require('./matrices/patchbay').PatchBayNode,
-
-    // indicators
-    led: require('./indicators/led'),
-    text: require('./indicators/text'),
-
-    // graphs
-    plot: require('./graphs/plot'),
-    eq: require('./graphs/eq'),
-    visualizer: require('./graphs/visualizer'),
+    tab: require('./containers/tab'),
+    modal: require('./containers/modal'),
+    clone: require('./containers/clone'),
+    matrix: require('./containers/matrix'),
+    keyboard: require('./containers/keyboard'),
+    patchbay: require('./containers/patchbay').PatchBay,
+    patchbaynode: require('./containers/patchbay').PatchBayNode,
 
     // frames
     image: require('./frames/image'),
@@ -41,37 +25,41 @@ module.exports.widgets = {
     html: require('./frames/html'),
     frame: require('./frames/frame'),
 
-    // containers
-    panel: require('./containers/panel'),
-    modal: require('./containers/modal'),
-    clone: require('./containers/clone'),
-    matrix: require('./containers/matrix'),
+    // graphs
+    plot: require('./graphs/plot'),
+    eq: require('./graphs/eq'),
+    visualizer: require('./graphs/visualizer'),
 
-    // state switchers
-    switcher: require('./switchers/switcher'),
-    crossfader: require('./switchers/crossfader'),
-    state: require('./switchers/state'),
+    // indicators
+    led: require('./indicators/led'),
+    text: require('./indicators/text'),
 
-    // inputs
-    input: require('./inputs/input'),
-    keys: require('./inputs/keys'),
-    script: require('./inputs/script'),
-    gyroscope: require('./inputs/gyroscope'),
-    file: require('./inputs/file'),
+    // pads
+    xy: require('./pads/xy'),
+    rgb: require('./pads/rgb'),
+    multixy: require('./pads/multixy'),
+    canvas: require('./pads/canvas'),
+
+    // sliders
+    fader: require('./sliders/fader'),
+    knob: require('./sliders/knob'),
+    encoder: require('./sliders/encoder'),
+    range: require('./sliders/range'),
+
+    // scripts
+    script: require('./scripts/script'),
 
 }
 
 module.exports.categories = {
-    'Buttons':['toggle', 'switch', 'dropdown', 'menu'],
-    'Containers':['panel', 'modal', 'clone', 'matrix'],
+    'Basics':['button', 'switch', 'dropdown', 'menu', 'input', 'file'],
+    'Containers':['panel', 'modal', 'clone', 'matrix', 'keyboard', 'patchbay'],
     'Frames':['frame', 'svg', 'html', 'image'],
     'Graphs':['plot','eq','visualizer'],
     'Indicators':['led', 'text'],
-    'Inputs':['input', 'keys', 'script', 'gyroscope', 'file'],
-    'Matrices':['keyboard', 'patchbay'],
     'Pads':['xy','rgb','multixy', 'canvas'],
     'Sliders':['fader','knob', 'encoder', 'range'],
-    'Switchers':['state', 'switcher','crossfader'],
+    'Scripts':['script'],
 }
 
 var defaults = {}

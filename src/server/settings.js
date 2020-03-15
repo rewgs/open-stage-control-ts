@@ -111,7 +111,8 @@ var makeDefaultConfig = function(argv){
                             .filter(i=>i.family === 'IPv4')
                             .map(i=>'http://' + i.address + ':' + (argv['port'] || 8080)),
         examples: argv['examples'],
-        theme: argv['theme'] || []
+        theme: argv['theme'] || [],
+        checkForUpdates: true
     }
 }
 
@@ -122,7 +123,7 @@ module.exports = {
     options:options,
     makeDefaultConfig:makeDefaultConfig,
     read:function(key){
-        var x = config[key] || defaultConfig[key]
+        var x = config[key] !== undefined ? config[key] : defaultConfig[key]
         return x
     },
     write:function(key,value,tmp) {

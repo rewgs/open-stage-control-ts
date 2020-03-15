@@ -156,6 +156,7 @@ osc-inspector-checkbox {
         @include pseudo-fill($z: -1);
         i {
             opacity: 1;
+            color: var(--color-text-solid);
         }
     }
 

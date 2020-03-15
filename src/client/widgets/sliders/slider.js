@@ -66,11 +66,11 @@ class Slider extends Canvas {
 
         this.widget.addEventListener('mousewheel',this.mousewheelHandleProxy.bind(this))
 
+        touchstate(this, {element: this.widget, multitouch: options.multitouch})
+
         this.on('draginit', this.draginitHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
         this.on('drag', this.dragHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
         this.on('dragend', this.dragendHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
-
-        touchstate(this, {element: this.widget, multitouch: options.multitouch})
 
         this.setSteps()
 
