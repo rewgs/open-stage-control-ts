@@ -13,6 +13,7 @@ window.READ_ONLY = false
 window.GRIDWIDTH = 10
 
 
+window.ELECTRON_NOGPU = false
 window.CANVAS_FRAMERATE = parseFloat(ENV.framerate || 60)
 window.CANVAS_SCALING = parseFloat(ENV.forceHdpi) || ( ENV.hdpi ? window.devicePixelRatio : 1 )
 window.INITIALZOOM = ENV.zoom ? parseFloat(ENV.zoom) : 1
