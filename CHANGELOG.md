@@ -8,6 +8,7 @@
 
 - misc
   - prevent `--disable-gpu` from bypassing the launcher window
+  - prevent converting `"^icon-name"` to an icon (in text widgets and labels) when `icon-name` is too short to be a valid icon name (minimum 4 characters)
 
 ## 0.49.9
 
