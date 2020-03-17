@@ -1,5 +1,11 @@
 # Changelog
 
+
+## 0.49.9
+
+- bug fixes
+  - downgrade electron engine to fix regression (v0.49.8) on some systems
+
 ## 0.49.8
 
 - bug fixes
