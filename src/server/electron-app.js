@@ -10,6 +10,7 @@ if (settings.read('noVsync') || (!settings.cli && settings.read('argv')['disable
 
 if (settings.read('noGpu') || (!settings.cli && settings.read('argv')['disable-gpu'])) {
     app.disableHardwareAcceleration()
+    app._noGpu = true
 }
 
 if (settings.read('forceGpu') || (!settings.cli && settings.read('argv')['force-gpu'])) {

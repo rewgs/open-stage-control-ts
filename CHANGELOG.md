@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.49.10
+
+- bug fixes
+  - svg files not loading
+  - canvas glitches when hardware acceleration is disabled (--disable-gpu) (built-in gui only)
+
+- misc
+  - prevent `--disable-gpu` from bypassing the launcher window
 
 ## 0.49.9
 
