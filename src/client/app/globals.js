@@ -3,6 +3,7 @@ location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, (s,k,v)=>{
     ARGV[k]=v
 })
 
+window.ELECTRON_NOGPU = window.ELECTRON_NOGPU || false
 window.ELECTRON_FULLSCREEN = window.ELECTRON_FULLSCREEN || false
 
 window.LANG = ARGV.lang === 'debug' ? 'debug' : (ARGV.lang || navigator.language || '').substr(0, 2).toLowerCase()
