@@ -8,11 +8,22 @@ var session = {type: 'root', tabs:[{widgets:[]}]},
 
 require('../scripts/client-shim')
 
-var {widgets} = require('../src/client/app/widgets')
-for (let type in widgets) {
-    if (type !== 'tab' && type !== 'root' && type !== 'patchbaynode') {
-        console.log(type)
-        session.tabs[0].widgets.push({type: type})
+var widgets = {
+    'Basics':['button', 'switch', 'dropdown', 'menu', 'input', 'file'],
+    'Containers':['panel', 'modal', 'clone', 'matrix', 'keyboard', 'patchbay'],
+    'Frames':['frame', 'svg', 'html', 'image'],
+    'Graphs':['plot','eq','visualizer'],
+    'Indicators':['led', 'text'],
+    'Pads':['xy','rgb','multixy', 'canvas'],
+    'Sliders':['fader','knob', 'encoder', 'range'],
+    'Scripts':['script'],
+}
+for (let k in widgets) {
+    for (let type of widgets[k]) {
+        if (type !== 'tab' && type !== 'root' && type !== 'patchbaynode') {
+            console.log(type)
+            session.tabs[0].widgets.push({type: type})
+        }
     }
 }
 
@@ -35,7 +46,7 @@ function std(data){
         console.error(data.toString())
         console.log('\033[31m\n=> Test errored ✘\n\033[0m')
 
-        end()
+        end(true)
     }
 
 }
