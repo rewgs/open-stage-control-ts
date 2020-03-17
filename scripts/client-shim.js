@@ -67,7 +67,7 @@ Object.assign(global, window)
 
 // Required globals
 
-DOM = require('../src/client/app/dom')
+DOM = require('../src/client/dom')
 DOM.get = x=>[{addEventListener:()=>{}}]
 DOM.init()
 ELECTRON_NOGPU = false
