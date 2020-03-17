@@ -30,7 +30,7 @@ module.exports = function(options={}) {
     window.once('ready-to-show', ()=>{
         window.show()
     })
-    
+
     window.webContents.once('page-title-updated', ()=>{
         if (options.fullscreen) {
             window.webContents.sendInputEvent({keyCode: 'F11', type: 'keyDown'})
