@@ -1,5 +1,6 @@
 var path = require('path'),
     {BrowserWindow, dialog, shell} = require('electron'),
+    app = require('./electron-app'),
     shortcut = require('electron-localshortcut'),
     settings = require('./settings'),
     theme = require('./theme')
