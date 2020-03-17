@@ -79,7 +79,7 @@ module.exports = class Keyboard extends Panel {
             var data = JSON.parse(strData)
 
             data.top = data.left = data.height = data.width = 'auto'
-            data.type = 'toggle'
+            data.type = 'button'
             data.mode = this.getProp('toggles') ? 'toggle' : 'push'
             data.id = this.getProp('id') + '/' + i
             data.label = false

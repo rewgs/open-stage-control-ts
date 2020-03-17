@@ -145,7 +145,7 @@ if (configPathExists) {
     configFile = function(){try {return JSON.parse(fs.readFileSync(configPath,'utf-8'))} catch(err) {return {}}}()
     config = JSON.parse(JSON.stringify(configFile))
 }
-console.log(configPath)
+
 if (!configPath) {
     console.warn('(WARNING) Config directory not found, settings and session history will not be saved.')
 }

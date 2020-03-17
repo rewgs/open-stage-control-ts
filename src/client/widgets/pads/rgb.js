@@ -65,7 +65,7 @@ module.exports = class Rgb extends Widget {
         this.hue = new HueFader({props:{
             ...faderDefaults,
             type: 'fader',
-            design: 'default',
+            design: 'compact',
             label: false,
             pips:false,
             horizontal:false,
