@@ -40,7 +40,7 @@ argv = argv.argv
 
 // are we in a terminal ?
 var cli = false,
-    ignored = ['_', '$0', 'no-sandbox', 'noSandbox']
+    ignored = ['_', '$0', 'no-sandbox', 'noSandbox', 'disable-gpu', 'disableGpu']
 
 for (i in argv) {
     if (!ignored.includes(i) && (argv[i]!=undefined && argv[i]!==false)) cli = true
