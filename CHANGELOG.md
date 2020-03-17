@@ -1,5 +1,20 @@
 # Changelog (v0)
 
+## 0.49.10
+
+- bug fixes
+  - svg files not loading
+  - canvas glitches when hardware acceleration is disabled (--disable-gpu) (built-in gui only)
+
+- misc
+  - prevent `--disable-gpu` from bypassing the launcher window
+  - prevent converting `"^icon-name"` to an icon (in text widgets and labels) when `icon-name` is too short to be a valid icon name (minimum 4 characters)
+
+## 0.49.9
+
+- bug fixes
+  - downgrade electron engine to fix regression (v0.49.8) on some systems
+
 ## 0.49.8
 
 - bug fixes
