@@ -70,5 +70,6 @@ Object.assign(global, window)
 DOM = require('../src/client/app/dom')
 DOM.get = x=>[{addEventListener:()=>{}}]
 DOM.init()
+ELECTRON_NOGPU = false
 CANVAS_FRAMERATE = 1
 LANG = 'en'
