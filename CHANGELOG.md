@@ -1,5 +1,11 @@
 # Changelog (v0)
 
+## 0.49.11
+
+- bug fixes
+  - regression (0.49.10) breaking icon with short names (minimum valid length set to 2 characters)
+  - html widget: content not initialized properly 
+
 ## 0.49.10
 
 - bug fixes
