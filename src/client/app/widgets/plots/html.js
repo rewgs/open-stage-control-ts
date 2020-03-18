@@ -44,6 +44,8 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
 
         if (!this.getProp('border')) this.container.classList.add('noborder')
 
+        if (this.getProp('html') !== '') this.updateHtml()
+
     }
 
     updateHtml(){
