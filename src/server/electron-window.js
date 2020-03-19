@@ -76,10 +76,13 @@ module.exports = function(options={}) {
 
     if (process.platform !== 'darwin') {
         // already registered in app menu on macOs
-        // ISSUE seems to bind ctrl+z as well (FR keyboard ?)
-        shortcut.register(window,'CmdOrCtrl+W',function(){
-            // window.close()
-        })
+        window.webContents.on('before-input-event', (e, input)=>{
+            // using before-input-event because electron-localshortcut
+            // gets azerty keyboards wrong (ctrl + z would also be catched)
+            if ((input.key === 'w' || input.key === 'W') && input.control) {
+                window.close()
+            }
+        });
     }
 
     if (options.shortcuts) {
