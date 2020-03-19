@@ -5,7 +5,7 @@ var Panel = require('./panel'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw')
 
-class Root extends StaticProperties(Panel, {scroll: false, visible: true, label: false, id: 'root'}) {
+class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'root'}) {
 
     static description() {
 
@@ -26,6 +26,7 @@ class Root extends StaticProperties(Panel, {scroll: false, visible: true, label:
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
+            scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             variables: {type: '*', value: '', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
         }, [
