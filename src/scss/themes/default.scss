@@ -1,6 +1,7 @@
-$base: rgb(25, 31, 42);
-$accent: rgb(82, 168, 255);
-$text: white;
+$base: rgb(25, 31, 42)!default;
+$accent: rgb(82, 168, 255)!default;
+
+$text: white!default;
 
 :root {
 
