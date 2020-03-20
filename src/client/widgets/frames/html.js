@@ -5,7 +5,11 @@ var Widget = require('../common/widget'),
     StaticProperties = require('../mixins/static_properties')
 
 var sanitizeOptions = {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe')
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe'),
+    allowedAttributes: {
+      '*': [ 'title', 'class', 'style'],
+      'img': [ 'src' ,  'title', 'class', 'style', 'width', 'height']
+    }
 }
 
 class Html extends StaticProperties(Widget, {bypass: true}) {
@@ -27,7 +31,10 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
                 'Allowed HTML tags:',
                 '&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,',
                 '&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,',
-                '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre'
+                '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre',
+                'Allowed attributes:',
+                '&nbsp;&nbsp;<*>: class, style, title',
+                '&nbsp;&nbsp;<img>: src, width, height',
             ]},
 
         }, ['decimals', 'bypass'], {})
