@@ -61,6 +61,8 @@ class Script extends Widget {
 
         this.scriptLock = false
 
+        this.timeouts = {}
+        this.intervals = {}
 
         if (this.getProp('event') === 'value') {
 
@@ -75,19 +77,26 @@ class Script extends Widget {
 
             keyboardJS.withContext('global', ()=>{
 
-                keyboardJS.bind(this.getProp('keyBinding'), this.getProp('keyType') !== 'keyup' ? this.keyCb : undefined, this.getProp('keyType') !== 'keydown' ? this.keyCb : undefined)
+                keyboardJS.bind(this.getProp('keyBinding'), this.keyCb, this.keyCb)
 
             })
 
-            this.script = scriptVm.compile(this.getProp('script'), {
-                type: '',
-                key: '',
-                code: 0,
-                ctrl: false,
-                shift: false,
-                alt: false,
-                meta: false,
-            })
+            try {
+                this.script = scriptVm.compile(this.getProp('script'), {
+                    type: '',
+                    key: '',
+                    code: 0,
+                    ctrl: false,
+                    shift: false,
+                    alt: false,
+                    meta: false,
+                })
+            } catch(err) {
+                var stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
+                console.log((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
+                this.script = ()=>{}
+            }
 
         }
 
@@ -97,7 +106,7 @@ class Script extends Widget {
 
         if (this.scriptLock) return
 
-        scriptVm.setSendWidget(this)
+        scriptVm.setWidget(this)
 
         this.scriptLock = true
         try {
@@ -107,7 +116,7 @@ class Script extends Widget {
         }
         this.scriptLock = false
 
-        scriptVm.setSendWidget()
+        scriptVm.setWidget()
 
 
     }
@@ -131,9 +140,11 @@ class Script extends Widget {
 
     keyboardCallback(e) {
 
-        if (e.target && (e.target.tagName === 'INPUT' || e.target.tabName === 'TEXTAREA' || e.target.tabName === 'SELECT')) return
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return
 
-        if (e && e.type === 'keydown' && !this.getProp('keyRepeat')) e.preventRepeat()
+        if (this.getProp('keyType') !== 'both' && e.type !== this.getProp('keyType')) return
+
+        if (e.type === 'keydown' && !this.getProp('keyRepeat')) e.preventRepeat()
 
         e.preventDefault()
 
@@ -161,6 +172,14 @@ class Script extends Widget {
 
             })
 
+        }
+
+        for (let k in this.timeouts) {
+            clearTimeout(this.timeouts[k])
+        }
+
+        for (let k in this.intervals) {
+            clearInterval(this.intervals[k])
         }
 
         super.onRemove()

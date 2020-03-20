@@ -178,7 +178,7 @@ class Widget extends EventEmitter {
         this.visible = true
 
         this.parsers = {}
-        this.parsersLocalScope = {}
+        this.parsersLocalScope = options.locals || {}
 
         this.createPropsCache()
 

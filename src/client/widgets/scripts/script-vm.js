@@ -12,7 +12,7 @@ class ScriptVm extends Vm {
         super()
 
         this.valueOptions = []
-        this.sendWidget = []
+        this.widget = []
 
     }
 
@@ -29,16 +29,16 @@ class ScriptVm extends Vm {
 
     }
 
-    setSendWidget(widget) {
+    setWidget(widget) {
 
-        if (!widget) this.sendWidget.pop()
-        else this.sendWidget.push(widget)
+        if (!widget) this.widget.pop()
+        else this.widget.push(widget)
 
     }
 
-    getSendWidget() {
+    getWidget() {
 
-        return this.sendWidget[this.sendWidget.length - 1]
+        return this.widget[this.widget.length - 1]
 
     }
 
@@ -76,7 +76,7 @@ class ScriptVm extends Vm {
 
             if (target) overrides.target = Array.isArray(target) ? target : [target]
 
-            this.getSendWidget().sendValue(overrides)
+            this.getWidget().sendValue(overrides)
 
         }
 
@@ -162,8 +162,53 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.setTimeout = (id, callback, timeout)=>{
 
-        for (var imports of ['set', 'get', 'getProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage']) {
+            var widget = this.getWidget()
+
+            if (widget.timeouts[id] !== undefined) {
+                clearTimeout(widget.timeouts[id])
+                delete widget.timeouts[id]
+            }
+            widget.timeouts[id] = setTimeout(()=>{
+                callback()
+            }, timeout)
+
+        }
+
+        this.sandbox.contentWindow.clearTimeout = (id)=>{
+
+            var widget = this.getWidget()
+
+            clearTimeout(widget.timeouts[id])
+            delete widget.timeouts[id]
+
+        }
+
+        this.sandbox.contentWindow.setInterval = (id, callback, timeout)=>{
+
+            var widget = this.getWidget()
+
+            if (widget.intervals[id] !== undefined) clearTimeout(widget.intervals[id])
+            delete widget.intervals[id]
+
+            widget.intervals[id] = setInterval(()=>{
+                callback()
+            }, timeout)
+
+        }
+
+        this.sandbox.contentWindow.clearInterval = (id)=>{
+
+            var widget = this.getWidget()
+
+            clearInterval(widget.intervals[id])
+            delete widget.intervals[id]
+
+        }
+
+        for (var imports of ['set', 'get', 'getProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
+                             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
 
