@@ -4,7 +4,7 @@ var {clip} = require('../utils'),
     StaticProperties = require('../mixins/static_properties')
 
 
-module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max: 22000}}) {
+module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max: 22000}, logScaleX: true}) {
 
     static description() {
 
@@ -22,7 +22,6 @@ module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max:
             resolution: {type: 'number', value: 128, help: 'Defines the number of points used to compute the frequency response'},
             rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
             origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
-            logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm\'s base.'},
 
         }, ['interaction', 'decimals', 'typeTags', 'bypass'], {
 
@@ -74,9 +73,9 @@ module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max:
                     if (!filters[i].type) filters[i].type = 'peak'
 
                     if (!filters[i].on) {
-                        filterResponse = calcBiquad({type:'peak',freq:1,gain:0,q:1},!this.getProp('logScaleX'), this.resolution)
+                        filterResponse = calcBiquad({type:'peak',freq:1,gain:0,q:1}, this.resolution)
                     } else {
-                        filterResponse = calcBiquad(filters[i],!this.getProp('logScaleX'), this.resolution)
+                        filterResponse = calcBiquad(filters[i], this.resolution)
                     }
 
                     for (var k in filterResponse) {
@@ -105,7 +104,7 @@ module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max:
 // Dec 14, 2010 njr
 // original @ Nigel Redmon
 
-function calcBiquad(options,linear,resolution) {
+function calcBiquad(options, resolution) {
     var {type, freq, q, gain} = options,
         Fs = 44100,
         a0,a1,a2,b1,b2,norm,
@@ -210,10 +209,9 @@ function calcBiquad(options,linear,resolution) {
     var magPlot = []
     for (var i = 0; i < len; i++) {
         var w, phi, y
-        if (linear)
-            w = i / (len - 1) * Math.PI    // 0 to pi, linear scale
-        else
-            w = Math.exp(Math.log(1 / 0.001) * i / (len - 1)) * 0.001 * Math.PI    // 0.001 to 1, times pi, log scale
+
+        // if (linear) w = i / (len - 1) * Math.PI    // 0 to pi, linear scale
+        w = Math.exp(Math.log(1 / 0.001) * i / (len - 1)) * 0.001 * Math.PI    // 0.001 to 1, times pi, log scale
 
         phi = Math.pow(Math.sin(w/2), 2)
 
@@ -221,10 +219,7 @@ function calcBiquad(options,linear,resolution) {
         y = y * 10 / Math.LN10
         if (y == -Infinity) y = -200
 
-        if (linear)
-            magPlot.push([i / (len - 1) * Fs / 2, y])
-        else
-            magPlot.push([i / (len - 1) * Fs / 2, y])
+        magPlot.push([i / (len - 1) * Fs / 2, y])
 
         if (i == 0)
             minVal = maxVal = y
