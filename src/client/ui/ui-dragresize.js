@@ -155,12 +155,14 @@ class UiDragResize extends UiWidget {
 
     updateCss(grid) {
 
-        for (var k of ['top', 'left', 'width', 'height']) {
+        for (let k of ['top', 'left', 'width', 'height']) {
 
             var val = this[k]
 
             if (k === 'width' || k === 'height') val = Math.max(10 * PXSCALE,  val)
-            if (grid) val = Math.round(val / GRIDWIDTH) * GRIDWIDTH
+            if (grid && this.dragging.includes(k)) {
+                val = Math.round(val / GRIDWIDTH) * GRIDWIDTH
+            }
 
             this.container.style.setProperty('--' + k, val  + 'rem')
 

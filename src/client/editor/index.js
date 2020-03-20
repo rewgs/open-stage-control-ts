@@ -75,13 +75,17 @@ class Editor {
 
         this.widgetDragResize = new UiDragResize({})
         this.widgetDragResize.on('move', (e)=>{
-            var dX = Math.round((e.left - e.initLeft) / GRIDWIDTH) * GRIDWIDTH,
-                dY = Math.round((e.top - e.initTop) / GRIDWIDTH) * GRIDWIDTH
+            var left  =  Math.round(e.left / GRIDWIDTH) * GRIDWIDTH,
+                top  =  Math.round(e.top / GRIDWIDTH) * GRIDWIDTH
+            var dX = left - e.initLeft,
+                dY = top - e.initTop
             this.moveWidget(dX, dY)
         })
         this.widgetDragResize.on('resize', (e)=>{
-            var dX = Math.round((e.width - e.initWidth) / GRIDWIDTH) * GRIDWIDTH,
-                dY = Math.round((e.height - e.initHeight) / GRIDWIDTH) * GRIDWIDTH
+            var width  =  Math.round(e.width / GRIDWIDTH) * GRIDWIDTH,
+                height  =  Math.round(e.height / GRIDWIDTH) * GRIDWIDTH
+            var dX = width - e.initWidth,
+                dY = height - e.initHeight
             this.resizeWidget(dX, dY)
         })
 
