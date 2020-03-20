@@ -2,8 +2,8 @@ var osc = require('./osc'),
     EventEmitter = require('events').EventEmitter,
     settings = require('../settings'),
     zeroconf = require('../zeroconf'),
-    tcpInPort = settings.read('tcpInPort'),
-    tcpTargets = settings.read('tcpTargets'),
+    tcpInPort = settings.read('tcp-port'),
+    tcpTargets = settings.read('tcp-targets'),
     net = require('net')
 
 class OscTCPClient extends EventEmitter {
@@ -129,7 +129,7 @@ class OscTCPServer extends EventEmitter {
         }
 
         zeroconf.publish({
-            name: settings.read('appName') + (settings.read('instanceName') ? ' (' + settings.read('instanceName') + ')' : ''),
+            name: settings.infos.appName + (settings.read('instance-name') ? ' (' + settings.read('instance-name') + ')' : ''),
             protocol: 'tcp',
             type: 'osc',
             port: tcpInPort

@@ -94,11 +94,6 @@ module.exports = {
 
     },
 
-    readOnly: function(){
-        READ_ONLY = true
-        if (editor.enabled) editor.disable()
-    },
-
     reload: function(){
 
         var id = Math.random(),

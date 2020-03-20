@@ -9,9 +9,9 @@ function nodeMode() {
 
     console.warn('(INFO) Running with node')
 
-    if (!settings.read('noGui')) {
+    if (!settings.read('no-gui')) {
         settings.cli = true
-        settings.write('noGui', true, true)
+        settings.write('no-gui', true, true)
         console.warn('(INFO) Headless mode (--no-gui) enabled automatically')
     }
 
@@ -66,10 +66,10 @@ function start() {
 function openClient() {
 
     var app = require('./electron-app')
-    var address = settings.read('appAddresses')[0]
+    var address = settings.appAddresses()[0]
 
     var launch = ()=>{
-        var win = require('./electron-window')({address:address, shortcuts:true, fullscreen: settings.read('fullScreen')})
+        var win = require('./electron-window')({address:address, shortcuts:true, fullscreen: settings.read('fullscreen')})
         win.on('error', ()=>{
             console.log('ERR')
         })
@@ -89,7 +89,7 @@ function openClient() {
 if (settings.cli) {
 
     start()
-    if (!settings.read('noGui')) openClient()
+    if (!settings.read('no-gui')) openClient()
 
 
 } else {
@@ -142,18 +142,19 @@ if (settings.cli) {
     ipcMain.on('start',function(e, options){
 
         var args = ['--no-gui']
-        for (var k in settings.read('argv')) {
+        for (var k in settings.read('options')) {
             args.push('--' + k)
-            var val = settings.read('argv')[k]
+            var val = settings.read(k)
             if (typeof val === 'object') {
                 args = args.concat(val)
             } else if (typeof val !== 'boolean') {
                 args.push(val)
             }
         }
+
         global.serverProcess = spawn(process.argv[0], process.argv.slice(1).concat(args), {stdio: 'pipe'/*, env: {"ELECTRON_RUN_AS_NODE":"1"}*/})
 
-        if (!settings.read('noGui')) {
+        if (!settings.read('no-gui')) {
             global.serverProcess.stdout.once('data', (data) => {
                 global.clientWindows.push(openClient())
             })

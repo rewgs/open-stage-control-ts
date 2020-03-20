@@ -9,7 +9,7 @@ window.PACKAGE = require('../../package.json')
 
 window.LOADING = null
 
-window.READ_ONLY = false
+window.READ_ONLY = window.READ_ONLY || false
 window.GRIDWIDTH = 10
 
 

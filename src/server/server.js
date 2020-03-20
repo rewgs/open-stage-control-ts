@@ -10,7 +10,7 @@ var urlparser   = require('url'),
     settings     = require('./settings'),
     theme       = require('./theme').init(),
     zeroconf = require('./zeroconf'),
-    appAddresses = settings.read('appAddresses'),
+    appAddresses = settings.appAddresses(),
     osc = {},
     clients = {},
     httpCheckTimeout
@@ -28,7 +28,11 @@ function httpRoute(req, res) {
     if (url === '/' || url.indexOf('/?') === 0) {
 
         fs.createReadStream(path.resolve(__dirname + '/../client/index.html'))
-          .pipe(replaceStream('</body>', `<script>window.ENV=${JSON.stringify(settings.read('clientOptions'))}</script></body>`))
+          .pipe(replaceStream('</body>', `
+            <script>
+                window.ENV=${JSON.stringify(settings.read('client-options'))}
+                window.READ_ONLY=${JSON.stringify(settings.read('read-only'))}
+            </script></body>`))
           .pipe(res);
 
         // res.sendFile(path.resolve(__dirname + '/../client/index.html'))
@@ -89,9 +93,9 @@ server.on('error', (e)=>{
     }
 })
 
-server.listen(settings.read('httpPort'))
+server.listen(settings.read('port') || 8080)
 
-http.get(settings.read('appAddresses')[0] + '/osc-ping', ()=>{}).on('error', ()=>{httpCheck(false)})
+http.get(settings.appAddresses()[0] + '/osc-ping', ()=>{}).on('error', ()=>{httpCheck(false)})
 httpCheckTimeout = setTimeout(()=>{httpCheck(false)}, 5000)
 function httpCheck(ok){
     if (!httpCheckTimeout) return
@@ -105,9 +109,9 @@ function httpCheck(ok){
 }
 
 zeroconf.publish({
-    name: settings.read('appName') + (settings.read('instanceName') ? ' (' + settings.read('instanceName') + ')' : ''),
+    name: settings.infos.appName + (settings.read('instanceName') ? ' (' + settings.read('instanceName') + ')' : ''),
     type: 'http',
-    port: settings.read('httpPort')
+    port: settings.read('port') || 8080
 }).on('error', (e)=>{
     console.error(`(ERROR, ZEROCONF) ${e.message}`)
 })

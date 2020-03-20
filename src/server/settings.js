@@ -1,3 +1,15 @@
+var path = require('path'),
+    fs = require('fs'),
+    ifaces = require('os').networkInterfaces(),
+    yargs = require('yargs'),
+    infos = require('../package.json'),
+    options = require('./options')
+
+var appAddresses =  Object.values(ifaces)
+    .reduce((a,b)=>a.concat(b), [])
+    .filter(i=>i.family === 'IPv4')
+    .map(i=>'http://' + i.address + ':')
+
 // This prevents argv parsing to be breaked when the app is packaged (executed without 'electron' prefix)
 if (process.argv[1] && process.argv[1].indexOf('-') == 0) process.argv.unshift('')
 
@@ -7,11 +19,7 @@ if (process.argv[1] && process.argv[1].indexOf('-') == 0) process.argv.unshift('
 // it must be stripped to let yargs work normally
 if (process.argv[2] == '--') process.argv.splice(2, 1)
 
-
-var infos = require('../package.json')
-
-var options = require('./options'),
-    argv = require('yargs')
+var argv = yargs
     .parserConfiguration({'boolean-negation': false})
     .help('help').usage('\nUsage:\n  $0 [options]').alias('h', 'help')
     .options(options)
@@ -40,78 +48,45 @@ argv = argv.argv
 delete argv._
 delete argv.$0
 
-// are we in a terminal ?
-var cli = false,
-    ignored = ['_', '$0', 'no-sandbox', 'noSandbox', 'cache-dir', 'cacheDir', 'config-file', 'configFile', 'disable-gpu', 'disableGpu', 'inspect']
+// clean argv
+var optNames = [],
+    cliOnly = []
 
-for (i in argv) {
-    if (!ignored.includes(i) && (argv[i]!=undefined && argv[i]!==false)) cli = true
-}
-
-var fs = require('fs'),
-    ifaces = require('os').networkInterfaces()
-
-
-var defaultConfig,
-    makeDefaultConfig = function(argv){
-    defaultConfig = {
-        argv:argv,
-        recentSessions: [],
-        appName: infos.productName,
-        instanceName: argv['instance-name'] || false,
-        targets: argv['send'] || false,
-        oscInPort: argv['osc-port'] || 0,
-        httpPort: argv['port'] || 8080,
-        tcpInPort: argv['tcp-port'] || false,
-        tcpTargets: argv['tcp-targets'] || [],
-        debug: argv['debug'] || false,
-        sessionFile: argv['load'] || false,
-        newSession: argv['blank'] || false,
-        customModule: argv['custom-module'] || false,
-        fullScreen: argv['fullscreen'] || false,
-        noGui: argv['no-gui'] || false,
-        guiOnly: typeof argv['gui-only'] == 'string' ? argv['gui-only'].length ? argv['gui-only'] : true : false,
-        clientOptions: argv['client-options'] ? (function(){
-            var opts = {}
-            for (var o of argv['client-options']) {
-                if (!o.includes('=')) continue
-                var [k, v] = o.split('=')
-                opts[k] = v
-            }
-            return opts
-        })() : false,
-        noVsync: argv['disable-vsync'] || false,
-        noGpu: argv['disable-gpu'] || false,
-        forceGpu: argv['force-gpu'] || false,
-        readOnly: argv['read-only'] || false,
-        remoteSaving: argv['remote-saving'] ? RegExp(argv['remote-saving']) : false,
-        remoteRoot: argv['remote-root'] || false,
-        midi: argv['midi'],
-        stateFile: (function(){
-            if (!argv['state']) return false
-            try {
-                return JSON.parse(fs.readFileSync(argv['state'], 'utf8'))
-            } catch(err) {
-                console.error(err)
-                return false
-            }
-        })(),
-        appAddresses: Object.values(ifaces)
-                            .reduce((a,b)=>a.concat(b), [])
-                            .filter(i=>i.family === 'IPv4')
-                            .map(i=>'http://' + i.address + ':' + (argv['port'] || 8080)),
-        examples: argv['examples'],
-        theme: argv['theme'] || [],
-        checkForUpdates: true
+for (var k in options) {
+    var name = options[k].alias || k
+    optNames.push(name)
+    if (options[k].launcher === false) {
+        cliOnly.push(name)
     }
 }
 
-makeDefaultConfig(argv)
+for (var i in argv) {
+    if (argv[i] === false || !optNames.includes(i)) {
+        delete argv[i]
+    }
+}
+delete argv._
+delete argv.$0
+
+// are we in a terminal ?
+var cli = false
+for (i in argv) {
+    if (!cliOnly.includes(i)) cli = true
+}
+
+
+var settings = {
+    options: argv,
+    recentSessions: [],
+    checkForUpdates: true
+}
 
 
 
-var path = require('path'),
-    baseDir, configPath, configPathExists = true
+
+///////////////// config paths
+
+var baseDir, configPath, configPathExists = true
 
 if (argv['cache-dir']) {
     baseDir = path.isAbsolute(argv['cache-dir']) ? argv['cache-dir'] : path.resolve(process.cwd(), argv['cache-dir'])
@@ -142,34 +117,52 @@ if (configPathExists) {
     } else {
         configPath = path.join(baseDir, 'config.json')
     }
-    configFile = function(){try {return JSON.parse(fs.readFileSync(configPath,'utf-8'))} catch(err) {return {}}}()
-    config = JSON.parse(JSON.stringify(configFile))
+    try {
+        config = JSON.parse(fs.readFileSync(configPath,'utf-8'))
+    } catch(e) {}
+    if (cli) {
+        for (var k in config) {
+            if (k === 'options') continue
+            settings[k] = config[k]
+        }
+    } else {
+        for (var k in config) {
+            settings[k] = config[k]
+        }
+    }
 }
 
 if (!configPath) {
     console.warn('(WARNING) Config directory not found, settings and session history will not be saved.')
 }
 
+/////////////////
+
+
 
 module.exports = {
-    argv: argv,
     options: options,
-    makeDefaultConfig: makeDefaultConfig,
     read: function(key){
-        var x = config[key] !== undefined ? config[key] : defaultConfig[key]
-        return x
+        return settings.options[key] !== undefined ? settings.options[key] : settings[key]
     },
-    write:function(key,value,tmp) {
+    write:function(key, value, tmp) {
 
-        config[key] = value
-        if (tmp || !configPathExists) return
+        settings[key] = value
 
-        configFile[key] = value
+        if (!tmp && configPathExists) {
 
-        fs.writeFile(configPath, JSON.stringify(configFile, null, 4), function(err, data) {
-            if (err) throw err
-        })
+            config[key] = value
+            fs.writeFile(configPath, JSON.stringify(config, null, 4), function(err, data) {
+                if (err) throw err
+            })
+
+        }
+
     },
     cli: cli,
     configPath: baseDir,
+    infos: infos,
+    appAddresses: ()=>{
+        return appAddresses.map(x=>x + (settings.options.port || 8080))
+    }
 }

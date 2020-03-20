@@ -6,16 +6,16 @@ app.setPath('userData', settings.configPath)
 
 app.commandLine.appendSwitch('--touch-events')
 
-if (settings.read('noVsync') || (!settings.cli && settings.read('argv')['disable-vsync'])) {
+if (settings.read('disable-vsync')) {
     app.commandLine.appendSwitch('--disable-gpu-vsync')
 }
 
-if (settings.read('noGpu') || (!settings.cli && settings.read('argv')['disable-gpu'])) {
+if (settings.read('disable-gpu')) {
     app.disableHardwareAcceleration()
     app._noGpu = true
 }
 
-if (settings.read('forceGpu') || (!settings.cli && settings.read('argv')['force-gpu'])) {
+if (settings.read('force-gpu')) {
     app.commandLine.appendSwitch('--ignore-gpu-blacklist')
 }
 
@@ -36,7 +36,7 @@ var template = [{
 if (process.platform === 'darwin') {
     // Add app menu (macOs)
     template.unshift({
-        label: settings.read('appName'),
+        label: settings.infos.appName,
         submenu: [
             {
                 label: 'Hide ' + infos.productName,

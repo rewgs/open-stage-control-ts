@@ -1,7 +1,7 @@
 var path = require('path'),
     ipc = require('../server').ipc,
     settings = require('../settings'),
-    tcpInPort = settings.read('tcpInPort'),
+    tcpInPort = settings.read('tcp-port'),
     debug = settings.read('debug'),
     vm = require('vm'),
     fs = require('fs'),
@@ -20,7 +20,7 @@ class OscServer {
         this.customModuleEventEmitter = new EventEmitter()
         this.customModule = (()=>{
 
-            var customModule = settings.read('customModule')
+            var customModule = settings.read('custom-module')
             if (!customModule) return false
 
             // consolidate path containing whitespaces
@@ -257,7 +257,7 @@ class OscServer {
         oscUDPServer.on('message', this.oscInHandlerWrapper.bind(this))
         oscUDPServer.open()
 
-        if (settings.read('tcpInPort')) {
+        if (settings.read('tcp-port')) {
             oscTCPServer.on('message', this.oscInHandlerWrapper.bind(this))
             oscTCPServer.open()
         }
