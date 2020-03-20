@@ -14,7 +14,7 @@ module.exports = function(options={}) {
     window = new BrowserWindow({
         width: options.width || screenSize.width,
         height: options.height || screenSize.height,
-        title: options.title || settings.read('appName'),
+        title: options.title || settings.infos.appName,
         icon: path.resolve(__dirname + '/../assets/logo.png'),
         backgroundColor: options.color || theme.backgroundColor,
         type: options.type,

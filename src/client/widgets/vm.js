@@ -31,7 +31,7 @@ class Vm {
         this.registerGlobals()
 
         // detach sandbox
-        document.documentElement.appendChild(this.sandbox)
+        document.documentElement.removeChild(this.sandbox)
 
     }
 

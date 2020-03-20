@@ -6,7 +6,7 @@ var {remote, ipcRenderer, shell} = eval('require(\'electron\')'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     terminal = require('./terminal'),
-    argv_remote = settings.read('argv')
+    options_remote = settings.read('options')
 
 class Settings {
 
@@ -15,10 +15,10 @@ class Settings {
         this.remote = settings
         this.container = DOM.get('#osc-container')[0].appendChild(html`<osc-settings></osc-settings>`)
         this.names = []
-        this.argv = {}
+        this.options = {}
         this.configPath = null
-        for (var i in argv_remote) {
-            this.argv[i] = argv_remote[i]
+        for (var i in options_remote) {
+            this.options[i] = options_remote[i]
         }
 
         this.create()
@@ -29,7 +29,7 @@ class Settings {
     save() {
 
         if (!this.configPath) return this.saveAs()
-        fs.writeFile(this.configPath, JSON.stringify(this.argv), (err, fdata)=>{
+        fs.writeFile(this.configPath, JSON.stringify(this.options), (err, fdata)=>{
 
             if (err) console.error(err)
             else terminal.log('(INFO) Config saved in ' + this.configPath)
@@ -60,7 +60,7 @@ class Settings {
             properties: ['openFile']
         }).then((file)=>{
             if (file.canceled || !file.filePaths.length) return
-            this.argv = JSON.parse(fs.readFileSync(file.filePaths[0], 'utf-8'))
+            this.options = JSON.parse(fs.readFileSync(file.filePaths[0], 'utf-8'))
             this.create()
             this.write()
             terminal.log('(INFO) Config loaded from ' + file.filePaths[0])
@@ -72,17 +72,13 @@ class Settings {
 
     write(tmp) {
 
-        for (var i in this.argv) {
-            if (this.argv[i] === '' || !this.names.includes(i)) {
-                delete this.argv[i]
+        for (var i in this.options) {
+            if (this.options[i] === '') {
+                delete this.options[i]
             }
         }
 
-        delete this.argv._
-        delete this.argv.$0
-
-        settings.makeDefaultConfig(this.argv)
-        settings.write('argv', this.argv, tmp)
+        settings.write('options', this.options, tmp)
 
     }
 
@@ -104,7 +100,7 @@ class Settings {
 
             this.names.push(name)
 
-            let value = this.argv[name] === undefined ? '' : this.argv[name],
+            let value = this.options[name] === undefined ? '' : this.options[name],
                 strValue = Array.isArray(value) ? value.map(x=>x.includes(' ') ? '"'+x+'"' : x).join(' ') : value
 
 
@@ -178,14 +174,14 @@ class Settings {
                     fail = err
                 }
 
-                if (fail || v !== '' && data.check && data.check(v, this.argv) !== true) {
+                if (fail || v !== '' && data.check && data.check(v, this.options) !== true) {
                     if (!field.classList.contains('error')) {
                         field.classList.add('error')
-                        terminal.log(`(ERROR) --${name}: ${fail || data.check(v, this.argv)}`, 'error')
+                        terminal.log(`(ERROR) --${name}: ${fail || data.check(v, this.options)}`, 'error')
                     }
                 } else {
                     field.classList.remove('error')
-                    this.argv[name] = v
+                    this.options[name] = v
                 }
 
                 if (data.restart && !field.classList.contains('restart') && v != value) {

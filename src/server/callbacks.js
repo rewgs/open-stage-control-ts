@@ -21,21 +21,12 @@ module.exports =  {
         ipc.send('sessionList', recentSessions, clientId)
         ipc.send('clipboard', clipboard, clientId)
 
-        if (settings.read('readOnly')) {
-            ipc.send('readOnly')
-        }
-
         if (data.backupId && sessionBackups[data.backupId]) {
             ipc.send('loadBackup', sessionBackups[data.backupId])
             return
         }
 
-        if (settings.read('newSession')) {
-            ipc.send('sessionNew')
-            return
-        }
-
-        if (settings.read('sessionFile')) return this.sessionOpen({path:settings.read('sessionFile')},clientId)
+        if (settings.read('load')) return this.sessionOpen({path:settings.read('load')},clientId)
 
 
         if (settings.read('examples')) {
@@ -44,7 +35,7 @@ module.exports =  {
             recentSessions = recentSessions.map(function(file){return dir + '/' + file})
         }
 
-        ipc.send('serverTargets', settings.read('targets'), clientId)
+        ipc.send('serverTargets', settings.read('send'), clientId)
 
     },
 
@@ -64,12 +55,12 @@ module.exports =  {
                 return index == self.indexOf(elem)
             })
             recentSessions = recentSessions.reverse()
-            
+
             // history size limit
             if (recentSessions.length > 10) recentSessions = recentSessions.slice(0, 10)
 
             // save history
-            settings.write('recentSessions',recentSessions)
+            settings.write('recentSessions', recentSessions)
 
             ipc.send('sessionList', recentSessions)
 
@@ -91,7 +82,7 @@ module.exports =  {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
-        if (!settings.read('readOnly')) {
+        if (!settings.read('read-only')) {
             module.exports.sessionAddToHistory(data.path)
         }
 
@@ -118,7 +109,7 @@ module.exports =  {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
-        if (settings.read('stateFile')) {
+        if (settings.read('state')) {
             var send = true
             for (var id in ipc.clients) {
                 // only make the client send its osc state if there are no other active clients
@@ -127,7 +118,7 @@ module.exports =  {
                 }
             }
             var state = {
-                state: settings.read('stateFile'),
+                state: settings.read('state'),
                 send: send
             }
             ipc.send('stateLoad', state, clientId)
@@ -170,7 +161,7 @@ module.exports =  {
 
         if (!ok) return
 
-        if (!data.path || settings.read('remoteSaving') && !settings.read('remoteSaving').test(ipc.clients[clientId].address)) {
+        if (!data.path || settings.read('remote-saving') && !settings.read('remote-saving').test(ipc.clients[clientId].address)) {
 
             return ipc.send('notify', {
                 icon: 'save',
@@ -184,7 +175,7 @@ module.exports =  {
 
             if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
-            var root = settings.read('remoteRoot')
+            var root = settings.read('remote-root')
             if (root && !data.path.includes(root)) {
                 console.error('(ERROR) Could not save: path outside of remote-root')
                 return ipc.send('notify', {
@@ -312,7 +303,7 @@ module.exports =  {
 
             var targets = []
 
-            if (data.target.indexOf(null) === -1 && settings.read('targets') && !shortdata.target) Array.prototype.push.apply(targets, settings.read('targets'))
+            if (data.target.indexOf(null) === -1 && settings.read('send') && !shortdata.target) Array.prototype.push.apply(targets, settings.read('send'))
             if (data.target) Array.prototype.push.apply(targets, data.target)
 
             data.args = data.preArgs ? data.preArgs.concat(value) : [value]
@@ -436,7 +427,7 @@ module.exports =  {
 
         if (data.path) p = path.resolve(...data.path)
 
-        var root = settings.read('remoteRoot')
+        var root = settings.read('remote-root')
         if (root && !p.includes(root)) p = root
 
         fs.readdir(p, (err, files)=>{

@@ -1,23 +1,8 @@
-
 $base: rgb(25, 31, 42);
 $accent: rgb(82, 168, 255);
-$tone: rgb(104, 174, 245);
 $text: white;
 
 :root {
-
-    ////////////////////// old colors
-
-    --color-text-fade: pink;
-    --color-bg: pink;
-    --color-track: pink;
-    --color-fg: pink;
-    --color-raised: pink;
-    --color-light: pink;
-    --color-custom: pink;
-    --color-white: white;
-
-    ////////////////////// MISC
 
     --nav-height: 40rem;
     --grid-width: 10;
@@ -25,7 +10,6 @@ $text: white;
 
     --color-text: #{transparentize($text, .4)};
 
-    --color-accent: #{$accent};
 
     --color-background: #{$base};
     --color-ui-background: #{mix($base, black, 85)};
@@ -38,14 +22,13 @@ $text: white;
 
     --alpha-scrollbar: 0.25;
     --alpha-scrollbar-on: 0.5;
-    --scrollbar-size:12rem;
+    --scrollbar-size: 12rem;
 
     --color-text-solid: #{$text};
     --color-text: #{transparentize($text, .4)};
 
+
+    --color-accent: #{$accent};
     --color-widget: var(--color-accent);
-
-
-
 
 }

@@ -17,7 +17,7 @@ class Theme {
 
     init() {
 
-        this.themes = settings.read('theme')
+        this.themes = settings.read('theme') || []
         this.files = []
 
         for (let theme of this.themes) {
@@ -53,8 +53,8 @@ class Theme {
 
         var css = this.get()
 
-        if (css.includes('--color-bg:')) {
-            this.backgroundColor = css.match(/--color-bg:([^;]*);/)[1].trim()
+        if (css.includes('--color-background:')) {
+            this.backgroundColor = css.match(/--color-background:([^;]*);/)[1].trim()
         } else {
             this.backgroundColor = this.defaultColor
         }
