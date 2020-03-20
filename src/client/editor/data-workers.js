@@ -99,6 +99,7 @@ function updateWidget(widget, options={}) {
         parent: widget.parent,
         parentNode: widget.parentNode,
         reCreateOptions: options.reCreateOptions,
+        locals: widget.parsersLocalScope,
         children: children,
         index: index
     })
