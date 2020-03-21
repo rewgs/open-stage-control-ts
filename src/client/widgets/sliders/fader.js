@@ -40,7 +40,7 @@ module.exports = class Fader extends Slider {
                 '- values can be `number` or `object` if a custom label is needed',
                 'Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`)'
             ]},
-            logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale (base 10). Set to a `number` to define the logarithm\'s base.'},
+            logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale. Set to `-1` for exponential scale.'},
             sensitivity: {type: 'number', value: 1, help: 'Defines the fader\'s sensitivity when `snap` is `false` '},
             steps: {type: 'string|number|array', value: '', help: [
                 'Restricts the widget\'s value:',
