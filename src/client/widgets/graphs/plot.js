@@ -63,7 +63,6 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
                 max: Math.abs(this.rangeY.max)>=1000?this.rangeY.max/1000+'k':this.rangeY.max
             }
         }
-        this.smooth = this.getProp('smooth') === true ? 0.25 : this.getProp('smooth') === false ? 0 : parseFloat(this.getProp('smooth')) || 0
 
     }
 

@@ -24,15 +24,22 @@ module.exports = {
         // clip in
         value = module.exports.clip(value,[rangeIn[0], rangeIn[1]])
 
+
         // normalize
         value = (value - rangeIn[0]) / (rangeIn[1] - rangeIn[0])
 
         // log scale
         if (log) {
-            if (log === true) log = 10
+
+            if (log < 0) revertlog = !revertlog
+
+            var logScale = revertlog ? Math.abs(rangeIn[1] - rangeIn[0]) / 10 :
+                            Math.abs(rangeOut[1] - rangeOut[0]) / 10
+
             value = revertlog ?
-                Math.pow(log, value) / (log - 1) - 1 / (log - 1) :
-                Math.log(value * (log - 1) + 1) / Math.log(log)
+                Math.log(value  * (logScale - 1) + 1) / Math.log(logScale) :
+                Math.pow(logScale, value) / (logScale - 1) - 1 / (logScale - 1)
+
         }
 
         // scale out

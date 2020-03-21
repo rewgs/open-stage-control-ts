@@ -302,7 +302,9 @@ osc-panel-content {
     overflow-y: auto;
 
     &.left, &.right {
-        border-right: 1rem solid var(--color-ui-background);
+        &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
+            border-right: 1rem solid var(--color-ui-background);
+        }
     }
 
 
