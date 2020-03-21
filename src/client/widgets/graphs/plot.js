@@ -116,9 +116,9 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
 
         var points = [],
             padding = this.cssVars.padding + PXSCALE,
-            x, y
+            x, y, i
 
-        for (let i in this.value) {
+        for (i in this.value) {
 
             if (this.value[i].length) {
                 points.push(mapToScale(this.value[i][0], [this.rangeX.min, this.rangeX.max], [padding, this.width - padding], 0, this.logScaleX, true))
@@ -141,7 +141,7 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
         this.ctx.beginPath()
 
         this.ctx.moveTo(points[0], points[1])
-        for (let i = 2; i < points.length - 2; i += 2) {
+        for (i = 2; i < points.length - 2; i += 2) {
             this.ctx.lineTo(points[i], points[i + 1])
         }
         this.ctx.lineTo(points[i], points[i + 1])

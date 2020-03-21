@@ -203,7 +203,7 @@ class UiInspector extends UiWidget {
         input.blur()
 
         var v
-        var str = input.value.replace(/[‟”]/g, '"').replace(/[‘’]/g, '\'') // convert invalid quote characters
+        var str = input.value.replace(/[‟“”]/g, '"').replace(/[‘’]/g, '\'') // convert invalid quote characters
 
         try {
             v = JSON.parseFlex(str)
