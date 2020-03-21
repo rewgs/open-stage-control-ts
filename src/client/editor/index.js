@@ -468,6 +468,7 @@ class Editor {
     copyWidget() {
 
         if (!this.selectedWidgets.length) return
+        if (this.selectedWidgets[0].getProp('type') === 'root') return
 
         this.clipboard = deepCopy(this.selectedWidgets.map((w)=>w.props))
         this.idClipboard = this.selectedWidgets[0].getProp('id')
@@ -481,25 +482,8 @@ class Editor {
 
     cutWidget() {
 
-        if (!this.selectedWidgets.length) return
-
         this.copyWidget()
-
-        var parent = this.selectedWidgets[0].parent,
-            index = this.selectedWidgets.map(w => parent.children.indexOf(w)).sort((a,b)=>{return b-a}),
-            data = this.selectedWidgets.map((w)=>w.props),
-            removedIndexes = []
-
-        for (var i of index) {
-            removedIndexes.push(i)
-            parent.props.widgets.splice(i,1)
-        }
-
-        this.select(updateWidget(parent, {
-            preventSelect: true,
-            removedIndexes
-        }))
-        this.pushHistory({removedIndexes})
+        this.deleteWidget()
 
     }
 
@@ -602,13 +586,12 @@ class Editor {
     deleteWidget() {
 
         if (!this.selectedWidgets.length) return
+        if (this.selectedWidgets[0].getProp('type') === 'root') return
 
         var type = this.selectedWidgets[0].props.type == 'tab' ? 'tab' : 'widget',
             parent = this.selectedWidgets[0].parent,
             index = this.selectedWidgets.map(w => parent.children.indexOf(w)).sort((a,b)=>{return b-a}),
             removedIndexes = []
-
-        if (this.selectedWidgets[0].getProp('id') === 'root') return
 
         if (type === 'widget') {
             for (let i of index) {
