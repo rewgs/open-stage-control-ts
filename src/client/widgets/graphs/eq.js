@@ -4,11 +4,11 @@ var {clip} = require('../utils'),
     StaticProperties = require('../mixins/static_properties')
 
 
-module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max: 22000}, logScaleX: true}) {
+class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max: 22000}, logScaleX: false}) {
 
     static description() {
 
-        return 'Draws frequency response between from from an array of filter objects.'
+        return 'Draws logarithmic frequency response from an array of filter objects.'
 
     }
 
@@ -18,14 +18,7 @@ module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max:
 
             _eq:'eq',
 
-            pips: {type: 'boolean', value: true, help: 'Set to false to hide the scale'},
-            resolution: {type: 'number', value: 128, help: 'Defines the number of points used to compute the frequency response'},
-            rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
-            origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
-
-        }, ['interaction', 'decimals', 'typeTags', 'bypass'], {
-
-            value: {type: 'array', value: '', help: [
+            filters: {type: 'array', value: '', help: [
                 'Each item must be an object with the following properties',
                 '- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak" or "notch")',
                 '- `freq`: number (filter\'s resonant frequency)',
@@ -33,9 +26,13 @@ module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max:
                 '- `gain`: number',
                 '- `on`: boolean',
 
-            ]}
+            ]},
+            pips: {type: 'boolean', value: true, help: 'Set to false to hide the scale'},
+            resolution: {type: 'number', value: 128, help: 'Defines the number of points used to compute the frequency response'},
+            rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
+            origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
 
-        })
+        }, ['interaction', 'decimals', 'typeTags', 'bypass'])
 
     }
 
@@ -43,54 +40,53 @@ module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max:
 
         super(options)
 
-        this.resolution = clip(this.getProp('resolution'),[64,1024])
+        this.calcFilters()
 
     }
 
-    setValue(v, options={}) {
+    calcFilters() {
 
-        if (typeof v == 'string') {
-            try {
-                v = JSON.parseFlex(v)
-            } catch(err) {}
-        }
+        var filters = this.getProp('filters'),
+            resolution = Math.min(parseInt(this.getProp('resolution')) || 64, 1024),
+            eqResponse = []
 
-        if (Array.isArray(v)) {
+        for (let i in filters) {
 
-            var filters = v,
-                eqResponse = []
+            var filterResponse
 
-            if (v.length === this.resolution) {
+            if (!filters[i].type) filters[i].type = 'peak'
 
-                eqResponse = v
-
+            if (!filters[i].on) {
+                filterResponse = calcBiquad({type:'peak',freq:1,gain:0,q:1}, resolution)
             } else {
-
-                for (let i in filters) {
-
-                    var filterResponse
-
-                    if (!filters[i].type) filters[i].type = 'peak'
-
-                    if (!filters[i].on) {
-                        filterResponse = calcBiquad({type:'peak',freq:1,gain:0,q:1}, this.resolution)
-                    } else {
-                        filterResponse = calcBiquad(filters[i], this.resolution)
-                    }
-
-                    for (var k in filterResponse) {
-                        if (eqResponse[k]===undefined) {
-                            eqResponse[k]=[0,0]
-                        }
-
-                        eqResponse[k] = [filterResponse[k][0], eqResponse[k][1]+filterResponse[k][1]]
-                    }
-
-                }
-
+                filterResponse = calcBiquad(filters[i], resolution)
             }
 
-            if (eqResponse.length) super.setValue(eqResponse, options)
+            for (var k in filterResponse) {
+                if (eqResponse[k] === undefined) {
+                    eqResponse[k] = [0,0]
+                }
+
+                eqResponse[k] = [filterResponse[k][0], eqResponse[k][1]+filterResponse[k][1]]
+            }
+
+        }
+
+        this.setValue(eqResponse, {sync: true})
+
+    }
+
+
+    onPropChanged(propName, options, oldPropValue) {
+
+        super.onPropChanged(...arguments)
+
+        switch (propName) {
+
+            case 'resolution':
+            case 'filters':
+                this.calcFilters()
+                return
 
         }
 
@@ -98,13 +94,17 @@ module.exports = class Eq extends StaticProperties(Plot, {rangeX: {min: 20, max:
 
 }
 
-//
-// calcBiquad
-//
-// Dec 14, 2010 njr
-// original @ Nigel Redmon
+Eq.dynamicProps = Eq.prototype.constructor.dynamicProps.concat(
+    'resolution',
+    'filters'
+)
+
+module.exports = Eq
+
 
 function calcBiquad(options, resolution) {
+    // Dec 14, 2010 njr (Nigel Redmon)
+
     var {type, freq, q, gain} = options,
         Fs = 44100,
         a0,a1,a2,b1,b2,norm,
