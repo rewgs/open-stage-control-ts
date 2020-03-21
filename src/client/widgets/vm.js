@@ -1,5 +1,11 @@
 var loopProtect = require('loop-protect'),
-    {deepCopy} = require('../utils')
+    {deepCopy} = require('../utils'),
+    globals = {
+        screen: {width: screen.width, height: screen.height},
+        env: deepCopy(ENV),
+        url: document.location.host,
+        platform: navigator.platform
+    }
 
 class Vm {
 
@@ -42,12 +48,7 @@ class Vm {
         this.sandbox.contentWindow.setInterval = ()=>{
             throw 'setTimeout and setInterval can\'t be used in the JS sandbox'
         }
-        this.sandbox.contentWindow.globals = {
-            screen: {width: screen.width, height: screen.height},
-            env: deepCopy(ENV),
-            url: document.location.host,
-            platform: navigator.platform
-        }
+        this.sandbox.contentWindow.globals = globals
 
         // sanitize globals
         for (var imports of ['__protect', 'console', 'setTimeout', 'setInterval', 'globals']) {
