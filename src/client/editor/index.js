@@ -168,7 +168,8 @@ class Editor {
 
     handleKeyboard(combo, e){
 
-        if (e.target && e.target.classList.contains('no-keybinding')) return
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return
+
         e.preventDefault()
 
         switch (combo) {
