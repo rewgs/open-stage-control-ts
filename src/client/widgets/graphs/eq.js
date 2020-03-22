@@ -44,7 +44,6 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
         super(options)
 
         setTimeout(()=>{
-
             this.createFilters()
             this.calcResponse()
         })
@@ -56,12 +55,20 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
         this.filters = []
         var filters = this.getProp('filters')
         for (let i in filters) {
-            this.filters[i] = new BiquadFilterNode(audioContext, {
-                Q: filters[i].q,
-                type: filters[i].type,
-                frequency: filters[i].freq,
-                gain: filters[i].gain,
-            })
+            try {
+                this.filters[i] = new BiquadFilterNode(audioContext, {
+                    Q: filters[i].q,
+                    type: filters[i].type,
+                    frequency: filters[i].freq,
+                    gain: filters[i].gain,
+                })
+            } catch(e) {
+                this.filters[i] = new BiquadFilterNode(audioContext, {
+                    Q: 1,
+                    type: "allpass",
+                })
+            }
+
             this.filters[i]._on = filters[i].on
         }
 
@@ -82,13 +89,7 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
 
 
         for (let i = 0; i < resolution; ++i) {
-            var f = i / resolution
-
-            // Convert to log frequency scale (octaves).
-            // f = MAXFREQ * Math.pow(2.0, nOctaves * (f - 1.0))
-            f = mapToScale(i, [0,this.width], rangeXOut, -1, true)
-
-            frequencyHz[i] = f
+            frequencyHz[i] = mapToScale(i, [0,this.width], rangeXOut, -1, true)
         }
 
 
@@ -117,13 +118,15 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
 
         }
 
-        this.setValue(eqResponse)
-
+        // this.setValue(eqResponse)
+        this.value = eqResponse
+        this.batchDraw()
 
 
 
     }
 
+    setValue() {}
 
     onPropChanged(propName, options, oldPropValue) {
 
