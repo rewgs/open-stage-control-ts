@@ -3,7 +3,8 @@ var UiWidget = require('./ui-widget'),
     doubleClick = require('../events/double-click'),
     Sortable = require('sortablejs'),
     morph = require('nanomorph'),
-    Root, Panel, Matrix, Keyboard, widgetManager
+    Root, Panel, Matrix, Keyboard, widgetManager,
+    init = false
 
 class UiTree extends UiWidget {
 
@@ -170,12 +171,20 @@ class UiTree extends UiWidget {
         if (widget instanceof Panel && !(widget instanceof Matrix || widget instanceof Keyboard)) {
             node.insertBefore(html`<span class="toggle no-widget-select"></span>`, node.childNodes[0])
             node.classList.add('container')
-            if (this.expanded[widget.hash] || widget instanceof Root) node.classList.add('expanded')
+            if (this.expanded[widget.hash]) node.classList.add('expanded')
+            if (!init && widget instanceof Root) {
+                node.classList.add('expanded')
+                init = true
+            }
             var sublist = node.appendChild(html`<ol style="--depth:${++depth};"></ol>`)
             for (let child of widget.children) {
                 if (child) sublist.appendChild(this.parseWidgets(child, selectedWidgets, depth))
             }
 
+        }
+
+        for (var h in this.expanded) {
+            if (!widgetManager.widgets[h]) delete this.expanded[h]
         }
 
         return node
