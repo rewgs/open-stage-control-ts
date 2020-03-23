@@ -111,7 +111,7 @@ class Settings {
             if (data.type === 'boolean') {
 
                 toggle = field.appendChild(html`
-                    <osc-settings-checkbox class="${!!value ? 'on' : ''}">${raw(icon('check'))}</osc-settings-checkbox>
+                    <osc-settings-checkbox class="${value ? 'on' : ''}">${raw(icon('check'))}</osc-settings-checkbox>
                 `)
                 toggle.addEventListener('click', (e)=>{
                     input.value = toggle.classList.toggle('on')
@@ -200,7 +200,7 @@ class Settings {
                         DOM.dispatchEvent(el, 'change', {stop: true})
                     })
                     this.write()
-                 }
+                }
 
             })
 

@@ -136,7 +136,7 @@ class ScriptVm extends Vm {
             if (filter) {
 
                 var filter = Array.isArray(filter) ? filter : [filter],
-                containers = this.filter.map(x=>widgetManager.getWidgetById(x)).reduce((a,b)=>a.concat(b), [])
+                    containers = this.filter.map(x=>widgetManager.getWidgetById(x)).reduce((a,b)=>a.concat(b), [])
                 if (!containers.length) return
                 filter = (widget)=>{
                     return containers.some(x=>x.contains(widget) || x === widget)
@@ -242,7 +242,7 @@ class ScriptVm extends Vm {
         }
 
         for (var imports of ['set', 'get', 'getProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
-                             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout']) {
+            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
 

@@ -82,7 +82,7 @@ module.exports = function(options={}) {
             if ((input.key === 'w' || input.key === 'W') && input.control) {
                 window.close()
             }
-        });
+        })
     }
 
     if (options.shortcuts) {

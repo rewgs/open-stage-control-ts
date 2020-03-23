@@ -7,24 +7,24 @@ var UiWidget = require('./ui-widget'),
 
 class UiModal extends UiWidget {
 
-   constructor(options) {
+    constructor(options) {
 
-       super(options)
+        super(options)
 
-       if (!MODAL_CONTAINER) MODAL_CONTAINER = DOM.get('osc-modal-container')[0]
+        if (!MODAL_CONTAINER) MODAL_CONTAINER = DOM.get('osc-modal-container')[0]
 
-       if (options.closable) {
+        if (options.closable) {
 
-           if (MODAL_SINGLETON) MODAL_SINGLETON.close()
-           MODAL_SINGLETON = this
+            if (MODAL_SINGLETON) MODAL_SINGLETON.close()
+            MODAL_SINGLETON = this
 
-       }
+        }
 
-       this.escKey = options.closable || options.escKey
-       this.enterKey = options.enterKey
-       this.state = 0
+        this.escKey = options.closable || options.escKey
+        this.enterKey = options.enterKey
+        this.state = 0
 
-       this.container = html`
+        this.container = html`
            <div class="popup show">
                <div class="popup-wrapper">
                    <div class="popup-title ${options.closable? 'closable' : ''}">
@@ -41,64 +41,64 @@ class UiModal extends UiWidget {
            </div>
        `
 
-       if (options.width) this.container.style.setProperty('--width', options.width + 'rem')
-       if (options.height) this.container.style.setProperty('--height', options.height + 'rem')
+        if (options.width) this.container.style.setProperty('--width', options.width + 'rem')
+        if (options.height) this.container.style.setProperty('--height', options.height + 'rem')
 
-       if (options.closable) {
-           var closer = DOM.get(this.container, '.popup-title .closer')[0]
-           this.container.addEventListener('fast-click',(e)=>{
-               if (e.target === this.container || e.target === closer) {
-                   e.detail.preventOriginalEvent = true
-                   this.close()
-               }
-           })
-       }
+        if (options.closable) {
+            var closer = DOM.get(this.container, '.popup-title .closer')[0]
+            this.container.addEventListener('fast-click',(e)=>{
+                if (e.target === this.container || e.target === closer) {
+                    e.detail.preventOriginalEvent = true
+                    this.close()
+                }
+            })
+        }
 
-       if (this.escKey) {
-           this.escKeyHandler = ((e)=>{
-               if (e.keyCode==27) this.close()
-           }).bind(this)
-       }
+        if (this.escKey) {
+            this.escKeyHandler = ((e)=>{
+                if (e.keyCode==27) this.close()
+            }).bind(this)
+        }
 
-       if (this.enterKey) {
-           this.enterKeyHandler = ((e)=>{
-               if (e.keyCode == 13) this.enterKey.call(this, e)
-           }).bind(this)
-       }
+        if (this.enterKey) {
+            this.enterKeyHandler = ((e)=>{
+                if (e.keyCode == 13) this.enterKey.call(this, e)
+            }).bind(this)
+        }
 
-       if (!options.hide) this.open()
-
-
-   }
+        if (!options.hide) this.open()
 
 
+    }
 
-   close() {
 
-       if (!this.state) return
-       this.state = 0
 
-       if (this.escKey) document.removeEventListener('keydown', this.escKeyHandler)
-       if (this.enterKey) document.removeEventListener('keydown', this.enterKeyHandler)
+    close() {
 
-       MODAL_CONTAINER.removeChild(this.container)
+        if (!this.state) return
+        this.state = 0
 
-       this.trigger('close')
+        if (this.escKey) document.removeEventListener('keydown', this.escKeyHandler)
+        if (this.enterKey) document.removeEventListener('keydown', this.enterKeyHandler)
 
-   }
+        MODAL_CONTAINER.removeChild(this.container)
 
-   open() {
+        this.trigger('close')
 
-       if (this.state) return
-       this.state = 1
+    }
 
-       if (this.escKey) document.addEventListener('keydown', this.escKeyHandler)
-       if (this.enterKey) document.addEventListener('keydown', this.enterKeyHandler)
+    open() {
 
-       MODAL_CONTAINER.appendChild(this.container)
+        if (this.state) return
+        this.state = 1
 
-       this.trigger('open')
-   }
+        if (this.escKey) document.addEventListener('keydown', this.escKeyHandler)
+        if (this.enterKey) document.addEventListener('keydown', this.enterKeyHandler)
+
+        MODAL_CONTAINER.appendChild(this.container)
+
+        this.trigger('open')
+    }
 
 }
 

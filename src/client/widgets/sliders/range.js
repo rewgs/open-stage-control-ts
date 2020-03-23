@@ -367,7 +367,7 @@ class Range extends Fader {
 
         if (this.getProp('pips')) {
             this.ctx.globalAlpha = 1
-            this.ctx.drawImage(this.pips, 0, 0);
+            this.ctx.drawImage(this.pips, 0, 0)
             if (!compact) this.clearRect = [this.clearRect, [m + 10 * PXSCALE, 0, 10 * PXSCALE + this.pipsTextSize, height]]
         }
 

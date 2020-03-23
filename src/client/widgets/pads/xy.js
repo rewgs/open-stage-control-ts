@@ -217,7 +217,7 @@ module.exports = class Xy extends Pad {
             for (let i in this.faders.x.rangeKeys) {
 
                 let pip = this.faders.x.rangeKeys[i],
-                px = Math.round(0.5 * this.faders.x.percentToCoord(pip)) * 2
+                    px = Math.round(0.5 * this.faders.x.percentToCoord(pip)) * 2
 
                 if (parseInt(px) === px) px -= 0.5
 
@@ -238,7 +238,7 @@ module.exports = class Xy extends Pad {
             for (let i in this.faders.y.rangeKeys) {
 
                 let pip = this.faders.y.rangeKeys[i],
-                py = Math.round(0.5 * this.faders.y.percentToCoord(pip)) * 2
+                    py = Math.round(0.5 * this.faders.y.percentToCoord(pip)) * 2
 
                 if (parseInt(py) === py) py -= 0.5
 

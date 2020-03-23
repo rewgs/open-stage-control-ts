@@ -1,4 +1,4 @@
-var terminal = require('./terminal')
+var terminal = require('./terminal'),
     settings = require('./settings'),
     contextmenu = require('./context-menu'),
     toolbar = require('./toolbar'),
