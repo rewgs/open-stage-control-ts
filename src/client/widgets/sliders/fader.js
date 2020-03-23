@@ -310,7 +310,7 @@ module.exports = class Fader extends Slider {
 
         if (this.getProp('pips') && !compact) {
             this.ctx.globalAlpha = 1
-            this.ctx.drawImage(this.pips, 0, 0);
+            this.ctx.drawImage(this.pips, 0, 0)
             if (!compact) this.clearRect = [this.clearRect, [m + 10 * PXSCALE, 0, 10 * PXSCALE + this.pipsTextSize, height]]
         }
 
@@ -394,7 +394,7 @@ module.exports = class Fader extends Slider {
                     ctx.save()
                     ctx.translate(textX + 3 *  PXSCALE, textY - 0.5 * PXSCALE)
                     ctx.rotate(Math.PI/2)
-                    ctx.textAlign = "center"
+                    ctx.textAlign = 'center'
                     ctx.fillText(this.rangeLabels[i], 0, 0)
                     ctx.restore()
 

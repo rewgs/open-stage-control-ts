@@ -4,9 +4,9 @@ var iOS
 
 if (navigator.platform.match(/iPhone|iPod|iPad/)) {
 
-    var supportsPassiveOption = false;
+    var supportsPassiveOption = false
     try {
-        document.createElement("div").addEventListener("test", function() {}, {
+        document.createElement('div').addEventListener('test', function() {}, {
             get passive() {
                 supportsPassiveOption = true
                 return false

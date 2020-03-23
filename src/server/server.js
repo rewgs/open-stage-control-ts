@@ -33,7 +33,7 @@ function httpRoute(req, res) {
                 window.ENV=${JSON.stringify(settings.read('client-options'))}
                 window.READ_ONLY=${JSON.stringify(settings.read('read-only'))}
             </script></body>`))
-          .pipe(res);
+          .pipe(res)
 
         // res.sendFile(path.resolve(__dirname + '/../client/index.html'))
 

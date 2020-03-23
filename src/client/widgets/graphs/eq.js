@@ -65,7 +65,7 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
             } catch(e) {
                 this.filters[i] = new BiquadFilterNode(audioContext, {
                     Q: 1,
-                    type: "allpass",
+                    type: 'allpass',
                 })
             }
 
@@ -101,9 +101,9 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
 
             if (filter._on === false) continue
 
-            var filterResponse = new Float32Array(resolution);
+            var filterResponse = new Float32Array(resolution)
 
-            filter.getFrequencyResponse(frequencyHz, filterResponse, phaseResponse);
+            filter.getFrequencyResponse(frequencyHz, filterResponse, phaseResponse)
 
             responses.push(filterResponse)
 

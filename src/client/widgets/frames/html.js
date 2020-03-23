@@ -7,8 +7,8 @@ var Widget = require('../common/widget'),
 var sanitizeOptions = {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe'),
     allowedAttributes: {
-      '*': [ 'title', 'class', 'style'],
-      'img': [ 'src' ,  'title', 'class', 'style', 'width', 'height']
+        '*': [ 'title', 'class', 'style'],
+        'img': [ 'src' ,  'title', 'class', 'style', 'width', 'height']
     }
 }
 
