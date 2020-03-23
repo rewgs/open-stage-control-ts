@@ -57,7 +57,7 @@ module.exports.categories = {
     'Frames':['frame', 'svg', 'html', 'image'],
     'Graphs':['plot','eq','visualizer'],
     'Indicators':['led', 'text'],
-    'Pads':['xy','rgb','multixy', 'canvas'],
+    'Pads':['xy','rgb','multixy'],
     'Sliders':['fader','knob', 'encoder', 'range'],
     'Scripts':['script'],
 }
