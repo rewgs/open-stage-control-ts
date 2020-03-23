@@ -35,7 +35,9 @@ var Parser = class Parser {
             tab,
             reCreateOptions,
             children,
-            index
+            index,
+            hash,
+            locals
         } = options
 
         var props = data
@@ -76,12 +78,13 @@ var Parser = class Parser {
 
         // create widget
         var widget = new this.widgets[props.type]({
-            container:true,
             props,
             parent,
             parentNode,
             reCreateOptions,
-            children
+            children,
+            hash,
+            locals,
         })
 
         widgetManager.addWidget(widget)
