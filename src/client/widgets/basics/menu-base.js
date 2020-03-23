@@ -39,7 +39,7 @@ class MenuBase extends Widget {
                 if (deepEqual(value, this.values[i])) return i
             }
         }
-        return i
+        return index
 
     }
 

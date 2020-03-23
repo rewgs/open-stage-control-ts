@@ -101,7 +101,7 @@ class Switch extends MenuBase {
 
     setValue(v, options={}) {
 
-        var i = this.values.indexOf(v)
+        var i = this.getIndex(v)
 
 
         if (i !== -1) {
