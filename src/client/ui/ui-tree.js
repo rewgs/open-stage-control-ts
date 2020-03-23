@@ -3,12 +3,13 @@ var UiWidget = require('./ui-widget'),
     doubleClick = require('../events/double-click'),
     Sortable = require('sortablejs'),
     morph = require('nanomorph'),
-    Panel, Matrix, Keyboard, widgetManager
+    Root, Panel, Matrix, Keyboard, widgetManager
 
 class UiTree extends UiWidget {
 
     constructor(options) {
 
+        Root = require('../widgets/containers/root')
         Panel = require('../widgets/containers/panel')
         Matrix = require('../widgets/containers/matrix')
         Keyboard = require('../widgets/containers/keyboard')
@@ -21,16 +22,17 @@ class UiTree extends UiWidget {
         this.dragDummy = html`<span></span>`
 
 
-        this.expanded = {root: true}
+        this.expanded = {}
+
         this.container.addEventListener('fast-click', (event)=>{
 
             var node = event.target
             if (node.classList.contains('toggle')) {
                 var exp = node.parentNode.classList.toggle('expanded')
                 if (exp) {
-                    this.expanded[node.parentNode.getAttribute('data-id')] = true
+                    this.expanded[node.parentNode.getAttribute('data-widget')] = true
                 } else {
-                    delete this.expanded[node.parentNode.getAttribute('data-id')]
+                    delete this.expanded[node.parentNode.getAttribute('data-widget')]
                 }
             }
 
@@ -43,9 +45,9 @@ class UiTree extends UiWidget {
             if (node.classList.contains('container')) {
                 var exp = node.classList.toggle('expanded')
                 if (exp) {
-                    this.expanded[node.getAttribute('data-id')] = true
+                    this.expanded[node.getAttribute('data-widget')] = true
                 } else {
-                    delete this.expanded[node.getAttribute('data-id')]
+                    delete this.expanded[node.getAttribute('data-widget')]
                 }
             }
 
@@ -128,7 +130,7 @@ class UiTree extends UiWidget {
             while (parent !== this.list) {
                 if (parent.classList.contains('container')) {
                     parent.classList.add('expanded')
-                    this.expanded[parent.getAttribute('data-id')] = true
+                    this.expanded[parent.getAttribute('data-widget')] = true
                 }
                 parent = parent.parentNode
             }
@@ -162,14 +164,13 @@ class UiTree extends UiWidget {
         var selected = selectedWidgets.includes(widget),
             id = widget.getProp('id'),
             node = html`<li class="${selected ? 'editing' : ''} ${!widget.getProp('visible') ? 'invisible' : ''}"
-                            data-widget="${widget.hash}"
-                            data-id="${id}"">
+                            data-widget="${widget.hash}">
                         ${id}</li>`
 
         if (widget instanceof Panel && !(widget instanceof Matrix || widget instanceof Keyboard)) {
             node.insertBefore(html`<span class="toggle no-widget-select"></span>`, node.childNodes[0])
             node.classList.add('container')
-            if (this.expanded[id]) node.classList.add('expanded')
+            if (this.expanded[widget.hash] || widget instanceof Root) node.classList.add('expanded')
             var sublist = node.appendChild(html`<ol style="--depth:${++depth};"></ol>`)
             for (let child of widget.children) {
                 if (child) sublist.appendChild(this.parseWidgets(child, selectedWidgets, depth))
