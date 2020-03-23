@@ -216,7 +216,7 @@ var StateManager = class StateManager {
         for (let id in this.valueStateQueue) {
             if (this.valueStateQueue[id] !== undefined) {
                 for (let w of widgetManager.getWidgetById(id)) {
-                    w.setValue(this.valueStateQueue[id], {sync: true, fromState:true})
+                    w.setValue(this.valueStateQueue[id], {sync: true, fromState:true, fromEdit: true})
                 }
             }
         }

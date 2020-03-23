@@ -76,7 +76,9 @@ class ScriptVm extends Vm {
 
             if (target) overrides.target = Array.isArray(target) ? target : [target]
 
-            this.getWidget().sendValue(overrides)
+            var widget = this.getWidget()
+            if (widget.buildIn) widget = widget.parent
+            widget.sendValue(overrides)
 
         }
 
@@ -164,6 +166,12 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.setTimeout = (id, callback, timeout)=>{
 
+            if (typeof id === 'function') {
+                timeout = callback
+                callback = id
+                id = undefined
+            }
+
             var widget = this.getWidget()
 
             if (widget.timeouts[id] !== undefined) {
@@ -186,6 +194,12 @@ class ScriptVm extends Vm {
         }
 
         this.sandbox.contentWindow.setInterval = (id, callback, timeout)=>{
+
+            if (typeof id === 'function') {
+                timeout = callback
+                callback = id
+                id = undefined
+            }
 
             var widget = this.getWidget()
 

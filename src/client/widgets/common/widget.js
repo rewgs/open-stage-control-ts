@@ -11,7 +11,8 @@ var EventEmitter = require('../../events/event-emitter'),
     OscReceiver = require('./osc-receiver'),
     {deepCopy, deepEqual, isJSON} = require('../../utils'),
     html = require('nanohtml'),
-    updateWidget = ()=>{}
+    updateWidget = ()=>{},
+    Script
 
 
 var oscReceiverState = {}
@@ -98,7 +99,7 @@ class Widget extends EventEmitter {
                 'When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)',
                 'When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending)'
             ]},
-
+            script: {type: 'script', value: '', help: ''},
 
             _osc: 'osc',
 
@@ -192,6 +193,18 @@ class Widget extends EventEmitter {
             this.decimals = Math.min(20, Math.max(this.getProp('decimals'), 0))
         }
 
+        Script = Script || require('../scripts/script')
+        if (this.getProp('script') && !(this instanceof Script)) {
+            this.script = new Script({props:{
+                id: this.getProp('id') + '/script',
+                script: this.getProp('script'),
+                event: 'value'
+            }, builtIn: true, parent: this})
+            this.on('change', (e)=>{
+                if (e.widget === this && this.mounted && !e.options.fromEdit) this.script.setValue(this.value, {...e.options, id: e.id})
+            })
+
+        }
 
         this.container = html`
             <div class="widget ${options.props.type}-container" id="${this.hash}" data-widget="${this.hash}"></div>
@@ -207,7 +220,6 @@ class Widget extends EventEmitter {
         this.setContainerStyles()
         this.setCssVariables()
         this.setVisibility()
-
 
     }
 
@@ -1008,6 +1020,10 @@ class Widget extends EventEmitter {
     }
 
     onRemove(){
+
+        if (this.getProp('script') && !(this instanceof Script)) {
+            this.script.onRemove()
+        }
 
         this.removed = true
         widgetManager.off(undefined, undefined, this)
