@@ -61,7 +61,7 @@ class Menu extends Widget {
         this.opened = false
 
         this.values = []
-        this.stringValues = []
+        this.keys = []
 
         this.selected = -1
         this.value = undefined
@@ -201,6 +201,8 @@ class Menu extends Widget {
         if (this.opened) this.widget.removeChild(this.menu)
         this.menu.innerHTML = ''
 
+        this.keys = !Array.isArray(values) ? Object.keys(values) : values
+        this.values = !Array.isArray(values) ? Object.values(values) : values
 
         nval = Array.isArray(values) ? values.length : Object.keys(values).length
         weights = Array.isArray(weights) ? weights.slice(0, nval) : Array(nval).fill(1)
@@ -211,12 +213,7 @@ class Menu extends Widget {
         for (let k in values) {
             let angle = Math.min(360 * weights[i] / totalWeight, 120),
                 skew = 90 - angle
-            this.values.push(values[k])
-            if (typeof values[k] == 'object') {
-                this.stringValues.push(JSON.stringify(values[k]))
-            } else {
-                this.stringValues.push(0)
-            }
+
             this.menu.appendChild(html`
                 <div class="item" style="${circular ? `transform: rotate(${ac}deg) skew(${skew}deg)` : `flex: ${weights[i]}`}">
                     <div style="${circular ? `transform: skew(${-skew}deg) rotate(${-90 + angle / 2}deg)` : ''}"><span style="${circular ? `transform: rotate(${-ac + 90 - angle / 2}deg)` : ''}">${raw(iconify(parseFloat(k) != k ? k : values[k]))}</span></div>
@@ -278,7 +275,7 @@ class Menu extends Widget {
 
         DOM.each(this.menu, '.on', (el)=>{el.classList.remove('on')})
         if (i > -1) DOM.get(this.menu, '.item')[i].classList.add('on')
-        this.text.textContent = this.stringValues[i] || this.value
+        this.text.textContent = this.keys[i]
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
