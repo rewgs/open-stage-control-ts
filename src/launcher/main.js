@@ -1,8 +1,9 @@
 var terminal = require('./terminal'),
     settings = require('./settings'),
-    contextmenu = require('./context-menu'),
-    toolbar = require('./toolbar'),
     html = require('nanohtml')
+
+require('./toolbar')
+require('./context-menu')
 
 DOM.get(document, '#osc-greeting-header')[0].appendChild(html`${window.PACKAGE.productName} <span class="version">v${window.PACKAGE.version}</span>`)
 

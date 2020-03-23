@@ -273,9 +273,7 @@ class HueFader extends Fader {
 
         var percent = this.getProp('steps') ? this.valueToPercent(this.value) : this.percent,
             d = Math.round(this.percentToCoord(percent)),
-            o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
-            dashed = this.getProp('dashed'),
             flat = this.getProp('mode') === 'flat'
 
         // sharp border trick

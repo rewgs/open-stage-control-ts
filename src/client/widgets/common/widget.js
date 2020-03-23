@@ -633,7 +633,7 @@ class Widget extends EventEmitter {
 
                 })
             } catch (err) {
-                var stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
                     line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
                 console.log((this.getProp('id') || this.props.id) + '.' + propName + ': #{} error:\n' + err + line)
             }
@@ -651,7 +651,7 @@ class Widget extends EventEmitter {
 
                 })
             } catch (err) {
-                var stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
                     line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
                 console.log((this.getProp('id') || this.props.id) + '.' + propName + ': JS{{}} error:\n' + err + line)
             }
@@ -768,17 +768,19 @@ class Widget extends EventEmitter {
 
             case 'height':
             case 'width':
-            case 'expand':
+            case 'expand': {
                 this.setContainerStyles(['geometry'])
-                var container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
+                let container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                 resize.check(container)
                 return
+            }
 
-            case 'visible':
+            case 'visible': {
                 this.setVisibility()
-                var container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
+                let container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                 resize.check(container)
                 return
+            }
 
             case 'interaction':
                 this.container.classList.toggle('no-interaction', !this.getProp('interaction'))
@@ -791,14 +793,15 @@ class Widget extends EventEmitter {
                 }
                 return
 
-            case 'css':
+            case 'css': {
                 this.setContainerStyles(['css'])
                 var re = /width|height|display|margin|padding|flex/
                 if (re.test(oldPropValue) || re.test(this.getProp('css'))) {
-                    var container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
+                    let container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                     resize.check(container)
                 }
                 return
+            }
 
             case 'colorText':
             case 'colorWidget':

@@ -1,6 +1,5 @@
 var {updateWidget} = require('./data-workers'),
     {categories} = require('../widgets/'),
-    Panel = require('../widgets/containers/panel'),
     widgetManager = require('../managers/widgets'),
     {icon} = require('../ui/utils'),
     editor = require('./'),
@@ -21,12 +20,12 @@ var handleClick = function(event) {
     )) { return }
 
     var eventData = event.detail,
-        widget = widgetManager.getWidgetByElement(eventData.target, ':not(.not-editable)')
+        targetWidget = widgetManager.getWidgetByElement(eventData.target, ':not(.not-editable)')
 
-    if (!widget) return
+    if (!targetWidget) return
 
     // if the widget is not already selected
-    if (!widget.container.classList.contains('editing') || event.detail.ctrlKey || event.detail.shiftKey) {
+    if (!targetWidget.container.classList.contains('editing') || event.detail.ctrlKey || event.detail.shiftKey) {
         // add a flag to the original event to prevent draginit
         // and prevent any further fast-click (ie input focus)
         eventData.capturedByEditor = true
@@ -35,20 +34,19 @@ var handleClick = function(event) {
 
 
     if (event.type !== 'fast-right-click') {
-        editor.select(widget, {multi: event.detail[multiSelectKey]})
+        editor.select(targetWidget, {multi: event.detail[multiSelectKey]})
     }
 
     // right-click menu
     if (event.type !== 'fast-right-click') return
 
     if (!event.detail.shiftKey && !event.detail[multiSelectKey] && editor.selectedWidgets.length <= 1) {
-        editor.select(widget)
+        editor.select(targetWidget)
     }
 
     if (!editor.selectedWidgets.length) return
 
-    var index = editor.selectedWidgets.map((w)=>DOM.index(w.container)).sort((a,b)=>{return b-a}),
-        data = editor.selectedWidgets.map((w)=>w.props),
+    var data = editor.selectedWidgets.map((w)=>w.props),
         widget = editor.selectedWidgets[0],
         parent = widget.parent,
         actions = []

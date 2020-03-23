@@ -1,5 +1,3 @@
-var {deepCopy} = require('../utils')
-
 module.exports = {
 
     clip: function(value,range) {

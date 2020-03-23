@@ -2,7 +2,6 @@ var Container = require('../common/container'),
     widgetManager = require('../../managers/widgets'),
     parser = require('../../parser'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw'),
     {enableTraversingGestures, disableTraversingGestures} = require('../../events/drag'),
     setScrollbarColor = require('../../ui/scrollbar-color')
 

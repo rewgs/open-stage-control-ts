@@ -135,8 +135,10 @@ class ScriptVm extends Vm {
 
             if (filter) {
 
-                var filter = Array.isArray(filter) ? filter : [filter],
-                    containers = this.filter.map(x=>widgetManager.getWidgetById(x)).reduce((a,b)=>a.concat(b), [])
+                filter = Array.isArray(filter) ? filter : [filter]
+                
+                var containers = this.filter.map(x=>widgetManager.getWidgetById(x)).reduce((a,b)=>a.concat(b), [])
+
                 if (!containers.length) return
                 filter = (widget)=>{
                     return containers.some(x=>x.contains(widget) || x === widget)

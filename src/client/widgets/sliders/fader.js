@@ -1,7 +1,5 @@
 var {clip} = require('../utils'),
-    Slider = require('./slider'),
-    parser = require('../../parser'),
-    html = require('nanohtml')
+    Slider = require('./slider')
 
 module.exports = class Fader extends Slider {
 
