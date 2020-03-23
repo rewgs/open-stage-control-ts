@@ -1,15 +1,7 @@
 var {mapToScale} = require('../utils'),
     Plot = require('./plot'),
     Widget = require('../common/widget'),
-    StaticProperties = require('../mixins/static_properties'),
-    audioContext
-
-try {
-    audioContext = new AudioContext()
-} catch(e) {
-    audioContext = new webkitAudioContext()
-}
-
+    StaticProperties = require('../mixins/static_properties')
 
 class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
 
@@ -49,80 +41,36 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
         super(options)
 
         setTimeout(()=>{
-            this.createFilters()
             this.calcResponse()
         })
 
     }
 
-    createFilters() {
-
-        this.filters = []
-        var filters = this.getProp('filters')
-        for (let i in filters) {
-            try {
-                this.filters[i] = new BiquadFilterNode(audioContext, {
-                    Q: filters[i].q,
-                    type: filters[i].type,
-                    frequency: filters[i].freq,
-                    gain: filters[i].gain,
-                })
-            } catch(e) {
-                this.filters[i] = new BiquadFilterNode(audioContext, {
-                    Q: 1,
-                    type: 'allpass',
-                })
-            }
-
-            this.filters[i]._on = filters[i].on
-        }
-
-    }
-
     calcResponse() {
-
-        /*
-            Based on view-source:http://webaudio-io2012.appspot.com/frames/frequency-response.html © Google 2010
-        */
 
         var resolution = this.width,
             frequencyHz = new Float32Array(resolution),
-            phaseResponse = new Float32Array(resolution)
+            filterResponse = new Float32Array(resolution).fill(0)
 
         for (let i = 0; i < resolution; ++i) {
-            frequencyHz[i] = mapToScale(i, [0,this.width], [this.getProp('rangeX').min, this.getProp('rangeX').max], -1, true)
+            frequencyHz[i] = mapToScale(i, [0, this.width], [this.getProp('rangeX').min, this.getProp('rangeX').max], -1, true)
         }
 
+        for (let filter of this.getProp('filters')) {
 
-        var responses = [],
-            eqResponse = []
+            if (filter.on === false) continue
 
-        for (let filter of this.filters) {
-
-            if (filter._on === false) continue
-
-            var filterResponse = new Float32Array(resolution)
-
-            filter.getFrequencyResponse(frequencyHz, filterResponse, phaseResponse)
-
-            responses.push(filterResponse)
+            biquadResponse({
+                type: filter.type,
+                gain: filter.gain,
+                frequency: filter.freq,
+                q: filter.q
+            }, frequencyHz, filterResponse)
 
         }
 
-        for (let i = 0; i < resolution; ++i) {
-
-            eqResponse[i] = 0
-            for (let r of responses) {
-                eqResponse[i] += 20.0 * Math.log(r[i]) / Math.LN10
-            }
-
-        }
-
-        // this.setValue(eqResponse)
-        this.value = eqResponse
+        this.value = filterResponse
         this.batchDraw()
-
-
 
     }
 
@@ -134,7 +82,6 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
 
         switch (propName) {
             case 'filters':
-                this.createFilters()
                 this.calcResponse()
                 return
 
@@ -149,3 +96,127 @@ Eq.dynamicProps = Eq.prototype.constructor.dynamicProps.concat(
 )
 
 module.exports = Eq
+
+
+// biquadResponse
+// Based on code by Nigel Redmon Dec 14, 2010 njr
+function biquadResponse(options, frequencyHz, filterResponse) {
+
+    var {type, frequency, q, gain} = options,
+        Fs = 44100,
+        len = frequencyHz.length,
+        a0, a1, a2, b1, b2,norm
+
+    var V = Math.pow(10, Math.abs(gain) / 20)
+    var K = Math.tan(Math.PI * frequency / Fs)
+
+    switch (type) {
+        case 'lowpass':
+            norm = 1 / (1 + K / q + K * K)
+            a0 = K * K * norm
+            a1 = 2 * a0
+            a2 = a0
+            b1 = 2 * (K * K - 1) * norm
+            b2 = (1 - K / q + K * K) * norm
+            break
+
+        case 'highpass':
+            norm = 1 / (1 + K / q + K * K)
+            a0 = 1 * norm
+            a1 = -2 * a0
+            a2 = a0
+            b1 = 2 * (K * K - 1) * norm
+            b2 = (1 - K / q + K * K) * norm
+            break
+
+        case 'bandpass':
+            norm = 1 / (1 + K / q + K * K)
+            a0 = K / q * norm
+            a1 = 0
+            a2 = -a0
+            b1 = 2 * (K * K - 1) * norm
+            b2 = (1 - K / q + K * K) * norm
+            break
+
+        case 'notch':
+            norm = 1 / (1 + K / q + K * K)
+            a0 = (1 + K * K) * norm
+            a1 = 2 * (K * K - 1) * norm
+            a2 = a0
+            b1 = a1
+            b2 = (1 - K / q + K * K) * norm
+            break
+
+        case 'peaking':
+            if (gain >= 0) {
+                norm = 1 / (1 + 1/q * K + K * K)
+                a0 = (1 + V/q * K + K * K) * norm
+                a1 = 2 * (K * K - 1) * norm
+                a2 = (1 - V/q * K + K * K) * norm
+                b1 = a1
+                b2 = (1 - 1/q * K + K * K) * norm
+            }
+            else {
+                norm = 1 / (1 + V/q * K + K * K)
+                a0 = (1 + 1/q * K + K * K) * norm
+                a1 = 2 * (K * K - 1) * norm
+                a2 = (1 - 1/q * K + K * K) * norm
+                b1 = a1
+                b2 = (1 - V/q * K + K * K) * norm
+            }
+            break
+        case 'lowshelf':
+            if (gain >= 0) {
+                norm = 1 / (1 + Math.SQRT2 * K + K * K)
+                a0 = (1 + Math.sqrt(2*V) * K + V * K * K) * norm
+                a1 = 2 * (V * K * K - 1) * norm
+                a2 = (1 - Math.sqrt(2*V) * K + V * K * K) * norm
+                b1 = 2 * (K * K - 1) * norm
+                b2 = (1 - Math.SQRT2 * K + K * K) * norm
+            }
+            else {
+                norm = 1 / (1 + Math.sqrt(2*V) * K + V * K * K)
+                a0 = (1 + Math.SQRT2 * K + K * K) * norm
+                a1 = 2 * (K * K - 1) * norm
+                a2 = (1 - Math.SQRT2 * K + K * K) * norm
+                b1 = 2 * (V * K * K - 1) * norm
+                b2 = (1 - Math.sqrt(2*V) * K + V * K * K) * norm
+            }
+            break
+        case 'highshelf':
+            if (gain >= 0) {
+                norm = 1 / (1 + Math.SQRT2 * K + K * K)
+                a0 = (V + Math.sqrt(2*V) * K + K * K) * norm
+                a1 = 2 * (K * K - V) * norm
+                a2 = (V - Math.sqrt(2*V) * K + K * K) * norm
+                b1 = 2 * (K * K - 1) * norm
+                b2 = (1 - Math.SQRT2 * K + K * K) * norm
+            }
+            else {
+                norm = 1 / (V + Math.sqrt(2*V) * K + K * K)
+                a0 = (1 + Math.SQRT2 * K + K * K) * norm
+                a1 = 2 * (K * K - 1) * norm
+                a2 = (1 - Math.SQRT2 * K + K * K) * norm
+                b1 = 2 * (K * K - V) * norm
+                b2 = (V - Math.sqrt(2*V) * K + K * K) * norm
+            }
+            break
+    }
+
+    for (var i = 0; i < len; i++) {
+
+        var w = mapToScale(frequencyHz[i], [0, Fs / 2], [0, Math.PI], -1, false),
+            phi = Math.pow(Math.sin(w / 2), 2),
+            y = Math.log(Math.pow(a0 + a1 + a2, 2) - 4 * (a0 * a1 + 4 * a0 * a2 + a1 * a2) * phi + 16 * a0 * a2 * phi * phi) -
+                Math.log(Math.pow(1 + b1 + b2, 2) - 4 * (b1 + 4 * b2 + b1 * b2) * phi + 16 * b2 * phi *phi)
+
+        y = y * 10 / Math.LN10
+
+        // if (y == -Infinity) y = -200
+
+        filterResponse[i] += y
+
+    }
+
+
+}
