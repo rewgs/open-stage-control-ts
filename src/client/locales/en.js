@@ -11,14 +11,12 @@ module.exports = {
     editor_show_in_tree: 'Show in tree',
     editor_copy: 'Copy',
     editor_cut: 'Cut',
-    editor_wrap: 'Wrap in',
     editor_paste: 'Paste',
     editor_pasteindent: 'ID + 1',
     editor_clone: 'Clone',
     editor_addwidget: 'Add widget',
     editor_addtab: 'Add tab',
     editor_delete: 'Delete',
-    editor_click_for_help: 'Click on the property name to display help',
 
     // loadings
     loading_upload: 'Uploading file...',
@@ -26,6 +24,7 @@ module.exports = {
     loading_server: 'Connecting server...',
     loading_session: 'Loading session...',
 
+    // file
     file_open: 'Open',
     file_open_recent: 'Open recent',
     file_save: 'Save',
@@ -33,14 +32,12 @@ module.exports = {
     file_import: 'Import',
     file_export: 'Export',
 
-
-    // fullscreen error
+    // fullscreen
     fullscreen: 'Fullscreen',
     fullscreen_unnavailable: 'Fullscreen not available',
     fullscreen_addtohome: 'You must add this page to your home screen to launch it in fullscreen',
 
     // inspector
-    inspector_title: 'Inspector',
     inspector_color_confirm: 'Confirm',
     inspector_color_apply: 'Apply',
 
@@ -61,8 +58,7 @@ module.exports = {
 
     // session
     session: 'Session',
-    session_browse: 'Browse...',
-    session_new: 'New',
+    session_new: 'New session',
     session_malformed: 'Malformed session file.',
     session_parsingerror: 'Parsing error.',
     session_uploaderror: 'Failed to upload session file.',
@@ -79,11 +75,6 @@ module.exports = {
     state_storesuccess: 'State saved',
     state_recallsuccess: 'State recalled',
     state_sendsuccess: 'State sent',
-
-    // traversing
-    traversing_on: 'On',
-    traversing_smart: 'Smart',
-    traversing_off: 'Off',
 
     // misc
     error: 'Error'
