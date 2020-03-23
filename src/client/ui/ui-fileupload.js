@@ -18,8 +18,9 @@ module.exports = function uiFileUpload(types, ok, error) {
 
 
         var reader = new FileReader(),
-            file = e.target.files[0],
-            loader = uiLoading(locales('loading_upload'))
+            file = e.target.files[0]
+
+        uiLoading(locales('loading_upload'))
 
         reader.onerror = reader.onabort = function() {
             loader.close()
@@ -27,7 +28,7 @@ module.exports = function uiFileUpload(types, ok, error) {
         }
 
         reader.onload = function(e) {
-            loader.close()
+            uiLoading(false)
             ok(file.path, e.target.result)
         }
 
