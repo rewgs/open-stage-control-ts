@@ -195,7 +195,7 @@ class OscServer {
 
         if (!data) return
 
-        for (i in data.args) {
+        for (var i in data.args) {
             data.args[i] = data.args[i].value
         }
 
