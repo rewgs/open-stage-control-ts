@@ -1,3 +1,21 @@
+.panel-container {
+    width: 200rem;
+    height: 200rem;
+}
+.modal-container {
+    width: 90rem;
+    height: 60rem;
+}
+.keyboard-container {
+    width: 220rem;
+    height: 90rem;
+}
+.patchbay-container {
+    width: 240rem;
+    height: 160rem;
+}
+
+
 .widget-panel-base {
 
     --widget-padding: 4rem;
@@ -488,9 +506,6 @@
 
 }
 .patchbay-container {
-    width: 200rem;
-    height: 200rem;
-
 
     --alpha-fill-on: .75;
     --alpha-fill-off: 0.25;

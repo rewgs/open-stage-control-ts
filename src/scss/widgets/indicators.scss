@@ -1,5 +1,8 @@
 .led-container {
 
+    width: 90rem;
+    height: 60rem;
+
     --color-led: var(--color-fill);
     --alpha-fill-off: 0;
     --alpha-fill-on: 1;
@@ -29,8 +32,8 @@
 
 .text-container {
 
-    width: 100rem;
-    height:60rem;
+    width: 90rem;
+    height: 60rem;
     --alpha-fill-on: 75;
 
     inner {

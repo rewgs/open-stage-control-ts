@@ -27,6 +27,11 @@
         text-align: left;
     }
 
+    &.horizontal {
+        width: 200rem;
+        height: 50rem;
+    }
+
     &.design-default {
         --widget-padding: 10rem;
         --alpha-stroke: 0.5;
