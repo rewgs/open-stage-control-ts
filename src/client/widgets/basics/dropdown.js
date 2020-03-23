@@ -93,6 +93,12 @@ class Dropdown extends Widget {
 
         if (!options.fromLocal) this.select.selectedIndex = i + 1
 
+        if (document.activeElement === this.select) {
+            // force menu close
+            this.select.blur()
+            this.select.focus()
+        }
+
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
 
