@@ -1,5 +1,5 @@
 var Widget = require('../common/widget'),
-    deepEqual = require('../../utils')
+    {deepEqual} = require('../../utils')
 
 class MenuBase extends Widget {
 
