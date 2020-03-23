@@ -60,6 +60,8 @@ module.exports = class Fader extends Slider {
 
         super(options)
 
+        this.container.classList.toggle('horizontal', this.getProp('horizontal'))
+
         this.gaugeGradient = null
 
     }
