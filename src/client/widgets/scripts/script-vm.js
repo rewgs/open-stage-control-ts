@@ -172,14 +172,24 @@ class ScriptVm extends Vm {
                 id = undefined
             }
 
-            var widget = this.getWidget()
+            var widget = this.getWidget(),
+                options = this.getValueOptions()
+
 
             if (widget.timeouts[id] !== undefined) {
                 clearTimeout(widget.timeouts[id])
                 delete widget.timeouts[id]
             }
             widget.timeouts[id] = setTimeout(()=>{
-                callback()
+                this.setWidget(widget)
+                this.setValueOptions(options)
+                try {
+                    callback()
+                } catch(e) {
+                    console.log(e)
+                }
+                this.setWidget()
+                this.setValueOptions()
             }, timeout)
 
         }
@@ -201,13 +211,23 @@ class ScriptVm extends Vm {
                 id = undefined
             }
 
-            var widget = this.getWidget()
+            var widget = this.getWidget(),
+                options = this.getValueOptions()
+
 
             if (widget.intervals[id] !== undefined) clearTimeout(widget.intervals[id])
             delete widget.intervals[id]
 
             widget.intervals[id] = setInterval(()=>{
-                callback()
+                this.setWidget(widget)
+                this.setValueOptions(options)
+                try {
+                    callback()
+                } catch(e) {
+                    console.log(e)
+                }
+                this.setWidget()
+                this.setValueOptions()
             }, timeout)
 
         }
