@@ -69,7 +69,7 @@ class Dropdown extends MenuBase {
 
     setValue(v,options={}) {
 
-        var i = this.values.indexOf(v)
+        var i = this.getIndex(v)
 
         this.value = this.values[i]
 
