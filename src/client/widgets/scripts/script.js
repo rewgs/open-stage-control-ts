@@ -104,7 +104,7 @@ class Script extends Widget {
 
     }
 
-    run(context) {
+    run(context) {
 
         if (this.scriptLock) return
 

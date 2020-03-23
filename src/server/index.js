@@ -142,7 +142,7 @@ if (settings.cli) {
     ipcMain.on('start',function(e, options){
 
         var args = ['--no-gui']
-        for (var k in settings.read('options')) {
+        for (var k in settings.read('options')) {
             args.push('--' + k)
             var val = settings.read(k)
             if (typeof val === 'object') {

@@ -52,7 +52,7 @@ delete argv.$0
 var optNames = [],
     cliOnly = []
 
-for (var k in options) {
+for (let k in options) {
     var name = options[k].alias || k
     optNames.push(name)
     if (options[k].launcher === false) {
@@ -86,7 +86,7 @@ var settings = {
 
 ///////////////// config paths
 
-var baseDir, configPath, configPathExists = true
+var baseDir, configPath, configPathExists = true, config = {}
 
 if (argv['cache-dir']) {
     baseDir = path.isAbsolute(argv['cache-dir']) ? argv['cache-dir'] : path.resolve(process.cwd(), argv['cache-dir'])
@@ -107,10 +107,6 @@ if (!fs.existsSync(baseDir)) {
     }
 }
 
-var configPath,
-    configFile = {},
-    config = {}
-
 if (configPathExists) {
     if (argv['config-file']) {
         configPath = path.isAbsolute(argv['config-file']) ? argv['config-file'] : path.resolve(process.cwd(), argv['config-file'])
@@ -121,12 +117,12 @@ if (configPathExists) {
         config = JSON.parse(fs.readFileSync(configPath,'utf-8'))
     } catch(e) {}
     if (cli) {
-        for (var k in config) {
+        for (let k in config) {
             if (k === 'options') continue
             settings[k] = config[k]
         }
     } else {
-        for (var k in config) {
+        for (let k in config) {
             settings[k] = config[k]
         }
     }
