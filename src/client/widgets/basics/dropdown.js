@@ -1,5 +1,6 @@
 var MenuBase = require('./menu-base'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    iOS = require('../../ui/ios')
 
 class Dropdown extends MenuBase {
 
@@ -77,10 +78,9 @@ class Dropdown extends MenuBase {
 
         this.text.textContent = i === -1 ? '' : this.select.options[i].textContent
 
-        if (document.activeElement === this.select) {
-            // force menu close
+        if (document.activeElement === this.select && iOS) {
+            // force menu close on ios
             this.select.blur()
-            this.select.focus()
         }
 
         if (options.send) this.sendValue()
