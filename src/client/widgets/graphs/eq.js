@@ -3,7 +3,7 @@ var {mapToScale} = require('../utils'),
     Widget = require('../common/widget'),
     StaticProperties = require('../mixins/static_properties')
 
-class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
+class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smooth:true}) {
 
     static description() {
 
@@ -19,7 +19,7 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
 
             filters: {type: 'array', value: '', help: [
                 'Each item must be an object with the following properties',
-                '- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peaking", "bandpass" or "notch")',
+                '- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch")',
                 '- `freq`: number (filter\'s resonant frequency)',
                 '- `q`: number (Q factor)',
                 '- `gain`: number',
@@ -75,6 +75,13 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
     }
 
     setValue() {}
+
+    resizeHandle(event){
+
+        super.resizeHandle(event)
+        if (this.width !== this.value.length) this.calcResponse()
+
+    }
 
     onPropChanged(propName, options, oldPropValue) {
 
@@ -147,7 +154,7 @@ function biquadResponse(options, frequencyHz, filterResponse) {
             b2 = (1 - K / q + K * K) * norm
             break
 
-        case 'peaking':
+        case 'peak':
             if (gain >= 0) {
                 norm = 1 / (1 + 1/q * K + K * K)
                 a0 = (1 + V/q * K + K * K) * norm
