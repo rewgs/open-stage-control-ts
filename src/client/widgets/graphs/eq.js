@@ -2,7 +2,13 @@ var {mapToScale} = require('../utils'),
     Plot = require('./plot'),
     Widget = require('../common/widget'),
     StaticProperties = require('../mixins/static_properties'),
+    audioContext
+
+try {
     audioContext = new AudioContext()
+} catch(e) {
+    audioContext = new webkitAudioContext()
+}
 
 
 class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
