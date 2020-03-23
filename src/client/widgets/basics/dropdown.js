@@ -1,9 +1,9 @@
-var Widget = require('../common/widget'),
+var MenuBase = require('./menu-base'),
     {iconify} = require('../../ui/utils'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw')
 
-class Dropdown extends Widget {
+class Dropdown extends MenuBase {
 
     static description() {
 
@@ -43,15 +43,12 @@ class Dropdown extends Widget {
         this.select = this.widget.appendChild(html`<select class="no-keybinding"></select>`)
         this.text = DOM.get(this.widget, '.text')[0]
 
-        this.values = []
-
         this.parseValues()
 
         this.select.addEventListener('change', ()=>{
             this.setValue(this.values[this.select.selectedIndex], {sync:true, send:true, fromLocal:true})
         })
 
-        this.value = undefined
         this.select.selectedIndex = -1
         this.container.classList.add('noselect')
 
@@ -59,25 +56,15 @@ class Dropdown extends Widget {
 
     parseValues() {
 
-        var i = 0,
-            values = this.getProp('values')
-
-        if (!Array.isArray(values) && !(typeof values === 'object' && values !== null)) {
-            values = values !== '' ? [values] : []
-        }
+        super.parseValues()
 
         this.select.innerHTML = ''
-
-        this.values = []
-
-        for (var k in values) {
-            this.values.push(values[k])
+        for (var i = 0; i < this.values.length; i++) {
             this.select.appendChild(html`
                 <option value="${i}">
-                    ${raw(iconify(parseFloat(k) != k ? k : values[k]))}
+                    ${this.keys[i]}
                 </option>
             `)
-            i++
         }
 
     }
@@ -90,7 +77,7 @@ class Dropdown extends Widget {
 
         if (!options.fromLocal) this.select.selectedIndex = i
 
-        this.text.textContent = this.select.options[i].textContent
+        this.text.textContent = i === -1 ? '' : this.select.options[i].textContent
 
         if (document.activeElement === this.select) {
             // force menu close

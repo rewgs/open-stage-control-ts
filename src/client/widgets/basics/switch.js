@@ -1,9 +1,9 @@
-var Widget = require('../common/widget'),
+var MenuBase = require('./menu-base'),
     {iconify} = require('../../ui/utils'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw')
 
-class Switch extends Widget {
+class Switch extends MenuBase {
 
     static description() {
 
@@ -19,7 +19,6 @@ class Switch extends Widget {
 
             layout: {type: 'string', value: 'vertical', choices: ['vertical', 'horizontal', 'grid'], help:''},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
-            showValues: {type: 'boolean', value: false, help: 'If values is an object, set to `true` to display both values and labels instead of labels only'},
             values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
                 '`Array` of possible values to switch between : `[1,2,3]`',
                 '`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
@@ -47,38 +46,8 @@ class Switch extends Widget {
             this.widget.style.gridTemplate = template === parseInt(template) ? `none / repeat(${template}, 1fr)` : template
         }
 
+        this.parseValues()
 
-        this.values = []
-        this.stringValues = []
-
-        var values =  this.getProp('values')
-
-        if (!Array.isArray(values) && !(typeof values === 'object' && values !== null)) {
-            values = [values]
-        }
-
-        var isArray = Array.isArray(values)
-
-        for (var k in values) {
-
-            this.values.push(values[k])
-
-            if (typeof values[k] == 'object') {
-                this.stringValues.push(JSON.stringify(values[k]))
-            } else {
-                this.stringValues.push(0)
-            }
-
-            var label = isArray ? values[k]: k
-            if (this.getProp('showValues') && !isArray) label = label + ': ' + (this.stringValues[this.stringValues.length - 1] || values[k])
-
-            this.widget.appendChild(html`
-                <value> ${raw(iconify(label))}</value>
-            `)
-
-        }
-
-        this.value = undefined
 
         var dragCallback = (e, touchFix)=>{
 
@@ -92,7 +61,7 @@ class Switch extends Widget {
 
             if (node === this.widget || !this.widget.contains(node)) return
 
-            while ( (node = node.previousSibling) ) {
+            while ((node = node.previousSibling)) {
                 if (node.nodeType != 3) {
                     index++
                 }
@@ -100,7 +69,7 @@ class Switch extends Widget {
 
             var value = this.values[index]
 
-            if (value!=this.value || this.value===undefined) this.setValue(value,{sync:true,send:true})
+            if (value !== this.value || this.value === undefined) this.setValue(value, {sync: true, send: true})
 
         }
 
@@ -116,21 +85,33 @@ class Switch extends Widget {
 
     }
 
+    parseValues() {
+
+        super.parseValues()
+
+        for (var i = 0; i < this.values.length; i++) {
+
+            this.widget.appendChild(html`
+                <value>${raw(iconify(this.keys[i]))}</value>
+            `)
+
+        }
+
+    }
+
     setValue(v, options={}) {
 
-        var i = typeof v == 'object' ?
-            this.stringValues.indexOf(JSON.stringify(v)) :
-            this.values.indexOf(v)
+        var i = this.values.indexOf(v)
 
-        DOM.each(this.widget, '.on', (el)=>{el.classList.remove('on')})
 
-        if (i!=-1) {
+        if (i !== -1) {
+
             this.value = this.values[i]
+
+            DOM.each(this.widget, '.on', (el)=>{el.classList.remove('on')})
             DOM.get(this.widget, 'value')[i].classList.add('on')
+
             if (options.send) this.sendValue(this.value)
-            if (options.sync) this.changed(options)
-        } else {
-            this.value = undefined
             if (options.sync) this.changed(options)
         }
 

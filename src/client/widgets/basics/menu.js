@@ -1,10 +1,10 @@
-var Widget = require('../common/widget'),
+var MenuBase = require('./menu-base'),
     {iconify} = require('../../ui/utils'),
     doubletab = require('../mixins/double_tap'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw')
 
-class Menu extends Widget {
+class Menu extends MenuBase {
 
     static description() {
 
@@ -60,14 +60,9 @@ class Menu extends Widget {
 
         this.opened = false
 
-        this.values = []
-        this.keys = []
-
         this.selected = -1
-        this.value = undefined
 
         this.parseValues()
-
 
         if (this.getProp('doubleTap')) {
 
@@ -186,40 +181,30 @@ class Menu extends Widget {
 
     parseValues() {
 
-        var nval = 0,
-            i = 0,
+        super.parseValues()
+
+        var nval = this.values.length,
             circular = this.getProp('layout') === 'circular',
-            values = this.getProp('values'),
             weights = this.getProp('weights'),
             totalWeight
 
-        if (!Array.isArray(values) && !(typeof values === 'object' && values !== null)) {
-            values = values !== '' ? [values] : []
-        }
-
-        this.values = []
         if (this.opened) this.widget.removeChild(this.menu)
         this.menu.innerHTML = ''
 
-        this.keys = !Array.isArray(values) ? Object.keys(values) : values
-        this.values = !Array.isArray(values) ? Object.values(values) : values
-
-        nval = Array.isArray(values) ? values.length : Object.keys(values).length
         weights = Array.isArray(weights) ? weights.slice(0, nval) : Array(nval).fill(1)
         if (weights.length < nval) weights = weights.concat(Array(nval - weights.length).fill(1))
         totalWeight = weights.reduce((a, b) => a + b, 0)
 
         var ac = 0
-        for (let k in values) {
+        for (var i = 0; i < nval; i++) {
             let angle = Math.min(360 * weights[i] / totalWeight, 120),
                 skew = 90 - angle
 
             this.menu.appendChild(html`
                 <div class="item" style="${circular ? `transform: rotate(${ac}deg) skew(${skew}deg)` : `flex: ${weights[i]}`}">
-                    <div style="${circular ? `transform: skew(${-skew}deg) rotate(${-90 + angle / 2}deg)` : ''}"><span style="${circular ? `transform: rotate(${-ac + 90 - angle / 2}deg)` : ''}">${raw(iconify(parseFloat(k) != k ? k : values[k]))}</span></div>
+                    <div style="${circular ? `transform: skew(${-skew}deg) rotate(${-90 + angle / 2}deg)` : ''}"><span style="${circular ? `transform: rotate(${-ac + 90 - angle / 2}deg)` : ''}">${raw(iconify(this.keys[i]))}</span></div>
                 </div>
             `)
-            i++
             ac+=angle
 
         }
@@ -275,7 +260,7 @@ class Menu extends Widget {
 
         DOM.each(this.menu, '.on', (el)=>{el.classList.remove('on')})
         if (i > -1) DOM.get(this.menu, '.item')[i].classList.add('on')
-        this.text.textContent = this.keys[i]
+        this.text.innerHTML = iconify(this.keys[i])
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
