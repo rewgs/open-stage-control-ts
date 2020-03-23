@@ -1,7 +1,6 @@
-var {remote, ipcRenderer, shell} = eval('require(\'electron\')'),
-    {dialog, Menu, MenuItem, app} = remote.require('electron'),
+var {remote, ipcRenderer} = eval('require(\'electron\')'),
+    {Menu, MenuItem} = remote.require('electron'),
     menu = new Menu(),
-    html = require('nanohtml'),
     terminal = require('./terminal'),
     settings = require('./settings'),
     midilist = remote.getGlobal('midilist')

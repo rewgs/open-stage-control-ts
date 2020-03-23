@@ -1,6 +1,6 @@
 var UiWidget = require('./ui-widget'),
     html = require('nanohtml'),
-    Tab, Root, Modal
+    Tab, Root
 
 class UiDragResize extends UiWidget {
 
@@ -8,7 +8,6 @@ class UiDragResize extends UiWidget {
 
         Tab = require('../widgets/containers/tab')
         Root = require('../widgets/containers/root')
-        Modal = require('../widgets/containers/modal')
 
         super(options)
 

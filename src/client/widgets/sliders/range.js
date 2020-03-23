@@ -1,7 +1,5 @@
 var {clip} = require('../utils'),
-    Canvas = require('../common/canvas'),
     Fader = require('./fader'),
-    touchstate = require('../mixins/touch_state'),
     html = require('nanohtml')
 
 var faderDefaults = Fader.defaults()._props()

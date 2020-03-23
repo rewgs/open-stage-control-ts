@@ -1,8 +1,6 @@
 var Widget = require('../common/widget'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw'),
-    uiFilebrowser = require('../../ui/ui-filebrowser'),
-    {icon} = require('../../ui/utils')
+    uiFilebrowser = require('../../ui/ui-filebrowser')
 
 module.exports = class File extends Widget {
 

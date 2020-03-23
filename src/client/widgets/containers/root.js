@@ -1,9 +1,6 @@
 var Panel = require('./panel'),
     Widget = require('../common/widget'),
-    StaticProperties = require('../mixins/static_properties'),
-    {icon} = require('../../ui/utils'),
-    html = require('nanohtml'),
-    raw = require('nanohtml/raw')
+    StaticProperties = require('../mixins/static_properties')
 
 class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'root'}) {
 

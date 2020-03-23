@@ -1,7 +1,4 @@
 var Widget = require('../common/widget'),
-    {icon} = require('../../ui/utils'),
-    html = require('nanohtml'),
-    raw = require('nanohtml/raw'),
     keyboardJS = require('keyboardjs'),
     ScriptVm = require('./script-vm'),
     scriptVm = new ScriptVm()

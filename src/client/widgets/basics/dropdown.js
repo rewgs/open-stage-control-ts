@@ -1,7 +1,5 @@
 var MenuBase = require('./menu-base'),
-    {iconify} = require('../../ui/utils'),
-    html = require('nanohtml'),
-    raw = require('nanohtml/raw')
+    html = require('nanohtml')
 
 class Dropdown extends MenuBase {
 

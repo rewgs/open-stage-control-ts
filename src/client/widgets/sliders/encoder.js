@@ -1,8 +1,5 @@
-var {clip} = require('../utils'),
-    Knob = require('./knob'),
+var Knob = require('./knob'),
     Widget = require('../common/widget'),
-    doubletab = require('../mixins/double_tap'),
-    html = require('nanohtml'),
     StaticProperties = require('../mixins/static_properties')
 
 

@@ -283,7 +283,6 @@ module.exports = class Knob extends Slider {
             this.ctx.lineWidth = 1.5 * PXSCALE
 
             let r1 = maxRadius - (8 + this.cssVars.padding) * PXSCALE,
-                r2 =  maxRadius / 3 ,
                 a  = 2 * Math.PI - d
 
             this.ctx.beginPath()

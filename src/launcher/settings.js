@@ -1,5 +1,5 @@
-var {remote, ipcRenderer, shell} = eval('require(\'electron\')'),
-    {dialog, Menu, MenuItem} = remote.require('electron'),
+var {remote} = eval('require(\'electron\')'),
+    {dialog} = remote.require('electron'),
     fs = remote.require('fs'),
     settings = remote.getGlobal('settings'),
     {icon} = require('../client/ui/utils'),

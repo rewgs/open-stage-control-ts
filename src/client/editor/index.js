@@ -11,7 +11,6 @@ var {updateWidget, incrementWidget} = require('./data-workers'),
     UiDragResize = require('../ui/ui-dragresize'),
     {leftUiSidePanel, rightUiSidePanel} = require('../ui/'),
     ipc = require('../ipc'),
-    html = require('nanohtml'),
     sessionManager
 
 const HISTORY_SIZE = 50

@@ -1,16 +1,11 @@
 var ipc = require('../ipc/'),
     parser = require('../parser'),
     editor = require('../editor/'),
-    {icon} = require('../ui/utils'),
-    UiModal = require('../ui/ui-modal'),
-    UiModal = require('../ui/ui-modal'),
     uiFilebrowser = require('../ui/ui-filebrowser'),
     uiFileupload = require('../ui/ui-fileupload'),
     uiLoading = require('../ui/ui-loading'),
     {saveAs} = require('file-saver'),
     widgetManager = require('./widgets'),
-    html = require('nanohtml'),
-    raw = require('nanohtml/raw'),
     locales = require('../locales')
 
 

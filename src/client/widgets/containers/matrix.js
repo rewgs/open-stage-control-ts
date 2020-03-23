@@ -2,8 +2,7 @@ var Panel = require('./panel'),
     Widget = require('../common/widget'),
     StaticProperties = require('../mixins/static_properties'),
     parser = require('../../parser'),
-    {deepCopy} = require('../../utils'),
-    html = require('nanohtml')
+    {deepCopy} = require('../../utils')
 
 
 class Matrix extends StaticProperties(Panel, {scroll: false}) {

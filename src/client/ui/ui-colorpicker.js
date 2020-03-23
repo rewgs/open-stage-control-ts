@@ -2,7 +2,6 @@ var UiWidget = require('./ui-widget'),
     Rgb = require('../widgets/pads/rgb'),
     UiModal = require('./ui-modal'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw'),
     chroma = require('chroma-js'),
     resize = require('../events/resize'),
     locales = require('../locales')

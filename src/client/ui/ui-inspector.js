@@ -3,8 +3,7 @@ var UiWidget = require('./ui-widget'),
     UiColorPicker = require('./ui-colorpicker'),
     UiModal = require('./ui-modal'),
     morph = require('nanomorph'),
-    {widgets, defaults} = require('../widgets/'),
-    {deepCopy} = require('../utils'),
+    {defaults} = require('../widgets/'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw')
 
@@ -111,7 +110,6 @@ class UiInspector extends UiWidget {
 
         var widget = widgets[0],
             props = defaults[widget.props.type],
-            multi = widgets.length > 1,
             tabIndex = 1000
 
         this.widget = widget
@@ -256,8 +254,7 @@ class UiInspector extends UiWidget {
             el.target = '_blank'
         })
 
-        var htmlError = false ? html`<p class="error">${error}</p>` : '',
-            computedValue = this.widget.getProp(name)
+        var computedValue = this.widget.getProp(name)
 
         if (typeof computedValue === 'string') {
             try {
@@ -274,8 +271,6 @@ class UiInspector extends UiWidget {
                 <p>Default: <code>${JSON.stringify(defaultValue.value)}</code></p>
                 <p>Dynamic: <code>${dynamic ? 'true' : 'false'}</code></p>
                 <p>Computed: <code class="pre">${computedValue}</code></p>
-
-                ${htmlError}
 
                 ${htmlHelp}
             </div>

@@ -1,5 +1,4 @@
 var Widget = require('../common/widget'),
-    ipc = require('../../ipc'),
     html = require('nanohtml'),
     {urlParser} = require('../utils'),
     StaticProperties = require('../mixins/static_properties')

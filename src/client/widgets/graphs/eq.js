@@ -1,9 +1,8 @@
-var {clip, mapToScale} = require('../utils'),
+var {mapToScale} = require('../utils'),
     Plot = require('./plot'),
     Widget = require('../common/widget'),
     StaticProperties = require('../mixins/static_properties'),
-    audioContext = new AudioContext(),
-    MAXFREQ = 0.5 * audioContext.sampleRate
+    audioContext = new AudioContext()
 
 
 class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
@@ -82,19 +81,14 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
 
         var resolution = this.width,
             frequencyHz = new Float32Array(resolution),
-            phaseResponse = new Float32Array(resolution),
-            nOctaves = 11,
-            rangeXIn = [MAXFREQ * Math.pow(2.0, nOctaves * -1.0), MAXFREQ],
-            rangeXOut = [this.getProp('rangeX').min, this.getProp('rangeX').max]
-
+            phaseResponse = new Float32Array(resolution)
 
         for (let i = 0; i < resolution; ++i) {
-            frequencyHz[i] = mapToScale(i, [0,this.width], rangeXOut, -1, true)
+            frequencyHz[i] = mapToScale(i, [0,this.width], [this.getProp('rangeX').min, this.getProp('rangeX').max], -1, true)
         }
 
 
-        var filters = this.getProp('filters'),
-            responses = [],
+        var responses = [],
             eqResponse = []
 
         for (let filter of this.filters) {
