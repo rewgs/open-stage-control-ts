@@ -296,7 +296,7 @@ class Range extends Fader {
             this.clearRect = [0, 0, width, height]
 
 
-        } else if (this.getProp('design') === 'classic') {
+        } else if (this.getProp('design') === 'default') {
 
             for (let _d of [d, d2]) {
 
