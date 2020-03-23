@@ -55,14 +55,14 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false}) {
         this.filters = []
         var filters = this.getProp('filters')
         for (let i in filters) {
-            try {
+            try {
                 this.filters[i] = new BiquadFilterNode(audioContext, {
                     Q: filters[i].q,
                     type: filters[i].type,
                     frequency: filters[i].freq,
                     gain: filters[i].gain,
                 })
-            } catch(e) {
+            } catch(e) {
                 this.filters[i] = new BiquadFilterNode(audioContext, {
                     Q: 1,
                     type: 'allpass',

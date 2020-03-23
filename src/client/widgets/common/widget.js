@@ -171,7 +171,7 @@ class Widget extends EventEmitter {
         this.errors = {}
         this.parent = options.root ? widgetManager : options.parent
         this.parentNode = options.parentNode
-        this.hash = options.hash || nanoid('abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ', 10)
+        this.hash = options.hash || nanoid('abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ', 10)
         this.children = []
         this.reCreateOptions = options.reCreateOptions
         this.removed = false

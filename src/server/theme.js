@@ -17,7 +17,7 @@ class Theme {
 
     init() {
 
-        this.themes = settings.read('theme') || []
+        this.themes = settings.read('theme') || []
         this.files = []
 
         for (let theme of this.themes) {
