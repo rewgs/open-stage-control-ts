@@ -64,6 +64,7 @@
   - eq: added `rangeX`
   - html: allow `class`, `title` and `style` attributes
   - dropdown: close menu when receiving a value
+  - dropdown: removed empty 1st option
 
 - widget removals
   - `push`, `toggle`: merged into `button`
