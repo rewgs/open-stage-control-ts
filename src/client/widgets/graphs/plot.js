@@ -115,16 +115,17 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
 
         var points = [],
             padding = this.cssVars.padding + PXSCALE,
+            decimals = this.getProp('smooth') ? 1 : 0,
             x, y, i
 
         for (i in this.value) {
 
             if (this.value[i].length) {
-                points.push(mapToScale(this.value[i][0], [this.rangeX.min, this.rangeX.max], [padding, this.width - padding], 0, this.logScaleX, true))
-                points.push(mapToScale(this.value[i][1], [this.rangeY.min, this.rangeY.max], [this.height - 2 * PXSCALE - padding, 2 * PXSCALE + padding], 0, this.logScaleY, true))
+                points.push(mapToScale(this.value[i][0], [this.rangeX.min, this.rangeX.max], [padding, this.width - padding], decimals, this.logScaleX, true))
+                points.push(mapToScale(this.value[i][1], [this.rangeY.min, this.rangeY.max], [this.height - 2 * PXSCALE - padding, 2 * PXSCALE + padding], decimals, this.logScaleY, true))
             } else {
-                let nx = mapToScale(i, [0, this.value.length - 1], [padding, this.width - padding], 0, this.logScaleX, true),
-                    ny = mapToScale(this.value[i], [this.rangeY.min, this.rangeY.max], [this.height - 2 * PXSCALE - padding, 2 * PXSCALE + padding], 0, this.logScaleY, true)
+                let nx = mapToScale(i, [0, this.value.length - 1], [padding, this.width - padding], decimals, this.logScaleX, true),
+                    ny = mapToScale(this.value[i], [this.rangeY.min, this.rangeY.max], [this.height - 2 * PXSCALE - padding, 2 * PXSCALE + padding], decimals, this.logScaleY, true)
                 if (x !== nx || y !== ny) {
                     points.push(nx)
                     points.push(ny)
