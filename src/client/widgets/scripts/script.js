@@ -59,6 +59,8 @@ class Script extends Widget {
 
         super({...options, html: null})
 
+        this.builtIn = options.builtIn
+
         this.scriptLock = false
 
         this.timeouts = {}
