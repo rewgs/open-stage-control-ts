@@ -44,12 +44,11 @@ class Dropdown extends Widget {
         this.text = DOM.get(this.widget, '.text')[0]
 
         this.values = []
-        this.keys = []
 
         this.parseValues()
 
         this.select.addEventListener('change', ()=>{
-            this.setValue(this.values[this.select.selectedIndex - 1], {sync:true, send:true, fromLocal:true})
+            this.setValue(this.values[this.select.selectedIndex], {sync:true, send:true, fromLocal:true})
         })
 
         this.value = undefined
@@ -68,7 +67,6 @@ class Dropdown extends Widget {
         }
 
         this.select.innerHTML = ''
-        this.select.appendChild(html`<option value=""></option>`)
 
         this.values = []
 
@@ -89,9 +87,10 @@ class Dropdown extends Widget {
         var i = this.values.indexOf(v)
 
         this.value = this.values[i]
-        this.text.textContent = this.value
 
-        if (!options.fromLocal) this.select.selectedIndex = i + 1
+        if (!options.fromLocal) this.select.selectedIndex = i
+
+        this.text.textContent = this.select.options[i].textContent
 
         if (document.activeElement === this.select) {
             // force menu close
