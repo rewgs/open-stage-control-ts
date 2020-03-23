@@ -26,7 +26,7 @@ var handleClick = function(event) {
     if (!widget) return
 
     // if the widget is not already selected
-    if (!widget.container.classList.contains('editing')) {
+    if (!widget.container.classList.contains('editing') || event.detail.ctrlKey || event.detail.shiftKey) {
         // add a flag to the original event to prevent draginit
         // and prevent any further fast-click (ie input focus)
         eventData.capturedByEditor = true
