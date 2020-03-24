@@ -3,7 +3,6 @@ var build = require('./build'),
     babelify = require('babelify'),
     nanohtml = require('nanohtml'),
     watch = process.argv.includes('--watch'),
-    prod = process.argv.includes('--prod'),
     through = require('through'),
     minimatch = require('minimatch').Minimatch
 
@@ -24,10 +23,8 @@ var transforms = [
     [transformWrapper(babelify)]
 ]
 
-if (prod) {
-    console.warn('\033[36m=> Building minified client bundle, this may take a while...\033[0m')
-    transforms.push([transformWrapper(require('uglifyify')), {global: true}])
-}
+console.warn('\033[36m=> Building compressed client scripts...\033[0m')
+transforms.push([transformWrapper(require('uglifyify')), {global: true}])
 
 var bundle = build({
     input: '../src/client/index.js',
