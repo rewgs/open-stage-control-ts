@@ -1,7 +1,8 @@
 var Widget = require('../common/widget'),
     {iconify} = require('../../ui/utils'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw')
+    raw = require('nanohtml/raw'),
+    iOS = require('../../ui/ios')
 
 class Dropdown extends Widget {
 
@@ -81,7 +82,10 @@ class Dropdown extends Widget {
 
         this.value = this.values[i]
 
-        if (!options.fromLocal) this.select.selectedIndex = i + 1
+        if (!options.fromLocal) {
+            this.select.selectedIndex = i + 1
+            if (iOS && document.activeElement === this.select) this.select.blur()
+        }
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
