@@ -94,6 +94,10 @@
   - added `storage` object, proxy to the document's sessionStorage object (allows storing data that persist after page refresh, but not closing)
   - added `setTimeout`, `clearTimeout`, `setInterval`, `clearInterval` function proxies with an extra `id` argument (they clear automatically when called multiple times and upon widget removal. `id` is scoped to the widget)
 
+
+- state
+ - quickstate (store/recall from menu) is now stored in the clients cache and persists after refresh/close (cleared with the browser's cache)
+
 - custom module
   - `settings.read(name)`: `name` is now the long name of command-line options (not a camelCased one)
 
