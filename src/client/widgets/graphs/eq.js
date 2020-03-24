@@ -58,7 +58,7 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
 
         for (let filter of this.getProp('filters')) {
 
-            if (filter.on === false) continue
+            if (filter.on !== undefined && !filter.on) continue
 
             biquadResponse({
                 type: filter.type,
