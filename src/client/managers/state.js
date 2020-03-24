@@ -15,7 +15,7 @@ var StateManager = class StateManager {
         this.statePath = ''
         this.lastDir = null
 
-        this.quickState = null
+        this.quickState = JSON.parse(localStorage.getItem('osc.state.quickState')) || null
 
         this.valueStateQueue = {}
         this.valueOldPropQueue = {}
@@ -182,6 +182,7 @@ var StateManager = class StateManager {
     quickSave() {
 
         this.quickState = deepCopy(this.get())
+        localStorage.setItem('osc.state.quickState', JSON.stringify(this.quickState))
 
     }
 
