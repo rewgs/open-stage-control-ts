@@ -189,6 +189,16 @@ module.exports = class MultiXy extends Pad {
 
     }
 
+    cacheCanvasStyle(style) {
+
+        super.cacheCanvasStyle(style)
+        for (var k in this.pads) {
+            this.pads[k].cacheCanvasStyle()
+            this.pads[k].batchDraw()
+        }
+
+    }
+
     updateHandlesPosition() {
 
         for (var i=0;i<this.npoints;i++) {
