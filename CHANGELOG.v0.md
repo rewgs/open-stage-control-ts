@@ -1,10 +1,20 @@
 # Changelog (v0)
 
+## 0.49.12
+
+
+**This is the last release of the v0 branch**
+
+- bug fixes
+  - dropdown: value update issue on iOS 13
+- widgets
+  - html: allow `class`, `title` and `style` attributes
+
 ## 0.49.11
 
 - bug fixes
   - regression (0.49.10) breaking icon with short names (minimum valid length set to 2 characters)
-  - html widget: content not initialized properly 
+  - html widget: content not initialized properly
 
 ## 0.49.10
 
