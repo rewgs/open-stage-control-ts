@@ -2,6 +2,9 @@
 
 ## 0.49.12
 
+
+**This is the last release of the v0 branch**
+
 - bug fixes
   - dropdown: value update issue on iOS 13
 - widgets
