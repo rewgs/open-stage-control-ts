@@ -91,7 +91,7 @@
   - always hidden except in project tree
   - `script` property must not be wrapped in a JS{{}} block anymore
   - added `stateGet` and `stateSet` functions
-  - added `storage` object, proxy to the document's sessionStorage object (allows storing data that persist after page refresh, but not closing)
+  - added `storage` object, proxy to the document's localStorage object (allows storing data that persist after refresh/close (cleared with the browser's cache)
   - added `setTimeout`, `clearTimeout`, `setInterval`, `clearInterval` function proxies with an extra `id` argument (they clear automatically when called multiple times and upon widget removal. `id` is scoped to the widget)
 
 

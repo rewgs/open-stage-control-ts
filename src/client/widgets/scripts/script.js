@@ -65,10 +65,17 @@ class Script extends Widget {
 
         if (this.getProp('event') === 'value') {
 
-            this.script = scriptVm.compile(this.getProp('script'), {
-                id: '',
-                value: 0
-            })
+            try {
+                this.script = scriptVm.compile(this.getProp('script'), {
+                    id: '',
+                    value: 0
+                })
+            } catch(err) {
+                var stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
+                console.log((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
+                this.script = ()=>{}
+            }
 
         } else if (this.getProp('event') === 'keyboard' && this.getProp('keyBinding')) {
 
