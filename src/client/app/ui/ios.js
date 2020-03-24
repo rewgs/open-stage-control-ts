@@ -2,7 +2,7 @@
 
 var iOS
 
-if (navigator.platform.match(/iPhone|iPod|iPad/)) {
+if (navigator.platform.match(/iPhone|iPod|iPad/) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
 
     iOS = true
 
