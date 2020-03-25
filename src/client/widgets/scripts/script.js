@@ -71,7 +71,7 @@ class Script extends Widget {
                     value: 0
                 })
             } catch(err) {
-                var stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
                     line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
                 console.log((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
                 this.script = ()=>{}
@@ -98,7 +98,7 @@ class Script extends Widget {
                     meta: false,
                 })
             } catch(err) {
-                var stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
                     line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
                 console.log((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
                 this.script = ()=>{}
