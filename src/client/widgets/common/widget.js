@@ -76,15 +76,15 @@ class Widget extends EventEmitter {
             _style:'style',
 
 
-            colorText: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
-            colorWidget: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
-            colorStroke: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
-            colorFill: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
-            alphaStroke: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
-            alphaFillOff: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
-            alphaFillOn: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            colorText: {type: 'string', value: 'auto', help: 'Text color. Set to "auto" to inherit from parent widget.'},
+            colorWidget: {type: 'string', value: 'auto', help: 'Widget\'s default accent color. Set to "auto" to inherit from parent widget.'},
+            colorStroke: {type: 'string', value: 'auto', help: 'Stroke color. Set to "auto" to use `colorWidget`.'},
+            colorFill: {type: 'string', value: 'auto', help: 'Fill color. Set to "auto" to use `colorWidget`.'},
+            alphaStroke: {type: 'number', value: 'auto', help: 'Stroke color opacity.'},
+            alphaFillOff: {type: 'number', value: 'auto', help: 'Fill color opacity (off).'},
+            alphaFillOn: {type: 'number', value: 'auto', help: 'Fill color opacity (on).'},
 
-            padding: {type: 'number', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            padding: {type: 'number', value: 'auto', help: 'Inner spacing.'},
 
 
 
@@ -99,14 +99,13 @@ class Widget extends EventEmitter {
                 'When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)',
                 'When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending)'
             ]},
-            script: {type: 'script', value: '', help: ''},
+            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s value is set.'},
 
             _osc: 'osc',
 
             address: {type: 'string', value: 'auto', help: 'OSC address for sending messages, it must start with a /'},
             preArgs: {type: '*|array', value: '', help: [
                 'A value or array of values that will be prepended to the OSC messages.',
-                'Values can be defined as objects if the osc type tag needs to be specified: `{type: "i", value: 1}`'
             ]},
             typeTags: {type: 'string', value: '', help: [
                 'Defines the osc argument types, one letter per argument (including preArgs)',

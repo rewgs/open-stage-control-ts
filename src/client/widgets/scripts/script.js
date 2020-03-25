@@ -18,7 +18,7 @@ class Script extends Widget {
 
             _script: 'script',
 
-            event: {type: 'string', value: 'value', choices: ['value', 'keyboard']},
+            event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
 
             script: {type: 'string', value: '', help: [
                 'This property is evaluated each time the widget receives a value*. Formulas are given extras variables in this context:',
