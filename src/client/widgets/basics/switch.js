@@ -29,7 +29,7 @@ class Switch extends MenuBase {
                 '- `slide`: same as `tap` but allows sliding between values',
                 '- `click`: activates upon click only and allows further scrolling',
             ]},
-            colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
 
         })
 
