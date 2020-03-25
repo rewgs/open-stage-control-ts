@@ -3,7 +3,7 @@ var fs = require('fs')
 module.exports = {
     's': {alias: 'send', type: 'array', describe: 'default targets for all widgets (ip: port / domain: port / midi: port_name pairs)',
         check: (s)=>{
-            return s.some(item=>!item.match(/^[^: ]*: [0-9]{4, 5}$/) && !item.match(/^midi: .*$/)) ?
+            return s.some(item=>!item.match(/^[^:]*:[0-9]{4,5}$/) && !item.match(/^midi:.*$/)) ?
                 'Targets must be ip: port or domain: port pairs (udp / tcp port must be >= 1024) or midi: port_name pairs' : true
         }
     },
