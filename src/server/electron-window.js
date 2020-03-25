@@ -79,7 +79,7 @@ module.exports = function(options={}) {
         window.webContents.on('before-input-event', (e, input)=>{
             // using before-input-event because electron-localshortcut
             // gets azerty keyboards wrong (ctrl + z would also be catched)
-            if ((input.key === 'w' || input.key === 'W') && input.control) {
+            if ((input.key === 'w' || input.key === 'W') && input.control && input.type === 'keyDown') {
                 window.close()
             }
         })
