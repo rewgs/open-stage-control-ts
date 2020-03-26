@@ -159,7 +159,7 @@ var SessionManager = class SessionManager {
             try {
                 session = JSON.parse(result)
             } catch (err) {
-                new UiModal({title: locales('session_parsingerror'), content: err, icon: 'exclamation-triangle', closable:true})
+                new UiModal({title: locales('session_parsingerror'), content: err.message, icon: 'exclamation-triangle', closable:true})
             }
             if (editor.unsavedSession && !confirm(locales('session_unsaved'))) return
             if (session) sessionManager.load(session, ()=>{

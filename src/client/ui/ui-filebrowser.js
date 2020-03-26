@@ -17,6 +17,7 @@ module.exports = function UiFilebrowser(options, callback) {
     var popup = new UiModal({
         height: 360,
         closable: true,
+        html: true,
         title: locales(save ? 'remotesave_save' : 'remotesave_open'),
         hide: true
     })
