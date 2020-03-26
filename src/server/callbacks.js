@@ -7,7 +7,6 @@ var path = require('path'),
     theme = require('./theme')
 
 var widgetHashTable = {},
-    sessionBackups = {},
     clipboard = {clipboard: null, idClipboard: null}
 
 module.exports =  {
@@ -20,22 +19,9 @@ module.exports =  {
 
         ipc.send('sessionList', recentSessions, clientId)
         ipc.send('clipboard', clipboard, clientId)
-
-        if (data.backupId && sessionBackups[data.backupId]) {
-            ipc.send('loadBackup', sessionBackups[data.backupId])
-            return
-        }
-
-        if (settings.read('load')) return this.sessionOpen({path:settings.read('load')},clientId)
-
-
-        if (settings.read('examples')) {
-            var dir = path.resolve(__dirname + '/../examples')
-            recentSessions = fs.readdirSync(dir)
-            recentSessions = recentSessions.map(function(file){return dir + '/' + file})
-        }
-
         ipc.send('serverTargets', settings.read('send'), clientId)
+
+        if (settings.read('load') && !data.hotReload) return this.sessionOpen({path: settings.read('load')}, clientId)
 
     },
 
@@ -383,18 +369,6 @@ module.exports =  {
     reload: function(data) {
 
         ipc.send('reload')
-
-    },
-
-    storeBackup: function(data, clientId) {
-
-        sessionBackups[data.backupId] = data
-
-    },
-
-    deleteBackup: function(data) {
-
-        delete sessionBackups[data]
 
     },
 

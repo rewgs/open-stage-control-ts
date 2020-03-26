@@ -1,13 +1,14 @@
-var ipc = require('../ipc/'),
-    parser = require('../parser'),
-    editor = require('../editor/'),
-    uiFilebrowser = require('../ui/ui-filebrowser'),
-    uiFileupload = require('../ui/ui-fileupload'),
-    UiModal = require('../ui/ui-modal'),
-    uiLoading = require('../ui/ui-loading'),
+var ipc = require('../../ipc/'),
+    parser = require('../../parser'),
+    editor = require('../../editor/'),
+    uiFilebrowser = require('../../ui/ui-filebrowser'),
+    uiFileupload = require('../../ui/ui-fileupload'),
+    UiModal = require('../../ui/ui-modal'),
+    uiLoading = require('../../ui/ui-loading'),
     {saveAs} = require('file-saver'),
-    widgetManager = require('./widgets'),
-    locales = require('../locales')
+    widgetManager = require('../widgets'),
+    locales = require('../../locales'),
+    Session = require('./session')
 
 
 var SessionManager = class SessionManager {
@@ -38,18 +39,12 @@ var SessionManager = class SessionManager {
         setTimeout(()=>{
             try {
 
-                // backward compat
-                if (Array.isArray(session)) session = session[0]
-
-                // session object must be a root widget
-                if (session.type !== 'root') throw new Error(locales('session_malformed'))
-
-                // ok
-                this.session = session
+                this.session = new Session(session)
+                console.log(this.session)
                 container.innerHTML = ''
                 parser.reset()
                 parser.parse({
-                    data: this.session,
+                    data: this.session.getRoot(),
                     parentNode: DOM.get('#osc-container')[0]
                 })
                 editor.clearHistory()
@@ -99,7 +94,7 @@ var SessionManager = class SessionManager {
         if (!this.sessionPath) return this.saveAs()
 
         ipc.send('sessionSave', {
-            session: JSON.stringify(this.session, null, '  '),
+            session: this.session.toJSON(),
             path: this.sessionPath
         })
 
@@ -118,7 +113,7 @@ var SessionManager = class SessionManager {
 
     export() {
 
-        var sessionfile = JSON.stringify(this.session,null,'  '),
+        var sessionfile = this.session.toJSON(),
             blob = new Blob([sessionfile],{type : 'application/json'})
 
         saveAs(blob, new Date().toJSON().slice(0,10)+'_'+new Date().toJSON().slice(11,16) + '.json')
@@ -181,7 +176,7 @@ var SessionManager = class SessionManager {
 
         if (editor.unsavedSession && !confirm(locales('session_unsaved'))) return
 
-        this.load({type: 'root'},function(){
+        this.load(null, function(){
             editor.enable()
             editor.select(widgetManager.getWidgetById('root'))
         })

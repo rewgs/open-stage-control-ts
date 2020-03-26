@@ -63,6 +63,8 @@ module.exports = {
     session_parsingerror: 'Erreur à l\'ouverture de la session.',
     session_uploaderror: 'Échec à l\'envoi du fichier de session.',
     session_unsaved: 'Vos modifications seront perdues si vous fermez la session actuelle sans sauvegarder, continuer ?',
+    session_oldversion_title: 'Attention',
+    session_oldversion: 'Cette session a été créée avec une ancienne version, une conversion automatique a été appliquée.',
 
     // state
     state: 'État',
