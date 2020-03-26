@@ -264,7 +264,7 @@ class UiInspector extends UiWidget {
             computedValue = JSON.stringify(computedValue, null, ' ')
         }
 
-        new UiModal({closable: true, title: html`<span class="editor-help-title">${name}</span>`, content: html`
+        new UiModal({closable: true, title: html`<span class="editor-help-title">${name}</span>`, html: true, content: html`
             <div class="inspector-help">
 
                 <p>Type: <code>${defaultValue.type}</code></p>
