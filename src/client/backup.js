@@ -1,4 +1,4 @@
-var localBackup = localStorage.getItem('osc.backup')
+var localBackup = sessionStorage.getItem('osc.backup')
 
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
             editor = require('./editor/')
 
         if (session.session) {
-            localStorage.setItem('osc.backup', JSON.stringify({
+            sessionStorage.setItem('osc.backup', JSON.stringify({
                 session: session.session.data,
                 sessionPath: session.sessionPath,
                 state: state.get(),
@@ -35,7 +35,7 @@ module.exports = {
 
             var data = JSON.parse(localBackup)
 
-            localStorage.removeItem('osc.backup')
+            sessionStorage.removeItem('osc.backup')
             session.load(data.session, ()=>{
 
                 state.set(data.state, false)
