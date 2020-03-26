@@ -276,7 +276,7 @@ class UiInspector extends UiWidget {
                     ${htmlHelp}
                 </div>
                 <div class="computed">
-                    <p>Computed value: <code class="pre">${computedValue || "empty"}</code></p>
+                    <p>Computed value: <code class="pre">${computedValue || 'empty'}</code></p>
                 </div>
             </div>
         `})
