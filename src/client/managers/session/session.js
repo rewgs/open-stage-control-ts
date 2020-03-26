@@ -90,9 +90,15 @@ var converters = [
             }
         },
         widget: (data)=>{
-            if (data.precision === 0) data.typeTags = 'i'
 
-            console.log(data.type)
+            data.decimals = data.precision
+
+            if (data.precision === 0) {
+                data.typeTags = 'i'
+                data.decimals = 0
+            }
+            if (data.color !== "auto") data.colorWidget = data.color
+
             switch (data.type) {
 
                 case 'toggle':
@@ -105,17 +111,63 @@ var converters = [
                     data.mode = data.norelease ? 'tap' : 'push'
                     break
 
+                case 'fader':
+                    data.design = data.compact ? 'compact' : 'default'
+                    break
+                    
                 case 'meter':
                     data.type = 'fader'
                     data.design = 'compact'
                     data.interaction = false
                     break
 
+
                 case 'strip':
                     data.type = 'panel'
                     data.layout = data.horizontal ? 'horizontal' : 'vertical'
                     break
 
+                case 'matrix':
+
+
+                    data.layout = 'grid'
+                    if (Array.isArray(data.matrix) && data.matrix.every(x=>typeof x === 'number')) {
+                        data.quantity = data.matrix[0] * data.matrix[1]
+                        data.gridTemplate = data.matrix[0]
+                    }
+
+
+                    var oprops = typeof data.props === 'object' && data.props !== null
+
+                    switch (data.widgetType) {
+                        case 'toggle':
+                            data.widgetType = 'button'
+                            if (oprops) data.props.mode = 'toggle'
+                            break
+
+                        case 'push':
+                            data.widgetType = 'button'
+                            if (oprops) data.props.mode = data.props.norelease ? 'tap' : 'push'
+                            break
+
+                        case 'fader':
+                            if (oprops) data.props.design = data.props.compact ? 'compact' : 'default'
+                            break
+
+                        case 'meter':
+                            data.widgetType = 'fader'
+                            if (oprops) {
+                                data.props.design = 'compact'
+                                data.props.interaction = false
+                            }
+                            break
+
+                        case 'strip':
+                            data.widgetType = 'panel'
+                            if (oprops) data.props.layout = data.props.horizontal ? 'horizontal' : 'vertical'
+                            break
+                    }
+                    break
                 case 'eq':
                     data.filter = data.value
                     data.value = ''
