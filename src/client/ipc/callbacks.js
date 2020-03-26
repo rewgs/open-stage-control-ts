@@ -5,13 +5,10 @@ var utils = require('../ui/utils'),
     state = require('../managers/state'),
     editor = require('../editor/'),
     locales = require('../locales'),
-    {deepCopy} = require('../utils'),
     UiModal = require('../ui/ui-modal'),
     uiLoading = require('../ui/ui-loading'),
     notifications = require('../ui/notifications'),
-    {TRAVERSING_SAMEWIDGET} = require('../events/utils'),
     raw = require('nanohtml/raw'),
-    ipc = require('./'),
     backup = require('../backup')
 
 module.exports = {
