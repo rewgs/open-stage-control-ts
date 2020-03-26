@@ -11,7 +11,7 @@ var widgetHashTable = {},
 
 module.exports =  {
 
-    ready: function(data,clientId) {
+    ready(data,clientId) {
 
         ipc.send('connected')
 
@@ -25,7 +25,7 @@ module.exports =  {
 
     },
 
-    sessionAddToHistory: function(data) {
+    sessionAddToHistory(data) {
 
         var recentSessions = settings.read('recentSessions')
 
@@ -51,7 +51,7 @@ module.exports =  {
         })
     },
 
-    sessionRemoveFromHistory: function(data) {
+    sessionRemoveFromHistory(data) {
 
         var recentSessions = settings.read('recentSessions')
         if (recentSessions.indexOf(data) > -1) {
@@ -62,7 +62,7 @@ module.exports =  {
 
     },
 
-    sessionSetPath: function(data, clientId) {
+    sessionSetPath(data, clientId) {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -76,7 +76,7 @@ module.exports =  {
 
     },
 
-    sessionOpen: function(data, clientId) {
+    sessionOpen(data, clientId) {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -89,7 +89,7 @@ module.exports =  {
 
     },
 
-    sessionOpened: function(data, clientId) {
+    sessionOpened(data, clientId) {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -114,7 +114,7 @@ module.exports =  {
 
     },
 
-    fileRead: function(data, clientId, ok, callback) {
+    fileRead(data, clientId, ok, callback) {
 
         if (!ok) return
 
@@ -141,7 +141,7 @@ module.exports =  {
 
     },
 
-    fileSave: function(data, clientId, ok, callback) {
+    fileSave(data, clientId, ok, callback) {
 
         if (!ok) return
 
@@ -198,7 +198,7 @@ module.exports =  {
 
     },
 
-    stateOpen: function(data, clientId) {
+    stateOpen(data, clientId) {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -210,7 +210,7 @@ module.exports =  {
 
     },
 
-    sessionSave: function(data, clientId) {
+    sessionSave(data, clientId) {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -235,7 +235,7 @@ module.exports =  {
 
     },
 
-    stateSave: function(data, clientId) {
+    stateSave(data, clientId) {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -249,7 +249,7 @@ module.exports =  {
 
     },
 
-    syncOsc: function(shortdata, clientId) {
+    syncOsc(shortdata, clientId) {
 
         if (!(widgetHashTable[clientId] && widgetHashTable[clientId][shortdata.h])) return
 
@@ -271,7 +271,7 @@ module.exports =  {
 
     },
 
-    sendOsc: function(shortdata, clientId) {
+    sendOsc(shortdata, clientId) {
 
         if (!(widgetHashTable[clientId] && widgetHashTable[clientId][shortdata.h])) return
 
@@ -362,38 +362,38 @@ module.exports =  {
 
     },
 
-    fullscreen: function(data) {
+    fullscreen(data) {
         window.setFullScreen(!window.isFullScreen())
     },
 
-    reload: function(data) {
+    reload(data) {
 
         ipc.send('reload')
 
     },
 
-    reloadCss:function(){
+    reloadCss() {
         theme.load()
         ipc.send('reloadCss')
     },
 
-    log: function(data) {
+    log(data) {
         console.log(data)
     },
 
-    error: function(data) {
+    error(data) {
         console.error(data)
     },
 
-    errorLog: function(data) {
+    errorLog(data) {
         console.error(data)
     },
 
-    errorPopup: function(data) {
+    errorPopup(data) {
         ipc.send('error', data)
     },
 
-    listDir: function(data, clientId) {
+    listDir(data, clientId) {
 
         var p = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
 
@@ -429,7 +429,7 @@ module.exports =  {
 
     },
 
-    clipboard: function(data, clientId) {
+    clipboard(data, clientId) {
 
         clipboard = data
         ipc.send('clipboard', data, null, clientId)
