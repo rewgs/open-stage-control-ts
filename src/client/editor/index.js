@@ -704,7 +704,7 @@ class Editor {
             this.historyState = -1
         }
 
-        var d = diff.diff(this.historySession, sessionManager.session)
+        var d = diff.diff(this.historySession, sessionManager.session.getRoot())
 
         if (d) {
             diff.patch(this.historySession, deepCopy(d))
@@ -718,7 +718,7 @@ class Editor {
 
         this.history = []
         this.historyState = -1
-        this.historySession = deepCopy(sessionManager.session)
+        this.historySession = deepCopy(sessionManager.session.getRoot())
 
     }
 
@@ -733,7 +733,7 @@ class Editor {
             d2 = deepCopy(patch)
 
         diff.unpatch(this.historySession, d1)
-        diff.unpatch(sessionManager.session, d2)
+        diff.unpatch(sessionManager.session.getRoot(), d2)
 
         this.updateWidgetFromPatch(patch, indexes ? {
             addedIndexes: deepCopy(indexes.removedIndexes),
@@ -751,7 +751,7 @@ class Editor {
             d2 = deepCopy(patch)
 
         diff.patch(this.historySession, d1)
-        diff.patch(sessionManager.session, d2)
+        diff.patch(sessionManager.session.getRoot(), d2)
 
         this.updateWidgetFromPatch(patch, indexes ? {
             addedIndexes: deepCopy(indexes.addedIndexes),
@@ -796,4 +796,4 @@ var editor = new Editor()
 module.exports = editor
 
 require('./context-menu')
-sessionManager = require('../managers/session')
+sessionManager = require('../managers/session/')

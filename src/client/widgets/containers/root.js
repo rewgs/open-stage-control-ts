@@ -47,6 +47,7 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
     constructor(options) {
 
         options.root = true
+        options.props.id = 'root'
 
         super(options)
 
