@@ -93,7 +93,7 @@
     "watch-browser": "npm run build-client-js -- --watch",
     "watch-css": "nodemon --watch src/scss -e scss -x \"npm run build-css -- --reload\"",
     "watch-server": "nodemon --watch src/server/ -e js -x \"npm run build-server-js\"",
-    "watch-launcher": "nodemon --watch src/ -e js -x \"npm run build-launcher-js\"",
+    "watch-launcher": "nodemon --watch src/launcher/ -e js -x \"npm run build-launcher-js\"",
     "build-docs": "node scripts/build-widgets-reference.js > resources/docs/docs/widgets-reference.md && cd resources && npm run build",
     "test": "eslint src && npm run build && node tests/test.js"
   },
