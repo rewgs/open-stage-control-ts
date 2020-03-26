@@ -23,3 +23,9 @@
     }
 
 }
+
+.frame-container {
+    iframe[src=""] {
+        pointer-events: none;
+    }
+}
