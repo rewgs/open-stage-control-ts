@@ -6,7 +6,7 @@ var Container = require('../common/container'),
     {diff, diffToWidget} = require('../../editor/diff'),
     html = require('nanohtml')
 
-var excludedCloneClasses =  ['widget', 'absolute-position', 'not-editable', 'editing', 'flex-expand']
+var excludedCloneClasses =  ['widget', 'absolute-position', 'not-editable', 'editing', 'flex-expand', 'no-interaction']
 
 class Clone extends Container() {
 
