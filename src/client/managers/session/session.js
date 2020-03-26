@@ -97,7 +97,7 @@ var converters = [
                 data.typeTags = 'i'
                 data.decimals = 0
             }
-            if (data.color !== "auto") data.colorWidget = data.color
+            if (data.color !== 'auto') data.colorWidget = data.color
 
             switch (data.type) {
 
@@ -114,7 +114,7 @@ var converters = [
                 case 'fader':
                     data.design = data.compact ? 'compact' : 'default'
                     break
-                    
+
                 case 'meter':
                     data.type = 'fader'
                     data.design = 'compact'
