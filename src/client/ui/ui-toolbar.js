@@ -32,7 +32,8 @@ var menuEntries = [
             },
             {
                 label: locales('file_open_recent'),
-                action: recentSessions
+                action: recentSessions,
+                class: ()=>{return !recentSessions.length ? 'disabled' :''}
             },
             {
                 separator: true
