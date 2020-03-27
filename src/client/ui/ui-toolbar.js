@@ -5,7 +5,7 @@ var UiWidget = require('./ui-widget'),
     notifications = require('./notifications'),
     fullscreen = require('./fullscreen'),
     editor = require('../editor'),
-    sessionManager = require('../managers/session'),
+    sessionManager = require('../managers/session/'),
     stateManager = require('../managers/state'),
     {leftUiSidePanel, rightUiSidePanel} = require('../ui/')
 

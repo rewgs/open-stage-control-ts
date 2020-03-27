@@ -31,7 +31,7 @@ class Button extends Widget {
                 '- `tap` (no release)'
             ]},
             doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
-            colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s accent color (css variable `--custom-color`). Must be a valid CSS color. Set to "auto" to inherit from parent widget.'},
+            colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
 
         })
 

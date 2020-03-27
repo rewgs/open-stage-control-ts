@@ -96,5 +96,13 @@ $padding: 8rem;
             min-height: 0;
             display: flex;
         }
+
+        .message {
+            white-space: normal;
+            line-height: 150%;
+            background: var(--color-background);
+            padding-top:8rem;
+            overflow-x: auto;
+        }
     }
 }

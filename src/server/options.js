@@ -25,7 +25,7 @@ module.exports = {
     },
     'c': {alias: 'custom-module', type: 'array', file: {name: 'OSC Custom module (.js)', extensions: ['js']}, describe: 'custom module file to load (custom options can be passed after the filename)',
         check: (arg)=>{
-            return fs.lstatSync(arg) ? true : 'Custom module file not found: ' + arg
+            return fs.lstatSync(arg[0]) ? true : 'Custom module file not found: ' + arg
         },
     },
     'p': {alias: 'port', type: 'number', describe: 'http port of the server (default to 8080)',

@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     setTimeout(()=>{
 
-        var ipc = require('./ipc/')
+        var ipc = require('./ipc/'),
+            backup = require('./backup')
+
 
         ipc.init()
 
@@ -24,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         document.title = TITLE
 
-        ipc.send('ready', {backupId: ENV.backupId})
+        ipc.send('ready', {hotReload: backup.exists})
+
+        backup.load()
 
 
     }, 100)

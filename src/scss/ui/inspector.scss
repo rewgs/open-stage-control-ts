@@ -269,6 +269,8 @@ osc-inspector-color {
     padding: 8rem;
     background: var(--color-background);
 
+    p {
+    }
     .error {
         color: red;
         margin-top: 10rem;
@@ -278,7 +280,7 @@ osc-inspector-color {
     }
     code {
         color: var(--color-accent);
-        padding: 1rem 3rem;
+        padding: 4rem;
         background: rgba(black, 0.2);
         display: inline-block;
         user-select: auto;
@@ -292,9 +294,30 @@ osc-inspector-color {
     .pre {
         white-space: pre;
         vertical-align: text-top;
+        margin-top: -4rem;
+        position: relative;
+        padding: 5rem;
+        user-select: text;
     }
-    .help {
+
+    .header p {
+        margin-bottom: 2rem;
+        user-select: text;
+    }
+    .description {
+        border-top: 2rem solid var(--color-ui-background);
         margin-top: 10rem;
+        padding-top: 10rem;
         white-space: normal;
+        * {
+            user-select: text;
+        }
+    }
+
+    .computed {
+        border-top: 2rem solid var(--color-ui-background);
+        margin-top: 10rem;
+        padding-top: 10rem;
+
     }
 }

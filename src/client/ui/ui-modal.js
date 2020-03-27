@@ -34,7 +34,7 @@ class UiModal extends UiWidget {
                        </span>
                        ${options.closable? html`<span class="closer">${raw(icon('times'))}</span>` : ''}
                        </div>
-                   <div class="popup-content">
+                   <div class="popup-content ${options.html ? 'html' : 'message'}">
                        ${options.content}
                    </div>
                </div>

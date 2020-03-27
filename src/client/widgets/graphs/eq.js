@@ -19,11 +19,11 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
 
             filters: {type: 'array', value: '', help: [
                 'Each item must be an object with the following properties',
-                '- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch")',
-                '- `freq`: number (filter\'s resonant frequency)',
-                '- `q`: number (Q factor)',
-                '- `gain`: number',
-                '- `on`: boolean',
+                '- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")',
+                '- `freq`: number (filter\'s resonant frequency, default: 1000)',
+                '- `q`: number (Q factor, default: 1)',
+                '- `gain`: number (default: 0)',
+                '- `on`: boolean (default: true)',
                 'See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode'
 
             ]},
@@ -40,9 +40,7 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
 
         super(options)
 
-        setTimeout(()=>{
-            this.calcResponse()
-        })
+        this.calcResponse()
 
     }
 
@@ -58,23 +56,33 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
 
         for (let filter of this.getProp('filters')) {
 
-            if (filter.on === false) continue
+            if (filter.on !== undefined && !filter.on) continue
 
             biquadResponse({
-                type: filter.type,
-                gain: filter.gain,
-                frequency: filter.freq,
-                q: filter.q
+                type: filter.type || 'peak',
+                gain: filter.gain || 0,
+                frequency: filter.freq || 1000,
+                q: filter.q || 1
             }, frequencyHz, filterResponse)
 
         }
 
-        this.value = filterResponse
-        this.batchDraw()
+        this.setValue(filterResponse, {sync: true})
+
+
 
     }
 
-    setValue() {}
+    setValue(v, options={}) {
+
+        if (!(v instanceof Float32Array) && !(Array.isArray(v)) || v.length !== this.width) return
+
+        this.value = v
+        this.batchDraw()
+
+        if (options.sync) this.changed(options)
+
+    }
 
     resizeHandle(event){
 

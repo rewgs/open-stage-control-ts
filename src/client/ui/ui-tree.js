@@ -174,6 +174,7 @@ class UiTree extends UiWidget {
             if (this.expanded[widget.hash]) node.classList.add('expanded')
             if (!init && widget instanceof Root) {
                 node.classList.add('expanded')
+                this.expanded[widget.hash] = true
                 init = true
             }
             var sublist = node.appendChild(html`<ol style="--depth:${++depth};"></ol>`)

@@ -18,7 +18,7 @@ class Script extends Widget {
 
             _script: 'script',
 
-            event: {type: 'string', value: 'value', choices: ['value', 'keyboard']},
+            event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
 
             script: {type: 'string', value: '', help: [
                 'This property is evaluated each time the widget receives a value*. Formulas are given extras variables in this context:',
@@ -65,10 +65,17 @@ class Script extends Widget {
 
         if (this.getProp('event') === 'value') {
 
-            this.script = scriptVm.compile(this.getProp('script'), {
-                id: '',
-                value: 0
-            })
+            try {
+                this.script = scriptVm.compile(this.getProp('script'), {
+                    id: '',
+                    value: 0
+                })
+            } catch(err) {
+                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
+                console.log((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
+                this.script = ()=>{}
+            }
 
         } else if (this.getProp('event') === 'keyboard' && this.getProp('keyBinding')) {
 
@@ -91,7 +98,7 @@ class Script extends Widget {
                     meta: false,
                 })
             } catch(err) {
-                var stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
                     line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
                 console.log((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
                 this.script = ()=>{}
