@@ -264,15 +264,20 @@ class UiInspector extends UiWidget {
             computedValue = JSON.stringify(computedValue, null, ' ')
         }
 
-        new UiModal({closable: true, title: html`<span class="editor-help-title">${name}</span>`, content: html`
+        new UiModal({closable: true, title: html`<span class="editor-help-title">${name}</span>`, html: true, content: html`
             <div class="inspector-help">
 
-                <p>Type: <code>${defaultValue.type}</code></p>
-                <p>Default: <code>${JSON.stringify(defaultValue.value)}</code></p>
-                <p>Dynamic: <code>${dynamic ? 'true' : 'false'}</code></p>
-                <p>Computed: <code class="pre">${computedValue}</code></p>
-
-                ${htmlHelp}
+                <div class="header">
+                    <p>Type: <code>${defaultValue.type}</code></p>
+                    <p>Default: <code>${JSON.stringify(defaultValue.value)}</code></p>
+                    <p>Dynamic: <code>${dynamic ? 'true' : 'false'}</code></p>
+                </div>
+                <div class="description">
+                    ${htmlHelp}
+                </div>
+                <div class="computed">
+                    <p>Computed value: <code class="pre">${computedValue || 'empty'}</code></p>
+                </div>
             </div>
         `})
 
