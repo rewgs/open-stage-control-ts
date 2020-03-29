@@ -8,7 +8,7 @@ module.exports = function uiFileUpload(types, ok, error) {
 
     if (!CONTAINER) CONTAINER = DOM.get('osc-modal-container')[0]
 
-    if (SINGLETON) CONTAINER.removeChild(uploadSingleton)
+    if (SINGLETON) CONTAINER.removeChild(SINGLETON)
 
     SINGLETON = html`<input type="file" accept="${types}" style="position:absolute;opacity:0;pointer-events:none;"/>`
 
