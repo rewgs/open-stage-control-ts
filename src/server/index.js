@@ -153,6 +153,7 @@ if (settings.cli) {
         }
 
         global.serverProcess = spawn(process.argv[0], process.argv.slice(1).concat(args), {stdio: 'pipe'/*, env: {"ELECTRON_RUN_AS_NODE":"1"}*/})
+        launcher.webContents.send('server-started')
 
         if (!settings.read('no-gui')) {
             global.serverProcess.stdout.once('data', (data) => {
@@ -172,6 +173,7 @@ if (settings.cli) {
             console.log('(INFO) Server stopped')
             global.serverProcess = null
             if (global.defaultClient) global.defaultClient.close()
+            if (!launcher.isDestroyed()) launcher.webContents.send('server-stopped')
         })
 
     })

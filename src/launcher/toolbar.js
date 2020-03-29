@@ -10,14 +10,12 @@ var start = new MenuItem({
     label: 'Start',
     click: ()=>{
         ipcRenderer.send('start')
-        settings.disable()
     }
 })
 var stop = new MenuItem({
     label: 'Stop',
     click: ()=>{
         ipcRenderer.send('stop')
-        settings.enable()
     }
 })
 var newWindow = new MenuItem({
