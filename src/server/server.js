@@ -15,6 +15,16 @@ var urlparser   = require('url'),
     clients = {},
     httpCheckTimeout
 
+
+var clientOptions = {}
+if (settings.read('client-options')) {
+    for (var o of settings.read('client-options')) {
+        if (!o.includes('=')) continue
+        var [k, v] = o.split('=')
+        clientOptions[k] = v
+    }
+}
+
 function httpRoute(req, res) {
 
     res.sendFile = (path)=>{
@@ -30,7 +40,7 @@ function httpRoute(req, res) {
         fs.createReadStream(path.resolve(__dirname + '/../client/index.html'))
           .pipe(replaceStream('</body>', `
             <script>
-                window.ENV=${JSON.stringify(settings.read('client-options'))}
+                window.ENV=${JSON.stringify(clientOptions)}
                 window.READ_ONLY=${JSON.stringify(settings.read('read-only'))}
             </script></body>`))
           .pipe(res)

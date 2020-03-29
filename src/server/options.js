@@ -10,17 +10,11 @@ module.exports = {
     'l': {alias: 'load', type: 'string', file: {name: 'OSC Session (.json)', extensions: ['json', 'js']}, describe: 'session file to load',
         check: (arg)=>{
             return fs.lstatSync(arg) ? true : 'Session file not found: ' + arg
-        },
-        coerce: (arg)=>{
-            return JSON.parse(fs.readFileSync(arg, 'utf8'))
         }
     },
     'state': {type: 'string', file: {name: 'OSC State (.state)', extensions: ['state']}, describe: 'state file to load',
         check: (arg)=>{
             return fs.lstatSync(arg) ? true : 'State file not found: ' + arg
-        },
-        coerce: (arg)=>{
-            return JSON.parse(fs.readFileSync(arg, 'utf8'))
         }
     },
     'c': {alias: 'custom-module', type: 'array', file: {name: 'OSC Custom module (.js)', extensions: ['js']}, describe: 'custom module file to load (custom options can be passed after the filename)',
@@ -63,15 +57,6 @@ module.exports = {
         check: (o)=>{
             return o.some(item=>!item.match(/^[^=]*=[^=]*$/)) ?
                 'Options must be key=value pairs' : true
-        },
-        coerce: (arg)=>{
-            var opts = {}
-            for (var o of arg) {
-                if (!o.includes('=')) continue
-                var [k, v] = o.split('=')
-                opts[k] = v
-            }
-            return opts
         }
     },
     'disable-vsync': {type: 'boolean', describe: 'disable gui\'s vertical synchronization', restart: true},
@@ -86,8 +71,7 @@ module.exports = {
                 msg = e
             }
             return msg
-        },
-        coerce: arg=>RegExp(arg)
+        }
     },
     'remote-root': {type: 'string', describe: 'set remote file browsing root folder', file: {folder: true}},
     'instance-name': {type: 'string', describe: 'used to differenciate multiple instances in a zeroconf network'},

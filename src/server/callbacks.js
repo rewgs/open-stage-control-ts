@@ -102,7 +102,7 @@ module.exports =  {
                 }
             }
             var state = {
-                state: settings.read('state'),
+                state: JSON.parse(fs.readFileSync(settings.read('state'), 'utf8')),
                 send: send
             }
             ipc.send('stateLoad', state, clientId)
@@ -145,7 +145,7 @@ module.exports =  {
 
         if (!ok) return
 
-        if (!data.path || settings.read('remote-saving') && !settings.read('remote-saving').test(ipc.clients[clientId].address)) {
+        if (!data.path || settings.read('remote-saving') && !RegExp(settings.read('remote-saving')).test(ipc.clients[clientId].address)) {
 
             return ipc.send('notify', {
                 icon: 'save',
