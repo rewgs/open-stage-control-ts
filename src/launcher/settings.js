@@ -1,4 +1,4 @@
-var {remote} = eval('require(\'electron\')'),
+var {remote, ipcRenderer} = eval('require(\'electron\')'),
     {dialog} = remote.require('electron'),
     fs = remote.require('fs'),
     settings = remote.getGlobal('settings'),
@@ -23,6 +23,13 @@ class Settings {
 
         this.create()
         this.write(true)
+
+        ipcRenderer.on('server-started', ()=>{
+            this.disable()
+        })
+        ipcRenderer.on('server-stopped', ()=>{
+            this.enable()
+        })
 
     }
 
