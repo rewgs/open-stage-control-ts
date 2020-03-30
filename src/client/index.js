@@ -19,14 +19,20 @@ document.addEventListener('DOMContentLoaded', function(event) {
         var ipc = require('./ipc/'),
             backup = require('./backup')
 
-
         ipc.init()
 
+
         require('./ui/init')
+        var editor = require('./editor')
 
         document.title = TITLE
 
         ipc.send('open', {hotReload: backup.exists})
+
+        window.onbeforeunload = ()=>{
+            if (editor.unsavedSession) return true
+            ipc.send('close')
+        }
 
         backup.load()
 
