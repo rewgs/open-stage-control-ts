@@ -65,37 +65,3 @@ This syntax allows writing formulas in pure javascript. The code will be compile
 In this context, `@{} / OSC{}` are seen as variables, not as the value they hold,
 
 Parsing errors can be read in the DevTool console (F12).
-
-## Formulas: `#{}`
-
-!!! warning "Deprecated"
-    This syntax is now deprecated and will be removed in the future, sessions using it will be working for a few more versions but users are strongly encouraged to migrate to the javascript syntax.
-
-The following syntax allow writing mathematical formulas in widgets' properties:
-
-```
-#{FORMULA}
-```
-
-Where FORMULA is a valid [MathJS](http://mathjs.org/docs/expressions/syntax.html) expression:
-
-- [syntax documentation](http://mathjs.org/docs/expressions/syntax.html)
-- [available functions](http://mathjs.org/docs/reference/functions.html)
-- [available constants](http://mathjs.org/docs/reference/constants.html)
-- formulas can be [multiline](http://mathjs.org/docs/expressions/syntax.html#multiline-expressions)
-- property inheritance calls (`@{...}`) are always resolved before formulas
-- arrays / matrices indexes are **zero-based** (ie `["a","b"][0]` returns `"a"`)
-- strings can be multiline when enclosed in backticks instead of double quotes (``` ` `  ```)
-
-Additionnal functions:
-
-- `indexOf(a, x)`: returns index of item `x` in array `a`
-- `unpack(x)`: remove an array's brackets (`unpack([1,2])` returns `"1, 2"`)
-- `pad(x, padding)`: add leading zeros if the length of the integer part of `x` is smaller than `padding` (`pad(1,2)` returns `"01"`)
-- `length(x)`: returns the length of an array or string
-- `keys(x)`: returns an array of a given object's property names (from [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys))
-- `values(x)`: returns an array of a given object's own enumerable property values (from [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values))
-- `extend(x, y)`: merges two objects into one
-
-!!! tip ""
-    A single widget property can contain multiple formulas. Variables and functions declared in a formula are available to subsequent formulas in the same property definition.
