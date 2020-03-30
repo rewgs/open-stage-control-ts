@@ -102,10 +102,6 @@ class Editor {
         this.grid = true
 
         this.unsavedSession = false
-        window.onbeforeunload = ()=>{
-            if (this.unsavedSession) return true
-        }
-
 
         this.history = []
         this.historyState = -1

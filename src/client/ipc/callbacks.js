@@ -95,7 +95,7 @@ module.exports = {
     reload: function(){
 
         backup.save()
-        window.onbeforeunload = null
+        editor.unsavedSession = false
         window.location.href = window.location.href
 
     },
