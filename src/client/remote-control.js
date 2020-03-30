@@ -217,9 +217,9 @@ var callbacks = {
     '/NOTIFY': function(args) {
 
         if (!Array.isArray(args)) args = [args]
-        console.log(args)
+
         notifications.add({
-            message: args.join('\n')
+            message: args.join('\n') || ' '
         })
 
     },
