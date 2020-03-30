@@ -56,7 +56,12 @@ class OscServer {
                             address = host
                             host = port = undefined
                         }
-                        this.receiveOsc({host, port, address, args:args.map(x=>this.parseArg(x))})
+                        var lastArg = args[args.length - 1],
+                            options = {}
+                        if (typeof lastArg === 'object' && lastArg !== null && lastArg.type === undefined) {
+                            options = lastArg
+                        }
+                        this.receiveOsc({host, port, address, args:args.map(x=>this.parseArg(x))}, options.clientId)
                     },
                     loadJSON: (url)=>{
                         if (url.split('.').pop() === 'json') {
@@ -191,7 +196,7 @@ class OscServer {
 
     }
 
-    receiveOsc(data, info){
+    receiveOsc(data, clientId){
 
         if (!data) return
 
@@ -201,7 +206,7 @@ class OscServer {
 
         if (data.args.length==1) data.args = data.args[0]
 
-        ipc.send('receiveOsc',data)
+        ipc.send('receiveOsc', data, clientId)
 
         if (debug) console.log('(OSC) In: ', {address:data.address, args: data.args}, 'From: ' + data.host + ':' + data.port)
 
@@ -277,7 +282,7 @@ oscServer.init()
 
 module.exports = {
     server: oscServer,
-    send: function(host, port, address, args, typeTags) {
+    send: function(host, port, address, args, typeTags, clientId) {
 
         var message = []
 
@@ -298,7 +303,7 @@ module.exports = {
             }
         }
 
-        var data = oscServer.oscOutFilter({address:address, args: message, host: host, port: port})
+        var data = oscServer.oscOutFilter({address:address, args: message, host: host, port: port, clientId: clientId})
 
         oscServer.sendOsc(data)
 
