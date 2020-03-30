@@ -1,7 +1,15 @@
 var EventEmitter = require('../events/event-emitter'),
-    uuid = require('nanoid/generate')('0123456789abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ', 10),
+    nanoid = require('nanoid/generate'), uuid,
     notifications,
     locales
+
+var localUuid = ENV.id || sessionStorage.getItem('osc.uuid')
+if (localUuid) {
+    uuid = localUuid
+} else {
+    uuid = nanoid('0123456789abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ', 10)
+    sessionStorage.setItem('osc.uuid', uuid)
+}
 
 setTimeout(()=>{
     notifications = require('../ui/notifications')
