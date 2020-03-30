@@ -1,6 +1,6 @@
 # Scripting
 
-The `script` property allows widgets to run javascript code when they receive a value. It differs from the javascript property syntax in the following ways:
+The `script` property allows widgets to run javascript code when their value update. It differs from the javascript property syntax in the following ways:
 - no `JS{{}}` wrapper, only `code`
 - `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their value before the script's compilation
 
