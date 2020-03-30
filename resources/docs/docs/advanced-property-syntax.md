@@ -52,7 +52,6 @@ This syntax allows listening on an osc address to define a property.
 The `address` can contain `@{}` blocks
 
 
-
 ## Javascript: `JS{{ <code> }}`
 
 This syntax allows writing formulas in pure javascript. The code will be compiled as a function and executed in a restricted context.
@@ -60,8 +59,21 @@ This syntax allows writing formulas in pure javascript. The code will be compile
 - if no `return` statement is found, the formula will return an empty string
 - javascript [strict mode](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode) is always enabled
 - `setTimeout` and `setInterval` functions are not available
-- the `global` object is shared between all javascript formulas (changing its properties *does not* trigger any synchronisation even if the value is used somewhere else)
 
-In this context, `@{} / OSC{}` are seen as variables, not as the value they hold,
+#### Available variables
+
+- `console`: javascript console
+- `locals`: object for storing/reading arbitrary values. Changing its properties *does not* trigger any synchronisation even if the value is used somewhere else.
+- `globals`: same as `locals` but shared between all widgets, contains a few useful variables:
+  - `screen`: `{width, height}`
+  - `env`: client options (ie: url query options),
+  - `url`: server url,
+  - `platform`: operating system as seen by the client
+
+In this context, `@{} / OSC{}` are also seen as variables (named `VAR_XXX`), not as the value they hold,
 
 Parsing errors can be read in the DevTool console (F12).
+
+## Javascript shorthand: `#{ <code> }`
+
+This is a shorthand for the `JS{{}}` syntax, the only difference being that `<code>` is automatically prepended with a `return` statement.
