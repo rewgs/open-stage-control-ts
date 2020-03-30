@@ -97,7 +97,7 @@
 
 
 - state
- - quickstate (store/recall from menu) is now stored in the clients cache and persists after refresh/close (cleared with the browser's cache)
+  - quickstate (store/recall from menu) is now stored in the clients cache and persists after refresh/close (cleared with the browser's cache)
 
 - custom module
   - `settings.read(name)`: `name` is now the long name of command-line options (not a camelCased one)
