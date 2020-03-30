@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         document.title = TITLE
 
-        ipc.send('ready', {hotReload: backup.exists})
+        ipc.send('open', {hotReload: backup.exists})
 
         backup.load()
 

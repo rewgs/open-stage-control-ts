@@ -141,12 +141,6 @@ var bindCallbacks = function(callbacks) {
             })
         }
 
-        client.on('close', function() {
-
-            callbacks.removeClientWidgets(client.id)
-
-        })
-
     })
 
 }

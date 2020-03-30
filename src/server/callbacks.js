@@ -11,7 +11,8 @@ var widgetHashTable = {},
 
 module.exports =  {
 
-    ready(data,clientId) {
+    open(data, clientId) {
+        // client connected
 
         ipc.send('connected')
 
@@ -22,6 +23,22 @@ module.exports =  {
         ipc.send('serverTargets', settings.read('send'), clientId)
 
         if (settings.read('load') && !data.hotReload) return this.sessionOpen({path: settings.read('load')}, clientId)
+
+    },
+
+    close(data, clientId) {
+        // client disconnected
+
+        // clear osc data cache
+        if (widgetHashTable[clientId]) delete widgetHashTable[clientId]
+
+    },
+
+    clipboard(data, clientId) {
+        // shared clipboard
+
+        clipboard = data
+        ipc.send('clipboard', data, null, clientId)
 
     },
 
@@ -63,6 +80,7 @@ module.exports =  {
     },
 
     sessionSetPath(data, clientId) {
+        // store client's current session file path
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -77,6 +95,7 @@ module.exports =  {
     },
 
     sessionOpen(data, clientId) {
+        // attempt to read session file
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -90,6 +109,7 @@ module.exports =  {
     },
 
     sessionOpened(data, clientId) {
+        // session file opened successfully
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -115,6 +135,7 @@ module.exports =  {
     },
 
     fileRead(data, clientId, ok, callback) {
+        // private function
 
         if (!ok) return
 
@@ -142,6 +163,7 @@ module.exports =  {
     },
 
     fileSave(data, clientId, ok, callback) {
+        // private function
 
         if (!ok) return
 
@@ -199,6 +221,7 @@ module.exports =  {
     },
 
     stateOpen(data, clientId) {
+        // attempt to open state file
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -211,6 +234,7 @@ module.exports =  {
     },
 
     sessionSave(data, clientId) {
+        // save session file (.json)
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -236,6 +260,7 @@ module.exports =  {
     },
 
     stateSave(data, clientId) {
+        // save state file (.json)
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
@@ -250,6 +275,7 @@ module.exports =  {
     },
 
     syncOsc(shortdata, clientId) {
+        // sync osc (or midi) message with other clients
 
         if (!(widgetHashTable[clientId] && widgetHashTable[clientId][shortdata.h])) return
 
@@ -264,7 +290,7 @@ module.exports =  {
         // only rawTarget will be used
         delete data.target
 
-        data.args =  data.preArgs ? data.preArgs.concat(value) : [value]
+        data.args = data.preArgs ? data.preArgs.concat(value) : [value]
 
         if (!data.noSync) ipc.send('receiveOsc', data, null, clientId)
 
@@ -272,6 +298,7 @@ module.exports =  {
     },
 
     sendOsc(shortdata, clientId) {
+        // send osc (or midi) message and sync with other clients
 
         if (!(widgetHashTable[clientId] && widgetHashTable[clientId][shortdata.h])) return
 
@@ -306,7 +333,7 @@ module.exports =  {
 
                 if (port) {
 
-                    osc.send(host, port, data.address, data.args, data.typeTags)
+                    osc.send(host, port, data.address, data.args, data.typeTags, clientId)
 
                 }
 
@@ -319,6 +346,7 @@ module.exports =  {
     },
 
     addWidget(data, clientId) {
+        // cache widget osc data to reduce bandwidth usage
 
         if (!widgetHashTable[clientId])  {
             widgetHashTable[clientId] = {}
@@ -349,30 +377,21 @@ module.exports =  {
     },
 
     removeWidget(data, clientId) {
+        // clear widget osc data
 
         delete widgetHashTable[clientId][data.hash]
 
     },
 
-    removeClientWidgets(clientId) {
-
-        if (widgetHashTable[clientId]) {
-            delete widgetHashTable[clientId]
-        }
-
-    },
-
-    fullscreen(data) {
-        window.setFullScreen(!window.isFullScreen())
-    },
-
     reload(data) {
-
+        // (dev) hot reload
         ipc.send('reload')
 
     },
 
     reloadCss() {
+        // (dev) hot css reload
+
         theme.load()
         ipc.send('reloadCss')
     },
@@ -394,6 +413,7 @@ module.exports =  {
     },
 
     listDir(data, clientId) {
+        // remote file browser backend
 
         var p = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
 
@@ -429,11 +449,5 @@ module.exports =  {
 
     },
 
-    clipboard(data, clientId) {
-
-        clipboard = data
-        ipc.send('clipboard', data, null, clientId)
-
-    }
 
 }
