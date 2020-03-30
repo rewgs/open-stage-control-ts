@@ -22,14 +22,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
         require('./ui/init')
-        var editor = require('./editor')
 
         document.title = TITLE
 
         ipc.send('open', {hotReload: backup.exists})
 
-        window.onbeforeunload = ()=>{
-            if (editor.unsavedSession) return true
+        window.onunload = ()=>{
             ipc.send('close')
         }
 
