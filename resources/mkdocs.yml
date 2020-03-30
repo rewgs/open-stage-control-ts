@@ -34,6 +34,7 @@ nav:
         - Editing sessions: docs/editing-sessions.md
         - Widgets reference: docs/widgets-reference.md
         - Advanced property syntax: docs/advanced-property-syntax.md
+        - Scripting: docs/scripting.md
         - CSS Tips: docs/css-tips.md
         - Theming: docs/theming.md
         - URL options: docs/url-options.md
