@@ -731,11 +731,13 @@ class Widget extends EventEmitter {
 
             return this.reCreateWidget({reCreateOptions: options})
 
-        } else if (changedProps.length) {
+        }
 
-            if (options && options.fromEditor) {
-                this.checkLinkedProps(propNames)
-            }
+        if (options && options.fromEditor) {
+            this.checkLinkedProps(propNames)
+        }
+
+        if (changedProps.length) {
 
             for (var i in changedProps) {
                 this.onPropChanged(changedProps[i].propName, options, changedProps[i].oldPropValue)

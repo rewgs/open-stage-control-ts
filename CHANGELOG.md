@@ -32,6 +32,7 @@
   - allow copying tabs (to tab containers only)
   - shared clipboard accross all clients
   - prevent interaction with widgets when `shift` or `ctrl` is held
+  - ensure @{} bindings are always updated upon edition 
 
 
 - widget changes
