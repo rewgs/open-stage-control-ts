@@ -1,7 +1,9 @@
 var StackTrace = require('stacktrace-js'),
-    ipc = require('./ipc')
+    ipc
 
 window.onerror = function(msg,url,row,col, error) {
+
+    if (!ipc) ipc = require('./ipc')
 
     StackTrace.fromError(error).then((stackframes)=>{
 

@@ -32,7 +32,7 @@
   - allow copying tabs (to tab containers only)
   - shared clipboard accross all clients
   - prevent interaction with widgets when `shift` or `ctrl` is held
-  - ensure @{} bindings are always updated upon edition 
+  - ensure @{} bindings are always updated upon edition
 
 
 - widget changes
@@ -101,6 +101,8 @@
 
 - custom module
   - `settings.read(name)`: `name` is now the long name of command-line options (not a camelCased one)
+  - `receive()`: optional last argument to pass extra options such as `clientId`
+  - client id persist upon page refresh and can be set manually with the client url option `id`
 
 
 - launcher
