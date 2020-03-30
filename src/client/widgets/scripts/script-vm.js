@@ -68,6 +68,11 @@ class ScriptVm extends Vm {
 
             if (!options.send) return
 
+            if (target && target[0] === '/') {
+                args.unshift(address)
+                address = target
+            }
+
             var overrides = {
                 address,
                 v: args,
@@ -136,7 +141,7 @@ class ScriptVm extends Vm {
             if (filter) {
 
                 filter = Array.isArray(filter) ? filter : [filter]
-                
+
                 var containers = this.filter.map(x=>widgetManager.getWidgetById(x)).reduce((a,b)=>a.concat(b), [])
 
                 if (!containers.length) return
