@@ -1,8 +1,7 @@
-require('./stacktrace')
-
 document.addEventListener('DOMContentLoaded', function(event) {
 
     require('./globals')
+    require('./stacktrace')
 
     var locales = require('./locales'),
         html = require('nanohtml')
