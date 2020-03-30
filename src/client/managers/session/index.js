@@ -40,7 +40,6 @@ var SessionManager = class SessionManager {
             try {
 
                 this.session = new Session(session)
-                console.log(this.session)
                 container.innerHTML = ''
                 parser.reset()
                 parser.parse({
