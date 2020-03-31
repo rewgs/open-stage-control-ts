@@ -417,7 +417,16 @@ module.exports =  {
 
         var p = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
 
-        if (data.path) p = path.resolve(...data.path)
+        if (data.path) {
+            // Resolve '~' to user's home directory
+            if (data.path[0].startsWith('~')) {
+                p = data.path[0].replace( "~", p );
+            }
+            else {
+                p = path.resolve(...data.path)
+            }
+            //console.log(`Resolved path: ${p}`);
+        }
 
         var root = settings.read('remote-root')
         if (root && !p.includes(root)) p = root
