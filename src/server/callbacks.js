@@ -420,7 +420,7 @@ module.exports =  {
         if (data.path) {
             // Resolve '~' to user's home directory
             if (data.path[0].startsWith('~')) {
-                p = data.path[0].replace( "~", p );
+                p = data.path[0].replace( '~', p )
             }
             else {
                 p = path.resolve(...data.path)
