@@ -6,6 +6,10 @@ The `script` property allows widgets to run javascript code when their value upd
 
 ## Available variables
 
+#### `value`: widget's value
+
+#### `id`: id of the widget that's reponsible for the value update
+
 #### `get`: `function(id)`
 
 Returns the value of the first widget whose id is `"id"`.
