@@ -6,13 +6,22 @@ copyright: "Open Stage Control is an <a href='http://ammd.net'>AMMD</a> software
 site_description: "Libre and modular OSC / MIDI controller"
 
 theme:
-    name: null
-    custom_dir: 'theme/'
-    favicon: 'img/logo-nobadge.png?1'
-    include_search_page: true
-    static_templates:
-      - 404.html
+    name: 'material'
+    custom_dir: 'theme'
+    # font: false
+    features:
+        - tabs
+        - instant
+    palette:
+        primary: 'Black'
+        accent: 'Indigo'
+    logo: 'img/logo.png'
+    favicon: 'img/logo_nobadge.png?6'
+    # static_templates:
+    #   - 404.html
 
+extra_css:
+  - 'extra/styles.css'
 
 extra:
     screenshot: img/ardour-osc.png
@@ -26,24 +35,42 @@ extra:
             url : http://openstagecontrol.herokuapp.com
 
 nav:
-    - Open Stage Control: index.md
-    - Docs: docs.md
-    - Docs:
-        - Getting started: docs/getting-started.md
-        - User interface: docs/interface.md
-        - Editing sessions: docs/editing-sessions.md
-        - Widgets reference: docs/widgets-reference.md
-        - Advanced property syntax: docs/advanced-property-syntax.md
-        - Scripting: docs/scripting.md
-        - CSS Tips: docs/css-tips.md
-        - Theming: docs/theming.md
-        - URL options: docs/url-options.md
+    - Home: index.md
+    - Download:
+        - download.md
+    - Documentation:
+        - Getting started:
+            - docs/getting-started/server-setup.md
+            - docs/getting-started/supported-platforms.md
+            - docs/getting-started/running-from-sources.md
+            - docs/getting-started/running-with-node.md
+        - User interface:
+            - docs/user-interface/user-interface.md
+            - docs/user-interface/editor.md
+            - docs/user-interface/keyboard-shortcuts.md
+        - Widgets:
+            - docs/widgets/general-mechanics.md
+            - docs/widgets/properties-reference.md
+            - docs/widgets/advanced-syntaxes.md
+            - docs/widgets/scripting.md
+        - MIDI:
+            - MIDI setup: docs/midi/midi-setup.md
+            - MIDI messages: docs/midi/midi-messages.md
+        - Custom module:
+            - docs/custom-module/custom-module.md
+            - docs/custom-module/examples.md
+            - docs/custom-module/managing-big-modules.md
+        - Customization:
+            - docs/customization/themes.md
+            - docs/customization/css-tips.md
+        - Client options: docs/client-options.md
         - Remote control: docs/remote-control.md
-        - Custom module: docs/custom-module.md
-        - Midi: docs/midi.md
-        - Examples: docs/examples.md
         - Credits: docs/credits.md
-    - Support: support.md
+
+    - Bug Tracker:
+        - 'Bug Tracker': 'https://github.com/jean-emmanuel/open-stage-control/issues'
+    - Community:
+        - 'Community forums': 'https://openstagecontrol.discourse.group'
 
 markdown_extensions:
     - markdown.extensions.extra
@@ -68,6 +95,6 @@ markdown_extensions:
     - pymdownx.tasklist:
         custom_checkbox: true
     - pymdownx.tilde
-
-plugins:
-    - search
+#
+# plugins:
+#     - search

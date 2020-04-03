@@ -1,0 +1,73 @@
+html {
+    overflow-y: scroll;
+}
+
+.md-header-nav__title {
+    padding-top: 1px;
+    padding-left: 0!important
+}
+
+td:first-child {
+    white-space: pre!important;
+    vertical-align: top;
+}
+
+
+.force-full-table + .md-typeset__scrollwrap .md-typeset__table {
+    width:100%;
+}
+.force-full-table + .md-typeset__scrollwrap .md-typeset__table table {
+    display: table!important;
+    width:100%;
+}
+
+
+.accordion {
+    margin: 1.5625em 0;
+    padding: .6rem;
+    overflow: hidden;
+    font-size: .64rem;
+    page-break-inside: avoid;
+    border-left: .2rem solid #448aff;
+    border-radius: .1rem;
+    box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,.05), 0 0 0.05rem rgba(0,0,0,.1);
+}
+.accordion h6 {
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.accordion > :last-child {
+    display: none;
+}
+.accordion .md-typeset__table {
+    margin-bottom: 0;
+}
+.accordion.show > :last-child {
+    display: block;
+    margin-bottom: 0;
+}
+.accordionlink > .headerlink {
+    opacity: 1!important;
+    visibility: visible!important;
+    text-decoration: none;
+    color: inherit!important;
+    display: block;
+    outline: none;
+    box-shadow: none;
+    margin-left: 0;
+}
+.accordion-description {
+    opacity: 0.8;
+}
+.accordion.show .accordion-description {
+   margin-bottom: 8px;
+}
+
+table .thead2 {
+    background: rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+}
+table .thead2 h6 {
+    color: #888;
+}
