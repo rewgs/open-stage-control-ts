@@ -13,6 +13,10 @@ var {updateWidget, incrementWidget} = require('./data-workers'),
     ipc = require('../ipc'),
     sessionManager
 
+setTimeout(()=>{
+    sessionManager = require('../managers/session/')
+})
+
 const HISTORY_SIZE = 50
 
 class Editor {
@@ -105,7 +109,7 @@ class Editor {
         window.onbeforeunload = ()=>{
             if (editor.unsavedSession) return true
         }
-        
+
         this.history = []
         this.historyState = -1
         this.historySession = null
@@ -795,4 +799,3 @@ var editor = new Editor()
 module.exports = editor
 
 require('./context-menu')
-sessionManager = require('../managers/session/')

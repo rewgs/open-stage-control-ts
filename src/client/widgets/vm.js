@@ -1,11 +1,15 @@
 var loopProtect = require('loop-protect'),
     {deepCopy} = require('../utils'),
+    globals
+
+setTimeout(()=>{
     globals = {
         screen: {width: screen.width, height: screen.height},
         env: deepCopy(ENV),
         url: document.location.host,
         platform: navigator.platform
     }
+})
 
 class Vm {
 

@@ -4,7 +4,7 @@ var {updateWidget} = require('./editor/data-workers'),
     stateManager = require('./managers/state'),
     deepExtend = require('deep-extend'),
     notifications = require('./ui/notifications')
-
+    
 var callbacks = {
     '/EDIT': function(args) {
 
