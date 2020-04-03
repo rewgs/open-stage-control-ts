@@ -60,7 +60,13 @@ window = {
         platform:''
     },
     NodeList: Array,
-    WebSocket: Object
+    WebSocket: Object,
+    localStorage: {
+        getItem(){return null}
+    },    sessionStorage: {
+        getItem(){return null},
+            setItem(){},
+        },
 }
 
 Object.assign(global, window)
@@ -73,3 +79,4 @@ DOM.init()
 ELECTRON_NOGPU = false
 CANVAS_FRAMERATE = 1
 LANG = 'en'
+ENV = {id: ''}
