@@ -13,6 +13,10 @@ var Osc = class Osc extends EventEmitter {
         this.remoteControl = {}
         this.serverTargets = []
 
+        setTimeout(()=>{
+            osc.remoteControl = require('./remote-control')
+        })
+
     }
 
     send(data) {
@@ -76,5 +80,3 @@ var Osc = class Osc extends EventEmitter {
 var osc = new Osc()
 
 module.exports = osc
-
-osc.remoteControl = require('./remote-control')

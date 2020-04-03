@@ -6,6 +6,11 @@ var widgetManager = require('../managers/widgets'),
     editor,
     scrollState = {}
 
+setTimeout(()=>{
+    editor = require('./')
+    Panel = require('../widgets/containers/panel')
+})
+
 function updateWidget(widget, options={}) {
 
     if (options.changedProps) {
@@ -222,6 +227,3 @@ module.exports = {
     updateWidget:updateWidget,
     incrementWidget:incrementWidget
 }
-
-editor = require('./')
-Panel = require('../widgets/containers/panel')
