@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "build": "node scripts/build-css && mkdocs build"
+    "build": "mkdocs build"
   },
   "author": "",
   "license": "ISC",
