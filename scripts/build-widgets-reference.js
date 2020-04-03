@@ -1,9 +1,8 @@
 require('./client-shim')
 
 // Here we go
-
-var widgets = require('../src/client/app/widgets'),
-    baseClass = require('../src/client/app/widgets/common/widget'),
+var widgets = require('../src/client/widgets'),
+    baseClass = require('../src/client/widgets/common/widget'),
     base = baseClass.defaults(),
     doc = []
 
@@ -14,7 +13,7 @@ doc.push(`
 
     <div class="accordion" data-category="generic" markdown="1">
 
-    <h4 class="accordionlink" id="generic_properties"><a class="headerlink" href="#generic_properties">Generic properties</a></h3>
+    <h6 class="accordionlink" id="generic_properties"><a class="headerlink" href="#generic_properties">Generic properties</a></h3>
     <div class="accordion-description">Properties shared by all widgets</div>
 
     | property | type |default | description |
@@ -28,7 +27,7 @@ for (var propName in base) {
 
     if (propName[0] === '_' && propName !== '_props') {
         doc.push(`
-            | <h4 class="thead2" id="${prop}">${prop}<a class="headerlink" href="#${prop}" title="Permanent link">#</a></h4> ||||`
+            | <h6 class="thead2" id="${prop}">${prop}<a class="headerlink" href="#${prop}" title="Permanent link">#</a></h6> ||||`
         )
     }
 
@@ -39,7 +38,7 @@ for (var propName in base) {
 
 
     doc.push(`
-        | <h4 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h4> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>')}</code> | ${help} |`
+        | <h6 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>')}</code> | ${help} |`
     )
 
 }
@@ -71,7 +70,7 @@ for (var k in widgets.categories) {
 
             <div class="accordion" data-category="${k}" markdown="1">
 
-            <h4 class="accordionlink" id="${type}"><a class="headerlink" href="#${type}">${type}</a></h3>
+            <h6 class="accordionlink" id="${type}"><a class="headerlink" href="#${type}">${type}</a></h3>
             <div class="accordion-description">${description}</div>
 
             | property | type |default | description |
@@ -86,7 +85,7 @@ for (var k in widgets.categories) {
             if (propName[0] === '_' && propName !== '_props') {
                 if (separator) doc.pop()
                 doc.push(`
-                    | <h4 class="thead2" id="${type + '_' + prop}">${prop}<a class="headerlink" href="#${type + '_' + prop}" title="Permanent link">#</a></h4> ||||`
+                    | <h6 class="thead2" id="${type + '_' + prop}">${prop}<a class="headerlink" href="#${type + '_' + prop}" title="Permanent link">#</a></h6> ||||`
                 )
                 separator = true
             }
@@ -97,7 +96,7 @@ for (var k in widgets.categories) {
                 dynamic = widgets.widgets[type].dynamicProps.includes(propName) ? '<i class="dynamic-prop-icon" title="dynamic"></i>' : ''
 
             doc.push(`
-                | <h4 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h4> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
+                | <h6 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
             )
             separator = false
         }
