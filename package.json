@@ -82,6 +82,7 @@
     "package": "node scripts/package.js",
     "package-rpi": "node scripts/package.js --old-rpi",
     "package-node": "node scripts/package-node.js",
+    "deb32": "electron-installer-debian --src dist/open-stage-control-linux-ia32/ --arch i386 --dest dist/open-stage-control-linux-ia32/ --icon resources/images/logo.png",
     "deb64": "electron-installer-debian --src dist/open-stage-control-linux-x64/ --arch amd64 --dest dist/open-stage-control-linux-x64/ --icon resources/images/logo.png",
     "debarm": "electron-installer-debian --src dist/open-stage-control-linux-armv7l/ --arch armv7l --dest dist/open-stage-control-linux-armv7l/ --icon resources/images/logo.png",
     "build-css": "node scripts/build-css.js",
