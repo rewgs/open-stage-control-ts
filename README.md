@@ -1,4 +1,6 @@
-<img src="resources/images/logo_discourse_black.png" alt="Open Stage Control" height="50px"/>
+<img src="resources/images/logo.png" alt="Open Stage Control" height="50px"/>
+
+Open Stage Control
 
 *Libre and modular OSC / MIDI controller*
 
