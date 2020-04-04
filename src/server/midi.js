@@ -33,7 +33,7 @@ class MidiConverter {
     send(data) {
 
         var args = []
-        for (i in data.args) {
+        for (let i in data.args) {
             args.push(data.args[i].value)
         }
 

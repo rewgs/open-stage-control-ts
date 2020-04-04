@@ -70,7 +70,7 @@ delete argv.$0
 
 // are we in a terminal ?
 var cli = false
-for (i in argv) {
+for (let i in argv) {
     if (!cliOnly.includes(i)) cli = true
 }
 
