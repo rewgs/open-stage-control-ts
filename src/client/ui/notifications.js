@@ -46,7 +46,7 @@ class Toast {
 
         this.html.classList.add('remove')
         setTimeout(()=>{
-            el.removeChild(this.html)
+            if (el.contains(this.html)) el.removeChild(this.html)
         }, 200)
 
     }
