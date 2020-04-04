@@ -5,10 +5,8 @@ var cpr = require('cpr'),
         ['../resources/images/logo-nobadge.png', '../app/assets/favicon.png'],
         ['../resources/images/logo.png', '../app/assets/logo.png'],
         ['../LICENSE', '../app/LICENSE'],
-        ['../src/python/head.py', '../app/server/python/head.py'],
-        ['../src/python/list.py', '../app/server/python/list.py'],
-        ['../src/python/utils.py', '../app/server/python/utils.py'],
-        ['../src/python/midi.py', '../app/server/python/midi.py'],
+        ['../src/python/', '../app/server/python/'],
+        ['../resources/fonts/', '../app/assets/fonts/'],
     ]
 
 for (var i in files) {
