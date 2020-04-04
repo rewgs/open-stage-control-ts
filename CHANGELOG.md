@@ -5,6 +5,7 @@
 
 - compatibility
   - dropped support for iOS 9
+  - no pre-compiled binaries for 32bit-linux
 
 - UI
   - overhaul design reworked
