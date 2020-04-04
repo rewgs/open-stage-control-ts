@@ -26,6 +26,7 @@ nav:
         - download.md
     - Documentation:
         - Getting started:
+            - docs/getting-started/introduction.md
             - docs/getting-started/server-setup.md
             - docs/getting-started/supported-platforms.md
             - docs/getting-started/running-from-sources.md

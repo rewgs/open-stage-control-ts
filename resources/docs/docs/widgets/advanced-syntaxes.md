@@ -65,6 +65,7 @@ This syntax allows writing formulas in pure javascript. The code will be compile
 - `console`: javascript console
 - `locals`: object for storing/reading arbitrary values. Changing its properties *does not* trigger any synchronisation even if the value is used somewhere else.
 - `globals`: same as `locals` but shared between all widgets, contains a few useful variables:
+
   - `screen`: `{width, height}`
   - `env`: client options (ie: url query options),
   - `url`: server url,
@@ -74,6 +75,6 @@ In this context, `@{} / OSC{}` are also seen as variables (named `VAR_XXX`), not
 
 Parsing errors can be read in the DevTool console (F12).
 
-## Javascript shorthand: `#{ <code> }`
+## Javascript: `#{ <code> }`
 
 This is a shorthand for the `JS{{}}` syntax, the only difference being that `<code>` is automatically prepended with a `return` statement.

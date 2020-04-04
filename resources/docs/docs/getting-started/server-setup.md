@@ -1,5 +1,3 @@
-Below are the available command-line options. Note that when running without any command-line switch (ie from a file browser), a launcher window will spawn to help setting them.
-
 <div class="force-full-table"></div>
 | Option | Description |
 |---|---|
