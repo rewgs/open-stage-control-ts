@@ -1,10 +1,9 @@
 @import 'reset';
-
 @import 'mixins';
-
+@import 'themes/default';
 @import 'ui';
-
 @import 'widgets';
+
 
 input,
 textarea,
@@ -53,36 +52,13 @@ body {
     white-space:nowrap;
     opacity:1;
     cursor: default;
-    font-family: 'Roboto', sans-serif;
+    font-family: $font, sans-serif;
     font-size:11rem;
     line-height:100%;
     font-weight: 500;
     // text-transform: uppercase;
     letter-spacing: 1rem;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .error-stack {
@@ -99,7 +75,7 @@ body {
     }
     overflow:auto;
     white-space:pre;
-    font-family: monospace;
+    font-family: $font-mono;
     font-weight:bold;
 }
 
@@ -114,5 +90,3 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
 }
-
-@import 'themes/default';

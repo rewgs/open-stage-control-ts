@@ -1,4 +1,4 @@
-It is possible to run the server in headless mode using [Node.js](https://nodejs.org/en/download/package-manager/). This allows running OSC on systems that
+It is possible to run the server in headless mode using [Node.js](https://nodejs.org/en/download/package-manager/).
 
 
 1. Install [Node.js](https://nodejs.org/en/download/package-manager/)

@@ -33,6 +33,7 @@ class ColorPicker extends UiWidget {
             closable: true,
             title: '',
             hide: true,
+            html: true,
             content: html`
                 <div class="color-picker-modal">
                     ${this.rgb.container}
