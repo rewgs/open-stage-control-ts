@@ -158,8 +158,8 @@ class Button extends Widget {
             if (options.send) this.sendValue()
             if (options.sync) this.changed(options)
 
-            if (newstate && this.getProp('mode') === 'tap') {
-                this.setValue(this.getProp('off'), {sync: false, send: false})
+            if (newstate && this.getProp('mode') === 'tap' && !options.tapRelease) {
+                this.setValue(this.getProp('off'), {sync: false, send: false, tapRelease: true})
             }
 
         }
