@@ -9,9 +9,6 @@
   "scripts": {
     "build": "mkdocs build"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "spectre.css": "^0.5.8"
-  }
+  "author": "Jean-Emmanuel Doucet",
+  "license": "GPLv3",
 }

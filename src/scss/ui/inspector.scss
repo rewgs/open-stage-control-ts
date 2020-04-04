@@ -25,10 +25,10 @@ osc-inspector-field {
     }
 
     textarea, input {
-        font-family: mono;
+        font-family: $font-mono;
 
         line-height: $field-height - 8rem;
-        padding: 5rem 6rem 3rem;
+        padding: 4rem 6rem;
         flex: 1;
         overflow-x: auto;
         overflow-y: hidden;
@@ -164,7 +164,7 @@ osc-inspector-checkbox {
 
 osc-inspector-select {
     position: relative;
-    font-family: mono;
+    font-family: $font-mono;
     line-height: inherit;
     padding: 0;
     overflow: hidden;
@@ -216,7 +216,7 @@ osc-inspector-color {
     box-shadow: 0;
     outline: 0;
     position: relative;
-    font-family: mono;
+    font-family: $font-mono;
     line-height: inherit;
     overflow: hidden;
     height: $field-height;

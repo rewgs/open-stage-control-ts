@@ -1,4 +1,6 @@
-# Properties reference
+
+
+# Widget reference
 
 <div class="accordion" data-category="generic" markdown="1">
 
@@ -687,3 +689,4 @@ item.click()
 })
 }
 </script>
+

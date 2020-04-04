@@ -135,3 +135,5 @@ doc.push(`\n\n
 `)
 
 console.log(doc.join('').replace(/^ +/gm,''))
+
+process.exit(0) // avoid setTimeout errors in required modules
