@@ -56,8 +56,13 @@ function reqListener () {
 html {
     overflow-y: scroll
 }
-.md-sidebar--secondary, .md-sidebar--primary {
+.md-sidebar--secondary {
   display: none;
+}
+@media screen and (min-width: 76.1875em) {
+    .md-sidebar--primary {
+      display: none;
+    }
 }
 .md-content {
     margin: 0;
