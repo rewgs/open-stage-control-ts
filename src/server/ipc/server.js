@@ -26,7 +26,7 @@ class Ipc extends EventEmitter {
 
                 this.emit('connection', client)
 
-                client.on('close', ()=>{
+                client.on('destroyed', ()=>{
                     delete this.clients[id]
                 })
 

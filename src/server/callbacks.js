@@ -29,6 +29,11 @@ module.exports =  {
     close(data, clientId) {
         // client disconnected
 
+    },
+
+    destroyed(data, clientId) {
+        // client removed (timeout)
+
         // clear osc data cache
         if (widgetHashTable[clientId]) delete widgetHashTable[clientId]
 

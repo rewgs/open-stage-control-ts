@@ -67,7 +67,7 @@ class Socket extends EventEmitter {
 
         this.dieTimeout = setTimeout(()=>{
 
-            this.emit('close')
+            this.emit('destroyed')
 
         }, dieTimeout)
 
