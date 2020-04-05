@@ -277,7 +277,7 @@ module.exports = class Fader extends Slider {
             }
 
             this.ctx.globalAlpha = 1
-            this.ctx.fillStyle = this.cssVars.colorWidget
+            this.ctx.fillStyle = this.cssVars.colorStroke
 
             this.ctx.beginPath()
             this.ctx.rect(m - 3 * PXSCALE, d, 6 * PXSCALE, PXSCALE)
@@ -347,8 +347,8 @@ module.exports = class Fader extends Slider {
 
 
         ctx.lineWidth = PXSCALE
-        ctx.fillStyle = this.cssVars.colorWidget
-        ctx.strokeStyle = this.cssVars.colorWidget
+        ctx.fillStyle = this.cssVars.colorText
+        ctx.strokeStyle = this.cssVars.colorFill
 
         var i = 0
 
@@ -365,49 +365,33 @@ module.exports = class Fader extends Slider {
 
             ctx.beginPath()
 
-            if (compact) {
+            ctx.moveTo(m + 10 * PXSCALE, y)
+            ctx.lineTo(m + 10 * PXSCALE + pipWidth, y)
+            ctx.stroke()
 
 
-                ctx.moveTo(width - pipWidth - PXSCALE, y)
-                ctx.lineTo(width - PXSCALE, y - pipWidth / 2)
-                ctx.lineTo(width - PXSCALE, y + pipWidth / 2)
-                ctx.closePath()
-                ctx.fill()
+            var textX = m + 10 * PXSCALE + pipWidth + 5 * PXSCALE,
+                textY = y + PXSCALE
+
+            ctx.globalAlpha = this.cssVars.alphaPipsText
+
+
+            if (this.getProp('horizontal')) {
+
+                ctx.save()
+                ctx.translate(textX + 3 *  PXSCALE, textY - 0.5 * PXSCALE)
+                ctx.rotate(Math.PI/2)
+                ctx.textAlign = 'center'
+                ctx.fillText(this.rangeLabels[i], 0, 0)
+                ctx.restore()
 
             } else {
 
-                ctx.moveTo(m + 10 * PXSCALE, y)
-                ctx.lineTo(m + 10 * PXSCALE + pipWidth, y)
-                ctx.stroke()
-
-
-
-                var textX = m + 10 * PXSCALE + pipWidth + 5 * PXSCALE,
-                    textY = y + PXSCALE
-
-                ctx.fillStyle = this.cssVars.colorText
-                ctx.globalAlpha = this.cssVars.alphaPipsText
-
-
-                if (this.getProp('horizontal')) {
-
-                    ctx.save()
-                    ctx.translate(textX + 3 *  PXSCALE, textY - 0.5 * PXSCALE)
-                    ctx.rotate(Math.PI/2)
-                    ctx.textAlign = 'center'
-                    ctx.fillText(this.rangeLabels[i], 0, 0)
-                    ctx.restore()
-
-                } else {
-
-                    this.pipsTextSize  = Math.max(this.pipsTextSize , ctx.measureText(this.rangeLabels[i]).width)
-                    ctx.fillText(this.rangeLabels[i], textX, textY)
-
-                }
-
-
+                this.pipsTextSize  = Math.max(this.pipsTextSize , ctx.measureText(this.rangeLabels[i]).width)
+                ctx.fillText(this.rangeLabels[i], textX, textY)
 
             }
+
 
             i++
 
