@@ -99,7 +99,7 @@ class Widget extends EventEmitter {
                 'When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)',
                 'When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending)'
             ]},
-            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s value is set.'},
+            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s value is set. See https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/'},
 
             _osc: 'osc',
 
