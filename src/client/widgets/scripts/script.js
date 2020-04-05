@@ -19,20 +19,7 @@ class Script extends Widget {
             _script: 'script',
 
             event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
-
-            script: {type: 'string', value: '', help: [
-                'This property is evaluated each time the widget receives a value*. Formulas are given extras variables in this context:',
-                '- `value`: value received by the widget',
-                '- `id`: id of the widget that triggered the script',
-                '- `send(target, address, arg1, arg2, ...)`: function for sending osc messages (ignores the script\'s targets and the server\'s defaults unless `target` is `false`; ignores the script\'s `preArgs`)',
-                '- `set(id, value)`: function for setting a widget\'s value',
-                '- `get(id)`: function for getting a widget\'s value (dynamic equivalent of @{id})',
-                '- `getProp(id, property)`: function for getting a widget\'s property value ((dynamic equivalent of @{id.property})',
-                '- `httpGet(url, callback)`: function for making http requests (asynchronous "GET" request and local urls only)',
-                '',
-                '* Note: `value` or `linkId` properties can be used to receive other widgets\' values. The `value` property must actually change to trigger the execution, where linked widgets via `linkId` can submit the same value over and over and trigger the execution',
-            ]},
-
+            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/'},
 
             _eventKey: 'event: keyboard',
 
