@@ -24,3 +24,16 @@ osc-toolbar {
         }
     }
 }
+
+osc-toolbar#start {
+
+    left: var(--size);
+    &:after {
+        content: "\f04b"
+    }
+    &.started:after {
+        content: "\f04d";
+        color: var(--color-widget);
+    }
+
+}

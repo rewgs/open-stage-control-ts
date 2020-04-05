@@ -3,20 +3,24 @@ var {remote, ipcRenderer} = eval('require(\'electron\')'),
     menu = new Menu(),
     terminal = require('./terminal'),
     settings = require('./settings'),
-    midilist = remote.getGlobal('midilist')
-
+    midilist = remote.getGlobal('midilist'),
+    serverStarted = false,
+    serverStart = ()=>{
+        if (serverStarted) return
+        ipcRenderer.send('start')
+    },
+    serverStop = ()=>{
+        if (!serverStarted) return
+        ipcRenderer.send('stop')
+    }
 
 var start = new MenuItem({
     label: 'Start',
-    click: ()=>{
-        ipcRenderer.send('start')
-    }
+    click: serverStart
 })
 var stop = new MenuItem({
     label: 'Stop',
-    click: ()=>{
-        ipcRenderer.send('stop')
-    }
+    click: serverStop
 })
 var newWindow = new MenuItem({
     label: 'New window',
@@ -100,20 +104,33 @@ class Toolbar {
 
     constructor() {
 
-        this.container = DOM.get('osc-toolbar')[0]
-
+        this.container = DOM.get('osc-toolbar#menu')[0]
+        this.startButton = DOM.get('osc-toolbar#start')[0]
 
         this.container.addEventListener('click', (e)=>{
             this.container.classList.add('on')
-            var serverProcess = remote.getGlobal('serverProcess')
-            start.visible = !serverProcess
-            stop.visible = !!serverProcess
-            newWindow.visible = !!serverProcess
+            start.visible = !serverStarted
+            stop.visible = !!serverStarted
+            newWindow.visible = !!serverStarted
             menu.popup({window: remote.getCurrentWindow(), x: parseInt(PXSCALE), y: parseInt(40 * PXSCALE)})
         })
 
         menu.on('menu-will-close', ()=>{
             this.container.classList.remove('on')
+        })
+
+        this.startButton.addEventListener('click', (e)=>{
+            if (!serverStarted) serverStart()
+            else serverStop()
+        })
+
+        ipcRenderer.on('server-started', ()=>{
+            serverStarted = true
+            this.startButton.classList.add('started')
+        })
+        ipcRenderer.on('server-stopped', ()=>{
+            serverStarted = false
+            this.startButton.classList.remove('started')
         })
 
     }
