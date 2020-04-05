@@ -199,6 +199,15 @@ module.exports = class MultiXy extends Pad {
 
     }
 
+    setVisibility() {
+
+        super.setVisibility()
+        for (var k in this.pads) {
+            this.pads[k].setVisibility()
+        }
+
+    }
+
     updateHandlesPosition() {
 
         for (var i=0;i<this.npoints;i++) {
