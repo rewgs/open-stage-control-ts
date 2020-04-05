@@ -365,13 +365,13 @@ module.exports = class Fader extends Slider {
 
             ctx.beginPath()
 
-            ctx.moveTo(m + 10 * PXSCALE, y)
-            ctx.lineTo(m + 10 * PXSCALE + pipWidth, y)
+            ctx.moveTo(m + 7 * PXSCALE, y)
+            ctx.lineTo(m + 7 * PXSCALE + pipWidth, y)
             ctx.stroke()
 
 
-            var textX = m + 10 * PXSCALE + pipWidth + 5 * PXSCALE,
-                textY = y + PXSCALE
+            var textX = m + 10 * PXSCALE + pipWidth + 4 * PXSCALE,
+                textY = y
 
             ctx.globalAlpha = this.cssVars.alphaPipsText
 
@@ -379,7 +379,7 @@ module.exports = class Fader extends Slider {
             if (this.getProp('horizontal')) {
 
                 ctx.save()
-                ctx.translate(textX + 3 *  PXSCALE, textY - 0.5 * PXSCALE)
+                ctx.translate(textX + 3 *  PXSCALE, textY)
                 ctx.rotate(Math.PI/2)
                 ctx.textAlign = 'center'
                 ctx.fillText(this.rangeLabels[i], 0, 0)
