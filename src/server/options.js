@@ -49,7 +49,12 @@ module.exports = {
                 'Targets must be ip: port pairs & port must be >= 1024' : true
         }
     },
-    'm': {alias: 'midi', type: 'array', describe: 'midi router settings'},
+    'm': {alias: 'midi', type: 'array', describe: 'midi router settings',
+        check: (o)=>{
+            var err = o.filter(item=>!item.match(/^(list|jack|sysex|pc_offset|path=(.*)|[^:]+:(virtual|(-1|[0-9]+),(-1|[0-9]+)))$/))
+            return err.length ? `Invalid option${err.length > 1 ? 's' : ''}: ${err.join(', ')}` : true
+        }
+    },
     'd': {alias: 'debug', type: 'boolean', describe: 'log received osc messages in the console'},
     'n': {alias: 'no-gui', type: 'boolean', describe: 'disable default gui'},
     't': {alias: 'theme', type: 'array', describe: 'theme name or path (mutliple values allowed)'},

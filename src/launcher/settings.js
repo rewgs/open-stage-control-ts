@@ -182,12 +182,15 @@ class Settings {
                 }
 
                 if (fail || v !== '' && data.check && data.check(v, this.options) !== true) {
-                    if (!field.classList.contains('error')) {
-                        field.classList.add('error')
-                        terminal.log(`(ERROR) --${name}: ${fail || data.check(v, this.options)}`, 'error')
+                    let error = `(ERROR) --${name}: ${fail || data.check(v, this.options)}`
+                    field.classList.add('error')
+                    if (field.getAttribute('data-error') !== error) {
+                        terminal.log(error, 'error')
+                        field.setAttribute('data-error', error)
                     }
                 } else {
                     field.classList.remove('error')
+                    field.removeAttribute('data-error')
                     this.options[name] = v
                 }
 

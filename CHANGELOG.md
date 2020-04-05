@@ -108,6 +108,7 @@
 - launcher
   - config save/load
   - allow starting/stopping server without rebooting
+  - syntax check on `--midi` option
 
 - server
   - renamed `--url-options` to `--client-options` and make them apply even in remote browsers (can be overridden with url queries)
