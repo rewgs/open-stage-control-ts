@@ -33,7 +33,6 @@ osc-toolbar#start {
     }
     &.started:after {
         content: "\f04d";
-        color: var(--color-widget);
     }
 
 }
