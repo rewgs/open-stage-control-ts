@@ -19,7 +19,7 @@ class Script extends Widget {
             _script: 'script',
 
             event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
-            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See <a href="https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/">documentation</a>.'},
+            script: {},
 
             _eventKey: 'event: keyboard',
 
@@ -35,7 +35,9 @@ class Script extends Widget {
             '_geometry', 'left', 'top', 'width', 'height', 'expand',
             '_style',  'colorText', 'colorWidget', 'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOn', 'alphaFillOff', 'padding', 'css'
 
-        ])
+        ], {
+            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See <a href="https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/">documentation</a>.'},
+        })
 
     }
 
