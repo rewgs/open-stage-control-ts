@@ -30,16 +30,7 @@
 | <h6 id="alphaFillOff" class="dynamic">alphaFillOff<a class="headerlink" href="#alphaFillOff" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fill color opacity (off). |
 | <h6 id="alphaFillOn" class="dynamic">alphaFillOn<a class="headerlink" href="#alphaFillOn" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fill color opacity (on). |
 | <h6 id="padding" class="dynamic">padding<a class="headerlink" href="#padding" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Inner spacing. |
-| <h6 id="css" class="dynamic">css<a class="headerlink" href="#css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`
-<br/>- `--color-fill`: `colorFill`
-<br/>- `--color-stroke`: `colorStroke`
-<br/>- `--color-text`: `colorText`
-<br/>- `--color-background`: `colorPanel`
-<br/>- `--widget-padding`: `padding`
-<br/>- `--alpha-fill-on`: `alphaFillOn`
-<br/>- `--alpha-fill-off`: `alphaFillOff`
-<br/>- `--alpha-stroke`: `alphaStroke`
-|
+| <h6 id="css" class="dynamic">css<a class="headerlink" href="#css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--color-background`: `colorPanel`<br/>- `--widget-padding`: `padding`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke` |
 | <h6 class="thead2" id="value">value<a class="headerlink" href="#value" title="Permanent link">#</a></h6> ||||
 | <h6 id="value" class="dynamic">value<a class="headerlink" href="#value" title="Permanent link">#</a></h6> | `*` | <code>""</code> | Define the widget's value depending on other widget's values / properties using the advanced property syntax |
 | <h6 id="default" class="">default<a class="headerlink" href="#default" title="Permanent link">#</a></h6> | `*` | <code>""</code> | If set, the widget will be initialized with this value when the session is loaded. |
@@ -65,17 +56,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="button_style">style<a class="headerlink" href="#button_style" title="Permanent link">#</a></h6> ||||
-| <h6 id="button_css" class="dynamic">css<a class="headerlink" href="#button_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`
-<br/>- `--color-fill`: `colorFill`
-<br/>- `--color-stroke`: `colorStroke`
-<br/>- `--color-text`: `colorText`
-<br/>- `--color-background`: `colorPanel`
-<br/>- `--widget-padding`: `padding`
-<br/>- `--alpha-fill-on`: `alphaFillOn`
-<br/>- `--alpha-fill-off`: `alphaFillOff`
-<br/>- `--alpha-stroke`: `alphaStroke`
-<br/>- `--color-text-on`: `colorTextOn`
-|
+| <h6 id="button_css" class="dynamic">css<a class="headerlink" href="#button_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--color-background`: `colorPanel`<br/>- `--widget-padding`: `padding`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--color-text-on`: `colorTextOn` |
 | <h6 class="thead2" id="button_button">button<a class="headerlink" href="#button_button" title="Permanent link">#</a></h6> ||||
 | <h6 id="button_on" class="dynamic">on<a class="headerlink" href="#button_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message |
 | <h6 id="button_off" class="dynamic">off<a class="headerlink" href="#button_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message. Must be different from `on`. |
@@ -94,17 +75,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="switch_style">style<a class="headerlink" href="#switch_style" title="Permanent link">#</a></h6> ||||
-| <h6 id="switch_css" class="dynamic">css<a class="headerlink" href="#switch_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`
-<br/>- `--color-fill`: `colorFill`
-<br/>- `--color-stroke`: `colorStroke`
-<br/>- `--color-text`: `colorText`
-<br/>- `--color-background`: `colorPanel`
-<br/>- `--widget-padding`: `padding`
-<br/>- `--alpha-fill-on`: `alphaFillOn`
-<br/>- `--alpha-fill-off`: `alphaFillOff`
-<br/>- `--alpha-stroke`: `alphaStroke`
-<br/>- `--color-text-on`: `colorTextOn`
-|
+| <h6 id="switch_css" class="dynamic">css<a class="headerlink" href="#switch_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--color-background`: `colorPanel`<br/>- `--widget-padding`: `padding`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--color-text-on`: `colorTextOn` |
 | <h6 class="thead2" id="switch_switch">switch<a class="headerlink" href="#switch_switch" title="Permanent link">#</a></h6> ||||
 | <h6 id="switch_layout" class="">layout<a class="headerlink" href="#switch_layout" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | Choices: `vertical`, `horizontal`, `grid` |
 | <h6 id="switch_gridTemplate" class="">gridTemplate<a class="headerlink" href="#switch_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
@@ -590,18 +561,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="fader_style">style<a class="headerlink" href="#fader_style" title="Permanent link">#</a></h6> ||||
-| <h6 id="fader_css" class="dynamic">css<a class="headerlink" href="#fader_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`
-<br/>- `--color-fill`: `colorFill`
-<br/>- `--color-stroke`: `colorStroke`
-<br/>- `--color-text`: `colorText`
-<br/>- `--color-background`: `colorPanel`
-<br/>- `--widget-padding`: `padding`
-<br/>- `--alpha-fill-on`: `alphaFillOn`
-<br/>- `--alpha-fill-off`: `alphaFillOff`
-<br/>- `--alpha-stroke`: `alphaStroke`
-<br/>- `--alpha-pips`: `alphaPips`
-<br/>- `--alpha-pips-text`: `alphaPipsText`
-|
+| <h6 id="fader_css" class="dynamic">css<a class="headerlink" href="#fader_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--color-background`: `colorPanel`<br/>- `--widget-padding`: `padding`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--alpha-pips`: `alphaPips`<br/>- `--alpha-pips-text`: `alphaPipsText` |
 | <h6 class="thead2" id="fader_fader">fader<a class="headerlink" href="#fader_fader" title="Permanent link">#</a></h6> ||||
 | <h6 id="fader_design" class="">design<a class="headerlink" href="#fader_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Choices: `default`, `round`, `compact` |
 | <h6 id="fader_horizontal" class="">horizontal<a class="headerlink" href="#fader_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
@@ -630,18 +590,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="knob_style">style<a class="headerlink" href="#knob_style" title="Permanent link">#</a></h6> ||||
-| <h6 id="knob_css" class="dynamic">css<a class="headerlink" href="#knob_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`
-<br/>- `--color-fill`: `colorFill`
-<br/>- `--color-stroke`: `colorStroke`
-<br/>- `--color-text`: `colorText`
-<br/>- `--color-background`: `colorPanel`
-<br/>- `--widget-padding`: `padding`
-<br/>- `--alpha-fill-on`: `alphaFillOn`
-<br/>- `--alpha-fill-off`: `alphaFillOff`
-<br/>- `--alpha-stroke`: `alphaStroke`
-<br/>- `--alpha-pips`: `alphaPips`
-<br/>- `--alpha-pips-text`: `alphaPipsText`
-|
+| <h6 id="knob_css" class="dynamic">css<a class="headerlink" href="#knob_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--color-background`: `colorPanel`<br/>- `--widget-padding`: `padding`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--alpha-pips`: `alphaPips`<br/>- `--alpha-pips-text`: `alphaPipsText` |
 | <h6 class="thead2" id="knob_knob">knob<a class="headerlink" href="#knob_knob" title="Permanent link">#</a></h6> ||||
 | <h6 id="knob_mode" class="">mode<a class="headerlink" href="#knob_mode" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion<br/><br/>Choices: `vertical`, `circular`, `snap` |
 | <h6 id="knob_spring" class="dynamic">spring<a class="headerlink" href="#knob_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
@@ -688,18 +637,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="range_style">style<a class="headerlink" href="#range_style" title="Permanent link">#</a></h6> ||||
-| <h6 id="range_css" class="dynamic">css<a class="headerlink" href="#range_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`
-<br/>- `--color-fill`: `colorFill`
-<br/>- `--color-stroke`: `colorStroke`
-<br/>- `--color-text`: `colorText`
-<br/>- `--color-background`: `colorPanel`
-<br/>- `--widget-padding`: `padding`
-<br/>- `--alpha-fill-on`: `alphaFillOn`
-<br/>- `--alpha-fill-off`: `alphaFillOff`
-<br/>- `--alpha-stroke`: `alphaStroke`
-<br/>- `--alpha-pips`: `alphaPips`
-<br/>- `--alpha-pips-text`: `alphaPipsText`
-|
+| <h6 id="range_css" class="dynamic">css<a class="headerlink" href="#range_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--color-background`: `colorPanel`<br/>- `--widget-padding`: `padding`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--alpha-pips`: `alphaPips`<br/>- `--alpha-pips-text`: `alphaPipsText` |
 | <h6 class="thead2" id="range_fader">fader<a class="headerlink" href="#range_fader" title="Permanent link">#</a></h6> ||||
 | <h6 id="range_design" class="">design<a class="headerlink" href="#range_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Choices: `default`, `round`, `compact` |
 | <h6 id="range_horizontal" class="">horizontal<a class="headerlink" href="#range_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
