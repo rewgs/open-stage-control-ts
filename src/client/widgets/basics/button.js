@@ -33,7 +33,7 @@ class Button extends Widget {
             doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
             colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
 
-        })
+        }, [], {}, Button)
 
     }
 

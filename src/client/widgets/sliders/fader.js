@@ -52,7 +52,7 @@ module.exports = class Fader extends Slider {
 
             touchAddress: {type: 'string', value:'', help: 'OSC address for touched state messages: `/touchAddress [preArgs] 0/1`'},
 
-        })
+        }, Fader)
 
     }
 

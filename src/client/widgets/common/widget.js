@@ -44,7 +44,7 @@ class Widget extends EventEmitter {
 
     }
 
-    static defaults(insert={}, except=[], push={}) {
+    static defaults(insert={}, except=[], push={}, Class=Widget) {
 
         var defaults = {
 
@@ -88,7 +88,11 @@ class Widget extends EventEmitter {
 
 
 
-            css: {type: 'string', value: '', help: 'CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/css-tips/">documentation</a>.'},
+            css: {type: 'string', value: '', help: [
+                'CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.',
+                'Available css variables:',
+                ...Class.cssVariables.map(x=>'- `' + x.css + '`: `' + x.js + '`\n')
+            ]},
 
             _value: 'value',
 
