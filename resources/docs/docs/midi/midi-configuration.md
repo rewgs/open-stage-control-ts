@@ -10,7 +10,7 @@ To install `python-rtmidi`, run `pip install python-rtmidi` (python 2) in a term
 !!! info "Why an additionnal dependency ?"
     Providing cross-platform MIDI support is not trivial, as it requires OS-specific compilation that cannot be automated within Open Stage Control's current packaging workflow. Using a python addon seems to be the best compromise so far : the core app remains easy to build, and the extra dependency is easy to install.
 
-## Setup
+## Configuration
 
 When running the app, the `-m / --midi` switch must be set; it accepts the following options (separated by spaces):
 
@@ -23,7 +23,7 @@ When running the app, the `-m / --midi` switch must be set; it accepts the follo
 *Linux only:*
 
 - `device_name:virtual`: creates a virtual midi device with one input port and one output port
-- `jack`: use JACK MIDI instead of ALSA (add as extra parameter). `rtmidi` must be compiled with `--jack-midi` flag for this to work.
+- `jack`: use JACK MIDI instead of ALSA. `rtmidi` must be compiled with `--jack-midi` flag for this to work.
 
 
 ## Widget setup
