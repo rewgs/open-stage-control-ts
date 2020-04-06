@@ -270,6 +270,11 @@ class UiInspector extends UiWidget {
                 <div class="header">
                     <p>Type: <code>${defaultValue.type}</code></p>
                     <p>Default: <code>${JSON.stringify(defaultValue.value)}</code></p>
+                    ${
+                        defaultValue.choices ? html`
+                            <p>Choices: ${raw(defaultValue.choices.map(x=>'<code>' + x + '</code>').join(', '))}</p>
+                        ` :''
+                    }
                     <p>Dynamic: <code>${dynamic ? 'true' : 'false'}</code></p>
                 </div>
                 <div class="description">

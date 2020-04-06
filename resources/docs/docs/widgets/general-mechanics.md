@@ -48,7 +48,7 @@ Within a single client's scope, there are multiple ways to synchronize widgets:
 
 - If they share the same `id`: in this case, the synchronized widget doesn't send any osc/midi message. This case is mostly used for widget cloning.
 - If they share a `linkId`: in this case, the synchronized widget sends its osc/midi message normally.
-- If their `value` properties depend on each other using the [advanced syntaxes](./advances-syntaxes.md)
+- If their `value` properties depend on each other using the [advanced syntaxes](./advanced-syntaxes.md)
 - Using [scripting](./scripting.md)
 
 ## Client synchronization
