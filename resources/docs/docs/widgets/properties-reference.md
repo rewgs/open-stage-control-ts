@@ -1,4 +1,4 @@
-
+<!-- This file is generated automatically from the widget class declarations. See scripts/build-widget-reference.js -->
 <div class="accordion" data-category="generic" markdown="1">
 
 <h6 class="accordionlink" id="generic_properties"><a class="headerlink" href="#generic_properties">Generic properties</a></h3>
