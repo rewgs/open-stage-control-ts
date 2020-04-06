@@ -1,7 +1,7 @@
 # Open Stage Control
 ## Libre and modular OSC / MIDI controller
 
-
+*Soon, a nice screenshot*
 
 
 <style>

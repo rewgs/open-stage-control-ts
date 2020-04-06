@@ -5,19 +5,25 @@ The `script` property allows widgets to run javascript code when their value upd
 - no `JS{{}}` wrapper, just the code
 - `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their value before the script's compilation
 
+## Event-dependent variables
+
+**Event: value**
+
+- `id` (`string`): id of the widget that's reponsible for the value update
+- `value`: widget's value
+
+**Event: keyboard**
+
+- `type` (`string`): `keydown` or `keyup`
+- `key` (`string`): key name,
+- `code` (`number`): key code
+- `ctrl` (`boolean)`: `true` if ctrl key is pressed
+- `shift` (`boolean`): `true` if shift key is pressed
+- `alt` (`boolean`): `true` if alt key is pressed
+- `meta` (`boolean`): `true` if meta key is pressed
+
+
 ## Available variables
-
-----
-
-#### `value`
-
-Widget's value
-
-----
-
-#### `id`: `string`
-
-Id of the widget that's reponsible for the value update
 
 ----
 
@@ -81,7 +87,7 @@ Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 These work like their native equivalent, with an extra (optional) `id` argument.
 
 - `id` (optional): unique identifier. If a timeout with the same id is already running, it is cleared before the new one is created. If omitted, defaults to `undefined`. One can use `Math.random()` or `Date.now()` to force new id at each execution, though this might cause performance issues. `id`s are scoped to the widget's context: two timeouts with the same `id` in two different widgets can run concurrently
-- `callback`: function to executed
+- `callback`: function to be executed
 - `delay`: delay before execution is ms
 
 Reference:

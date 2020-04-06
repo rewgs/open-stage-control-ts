@@ -1,3 +1,5 @@
+Running the app from the sources slightly differs from using prebuilt binaries: we'll build and launch the app with npm (node package manager).
+
 ## Requirements
 
 - [Node.js](https://nodejs.org/en/#download)
@@ -6,9 +8,8 @@
 
 ## Run from sources
 
-Running the app from the sources slightly differs from using built binaries : we'll build and launch the app with npm (node package manager).
 
-**2. Download sources**
+**Download**
 
 ```bash
 git clone https://github.com/jean-emmanuel/open-stage-control
@@ -27,7 +28,7 @@ npm run build
     npm run build
     ```
 
-**3. Run !**
+**Run**
 
 ```bash
 npm start [ -- options]
