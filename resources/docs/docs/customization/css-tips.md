@@ -46,16 +46,9 @@ Multiple classes can be added (one per `class` statement). Custom classes are al
 
 Z-Axis ordering can be set using the `z-index` rule. Absolutely positionned widgets (when `top` or `left` is different from `auto`) have `z-index:10;` by default.
 
-## Layering: `pointer-events`
-
-To make a widget ignore interactions (ie to be able to click through it), add `pointer-events:none;`.
-
-!!! info ""
-    This is always ignored when the editor is enabled.
-
 ## Responsive sizing
 
-In most cases, using percentages in `height` and `width` will do. CSS `calc()` function can help in some cases (set the corresponding property to `auto` to avoid conflicts):
+In most cases, using `vertical`, `horizontal` or `grid` layouts as well as using percentages in `height` and `width` will do. CSS `calc()` function can help in some cases (set the corresponding property to `auto` to avoid conflicts):
 
 ```css
 :host {
@@ -86,9 +79,11 @@ Media queries can also be used:
 - use `%` for font-size
 
 
-## CSS Variables
+## CSS variables
 
-CSS Variables declared in the  [default theme](https://github.com/jean-emmanuel/open-stage-control/blob/master/src/scss/themes/default.scss) can be overriden. Some widgets also use specific CSS variables (mostly to define colors) documented on their respective pages.
+[CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) declared in the  [default theme](https://github.com/jean-emmanuel/open-stage-control/blob/master/src/scss/themes/default.scss) can be overriden.
+
+Widgets also rely on CSS variables for the style properties (colors, padding, etc). These are documented in the widgets' `css` property description.
 
 ## Other tips
 

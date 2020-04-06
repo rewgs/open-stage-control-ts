@@ -31,7 +31,7 @@ class Switch extends MenuBase {
             ]},
             colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
 
-        })
+        }, [], {}, Switch)
 
     }
 

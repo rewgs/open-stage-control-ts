@@ -48,7 +48,7 @@ module.exports = class Knob extends Slider {
 
             touchAddress: {type: 'string', value:'', help: 'OSC address for touched state messages: `/touchAddress [preArgs] 0/1`'},
 
-        })
+        }, Knob)
 
     }
 
