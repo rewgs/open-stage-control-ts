@@ -57,6 +57,7 @@ module.exports = {
     },
     'd': {alias: 'debug', type: 'boolean', describe: 'log received osc messages in the console'},
     'n': {alias: 'no-gui', type: 'boolean', describe: 'disable default gui'},
+    'fullscreen': {type: 'boolean', describe: 'launch in fullscreen mode (only affects the default client gui)'},
     't': {alias: 'theme', type: 'array', describe: 'theme name or path (mutliple values allowed)'},
     'client-options': {type: 'array', describe: 'client options (opt=value pairs)',
         check: (o)=>{
@@ -80,7 +81,6 @@ module.exports = {
     },
     'remote-root': {type: 'string', describe: 'set remote file browsing root folder', file: {folder: true}},
     'instance-name': {type: 'string', describe: 'used to differenciate multiple instances in a zeroconf network'},
-    'fullscreen': {type: 'boolean', describe: 'launch in fullscreen mode (only affects the default client gui)'},
 
     // cli only
     'disable-gpu': {type: 'boolean', describe: 'disable hardware acceleration', launcher: false},
