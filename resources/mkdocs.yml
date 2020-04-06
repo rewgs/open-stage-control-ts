@@ -40,7 +40,7 @@ nav:
             - docs/widgets/advanced-syntaxes.md
             - docs/widgets/scripting.md
         - MIDI:
-            - MIDI setup: docs/midi/midi-configuration.md
+            - MIDI configuration: docs/midi/midi-configuration.md
             - MIDI messages: docs/midi/midi-messages.md
         - Custom module:
             - docs/custom-module/custom-module.md
