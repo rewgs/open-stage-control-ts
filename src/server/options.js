@@ -4,7 +4,7 @@ module.exports = {
     's': {alias: 'send', type: 'array', describe: 'default targets for all widgets (ip: port / domain: port / midi: port_name pairs)',
         check: (s)=>{
             return s.some(item=>!item.match(/^[^:]*:[0-9]{4,5}$/) && !item.match(/^midi:.*$/)) ?
-                'Targets must be ip: port or domain: port pairs (udp / tcp port must be >= 1024) or midi: port_name pairs' : true
+                'Targets must be ip:port or hostname:port pairs (port must be >= 1024) or midi:port_name pairs' : true
         }
     },
     'l': {alias: 'load', type: 'string', file: {name: 'OSC Session (.json)', extensions: ['json', 'js']}, describe: 'session file to load',
@@ -45,8 +45,8 @@ module.exports = {
     'tcp-targets': {type: 'array', describe: 'tcp servers to connect to (ip: port pairs), does not susbtitute for --send',
         check: (s, argv)=>{
             if (!argv['tcp-port']) return '--tcp-port must be set'
-            return s.some(item=>!item.match('^[^: \s\"\']*: [0-9]{4, 5}[\s\"\']*$')) ?
-                'Targets must be ip: port pairs & port must be >= 1024' : true
+            return s.some(item=>!item.match(/^[^:]*:[0-9]{4,5}$/)) ?
+                'Targets must be ip:port or hostname:port pairs (port must be >= 1024)' : true
         }
     },
     'm': {alias: 'midi', type: 'array', describe: 'midi router settings',
