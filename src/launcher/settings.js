@@ -101,7 +101,7 @@ class Settings {
             let data = settings.options[k],
                 name = data.alias || k,
                 field = html`<osc-settings-field></osc-settings-field>`,
-                label = field.appendChild(html`<label><span>--</span>${name}</label>`),
+                label = field.appendChild(html`<label>${name}</label>`),
                 input = field.appendChild(html`<input/>`),
                 toggle, browse, reset
 
