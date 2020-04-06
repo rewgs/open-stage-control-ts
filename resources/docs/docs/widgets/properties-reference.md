@@ -55,7 +55,7 @@
 | <h6 class="thead2" id="button_button">button<a class="headerlink" href="#button_button" title="Permanent link">#</a></h6> ||||
 | <h6 id="button_on" class="dynamic">on<a class="headerlink" href="#button_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message |
 | <h6 id="button_off" class="dynamic">off<a class="headerlink" href="#button_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message. Must be different from `on`. |
-| <h6 id="button_mode" class="">mode<a class="headerlink" href="#button_mode" title="Permanent link">#</a></h6> | `string` | <code>"toggle"</code> | Interraction mode:<br/>- `toggle` (classic on/off switch)<br/>- `push` (press & release)<br/>- `tap` (no release)<br/><br/>Possible values: toggle, push, tap |
+| <h6 id="button_mode" class="">mode<a class="headerlink" href="#button_mode" title="Permanent link">#</a></h6> | `string` | <code>"toggle"</code> | Interraction mode:<br/>- `toggle` (classic on/off switch)<br/>- `push` (press & release)<br/>- `tap` (no release)<br/><br/>Choices: `toggle`, `push`, `tap` |
 | <h6 id="button_doubleTap" class="">doubleTap<a class="headerlink" href="#button_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the button require a double tap to be pushed instead of a single tap |
 | <h6 id="button_colorTextOn" class="">colorTextOn<a class="headerlink" href="#button_colorTextOn" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Defines the widget's text color when active. |</div>
 
@@ -70,10 +70,10 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="switch_switch">switch<a class="headerlink" href="#switch_switch" title="Permanent link">#</a></h6> ||||
-| <h6 id="switch_layout" class="">layout<a class="headerlink" href="#switch_layout" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | Possible values: vertical, horizontal, grid |
+| <h6 id="switch_layout" class="">layout<a class="headerlink" href="#switch_layout" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | Choices: `vertical`, `horizontal`, `grid` |
 | <h6 id="switch_gridTemplate" class="">gridTemplate<a class="headerlink" href="#switch_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
 | <h6 id="switch_values" class="">values<a class="headerlink" href="#switch_values" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
-| <h6 id="switch_mode" class="">mode<a class="headerlink" href="#switch_mode" title="Permanent link">#</a></h6> | `string` | <code>"tap"</code> | Interraction mode:<br/>- `tap`: activates when the pointer is down but prevents further scrolling<br/>- `slide`: same as `tap` but allows sliding between values<br/>- `click`: activates upon click only and allows further scrolling<br/><br/>Possible values: tap, slide, click |
+| <h6 id="switch_mode" class="">mode<a class="headerlink" href="#switch_mode" title="Permanent link">#</a></h6> | `string` | <code>"tap"</code> | Interraction mode:<br/>- `tap`: activates when the pointer is down but prevents further scrolling<br/>- `slide`: same as `tap` but allows sliding between values<br/>- `click`: activates upon click only and allows further scrolling<br/><br/>Choices: `tap`, `slide`, `click` |
 | <h6 id="switch_colorTextOn" class="">colorTextOn<a class="headerlink" href="#switch_colorTextOn" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Defines the widget's text color when active. |</div>
 
 
@@ -87,7 +87,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="dropdown_dropdown">dropdown<a class="headerlink" href="#dropdown_dropdown" title="Permanent link">#</a></h6> ||||
-| <h6 id="dropdown_align" class="">align<a class="headerlink" href="#dropdown_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Possible values: center, left, right |
+| <h6 id="dropdown_align" class="">align<a class="headerlink" href="#dropdown_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
 | <h6 id="dropdown_values" class="dynamic">values<a class="headerlink" href="#dropdown_values" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |</div>
 
 
@@ -102,8 +102,8 @@
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="menu_menu">menu<a class="headerlink" href="#menu_menu" title="Permanent link">#</a></h6> ||||
 | <h6 id="menu_size" class="dynamic">size<a class="headerlink" href="#menu_size" title="Permanent link">#</a></h6> | `number`&vert;<br/>`array` | <code>200</code> | - If `layout` is `circular`: diameter (in px)<br/>- Else: square size or `[width, height]` array |
-| <h6 id="menu_align" class="">align<a class="headerlink" href="#menu_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Possible values: center, left, right |
-| <h6 id="menu_layout" class="dynamic">layout<a class="headerlink" href="#menu_layout" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | Defines whether the menu's layout should be rendered in a circle or in a box<br/><br/>Possible values: circular, horizontal, vertical, grid |
+| <h6 id="menu_align" class="">align<a class="headerlink" href="#menu_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
+| <h6 id="menu_layout" class="dynamic">layout<a class="headerlink" href="#menu_layout" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | Defines whether the menu's layout should be rendered in a circle or in a box<br/><br/>Choices: `circular`, `horizontal`, `vertical`, `grid` |
 | <h6 id="menu_gridTemplate" class="">gridTemplate<a class="headerlink" href="#menu_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
 | <h6 id="menu_toggle" class="">toggle<a class="headerlink" href="#menu_toggle" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the menu stay opened after mouse/touch release |
 | <h6 id="menu_doubleTap" class="">doubleTap<a class="headerlink" href="#menu_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the menu require a double tap to be opened instead of a single tap |
@@ -121,7 +121,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="input_input">input<a class="headerlink" href="#input_input" title="Permanent link">#</a></h6> ||||
-| <h6 id="input_align" class="">align<a class="headerlink" href="#input_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Possible values: center, left, right |
+| <h6 id="input_align" class="">align<a class="headerlink" href="#input_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
 | <h6 id="input_unit" class="">unit<a class="headerlink" href="#input_unit" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Unit will be appended to the displayed widget's value (it doesn't affect osc messages) |
 | <h6 id="input_asYouType" class="">asYouType<a class="headerlink" href="#input_asYouType" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the input send its value at each keystroke |</div>
 
@@ -136,7 +136,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="file_input">input<a class="headerlink" href="#file_input" title="Permanent link">#</a></h6> ||||
-| <h6 id="file_align" class="">align<a class="headerlink" href="#file_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Possible values: center, left, right |
+| <h6 id="file_align" class="">align<a class="headerlink" href="#file_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
 | <h6 id="file_directory" class="">directory<a class="headerlink" href="#file_directory" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Default browsing directory |
 | <h6 id="file_extension" class="">extension<a class="headerlink" href="#file_extension" title="Permanent link">#</a></h6> | `string` | <code>"*"</code> | Only display files with this extension |
 | <h6 id="file_hidePath" class="">hidePath<a class="headerlink" href="#file_hidePath" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to only display the filename (the whole path will still be used as value) |
@@ -156,8 +156,8 @@
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="panel_panel">panel<a class="headerlink" href="#panel_panel" title="Permanent link">#</a></h6> ||||
 | <h6 id="panel_colorPanel" class="">colorPanel<a class="headerlink" href="#panel_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="panel_layout" class="">layout<a class="headerlink" href="#panel_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Possible values: default, vertical, horizontal, grid |
-| <h6 id="panel_justify" class="">justify<a class="headerlink" href="#panel_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Possible values: start, end, center, space-around, space-between |
+| <h6 id="panel_layout" class="">layout<a class="headerlink" href="#panel_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Choices: `default`, `vertical`, `horizontal`, `grid` |
+| <h6 id="panel_justify" class="">justify<a class="headerlink" href="#panel_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Choices: `start`, `end`, `center`, `space-around`, `space-between` |
 | <h6 id="panel_gridTemplate" class="">gridTemplate<a class="headerlink" href="#panel_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
 | <h6 id="panel_verticalTabs" class="">verticalTabs<a class="headerlink" href="#panel_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
 | <h6 id="panel_traversing" class="dynamic">traversing<a class="headerlink" href="#panel_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
@@ -187,7 +187,7 @@
 | <h6 id="modal_popupLeft" class="">popupLeft<a class="headerlink" href="#modal_popupLeft" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Modal popup's position |
 | <h6 id="modal_popupTop" class="">popupTop<a class="headerlink" href="#modal_popupTop" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Modal popup's position |
 | <h6 id="modal_colorPanel" class="">colorPanel<a class="headerlink" href="#modal_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="modal_layout" class="">layout<a class="headerlink" href="#modal_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Possible values: default, vertical, horizontal, grid |
+| <h6 id="modal_layout" class="">layout<a class="headerlink" href="#modal_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Choices: `default`, `vertical`, `horizontal`, `grid` |
 | <h6 id="modal_gridTemplate" class="">gridTemplate<a class="headerlink" href="#modal_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
 | <h6 id="modal_traversing" class="dynamic">traversing<a class="headerlink" href="#modal_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
 | <h6 id="modal_scroll" class="">scroll<a class="headerlink" href="#modal_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
@@ -225,7 +225,7 @@
 | <h6 class="thead2" id="matrix_matrix">matrix<a class="headerlink" href="#matrix_matrix" title="Permanent link">#</a></h6> ||||
 | <h6 id="matrix_widgetType" class="">widgetType<a class="headerlink" href="#matrix_widgetType" title="Permanent link">#</a></h6> | `string` | <code>"button"</code> | Defines the type of the widgets in the matrix |
 | <h6 id="matrix_colorPanel" class="">colorPanel<a class="headerlink" href="#matrix_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="matrix_layout" class="">layout<a class="headerlink" href="#matrix_layout" title="Permanent link">#</a></h6> | `string` | <code>"horizontal"</code> | Defines how children are laid out.<br/><br/>Possible values: horizontal, vertical, grid |
+| <h6 id="matrix_layout" class="">layout<a class="headerlink" href="#matrix_layout" title="Permanent link">#</a></h6> | `string` | <code>"horizontal"</code> | Defines how children are laid out.<br/><br/>Choices: `horizontal`, `vertical`, `grid` |
 | <h6 id="matrix_gridTemplate" class="">gridTemplate<a class="headerlink" href="#matrix_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
 | <h6 id="matrix_quantity" class="">quantity<a class="headerlink" href="#matrix_quantity" title="Permanent link">#</a></h6> | `number` | <code>4</code> | Defines the number of widgets in the matrix |
 | <h6 id="matrix_start" class="">start<a class="headerlink" href="#matrix_start" title="Permanent link">#</a></h6> | `integer` | <code>0</code> | First widget's index |
@@ -280,8 +280,8 @@
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="root_panel">panel<a class="headerlink" href="#root_panel" title="Permanent link">#</a></h6> ||||
 | <h6 id="root_colorPanel" class="">colorPanel<a class="headerlink" href="#root_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="root_layout" class="">layout<a class="headerlink" href="#root_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Possible values: default, vertical, horizontal, grid |
-| <h6 id="root_justify" class="">justify<a class="headerlink" href="#root_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Possible values: start, end, center, space-around, space-between |
+| <h6 id="root_layout" class="">layout<a class="headerlink" href="#root_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Choices: `default`, `vertical`, `horizontal`, `grid` |
+| <h6 id="root_justify" class="">justify<a class="headerlink" href="#root_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Choices: `start`, `end`, `center`, `space-around`, `space-between` |
 | <h6 id="root_gridTemplate" class="">gridTemplate<a class="headerlink" href="#root_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
 | <h6 id="root_verticalTabs" class="">verticalTabs<a class="headerlink" href="#root_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
 | <h6 id="root_traversing" class="dynamic">traversing<a class="headerlink" href="#root_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
@@ -305,8 +305,8 @@
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="tab_tab">tab<a class="headerlink" href="#tab_tab" title="Permanent link">#</a></h6> ||||
 | <h6 id="tab_colorPanel" class="">colorPanel<a class="headerlink" href="#tab_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="tab_layout" class="">layout<a class="headerlink" href="#tab_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Possible values: default, vertical, horizontal, grid |
-| <h6 id="tab_justify" class="">justify<a class="headerlink" href="#tab_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Possible values: start, end, center, space-around, space-between |
+| <h6 id="tab_layout" class="">layout<a class="headerlink" href="#tab_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Choices: `default`, `vertical`, `horizontal`, `grid` |
+| <h6 id="tab_justify" class="">justify<a class="headerlink" href="#tab_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Choices: `start`, `end`, `center`, `space-around`, `space-between` |
 | <h6 id="tab_gridTemplate" class="">gridTemplate<a class="headerlink" href="#tab_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
 | <h6 id="tab_verticalTabs" class="">verticalTabs<a class="headerlink" href="#tab_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
 | <h6 id="tab_traversing" class="dynamic">traversing<a class="headerlink" href="#tab_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
@@ -450,7 +450,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="led_led">led<a class="headerlink" href="#led_led" title="Permanent link">#</a></h6> ||||
-| <h6 id="led_mode" class="">mode<a class="headerlink" href="#led_mode" title="Permanent link">#</a></h6> | `string` | <code>"intensity"</code> | Defines how value is interpreted (see `value`)<br/><br/>Possible values: intensity, color |
+| <h6 id="led_mode" class="">mode<a class="headerlink" href="#led_mode" title="Permanent link">#</a></h6> | `string` | <code>"intensity"</code> | Defines how value is interpreted (see `value`)<br/><br/>Choices: `intensity`, `color` |
 | <h6 id="led_range" class="">range<a class="headerlink" href="#led_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Value range |
 | <h6 id="led_alphaRange" class="">alphaRange<a class="headerlink" href="#led_alphaRange" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Alpha range (if `mode` is `color`) |
 | <h6 id="led_logScale" class="">logScale<a class="headerlink" href="#led_logScale" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | If `mode` is `intensity`, set to `true` to use logarithmic scale. |
@@ -471,7 +471,7 @@
 | <h6 class="thead2" id="text_text">text<a class="headerlink" href="#text_text" title="Permanent link">#</a></h6> ||||
 | <h6 id="text_vertical" class="">vertical<a class="headerlink" href="#text_vertical" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the text vertically |
 | <h6 id="text_wrap" class="">wrap<a class="headerlink" href="#text_wrap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically.<br/><br/>This will not break overflowing words by default, word-breaking can be enabled by adding `word-break: break-all;` to the `css` property |
-| <h6 id="text_align" class="">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Css text-align property.<br/><br/>Possible values: center, left, right |</div>
+| <h6 id="text_align" class="">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Css text-align property.<br/><br/>Choices: `center`, `left`, `right` |</div>
 
 
 
@@ -554,7 +554,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="fader_fader">fader<a class="headerlink" href="#fader_fader" title="Permanent link">#</a></h6> ||||
-| <h6 id="fader_design" class="">design<a class="headerlink" href="#fader_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Possible values: default, round, compact |
+| <h6 id="fader_design" class="">design<a class="headerlink" href="#fader_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Choices: `default`, `round`, `compact` |
 | <h6 id="fader_horizontal" class="">horizontal<a class="headerlink" href="#fader_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
 | <h6 id="fader_pips" class="">pips<a class="headerlink" href="#fader_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show range breakpoints (ignored if `design` is `compact`) |
 | <h6 id="fader_dashed" class="">dashed<a class="headerlink" href="#fader_dashed" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display a dashed gauge |
@@ -581,7 +581,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="knob_knob">knob<a class="headerlink" href="#knob_knob" title="Permanent link">#</a></h6> ||||
-| <h6 id="knob_mode" class="">mode<a class="headerlink" href="#knob_mode" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion<br/><br/>Possible values: vertical, circular, snap |
+| <h6 id="knob_mode" class="">mode<a class="headerlink" href="#knob_mode" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion<br/><br/>Choices: `vertical`, `circular`, `snap` |
 | <h6 id="knob_spring" class="dynamic">spring<a class="headerlink" href="#knob_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
 | <h6 id="knob_pips" class="">pips<a class="headerlink" href="#knob_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show the scale's breakpoints |
 | <h6 id="knob_dashed" class="">dashed<a class="headerlink" href="#knob_dashed" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display a dashed gauge |
@@ -610,7 +610,7 @@
 | <h6 id="encoder_back" class="">back<a class="headerlink" href="#encoder_back" title="Permanent link">#</a></h6> | `*` | <code>-1</code> | Defines which value is sent when rotating the encoder anticlockwise |
 | <h6 id="encoder_forth" class="">forth<a class="headerlink" href="#encoder_forth" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Defines which value is sent when rotating the encoder clockwise |
 | <h6 id="encoder_release" class="">release<a class="headerlink" href="#encoder_release" title="Permanent link">#</a></h6> | `number` | <code>""</code> | Defines which value is sent when releasing the encoder:<br/>- Set to `null` to send send no argument in the osc message<br/>- Can be an `object` if the type needs to be specified |
-| <h6 id="encoder_mode" class="">mode<a class="headerlink" href="#encoder_mode" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion<br/><br/>Possible values: circular, snap, vertical |
+| <h6 id="encoder_mode" class="">mode<a class="headerlink" href="#encoder_mode" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion<br/><br/>Choices: `circular`, `snap`, `vertical` |
 | <h6 id="encoder_doubleTap" class="">doubleTap<a class="headerlink" href="#encoder_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
 | <h6 class="thead2" id="encoder_osc">osc<a class="headerlink" href="#encoder_osc" title="Permanent link">#</a></h6> ||||
 | <h6 id="encoder_touchAddress" class="">touchAddress<a class="headerlink" href="#encoder_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
@@ -626,7 +626,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="range_fader">fader<a class="headerlink" href="#range_fader" title="Permanent link">#</a></h6> ||||
-| <h6 id="range_design" class="">design<a class="headerlink" href="#range_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Possible values: default, round, compact |
+| <h6 id="range_design" class="">design<a class="headerlink" href="#range_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Choices: `default`, `round`, `compact` |
 | <h6 id="range_horizontal" class="">horizontal<a class="headerlink" href="#range_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
 | <h6 id="range_pips" class="">pips<a class="headerlink" href="#range_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show range breakpoints (ignored if `design` is `compact`) |
 | <h6 id="range_dashed" class="">dashed<a class="headerlink" href="#range_dashed" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display a dashed gauge |
@@ -655,12 +655,12 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="script_script">script<a class="headerlink" href="#script_script" title="Permanent link">#</a></h6> ||||
-| <h6 id="script_event" class="">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Possible values: value, keyboard |
+| <h6 id="script_event" class="">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Choices: `value`, `keyboard` |
 | <h6 id="script_script" class="">script<a class="headerlink" href="#script_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's receives the defined event. See <a href="https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/">documentation</a>. |
 | <h6 class="thead2" id="script_event: keyboard">event: keyboard<a class="headerlink" href="#script_event: keyboard" title="Permanent link">#</a></h6> ||||
 | <h6 id="script_keyBinding" class="">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation) |
 | <h6 id="script_keyRepeat" class="">keyRepeat<a class="headerlink" href="#script_keyRepeat" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
-| <h6 id="script_keyType" class="">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keyDown"</code> | Determines which key event trigger the script's execution<br/><br/>Possible values: keydown, keyup, both |</div>
+| <h6 id="script_keyType" class="">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keyDown"</code> | Determines which key event trigger the script's execution<br/><br/>Choices: `keydown`, `keyup`, `both` |</div>
 
 
 

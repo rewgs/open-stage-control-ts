@@ -35,7 +35,7 @@ for (var propName in base) {
 
     if (prop.choices) {
         if (help) help += '<br/><br/>'
-        help += 'Possible values: ' + prop.choices.join(', ')
+        help += 'Choices: ' + prop.choices.map(x=>'`' + x + '`').join(', ')
     }
 
     doc.push(`
@@ -98,7 +98,7 @@ for (var k in widgets.categories) {
 
             if (prop.choices) {
                 if (help) help += '<br/><br/>'
-                help += 'Possible values: ' + prop.choices.join(', ')
+                help += 'Choices: ' + prop.choices.map(x=>'`' + x + '`').join(', ')
             }
 
             doc.push(`
