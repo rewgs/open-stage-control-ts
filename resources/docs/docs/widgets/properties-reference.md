@@ -7,39 +7,39 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="widget">widget<a class="headerlink" href="#widget" title="Permanent link">#</a></h6> ||||
-| <h6 id="type">type<a class="headerlink" href="#type" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> |  |
-| <h6 id="id">id<a class="headerlink" href="#id" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widgets sharing the same `id` will act as clones and update each other's value(s) without sending extra osc messages. |
-| <h6 id="label">label<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/><br/>Insert icons using the prefix ^ followed by the icon's name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free) |
-| <h6 id="visible">visible<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#visible" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the widget. |
-| <h6 id="interaction">interaction<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#interaction" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable pointer interactions. |
+| <h6 id="type" class="">type<a class="headerlink" href="#type" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> |  |
+| <h6 id="id" class="">id<a class="headerlink" href="#id" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widgets sharing the same `id` will act as clones and update each other's value(s) without sending extra osc messages. |
+| <h6 id="label" class="dynamic">label<a class="headerlink" href="#label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/><br/>Insert icons using the prefix ^ followed by the icon's name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free) |
+| <h6 id="visible" class="dynamic">visible<a class="headerlink" href="#visible" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the widget. |
+| <h6 id="interaction" class="dynamic">interaction<a class="headerlink" href="#interaction" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable pointer interactions. |
 | <h6 class="thead2" id="geometry">geometry<a class="headerlink" href="#geometry" title="Permanent link">#</a></h6> ||||
-| <h6 id="left">left<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#left" title="Permanent link">#</a></h6> | `number`&vert;<br/>`string` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be absolutely positioned |
-| <h6 id="top">top<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#top" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be absolutely positioned |
-| <h6 id="width">width<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#width" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> |  |
-| <h6 id="height">height<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#height" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> |  |
-| <h6 id="expand">expand<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#expand" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>"false"</code> | If parent's layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically. |
+| <h6 id="left" class="dynamic">left<a class="headerlink" href="#left" title="Permanent link">#</a></h6> | `number`&vert;<br/>`string` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be absolutely positioned |
+| <h6 id="top" class="dynamic">top<a class="headerlink" href="#top" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be absolutely positioned |
+| <h6 id="width" class="dynamic">width<a class="headerlink" href="#width" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> |  |
+| <h6 id="height" class="dynamic">height<a class="headerlink" href="#height" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> |  |
+| <h6 id="expand" class="dynamic">expand<a class="headerlink" href="#expand" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>"false"</code> | If parent's layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically. |
 | <h6 class="thead2" id="style">style<a class="headerlink" href="#style" title="Permanent link">#</a></h6> ||||
-| <h6 id="colorText">colorText<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#colorText" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Text color. Set to "auto" to inherit from parent widget. |
-| <h6 id="colorWidget">colorWidget<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#colorWidget" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widget's default accent color. Set to "auto" to inherit from parent widget. |
-| <h6 id="colorStroke">colorStroke<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#colorStroke" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Stroke color. Set to "auto" to use `colorWidget`. |
-| <h6 id="colorFill">colorFill<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#colorFill" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Fill color. Set to "auto" to use `colorWidget`. |
-| <h6 id="alphaStroke">alphaStroke<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#alphaStroke" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Stroke color opacity. |
-| <h6 id="alphaFillOff">alphaFillOff<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#alphaFillOff" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fill color opacity (off). |
-| <h6 id="alphaFillOn">alphaFillOn<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#alphaFillOn" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fill color opacity (on). |
-| <h6 id="padding">padding<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#padding" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Inner spacing. |
-| <h6 id="css">css<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/css-tips/">documentation</a>. |
+| <h6 id="colorText" class="dynamic">colorText<a class="headerlink" href="#colorText" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Text color. Set to "auto" to inherit from parent widget. |
+| <h6 id="colorWidget" class="dynamic">colorWidget<a class="headerlink" href="#colorWidget" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widget's default accent color. Set to "auto" to inherit from parent widget. |
+| <h6 id="colorStroke" class="dynamic">colorStroke<a class="headerlink" href="#colorStroke" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Stroke color. Set to "auto" to use `colorWidget`. |
+| <h6 id="colorFill" class="dynamic">colorFill<a class="headerlink" href="#colorFill" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Fill color. Set to "auto" to use `colorWidget`. |
+| <h6 id="alphaStroke" class="dynamic">alphaStroke<a class="headerlink" href="#alphaStroke" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Stroke color opacity. |
+| <h6 id="alphaFillOff" class="dynamic">alphaFillOff<a class="headerlink" href="#alphaFillOff" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fill color opacity (off). |
+| <h6 id="alphaFillOn" class="dynamic">alphaFillOn<a class="headerlink" href="#alphaFillOn" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fill color opacity (on). |
+| <h6 id="padding" class="dynamic">padding<a class="headerlink" href="#padding" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Inner spacing. |
+| <h6 id="css" class="dynamic">css<a class="headerlink" href="#css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/css-tips/">documentation</a>. |
 | <h6 class="thead2" id="value">value<a class="headerlink" href="#value" title="Permanent link">#</a></h6> ||||
-| <h6 id="value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#value" title="Permanent link">#</a></h6> | `*` | <code>""</code> | Define the widget's value depending on other widget's values / properties using the advanced property syntax |
-| <h6 id="default">default<a class="headerlink" href="#default" title="Permanent link">#</a></h6> | `*` | <code>""</code> | If set, the widget will be initialized with this value when the session is loaded. |
-| <h6 id="linkId">linkId<a class="headerlink" href="#linkId" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Widgets sharing the same `linkId` update each other's value(s) AND send their respective osc messages.<br/><br/>When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)<br/><br/>When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending) |
-| <h6 id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value is set. See https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/ |
+| <h6 id="value" class="dynamic">value<a class="headerlink" href="#value" title="Permanent link">#</a></h6> | `*` | <code>""</code> | Define the widget's value depending on other widget's values / properties using the advanced property syntax |
+| <h6 id="default" class="">default<a class="headerlink" href="#default" title="Permanent link">#</a></h6> | `*` | <code>""</code> | If set, the widget will be initialized with this value when the session is loaded. |
+| <h6 id="linkId" class="">linkId<a class="headerlink" href="#linkId" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Widgets sharing the same `linkId` update each other's value(s) AND send their respective osc messages.<br/><br/>When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)<br/><br/>When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending) |
+| <h6 id="script" class="">script<a class="headerlink" href="#script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's receives the defined event. See <a href="https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/">documentation</a>. |
 | <h6 class="thead2" id="osc">osc<a class="headerlink" href="#osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="address">address<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#address" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | OSC address for sending messages, it must start with a / |
-| <h6 id="preArgs">preArgs<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#preArgs" title="Permanent link">#</a></h6> | `*`&vert;<br/>`array` | <code>""</code> | A value or array of values that will be prepended to the OSC messages. |
-| <h6 id="typeTags">typeTags<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#typeTags" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Defines the osc argument types, one letter per argument (including preArgs)<br/>- If empty, the types are infered automatically from the values (with numbers casted to floats by default)<br/>- If there are more arguments than type letters, the last type is used for the extra arguments<br/><br/>See http://opensoundcontrol.org/spec-1_0 for existing typetags |
-| <h6 id="decimals">decimals<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#decimals" title="Permanent link">#</a></h6> | `integer` | <code>2</code> | Defines the number of decimals to send. |
-| <h6 id="target">target<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#target" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array`&vert;<br/>`null` | <code>""</code> | This defines the targets of the widget's OSC messages<br/>- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:port"]`<br/>- If midi is enabled, targets can be `midi:device_name`<br/>- The special item `"self"` can be used to refer to the emitting client directly.<br/>- If no target is set, messages can still be sent if the server has default targets<br/>- The server's default targets can be bypassed by setting one of the items to `null` |
-| <h6 id="bypass">bypass<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#bypass" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to prevent the widget from sending any osc message |</div>
+| <h6 id="address" class="dynamic">address<a class="headerlink" href="#address" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | OSC address for sending messages, it must start with a / |
+| <h6 id="preArgs" class="dynamic">preArgs<a class="headerlink" href="#preArgs" title="Permanent link">#</a></h6> | `*`&vert;<br/>`array` | <code>""</code> | A value or array of values that will be prepended to the OSC messages. |
+| <h6 id="typeTags" class="dynamic">typeTags<a class="headerlink" href="#typeTags" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Defines the osc argument types, one letter per argument (including preArgs)<br/>- If empty, the types are infered automatically from the values (with numbers casted to floats by default)<br/>- If there are more arguments than type letters, the last type is used for the extra arguments<br/><br/>See http://opensoundcontrol.org/spec-1_0 for existing typetags |
+| <h6 id="decimals" class="dynamic">decimals<a class="headerlink" href="#decimals" title="Permanent link">#</a></h6> | `integer` | <code>2</code> | Defines the number of decimals to send. |
+| <h6 id="target" class="dynamic">target<a class="headerlink" href="#target" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array`&vert;<br/>`null` | <code>""</code> | This defines the targets of the widget's OSC messages<br/>- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:port"]`<br/>- If midi is enabled, targets can be `midi:device_name`<br/>- The special item `"self"` can be used to refer to the emitting client directly.<br/>- If no target is set, messages can still be sent if the server has default targets<br/>- The server's default targets can be bypassed by setting one of the items to `null` |
+| <h6 id="bypass" class="dynamic">bypass<a class="headerlink" href="#bypass" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to prevent the widget from sending any osc message |</div>
 
 ## Basics
 
@@ -52,11 +52,11 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="button_button">button<a class="headerlink" href="#button_button" title="Permanent link">#</a></h6> ||||
-| <h6 id="button_on">on<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#button_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message |
-| <h6 id="button_off">off<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#button_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message. Must be different from `on`. |
-| <h6 id="button_mode">mode<a class="headerlink" href="#button_mode" title="Permanent link">#</a></h6> | `string` | <code>"toggle"</code> | Interraction mode:<br/>- `toggle` (classic on/off switch)<br/>- `push` (press & release)<br/>- `tap` (no release) |
-| <h6 id="button_doubleTap">doubleTap<a class="headerlink" href="#button_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the button require a double tap to be pushed instead of a single tap |
-| <h6 id="button_colorTextOn">colorTextOn<a class="headerlink" href="#button_colorTextOn" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Defines the widget's text color when active. |</div>
+| <h6 id="button_on" class="dynamic">on<a class="headerlink" href="#button_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message |
+| <h6 id="button_off" class="dynamic">off<a class="headerlink" href="#button_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message. Must be different from `on`. |
+| <h6 id="button_mode" class="">mode<a class="headerlink" href="#button_mode" title="Permanent link">#</a></h6> | `string` | <code>"toggle"</code> | Interraction mode:<br/>- `toggle` (classic on/off switch)<br/>- `push` (press & release)<br/>- `tap` (no release)<br/><br/>Possible values: toggle, push, tap |
+| <h6 id="button_doubleTap" class="">doubleTap<a class="headerlink" href="#button_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the button require a double tap to be pushed instead of a single tap |
+| <h6 id="button_colorTextOn" class="">colorTextOn<a class="headerlink" href="#button_colorTextOn" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Defines the widget's text color when active. |</div>
 
 
 
@@ -69,11 +69,11 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="switch_switch">switch<a class="headerlink" href="#switch_switch" title="Permanent link">#</a></h6> ||||
-| <h6 id="switch_layout">layout<a class="headerlink" href="#switch_layout" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> |  |
-| <h6 id="switch_gridTemplate">gridTemplate<a class="headerlink" href="#switch_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-| <h6 id="switch_values">values<a class="headerlink" href="#switch_values" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
-| <h6 id="switch_mode">mode<a class="headerlink" href="#switch_mode" title="Permanent link">#</a></h6> | `string` | <code>"tap"</code> | Interraction mode:<br/>- `tap`: activates when the pointer is down but prevents further scrolling<br/>- `slide`: same as `tap` but allows sliding between values<br/>- `click`: activates upon click only and allows further scrolling |
-| <h6 id="switch_colorTextOn">colorTextOn<a class="headerlink" href="#switch_colorTextOn" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Defines the widget's text color when active. |</div>
+| <h6 id="switch_layout" class="">layout<a class="headerlink" href="#switch_layout" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | Possible values: vertical, horizontal, grid |
+| <h6 id="switch_gridTemplate" class="">gridTemplate<a class="headerlink" href="#switch_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
+| <h6 id="switch_values" class="">values<a class="headerlink" href="#switch_values" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
+| <h6 id="switch_mode" class="">mode<a class="headerlink" href="#switch_mode" title="Permanent link">#</a></h6> | `string` | <code>"tap"</code> | Interraction mode:<br/>- `tap`: activates when the pointer is down but prevents further scrolling<br/>- `slide`: same as `tap` but allows sliding between values<br/>- `click`: activates upon click only and allows further scrolling<br/><br/>Possible values: tap, slide, click |
+| <h6 id="switch_colorTextOn" class="">colorTextOn<a class="headerlink" href="#switch_colorTextOn" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Defines the widget's text color when active. |</div>
 
 
 
@@ -86,8 +86,8 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="dropdown_dropdown">dropdown<a class="headerlink" href="#dropdown_dropdown" title="Permanent link">#</a></h6> ||||
-| <h6 id="dropdown_align">align<a class="headerlink" href="#dropdown_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center) |
-| <h6 id="dropdown_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#dropdown_values" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |</div>
+| <h6 id="dropdown_align" class="">align<a class="headerlink" href="#dropdown_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Possible values: center, left, right |
+| <h6 id="dropdown_values" class="dynamic">values<a class="headerlink" href="#dropdown_values" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>\{<br/>&nbsp;"Value 1": 1,<br/>&nbsp;"Value 2": 2<br/>}</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |</div>
 
 
 
@@ -100,14 +100,14 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="menu_menu">menu<a class="headerlink" href="#menu_menu" title="Permanent link">#</a></h6> ||||
-| <h6 id="menu_size">size<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_size" title="Permanent link">#</a></h6> | `number`&vert;<br/>`array` | <code>200</code> | - If `layout` is `circular`: diameter (in px)<br/>- Else: square size or `[width, height]` array |
-| <h6 id="menu_align">align<a class="headerlink" href="#menu_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center) |
-| <h6 id="menu_layout">layout<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_layout" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | Defines whether the menu's layout should be rendered in a circle or in a box |
-| <h6 id="menu_gridTemplate">gridTemplate<a class="headerlink" href="#menu_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-| <h6 id="menu_toggle">toggle<a class="headerlink" href="#menu_toggle" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the menu stay opened after mouse/touch release |
-| <h6 id="menu_doubleTap">doubleTap<a class="headerlink" href="#menu_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the menu require a double tap to be opened instead of a single tap |
-| <h6 id="menu_values">values<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#menu_values" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;1,<br/>&nbsp;2,<br/>&nbsp;3<br/>]</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
-| <h6 id="menu_weights">weights<a class="headerlink" href="#menu_weights" title="Permanent link">#</a></h6> | `array` | <code>""</code> | `Array` of `number` defining the weights of each value in `values`<br/><br/>Ignored when `mode` is `grid` |</div>
+| <h6 id="menu_size" class="dynamic">size<a class="headerlink" href="#menu_size" title="Permanent link">#</a></h6> | `number`&vert;<br/>`array` | <code>200</code> | - If `layout` is `circular`: diameter (in px)<br/>- Else: square size or `[width, height]` array |
+| <h6 id="menu_align" class="">align<a class="headerlink" href="#menu_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Possible values: center, left, right |
+| <h6 id="menu_layout" class="dynamic">layout<a class="headerlink" href="#menu_layout" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | Defines whether the menu's layout should be rendered in a circle or in a box<br/><br/>Possible values: circular, horizontal, vertical, grid |
+| <h6 id="menu_gridTemplate" class="">gridTemplate<a class="headerlink" href="#menu_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
+| <h6 id="menu_toggle" class="">toggle<a class="headerlink" href="#menu_toggle" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the menu stay opened after mouse/touch release |
+| <h6 id="menu_doubleTap" class="">doubleTap<a class="headerlink" href="#menu_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the menu require a double tap to be opened instead of a single tap |
+| <h6 id="menu_values" class="dynamic">values<a class="headerlink" href="#menu_values" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;1,<br/>&nbsp;2,<br/>&nbsp;3<br/>]</code> | `Array` of possible values to switch between : `[1,2,3]`<br/><br/>`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept |
+| <h6 id="menu_weights" class="">weights<a class="headerlink" href="#menu_weights" title="Permanent link">#</a></h6> | `array` | <code>""</code> | `Array` of `number` defining the weights of each value in `values`<br/><br/>Ignored when `mode` is `grid` |</div>
 
 
 
@@ -120,9 +120,9 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="input_input">input<a class="headerlink" href="#input_input" title="Permanent link">#</a></h6> ||||
-| <h6 id="input_align">align<a class="headerlink" href="#input_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center) |
-| <h6 id="input_unit">unit<a class="headerlink" href="#input_unit" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Unit will be appended to the displayed widget's value (it doesn't affect osc messages) |
-| <h6 id="input_asYouType">asYouType<a class="headerlink" href="#input_asYouType" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the input send its value at each keystroke |</div>
+| <h6 id="input_align" class="">align<a class="headerlink" href="#input_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Possible values: center, left, right |
+| <h6 id="input_unit" class="">unit<a class="headerlink" href="#input_unit" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Unit will be appended to the displayed widget's value (it doesn't affect osc messages) |
+| <h6 id="input_asYouType" class="">asYouType<a class="headerlink" href="#input_asYouType" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the input send its value at each keystroke |</div>
 
 
 
@@ -135,11 +135,11 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="file_input">input<a class="headerlink" href="#file_input" title="Permanent link">#</a></h6> ||||
-| <h6 id="file_align">align<a class="headerlink" href="#file_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center) |
-| <h6 id="file_directory">directory<a class="headerlink" href="#file_directory" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Default browsing directory |
-| <h6 id="file_extension">extension<a class="headerlink" href="#file_extension" title="Permanent link">#</a></h6> | `string` | <code>"*"</code> | Only display files with this extension |
-| <h6 id="file_hidePath">hidePath<a class="headerlink" href="#file_hidePath" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to only display the filename (the whole path will still be used as value) |
-| <h6 id="file_allowDir">allowDir<a class="headerlink" href="#file_allowDir" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Allow selecting a folder (by pressing "open" when no file is selected) |</div>
+| <h6 id="file_align" class="">align<a class="headerlink" href="#file_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Possible values: center, left, right |
+| <h6 id="file_directory" class="">directory<a class="headerlink" href="#file_directory" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Default browsing directory |
+| <h6 id="file_extension" class="">extension<a class="headerlink" href="#file_extension" title="Permanent link">#</a></h6> | `string` | <code>"*"</code> | Only display files with this extension |
+| <h6 id="file_hidePath" class="">hidePath<a class="headerlink" href="#file_hidePath" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to only display the filename (the whole path will still be used as value) |
+| <h6 id="file_allowDir" class="">allowDir<a class="headerlink" href="#file_allowDir" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Allow selecting a folder (by pressing "open" when no file is selected) |</div>
 
 
 
@@ -154,19 +154,19 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="panel_panel">panel<a class="headerlink" href="#panel_panel" title="Permanent link">#</a></h6> ||||
-| <h6 id="panel_colorPanel">colorPanel<a class="headerlink" href="#panel_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="panel_layout">layout<a class="headerlink" href="#panel_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out. |
-| <h6 id="panel_justify">justify<a class="headerlink" href="#panel_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified. |
-| <h6 id="panel_gridTemplate">gridTemplate<a class="headerlink" href="#panel_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-| <h6 id="panel_verticalTabs">verticalTabs<a class="headerlink" href="#panel_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
-| <h6 id="panel_traversing">traversing<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#panel_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
-| <h6 id="panel_scroll">scroll<a class="headerlink" href="#panel_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
-| <h6 id="panel_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#panel_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+| <h6 id="panel_colorPanel" class="">colorPanel<a class="headerlink" href="#panel_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
+| <h6 id="panel_layout" class="">layout<a class="headerlink" href="#panel_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Possible values: default, vertical, horizontal, grid |
+| <h6 id="panel_justify" class="">justify<a class="headerlink" href="#panel_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Possible values: start, end, center, space-around, space-between |
+| <h6 id="panel_gridTemplate" class="">gridTemplate<a class="headerlink" href="#panel_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
+| <h6 id="panel_verticalTabs" class="">verticalTabs<a class="headerlink" href="#panel_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
+| <h6 id="panel_traversing" class="dynamic">traversing<a class="headerlink" href="#panel_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+| <h6 id="panel_scroll" class="">scroll<a class="headerlink" href="#panel_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
+| <h6 id="panel_variables" class="dynamic">variables<a class="headerlink" href="#panel_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
 | <h6 class="thead2" id="panel_value">value<a class="headerlink" href="#panel_value" title="Permanent link">#</a></h6> ||||
-| <h6 id="panel_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#panel_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently widgeted tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+| <h6 id="panel_value" class="dynamic">value<a class="headerlink" href="#panel_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently widgeted tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
 | <h6 class="thead2" id="panel_osc">osc<a class="headerlink" href="#panel_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="panel_widgets">widgets<a class="headerlink" href="#panel_widgets" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously. |
-| <h6 id="panel_tabs">tabs<a class="headerlink" href="#panel_tabs" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |</div>
+| <h6 id="panel_widgets" class="">widgets<a class="headerlink" href="#panel_widgets" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously. |
+| <h6 id="panel_tabs" class="">tabs<a class="headerlink" href="#panel_tabs" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |</div>
 
 
 
@@ -179,22 +179,22 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="modal_modal">modal<a class="headerlink" href="#modal_modal" title="Permanent link">#</a></h6> ||||
-| <h6 id="modal_doubleTap">doubleTap<a class="headerlink" href="#modal_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the modal require a double tap to open instead of a single tap |
-| <h6 id="modal_popupLabel">popupLabel<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#modal_popupLabel" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Alternative label for the modal popup |
-| <h6 id="modal_popupWidth">popupWidth<a class="headerlink" href="#modal_popupWidth" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"80%"</code> | Modal popup's size |
-| <h6 id="modal_popupHeight">popupHeight<a class="headerlink" href="#modal_popupHeight" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"80%"</code> | Modal popup's size |
-| <h6 id="modal_popupLeft">popupLeft<a class="headerlink" href="#modal_popupLeft" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Modal popup's position |
-| <h6 id="modal_popupTop">popupTop<a class="headerlink" href="#modal_popupTop" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Modal popup's position |
-| <h6 id="modal_colorPanel">colorPanel<a class="headerlink" href="#modal_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="modal_layout">layout<a class="headerlink" href="#modal_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out. |
-| <h6 id="modal_gridTemplate">gridTemplate<a class="headerlink" href="#modal_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-| <h6 id="modal_traversing">traversing<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#modal_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
-| <h6 id="modal_scroll">scroll<a class="headerlink" href="#modal_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
-| <h6 id="modal_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#modal_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+| <h6 id="modal_doubleTap" class="">doubleTap<a class="headerlink" href="#modal_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the modal require a double tap to open instead of a single tap |
+| <h6 id="modal_popupLabel" class="dynamic">popupLabel<a class="headerlink" href="#modal_popupLabel" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Alternative label for the modal popup |
+| <h6 id="modal_popupWidth" class="">popupWidth<a class="headerlink" href="#modal_popupWidth" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"80%"</code> | Modal popup's size |
+| <h6 id="modal_popupHeight" class="">popupHeight<a class="headerlink" href="#modal_popupHeight" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"80%"</code> | Modal popup's size |
+| <h6 id="modal_popupLeft" class="">popupLeft<a class="headerlink" href="#modal_popupLeft" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Modal popup's position |
+| <h6 id="modal_popupTop" class="">popupTop<a class="headerlink" href="#modal_popupTop" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Modal popup's position |
+| <h6 id="modal_colorPanel" class="">colorPanel<a class="headerlink" href="#modal_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
+| <h6 id="modal_layout" class="">layout<a class="headerlink" href="#modal_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Possible values: default, vertical, horizontal, grid |
+| <h6 id="modal_gridTemplate" class="">gridTemplate<a class="headerlink" href="#modal_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
+| <h6 id="modal_traversing" class="dynamic">traversing<a class="headerlink" href="#modal_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+| <h6 id="modal_scroll" class="">scroll<a class="headerlink" href="#modal_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
+| <h6 id="modal_variables" class="dynamic">variables<a class="headerlink" href="#modal_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
 | <h6 class="thead2" id="modal_value">value<a class="headerlink" href="#modal_value" title="Permanent link">#</a></h6> ||||
-| <h6 id="modal_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#modal_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines the modal's state:`0` for closed, `1` for opened |
+| <h6 id="modal_value" class="dynamic">value<a class="headerlink" href="#modal_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines the modal's state:`0` for closed, `1` for opened |
 | <h6 class="thead2" id="modal_osc">osc<a class="headerlink" href="#modal_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="modal_widgets">widgets<a class="headerlink" href="#modal_widgets" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a widget object |</div>
+| <h6 id="modal_widgets" class="">widgets<a class="headerlink" href="#modal_widgets" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a widget object |</div>
 
 
 
@@ -207,9 +207,9 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="clone_clone">clone<a class="headerlink" href="#clone_clone" title="Permanent link">#</a></h6> ||||
-| <h6 id="clone_widgetId">widgetId<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#clone_widgetId" title="Permanent link">#</a></h6> | `string` | <code>""</code> | `id` of the widget to clone |
+| <h6 id="clone_widgetId" class="dynamic">widgetId<a class="headerlink" href="#clone_widgetId" title="Permanent link">#</a></h6> | `string` | <code>""</code> | `id` of the widget to clone |
 | <h6 class="thead2" id="clone_overrides">overrides<a class="headerlink" href="#clone_overrides" title="Permanent link">#</a></h6> ||||
-| <h6 id="clone_props">props<a class="headerlink" href="#clone_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Cloned widget's properties to override |</div>
+| <h6 id="clone_props" class="">props<a class="headerlink" href="#clone_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Cloned widget's properties to override |</div>
 
 
 
@@ -222,14 +222,14 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="matrix_matrix">matrix<a class="headerlink" href="#matrix_matrix" title="Permanent link">#</a></h6> ||||
-| <h6 id="matrix_widgetType">widgetType<a class="headerlink" href="#matrix_widgetType" title="Permanent link">#</a></h6> | `string` | <code>"button"</code> | Defines the type of the widgets in the matrix |
-| <h6 id="matrix_colorPanel">colorPanel<a class="headerlink" href="#matrix_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="matrix_layout">layout<a class="headerlink" href="#matrix_layout" title="Permanent link">#</a></h6> | `string` | <code>"horizontal"</code> | Defines how children are laid out. |
-| <h6 id="matrix_gridTemplate">gridTemplate<a class="headerlink" href="#matrix_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-| <h6 id="matrix_quantity">quantity<a class="headerlink" href="#matrix_quantity" title="Permanent link">#</a></h6> | `number` | <code>4</code> | Defines the number of widgets in the matrix |
-| <h6 id="matrix_start">start<a class="headerlink" href="#matrix_start" title="Permanent link">#</a></h6> | `integer` | <code>0</code> | First widget's index |
-| <h6 id="matrix_traversing">traversing<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#matrix_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |
-| <h6 id="matrix_props">props<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>Formulas in this field are resolved with an extra variable representing each widget's index: `$`<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |</div>
+| <h6 id="matrix_widgetType" class="">widgetType<a class="headerlink" href="#matrix_widgetType" title="Permanent link">#</a></h6> | `string` | <code>"button"</code> | Defines the type of the widgets in the matrix |
+| <h6 id="matrix_colorPanel" class="">colorPanel<a class="headerlink" href="#matrix_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
+| <h6 id="matrix_layout" class="">layout<a class="headerlink" href="#matrix_layout" title="Permanent link">#</a></h6> | `string` | <code>"horizontal"</code> | Defines how children are laid out.<br/><br/>Possible values: horizontal, vertical, grid |
+| <h6 id="matrix_gridTemplate" class="">gridTemplate<a class="headerlink" href="#matrix_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
+| <h6 id="matrix_quantity" class="">quantity<a class="headerlink" href="#matrix_quantity" title="Permanent link">#</a></h6> | `number` | <code>4</code> | Defines the number of widgets in the matrix |
+| <h6 id="matrix_start" class="">start<a class="headerlink" href="#matrix_start" title="Permanent link">#</a></h6> | `integer` | <code>0</code> | First widget's index |
+| <h6 id="matrix_traversing" class="dynamic">traversing<a class="headerlink" href="#matrix_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |
+| <h6 id="matrix_props" class="dynamic">props<a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>Formulas in this field are resolved with an extra variable representing each widget's index: `$`<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |</div>
 
 
 
@@ -242,14 +242,14 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="keyboard_style">style<a class="headerlink" href="#keyboard_style" title="Permanent link">#</a></h6> ||||
-| <h6 id="keyboard_css">css<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#keyboard_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Available CSS variables:<br/>- `--color-white:color;` (white keys color)<br/>- `--color-black:color;` (black keys color) |
+| <h6 id="keyboard_css" class="dynamic">css<a class="headerlink" href="#keyboard_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Available CSS variables:<br/>- `--color-white:color;` (white keys color)<br/>- `--color-black:color;` (black keys color) |
 | <h6 class="thead2" id="keyboard_matrix">matrix<a class="headerlink" href="#keyboard_matrix" title="Permanent link">#</a></h6> ||||
-| <h6 id="keyboard_keys">keys<a class="headerlink" href="#keyboard_keys" title="Permanent link">#</a></h6> | `number` | <code>25</code> | Defines the number keys |
-| <h6 id="keyboard_start">start<a class="headerlink" href="#keyboard_start" title="Permanent link">#</a></h6> | `number` | <code>48</code> | MIDI note number to start with (default is C4)<br/><br/>Standard keyboards settings are: `[25, 48]`, `[49, 36]`, `[61, 36]`, `[88, 21]` |
-| <h6 id="keyboard_traversing">traversing<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#keyboard_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |
-| <h6 id="keyboard_on">on<a class="headerlink" href="#keyboard_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
-| <h6 id="keyboard_off">off<a class="headerlink" href="#keyboard_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
-| <h6 id="keyboard_toggles">toggles<a class="headerlink" href="#keyboard_toggles" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make keys bahave like toggle buttons |</div>
+| <h6 id="keyboard_keys" class="">keys<a class="headerlink" href="#keyboard_keys" title="Permanent link">#</a></h6> | `number` | <code>25</code> | Defines the number keys |
+| <h6 id="keyboard_start" class="">start<a class="headerlink" href="#keyboard_start" title="Permanent link">#</a></h6> | `number` | <code>48</code> | MIDI note number to start with (default is C4)<br/><br/>Standard keyboards settings are: `[25, 48]`, `[49, 36]`, `[61, 36]`, `[88, 21]` |
+| <h6 id="keyboard_traversing" class="dynamic">traversing<a class="headerlink" href="#keyboard_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |
+| <h6 id="keyboard_on" class="">on<a class="headerlink" href="#keyboard_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
+| <h6 id="keyboard_off" class="">off<a class="headerlink" href="#keyboard_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
+| <h6 id="keyboard_toggles" class="">toggles<a class="headerlink" href="#keyboard_toggles" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make keys bahave like toggle buttons |</div>
 
 
 
@@ -262,10 +262,10 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="patchbay_style">style<a class="headerlink" href="#patchbay_style" title="Permanent link">#</a></h6> ||||
-| <h6 id="patchbay_css">css<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#patchbay_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | The inputs/ouputs width can be adjusted by using the  `.nodes` selector:<br/><br/>`.nodes { width: 25% }` |
+| <h6 id="patchbay_css" class="dynamic">css<a class="headerlink" href="#patchbay_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | The inputs/ouputs width can be adjusted by using the  `.nodes` selector:<br/><br/>`.nodes { width: 25% }` |
 | <h6 class="thead2" id="patchbay_patchbay">patchbay<a class="headerlink" href="#patchbay_patchbay" title="Permanent link">#</a></h6> ||||
-| <h6 id="patchbay_inputs">inputs<a class="headerlink" href="#patchbay_inputs" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;"input_1",<br/>&nbsp;"input_2"<br/>]</code> | - `Array` of input names : `['input_1', 'input_2']`<br/>- `Object` of `"label_1": "input_1"` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept<br/><br/><br/><br/>Patchbay inputs can be connected to one or more outputs and will send messages of the following form when they are connected/disconnected: <br/><br/>`/patchbay_address input_x output_x output_y etc`<br/><br/>If no output is connected to the input, the message will be `/patchbay_address input_x`<br/><br/>The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1` |
-| <h6 id="patchbay_outputs">outputs<a class="headerlink" href="#patchbay_outputs" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;"output_1",<br/>&nbsp;"output_2"<br/>]</code> | List of output values the inputs can connect to (see `inputs`). |</div>
+| <h6 id="patchbay_inputs" class="">inputs<a class="headerlink" href="#patchbay_inputs" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;"input_1",<br/>&nbsp;"input_2"<br/>]</code> | - `Array` of input names : `['input_1', 'input_2']`<br/>- `Object` of `"label_1": "input_1"` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept<br/><br/><br/><br/>Patchbay inputs can be connected to one or more outputs and will send messages of the following form when they are connected/disconnected: <br/><br/>`/patchbay_address input_x output_x output_y etc`<br/><br/>If no output is connected to the input, the message will be `/patchbay_address input_x`<br/><br/>The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1` |
+| <h6 id="patchbay_outputs" class="">outputs<a class="headerlink" href="#patchbay_outputs" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;"output_1",<br/>&nbsp;"output_2"<br/>]</code> | List of output values the inputs can connect to (see `inputs`). |</div>
 
 
 
@@ -278,19 +278,19 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="root_panel">panel<a class="headerlink" href="#root_panel" title="Permanent link">#</a></h6> ||||
-| <h6 id="root_colorPanel">colorPanel<a class="headerlink" href="#root_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="root_layout">layout<a class="headerlink" href="#root_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out. |
-| <h6 id="root_justify">justify<a class="headerlink" href="#root_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified. |
-| <h6 id="root_gridTemplate">gridTemplate<a class="headerlink" href="#root_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-| <h6 id="root_verticalTabs">verticalTabs<a class="headerlink" href="#root_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
-| <h6 id="root_traversing">traversing<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#root_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
-| <h6 id="root_scroll">scroll<a class="headerlink" href="#root_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
-| <h6 id="root_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#root_variables" title="Permanent link">#</a></h6> | `*` | <code>""</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+| <h6 id="root_colorPanel" class="">colorPanel<a class="headerlink" href="#root_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
+| <h6 id="root_layout" class="">layout<a class="headerlink" href="#root_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Possible values: default, vertical, horizontal, grid |
+| <h6 id="root_justify" class="">justify<a class="headerlink" href="#root_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Possible values: start, end, center, space-around, space-between |
+| <h6 id="root_gridTemplate" class="">gridTemplate<a class="headerlink" href="#root_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
+| <h6 id="root_verticalTabs" class="">verticalTabs<a class="headerlink" href="#root_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
+| <h6 id="root_traversing" class="dynamic">traversing<a class="headerlink" href="#root_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+| <h6 id="root_scroll" class="">scroll<a class="headerlink" href="#root_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
+| <h6 id="root_variables" class="dynamic">variables<a class="headerlink" href="#root_variables" title="Permanent link">#</a></h6> | `*` | <code>""</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
 | <h6 class="thead2" id="root_value">value<a class="headerlink" href="#root_value" title="Permanent link">#</a></h6> ||||
-| <h6 id="root_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#root_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently widgeted tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+| <h6 id="root_value" class="dynamic">value<a class="headerlink" href="#root_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently widgeted tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
 | <h6 class="thead2" id="root_osc">osc<a class="headerlink" href="#root_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="root_widgets">widgets<a class="headerlink" href="#root_widgets" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously. |
-| <h6 id="root_tabs">tabs<a class="headerlink" href="#root_tabs" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |</div>
+| <h6 id="root_widgets" class="">widgets<a class="headerlink" href="#root_widgets" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously. |
+| <h6 id="root_tabs" class="">tabs<a class="headerlink" href="#root_tabs" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |</div>
 
 
 
@@ -303,19 +303,19 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="tab_tab">tab<a class="headerlink" href="#tab_tab" title="Permanent link">#</a></h6> ||||
-| <h6 id="tab_colorPanel">colorPanel<a class="headerlink" href="#tab_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
-| <h6 id="tab_layout">layout<a class="headerlink" href="#tab_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out. |
-| <h6 id="tab_justify">justify<a class="headerlink" href="#tab_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified. |
-| <h6 id="tab_gridTemplate">gridTemplate<a class="headerlink" href="#tab_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-| <h6 id="tab_verticalTabs">verticalTabs<a class="headerlink" href="#tab_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
-| <h6 id="tab_traversing">traversing<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#tab_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
-| <h6 id="tab_scroll">scroll<a class="headerlink" href="#tab_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
-| <h6 id="tab_variables">variables<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#tab_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+| <h6 id="tab_colorPanel" class="">colorPanel<a class="headerlink" href="#tab_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
+| <h6 id="tab_layout" class="">layout<a class="headerlink" href="#tab_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Possible values: default, vertical, horizontal, grid |
+| <h6 id="tab_justify" class="">justify<a class="headerlink" href="#tab_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Possible values: start, end, center, space-around, space-between |
+| <h6 id="tab_gridTemplate" class="">gridTemplate<a class="headerlink" href="#tab_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
+| <h6 id="tab_verticalTabs" class="">verticalTabs<a class="headerlink" href="#tab_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
+| <h6 id="tab_traversing" class="dynamic">traversing<a class="headerlink" href="#tab_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+| <h6 id="tab_scroll" class="">scroll<a class="headerlink" href="#tab_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
+| <h6 id="tab_variables" class="dynamic">variables<a class="headerlink" href="#tab_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
 | <h6 class="thead2" id="tab_value">value<a class="headerlink" href="#tab_value" title="Permanent link">#</a></h6> ||||
-| <h6 id="tab_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#tab_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently widgeted tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+| <h6 id="tab_value" class="dynamic">value<a class="headerlink" href="#tab_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently widgeted tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
 | <h6 class="thead2" id="tab_osc">osc<a class="headerlink" href="#tab_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="tab_widgets">widgets<a class="headerlink" href="#tab_widgets" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously. |
-| <h6 id="tab_tabs">tabs<a class="headerlink" href="#tab_tabs" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |</div>
+| <h6 id="tab_widgets" class="">widgets<a class="headerlink" href="#tab_widgets" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously. |
+| <h6 id="tab_tabs" class="">tabs<a class="headerlink" href="#tab_tabs" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |</div>
 
 
 
@@ -330,9 +330,9 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="frame_widget">widget<a class="headerlink" href="#frame_widget" title="Permanent link">#</a></h6> ||||
-| <h6 id="frame_label">label<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#frame_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/><br/>Insert icons using the prefix ^ followed by the icon's name : ^play, ^pause, etc<br/><br/>If set to `false`, all pointer-events will be disabled on the frame as long as the editor is enabled to ensure it can be selected |
+| <h6 id="frame_label" class="dynamic">label<a class="headerlink" href="#frame_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/><br/>Insert icons using the prefix ^ followed by the icon's name : ^play, ^pause, etc<br/><br/>If set to `false`, all pointer-events will be disabled on the frame as long as the editor is enabled to ensure it can be selected |
 | <h6 class="thead2" id="frame_value">value<a class="headerlink" href="#frame_value" title="Permanent link">#</a></h6> ||||
-| <h6 id="frame_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#frame_value" title="Permanent link">#</a></h6> | `string` | <code>""</code> | External web page URL. Only local URLs are allowed (starting with `http://127.0.0.1/`, `http://10.x.x.x/`, `http://192.168.x.x/`, etc) |</div>
+| <h6 id="frame_value" class="dynamic">value<a class="headerlink" href="#frame_value" title="Permanent link">#</a></h6> | `string` | <code>""</code> | External web page URL. Only local URLs are allowed (starting with `http://127.0.0.1/`, `http://10.x.x.x/`, `http://192.168.x.x/`, etc) |</div>
 
 
 
@@ -345,7 +345,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="svg_svg">svg<a class="headerlink" href="#svg_svg" title="Permanent link">#</a></h6> ||||
-| <h6 id="svg_svg">svg<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#svg_svg" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Svg xml definition:<br/>- will be wrapped in a `< svg />` element<br/>- `<path>` commands support a special percent notation (`%x` and `%y`) |</div>
+| <h6 id="svg_svg" class="dynamic">svg<a class="headerlink" href="#svg_svg" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Svg xml definition:<br/>- will be wrapped in a `< svg />` element<br/>- `<path>` commands support a special percent notation (`%x` and `%y`) |</div>
 
 
 
@@ -358,7 +358,7 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="html_html">html<a class="headerlink" href="#html_html" title="Permanent link">#</a></h6> ||||
-| <h6 id="html_html">html<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#html_html" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Allowed HTML tags:<br/><br/>&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,<br/><br/>&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,<br/><br/>&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre<br/><br/>Allowed attributes:<br/><br/>&nbsp;&nbsp;<*>: class, style, title<br/><br/>&nbsp;&nbsp;<img>: src, width, height |</div>
+| <h6 id="html_html" class="dynamic">html<a class="headerlink" href="#html_html" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Allowed HTML tags:<br/><br/>&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,<br/><br/>&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,<br/><br/>&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre<br/><br/>Allowed attributes:<br/><br/>&nbsp;&nbsp;<*>: class, style, title<br/><br/>&nbsp;&nbsp;<img>: src, width, height |</div>
 
 
 
@@ -371,12 +371,12 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="image_image">image<a class="headerlink" href="#image_image" title="Permanent link">#</a></h6> ||||
-| <h6 id="image_size">size<a class="headerlink" href="#image_size" title="Permanent link">#</a></h6> | `string` | <code>"cover"</code> | CSS background-size |
-| <h6 id="image_position">position<a class="headerlink" href="#image_position" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | CSS background-position |
-| <h6 id="image_repeat">repeat<a class="headerlink" href="#image_repeat" title="Permanent link">#</a></h6> | `string` | <code>"no-repeat"</code> | CSS background-repeat |
-| <h6 id="image_cache">cache<a class="headerlink" href="#image_cache" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to disable image caching (forces file reload when updating or editing the widget).<br/><br/>When true, sending `reload` to the widget reloads its image without changing its value |
+| <h6 id="image_size" class="">size<a class="headerlink" href="#image_size" title="Permanent link">#</a></h6> | `string` | <code>"cover"</code> | CSS background-size |
+| <h6 id="image_position" class="">position<a class="headerlink" href="#image_position" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | CSS background-position |
+| <h6 id="image_repeat" class="">repeat<a class="headerlink" href="#image_repeat" title="Permanent link">#</a></h6> | `string` | <code>"no-repeat"</code> | CSS background-repeat |
+| <h6 id="image_cache" class="">cache<a class="headerlink" href="#image_cache" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to disable image caching (forces file reload when updating or editing the widget).<br/><br/>When true, sending `reload` to the widget reloads its image without changing its value |
 | <h6 class="thead2" id="image_value">value<a class="headerlink" href="#image_value" title="Permanent link">#</a></h6> ||||
-| <h6 id="image_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#image_value" title="Permanent link">#</a></h6> | `string` | <code>""</code> | - File `url` or `path` (relative to the session file location by default, falling back to absolute path)<br/>- Base64 encoded image : `data:image/...` |</div>
+| <h6 id="image_value" class="dynamic">value<a class="headerlink" href="#image_value" title="Permanent link">#</a></h6> | `string` | <code>""</code> | - File `url` or `path` (relative to the session file location by default, falling back to absolute path)<br/>- Base64 encoded image : `data:image/...` |</div>
 
 
 
@@ -391,16 +391,16 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="plot_plot">plot<a class="headerlink" href="#plot_plot" title="Permanent link">#</a></h6> ||||
-| <h6 id="plot_rangeX">rangeX<a class="headerlink" href="#plot_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
-| <h6 id="plot_rangeY">rangeY<a class="headerlink" href="#plot_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
-| <h6 id="plot_logScaleX">logScaleX<a class="headerlink" href="#plot_logScaleX" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm's base. |
-| <h6 id="plot_logScaleY">logScaleY<a class="headerlink" href="#plot_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
-| <h6 id="plot_origin">origin<a class="headerlink" href="#plot_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it. |
-| <h6 id="plot_dots">dots<a class="headerlink" href="#plot_dots" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> |  |
-| <h6 id="plot_bars">bars<a class="headerlink" href="#plot_bars" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to use draw bars instead (disables `logScaleX` and forces `x axis` even spacing) |
-| <h6 id="plot_pips">pips<a class="headerlink" href="#plot_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
+| <h6 id="plot_rangeX" class="">rangeX<a class="headerlink" href="#plot_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
+| <h6 id="plot_rangeY" class="">rangeY<a class="headerlink" href="#plot_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
+| <h6 id="plot_logScaleX" class="">logScaleX<a class="headerlink" href="#plot_logScaleX" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm's base. |
+| <h6 id="plot_logScaleY" class="">logScaleY<a class="headerlink" href="#plot_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
+| <h6 id="plot_origin" class="">origin<a class="headerlink" href="#plot_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it. |
+| <h6 id="plot_dots" class="">dots<a class="headerlink" href="#plot_dots" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> |  |
+| <h6 id="plot_bars" class="">bars<a class="headerlink" href="#plot_bars" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to use draw bars instead (disables `logScaleX` and forces `x axis` even spacing) |
+| <h6 id="plot_pips" class="">pips<a class="headerlink" href="#plot_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
 | <h6 class="thead2" id="plot_value">value<a class="headerlink" href="#plot_value" title="Permanent link">#</a></h6> ||||
-| <h6 id="plot_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#plot_value" title="Permanent link">#</a></h6> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values<br/>- `Array` of `[x, y]` `array` values<br/>- `String` `array`<br/>- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points' coordinates |</div>
+| <h6 id="plot_value" class="dynamic">value<a class="headerlink" href="#plot_value" title="Permanent link">#</a></h6> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values<br/>- `Array` of `[x, y]` `array` values<br/>- `String` `array`<br/>- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points' coordinates |</div>
 
 
 
@@ -413,11 +413,11 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="eq_eq">eq<a class="headerlink" href="#eq_eq" title="Permanent link">#</a></h6> ||||
-| <h6 id="eq_filters">filters<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#eq_filters" title="Permanent link">#</a></h6> | `array` | <code>""</code> | Each item must be an object with the following properties<br/>- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")<br/>- `freq`: number (filter's resonant frequency, default: 1000)<br/>- `q`: number (Q factor, default: 1)<br/>- `gain`: number (default: 0)<br/>- `on`: boolean (default: true)<br/><br/>See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode |
-| <h6 id="eq_pips">pips<a class="headerlink" href="#eq_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to hide the scale |
-| <h6 id="eq_rangeX">rangeX<a class="headerlink" href="#eq_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 20,<br/>&nbsp;"max": 22000<br/>}</code> | Defines the min and max values for the x axis (in Hz, logarithmic scale) |
-| <h6 id="eq_rangeY">rangeY<a class="headerlink" href="#eq_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": -6,<br/>&nbsp;"max": 6<br/>}</code> | Defines the min and max values for the y axis (in dB) |
-| <h6 id="eq_origin">origin<a class="headerlink" href="#eq_origin" title="Permanent link">#</a></h6> | `number`&vert;<br/>`boolean` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |</div>
+| <h6 id="eq_filters" class="dynamic">filters<a class="headerlink" href="#eq_filters" title="Permanent link">#</a></h6> | `array` | <code>""</code> | Each item must be an object with the following properties<br/>- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")<br/>- `freq`: number (filter's resonant frequency, default: 1000)<br/>- `q`: number (Q factor, default: 1)<br/>- `gain`: number (default: 0)<br/>- `on`: boolean (default: true)<br/><br/>See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode |
+| <h6 id="eq_pips" class="">pips<a class="headerlink" href="#eq_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to hide the scale |
+| <h6 id="eq_rangeX" class="">rangeX<a class="headerlink" href="#eq_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 20,<br/>&nbsp;"max": 22000<br/>}</code> | Defines the min and max values for the x axis (in Hz, logarithmic scale) |
+| <h6 id="eq_rangeY" class="">rangeY<a class="headerlink" href="#eq_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": -6,<br/>&nbsp;"max": 6<br/>}</code> | Defines the min and max values for the y axis (in dB) |
+| <h6 id="eq_origin" class="">origin<a class="headerlink" href="#eq_origin" title="Permanent link">#</a></h6> | `number`&vert;<br/>`boolean` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |</div>
 
 
 
@@ -430,11 +430,11 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="visualizer_visualizer">visualizer<a class="headerlink" href="#visualizer_visualizer" title="Permanent link">#</a></h6> ||||
-| <h6 id="visualizer_duration">duration<a class="headerlink" href="#visualizer_duration" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines visualization duration in seconds |
-| <h6 id="visualizer_rangeY">rangeY<a class="headerlink" href="#visualizer_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
-| <h6 id="visualizer_origin">origin<a class="headerlink" href="#visualizer_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
-| <h6 id="visualizer_logScaleY">logScaleY<a class="headerlink" href="#visualizer_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
-| <h6 id="visualizer_pips">pips<a class="headerlink" href="#visualizer_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |</div>
+| <h6 id="visualizer_duration" class="">duration<a class="headerlink" href="#visualizer_duration" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines visualization duration in seconds |
+| <h6 id="visualizer_rangeY" class="">rangeY<a class="headerlink" href="#visualizer_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
+| <h6 id="visualizer_origin" class="">origin<a class="headerlink" href="#visualizer_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
+| <h6 id="visualizer_logScaleY" class="">logScaleY<a class="headerlink" href="#visualizer_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
+| <h6 id="visualizer_pips" class="">pips<a class="headerlink" href="#visualizer_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |</div>
 
 
 
@@ -449,13 +449,13 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="led_led">led<a class="headerlink" href="#led_led" title="Permanent link">#</a></h6> ||||
-| <h6 id="led_mode">mode<a class="headerlink" href="#led_mode" title="Permanent link">#</a></h6> | `string` | <code>"intensity"</code> | Defines how value is interpreted (see `value`) |
-| <h6 id="led_range">range<a class="headerlink" href="#led_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Value range |
-| <h6 id="led_alphaRange">alphaRange<a class="headerlink" href="#led_alphaRange" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Alpha range (if `mode` is `color`) |
-| <h6 id="led_logScale">logScale<a class="headerlink" href="#led_logScale" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | If `mode` is `intensity`, set to `true` to use logarithmic scale. |
-| <h6 id="led_borderRadius">borderRadius<a class="headerlink" href="#led_borderRadius" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Css border-radius property. |
+| <h6 id="led_mode" class="">mode<a class="headerlink" href="#led_mode" title="Permanent link">#</a></h6> | `string` | <code>"intensity"</code> | Defines how value is interpreted (see `value`)<br/><br/>Possible values: intensity, color |
+| <h6 id="led_range" class="">range<a class="headerlink" href="#led_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Value range |
+| <h6 id="led_alphaRange" class="">alphaRange<a class="headerlink" href="#led_alphaRange" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Alpha range (if `mode` is `color`) |
+| <h6 id="led_logScale" class="">logScale<a class="headerlink" href="#led_logScale" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | If `mode` is `intensity`, set to `true` to use logarithmic scale. |
+| <h6 id="led_borderRadius" class="">borderRadius<a class="headerlink" href="#led_borderRadius" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Css border-radius property. |
 | <h6 class="thead2" id="led_value">value<a class="headerlink" href="#led_value" title="Permanent link">#</a></h6> ||||
-| <h6 id="led_value">value<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#led_value" title="Permanent link">#</a></h6> | `number`&vert;<br/>`array`&vert;<br/>`string` | <code>""</code> | If `mode` is `intensity`:<br/>- `Number`: `intensity` between `range.min` and `range.max`<br/><br/>If `mode` is `color`:<br/>- `Array`: `[r, g, b]` (`r`, `g` and `b` between `range.min` and `range.max`)<br/>- `Array`: `[r, g, b, alpha]` (`alpha` between `alphaRange.min` and `alphaRange.max`)<br/>- `String`: CSS color |</div>
+| <h6 id="led_value" class="dynamic">value<a class="headerlink" href="#led_value" title="Permanent link">#</a></h6> | `number`&vert;<br/>`array`&vert;<br/>`string` | <code>""</code> | If `mode` is `intensity`:<br/>- `Number`: `intensity` between `range.min` and `range.max`<br/><br/>If `mode` is `color`:<br/>- `Array`: `[r, g, b]` (`r`, `g` and `b` between `range.min` and `range.max`)<br/>- `Array`: `[r, g, b, alpha]` (`alpha` between `alphaRange.min` and `alphaRange.max`)<br/>- `String`: CSS color |</div>
 
 
 
@@ -468,9 +468,9 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="text_text">text<a class="headerlink" href="#text_text" title="Permanent link">#</a></h6> ||||
-| <h6 id="text_vertical">vertical<a class="headerlink" href="#text_vertical" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the text vertically |
-| <h6 id="text_wrap">wrap<a class="headerlink" href="#text_wrap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically.<br/><br/>This will not break overflowing words by default, word-breaking can be enabled by adding `word-break: break-all;` to the `css` property |
-| <h6 id="text_align">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Css text-align property. |</div>
+| <h6 id="text_vertical" class="">vertical<a class="headerlink" href="#text_vertical" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the text vertically |
+| <h6 id="text_wrap" class="">wrap<a class="headerlink" href="#text_wrap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically.<br/><br/>This will not break overflowing words by default, word-breaking can be enabled by adding `word-break: break-all;` to the `css` property |
+| <h6 id="text_align" class="">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Css text-align property.<br/><br/>Possible values: center, left, right |</div>
 
 
 
@@ -485,18 +485,18 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="xy_xy">xy<a class="headerlink" href="#xy_xy" title="Permanent link">#</a></h6> ||||
-| <h6 id="xy_pointSize">pointSize<a class="headerlink" href="#xy_pointSize" title="Permanent link">#</a></h6> | `integer` | <code>20</code> | Defines the points' size |
-| <h6 id="xy_snap">snap<a class="headerlink" href="#xy_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
-| <h6 id="xy_spring">spring<a class="headerlink" href="#xy_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
-| <h6 id="xy_pips">pips<a class="headerlink" href="#xy_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
-| <h6 id="xy_rangeX">rangeX<a class="headerlink" href="#xy_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
-| <h6 id="xy_rangeY">rangeY<a class="headerlink" href="#xy_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
-| <h6 id="xy_logScaleX">logScaleX<a class="headerlink" href="#xy_logScaleX" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale. |
-| <h6 id="xy_logScaleY">logScaleY<a class="headerlink" href="#xy_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale. |
-| <h6 id="xy_doubleTap">doubleTap<a class="headerlink" href="#xy_doubleTap" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`string` | <code>false</code> | Set to `true` to make the fader reset to its default value when receiving a double tap.<br/><br/>Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>` |
-| <h6 id="xy_sensitivity">sensitivity<a class="headerlink" href="#xy_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
+| <h6 id="xy_pointSize" class="">pointSize<a class="headerlink" href="#xy_pointSize" title="Permanent link">#</a></h6> | `integer` | <code>20</code> | Defines the points' size |
+| <h6 id="xy_snap" class="">snap<a class="headerlink" href="#xy_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
+| <h6 id="xy_spring" class="">spring<a class="headerlink" href="#xy_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
+| <h6 id="xy_pips" class="">pips<a class="headerlink" href="#xy_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
+| <h6 id="xy_rangeX" class="">rangeX<a class="headerlink" href="#xy_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
+| <h6 id="xy_rangeY" class="">rangeY<a class="headerlink" href="#xy_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
+| <h6 id="xy_logScaleX" class="">logScaleX<a class="headerlink" href="#xy_logScaleX" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale. |
+| <h6 id="xy_logScaleY" class="">logScaleY<a class="headerlink" href="#xy_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale. |
+| <h6 id="xy_doubleTap" class="">doubleTap<a class="headerlink" href="#xy_doubleTap" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`string` | <code>false</code> | Set to `true` to make the fader reset to its default value when receiving a double tap.<br/><br/>Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>` |
+| <h6 id="xy_sensitivity" class="">sensitivity<a class="headerlink" href="#xy_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
 | <h6 class="thead2" id="xy_osc">osc<a class="headerlink" href="#xy_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="xy_touchAddress">touchAddress<a class="headerlink" href="#xy_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1`) |</div>
+| <h6 id="xy_touchAddress" class="">touchAddress<a class="headerlink" href="#xy_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1`) |</div>
 
 
 
@@ -509,11 +509,11 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="rgb_rgb">rgb<a class="headerlink" href="#rgb_rgb" title="Permanent link">#</a></h6> ||||
-| <h6 id="rgb_snap">snap<a class="headerlink" href="#rgb_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
-| <h6 id="rgb_spring">spring<a class="headerlink" href="#rgb_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
-| <h6 id="rgb_range">range<a class="headerlink" href="#rgb_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 255<br/>}</code> | Defines the widget's output scale. |
-| <h6 id="rgb_alpha">alpha<a class="headerlink" href="#rgb_alpha" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable alpha channel |
-| <h6 id="rgb_rangeAlpha">rangeAlpha<a class="headerlink" href="#rgb_rangeAlpha" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the widget's output scale for the alpha channel. |</div>
+| <h6 id="rgb_snap" class="">snap<a class="headerlink" href="#rgb_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
+| <h6 id="rgb_spring" class="">spring<a class="headerlink" href="#rgb_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
+| <h6 id="rgb_range" class="">range<a class="headerlink" href="#rgb_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 255<br/>}</code> | Defines the widget's output scale. |
+| <h6 id="rgb_alpha" class="">alpha<a class="headerlink" href="#rgb_alpha" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable alpha channel |
+| <h6 id="rgb_rangeAlpha" class="">rangeAlpha<a class="headerlink" href="#rgb_rangeAlpha" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the widget's output scale for the alpha channel. |</div>
 
 
 
@@ -526,19 +526,19 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="multixy_multi xy">multi xy<a class="headerlink" href="#multixy_multi xy" title="Permanent link">#</a></h6> ||||
-| <h6 id="multixy_points">points<a class="headerlink" href="#multixy_points" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>2</code> | Defines the number of points on the pad<br/><br/>Can be an array of strings that will be used as labels for the points (ex: `['A', 'B']`) |
+| <h6 id="multixy_points" class="">points<a class="headerlink" href="#multixy_points" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>2</code> | Defines the number of points on the pad<br/><br/>Can be an array of strings that will be used as labels for the points (ex: `['A', 'B']`) |
 | <h6 class="thead2" id="multixy_xy">xy<a class="headerlink" href="#multixy_xy" title="Permanent link">#</a></h6> ||||
-| <h6 id="multixy_pointSize">pointSize<a class="headerlink" href="#multixy_pointSize" title="Permanent link">#</a></h6> | `integer` | <code>20</code> | Defines the points' size |
-| <h6 id="multixy_snap">snap<a class="headerlink" href="#multixy_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
-| <h6 id="multixy_spring">spring<a class="headerlink" href="#multixy_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
-| <h6 id="multixy_pips">pips<a class="headerlink" href="#multixy_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
-| <h6 id="multixy_rangeX">rangeX<a class="headerlink" href="#multixy_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
-| <h6 id="multixy_rangeY">rangeY<a class="headerlink" href="#multixy_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
-| <h6 id="multixy_logScaleX">logScaleX<a class="headerlink" href="#multixy_logScaleX" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale. |
-| <h6 id="multixy_logScaleY">logScaleY<a class="headerlink" href="#multixy_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale. |
-| <h6 id="multixy_sensitivity">sensitivity<a class="headerlink" href="#multixy_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
+| <h6 id="multixy_pointSize" class="">pointSize<a class="headerlink" href="#multixy_pointSize" title="Permanent link">#</a></h6> | `integer` | <code>20</code> | Defines the points' size |
+| <h6 id="multixy_snap" class="">snap<a class="headerlink" href="#multixy_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
+| <h6 id="multixy_spring" class="">spring<a class="headerlink" href="#multixy_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
+| <h6 id="multixy_pips" class="">pips<a class="headerlink" href="#multixy_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
+| <h6 id="multixy_rangeX" class="">rangeX<a class="headerlink" href="#multixy_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
+| <h6 id="multixy_rangeY" class="">rangeY<a class="headerlink" href="#multixy_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
+| <h6 id="multixy_logScaleX" class="">logScaleX<a class="headerlink" href="#multixy_logScaleX" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale. |
+| <h6 id="multixy_logScaleY" class="">logScaleY<a class="headerlink" href="#multixy_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale. |
+| <h6 id="multixy_sensitivity" class="">sensitivity<a class="headerlink" href="#multixy_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
 | <h6 class="thead2" id="multixy_osc">osc<a class="headerlink" href="#multixy_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="multixy_touchAddress">touchAddress<a class="headerlink" href="#multixy_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
+| <h6 id="multixy_touchAddress" class="">touchAddress<a class="headerlink" href="#multixy_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
 
 
 
@@ -553,21 +553,21 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="fader_fader">fader<a class="headerlink" href="#fader_fader" title="Permanent link">#</a></h6> ||||
-| <h6 id="fader_design">design<a class="headerlink" href="#fader_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style |
-| <h6 id="fader_horizontal">horizontal<a class="headerlink" href="#fader_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
-| <h6 id="fader_pips">pips<a class="headerlink" href="#fader_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show range breakpoints (ignored if `design` is `compact`) |
-| <h6 id="fader_dashed">dashed<a class="headerlink" href="#fader_dashed" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display a dashed gauge |
-| <h6 id="fader_gradient">gradient<a class="headerlink" href="#fader_gradient" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[]</code> | When set, the meter's gauge will be filled with a linear color gradient<br/>- each item must be a CSS color string.<br/>- as an `object`: each key must be a number between 0 and 1<br/>- each item must be a CSS color string.<br/><br/>Examples: `['blue', 'red']`, {'0': 'blue', '0.9': 'blue', '1': 'red'}  |
-| <h6 id="fader_snap">snap<a class="headerlink" href="#fader_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, dragging the widget will modify it's value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position |
-| <h6 id="fader_spring">spring<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#fader_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
-| <h6 id="fader_doubleTap">doubleTap<a class="headerlink" href="#fader_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
-| <h6 id="fader_range">range<a class="headerlink" href="#fader_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
-| <h6 id="fader_logScale">logScale<a class="headerlink" href="#fader_logScale" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale. Set to `-1` for exponential scale. |
-| <h6 id="fader_sensitivity">sensitivity<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#fader_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the fader's sensitivity when `snap` is `false`  |
-| <h6 id="fader_steps">steps<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#fader_steps" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
-| <h6 id="fader_origin">origin<a class="headerlink" href="#fader_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the fader's gauge |
+| <h6 id="fader_design" class="">design<a class="headerlink" href="#fader_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Possible values: default, round, compact |
+| <h6 id="fader_horizontal" class="">horizontal<a class="headerlink" href="#fader_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
+| <h6 id="fader_pips" class="">pips<a class="headerlink" href="#fader_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show range breakpoints (ignored if `design` is `compact`) |
+| <h6 id="fader_dashed" class="">dashed<a class="headerlink" href="#fader_dashed" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display a dashed gauge |
+| <h6 id="fader_gradient" class="">gradient<a class="headerlink" href="#fader_gradient" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[]</code> | When set, the meter's gauge will be filled with a linear color gradient<br/>- each item must be a CSS color string.<br/>- as an `object`: each key must be a number between 0 and 1<br/>- each item must be a CSS color string.<br/><br/>Examples: `['blue', 'red']`, {'0': 'blue', '0.9': 'blue', '1': 'red'}  |
+| <h6 id="fader_snap" class="">snap<a class="headerlink" href="#fader_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, dragging the widget will modify it's value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position |
+| <h6 id="fader_spring" class="dynamic">spring<a class="headerlink" href="#fader_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
+| <h6 id="fader_doubleTap" class="">doubleTap<a class="headerlink" href="#fader_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
+| <h6 id="fader_range" class="">range<a class="headerlink" href="#fader_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
+| <h6 id="fader_logScale" class="">logScale<a class="headerlink" href="#fader_logScale" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale. Set to `-1` for exponential scale. |
+| <h6 id="fader_sensitivity" class="dynamic">sensitivity<a class="headerlink" href="#fader_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the fader's sensitivity when `snap` is `false`  |
+| <h6 id="fader_steps" class="dynamic">steps<a class="headerlink" href="#fader_steps" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
+| <h6 id="fader_origin" class="">origin<a class="headerlink" href="#fader_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the fader's gauge |
 | <h6 class="thead2" id="fader_osc">osc<a class="headerlink" href="#fader_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="fader_touchAddress">touchAddress<a class="headerlink" href="#fader_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
+| <h6 id="fader_touchAddress" class="">touchAddress<a class="headerlink" href="#fader_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
 
 
 
@@ -580,19 +580,19 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="knob_knob">knob<a class="headerlink" href="#knob_knob" title="Permanent link">#</a></h6> ||||
-| <h6 id="knob_mode">mode<a class="headerlink" href="#knob_mode" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion |
-| <h6 id="knob_spring">spring<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#knob_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
-| <h6 id="knob_pips">pips<a class="headerlink" href="#knob_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show the scale's breakpoints |
-| <h6 id="knob_dashed">dashed<a class="headerlink" href="#knob_dashed" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display a dashed gauge |
-| <h6 id="knob_angle">angle<a class="headerlink" href="#knob_angle" title="Permanent link">#</a></h6> | `number` | <code>270</code> | Defines the angle's width of the knob, in degrees |
-| <h6 id="knob_doubleTap">doubleTap<a class="headerlink" href="#knob_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the knob reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
-| <h6 id="knob_range">range<a class="headerlink" href="#knob_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
-| <h6 id="knob_logScale">logScale<a class="headerlink" href="#knob_logScale" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale. Set to `-1` for exponential scale. |
-| <h6 id="knob_sensitivity">sensitivity<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#knob_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the knob's sensitivity when `mode` is not `snap`  |
-| <h6 id="knob_steps">steps<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#knob_steps" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
-| <h6 id="knob_origin">origin<a class="headerlink" href="#knob_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the knob's gauge |
+| <h6 id="knob_mode" class="">mode<a class="headerlink" href="#knob_mode" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion<br/><br/>Possible values: vertical, circular, snap |
+| <h6 id="knob_spring" class="dynamic">spring<a class="headerlink" href="#knob_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
+| <h6 id="knob_pips" class="">pips<a class="headerlink" href="#knob_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show the scale's breakpoints |
+| <h6 id="knob_dashed" class="">dashed<a class="headerlink" href="#knob_dashed" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display a dashed gauge |
+| <h6 id="knob_angle" class="">angle<a class="headerlink" href="#knob_angle" title="Permanent link">#</a></h6> | `number` | <code>270</code> | Defines the angle's width of the knob, in degrees |
+| <h6 id="knob_doubleTap" class="">doubleTap<a class="headerlink" href="#knob_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the knob reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
+| <h6 id="knob_range" class="">range<a class="headerlink" href="#knob_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
+| <h6 id="knob_logScale" class="">logScale<a class="headerlink" href="#knob_logScale" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale. Set to `-1` for exponential scale. |
+| <h6 id="knob_sensitivity" class="dynamic">sensitivity<a class="headerlink" href="#knob_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the knob's sensitivity when `mode` is not `snap`  |
+| <h6 id="knob_steps" class="dynamic">steps<a class="headerlink" href="#knob_steps" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
+| <h6 id="knob_origin" class="">origin<a class="headerlink" href="#knob_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the knob's gauge |
 | <h6 class="thead2" id="knob_osc">osc<a class="headerlink" href="#knob_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="knob_touchAddress">touchAddress<a class="headerlink" href="#knob_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
+| <h6 id="knob_touchAddress" class="">touchAddress<a class="headerlink" href="#knob_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
 
 
 
@@ -605,14 +605,14 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="encoder_encoder">encoder<a class="headerlink" href="#encoder_encoder" title="Permanent link">#</a></h6> ||||
-| <h6 id="encoder_ticks">ticks<a class="headerlink" href="#encoder_ticks" title="Permanent link">#</a></h6> | `number` | <code>360</code> | defines the granularity / verbosity of the encoder (number of step for a 360° arc) |
-| <h6 id="encoder_back">back<a class="headerlink" href="#encoder_back" title="Permanent link">#</a></h6> | `*` | <code>-1</code> | Defines which value is sent when rotating the encoder anticlockwise |
-| <h6 id="encoder_forth">forth<a class="headerlink" href="#encoder_forth" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Defines which value is sent when rotating the encoder clockwise |
-| <h6 id="encoder_release">release<a class="headerlink" href="#encoder_release" title="Permanent link">#</a></h6> | `number` | <code>""</code> | Defines which value is sent when releasing the encoder:<br/>- Set to `null` to send send no argument in the osc message<br/>- Can be an `object` if the type needs to be specified |
-| <h6 id="encoder_mode">mode<a class="headerlink" href="#encoder_mode" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion |
-| <h6 id="encoder_doubleTap">doubleTap<a class="headerlink" href="#encoder_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
+| <h6 id="encoder_ticks" class="">ticks<a class="headerlink" href="#encoder_ticks" title="Permanent link">#</a></h6> | `number` | <code>360</code> | defines the granularity / verbosity of the encoder (number of step for a 360° arc) |
+| <h6 id="encoder_back" class="">back<a class="headerlink" href="#encoder_back" title="Permanent link">#</a></h6> | `*` | <code>-1</code> | Defines which value is sent when rotating the encoder anticlockwise |
+| <h6 id="encoder_forth" class="">forth<a class="headerlink" href="#encoder_forth" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Defines which value is sent when rotating the encoder clockwise |
+| <h6 id="encoder_release" class="">release<a class="headerlink" href="#encoder_release" title="Permanent link">#</a></h6> | `number` | <code>""</code> | Defines which value is sent when releasing the encoder:<br/>- Set to `null` to send send no argument in the osc message<br/>- Can be an `object` if the type needs to be specified |
+| <h6 id="encoder_mode" class="">mode<a class="headerlink" href="#encoder_mode" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion<br/><br/>Possible values: circular, snap, vertical |
+| <h6 id="encoder_doubleTap" class="">doubleTap<a class="headerlink" href="#encoder_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
 | <h6 class="thead2" id="encoder_osc">osc<a class="headerlink" href="#encoder_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="encoder_touchAddress">touchAddress<a class="headerlink" href="#encoder_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
+| <h6 id="encoder_touchAddress" class="">touchAddress<a class="headerlink" href="#encoder_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
 
 
 
@@ -625,21 +625,21 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="range_fader">fader<a class="headerlink" href="#range_fader" title="Permanent link">#</a></h6> ||||
-| <h6 id="range_design">design<a class="headerlink" href="#range_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style |
-| <h6 id="range_horizontal">horizontal<a class="headerlink" href="#range_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
-| <h6 id="range_pips">pips<a class="headerlink" href="#range_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show range breakpoints (ignored if `design` is `compact`) |
-| <h6 id="range_dashed">dashed<a class="headerlink" href="#range_dashed" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display a dashed gauge |
-| <h6 id="range_gradient">gradient<a class="headerlink" href="#range_gradient" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[]</code> | When set, the meter's gauge will be filled with a linear color gradient<br/>- each item must be a CSS color string.<br/>- as an `object`: each key must be a number between 0 and 1<br/>- each item must be a CSS color string.<br/><br/>Examples: `['blue', 'red']`, {'0': 'blue', '0.9': 'blue', '1': 'red'}  |
-| <h6 id="range_snap">snap<a class="headerlink" href="#range_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, dragging the widget will modify it's value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position |
-| <h6 id="range_spring">spring<a class="headerlink" href="#range_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
-| <h6 id="range_doubleTap">doubleTap<a class="headerlink" href="#range_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
-| <h6 id="range_range">range<a class="headerlink" href="#range_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
-| <h6 id="range_logScale">logScale<a class="headerlink" href="#range_logScale" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale. Set to `-1` for exponential scale. |
-| <h6 id="range_sensitivity">sensitivity<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#range_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the fader's sensitivity when `snap` is `false`  |
-| <h6 id="range_steps">steps<i class="dynamic-prop-icon" title="dynamic"></i><a class="headerlink" href="#range_steps" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
-| <h6 id="range_origin">origin<a class="headerlink" href="#range_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the fader's gauge |
+| <h6 id="range_design" class="">design<a class="headerlink" href="#range_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Possible values: default, round, compact |
+| <h6 id="range_horizontal" class="">horizontal<a class="headerlink" href="#range_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
+| <h6 id="range_pips" class="">pips<a class="headerlink" href="#range_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show range breakpoints (ignored if `design` is `compact`) |
+| <h6 id="range_dashed" class="">dashed<a class="headerlink" href="#range_dashed" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display a dashed gauge |
+| <h6 id="range_gradient" class="">gradient<a class="headerlink" href="#range_gradient" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[]</code> | When set, the meter's gauge will be filled with a linear color gradient<br/>- each item must be a CSS color string.<br/>- as an `object`: each key must be a number between 0 and 1<br/>- each item must be a CSS color string.<br/><br/>Examples: `['blue', 'red']`, {'0': 'blue', '0.9': 'blue', '1': 'red'}  |
+| <h6 id="range_snap" class="">snap<a class="headerlink" href="#range_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, dragging the widget will modify it's value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position |
+| <h6 id="range_spring" class="">spring<a class="headerlink" href="#range_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
+| <h6 id="range_doubleTap" class="">doubleTap<a class="headerlink" href="#range_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
+| <h6 id="range_range" class="">range<a class="headerlink" href="#range_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
+| <h6 id="range_logScale" class="">logScale<a class="headerlink" href="#range_logScale" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale. Set to `-1` for exponential scale. |
+| <h6 id="range_sensitivity" class="dynamic">sensitivity<a class="headerlink" href="#range_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the fader's sensitivity when `snap` is `false`  |
+| <h6 id="range_steps" class="dynamic">steps<a class="headerlink" href="#range_steps" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
+| <h6 id="range_origin" class="">origin<a class="headerlink" href="#range_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the fader's gauge |
 | <h6 class="thead2" id="range_osc">osc<a class="headerlink" href="#range_osc" title="Permanent link">#</a></h6> ||||
-| <h6 id="range_touchAddress">touchAddress<a class="headerlink" href="#range_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
+| <h6 id="range_touchAddress" class="">touchAddress<a class="headerlink" href="#range_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |</div>
 
 
 
@@ -654,11 +654,11 @@
 | property | type |default | description |
 | --- | --- | --- | --- |
 | <h6 class="thead2" id="script_script">script<a class="headerlink" href="#script_script" title="Permanent link">#</a></h6> ||||
-| <h6 id="script_event">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution. |
+| <h6 id="script_event" class="">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Possible values: value, keyboard |
 | <h6 class="thead2" id="script_event: keyboard">event: keyboard<a class="headerlink" href="#script_event: keyboard" title="Permanent link">#</a></h6> ||||
-| <h6 id="script_keyBinding">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation) |
-| <h6 id="script_keyRepeat">keyRepeat<a class="headerlink" href="#script_keyRepeat" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
-| <h6 id="script_keyType">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keyDown"</code> | Determines which key event trigger the script's execution |</div>
+| <h6 id="script_keyBinding" class="">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation) |
+| <h6 id="script_keyRepeat" class="">keyRepeat<a class="headerlink" href="#script_keyRepeat" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
+| <h6 id="script_keyType" class="">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keyDown"</code> | Determines which key event trigger the script's execution<br/><br/>Possible values: keydown, keyup, both |</div>
 
 
 

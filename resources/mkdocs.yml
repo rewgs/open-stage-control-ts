@@ -27,8 +27,7 @@ nav:
     - Documentation:
         - Getting started:
             - docs/getting-started/introduction.md
-            - docs/getting-started/server-setup.md
-            - docs/getting-started/supported-platforms.md
+            - docs/getting-started/server-configuration.md
             - docs/getting-started/running-from-sources.md
             - docs/getting-started/running-with-node.md
         - User interface:
@@ -41,7 +40,7 @@ nav:
             - docs/widgets/advanced-syntaxes.md
             - docs/widgets/scripting.md
         - MIDI:
-            - MIDI setup: docs/midi/midi-setup.md
+            - MIDI setup: docs/midi/midi-configuration.md
             - MIDI messages: docs/midi/midi-messages.md
         - Custom module:
             - docs/custom-module/custom-module.md

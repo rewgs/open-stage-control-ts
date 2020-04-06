@@ -19,7 +19,7 @@ class Script extends Widget {
             _script: 'script',
 
             event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
-            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/'},
+            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See <a href="https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/">documentation</a>.'},
 
             _eventKey: 'event: keyboard',
 

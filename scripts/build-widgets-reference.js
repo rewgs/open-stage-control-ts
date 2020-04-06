@@ -31,13 +31,17 @@ for (var propName in base) {
     if (propName === '_props' || propName[0] === '_') continue
 
     var help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
-        dynamic = baseClass.dynamicProps.includes(propName) ? '<i class="dynamic-prop-icon" title="dynamic"></i>' : ''
+        dynamic = baseClass.dynamicProps.includes(propName)
 
+    if (prop.choices) {
+        if (help) help += '<br/><br/>'
+        help += 'Possible values: ' + prop.choices.join(', ')
+    }
 
     doc.push(`
-        | <h6 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>')}</code> | ${help} |`
+        | <h6 id="${permalink}" class="${dynamic? 'dynamic' : ''}">${propName}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
     )
-
+    
 }
 
 doc.push('</div>')
@@ -90,10 +94,15 @@ for (var k in widgets.categories) {
             if (propName === '_props' || propName[0] === '_' || JSON.stringify(prop) == JSON.stringify(base[propName])) continue
 
             var help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
-                dynamic = widgets.widgets[type].dynamicProps.includes(propName) ? '<i class="dynamic-prop-icon" title="dynamic"></i>' : ''
+                dynamic = widgets.widgets[type].dynamicProps.includes(propName)
+
+            if (prop.choices) {
+                if (help) help += '<br/><br/>'
+                help += 'Possible values: ' + prop.choices.join(', ')
+            }
 
             doc.push(`
-                | <h6 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
+                | <h6 id="${permalink}" class="${dynamic? 'dynamic' : ''}">${propName}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
             )
             separator = false
         }
