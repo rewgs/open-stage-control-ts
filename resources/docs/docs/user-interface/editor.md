@@ -30,17 +30,15 @@ Right clicking on a widget displays a menu with the following actions
 
 ## Inspector
 
-Selected widget's properties are displayed and can be modified in the sidepanel. The [properties reference](../widgets/properties-reference) lists the available properties for each widget type.
+Selected widget's properties are displayed and can be modified in the inspector. The [properties reference](../widgets/properties-reference.md) lists the available properties for each widget type.
 
-Property fields are all multiline (press `shift + enter` for new line).
-
-Properties are written in JSON, with some flexibility brought by the [JSON5](https://github.com/json5/json5) format. For example, doubles quotes around object keys are not mandatory.
+- Property fields are all multiline (press `shift + enter` for new line).
+- Properties are written in JSON, with some flexibility brought by the [JSON5](https://github.com/json5/json5) format. For example, doubles quotes around object keys are not mandatory.
 
 
 ## Project tree
 
-!!! warning "Incomplete documentation"
-
+The project tree displays the whole widget structure of the session. Widgets can be reordered within a container with drag-and-drop.
 
 ## Widget resizing / dragging
 

@@ -27,7 +27,7 @@
 
 ## 2. Sidepanels
 
-The sidepanels are only visible when the editor is active, they can be resized and/or hidden. Both are describe in the [editor](./editor) section.
+The sidepanels are only visible when the editor is active, they can be resized and/or hidden. Both are describe in the [editor](./editor.md) section.
 
 ## 3. Session
 
