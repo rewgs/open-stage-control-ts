@@ -34,6 +34,7 @@ Selected widget's properties are displayed and can be modified in the inspector.
 
 - Property fields are all multiline (press `shift + enter` for new line).
 - Properties are written in JSON, with some flexibility brought by the [JSON5](https://github.com/json5/json5) format. For example, doubles quotes around object keys are not mandatory.
+- Clicking on a property name spawns a help modal window 
 
 
 ## Project tree

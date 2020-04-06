@@ -44,7 +44,6 @@ nav:
             - MIDI messages: docs/midi/midi-messages.md
         - Custom module:
             - docs/custom-module/custom-module.md
-            - docs/custom-module/examples.md
             - docs/custom-module/managing-big-modules.md
         - Customization:
             - docs/customization/themes.md
