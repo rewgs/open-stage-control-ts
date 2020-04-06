@@ -1,18 +1,20 @@
 # Scripting
 
-The `script` property allows widgets to run javascript code when their value update. It differs from the javascript property syntax in the following ways:
+The `script` property allows widgets to run javascript code when their value update. It differs from the [javascript property syntax ](./advanced-syntaxes.md#available-variables) in the following ways:
 
 - no `JS{{}}` wrapper, just the code
 - `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their value before the script's compilation
 
 ## Event-dependent variables
 
+Depending on what triggered the script's execution, a few variables are available to help determine the execution conditions.
+
 **Event: value**
 
 - `id` (`string`): id of the widget that's reponsible for the value update
 - `value`: widget's value
 
-**Event: keyboard**
+**Event: keyboard** (script widget only)
 
 - `type` (`string`): `keydown` or `keyup`
 - `key` (`string`): key name,
@@ -24,6 +26,8 @@ The `script` property allows widgets to run javascript code when their value upd
 
 
 ## Available variables
+
+Besides the variables available in the [javascript property syntax ](./advanced-syntaxes.md#available-variables), the following variables and functions are also accessible in this context.
 
 ----
 

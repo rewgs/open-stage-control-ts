@@ -95,19 +95,19 @@ Default [client options](../client-options).
 
 ----
 
-####  `--disable-vsync`
+#### `disable-vsync`
 
 Disable built-in client window's vertical synchronization.
 
 ----
 
-####  `--force-gpu`
+#### `force-gpu`
 
 Disable built-in client window's gpu blacklist (may improve rendering performance in some cases).
 
 ----
 
-####  `--read-only`
+#### `read-only`
 
 Disable session editing, and file saving.
 
