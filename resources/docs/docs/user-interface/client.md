@@ -11,7 +11,7 @@
     - Export: export a session file to the client's filesystem
 - State
     - Store: save all widgets' state to a persistent slot (stored in the client's cache)
-    - Recall: apply state storer in the persistent slot
+    - Recall: apply state storer in the persistent slot (updated widgets may send messages)
     - Send All: make all widgets send their current value
     - Open: browse state files on the server
     - Save / Save as: save state file on the server
