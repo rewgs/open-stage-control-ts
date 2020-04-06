@@ -4,7 +4,7 @@ require('./client-shim')
 var widgets = require('../src/client/widgets'),
     baseClass = require('../src/client/widgets/common/widget'),
     base = baseClass.defaults(),
-    doc = []
+    doc = ['<!-- This file is generated automatically from the widget class declarations. See scripts/build-widget-reference.js -->']
 
 
 doc.push(`
@@ -41,7 +41,7 @@ for (var propName in base) {
     doc.push(`
         | <h6 id="${permalink}" class="${dynamic? 'dynamic' : ''}">${propName}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
     )
-    
+
 }
 
 doc.push('</div>')
