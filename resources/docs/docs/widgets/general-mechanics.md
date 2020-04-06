@@ -6,7 +6,7 @@ These are interaction events widgets are likely to respond to:
 |---|---|---|
 | Mousedown | Tap | Handled at pressing time, not releasing. |
 | Click | Click | Handled at release time. |
-| Double Click | Double Tap | Some widgets handle double click / double tap events. |
+| Double Click | Double Tap | Some widgets handle double click / double tap events. |
 | Drag | Drag | The widgets respond to mouse and touch drag gestures with a 1:1 precision ratio. |
 
 
@@ -26,15 +26,15 @@ When interacted with, widgets with at least one target (including the server's d
 /address ...preArgs ...value
 ```
 
-If they widget has MIDI targets, the server will try to convert the osc message into a MIDI message (see [MIDI messages](../midi/midi-messages.md)).
+If they have MIDI targets, the server will try to convert the osc messages into a MIDI messages (see [MIDI messages](../midi/midi-messages.md)).
 
 
 ## Receiving messages
 
-When an osc message is received, it updates every widgets that meet the following conditions
+When an osc message is received, it updates every widgets that meets the following conditions
 
-- exact same `address`
-- same `preArgs`
+- same `address`
+- same `preArgs` (no distinction between integers and round floats )
 
 The remaining arguments after `preArgs` are passed to the widget.
 
