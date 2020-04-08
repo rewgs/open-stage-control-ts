@@ -45,14 +45,22 @@ Modals are virtual popup windows that may contain various content: file browser,
 
 ## Keyboard shortcuts
 
-<div class="force-full-table"></div>
-| Shortcut | Description |
-|---|---|
-| ++"mod"+e++ | enable/disable editor |
-| ++"mod"+s++ | save session |
-| ++"mod"+shift+s++ | save session as... |
-| ++"mod"+o++ | open a session file |
-| ++"mod"+w++ | close client |
+=== "Linux / Windows"
 
-!!! info ""
-    `mod` refers to the `ctrl` key except on MacOs (`command`)
+    | Shortcut | Description |
+    |---|---|
+    | ++ctrl+e++ | enable/disable editor |
+    | ++ctrl+s++ | save session |
+    | ++ctrl+shift+s++ | save session as... |
+    | ++ctrl+o++ | open a session file |
+    | ++ctrl+w++ | close client |
+
+=== "Mac"
+
+    | Shortcut | Description |
+    |---|---|
+    | ++cmd+e++ | enable/disable editor |
+    | ++cmd+s++ | save session |
+    | ++cmd+shift+s++ | save session as... |
+    | ++cmd+o++ | open a session file |
+    | ++cmd+w++ | close client |

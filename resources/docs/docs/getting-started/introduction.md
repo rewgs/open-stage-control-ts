@@ -26,30 +26,30 @@ The **client** requires Chromium/Chrome `60` or later to work (Linux, MacOS, Win
 
 ## Installation
 
-### Linux
+??? example "Linux"
 
-**Ubuntu / Debian**
+    **Ubuntu / Debian**
 
-- [Download](/download) `open-stage-control-VERSION-ARCH.deb`
-- Install it by running this as root in a terminal:
-```bash
-dpkg -i path/to/open-stage-control-VERSION-ARCH.deb
-```
+    - [Download](/download) `open-stage-control-VERSION-ARCH.deb`
+    - Install it by running this as root in a terminal:
+    ```bash
+    dpkg -i path/to/open-stage-control-VERSION-ARCH.deb
+    ```
 
-**Other linux distributions**
+    **Other linux distributions**
 
-- [Download](/download) `open-stage-control-VERSION-linux-ARCH.zip`
-- Extract it in the location of your choice
-- The file inside it named `open-stage-control` is the app's main executable
+    - [Download](/download) `open-stage-control-VERSION-linux-ARCH.zip`
+    - Extract it in the location of your choice
+    - The file inside it named `open-stage-control` is the app's main executable
 
-### Mac
+??? example "Mac"
 
-- [Download](/download) `open-stage-control-VERSION-osx.zip`
-- Extract it in the location of your choice
-- Drag `open-stage-control.app` in your `Application` folder
+    - [Download](/download) `open-stage-control-VERSION-osx.zip`
+    - Extract it in the location of your choice
+    - Drag `open-stage-control.app` in your `Application` folder
 
-### Windows
+??? example "Windows"
 
-- [Download](/download) `open-stage-control-VERSION-win32-ARCH.zip`
-- Extract it in the location of your choice
-- The file inside it named `open-stage-control.exe` is the app's main executable
+    - [Download](/download) `open-stage-control-VERSION-win32-ARCH.zip`
+    - Extract it in the location of your choice
+    - The file inside it named `open-stage-control.exe` is the app's main executable

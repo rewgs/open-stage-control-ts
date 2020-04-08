@@ -35,6 +35,8 @@ class Modal extends Panel {
 
         }, [], {
 
+            _children: 'children',
+
             widgets: {type: 'array', value: [], help: 'Each element of the array must be a widget object'},
             value: {type: 'integer', value: '', help: [
                 'Defines the modal\'s state:`0` for closed, `1` for opened'

@@ -21,6 +21,8 @@ theme:
 
 extra_css:
   - 'extra/styles.css'
+extra_javascript:
+  - 'extra/scripts.js'
 
 nav:
     - Home: index.md
@@ -83,3 +85,5 @@ markdown_extensions:
         custom_checkbox: true
     - pymdownx.tilde
     - pymdownx.keys
+    - pymdownx.tabbed
+    - pymdownx.details

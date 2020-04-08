@@ -48,11 +48,11 @@
     .tx-container {
       padding-top: 1rem;
       background:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1123 258'><path d='M1124,2c0,0 0,256 0,256l-1125,0l0,-48c0,0 16,5 55,5c116,0 197,-92 325,-92c121,0 114,46 254,46c140,0 214,-167 572,-166Z' style='fill: white' /></svg>") no-repeat bottom,
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1123 258'><path d='M 1124,2 V 258 H -1 v -48 c 0,0 16,5 55,5 C 606.44786,217.24038 665.94266,3 1205,3 Z' style='fill: white' /></svg>") no-repeat bottom,
         linear-gradient(
           to bottom,
           var(--md-primary-fg-color),
-          hsla(160deg, 47%, 55%, 1) 99%,
+          var(--osc-accent-color),
           white 99%
         );
     }
@@ -86,7 +86,7 @@
     /* Invert primary button */
     .tx-hero .md-button--primary {
       background-color: var(--md-primary-bg-color);
-      color: hsla(193deg, 37%, 48%, 1);
+      color: var(--osc-accent-color);
       border-color: var(--md-primary-bg-color);
     }
 

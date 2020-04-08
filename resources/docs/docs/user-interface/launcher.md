@@ -26,16 +26,15 @@ The console diplays various informations, runtime errors and server debug messag
 
 ## Keyboard shortcuts
 
-<div class="force-full-table"></div>
-| Shortcut | Description |
-|---|---|
-| `mod + w` | close window |
+=== "Linux / Windows"
 
-<!-- | `F5` | start/stop server |
-| `mod + s` | save config |
-| `mod + shift s` | save config as... |
-| `mod + o` | open config file |
-| `mod + l` | clear console | -->
+    | Shortcut | Description |
+    |---|---|
+    | ++ctrl+w++ | close window |
 
-!!! info ""
-    `mod` refers to the `ctrl` key except on MacOs (`command`)
+=== "Mac"
+
+    | Shortcut | Description |
+    |---|---|
+    | ++cmd+w++ | close window |
+    | ++cmd+q++ | quit app |
