@@ -20,7 +20,7 @@ A widget can fetch its own properties or its direct parent's by using the keywor
 
 Some properties, when changed, trigger a complete widget recreation that ends any ongoing user interaction. Also, updating these properties continuously (e.g. when linked to a slider's dynamic value) can be very cpu expensive.
 
-Some properties have much cheaper update routines and can be considered as `dynamic`, as in performance safe. These properties are marked in the documentation with a <i class="dynamic-prop-icon" title="dynamic"></i>.
+Some properties have much cheaper update routines and can be considered as `dynamic`, as in performance safe. These properties are marked in the documentation with a <i class="fas fa-bolt" title="dynamic"></i>.
 
 
 #### Circular references cases

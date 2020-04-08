@@ -91,3 +91,7 @@ details.api summary {
 details.api summary:before {
     display: none!important;
 }
+
+i[title="dynamic"] {
+    color: var(--osc-accent-color);
+}
