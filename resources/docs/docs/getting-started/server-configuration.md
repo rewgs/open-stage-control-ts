@@ -49,7 +49,7 @@ The **server** can be configured with many options, either from a terminal or wi
 
     ===  "midi"
 
-        [MIDI configuration](../midi/midi-configuration).
+        [MIDI configuration](../midi/midi-configuration.md).
 
 
     ===  "debug"
