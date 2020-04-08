@@ -4,9 +4,9 @@
 
 <div id="osc-assets">Loading assets...</div>
 
-## Changelog
+??? abstract "Changelog"
+    <div class="highlight"><pre><code id="osc-changelog">Loading changelog...</code></pre></div>
 
-<div class="highlight"><pre><code id="osc-changelog">Loading changelog...</code></pre></div>
 
 <script>
 

@@ -34,7 +34,7 @@ Selected widget's properties are displayed and can be modified in the inspector.
 
 - Property fields are all multiline (press `shift + enter` for new line).
 - Properties are written in JSON, with some flexibility brought by the [JSON5](https://github.com/json5/json5) format. For example, doubles quotes around object keys are not mandatory.
-- Clicking on a property name spawns a help modal window 
+- Clicking on a property name spawns a help modal window
 
 
 ## Project tree
@@ -62,26 +62,48 @@ Multiple widgets can be edited at once.
 
 The following shortcuts are available only when the editor is enabled:
 
-| Shortcut | Description |
-|---|---|
-| `click` | Widget selection. |
-| `mod + click` | Multi-widget selection. Widgets can be toggled from selection by clicking on them individually.|
-| `shift + click + drag`* | Draw a selection rectangle and attempt to select widgets in it (starts by selecting the widget under the cursor). If `mod` is pressed too, current selection is kept and will be merged with the new one if possible. |
-| `mod + z` | Undo |
-| `mod + y / mod + shift + z` | Redo |
-| `delete` (`backspace` on Mac) | Delete selected widgets |
-| `mod + c` | Copy selected widgets |
-| `mod + x` | Cut selected widgets |
-| `mod + v` | Paste clipboard in selected widget |
-| `mod + shift + v` | Paste and increment id |
-| `up, down, left, right` | Move selected widgets (1 grid unit, hold `shift` for 5 grid units) |
-| `alt + [up, down, left, right]` | Resize selected widgets (1 grid unit, hold `shift` for 5 grid units) |
-| `mod + a` | Select current widget's siblings and itself |
-| `mod + shift + a` | Cancel current widget selection |
-| `mod + up` | Select current widget's parent |
-| `mod + down` | Select current widget's first child |
-| `mod + right` | Select current widget's next sibling |
-| `mod + left` | Select current widget's previous sibling |
+=== "Linux / Windows"
 
-!!! info ""
-    `mod` refers to the `ctrl` key except on MacOs (`command`)
+    | Shortcut | Description |
+    |---|---|
+    | ++"Click"++ | Widget selection. |
+    | ++ctrl+"Click"++ | Multi-widget selection. Widgets can be toggled from selection by clicking on them individually.|
+    | ++shift+"Click"+"Drag"++ | Draw a selection rectangle and attempt to select widgets in it (starts by selecting the widget under the cursor). If ++ctrl++ is pressed too, current selection is kept and will be merged with the new one if possible. |
+    | ++ctrl+z++ | Undo |
+    | ++ctrl+y++ <br/>++ctrl+shift+z++ | Redo |
+    | ++delete++ | Delete selected widgets |
+    | ++ctrl+c++ | Copy selected widgets |
+    | ++ctrl+x++ | Cut selected widgets |
+    | ++ctrl+v++ | Paste clipboard in selected widget |
+    | ++ctrl+shift+v++ | Paste and increment id |
+    | ++up++ <br/>++down++ <br/>++left++ <br/>++right++ | Move selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
+    | ++alt+up++ <br/>++alt+down++ <br/>++alt+left++ <br/>++alt+right++ | Resize selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
+    | ++ctrl+a++ | Select current widget's siblings and itself |
+    | ++ctrl+shift+a++ | Cancel current widget selection |
+    | ++ctrl+up++ | Select current widget's parent |
+    | ++ctrl+down++ | Select current widget's first child |
+    | ++ctrl+right++ | Select current widget's next sibling |
+    | ++ctrl+left++ | Select current widget's previous sibling |
+
+=== "Mac"
+
+    | Shortcut | Description |
+    |---|---|
+    | ++"Click"++ | Widget selection. |
+    | ++cmd+"Click"++ | Multi-widget selection. Widgets can be toggled from selection by clicking on them individually.|
+    | ++shift+"Click"+"Drag"++ | Draw a selection rectangle and attempt to select widgets in it (starts by selecting the widget under the cursor). If ++cmd++ is pressed too, current selection is kept and will be merged with the new one if possible. |
+    | ++cmd+z++ | Undo |
+    | ++cmd+y++ <br/>++cmd+shift+z++ | Redo |
+    | ++backspace++ | Delete selected widgets |
+    | ++cmd+c++ | Copy selected widgets |
+    | ++cmd+x++ | Cut selected widgets |
+    | ++cmd+v++ | Paste clipboard in selected widget |
+    | ++cmd+shift+v++ | Paste and increment id |
+    | ++up++ <br/>++down++ <br/>++left++ <br/>++right++ | Move selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
+    | ++alt+up++ <br/>++alt+down++ <br/>++alt+left++ <br/>++alt+right++ | Resize selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
+    | ++cmd+a++ | Select current widget's siblings and itself |
+    | ++cmd+shift+a++ | Cancel current widget selection |
+    | ++cmd+up++ | Select current widget's parent |
+    | ++cmd+down++ | Select current widget's first child |
+    | ++cmd+right++ | Select current widget's next sibling |
+    | ++cmd+left++ | Select current widget's previous sibling |

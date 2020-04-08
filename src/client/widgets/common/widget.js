@@ -148,7 +148,8 @@ class Widget extends EventEmitter {
 
         for (var m in push) {
             if (!alterDefaults[m]) alterDefaults[m] = []
-            Object.assign(alterDefaults[m], push[m])
+            if (typeof push[m] === 'string') alterDefaults[m] = push[m]
+            else Object.assign(alterDefaults[m], push[m])
         }
 
         alterDefaults._props = function() {
