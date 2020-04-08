@@ -1,5 +1,8 @@
 # Download latest release
 
+!!! info "Open Stage Control v1 is currently in alpha"
+    [Give it a try](https://github.com/jean-emmanuel/open-stage-control/releases/latest) and send your feedback on the [forum](https://openstagecontrol.discourse.group/t/open-stage-control-v1-0-0-alpha/472) !
+
 <a href="https://github.com/jean-emmanuel/open-stage-control/releases/latest"> Open Stage Control <span id="osc-version"span></a>
 
 <div id="osc-assets">Loading assets...</div>
@@ -59,7 +62,7 @@ html {
 .md-sidebar--secondary {
   display: none;
 }
-@media screen and (min-width: 76.1875em) {
+@media screen and (min-width: 76.25em) {
     .md-sidebar--primary {
       display: none;
     }

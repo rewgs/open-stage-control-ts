@@ -1,10 +1,7 @@
-!!! question "Looking for v0 documentation ?"
-    Head over <a href="https://v0.openstagecontrol.ammd.net">v0.openstagecontrol.ammd.net</a>
-
-!!! warning "Incomplete documentation"
-    The documentation is currently being updated.
-
 Welcome to Open Stage Control documentation. Along these pages you'll learn how to setup OSC on your system and everything you need to start building your own control interface.
+
+!!! info "Still using v0 ?"
+    The documentation for this version is available [here](https://v0.openstagecontrol.ammd.net).
 
 ## Overview
 
