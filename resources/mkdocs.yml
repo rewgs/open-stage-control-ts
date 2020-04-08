@@ -2,20 +2,22 @@ site_name: Open Stage Control
 repo_name: open-stage-control
 repo_url: https://github.com/jean-emmanuel/open-stage-control
 edit_uri: tree/master/resources/docs/
-copyright: "Open Stage Control is an <a href='http://ammd.net'>AMMD</a> software licensed under the <a href='https://github.com/jean-emmanuel/open-stage-control/blob/master/LICENSE'>GNU/GPLv3</a> License"
+copyright: "Copyleft © Jean-Emmanuel Doucet @ <a href='http://ammd.net'>AMMD</a> (<a href='https://github.com/jean-emmanuel/open-stage-control/blob/master/LICENSE'>GNU/GPLv3</a>)"
 site_description: "Libre and modular OSC / MIDI controller"
 
 theme:
     name: 'material'
-    custom_dir: 'theme'
+    custom_dir: 'overrides'
     features:
         - tabs
         - instant
     palette:
-        primary: 'Black'
+        primary: 'Indigo'
         accent: 'Indigo'
     logo: 'img/logo.png'
     favicon: 'img/logo_nobadge.png?6'
+    include_search_page: false
+    search_index_only: true
 
 extra_css:
   - 'extra/styles.css'
@@ -80,3 +82,4 @@ markdown_extensions:
     - pymdownx.tasklist:
         custom_checkbox: true
     - pymdownx.tilde
+    - pymdownx.keys

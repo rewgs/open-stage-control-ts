@@ -2,6 +2,10 @@ html {
     overflow-y: scroll;
 }
 
+.md-header, .md-nav__title[for=__drawer] {
+    background-color: rgb(21,26,36)!important
+}
+
 .md-header-nav__title {
     padding-top: 1px;
     padding-left: 0!important
