@@ -70,12 +70,12 @@ The **server** can be configured with many options, either from a terminal or wi
 
     ===  "theme"
 
-        Theme names or paths. See [Themes](../customization/themes).
+        Theme names or paths. See [Themes](../customization/themes.md).
 
 
     ===  "client-options"
 
-        Default [client options](../client-options).
+        Default [client options](../client-options.md).
 
 
     ===  "disable-vsync"
