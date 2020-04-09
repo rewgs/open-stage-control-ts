@@ -1,4 +1,4 @@
-# Download latest release
+# Download the latest release
 
 !!! info "Open Stage Control v1 is currently in alpha"
     [Give it a try](https://github.com/jean-emmanuel/open-stage-control/releases/tag/v1.0.0-alpha3) and send your feedback on the [forum](https://openstagecontrol.discourse.group/t/open-stage-control-v1-0-0-alpha/472) !
