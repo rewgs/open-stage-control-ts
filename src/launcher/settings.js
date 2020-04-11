@@ -54,6 +54,7 @@ class Settings {
         }).then((file)=>{
             if (file.canceled || !file.filePath) return
             this.configPath = file.filePath
+            if (this.configPath.split('.').pop() !== 'config') this.configPath += '.config'
             this.save()
         })
 
