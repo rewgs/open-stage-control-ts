@@ -10,16 +10,17 @@ var appAddresses =  Object.values(ifaces)
     .filter(i=>i.family === 'IPv4')
     .map(i=>'http://' + i.address + ':')
 
+
 // This prevents argv parsing to be breaked when the app is packaged (executed without 'electron' prefix)
-if (process.argv[1] && process.argv[1].indexOf('-') == 0) process.argv.unshift('')
+var firstArgIndex = path.basename(process.argv[0]).match(/electron|node/) ? 2 : 1
 
 // on windows, electron stops parsing after the first argument containing a colon
 // https://github.com/electron/electron/pull/13039
 // windows cli users need to add a double dash (--) before their options to avoid that
 // it must be stripped to let yargs work normally
-if (process.argv[2] == '--') process.argv.splice(2, 1)
+if (process.argv[firstArgIndex] === '--') process.argv.splice(firstArgIndex, 1)
 
-var argv = yargs
+var argv = yargs(process.argv.slice(firstArgIndex))
     .parserConfiguration({'boolean-negation': false})
     .help('help').usage('\nUsage:\n  $0 [options]').alias('h', 'help')
     .options(options)
