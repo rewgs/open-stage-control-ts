@@ -4,7 +4,7 @@ The **server** can be configured with many options, either from a terminal or wi
 
     ===  "send"
 
-        Defines the default osc/midi targets. These will be added to the widget's individual targets. Must be formatted as follows:
+        Defines the default osc/midi targets. These will be added to the widget's individual targets. Targets must be separated by a space and formatted as follows:
 
         - `ip_address:port`
         - `host_name:port`
@@ -31,17 +31,17 @@ The **server** can be configured with many options, either from a terminal or wi
 
     ===  "osc-port"
 
-        OSC (udp) input port (default: `port`).
+        OSC (UDP) input port (default: `port`).
 
 
     ===  "tcp-port"
 
-        OSC (tcp) input port/
+        OSC (TCP) input port.
 
 
     ===  "tcp-targets"
 
-        TCP servers to connect to. When sending osc messages, if the target matches one of these, TCP protocol will be used instead of UDP. Must be formatted as:
+        TCP servers to connect to. When sending osc messages, if the target matches one of these, TCP protocol will be used instead of UDP.  Targets must be separated by a space and formatted as follows:
 
         - `ip_address:port`
         - `host_name:port`
@@ -49,7 +49,7 @@ The **server** can be configured with many options, either from a terminal or wi
 
     ===  "midi"
 
-        [MIDI configuration](../midi/midi-configuration.md).
+        MIDI options separated by spaces, MIDI support must be enabled, see [MIDI configuration](../midi/midi-configuration.md).
 
 
     ===  "debug"
@@ -75,7 +75,7 @@ The **server** can be configured with many options, either from a terminal or wi
 
     ===  "client-options"
 
-        Default [client options](../client-options.md).
+        Default [client options](../client-options.md), separated by spaces.
 
 
     ===  "disable-vsync"
@@ -107,7 +107,7 @@ The **server** can be configured with many options, either from a terminal or wi
 
     ===  "instance-name"
 
-        Used to differenciate multiple instances in a zeroconf network.
+        Server's name on zeroconf/bonjour network. Incremented automatically if not available.
 
 
 !!! abstract "Command-line options"
