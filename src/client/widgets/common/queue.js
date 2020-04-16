@@ -19,11 +19,15 @@ class CanvasQueue extends EventEmitter{
 
         this.queue[widget.hash] = widget
         this.flushed = 0
+        if (!this.running) this.startLoop()
 
-        if (!this.running) {
-            this.running = true
-            requestAnimationFrame(this.bindedLoop)
-        }
+    }
+
+    startLoop() {
+
+        this.running = true
+        this.flushed = 0
+        requestAnimationFrame(this.bindedLoop)
 
     }
 
