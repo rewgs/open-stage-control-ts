@@ -161,7 +161,6 @@ class Editor {
             for (var i in elements) {
                 this.select(elements[i], {multi:true, fromLasso:true})
             }
-            this.select(this.selectedWidgets)
 
         })
 
@@ -426,9 +425,9 @@ class Editor {
 
         }
 
-        if (!options.fromLasso) this.unselect()
+        this.unselect()
 
-        if (this.selectedWidgets.length > 0 && !options.fromLasso) {
+        if (this.selectedWidgets.length > 0) {
 
             this.inspector.inspect(this.selectedWidgets)
             this.createSelectionBlock()
