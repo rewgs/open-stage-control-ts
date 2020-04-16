@@ -53,6 +53,7 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
         if (!this.looping) {
             this.lastUpdate = Date.now()
             canvasQueue.on('frame', this.bindedLoop)
+            if (!canvasQueue.running) canvasQueue.startLoop()
             this.looping = true
             this.ticks = 0
         }
