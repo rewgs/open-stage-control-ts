@@ -52,7 +52,7 @@ class ScriptVm extends Vm {
 
             if (id === options.id) options.sync = false // loop stop
 
-            if (id === "self") {
+            if (id === 'self') {
                 var widget = this.getWidget()
                 if (widget.builtIn) widget = widget.parent
                 return widget.setValue(value, options)
