@@ -124,9 +124,7 @@ class Widget extends EventEmitter {
                 'This defines the targets of the widget\'s OSC messages',
                 '- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:port"]`',
                 '- If midi is enabled, targets can be `midi:device_name`',
-                '- The special item `"self"` can be used to refer to the emitting client directly.',
                 '- If no target is set, messages can still be sent if the server has default targets',
-                '- The server\'s default targets can be bypassed by setting one of the items to `null`'
             ]},
             ignoreDefaults: {type: 'boolean', value: false, help: 'Set to `true` to ignore the server\'s default targets'},
             bypass: {type: 'boolean', value: false, help: 'Set to `true` to prevent the widget from sending any osc message'}
@@ -286,8 +284,10 @@ class Widget extends EventEmitter {
 
         var data = {
             h: this.hash,
-            v: this.getValue(true)
+            v: this.getValue(true),
         }
+
+        if (this.getProp('ignoreDefaults')) data.i = 1
 
         if (overrides) {
             for (var k in overrides) {
