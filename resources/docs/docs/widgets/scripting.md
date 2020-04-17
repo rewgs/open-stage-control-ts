@@ -32,14 +32,17 @@ Besides the variables available in the [javascript property syntax ](./advanced-
 ----
 
 #### `get`: `function(id)`
+- `id`: widget `id` as a string.
 
-Returns the value of the first widget whose id is `"id"`.
+Returns the value of the first matching widget.
 
 ----
 
 #### `set`: `function(id, value)`
+- `id`: widget `id` as a string. Can be `"self"` to target the host widget directly.
+- `value`: new value for the widget.
 
-Sets the value of the first widget whose id is `"id"`.
+Sets the value of the first matching widget.
 If the event that triggered the script's execution was initiated by a user interaction, this will make the widget send its value as well.
 
 ----
