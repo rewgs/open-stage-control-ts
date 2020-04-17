@@ -116,14 +116,20 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
         var points = [],
             padding = this.cssVars.padding + PXSCALE,
             decimals = this.getProp('smooth') ? 1 : 0,
-            x, y, i
+            length = this.value.length,
+            x, y, i, previousValue
 
-        for (i in this.value) {
+        for (i = 0; i < length; i++) {
 
             if (this.value[i].length) {
                 points.push(mapToScale(this.value[i][0], [this.rangeX.min, this.rangeX.max], [padding, this.width - padding], decimals, this.logScaleX, true))
                 points.push(mapToScale(this.value[i][1], [this.rangeY.min, this.rangeY.max], [this.height - 2 * PXSCALE - padding, 2 * PXSCALE + padding], decimals, this.logScaleY, true))
             } else {
+
+                if (i < length - 2 && this.value[i] === previousValue && this.value[i+1] === previousValue) {
+                    continue
+                }
+
                 let nx = mapToScale(i, [0, this.value.length - 1], [padding, this.width - padding], decimals, this.logScaleX, true),
                     ny = mapToScale(this.value[i], [this.rangeY.min, this.rangeY.max], [this.height - 2 * PXSCALE - padding, 2 * PXSCALE + padding], decimals, this.logScaleY, true)
                 if (x !== nx || y !== ny) {
@@ -132,6 +138,9 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
                     x = nx
                     y = ny
                 }
+
+                previousValue = this.value[i]
+
             }
 
         }
