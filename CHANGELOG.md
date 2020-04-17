@@ -36,6 +36,8 @@
 
 
 - widget changes
+  - all: removed support for `null` and `"self"` targets
+  - all: added `ignoreDefaults` property (allows ignoring the server's default targets)
   - all: `precision` property to `decimals`, don't set osc integer typetag when 0
   - all: added `typeTags` property
   - all: multiple style properties to control visibility, colors, alphas and padding
