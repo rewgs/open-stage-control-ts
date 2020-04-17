@@ -52,6 +52,12 @@ class ScriptVm extends Vm {
 
             if (id === options.id) options.sync = false // loop stop
 
+            if (id === "self") {
+                var widget = this.getWidget()
+                if (widget.builtIn) widget = widget.parent
+                return widget.setValue(value, options)
+            }
+
             var widgets = widgetManager.getWidgetById(id)
 
             for (var i = widgets.length - 1; i >= 0; i--) {
@@ -82,7 +88,7 @@ class ScriptVm extends Vm {
             if (target) overrides.target = Array.isArray(target) ? target : [target]
 
             var widget = this.getWidget()
-            if (widget.buildIn) widget = widget.parent
+            if (widget.builtIn) widget = widget.parent
             widget.sendValue(overrides)
 
         }
