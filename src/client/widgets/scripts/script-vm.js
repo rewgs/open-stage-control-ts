@@ -42,6 +42,17 @@ class ScriptVm extends Vm {
 
     }
 
+    resolveId(id) {
+
+        var widget = this.getWidget()
+        if (widget.builtIn) widget = widget.parent
+
+        if (id === 'this') return [widget]
+        else if (id === 'parent' && widget.parent !== widgetManager) return [widget.parent]
+        else return widgetManager.getWidgetById(id)
+
+    }
+
     registerGlobals() {
 
         super.registerGlobals()
@@ -50,15 +61,10 @@ class ScriptVm extends Vm {
 
             var options = this.getValueOptions()
 
-            if (id === options.id) options.sync = false // loop stop
+            // if (id === options.id) options.sync = false // loop stop
+            // if (this.getWidget() === options.widget) options.sync = false // loop stop
 
-            if (id === 'self') {
-                var widget = this.getWidget()
-                if (widget.builtIn) widget = widget.parent
-                return widget.setValue(value, options)
-            }
-
-            var widgets = widgetManager.getWidgetById(id)
+            var widgets = this.resolveId(id)
 
             for (var i = widgets.length - 1; i >= 0; i--) {
 
@@ -89,13 +95,14 @@ class ScriptVm extends Vm {
 
             var widget = this.getWidget()
             if (widget.builtIn) widget = widget.parent
+
             widget.sendValue(overrides)
 
         }
 
         this.sandbox.contentWindow.get = (id)=>{
 
-            var widgets = widgetManager.getWidgetById(id)
+            var widgets = this.resolveId(id)
 
             for (var i = widgets.length - 1; i >= 0; i--) {
 
@@ -112,7 +119,7 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.getProp = (id, prop)=>{
 
-            var widgets = widgetManager.getWidgetById(id)
+            var widgets = this.resolveId(id)
 
             for (var i = widgets.length - 1; i >= 0; i--) {
 
@@ -148,7 +155,7 @@ class ScriptVm extends Vm {
 
                 filter = Array.isArray(filter) ? filter : [filter]
 
-                var containers = this.filter.map(x=>widgetManager.getWidgetById(x)).reduce((a,b)=>a.concat(b), [])
+                var containers = this.filter.map(x=>this.resolveId(id)).reduce((a,b)=>a.concat(b), [])
 
                 if (!containers.length) return
                 filter = (widget)=>{
