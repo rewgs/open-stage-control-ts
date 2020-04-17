@@ -39,7 +39,7 @@ Returns the value of the first matching widget.
 ----
 
 #### `set`: `function(id, value)`
-- `id`: widget `id` as a string. Can be `"self"` to target the host widget directly.
+- `id`: widget `id` as a string. Can be `"self"` to target the host widget, or `"parent"` to target the parent widget.
 - `value`: new value for the widget.
 
 Sets the value of the first matching widget.
@@ -57,8 +57,10 @@ If the event that triggered the script's execution was not initiated by a user i
 ----
 
 #### `getProp`: `function(id, name)`
+- `id`: widget `id` as a string. Can be `"self"` to target the host widget, or `"parent"` to target the parent widget.
+- `name`: property name.
 
-Returns the property called `"name"` of the first widget whose id is `"id"`.
+Returns the property called `"name"` of the first matching widget.
 
 ----
 
@@ -70,8 +72,9 @@ Returns the property called `"name"` of the first widget whose id is `"id"`.
 ----
 
 #### `stateGet`: `function(id)`
+- `id`: widget `id` as a string, or array of `id` strings. Can be `"self"` to target the host widget, or `"parent"` to target the parent widget.
 
-Returns a state object (`id:value`) for the widget that match `id` and all its children.
+Returns a state object (`id:value`) for matching widget and all their children.
 
 ----
 
