@@ -71,7 +71,7 @@ module.exports = class OscReceiver {
             } else {
                 this.value = value
             }
-            this.parent.updateProps(this.propNames, this.parent)
+            this.parent.updateProps(this.propNames)
         }
 
     }
