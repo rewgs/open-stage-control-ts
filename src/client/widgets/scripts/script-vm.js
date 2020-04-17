@@ -60,6 +60,7 @@ class ScriptVm extends Vm {
         this.sandbox.contentWindow.set = (id, value)=>{
 
             var options = this.getValueOptions()
+            options.fromScript = true
 
             // if (id === options.id) options.sync = false // loop stop
             // if (this.getWidget() === options.widget) options.sync = false // loop stop

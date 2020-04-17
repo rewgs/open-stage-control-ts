@@ -202,7 +202,7 @@ class Slider extends Canvas {
 
         }
 
-        if (!options.dragged || (this.percent <= 100 && this.percent > 0)) this.percent = this.valueToPercent(this.value)
+        if (!options.dragged || options.fromScript) this.percent = this.valueToPercent(this.value)
 
         this.batchDraw()
 
