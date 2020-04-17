@@ -1,4 +1,5 @@
-var osc = require('../../osc')
+var osc = require('../../osc'),
+    {isJSON} = require('../../utils')
 
 module.exports = class OscReceiver {
 
@@ -6,9 +7,13 @@ module.exports = class OscReceiver {
 
         var {address, value, parent, propName, usePreArgs} = options
 
-        try {
-            this.value = JSON.parse(value)
-        } catch (err) {
+        if (typeof value === 'string' && isJSON(value)) {
+            try {
+                this.value = JSON.parseFlex(value)
+            } catch (err) {
+                this.value = value
+            }
+        } else {
             this.value = value
         }
 
@@ -55,12 +60,16 @@ module.exports = class OscReceiver {
             for (var i in preArgs) {
                 if (preArgs[i] !== args[i]) return
             }
-            var val = args.slice(preArgs.length)
-            if (val.length < 2) val = val[0]
-            try {
-                this.value = JSON.parse(val)
-            } catch (err) {
-                this.value = val
+            var value = args.slice(preArgs.length)
+            if (value.length < 2) value = value[0]
+            if (typeof value === 'string' && isJSON(value)) {
+                try {
+                    this.value = JSON.parseFlex(value)
+                } catch (err) {
+                    this.value = value
+                }
+            } else {
+                this.value = value
             }
             this.parent.updateProps(this.propNames, this.parent)
         }
