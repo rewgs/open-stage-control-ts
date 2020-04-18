@@ -20,6 +20,7 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
             _visualizer:'visualizer',
 
             duration: {type: 'number', value: 1, help: 'Defines visualization duration in seconds'},
+            framerate: {type: 'number', value: 30, help: 'Defines visualization framerate'},
             rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
             origin: {type: 'number', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
             logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm\'s base.'},
@@ -33,7 +34,7 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
 
         super(options)
 
-        this.fps = CANVAS_FRAMERATE
+        this.fps = clip(this.getProp('framerate'), [1, CANVAS_FRAMERATE])
         this.length = Math.round(clip(this.fps * this.getProp('duration'), [8, 4096]))
         this.value = new Array(this.length).fill(this.rangeY.min)
         this.cancel = false
