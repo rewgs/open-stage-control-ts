@@ -43,13 +43,20 @@ The inheritance syntax supports 1-level nesting : `@{fader_@{toggle_1}}`
 This syntax allows listening on an osc address to define a property.
 
 - `address`: osc address to listen to; if the leading slash (`/`) is omitted, the address will be prefixed with the widget's `address` property
-- `default` (optional): default value returned before any message is received
+- `default` (optional): default value returned before any message is received. Must be a primitive value, not an object or an array.
 - `usePreArgs` (optional): by default, osc listeners inherit the widget's `preArgs` and (these must be matched for the osc messages to be processed). Set to `false` bypass them.
 
+Options can contain `@{}` blocks.
 
-#### Dynamic address
-
-The `address` can contain `@{}` blocks
+??? example "Array/Object default value"
+    ```js
+    JS{{
+        return OSC{address} || {
+            "key a": 1,
+            "key b", 2
+        }
+    }}
+    ```
 
 
 ## Javascript: `JS{{ <code> }}`
