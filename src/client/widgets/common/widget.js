@@ -587,31 +587,33 @@ class Widget extends EventEmitter {
 
             })
 
-            propValue = propValue.replace(/OSC\{([^}]+)\}/g, (m)=>{
-                let [address, value, usePreArgs] = m.substr(4, m.length - 5).split(',').map(x=>x.trim()),
-                    resolvedAddress = address.replace(/VAR_[0-9]+/g, (m)=>{
-                        return typeof variables[m] === 'string' ? variables[m] : JSON.stringify(variables[m])
-                    })
+            propValue = propValue.replace(/OSC\{([^}]+)\}/g, (m, args)=>{
 
-                if (!this.oscReceivers[address]) {
-                    this.oscReceivers[address] = new OscReceiver({
-                        address: resolvedAddress,
+                let [address, value, usePreArgs] = args.split(',')
+                        .map(x=>x.trim())
+                        .map(x=>x.replace(/VAR_[0-9]+/g, (m)=>{
+                            return typeof variables[m] === 'string' ? variables[m] : JSON.stringify(variables[m])
+                        }))
+
+                if (!this.oscReceivers[args]) {
+                    this.oscReceivers[args] = new OscReceiver({
+                        address: address,
                         value: value,
                         parent: this,
                         propName: propName,
                         usePreArgs: usePreArgs === 'false' ? false : true
                     })
-                    if (oscReceiverState[address]) {
-                        this.oscReceivers[address].value = oscReceiverState[address]
-                        delete oscReceiverState[address]
+                    if (oscReceiverState[args]) {
+                        this.oscReceivers[args].value = oscReceiverState[args]
+                        delete oscReceiverState[args]
                     }
                 } else {
-                    this.oscReceivers[address].setAddress(resolvedAddress)
-                    this.oscReceivers[address].addProp(propName)
-                    this.oscReceivers[address].usePreArgs = usePreArgs === 'false' ? false : true
+                    this.oscReceivers[args].setAddress(address)
+                    this.oscReceivers[args].addProp(propName)
+                    this.oscReceivers[args].usePreArgs = usePreArgs === 'false' ? false : true
                 }
 
-                var r = this.oscReceivers[address].value
+                var r = this.oscReceivers[args].value
 
                 var varname = 'VAR_' + varnumber
                 varnumber--
