@@ -319,7 +319,7 @@ module.exports =  {
 
             var targets = []
 
-            if (shortdata.i && settings.read('send') && !shortdata.target) Array.prototype.push.apply(targets, settings.read('send'))
+            if (!shortdata.i && settings.read('send') && !shortdata.target) Array.prototype.push.apply(targets, settings.read('send'))
             if (data.target) Array.prototype.push.apply(targets, data.target)
 
             data.args = data.preArgs ? data.preArgs.concat(value) : [value]
