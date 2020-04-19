@@ -439,6 +439,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
         | <h6 id="visualizer_duration">duration<a class="headerlink" href="#visualizer_duration" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines visualization duration in seconds |
+        | <h6 id="visualizer_framerate">framerate<a class="headerlink" href="#visualizer_framerate" title="Permanent link">#</a></h6> | `number` | <code>30</code> | Defines visualization framerate |
         | <h6 id="visualizer_rangeY">rangeY<a class="headerlink" href="#visualizer_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
         | <h6 id="visualizer_origin">origin<a class="headerlink" href="#visualizer_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
         | <h6 id="visualizer_logScaleY">logScaleY<a class="headerlink" href="#visualizer_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
