@@ -144,9 +144,10 @@ class Modal extends Panel {
 
         this.popup.classList.toggle('show', this.value)
         this.container.classList.toggle('on', this.value)
-        // this.setVisibility()
 
         this.bindEscKey(this.value)
+
+        if (this.init) this.fixParents()
 
         if (this.value) {
             resize.check(this.widget, true)
@@ -155,6 +156,25 @@ class Modal extends Panel {
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
+
+
+    }
+
+    fixParents() {
+
+        var parent = this.parent,
+            scrollFixed = false
+
+        while (parent && parent.props && !parent.getProp('type').match(/modal|tab|root/)) {
+
+            // stacking
+            parent.container.style.zIndex = this.value ? 'initial' : ''
+            parent.container.style.contain = this.value ? 'style size' : ''
+
+            parent = parent.parent
+        }
+
+        this.container.style.contain = this.value ? 'style size' : ''
 
 
     }
