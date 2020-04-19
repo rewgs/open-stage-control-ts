@@ -54,7 +54,8 @@ class Widget extends EventEmitter {
             id: {type: 'string', value: 'auto', help: 'Widgets sharing the same `id` will act as clones and update each other\'s value(s) without sending extra osc messages.' },
             label: {type: 'string|boolean', value: 'auto', help: [
                 'Set to `false` to hide completely',
-                'Insert icons using the prefix ^ followed by the icon\'s name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)'
+                '- Insert icons using the prefix ^ followed by the icon\'s name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)',
+                '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
             ]},
             visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},
             interaction: {type: 'boolean', value: true, help: 'Set to `false` to disable pointer interactions.'},
