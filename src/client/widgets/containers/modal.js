@@ -162,8 +162,7 @@ class Modal extends Panel {
 
     fixParents() {
 
-        var parent = this.parent,
-            scrollFixed = false
+        var parent = this.parent
 
         while (parent && parent.props && !parent.getProp('type').match(/modal|tab|root/)) {
 
