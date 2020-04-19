@@ -248,7 +248,8 @@ osc-panel-inner {
     z-index: 3;
     min-width: 0;
     position: relative;
-
+    contain: strict;
+    
 }
 
 // @keyframes test{
