@@ -126,3 +126,4 @@
   - more detached DOM for lighter nested canvas widgets (ie multixy)
   - unified (kind of) dom html structure for widgets, known css tricks will require adjustments.
   - cache and config files are now stored in a folder named `open-stage-control` (located in the system's default location for config file). The `.open-stage-control` is no longer used.
+  - added support for icons rotate/flip transform suffixes (example: `^cog.spin`, `^play.rotate-horizontal`)
