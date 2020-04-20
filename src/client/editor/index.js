@@ -84,7 +84,7 @@ class Editor {
                 dY = top - e.initTop
             this.moveWidget(dX, dY)
         })
-        this.widgetDragResize.on('resize', (e)=>{
+        this.widgetDragResize.on('drag-resize', (e)=>{
             var width  =  Math.round(e.width / GRIDWIDTH) * GRIDWIDTH,
                 height  =  Math.round(e.height / GRIDWIDTH) * GRIDWIDTH
             var dX = width - e.initWidth,
