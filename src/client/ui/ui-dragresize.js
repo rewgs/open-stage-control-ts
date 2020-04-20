@@ -89,7 +89,7 @@ class UiDragResize extends UiWidget {
             this.container.classList.remove('dragging')
             this.left = Math.max(0, this.left)
             this.top = Math.max(0, this.top)
-            this.trigger(this.dragging.indexOf('left') > -1 ? 'move' : 'resize', this)
+            this.trigger(this.dragging.indexOf('left') > -1 ? 'move' : 'drag-resize', this)
             this.dragging = null
 
         }, {element: this.container})
