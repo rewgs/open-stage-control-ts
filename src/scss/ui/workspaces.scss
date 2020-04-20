@@ -5,9 +5,13 @@ osc-workspace {
     --color-fill: var(--color-widget);
     --color-stroke: var(--color-widget);
 
-    position: static;
-    width: 100%;
-    height: 100%;
+    // optimize layout recalc
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -249,7 +253,7 @@ osc-panel-inner {
     min-width: 0;
     position: relative;
     contain: strict;
-    
+
 }
 
 // @keyframes test{
@@ -321,9 +325,17 @@ osc-panel-content {
     }
     &.hidden {
         display: none;
+        + #osc-container {
+            // optimize layout recalc
+            position: absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+        }
     }
 }
 
 #osc-container {
-    background: var(--color-background)
+    background: var(--color-background);
 }
