@@ -123,7 +123,7 @@ class Modal extends Panel {
 
     isVisible() {
 
-        return this.value && super.isVisible()
+        return this.init && this.value && super.isVisible()
 
     }
 
@@ -149,6 +149,7 @@ class Modal extends Panel {
 
         if (this.init) this.fixParents()
 
+        this.setVisibility()
         if (this.value) {
             resize.check(this.widget, true)
         }
