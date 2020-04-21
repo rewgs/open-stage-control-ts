@@ -1019,7 +1019,7 @@ class Widget extends EventEmitter {
             this.container.style.display = this.getProp('visible') ? '' : 'none'
 
             for (var c of this.children) {
-                c.setVisibility()
+                if (c) c.setVisibility()
             }
 
         }
