@@ -52,7 +52,7 @@
 
         --widget-spacing: var(--widget-padding);
 
-        padding: calc(var(--widget-spacing) / 2 + 1rem);
+        padding: calc(var(--widget-spacing) + 1rem);
 
         grid-template:
             "a a b" auto / 1fr;
@@ -68,8 +68,8 @@
     .widget {
         height: auto;
         width: auto;
-        margin: calc(var(--widget-spacing) / 2);
-        --widget-padding: 2rem;//calc(var(--widget-spacing) / 2);
+        margin: var(--widget-spacing);
+        --widget-padding: 2rem;
     }
 
     .pad {
