@@ -95,6 +95,14 @@ class Clone extends Container() {
 
         }, {context: this})
 
+        this.on('widget-created', (e)=>{
+
+            if (e.widget !== this) {
+                e.widget.container.classList.add('not-editable')
+            }
+
+        })
+
     }
 
     getCloneTarget() {
