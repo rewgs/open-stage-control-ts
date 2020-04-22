@@ -4,14 +4,15 @@ var {updateWidget} = require('./editor/data-workers'),
     stateManager = require('./managers/state'),
     deepExtend = require('deep-extend'),
     notifications = require('./ui/notifications')
-    
+
 var callbacks = {
     '/EDIT': function(args) {
 
         if (READ_ONLY) return
 
-        var [id, json] = args,
+        var [id, json, opts] = args,
             newdata = typeof json == 'string' ? JSON.parseFlex(json) : json,
+            options = typeof opts == 'string' ? JSON.parseFlex(opts) : {},
             widgets = widgetManager.getWidgetById(id)
 
         if (!widgets.length) return
@@ -33,13 +34,16 @@ var callbacks = {
 
         editor.pushHistory()
 
+        if (options.noWarning) editor.unsavedSession = false
+
     },
     '/EDIT/MERGE': function(args) {
 
         if (READ_ONLY) return
 
-        var [id, json] = args,
+        var [id, json, opts] = args,
             newdata = typeof json == 'string' ? JSON.parseFlex(json) : json,
+            options = typeof opts == 'string' ? JSON.parseFlex(opts) : {},
             widgets = widgetManager.getWidgetById(id)
 
         if (!widgets.length) return
@@ -58,6 +62,8 @@ var callbacks = {
         }
 
         editor.pushHistory()
+
+        if (options.noWarning) editor.unsavedSession = false
 
     },
     '/EDIT/UNDO': function(args) {
