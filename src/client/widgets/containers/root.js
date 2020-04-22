@@ -14,17 +14,23 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
 
         return Widget.defaults({
 
-
-            _panel:'panel',
+            _panel: 'panel',
 
             colorPanel: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
+            variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
+            traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
+
+            _panel_widgets: 'panel: widget container',
+
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:'Defines how children are laid out.'},
             justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
-            verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
-            traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
-            variables: {type: '*', value: '', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
+            innerPadding: {type : 'boolean', value: true, help: 'Set to `false` to make the `padding` property apply only between children and not at the container\'s inner boundaries.'},
+
+            _panel_tabs: 'panel: tab container',
+
+            verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
 
         }, [
             'visible', 'label',

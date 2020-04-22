@@ -18,20 +18,24 @@ class Modal extends Panel {
 
         return Widget.defaults({
 
-            _modal:'modal',
+            _modal: 'modal',
 
             doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the modal require a double tap to open instead of a single tap'},
+            variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
+
+            _modalWidgets: 'modal: popup',
+
             popupLabel: {type: 'string', value: '', help: 'Alternative label for the modal popup'},
             popupWidth: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
             popupHeight: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
             popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
             popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
+
             colorPanel: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help: 'Defines how children are laid out.'},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
-            variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
         }, [], {
 

@@ -24,12 +24,12 @@
 
 
     > inner {
-        --widget-spacing: var(--widget-padding);
         flex: 1;
         position: relative;
         overflow: auto;
-        margin: calc(var(--widget-spacing) / 2) calc(1rem + var(--widget-spacing) / 2) calc(1rem + var(--widget-spacing) / 2);
     }
+
+
 
     &.no-scroll > inner {
         overflow: hidden;
@@ -37,8 +37,21 @@
 
     &.contains-widgets {
 
+        > inner {
+            --widget-spacing: calc(var(--widget-padding) / 2);
+            margin: var(--widget-spacing)
+                    calc(1rem + var(--widget-spacing))
+                    calc(1rem + var(--widget-spacing));
+        }
+
+        &.no-inner-padding > inner {
+            margin: calc(-1rem + var(--widget-spacing) * -1)
+                    calc(var(--widget-spacing) * -1)
+                    calc(var(--widget-spacing) * -1);
+        }
+
         > inner > .widget {
-            padding: calc(var(--widget-spacing) / 2);
+            padding: var(--widget-spacing);
         }
 
         &.layout-default > inner {
@@ -156,7 +169,7 @@
 
     @include pseudo-stroke($z: 1);
     &:before {
-        margin: calc(var(--widget-spacing) / 2);
+        margin: var(--widget-spacing);
     }
 
     > label {
@@ -201,7 +214,7 @@
     bottom:0;
 
     > inner {
-        margin: calc(var(--widget-spacing) / 2);
+        margin: var(--widget-spacing);
 
         // optimize layout recalc
         position: absolute;
@@ -384,7 +397,7 @@
         left:0;
         right:0;
         bottom:0;
-        margin: calc(var(--widget-spacing) / 2);
+        margin: var(--widget-spacing);
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -426,7 +439,7 @@
             background: none!important;
             color: var(--color-stroke);
             opacity: var(--alpha-stroke);
-            margin: calc(var(--widget-spacing) / 2);
+            margin: var(--widget-spacing);
         }
 
     }
@@ -470,7 +483,9 @@
                 }
 
                 > inner {
-                    margin: calc(var(--widget-spacing) / 2) calc(var(--widget-spacing) / 2) calc(var(--widget-spacing) / 2);
+                    margin: var(--widget-spacing)
+                            var(--widget-spacing)
+                            var(--widget-spacing);
                 }
             }
         }
