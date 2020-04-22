@@ -470,13 +470,19 @@
     > inner {
         display: none;
     }
+
+    &.no-inner-padding > .popup > .popup-wrapper > .popup-content > inner {
+        margin: calc(var(--widget-spacing) * -1);
+    }
+
+
     > .popup {
         padding:0;
 
         > .popup-wrapper {
             width: var(--width, 100%);
             height: var(--height, 100%);
-            .popup-content {
+            > .popup-content {
                 // contain:unset; // == no restrain
                 &:before {
                     content: none;
