@@ -14,7 +14,7 @@
         | --- | --- | --- | --- |
         | <h6 id="type">type<a class="headerlink" href="#type" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> |  |
         | <h6 id="id">id<a class="headerlink" href="#id" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widgets sharing the same `id` will act as clones and update each other's value(s) without sending extra osc messages. |
-        | <h6 id="label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/><br/>Insert icons using the prefix ^ followed by the icon's name : ^play, ^pause, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free) |
+        | <h6 id="label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/>- Insert icons using the prefix ^ followed by the icon's name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)<br/>- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal` |
         | <h6 id="visible">visible<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visible" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the widget. |
         | <h6 id="interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#interaction" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable pointer interactions. |
 
@@ -165,19 +165,30 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
         | <h6 id="panel_colorPanel">colorPanel<a class="headerlink" href="#panel_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
+        | <h6 id="panel_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+        | <h6 id="panel_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+
+    === "panel: widget container"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
         | <h6 id="panel_layout">layout<a class="headerlink" href="#panel_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Choices: `default`, `vertical`, `horizontal`, `grid` |
         | <h6 id="panel_justify">justify<a class="headerlink" href="#panel_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Choices: `start`, `end`, `center`, `space-around`, `space-between` |
         | <h6 id="panel_gridTemplate">gridTemplate<a class="headerlink" href="#panel_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-        | <h6 id="panel_verticalTabs">verticalTabs<a class="headerlink" href="#panel_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
-        | <h6 id="panel_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
         | <h6 id="panel_scroll">scroll<a class="headerlink" href="#panel_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
-        | <h6 id="panel_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+        | <h6 id="panel_innerPadding">innerPadding<a class="headerlink" href="#panel_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
+
+    === "panel: tab container"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+        | <h6 id="panel_verticalTabs">verticalTabs<a class="headerlink" href="#panel_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
 
     === "value"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-        | <h6 id="panel_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently widgeted tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+        | <h6 id="panel_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently selected tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
 
     === "children"
 
@@ -194,6 +205,12 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
         | <h6 id="modal_doubleTap">doubleTap<a class="headerlink" href="#modal_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the modal require a double tap to open instead of a single tap |
+        | <h6 id="modal_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+
+    === "modal: popup"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
         | <h6 id="modal_popupLabel">popupLabel<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_popupLabel" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Alternative label for the modal popup |
         | <h6 id="modal_popupWidth">popupWidth<a class="headerlink" href="#modal_popupWidth" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"80%"</code> | Modal popup's size |
         | <h6 id="modal_popupHeight">popupHeight<a class="headerlink" href="#modal_popupHeight" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"80%"</code> | Modal popup's size |
@@ -204,7 +221,7 @@
         | <h6 id="modal_gridTemplate">gridTemplate<a class="headerlink" href="#modal_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
         | <h6 id="modal_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
         | <h6 id="modal_scroll">scroll<a class="headerlink" href="#modal_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
-        | <h6 id="modal_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+        | <h6 id="modal_innerPadding">innerPadding<a class="headerlink" href="#modal_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
 
     === "value"
 
@@ -236,18 +253,24 @@
 ??? api "<div id="matrix">matrix<a class="headerlink" href="#matrix" title="Permanent link">#</a></div>"
     Generic matrix for creating rows/columns of widgets.
 
-    === "matrix"
+    === "matrix: widgets"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
         | <h6 id="matrix_widgetType">widgetType<a class="headerlink" href="#matrix_widgetType" title="Permanent link">#</a></h6> | `string` | <code>"button"</code> | Defines the type of the widgets in the matrix |
+        | <h6 id="matrix_quantity">quantity<a class="headerlink" href="#matrix_quantity" title="Permanent link">#</a></h6> | `number` | <code>4</code> | Defines the number of widgets in the matrix |
+        | <h6 id="matrix_start">start<a class="headerlink" href="#matrix_start" title="Permanent link">#</a></h6> | `integer` | <code>0</code> | First widget's index |
+        | <h6 id="matrix_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>Formulas in this field are resolved with an extra variable representing each widget's index: `$`<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |
+
+    === "matrix: layout"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
         | <h6 id="matrix_colorPanel">colorPanel<a class="headerlink" href="#matrix_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
         | <h6 id="matrix_layout">layout<a class="headerlink" href="#matrix_layout" title="Permanent link">#</a></h6> | `string` | <code>"horizontal"</code> | Defines how children are laid out.<br/><br/>Choices: `horizontal`, `vertical`, `grid` |
         | <h6 id="matrix_gridTemplate">gridTemplate<a class="headerlink" href="#matrix_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-        | <h6 id="matrix_quantity">quantity<a class="headerlink" href="#matrix_quantity" title="Permanent link">#</a></h6> | `number` | <code>4</code> | Defines the number of widgets in the matrix |
-        | <h6 id="matrix_start">start<a class="headerlink" href="#matrix_start" title="Permanent link">#</a></h6> | `integer` | <code>0</code> | First widget's index |
         | <h6 id="matrix_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |
-        | <h6 id="matrix_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>Formulas in this field are resolved with an extra variable representing each widget's index: `$`<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |
+        | <h6 id="matrix_innerPadding">innerPadding<a class="headerlink" href="#matrix_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
 
 ??? api "<div id="keyboard">keyboard<a class="headerlink" href="#keyboard" title="Permanent link">#</a></div>"
     Piano keyboard.
@@ -293,13 +316,24 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
         | <h6 id="root_colorPanel">colorPanel<a class="headerlink" href="#root_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
+        | <h6 id="root_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+        | <h6 id="root_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+
+    === "panel: widget container"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
         | <h6 id="root_layout">layout<a class="headerlink" href="#root_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Choices: `default`, `vertical`, `horizontal`, `grid` |
         | <h6 id="root_justify">justify<a class="headerlink" href="#root_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Choices: `start`, `end`, `center`, `space-around`, `space-between` |
         | <h6 id="root_gridTemplate">gridTemplate<a class="headerlink" href="#root_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-        | <h6 id="root_verticalTabs">verticalTabs<a class="headerlink" href="#root_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
-        | <h6 id="root_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
         | <h6 id="root_scroll">scroll<a class="headerlink" href="#root_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
-        | <h6 id="root_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_variables" title="Permanent link">#</a></h6> | `*` | <code>""</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+        | <h6 id="root_innerPadding">innerPadding<a class="headerlink" href="#root_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
+
+    === "panel: tab container"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+        | <h6 id="root_verticalTabs">verticalTabs<a class="headerlink" href="#root_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
 
     === "value"
 
@@ -317,18 +351,29 @@
 ??? api "<div id="tab">tab<a class="headerlink" href="#tab" title="Permanent link">#</a></div>"
     Tabbed panel widget
 
-    === "tab"
+    === "panel"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
         | <h6 id="tab_colorPanel">colorPanel<a class="headerlink" href="#tab_colorPanel" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Panel background color. Set to "auto" to inherit from parent widget. |
+        | <h6 id="tab_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+        | <h6 id="tab_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+
+    === "panel: widget container"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
         | <h6 id="tab_layout">layout<a class="headerlink" href="#tab_layout" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Defines how children are laid out.<br/><br/>Choices: `default`, `vertical`, `horizontal`, `grid` |
         | <h6 id="tab_justify">justify<a class="headerlink" href="#tab_justify" title="Permanent link">#</a></h6> | `string` | <code>"start"</code> | If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.<br/><br/>Choices: `start`, `end`, `center`, `space-around`, `space-between` |
         | <h6 id="tab_gridTemplate">gridTemplate<a class="headerlink" href="#tab_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
-        | <h6 id="tab_verticalTabs">verticalTabs<a class="headerlink" href="#tab_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
-        | <h6 id="tab_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
         | <h6 id="tab_scroll">scroll<a class="headerlink" href="#tab_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
-        | <h6 id="tab_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+        | <h6 id="tab_innerPadding">innerPadding<a class="headerlink" href="#tab_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
+
+    === "panel: tab container"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+        | <h6 id="tab_verticalTabs">verticalTabs<a class="headerlink" href="#tab_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
 
     === "value"
 

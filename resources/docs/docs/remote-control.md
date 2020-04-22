@@ -5,34 +5,27 @@ All widgets that send osc messages respond to the same messages. Additionnaly, O
 
 ----
 
-#### `/EDIT id options`
+#### `/EDIT id properties options`
 
 
 Apply a set of options to an existing widget by replacing the old ones with the new ones.
 
 
 - `id`: `string`, widget's `id`
-- `options`: `string`, [JSON5](https://github.com/json5/json5) stringified object defining the new properties to merge
+- `properties`: `string`, [JSON5](https://github.com/json5/json5) stringified object defining the new properties to merge
   - example: `{"label":"New Label", "color":"red"}`
+- `options` (optional): `string`, [JSON5](https://github.com/json5/json5) stringified object defining extra option flags:
+    - `noWarning`: set to `true` to prevent further warning when exiting.
 
-!!! info ""
-    Editing a widget can be cpu expensive, hence updating the UI continuously is not a good idea
+!!! danger "Warning"
+    Editing widgets is cpu expensive; for small and recurrent changes, consider using [osc listeners](./widgets/advanced-syntaxes.md) instead.
 
 
 ----
 
-#### `/EDIT/MERGE id options`
+#### `/EDIT/MERGE id properties options`
 
 Apply a set of options to an existing widget by merging them to the widget's options.  
-
-
-- `id`: `string`, widget's `id`
-- `options`: `string`, [JSON5](https://github.com/json5/json5) stringified object defining the new properties to merge
-  - example: `{"label":"New Label", "color":"red"}`
-
-!!! info ""
-    Editing a widget can be cpu expensive, hence updating the UI continuously is not a good idea
-
 
 ----
 
