@@ -8,7 +8,7 @@ The common pattern for this is using the [browserify](http://browserify.org/) li
 module.exports = 42
 ```
 
-**2**. retreive it in your main module file (`main.js`):
+**2**. retrieve it in your main module file (`main.js`):
 
 ```javascript
 var num = require('./number.js')
