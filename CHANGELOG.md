@@ -54,6 +54,7 @@
   - fader: removed `meter`
   - fader: added `gradient`
   - fader: added `round` design style
+  - fader: support setting dash size and gap size in `dashed` property
   - switch: added `layout` (including grid)
   - switch: added `click` mode
   - plot/eq: removed `smooth`
