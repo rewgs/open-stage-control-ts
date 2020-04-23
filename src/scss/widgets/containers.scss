@@ -39,15 +39,11 @@
 
         > inner {
             --widget-spacing: calc(var(--widget-padding) / 2);
-            margin: var(--widget-spacing)
-                    calc(1rem + var(--widget-spacing))
-                    calc(1rem + var(--widget-spacing));
+            margin: var(--widget-spacing);
         }
 
         &.no-inner-padding > inner {
-            margin: calc(-1rem + var(--widget-spacing) * -1)
-                    calc(var(--widget-spacing) * -1)
-                    calc(var(--widget-spacing) * -1);
+            margin: calc(var(--widget-spacing) * -1);
         }
 
         > inner > .widget {
@@ -155,10 +151,6 @@
         display:none
     }
 
-    > label {
-        display: none;
-    }
-
 }
 
 .panel-container {
@@ -170,21 +162,6 @@
     @include pseudo-stroke($z: 1);
     &:before {
         margin: var(--widget-spacing);
-    }
-
-    > label {
-
-        position: relative;
-        // background-color: var(--color-background);
-        @include pseudo-stroke($z: 10);
-        &:before {
-            border-width: 0 0 1rem 0;
-            margin: 0 1rem;
-        }
-    }
-
-    &.contains-widgets.no-label > inner {
-        border-top: 1rem solid var(--color-background);
     }
 
     &.contains-tabs > inner > .navigation {
@@ -352,11 +329,6 @@
         content: none
     }
 
-
-    > label {
-        display: none;
-    }
-
     > .clone {
 
         --widget-spacing: 0;
@@ -410,7 +382,12 @@
 
     > label {
 
-        flex: 1;
+        position: absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+
         max-height: initial;
         text-align: center;
         pointer-events:none;
@@ -489,9 +466,7 @@
                 }
 
                 > inner {
-                    margin: var(--widget-spacing)
-                            var(--widget-spacing)
-                            var(--widget-spacing);
+                    margin: var(--widget-spacing);
                 }
             }
         }
@@ -531,13 +506,6 @@
 .patchbaynode-container {
 
     justify-content: center;
-
-
-    label {
-        flex: 1;
-        pointer-events: none;
-        display: flex;
-    }
 
 }
 .patchbay-container {

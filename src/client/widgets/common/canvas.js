@@ -144,7 +144,7 @@ class Canvas extends Widget {
             case 'alphaStroke':
             case 'alphaFillOff':
             case 'alphaFillOn':
-            case 'colorPanel':
+            case 'colorBg':
                 setTimeout(()=>{
                     this.cacheCanvasStyle()
                     this.batchDraw()

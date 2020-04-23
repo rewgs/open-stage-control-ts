@@ -30,7 +30,6 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
             _matrixLayout: 'matrix: layout',
 
-            colorPanel: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
             layout: {type: 'string', value: 'horizontal', choices: ['horizontal', 'vertical', 'grid'], help: 'Defines how children are laid out.'},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},

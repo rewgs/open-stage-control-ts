@@ -1,7 +1,8 @@
 var Widget = require('../common/widget'),
     doubletab = require('../mixins/double_tap'),
     html = require('nanohtml'),
-    {deepEqual, isJSON} = require('../../utils')
+    {deepEqual, isJSON} = require('../../utils'),
+    {iconify} = require('../../ui/utils')
 
 class Button extends Widget {
 
@@ -18,6 +19,11 @@ class Button extends Widget {
 
             _button: 'button',
 
+            label: {type: 'string|boolean', value: 'auto', help: [
+                'Set to `false` to hide completely',
+                '- Insert icons using the prefix ^ followed by the icon\'s name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)',
+                '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
+            ]},
             on: {type: '*', value: 1, help: [
                 'Set to `null` to send send no argument in the osc message',
             ]},
@@ -125,6 +131,9 @@ class Button extends Widget {
 
         this.value = this.getProp('off')
 
+        this.label = html`<label></label>`
+        this.updateLabel()
+
     }
 
 
@@ -165,6 +174,36 @@ class Button extends Widget {
         }
 
 
+
+    }
+
+    updateLabel() {
+
+        if (this.getProp('label') === false) {
+
+            if (this.widget.contains(this.label)) this.widget.removeChild(this.label)
+
+        } else {
+            this.label.innerHTML = this.getProp('label') == 'auto'?
+                    this.getProp('id'):
+                    iconify(String(this.getProp('label')).replace(/</g, '&lt;'))
+
+            if (!this.widget.contains(this.label)) this.widget.appendChild(this.label)
+        }
+
+    }
+
+    onPropChanged(propName, options, oldPropValue) {
+
+        if (super.onPropChanged(...arguments)) return
+
+        switch (propName) {
+
+            case 'label':
+                this.updateLabel()
+                return
+
+        }
 
     }
 

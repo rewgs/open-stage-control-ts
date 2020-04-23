@@ -20,6 +20,11 @@ class Modal extends Panel {
 
             _modal: 'modal',
 
+            label: {type: 'string|boolean', value: 'auto', help: [
+                'Set to `false` to hide completely',
+                '- Insert icons using the prefix ^ followed by the icon\'s name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)',
+                '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
+            ]},
             doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the modal require a double tap to open instead of a single tap'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
@@ -31,7 +36,6 @@ class Modal extends Panel {
             popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
             popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
 
-            colorPanel: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help: 'Defines how children are laid out.'},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
@@ -120,6 +124,8 @@ class Modal extends Panel {
         this.popupContent.classList.add('layout-' + this.getProp('layout'))
         this.popupContent.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
 
+        this.label = html`<label></label>`
+        this.updateLabel()
 
         this.childrenType = 'widget'
 
@@ -200,6 +206,22 @@ class Modal extends Panel {
         super.onRemove()
     }
 
+    updateLabel() {
+
+        if (this.getProp('label') === false) {
+
+            if (this.container.contains(this.label)) this.container.removeChild(this.label)
+
+        } else {
+            this.label.innerHTML = this.getProp('label') == 'auto'?
+                    this.getProp('id'):
+                    iconify(String(this.getProp('label')).replace(/</g, '&lt;'))
+
+            if (!this.container.contains(this.label)) this.container.appendChild(this.label)
+        }
+
+    }
+
     updatePopupLabel() {
 
         if (!this.popup) return
@@ -216,8 +238,9 @@ class Modal extends Panel {
 
         switch (propName) {
 
-            case 'popupLabel':
             case 'label':
+                this.updateLabel()
+            case 'popupLabel':
                 if (this.value) {
                     this.updatePopupLabel()
                 } else {

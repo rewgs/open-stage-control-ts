@@ -272,7 +272,7 @@ module.exports = class Knob extends Slider {
         //
         //
         //     // center
-        //     this.ctx.fillStyle = this.cssVars.colorPanel
+        //     this.ctx.fillStyle = this.cssVars.colorBg
         //     this.ctx.strokeStyle = this.cssVars.colorStroke
         //     this.ctx.lineWidth = 1 * PXSCALE
         //

@@ -259,7 +259,7 @@ module.exports = class Fader extends Slider {
             if (this.cssVars.alphaStroke) {
 
                 this.ctx.globalAlpha = 1
-                this.ctx.fillStyle = this.cssVars.colorPanel
+                this.ctx.fillStyle = this.cssVars.colorBg
 
                 this.ctx.beginPath()
                 this.ctx.rect(m - 6 * PXSCALE, d - 10 * PXSCALE, 12 * PXSCALE, 20 * PXSCALE)
