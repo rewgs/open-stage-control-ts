@@ -18,7 +18,7 @@ module.exports = class Fader extends Slider {
             design: {type: 'string', value: 'default', choices: ['default', 'round', 'compact'], help: 'Design style'},
             horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
             pips: {type: 'boolean', value: false, help: 'Set to `true` to show range breakpoints (ignored if `design` is `compact`)'},
-            dashed: {type: 'boolean', value: false, help: 'Set to `true` to display a dashed gauge'},
+            dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
             gradient: {type: 'array|object', value: [], help: [
                 'When set, the meter\'s gauge will be filled with a linear color gradient',
                 '- each item must be a CSS color string.',
@@ -63,6 +63,9 @@ module.exports = class Fader extends Slider {
         this.container.classList.toggle('horizontal', this.getProp('horizontal'))
 
         this.gaugeGradient = null
+
+        var dashed = this.getProp('dashed')
+        this.dashed = dashed ? Array.isArray(dashed) ? dashed.map(x=>parseFloat(x)) : [1, 1] : false
 
     }
 
@@ -176,7 +179,7 @@ module.exports = class Fader extends Slider {
             d = Math.round(this.percentToCoord(percent)),
             o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
-            dashed = this.getProp('dashed'),
+            dashed = this.dashed,
             compact = this.getProp('design') === 'compact'
 
         this.clear()
@@ -200,7 +203,7 @@ module.exports = class Fader extends Slider {
         }
 
 
-        if (dashed) this.ctx.setLineDash([PXSCALE, PXSCALE])
+        if (dashed) this.ctx.setLineDash([PXSCALE * dashed[0], PXSCALE * dashed[1]])
 
 
         if (this.cssVars.alphaFillOff) {
