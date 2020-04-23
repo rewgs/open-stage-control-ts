@@ -19,7 +19,6 @@ class Panel extends Container() {
 
             _panel: 'panel',
 
-            colorPanel: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
 
@@ -189,7 +188,7 @@ class Panel extends Container() {
                 <div class="tablink" data-widget="${widget.hash}" style="${style}">
                 </div>
             `
-            label.innerHTML = widget.label.innerHTML
+            label.innerHTML = widget.label
             this.navigation.appendChild(label)
 
         })
@@ -245,7 +244,7 @@ class Panel extends Container() {
             case 'alphaStroke':
             case 'alphaFillOff':
             case 'alphaFillOn':
-            case 'colorPanel':
+            case 'colorBg':
             case 'padding':
                 for (var w of this.children) {
                     if (w) w.onPropChanged(propName)

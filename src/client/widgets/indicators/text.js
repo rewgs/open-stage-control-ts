@@ -32,7 +32,7 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
 
         super({...options, html: html`<inner></inner>`})
 
-        this.text = this.widget.appendChild(html`<div></div>`)
+        this.text = this.widget.appendChild(html`<label></label>`)
 
         if (this.getProp('vertical')) this.text.classList.add('vertical')
         if (this.getProp('align') === 'left') this.text.classList.add('left')

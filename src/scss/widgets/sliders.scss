@@ -3,10 +3,6 @@
 .encoder-container,
 .range-container {
 
-    inner {
-        flex: 1;
-    }
-
     canvas {
         image-rendering: pixelated;
         width: 100%;

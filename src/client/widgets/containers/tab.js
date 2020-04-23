@@ -1,6 +1,8 @@
 var Panel = require('./panel'),
     Widget = require('../common/widget'),
-    resize = require('../../events/resize')
+    resize = require('../../events/resize'),
+    {iconify} = require('../../ui/utils'),
+    html = require('nanohtml')
 
 module.exports = class Tab extends Panel {
 
@@ -17,7 +19,11 @@ module.exports = class Tab extends Panel {
 
             _panel: 'panel',
 
-            colorPanel: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
+            label: {type: 'string|boolean', value: 'auto', help: [
+                'Set to `false` to hide completely',
+                '- Insert icons using the prefix ^ followed by the icon\'s name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)',
+                '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
+            ]},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             // detached: {type: 'boolean', value: true, help: 'Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab opens'},
@@ -61,6 +67,21 @@ module.exports = class Tab extends Panel {
 
         this.detached = false
 
+        this.label = ''
+        this.updateLabel()
+
+    }
+
+    updateLabel() {
+
+        if (this.getProp('label') === false) {
+            this.label = ''
+        } else {
+            this.label = this.getProp('label') == 'auto'?
+                    this.getProp('id'):
+                    iconify(String(this.getProp('label')).replace(/</g, '&lt;'))
+        }
+
     }
 
     hide() {
@@ -92,8 +113,9 @@ module.exports = class Tab extends Panel {
 
         switch (propName) {
 
-            case 'visible':
             case 'label':
+                this.updateLabel()
+            case 'visible':
             case 'colorText':
             case 'colorWidget':
             case 'colorFill':

@@ -1,10 +1,13 @@
-.button-container,
+.button-container {
+    width: 90rem;
+    height: 60rem;
+}
 .menu-container,
 .dropdown-container,
 .input-container,
 .file-container {
     width: 90rem;
-    height: 60rem;
+    height: 30rem;
 }
 
 .button-container {
@@ -22,37 +25,32 @@
         right:0;
         bottom:0;
         margin: var(--widget-spacing);
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        z-index: -1;
+        padding: var(--widget-padding);
 
-        @include pseudo-stroke();
-        @include pseudo-fill();
+
+        @include pseudo-stroke($z: -1);
+        @include pseudo-fill($z: -1);
 
     }
 
-    > label {
-
-        flex: 1;
-        max-height: initial;
-        text-align: center;
-        pointer-events:none;
+    label {
         display: flex;
         justify-content: center;
         align-items: center;
-        color: var(--color-text);
-
-
+        white-space: pre;
+        line-height: 100%;
+        overflow: hidden;
+        text-align: center;
+        word-wrap: break-word;
+        height: 100%;
+        width: 100%;
+        border: 2rem solid transparent;
     }
 
     &.on, &.active {
 
         --alpha-fill:var(--alpha-fill-on);
-
-        label {
-            color: var(--color-text-on)
-        }
+        color: var(--color-text-on);
 
     }
 
