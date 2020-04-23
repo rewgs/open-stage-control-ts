@@ -40,22 +40,14 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
         if (this.getProp('wrap')) this.text.classList.add('wrap')
 
 
-        this.defaultValue = this.getProp('default') || ( this.getProp('label')===false ?
-            this.getProp('id'):
-            this.getProp('label')=='auto'?
-                this.getProp('id'):
-                this.getProp('label') )
-
-        this.value = this.defaultValue
-
-        this.setValue(this.value)
+        this.setValue(this.getProp('default'))
 
     }
 
 
     setValue(v, options={}) {
 
-        this.value = v==null ? this.defaultValue : v
+        this.value = v === '' || v === null ? this.getProp('default') : v
 
         var s = String(this.value)
         if (s.indexOf('^') > -1) {
