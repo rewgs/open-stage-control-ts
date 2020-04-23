@@ -36,6 +36,7 @@
 
 
 - widget changes
+  - all: removed `label` option except for buttons, tabs and modals (one should use `text` widgets if needed)
   - all: removed support for `null` and `"self"` targets
   - all: added `ignoreDefaults` property (allows ignoring the server's default targets)
   - all: `precision` property to `decimals`, don't set osc integer typetag when 0
