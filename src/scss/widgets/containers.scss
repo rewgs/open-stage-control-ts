@@ -24,8 +24,6 @@
 
 
     > inner {
-        flex: 1;
-        position: relative;
         overflow: auto;
     }
 
@@ -143,7 +141,6 @@
     --alpha-fill-on: 0.75;
 
     width: 100%;
-    flex: 1;
     height: 100%;
     background-color: var(--color-background);
 
