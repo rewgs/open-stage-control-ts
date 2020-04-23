@@ -543,6 +543,21 @@
         }
     }
 
+    label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        white-space: pre;
+        line-height: 100%;
+        overflow: hidden;
+        text-align: center;
+        word-wrap: break-word;
+        height: 100%;
+        width: 100%;
+        border: 2rem solid transparent;
+        pointer-events: none;
+    }
+
 }
 
 
@@ -583,6 +598,7 @@
             }
             &:after {
                 background: var(--color-key-on);
+                z-index: 1;
             }
         }
     }
@@ -609,6 +625,7 @@
         inner {
             margin-left: 0!important;
             margin-right: 0!important;
+            margin-bottom: 0!important;
             background: var(--color-black-key);
         }
     }
