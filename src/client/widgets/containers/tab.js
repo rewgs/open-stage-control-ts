@@ -1,8 +1,7 @@
 var Panel = require('./panel'),
     Widget = require('../common/widget'),
     resize = require('../../events/resize'),
-    {iconify} = require('../../ui/utils'),
-    html = require('nanohtml')
+    {iconify} = require('../../ui/utils')
 
 module.exports = class Tab extends Panel {
 

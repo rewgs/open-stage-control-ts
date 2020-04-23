@@ -267,6 +267,7 @@ class Modal extends Panel {
 }
 
 Modal.dynamicProps = Modal.prototype.constructor.dynamicProps.concat(
+    'label',
     'popupLabel'
 )
 
