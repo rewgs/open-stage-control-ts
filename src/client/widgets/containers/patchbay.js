@@ -1,14 +1,26 @@
 var Widget = require('../common/widget'),
     Canvas = require('../common/canvas'),
     Container = require('../common/container'),
+    {iconify} = require('../../ui/utils'),
     parser = require('../../parser'),
     html = require('nanohtml')
 
 class PatchBayNode extends Widget {
 
+
+    static defaults() {
+
+        return super.defaults({
+            label: {type: 'string', value: ''}
+        })
+
+    }
+
     constructor(options) {
 
-        super({...options, html: null})
+        super({...options, html: html`<label></label>`})
+
+        this.widget.innerHTML = iconify(this.getProp('label').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g,'<br/>'))
 
         this.value = []
 
@@ -126,12 +138,12 @@ class PatchBay extends Container(Canvas) {
             let w = parser.parse({
                 data: {
                     type: 'patchbaynode',
-                    label: k,
                     id: this.getProp('id') + '/' + this.inputs[k],
                     address: '@{parent.address}',
                     target: '@{parent.target}',
                     preArgs: this.inputs[k],
                     bypass: '@{parent.bypass}',
+                    label: k
 
                 },
                 parentNode: DOM.get(this.widget, '.inputs')[0],

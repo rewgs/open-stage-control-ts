@@ -174,9 +174,10 @@ module.exports = class Knob extends Slider {
             max = this.percentToAngle(100),
             dashed = this.getProp('dashed'),
             pips = this.getProp('pips'),
-            minRadius = this.minDimension / 6,
-            maxRadius = this.minDimension / 2 - (pips ? this.fontSize * 2 : PXSCALE),
-            gaugeWidth = maxRadius - minRadius,
+            minRadius = this.minDimension / 6 - (pips ? this.fontSize * 0.75 : PXSCALE),
+            maxRadius = this.minDimension / 2 - (pips ? this.fontSize * 2 : PXSCALE)
+
+        var gaugeWidth = maxRadius - minRadius,
             gaugeRadius = maxRadius - gaugeWidth / 2
 
         this.clear()
@@ -217,12 +218,12 @@ module.exports = class Knob extends Slider {
         this.ctx.globalAlpha = this.cssVars.alphaStroke
         this.ctx.strokeStyle = this.cssVars.colorStroke
         this.ctx.lineWidth = PXSCALE
-
-        if (this.minDimension > 40) {
-            this.ctx.beginPath()
-            this.ctx.arc(this.width / 2, this.height / 2, minRadius, 0, 2 * Math.PI)
-            this.ctx.stroke()
-        }
+        //
+        // if (this.minDimension > 40) {
+        //     this.ctx.beginPath()
+        //     this.ctx.arc(this.width / 2, this.height / 2, minRadius, 0, 2 * Math.PI)
+        //     this.ctx.stroke()
+        // }
 
 
         this.ctx.beginPath()
@@ -312,7 +313,7 @@ module.exports = class Knob extends Slider {
 
             for (var pip of this.rangeKeys) {
 
-                let r1 = maxRadius,
+                let r1 = maxRadius + 2 * PXSCALE,
                     r2 = r1 + 4 * PXSCALE,
                     a = 2 * Math.PI - this.percentToAngle(pip)
 
@@ -324,7 +325,7 @@ module.exports = class Knob extends Slider {
 
             }
 
-            var radius = maxRadius + (this.fontSize + 2 * PXSCALE)
+            var radius = maxRadius + (this.fontSize + 4 * PXSCALE)
             this.ctx.fillStyle = this.cssVars.colorText
             this.ctx.globalAlpha = this.cssVars.alphaPipsText
             for (var p in this.pipTexts) {
