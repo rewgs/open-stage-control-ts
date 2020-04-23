@@ -49,6 +49,10 @@ $warning: rgb(209, 154, 47);
         --color-background: --color-ui-background; // scrollbar
     }
 
+    osc-panel-inner {
+        contain: layout style;
+    }
+
 }
 
 osc-settings {
