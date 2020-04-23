@@ -118,7 +118,7 @@ class UiInspector extends UiWidget {
 
         for (let propName in props) {
 
-            if (propName === 'children' || propName === 'tabs' || propName === 'widgets') continue
+            if (propName === '_children' || propName === 'tabs' || propName === 'widgets') continue
 
             let field,
                 shared = true
