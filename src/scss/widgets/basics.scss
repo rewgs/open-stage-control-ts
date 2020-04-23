@@ -503,7 +503,7 @@
 
         &:focus::selection {
             background: var(--color-fill);
-            color: var(--color-background);
+            color: var(--color-text);
         }
 
     }

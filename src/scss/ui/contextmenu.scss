@@ -3,7 +3,7 @@ $line-height: 30rem;
 .context-menu {
 
     --widget-padding: 0rem;
-    --alpha-fill: 0.75;
+    --alpha-fill: 1;
 
     position:fixed;
     z-index: 9999999;
@@ -11,15 +11,17 @@ $line-height: 30rem;
     box-shadow: 0 0 0 0.5rem rgba(0, 0, 0, 0.15) inset;
     text-transform: none;
     color: var(--color-context-menu-text);
+    font-weight: 400;
+    font-size: 12rem;
     line-height: $line-height;
-
+    // border-radius: 2rem;
     .context-menu {
         position: absolute;
         left:100%;
         top:0;
         opacity:0;
         pointer-events: none;
-        margin-left: -0.5rem;
+        margin-left: -1rem;
         &:before {
             content:"";
             position: absolute;

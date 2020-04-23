@@ -21,8 +21,8 @@ $text: white!default;
     --color-grid: rgba(0,0,0, 0.1);
     --color-notification: #{rgba(black, 0.8)};
 
-    --color-context-menu: #{mix($base, white, 95)};
-    --color-context-menu-text: #{transparentize($text, .2)};
+    --color-context-menu: #fafafa;
+    --color-context-menu-text: #333;
 
     --alpha-scrollbar: 0.25;
     --alpha-scrollbar-on: 0.5;
