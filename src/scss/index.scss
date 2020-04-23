@@ -15,7 +15,7 @@ input:focus::selection,
 textarea:focus::selection,
 {
     background:var(--color-widget);
-    color:var(--color-text);
+    color: var(--color-text);
 }
 input {
     cursor: text;
@@ -29,7 +29,7 @@ input {
 }
 
 html, body {
-    
+
     position: absolute;
     top:0;
     left:0;
