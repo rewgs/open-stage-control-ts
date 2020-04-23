@@ -291,6 +291,19 @@ class Clone extends Container() {
                 this.bindTarget(this.getCloneTarget())
                 if (this.cloneTarget) this.createClone()
                 return
+            case 'colorText':
+            case 'colorWidget':
+            case 'colorFill':
+            case 'colorStroke':
+            case 'alphaStroke':
+            case 'alphaFillOff':
+            case 'alphaFillOn':
+            case 'colorBg':
+            case 'padding':
+                for (var w of this.children) {
+                    if (w) w.onPropChanged(propName)
+                }
+                return
 
         }
 
