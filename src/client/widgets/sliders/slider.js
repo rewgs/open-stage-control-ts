@@ -64,7 +64,7 @@ class Slider extends Canvas {
         }
 
 
-        this.widget.addEventListener('mousewheel',this.mousewheelHandleProxy.bind(this))
+        this.widget.addEventListener('wheel',this.mousewheelHandleProxy.bind(this))
 
         touchstate(this, {element: this.widget, multitouch: options.multitouch})
 
@@ -104,13 +104,13 @@ class Slider extends Canvas {
 
     mousewheelHandle(e) {
 
-        if (e.wheelDeltaX) return
+        if (e.deltaX) return
 
         e.preventDefault()
         e.stopPropagation()
 
-        var direction = e.wheelDelta / Math.abs(e.wheelDelta),
-            increment = e.ctrlKey?0.25:1
+        var direction = e.deltaY > 0 ? -1 : 1,
+            increment = e.ctrlKey ? 0.25 : 1
 
         if (this.getProp('steps')) {
             var i = this.steps.indexOf(this.value)
