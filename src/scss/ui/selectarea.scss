@@ -31,14 +31,14 @@
     left:0;
     right:0;
     bottom:0;
-    border:1rem solid var(--color-accent);
 
-    --opa1: rgba(0,0,0, 1);
-    --opa2: rgba(0,0,0, 0.2);
-    --opa3: rgba(0,0,0, 0.8);
-    -webkit-mask: linear-gradient(to right, var(--opa1) 10rem, var(--opa1) 10rem, var(--opa2) 10rem, var(--opa2) calc(100% - 10rem), var(--opa1) calc(100% - 10rem), var(--opa1)),
-                    linear-gradient(to bottom, var(--opa2) 10rem, var(--opa2) 10rem, var(--opa3) 10rem, var(--opa3) calc(100% - 10rem), var(--opa2) calc(100% - 10rem), var(--opa2)) ;
-    -webkit-mask-composite: xor;
+    border-style: solid;
+
+    -webkit-border-image: linear-gradient(to right, var(--color-accent) 10rem, rgba(0, 0, 0, 0) 10rem, rgba(0, 0, 0, 0) calc(100% - 10rem), var(--color-accent) calc(100% - 10rem)) 1 / 1rem;
+    -webkit-mask-image: linear-gradient(to bottom, white 10rem, rgba(0, 0, 0, 0) 10rem, rgba(0, 0, 0, 0) calc(100% - 10rem), white calc(100% - 10rem));
+
+    border-image: linear-gradient(to right, var(--color-accent) 10rem, rgba(0, 0, 0, 0) 10rem, rgba(0, 0, 0, 0) calc(100% - 10rem), var(--color-accent) calc(100% - 10rem)) 1 / 1rem;
+    mask-image: linear-gradient(to bottom, white 10rem, rgba(0, 0, 0, 0) 10rem, rgba(0, 0, 0, 0) calc(100% - 10rem), white calc(100% - 10rem));
 
     pointer-events: none;
     box-shadow: none!important;

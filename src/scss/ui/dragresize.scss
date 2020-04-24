@@ -9,6 +9,17 @@
     top: var(--top);
     left: var(--left);
 
+    &:before {
+        content:"";
+        position: absolute;
+        top:0;left:0;
+        width: calc(var(--width) - 2rem);
+        height: calc(var(--height) - 2rem);
+        border: 1rem solid var(--color-accent);
+        opacity: 0.2;
+        pointer-events: none;
+    }
+
     .helper {
 
         position: absolute;
