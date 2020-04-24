@@ -2,7 +2,7 @@
 
 var mod = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
 
-document.addEventListener('mousewheel', function(event) {
+document.addEventListener('wheel', function(event) {
     if (event.ctrlKey) event.preventDefault()
     if (event[mod]) {
 
