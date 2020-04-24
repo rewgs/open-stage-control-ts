@@ -39,7 +39,7 @@ osc-inspector-field {
         cursor: text;
 
         user-select: initial;
-        
+
         --scrollbar-size: 6rem;
 
         // Chromium scrollbar
@@ -48,7 +48,10 @@ osc-inspector-field {
         }
 
         // Firefox scrollbar (hidden to preserve height)
-        scrollbar-width: none;
+        scrollbar-width: thin;
+        &[rows="1"] {
+            scrollbar-width: none;
+        }
 
 
     }
