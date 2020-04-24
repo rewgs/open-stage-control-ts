@@ -5,6 +5,7 @@
 
 - compatibility
   - dropped support for iOS 9
+  - firefox (75+) support
 
 - UI
   - overhaul design reworked
