@@ -18,7 +18,12 @@ The **client** is the web application made available by the server when it start
 
 The **server** can run on all [platforms supported by Electron](https://www.electronjs.org/docs/tutorial/support#supported-platforms). Systems that can run [Node.js](https://nodejs.org/en/) may also be able to run it in headless mode (see [Running with Node](./running-with-node.md)).
 
-The **client** requires Chromium/Chrome `60` or later to work (Linux, MacOS, Windows, Android, etc). iOS devices must be of version `10.3` or higher.
+The **client** is compatible with the following browsers:
+
+- Firefox: version `75`
+- Chromium / Chrome: version `60`
+
+iOS devices must be of version `10.3` or higher.
 
 
 ## Installation
