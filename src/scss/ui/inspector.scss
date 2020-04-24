@@ -38,12 +38,18 @@ osc-inspector-field {
         background: var(--color-background);
         cursor: text;
 
+        user-select: initial;
+        
         --scrollbar-size: 6rem;
 
+        // Chromium scrollbar
         &::-webkit-scrollbar-thumb:horizontal {
-            // border-top: 4rem solid var(--color-background);
             cursor: normal;
         }
+
+        // Firefox scrollbar (hidden to preserve height)
+        scrollbar-width: none;
+
 
     }
 
