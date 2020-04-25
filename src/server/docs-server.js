@@ -20,7 +20,7 @@ class DocsServer extends EventEmitter {
 
         this.available = true
         if (!fs.existsSync(path.join(this.baseUrl, 'index.html'))) {
-            console.error(`(ERROR, DOCS) Documentation assets not found in the app\'s directory.`)
+            console.error('(ERROR, DOCS) Documentation assets not found in the app\'s directory.')
             this.available = false
         }
 
