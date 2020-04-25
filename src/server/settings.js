@@ -1,15 +1,9 @@
 var path = require('path'),
     fs = require('fs'),
-    ifaces = require('os').networkInterfaces(),
     yargs = require('yargs'),
     infos = require('../package.json'),
-    options = require('./options')
-
-var appAddresses =  Object.values(ifaces)
-    .reduce((a,b)=>a.concat(b), [])
-    .filter(i=>i.family === 'IPv4')
-    .map(i=>'http://' + i.address + ':')
-
+    options = require('./options'),
+    address = require('./address')
 
 // This prevents argv parsing to be breaked when the app is packaged (executed without 'electron' prefix)
 var firstArgIndex = path.basename(process.argv[0]).match(/electron|node/) ? 2 : 1
@@ -162,7 +156,5 @@ module.exports = {
     cli: cli,
     configPath: baseDir,
     infos: infos,
-    appAddresses: ()=>{
-        return appAddresses.map(x=>x + (settings.options.port || 8080))
-    }
+    appAddresses: ()=>address(settings.options.port || 8080)
 }

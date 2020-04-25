@@ -1,9 +1,23 @@
 require('source-map-support').install({handleUncaughtExceptions: false})
 
 var dev = process.argv[0].includes('node_modules'),
-    settings = require('./settings')
+    settings = require('./settings'),
+    docsServer, serverStarted
 
-var serverStarted
+
+function openDocs() {
+
+    if (!docsServer) {
+        var DocsServer = require('./docs-server')
+        docsServer = new DocsServer()
+    }
+
+    docsServer.open()
+
+}
+
+if (settings.read('docs')) return openDocs()
+
 
 function nodeMode() {
 
@@ -106,7 +120,9 @@ if (settings.cli) {
     })
 
     app.on('ready',function(){
+        var doscServer
         global.settings = settings
+        global.openDocs = openDocs
         global.midilist = require('./midi').list
         global.serverProcess = null
         global.clientWindows = []

@@ -10,7 +10,6 @@ var urlparser   = require('url'),
     settings     = require('./settings'),
     theme       = require('./theme').init(),
     zeroconf = require('./zeroconf'),
-    appAddresses = settings.appAddresses(),
     osc = {},
     clients = {},
     httpCheckTimeout
@@ -112,7 +111,7 @@ function httpCheck(ok){
     clearTimeout(httpCheckTimeout)
     httpCheckTimeout = null
     if (ok) {
-        console.log('(INFO) Server started, app available at \n    ' + appAddresses.join('\n    '))
+        console.log('(INFO) Server started, app available at \n    ' + settings.appAddresses().join('\n    '))
     } else {
         console.error('(ERROR, HTTP) Could not setup http server, maybe try a different port ?')
     }
