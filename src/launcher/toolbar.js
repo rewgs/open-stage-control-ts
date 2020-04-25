@@ -4,6 +4,7 @@ var {remote, ipcRenderer} = eval('require(\'electron\')'),
     terminal = require('./terminal'),
     settings = require('./settings'),
     midilist = remote.getGlobal('midilist'),
+    openDocs = remote.getGlobal('openDocs'),
     serverStarted = false,
     serverStart = ()=>{
         if (serverStarted) return
@@ -96,6 +97,12 @@ menu.append(new MenuItem({
 //         app.exit(0)
 //     }
 // }))
+menu.append(new MenuItem({
+    label: 'Documentation',
+    click: ()=>{
+        openDocs()
+    }
+}))
 menu.append(new MenuItem({
     role: 'Quit'
 }))

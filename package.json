@@ -54,6 +54,7 @@
     "node-sass": "4.13.1",
     "nodemon": "2.0.2",
     "nosleep.js": "0.9.0",
+    "open": "^7.0.3",
     "osc": "2.4.0",
     "python-shell": "1.0.8",
     "replacestream": "^4.0.3",

@@ -86,5 +86,6 @@ module.exports = {
     'disable-gpu': {type: 'boolean', describe: 'disable hardware acceleration', launcher: false},
     'inspect': {type: 'boolean', describe: 'enable node/electron inspector', launcher: false},
     'cache-dir': {type: 'string', describe: 'override default cache directory', launcher: false},
-    'config-file': {type: 'string', describe: 'override default config file (defaults to cache-dir/config.json)', launcher: false}
+    'config-file': {type: 'string', describe: 'override default config file (defaults to cache-dir/config.json)', launcher: false},
+    'docs': {type: 'boolean', describe: 'serve documentation website locally and open it with the system\'s default browser', launcher: false}
 }
