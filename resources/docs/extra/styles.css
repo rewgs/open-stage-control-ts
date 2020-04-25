@@ -16,6 +16,10 @@ html {
     padding-left: 0!important
 }
 
+.md-source__facts {
+    display: none;
+}
+
 td:first-child {
     white-space: pre!important;
     vertical-align: top;

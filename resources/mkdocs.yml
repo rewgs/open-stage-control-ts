@@ -4,6 +4,7 @@ repo_url: https://github.com/jean-emmanuel/open-stage-control
 edit_uri: tree/master/resources/docs/
 copyright: "Copyleft © Jean-Emmanuel Doucet @ <a href='http://ammd.net'>AMMD</a> (<a href='https://github.com/jean-emmanuel/open-stage-control/blob/master/LICENSE'>GNU/GPLv3</a>)"
 site_description: "Libre and modular OSC / MIDI controller"
+site_dir: '../app/docs/'
 
 theme:
     name: 'material'
