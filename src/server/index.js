@@ -120,7 +120,6 @@ if (settings.cli) {
     })
 
     app.on('ready',function(){
-        var doscServer
         global.settings = settings
         global.openDocs = openDocs
         global.midilist = require('./midi').list
