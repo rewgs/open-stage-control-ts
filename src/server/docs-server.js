@@ -12,15 +12,14 @@ class DocsServer extends EventEmitter {
 
         super(...arguments)
 
-
-        this.baseUrl = path.resolve(__dirname + '/../../resources/site')
+        this.baseUrl = path.resolve(__dirname + '/../docs')
         this.home = '/docs/getting-started/introduction/'
         this.server = null
         this.started = false
         this.port = 0
 
         this.available = true
-        if (!fs.existsSync(this.baseUrl)) {
+        if (!fs.existsSync(path.join(this.baseUrl, 'index.html'))) {
             console.error(`(ERROR, DOCS) Documentation assets not found in the app\'s directory.`)
             this.available = false
         }
@@ -68,9 +67,12 @@ class DocsServer extends EventEmitter {
 
         if (url[url.length-1] === '/') url += 'index.html'
 
-        var fpath = path.join(this.baseUrl, url)
+        if (url.indexOf('/fonts') === 0) url = '../assets' + url
 
-        if (!fs.existsSync(fpath)) {
+        url = path.join(this.baseUrl, url)
+
+
+        if (!fs.existsSync(url)) {
             if (url.indexOf('index.html') !== -1) {
                 return send(req, path.join(this.baseUrl, '/404.html')).pipe(res)
             } else {
@@ -78,7 +80,7 @@ class DocsServer extends EventEmitter {
                 res.end()
             }
         } else {
-            return send(req, fpath).pipe(res)
+            return send(req, url).pipe(res)
         }
 
     }

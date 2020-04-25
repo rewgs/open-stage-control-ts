@@ -37,6 +37,17 @@ npm start [ -- options]
 !!! info ""
     A double hyphen (`--`) is used here to tell npm that the options are to be passed to the app.
 
+## Build documentation
+
+In order to make the local documentation available through the server's `--docs` option and the launcher's `Documentation` menu action, an extra step is needed.
+
+
+```bash
+# install docs website theme
+python3 -m pip install mkdocs-material
+# build docs website
+npm run build-docs
+```
 
 ## Package from sources
 

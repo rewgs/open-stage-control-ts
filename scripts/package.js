@@ -18,7 +18,7 @@ packager({
     overwrite: true,
     out: path.resolve(__dirname + '/../dist'),
     icon: path.resolve(__dirname + '/../resources/images/logo'),
-    ignore: /node_modules\/(serialport|uws)/,
+    ignore: /(node_modules\/(serialport|uws)|docs\/fonts)/,
     afterExtract: [safeFFMPEG],
     prune: false
 }).then((appPaths)=>{
