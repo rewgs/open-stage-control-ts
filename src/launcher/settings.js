@@ -81,7 +81,7 @@ class Settings {
     write(tmp) {
 
         for (var i in this.options) {
-            if (this.options[i] === '') {
+            if (this.options[i] === '' || !this.names.includes(i)) {
                 delete this.options[i]
             }
         }

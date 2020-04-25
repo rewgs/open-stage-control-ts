@@ -124,6 +124,9 @@ if (configPathExists) {
         }
     } else {
         for (let k in config) {
+            if (k === 'options') {
+                Object.assign(config.options, settings.options)
+            }
             settings[k] = config[k]
         }
     }
