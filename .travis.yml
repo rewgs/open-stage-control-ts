@@ -6,7 +6,8 @@ node_js:
 before_install:
   - sudo dpkg --add-architecture i386
   - sudo apt-get update -qq
-  - sudo apt-get install -qq wine fakeroot xvfb
+  - sudo apt-get install -qq wine fakeroot xvfb python3-pip
+  - python3 -m pip install mkdocs-material
 install: npm install
 before_deploy:
 deploy:
@@ -20,6 +21,7 @@ deploy:
     tags: true
 before_deploy:
   - export VERSION=$(sed -nE 's/^\s*"version":\ "(.*?)",$/\1/p' package.json)
+  - npm run build-docs
   - npm run package -- --all
   - npm run package-node
   - npm run deb32
