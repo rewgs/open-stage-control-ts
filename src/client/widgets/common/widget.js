@@ -183,9 +183,16 @@ class Widget extends EventEmitter {
         this.createPropsCache()
 
         if (this.getProp('id') == 'root' && this.parent !== widgetManager) {
+            this.props.id = '_root'
             this.cachedProps.id = '_root'
-            this.errors.id = 'There can only be one root'
         }
+
+        if (this.getProp('type') == 'root' && this.parent !== widgetManager) {
+            this.props.type = 'panel'
+            this.cachedProps.type = 'panel'
+        }
+
+
 
         // cache decimals
         if (this.props.decimals !== undefined) {
