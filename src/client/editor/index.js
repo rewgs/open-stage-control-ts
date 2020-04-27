@@ -159,7 +159,7 @@ class Editor {
             elements = elements.map(e => widgetManager.getWidgetByElement(e, ':not(.not-editable)')).filter(e => e)
 
             for (var i in elements) {
-                this.select(elements[i], {multi:true, fromLasso:true})
+                this.select(elements[i], {multi:true, fromLasso:true, lassoEnd: i == elements.length - 1})
             }
 
         })
@@ -422,6 +422,8 @@ class Editor {
             this.selectedWidgets = [widget]
 
         }
+
+        if (options.fromLasso && !options.lassoEnd) return
 
         this.unselect()
 
