@@ -16,9 +16,9 @@ function pointerDownHandler(event) {
 
     event = normalizeDragEvent(event)
 
-    targets[event.pointerId] = event.target
-
     if (event.traversingStack) {
+
+        event.target = event.target.closest('.drag-event')
 
         var widget = event.target.closest('.drag-event')._drag_widget,
             local = event.traversingStack.stack[event.traversingStack.stack.length - 1]
@@ -33,6 +33,7 @@ function pointerDownHandler(event) {
 
     }
 
+    targets[event.pointerId] = event.target
     previousPointers[event.pointerId] = event
 
     triggerWidgetEvent(targets[event.pointerId], 'draginit', event)
