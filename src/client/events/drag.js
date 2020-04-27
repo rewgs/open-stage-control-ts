@@ -162,16 +162,14 @@ function touchMultiWrapper(event) {
 }
 
 function touchDownCapture(event, multitouch) {
-    console.log('down')
 
     event.preventDefault()
     for (var i in event.changedTouches) {
         if (isNaN(i) || !event.changedTouches[i]) continue
         var touchEvent = event.changedTouches[i]
 
-        if (event.traversing) {
-            touchEvent.traversing = event.traversing
-            touchEvent.traversingContainer = event.traversingContainer
+        if (event.traversingStack) {
+            touchEvent.traversingStack = event.traversingStack
         }
 
         touchEvent.pointerId = touchEvent.identifier
