@@ -168,7 +168,7 @@ class Widget extends EventEmitter {
         this.widget = options.html
         this.props = options.props
         this.errors = {}
-        this.parent = options.root ? widgetManager : options.parent
+        this.parent = options.parent
         this.parentNode = options.parentNode
         this.hash = options.hash || nanoid('abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ', 10)
         this.children = []
@@ -182,7 +182,7 @@ class Widget extends EventEmitter {
 
         this.createPropsCache()
 
-        if (this.getProp('id') == 'root' && !options.root) {
+        if (this.getProp('id') == 'root' && this.parent !== widgetManager) {
             this.cachedProps.id = '_root'
             this.errors.id = 'There can only be one root'
         }

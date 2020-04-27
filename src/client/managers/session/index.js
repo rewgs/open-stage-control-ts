@@ -44,7 +44,8 @@ var SessionManager = class SessionManager {
                 parser.reset()
                 parser.parse({
                     data: this.session.getRoot(),
-                    parentNode: DOM.get('#osc-container')[0]
+                    parentNode: DOM.get('#osc-container')[0],
+                    parent: widgetManager
                 })
                 editor.clearHistory()
                 DOM.get(document, '#osc-greeting-header')[0].classList.add('hidden')
