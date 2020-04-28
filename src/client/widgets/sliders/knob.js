@@ -161,8 +161,6 @@ module.exports = class Knob extends Slider {
 
         this.minDimension = Math.min(this.width, this.height)
 
-        this.widget.style.top = this.minDimension - (this.getProp('label') === false ? 0 : this.gaugeWidth / 4) + 'px'
-
     }
 
     draw() {

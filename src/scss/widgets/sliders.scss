@@ -2,11 +2,10 @@
 .knob-container,
 .encoder-container,
 .range-container {
-
     canvas {
         image-rendering: pixelated;
         width: 100%;
-        height: 100%;
+        height: auto;
     }
 
 }
