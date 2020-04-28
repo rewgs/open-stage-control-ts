@@ -2,7 +2,7 @@
   "name": "open-stage-control",
   "productName": "Open Stage Control",
   "description": "Libre and modular OSC / MIDI controller",
-  "version": "1.0.0-alpha12",
+  "version": "1.0.0-alpha13",
   "author": {
     "name": "Jean-Emmanuel Doucet",
     "email": "jean-emmanuel@ammd.net"
@@ -41,7 +41,6 @@
     "exorcist": "1.0.1",
     "file-saver": "2.0.2",
     "gyronorm": "2.0.6",
-    "jquery": "3.4.1",
     "json5": "2.1.2",
     "jsondiffpatch": "0.4.1",
     "keyboardjs": "github:jean-emmanuel/KeyboardJS",
