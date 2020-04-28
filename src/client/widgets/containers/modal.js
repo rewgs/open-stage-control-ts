@@ -180,12 +180,18 @@ class Modal extends Panel {
 
             // stacking
             parent.container.style.zIndex = this.value ? 'initial' : ''
-            parent.container.style.contain = this.value ? 'size' : ''
+
+            parent.modalBreakout += (this.value ? 1 : -1)
+            if (parent.modalBreakout > 0) parent.container.classList.add('modal-breakout')
+            else if (parent.modalBreakout === 0) parent.container.classList.remove('modal-breakout')
 
             parent = parent.parent
         }
 
-        this.container.style.contain = this.value ? 'size' : ''
+
+        this.modalBreakout += (this.value ? 1 : -1)
+        if (this.modalBreakout > 0) this.container.classList.add('modal-breakout')
+        else if (this.modalBreakout === 0) this.container.classList.remove('modal-breakout')
 
 
     }
