@@ -19,7 +19,19 @@ module.exports = {
     },
     'c': {alias: 'custom-module', type: 'array', file: {name: 'OSC Custom module (.js)', extensions: ['js']}, describe: 'custom module file to load (custom options can be passed after the filename)',
         check: (arg)=>{
-            return fs.existsSync(arg[0]) ? true : 'Custom module file not found: ' + arg
+
+            var customModule = arg.slice()
+            
+            // consolidate path containing whitespaces
+            if (!customModule[0].includes('.js')) {
+                var index = customModule.findIndex(x => typeof x === 'string' && x.includes('.js'))
+                if (index !== undefined) {
+                    var _path = customModule.slice(0, index + 1).join(' ')
+                    customModule.splice(0, index + 1, _path)
+                }
+            }
+
+            return fs.existsSync(customModule[0]) ? true : 'Custom module file not found: ' + customModule[0]
         },
     },
     'p': {alias: 'port', type: 'number', describe: 'http port of the server (default to 8080)',
