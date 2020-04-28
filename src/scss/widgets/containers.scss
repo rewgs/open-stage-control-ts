@@ -485,6 +485,7 @@
 }
 
 .modal-breakout {
+    z-index: initial!important;
     contain: size!important;
     @supports not (contain: strict) {
         transform: none!important; // cancel new stacking context

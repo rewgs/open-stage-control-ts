@@ -178,9 +178,6 @@ class Modal extends Panel {
 
         while (parent && parent.props && !parent.getProp('type').match(/modal|tab|root/)) {
 
-            // stacking
-            parent.container.style.zIndex = this.value ? 'initial' : ''
-
             parent.modalBreakout += (this.value ? 1 : -1)
             if (parent.modalBreakout > 0) parent.container.classList.add('modal-breakout')
             else if (parent.modalBreakout === 0) parent.container.classList.remove('modal-breakout')
