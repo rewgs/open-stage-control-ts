@@ -484,6 +484,14 @@
 
 }
 
+.modal-breakout {
+    contain: size!important;
+    @supports not (contain: strict) {
+        transform: none!important; // cancel new stacking context
+    }
+}
+
+
 
 .matrix-container {
 

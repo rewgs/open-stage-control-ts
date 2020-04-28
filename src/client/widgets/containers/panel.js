@@ -62,6 +62,8 @@ class Panel extends Container() {
         this.container.classList.toggle('no-scroll', !this.getProp('scroll'))
         this.container.classList.add('layout-' + this.getProp('layout'))
 
+        this.modalBreakout = 0
+
         var layout = this.getProp('layout')
         if (layout === 'grid') {
 
