@@ -42,13 +42,13 @@ var menuEntries = [
                 label: locales('file_save'),
                 action: sessionManager.save.bind(sessionManager),
                 shortcut: 'mod + s',
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
+                class: ()=>{return READ_ONLY || sessionManager.session === null ? 'disabled' :''}
             },
             {
                 label: locales('file_save_as'),
                 action: sessionManager.saveAs.bind(sessionManager),
                 shortcut: 'mod + shift + s',
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
+                class: ()=>{return READ_ONLY || sessionManager.session === null ? 'disabled' :''}
             },
             {
                 separator: true
@@ -61,7 +61,7 @@ var menuEntries = [
             {
                 label: locales('file_export'),
                 action: sessionManager.export.bind(sessionManager),
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
+                class: ()=>{return READ_ONLY || sessionManager.session === null ? 'disabled' :''}
             },
 
         ]
