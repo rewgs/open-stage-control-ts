@@ -37,7 +37,7 @@
 
         > inner {
             --widget-spacing: calc(var(--widget-padding) / 2);
-            margin: var(--widget-spacing);
+            margin: calc(var(--widget-spacing) + 1rem);
         }
 
         &.no-inner-padding > inner {
@@ -196,6 +196,17 @@
         left: 0;
         right: 0;
         bottom: 0;
+    }
+
+    &.contains-widgets {
+
+        > inner {
+            margin: calc(var(--widget-spacing));
+        }
+
+        &.no-inner-padding > inner {
+            margin: calc(var(--widget-spacing) * -1);
+        }
     }
 }
 
