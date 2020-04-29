@@ -37,7 +37,7 @@
 
         > inner {
             --widget-spacing: calc(var(--widget-padding) / 2);
-            margin: calc(var(--widget-spacing) + 1rem);
+            margin: var(--widget-spacing);
         }
 
         &.no-inner-padding > inner {
@@ -168,6 +168,17 @@
         }
     }
 
+    &.contains-widgets {
+
+        > inner {
+            margin: calc(var(--widget-spacing) + 1rem);
+        }
+
+        &.no-inner-padding > inner {
+            margin: calc(var(--widget-spacing) * -1);
+        }
+    }
+
 
 }
 
@@ -198,16 +209,6 @@
         bottom: 0;
     }
 
-    &.contains-widgets {
-
-        > inner {
-            margin: calc(var(--widget-spacing));
-        }
-
-        &.no-inner-padding > inner {
-            margin: calc(var(--widget-spacing) * -1);
-        }
-    }
 }
 
 
