@@ -366,12 +366,15 @@
 
 .modal-container {
 
+    --widget-padding: 4rem;
+    --color-text-on: var(--color-background);
 
     > .toggle {
 
         --alpha-fill-off: 0;
         --alpha-fill-on: .75;
         --widget-padding: -1rem;
+
         position: absolute;
         top:0;
         left:0;
@@ -389,47 +392,27 @@
     }
 
     > label {
-
-        position: absolute;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
-
-        max-height: initial;
-        text-align: center;
-        pointer-events:none;
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 1;
-        color: var(--color-text);
-
-
-        &:after {
-            content:"\f0da";
-            font-family: FontAwesome;
-            transform: rotateZ(-45deg);
-            font-size: 20rem;
-            display: block;
-            width:8rem;
-            height:6rem;
-            right:2rem;
-            top:1rem;
-            line-height: 10rem;
-            text-align: center;
-            float:right;
-            position: absolute;
-            box-shadow: none;
-            background: none!important;
-            color: var(--color-stroke);
-            opacity: var(--alpha-stroke);
-            margin: var(--widget-spacing);
-        }
-
+        white-space: pre;
+        overflow: hidden;
+        text-align: center;
+        word-wrap: break-word;
+        height: 100%;
+        width: 100%;
+        border: 2rem solid transparent;
     }
 
     &.on {
+
+        > .toggle {
+            --alpha-fill:var(--alpha-fill-on);
+        }
+        > label {
+            color: var(--color-text-on);
+        }
+
         contain: size;
         @supports not (contain: strict) {
             transform: none; // cancel new stacking context
@@ -437,13 +420,6 @@
 
         z-index: 9999999999999!important;
         overflow: visible;
-        > .toggle {
-            --alpha-fill:var(--alpha-fill-on);
-        }
-        > label, > label:after {
-            color: var(--color-background);
-            opacity: 1;
-        }
 
     }
 
