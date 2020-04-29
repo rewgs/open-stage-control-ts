@@ -469,6 +469,7 @@
             height: var(--height, 100%);
             > .popup-content {
                 // contain:unset; // == no restrain
+                padding: 0;
                 &:before {
                     content: none;
                 }
