@@ -33,7 +33,7 @@ class Editor {
                 if (propName === 'address' && value === '') {
                     // special case
                     w.props[propName] = '/' + w.props.id
-                } else if (propName === 'label' && value === true) {
+                } else if ((propName === 'label' || propName === 'popupLabel') && value === true) {
                     w.props[propName] = 'auto'
                 } else {
                     w.props[propName] = value !== '' ? value : deepCopy(defaults[w.props.type][propName].value)

@@ -443,6 +443,7 @@
         > .popup-wrapper {
             width: var(--width, 100%);
             height: var(--height, 100%);
+
             > .popup-content {
                 // contain:unset; // == no restrain
                 padding: 0;
@@ -454,6 +455,10 @@
                     margin: var(--widget-spacing);
                 }
             }
+        }
+
+        &.no-label > .popup-wrapper > .popup-title {
+            display: none;
         }
 
         &.x-positionned {
