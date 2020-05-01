@@ -24,7 +24,7 @@ var transforms = [
 ]
 
 console.warn('\033[36m=> Building compressed client scripts...\033[0m')
-transforms.push([transformWrapper(require('uglifyify')), {global: true}])
+transforms.push([transformWrapper(require('uglifyify')), {global: true, safari10: true}])
 
 var bundle = build({
     input: '../src/client/index.js',
