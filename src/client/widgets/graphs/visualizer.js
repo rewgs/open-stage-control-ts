@@ -5,7 +5,7 @@ var {clip} = require('../utils'),
     canvasQueue = require('../common/queue')
 
 
-module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false, interaction: false}) {
+class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false, interaction: false}) {
 
     static description() {
 
@@ -25,6 +25,7 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
             origin: {type: 'number', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
             logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm\'s base.'},
             pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
+            freeze: {type: 'boolean', value: false, help: 'Set to `true` to freeze current view and ignore incoming values'}
 
         }, ['interaction', 'decimals', 'typeTags', 'bypass'], {})
 
@@ -51,7 +52,7 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
     startLoop() {
 
         this.clock = Date.now()
-        if (!this.looping) {
+        if (!this.looping && !this.getProp('freeze')) {
             this.lastUpdate = Date.now()
             canvasQueue.on('frame', this.bindedLoop)
             if (!canvasQueue.running) canvasQueue.startLoop()
@@ -60,13 +61,23 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
         }
     }
 
+    stopLoop() {
+
+        if (this.looping) {
+
+            canvasQueue.off('frame', this.bindedLoop)
+            this.looping = false
+
+        }
+
+    }
+
     loop() {
 
         var t = Date.now()
 
         if (t - this.clock >= this.watchDuration) {
-            canvasQueue.off('frame', this.bindedLoop)
-            this.looping = false
+            this.stopLoop()
         }
 
         this.ticks += (t - this.lastUpdate) / (1000 / this.fps)
@@ -119,14 +130,33 @@ module.exports = class Visualizer extends StaticProperties(Plot, {rangeX: {min: 
 
     }
 
+    onPropChanged(propName, options, oldPropValue) {
+
+        if (super.onPropChanged(...arguments)) return
+
+        switch (propName) {
+
+            case 'freeze':
+                if (this.getProp('freeze')) this.stopLoop()
+                else this.startLoop()
+                return
+
+        }
+
+    }
+
     onRemove() {
 
-        if (this.looping) {
-            canvasQueue.off('frame', this.bindedLoop)
-        }
+        this.stopLoop()
         super.onRemove()
 
     }
 
 
 }
+
+Visualizer.dynamicProps = Visualizer.prototype.constructor.dynamicProps.concat(
+    'freeze'
+)
+
+module.exports = Visualizer
