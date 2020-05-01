@@ -30,7 +30,7 @@ class Modal extends Panel {
 
             _modalWidgets: 'modal: popup',
 
-            popupLabel: {type: 'string', value: '', help: 'Alternative label for the modal popup'},
+            popupLabel: {type: 'string|boolean', value: 'auto', help: 'Alternative label for the modal popup'},
             popupWidth: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
             popupHeight: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
             popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
@@ -229,8 +229,11 @@ class Modal extends Panel {
 
         if (!this.popup) return
 
-        var label = this.getProp('popupLabel') ? iconify(this.getProp('popupLabel')) : this.label.innerHTML
+        var label = this.getProp('popupLabel') !== 'auto' ? iconify(this.getProp('popupLabel')) : this.label.innerHTML
+
         DOM.get(this.popup, '.popup-title .popup-label')[0].innerHTML = label
+        this.popup.classList.toggle('no-label', this.getProp('popupLabel') === false)
+
         this.labelChange = false
 
     }
