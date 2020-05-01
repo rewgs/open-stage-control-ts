@@ -61,6 +61,7 @@
   - plot/eq: removed `smooth`
   - plots/sliders/pads: reversed `logScale` behavior to match standard implementations; can be either `false` (disabled), `true` (logarithmic scale) or `number` (manual log scale, negative for exponential scale)
   - visualizer: added `framerate` property
+  - visualizer: added `freeze` property
   - menu: always centered menu
   - modal: modals can't overflow parent modal/tab boundaries
   - input: removed `vertical`
