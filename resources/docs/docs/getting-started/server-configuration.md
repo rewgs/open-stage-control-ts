@@ -112,6 +112,11 @@ The **server** can be configured with many options, either from a terminal or wi
 
         Server's name on zeroconf/bonjour network. Incremented automatically if not available.
 
+    ===  "use-ssl"
+
+        Use HTTPS protocol instead of HTTP (a self-signed certificate will be created)
+
+
 
 !!! abstract "Command-line options"
 

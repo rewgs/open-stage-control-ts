@@ -212,7 +212,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-        | <h6 id="modal_popupLabel">popupLabel<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_popupLabel" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Alternative label for the modal popup |
+        | <h6 id="modal_popupLabel">popupLabel<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_popupLabel" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Alternative label for the modal popup |
         | <h6 id="modal_popupWidth">popupWidth<a class="headerlink" href="#modal_popupWidth" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"80%"</code> | Modal popup's size |
         | <h6 id="modal_popupHeight">popupHeight<a class="headerlink" href="#modal_popupHeight" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"80%"</code> | Modal popup's size |
         | <h6 id="modal_popupLeft">popupLeft<a class="headerlink" href="#modal_popupLeft" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Modal popup's position |
@@ -481,6 +481,7 @@
         | <h6 id="visualizer_origin">origin<a class="headerlink" href="#visualizer_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
         | <h6 id="visualizer_logScaleY">logScaleY<a class="headerlink" href="#visualizer_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
         | <h6 id="visualizer_pips">pips<a class="headerlink" href="#visualizer_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
+        | <h6 id="visualizer_freeze">freeze<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visualizer_freeze" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to freeze current view and ignore incoming values |
 ## Indicators
 
 ??? api "<div id="led">led<a class="headerlink" href="#led" title="Permanent link">#</a></div>"
