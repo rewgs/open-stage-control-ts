@@ -176,7 +176,8 @@ var SessionManager = class SessionManager {
 
         if (editor.unsavedSession && !confirm(locales('session_unsaved'))) return
 
-        this.load(null, function(){
+        this.load(null, ()=>{
+            ipc.send('sessionSetPath', {path: ''})
             editor.enable()
             editor.select(widgetManager.getWidgetById('root'))
         })
