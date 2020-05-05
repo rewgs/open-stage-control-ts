@@ -104,6 +104,9 @@ The **server** can be configured with many options, either from a terminal or wi
 
         Set file browsing root folder.
 
+    ===  "authentication"
+
+        Restrict access to `user:password` (remote clients will be prompted for these credentials).
 
     ===  "instance-name"
 

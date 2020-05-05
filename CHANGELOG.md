@@ -122,6 +122,7 @@
   - removed `--blank`, `--gui-only`, `--examples`
   - hide `--disable-gpu` (cli-only)
   - added cli-only `--cache-dir` and `--config-file`
+  - added `--authentication` option
 
 
 - misc
