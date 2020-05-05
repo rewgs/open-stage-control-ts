@@ -92,7 +92,7 @@ module.exports = {
         }
     },
     'remote-root': {type: 'string', describe: 'set remote file browsing root folder', file: {folder: true}},
-    'authentication': {type: 'string', describe: 'restrict access to "user:password"',
+    'authentication': {type: 'string', describe: 'restrict access to "user:password" (remote clients will be prompted for these credentials)',
         check: (a, argv)=>{
             return a.match(/[^:]*:[^:]+/) ? true : 'Auth must be a user:password pair.'
         }
