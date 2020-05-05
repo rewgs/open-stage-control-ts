@@ -98,6 +98,7 @@ module.exports = {
         }
     },
     'instance-name': {type: 'string', describe: 'used to differenciate multiple instances in a zeroconf network'},
+    'use-ssl': {type: 'boolean', describe: 'set to true to use HTTPS protocol instead of HTTP (a self-signed certificate will be created)'},
 
     // cli only
     'disable-gpu': {type: 'boolean', describe: 'disable hardware acceleration', launcher: false},

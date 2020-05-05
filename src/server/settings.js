@@ -1,7 +1,7 @@
 var path = require('path'),
     fs = require('fs'),
     yargs = require('yargs'),
-    infos = require('../package.json'),
+    infos = require('../../package.json'),
     options = require('./options'),
     address = require('./address')
 
@@ -156,5 +156,5 @@ module.exports = {
     cli: cli,
     configPath: baseDir,
     infos: infos,
-    appAddresses: ()=>address(settings.options.port || 8080)
+    appAddresses: ()=>address(settings.options.ssl ? 'https://' : 'http://', settings.options.port || 8080)
 }

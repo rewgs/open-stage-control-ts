@@ -1,12 +1,24 @@
+var settings = require('./settings'),
+    http = require('http')
+
+function createServer(route) {
+    if (settings.read('use-ssl')) {
+        http = require('https')
+        require('./ssl')
+        return http.createServer(settings.read('ssl-certificate'), route)
+
+    } else {
+        return http.createServer(route)
+    }
+}
+
 var urlparser   = require('url'),
     path        = require('path'),
     fs          = require('fs'),
     send        = require('send'),
-    http        = require('http'),
     replaceStream = require('replacestream'),
-    settings     = require('./settings'),
     auth        = require('./auth'),
-    server      = http.createServer(auth ? auth.check(httpRoute) : httpRoute),
+    server      = createServer(auth ? auth.check(httpRoute) : httpRoute),
     Ipc         = require('./ipc/server'),
     ipc         = new Ipc(server),
     theme       = require('./theme').init(),
@@ -24,9 +36,6 @@ if (settings.read('client-options')) {
         clientOptions[k] = v
     }
 }
-
-
-
 
 
 function httpRoute(req, res) {
@@ -109,15 +118,22 @@ server.on('error', (e)=>{
 
 server.listen(settings.read('port') || 8080)
 
-http.get(settings.appAddresses()[0] + '/osc-ping', {auth: settings.read('authentication')},()=>{}).on('error', ()=>{httpCheck(false)})
+http.get(settings.appAddresses()[0] + '/osc-ping', {
+    auth: settings.read('authentication'),
+    rejectUnauthorized: false
+},()=>{}).on('error', ()=>{httpCheck(false)})
+
 httpCheckTimeout = setTimeout(()=>{httpCheck(false)}, 5000)
-function httpCheck(ok){
+function httpCheck(ok, error){
     if (!httpCheckTimeout) return
     clearTimeout(httpCheckTimeout)
     httpCheckTimeout = null
     if (ok) {
         console.log('(INFO) Server started, app available at \n    ' + settings.appAddresses().join('\n    '))
     } else {
+        if (error) {
+            console.error('(ERROR, HTTP) Server setup error: ' + error.message)
+        }
         console.error('(ERROR, HTTP) Could not setup http server, maybe try a different port ?')
     }
 }

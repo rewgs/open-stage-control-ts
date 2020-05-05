@@ -51,6 +51,7 @@
     "nanohtml": "1.9.1",
     "nanoid": "2.1.11",
     "nanomorph": "5.4.0",
+    "node-forge": "^0.9.1",
     "node-sass": "4.13.1",
     "nodemon": "2.0.2",
     "nosleep.js": "0.9.0",
