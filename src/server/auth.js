@@ -4,18 +4,17 @@ var settings = require('./settings'),
 if (settings.read('authentication')) {
 
     var [name, pwd] = settings.read('authentication').split(':'),
-        httpAuth = require("http-auth")
+        httpAuth = require('http-auth')
 
-
-        auth = httpAuth.basic(
-            {
-                realm: "Open Stage Control"
-            },
-            (username, password, callback) => {
-                // Custom authentication method.
-                callback(username === name && password === pwd);
-            }
-        )
+    auth = httpAuth.basic(
+        {
+            realm: 'Open Stage Control'
+        },
+        (username, password, callback) => {
+            // Custom authentication method.
+            callback(username === name && password === pwd)
+        }
+    )
 
 }
 
