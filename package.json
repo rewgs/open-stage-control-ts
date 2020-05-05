@@ -2,7 +2,7 @@
   "name": "open-stage-control",
   "productName": "Open Stage Control",
   "description": "Libre and modular OSC / MIDI controller",
-  "version": "1.0.0-alpha15",
+  "version": "1.0.0-alpha16",
   "author": {
     "name": "Jean-Emmanuel Doucet",
     "email": "jean-emmanuel@ammd.net"
@@ -51,7 +51,7 @@
     "nanohtml": "1.9.1",
     "nanoid": "2.1.11",
     "nanomorph": "5.4.0",
-    "node-forge": "^0.9.1",
+    "node-forge": "0.9.1",
     "node-sass": "4.13.1",
     "nodemon": "2.0.2",
     "nosleep.js": "0.9.0",
