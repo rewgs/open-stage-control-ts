@@ -123,6 +123,7 @@
   - hide `--disable-gpu` (cli-only)
   - added cli-only `--cache-dir` and `--config-file`
   - added `--authentication` option
+  - added `--use-ssl` option
 
 
 - misc
