@@ -38,7 +38,7 @@ class DocsServer extends EventEmitter {
         })
         this.server.listen(0).on('listening', ()=>{
             this.port = this.server.address().port
-            console.log('(INFO) Documentation server started, docs available at \n    ' + address(this.port).join('\n    '))
+            console.log('(INFO) Documentation server started, docs available at \n    ' + address('http://', this.port).join('\n    '))
             this.emit('ready')
 
         })
@@ -51,11 +51,11 @@ class DocsServer extends EventEmitter {
         if (!this.started || !this.port) {
             this.start()
             this.on('ready', ()=>{
-                open(address(this.port)[0] + this.home)
+                open(address('http://', this.port)[0] + this.home)
                 console.log('(INFO) Opening documentation with default browser...')
             })
         } else {
-            open(address(this.port)[0] + this.home)
+            open(address('http://', this.port)[0] + this.home)
             console.log('(INFO) Opening documentation with default browser...')
         }
 

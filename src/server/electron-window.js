@@ -57,6 +57,15 @@ module.exports = function(options={}) {
         }
     })
 
+
+    window.webContents.on('certificate-error', function(event, url, error, certificate, callback) {
+        if (error === 'net::ERR_CERT_AUTHORITY_INVALID') {
+            // self signed certificate is ok
+            event.preventDefault()
+            callback(true)
+        }
+    })
+
     window.webContents.on('login', function(event, request, authInfo, callback) {
         event.preventDefault()
         var [name, pwd] = settings.read('authentication').split(':')
