@@ -21,7 +21,7 @@ module.exports = {
         check: (arg)=>{
 
             var customModule = arg.slice()
-            
+
             // consolidate path containing whitespaces
             if (!customModule[0].includes('.js')) {
                 var index = customModule.findIndex(x => typeof x === 'string' && x.includes('.js'))
@@ -92,6 +92,11 @@ module.exports = {
         }
     },
     'remote-root': {type: 'string', describe: 'set remote file browsing root folder', file: {folder: true}},
+    'authentication': {type: 'string', describe: 'restrict access to "user:password"',
+        check: (a, argv)=>{
+            return a.match(/[^:]*:[^:]+/) ? true : 'Auth must be a user:password pair.'
+        }
+    },
     'instance-name': {type: 'string', describe: 'used to differenciate multiple instances in a zeroconf network'},
 
     // cli only

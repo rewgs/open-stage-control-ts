@@ -57,6 +57,12 @@ module.exports = function(options={}) {
         }
     })
 
+    window.webContents.on('login', function(event, request, authInfo, callback) {
+        event.preventDefault()
+        var [name, pwd] = settings.read('authentication').split(':')
+        callback(name, pwd)
+    })
+
     // window.webContents.on('will-navigate', (event)=>event.preventDefault())
     window.webContents.on('new-window', (event, url)=>{
         event.preventDefault()

@@ -4,10 +4,11 @@ var urlparser   = require('url'),
     send        = require('send'),
     http        = require('http'),
     replaceStream = require('replacestream'),
-    server      = http.createServer(httpRoute),
+    settings     = require('./settings'),
+    auth        = require('./auth'),
+    server      = http.createServer(auth ? auth.check(httpRoute) : httpRoute),
     Ipc         = require('./ipc/server'),
     ipc         = new Ipc(server),
-    settings     = require('./settings'),
     theme       = require('./theme').init(),
     zeroconf = require('./zeroconf'),
     osc = {},
@@ -23,6 +24,10 @@ if (settings.read('client-options')) {
         clientOptions[k] = v
     }
 }
+
+
+
+
 
 function httpRoute(req, res) {
 
@@ -104,7 +109,7 @@ server.on('error', (e)=>{
 
 server.listen(settings.read('port') || 8080)
 
-http.get(settings.appAddresses()[0] + '/osc-ping', ()=>{}).on('error', ()=>{httpCheck(false)})
+http.get(settings.appAddresses()[0] + '/osc-ping', {auth: settings.read('authentication')},()=>{}).on('error', ()=>{httpCheck(false)})
 httpCheckTimeout = setTimeout(()=>{httpCheck(false)}, 5000)
 function httpCheck(ok){
     if (!httpCheckTimeout) return
