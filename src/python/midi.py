@@ -106,10 +106,11 @@ def create_callback(name):
                     osc['args'].append({'type': 'i', 'value': data})
 
 
-            ipc_send('osc', osc)
-
             if debug:
                 ipc_send('log','(DEBUG, MIDI) in: %s From: midi:%s' % (midi_str(message), name))
+
+            ipc_send('osc', osc)
+
 
 
     def callback_error_wrapper(event, data):
