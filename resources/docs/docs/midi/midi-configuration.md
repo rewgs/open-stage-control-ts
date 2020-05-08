@@ -20,9 +20,12 @@ When running the app, the `-m / --midi` switch must be set; it accepts the follo
 - `pc_offset`: send program changes with a `-1` offset to match some software/hardware implementations
 - `path=/path/to/python`: indicates where to find python or python3 binary in case open stage control doesn't (`Error: spawn python3 ENOENT`)
 
-*Linux only:*
+*Linux / Mac only:*
 
 - `device_name:virtual`: creates a virtual midi device with one input port and one output port
+
+*Linux only:*
+
 - `jack`: use JACK MIDI instead of ALSA. `rtmidi` must be compiled with `--jack-midi` flag for this to work.
 
 
