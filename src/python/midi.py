@@ -20,11 +20,17 @@ for arg in argv:
         inputs[name] = rtmidi.MidiIn(API, name if not JACK else name + '_in')
         outputs[name] = rtmidi.MidiOut(API, name if not JACK else name + '_out')
 
+        if debug:
+            ipc_send('log','(DEBUG, MIDI) device "%s" created' % name)
+
+
         if ports == 'virtual':
 
             try:
                 inputs[name].open_virtual_port('midi_in')
                 outputs[name].open_virtual_port('midi_out')
+                if debug:
+                    ipc_send('log','(DEBUG, MIDI) virtual ports opened for device "%s"' % name)
             except:
                 ipc_send('error', 'can\'t open virtual port "%s"' % name)
 
@@ -44,6 +50,8 @@ for arg in argv:
 
                 try:
                     inputs[name].open_port(in_port, 'midi_in')
+                    if debug:
+                        ipc_send('log','(DEBUG, MIDI) device "%s" connected to input port %s (%s)' % (name, in_port, in_dev.get_port_name(in_port)))
                 except:
                     ipc_send('error', 'can\'t connect input to port %i: %s' % (in_port, in_dev.get_port_name(in_port)))
 
@@ -51,6 +59,8 @@ for arg in argv:
 
                 try:
                     outputs[name].open_port(out_port, 'midi_out')
+                    if debug:
+                        ipc_send('log','(DEBUG, MIDI) device "%s" connected to output port %s (%s)' % (name, out_port, out_dev.get_port_name(out_port)))
                 except:
                     ipc_send('error', 'can\'t connect to output port %i: %s' % (out_port, out_dev.get_port_name(out_port)))
 
@@ -99,7 +109,7 @@ def create_callback(name):
             ipc_send('osc', osc)
 
             if debug:
-                ipc_send('log','(MIDI) in: %s From: midi:%s' % (midi_str(message), name))
+                ipc_send('log','(DEBUG, MIDI) in: %s From: midi:%s' % (midi_str(message), name))
 
 
     def callback_error_wrapper(event, data):
@@ -197,8 +207,7 @@ def send_midi(name, event, *args):
         outputs[name].send_message(m)
 
         if debug:
-
-            ipc_send('log','(MIDI) out: %s To: midi:%s' % (midi_str(m), name))
+            ipc_send('log','(DEBUG, MIDI) out: %s To: midi:%s' % (midi_str(m), name))
 
 
 while True:
