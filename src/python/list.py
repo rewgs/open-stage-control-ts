@@ -4,13 +4,13 @@ def list():
 
     message = []
 
-    message.append('(MIDI) Inputs')
+    message.append('(INFO, MIDI) Inputs')
     message.append('    -1: Void (bypass)')
 
     for i in range(in_dev.get_port_count()):
         message.append('    %i: %s' % (i, in_dev.get_port_name(i)))
 
-    message.append('(MIDI) Outputs')
+    message.append('(INFO, MIDI) Outputs')
     message.append('    -1: Void (bypass)')
 
     for i in range(out_dev.get_port_count()):
