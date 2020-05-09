@@ -176,7 +176,7 @@ class Modal extends Panel {
 
         var parent = this.parent
 
-        while (parent && parent.props && !parent.getProp('type').match(/modal|tab|root/)) {
+        while (parent && parent.props && !parent.getProp('type').match(/tab|root/)) {
 
             parent.modalBreakout += (this.value ? 1 : -1)
             if (parent.modalBreakout > 0) parent.container.classList.add('modal-breakout')

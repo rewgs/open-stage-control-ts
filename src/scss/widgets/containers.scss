@@ -435,6 +435,9 @@
     &.no-inner-padding > .popup > .popup-wrapper > .popup-content > inner {
         margin: calc(var(--widget-spacing) * -1);
     }
+    &.modal-breakout > .popup > .popup-wrapper > .popup-content {
+        @extend .modal-breakout;
+    }
 
 
     > .popup {

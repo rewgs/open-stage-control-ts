@@ -137,6 +137,8 @@ class Menu extends MenuBase {
         if (this.opened) return
 
         this.opened = true
+        this.fixParents()
+
         this.container.classList.add('on')
         this.widget.appendChild(this.menu)
 
@@ -147,6 +149,7 @@ class Menu extends MenuBase {
         if (!this.opened) return
 
         this.opened = false
+        this.fixParents()
         DOM.each(this.menu, '.active', (el)=>{el.classList.remove('active')})
         this.container.classList.remove('on')
         this.widget.removeChild(this.menu)
@@ -249,6 +252,29 @@ class Menu extends MenuBase {
 
     }
 
+    fixParents() {
+
+        var parent = this.parent,
+            scrollX = 0,
+            scrollY = 0
+
+        while (parent && parent.props && !parent.getProp('type').match(/tab|root/)) {
+
+            parent.modalBreakout += (this.opened ? 1 : -1)
+            if (parent.modalBreakout > 0) parent.container.classList.add('modal-breakout')
+            else if (parent.modalBreakout === 0) parent.container.classList.remove('modal-breakout')
+
+            scrollX += parent.widget.scrollLeft
+            scrollY += parent.widget.scrollTop
+
+            parent = parent.parent
+        }
+
+        this.container.style.setProperty('--parent-scroll-x', scrollX + 'px')
+        this.container.style.setProperty('--parent-scroll-y', scrollY + 'px')
+
+    }
+
     setValue(v,options={}) {
 
         var i = this.getIndex(v)
@@ -298,6 +324,9 @@ class Menu extends MenuBase {
 
         if (this.getProp('toggle')) {
             document.removeEventListener('fast-click', this.toggleCloseHandler)
+        }
+        if (this.opened) {
+            this.close()
         }
         super.onRemove()
 
