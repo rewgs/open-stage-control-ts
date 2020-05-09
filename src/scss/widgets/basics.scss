@@ -127,12 +127,16 @@
 
     --size: 300rem;
     --grid-columns: 2;
+
+    --parent-scroll-x: 0;
+    --parent-scroll-y: 0;
+
     overflow: hidden;
 
 
     &.on {
         z-index: 9999999999999!important;
-        contain: layout;
+        contain: size;
         overflow: visible;
     }
 
@@ -219,8 +223,8 @@
         border-radius: 100%;
         width:var(--size);
         height:var(--size);
-        margin-left: calc(- var(--size) / 2);
-        margin-top: calc(- var(--size) / 2);
+        margin-left: calc(-1 * var(--parent-scroll-x));
+        margin-top: calc(-1 * var(--parent-scroll-y));
 
         &:after {
             content:"";
