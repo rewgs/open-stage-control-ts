@@ -23,7 +23,7 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
             logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm\'s base.'},
             logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm\'s base.'},
             origin: {type: 'number', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it.'},
-            dots: {type: 'boolean', value: true, help: ''},
+            dots: {type: 'boolean', value: true, help: 'Draw dots on the line'},
             bars: {type: 'boolean', value: false, help: 'Set to `true` to use draw bars instead (disables `logScaleX` and forces `x axis` even spacing)'},
             pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
 
