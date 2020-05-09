@@ -49,7 +49,7 @@ class Widget extends EventEmitter {
 
             _widget:'widget',
 
-            type: {type: 'string', value: 'auto', help: ''},
+            type: {type: 'string', value: 'auto', help: 'Widget type'},
             id: {type: 'string', value: 'auto', help: 'Widgets sharing the same `id` will act as clones and update each other\'s value(s) without sending extra osc messages.' },
             visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},
             interaction: {type: 'boolean', value: true, help: 'Set to `false` to disable pointer interactions.'},
@@ -64,8 +64,8 @@ class Widget extends EventEmitter {
                 'When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).',
                 'Otherwise, the widget will be absolutely positioned'
             ]},
-            width: {type: 'number|percentage', value: 'auto', help: ''},
-            height: {type: 'number|percentage', value: 'auto', help: ''},
+            width: {type: 'number|percentage', value: 'auto', help: 'Widget width'},
+            height: {type: 'number|percentage', value: 'auto', help: 'Widget height'},
             expand: {type: 'boolean|number', value: 'false', help: 'If parent\'s layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically.'},
 
             _style:'style',
