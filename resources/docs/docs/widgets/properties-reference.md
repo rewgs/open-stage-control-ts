@@ -12,7 +12,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-        | <h6 id="type">type<a class="headerlink" href="#type" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> |  |
+        | <h6 id="type">type<a class="headerlink" href="#type" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widget type |
         | <h6 id="id">id<a class="headerlink" href="#id" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widgets sharing the same `id` will act as clones and update each other's value(s) without sending extra osc messages. |
         | <h6 id="visible">visible<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visible" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the widget. |
         | <h6 id="interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#interaction" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable pointer interactions. |
@@ -24,8 +24,8 @@
         | --- | --- | --- | --- |
         | <h6 id="left">left<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#left" title="Permanent link">#</a></h6> | `number`&vert;<br/>`string` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be absolutely positioned |
         | <h6 id="top">top<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#top" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be absolutely positioned |
-        | <h6 id="width">width<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#width" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> |  |
-        | <h6 id="height">height<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#height" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> |  |
+        | <h6 id="width">width<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#width" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Widget width |
+        | <h6 id="height">height<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#height" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Widget height |
         | <h6 id="expand">expand<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#expand" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>"false"</code> | If parent's layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically. |
 
 
@@ -52,7 +52,7 @@
         | <h6 id="value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#value" title="Permanent link">#</a></h6> | `*` | <code>""</code> | Define the widget's value depending on other widget's values / properties using the advanced property syntax |
         | <h6 id="default">default<a class="headerlink" href="#default" title="Permanent link">#</a></h6> | `*` | <code>""</code> | If set, the widget will be initialized with this value when the session is loaded. |
         | <h6 id="linkId">linkId<a class="headerlink" href="#linkId" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Widgets sharing the same `linkId` update each other's value(s) AND send their respective osc messages.<br/><br/>When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)<br/><br/>When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending) |
-        | <h6 id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/v1/docs/widgets/scripting/">documentation</a>. |
+        | <h6 id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 
 
     === "osc"
@@ -125,7 +125,9 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
         | <h6 id="menu_size">size<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#menu_size" title="Permanent link">#</a></h6> | `number`&vert;<br/>`array` | <code>200</code> | - If `layout` is `circular`: diameter (in px)<br/>- Else: square size or `[width, height]` array |
-        | <h6 id="menu_align">align<a class="headerlink" href="#menu_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
+        | <h6 id="menu_textAlign">textAlign<a class="headerlink" href="#menu_textAlign" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
+        | <h6 id="menu_menuAlignV">menuAlignV<a class="headerlink" href="#menu_menuAlignV" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `top` or `bottom` to change menu alignment (otherwise center)<br/><br/>Choices: `center`, `top`, `bottom` |
+        | <h6 id="menu_menuAlignH">menuAlignH<a class="headerlink" href="#menu_menuAlignH" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change menu alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
         | <h6 id="menu_layout">layout<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#menu_layout" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | Defines whether the menu's layout should be rendered in a circle or in a box<br/><br/>Choices: `circular`, `horizontal`, `vertical`, `grid` |
         | <h6 id="menu_gridTemplate">gridTemplate<a class="headerlink" href="#menu_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns of a value css grid-template definition. |
         | <h6 id="menu_toggle">toggle<a class="headerlink" href="#menu_toggle" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the menu stay opened after mouse/touch release |
@@ -445,7 +447,7 @@
         | <h6 id="plot_logScaleX">logScaleX<a class="headerlink" href="#plot_logScaleX" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm's base. |
         | <h6 id="plot_logScaleY">logScaleY<a class="headerlink" href="#plot_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm's base. |
         | <h6 id="plot_origin">origin<a class="headerlink" href="#plot_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it. |
-        | <h6 id="plot_dots">dots<a class="headerlink" href="#plot_dots" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> |  |
+        | <h6 id="plot_dots">dots<a class="headerlink" href="#plot_dots" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Draw dots on the line |
         | <h6 id="plot_bars">bars<a class="headerlink" href="#plot_bars" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to use draw bars instead (disables `logScaleX` and forces `x axis` even spacing) |
         | <h6 id="plot_pips">pips<a class="headerlink" href="#plot_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
 
