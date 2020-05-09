@@ -22,7 +22,8 @@ class Menu extends MenuBase {
                 '- If `layout` is `circular`: diameter (in px)',
                 '- Else: square size or `[width, height]` array',
             ]},
-            align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
+            alignV: {type: 'string', value: 'center', choices: ['center', 'top', 'bottom'], help: 'Set to `top` or `bottom` to change menu alignment (otherwise center)'},
+            alignH: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change menu alignment (otherwise center)'},
             layout: {type: 'string', value: 'circular', choices: ['circular', 'horizontal', 'vertical', 'grid'], help: [
                 'Defines whether the menu\'s layout should be rendered in a circle or in a box'
             ]},
@@ -36,7 +37,8 @@ class Menu extends MenuBase {
             weights: {type: 'array', value: '', help: [
                 '`Array` of `number` defining the weights of each value in `values`',
                 'Ignored when `mode` is `grid`'
-            ]}
+            ]},
+            textAlign: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
 
         })
 
@@ -52,8 +54,9 @@ class Menu extends MenuBase {
 
         `})
 
-        if (this.getProp('align') === 'left') this.widget.classList.add('left')
-        if (this.getProp('align') === 'right') this.widget.classList.add('right')
+        this.widget.classList.add('text-align-' + this.getProp('textAlign'))
+        this.widget.classList.add('menu-align-h-' + this.getProp('alignH'))
+        this.widget.classList.add('menu-align-v-' + this.getProp('alignV'))
 
         this.menu = html`<menu></menu>`
         this.text = DOM.get(this.widget, '.text')[0]
@@ -269,6 +272,9 @@ class Menu extends MenuBase {
 
             parent = parent.parent
         }
+
+        scrollX += parent.widget.scrollLeft
+        scrollY += parent.widget.scrollTop
 
         this.container.style.setProperty('--parent-scroll-x', scrollX + 'px')
         this.container.style.setProperty('--parent-scroll-y', scrollY + 'px')

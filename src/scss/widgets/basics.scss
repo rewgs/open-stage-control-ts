@@ -149,16 +149,32 @@
         position: relative;
         @include pseudo-stroke();
 
-        &.right .text {
+        &.text-align-right .text {
             justify-content: flex-end;
         }
-        &.left .text{
+        &.text-align-left .text{
             justify-content: flex-start;
         }
+
+
+        &.menu-align-h-right {
+            justify-content: flex-end;
+        }
+        &.menu-align-h-left{
+            justify-content: flex-start;
+        }
+        &.menu-align-v-top {
+            align-items: flex-start;
+        }
+        &.menu-align-v-bottom{
+            align-items: flex-end;
+        }
+
     }
 
     .text {
         flex: 1;
+        height: 100%;
         text-align: center;
         display: flex;
         justify-content: center;
@@ -190,10 +206,11 @@
     menu {
 
         // animation: menu-widget-fade .1s forwards;
-
         position: fixed;
         z-index: 999999999;
 
+        margin-left: calc(-1 * var(--parent-scroll-x));
+        margin-top: calc(-1 * var(--parent-scroll-y));
 
         overflow: hidden;
 
@@ -223,8 +240,7 @@
         border-radius: 100%;
         width:var(--size);
         height:var(--size);
-        margin-left: calc(-1 * var(--parent-scroll-x));
-        margin-top: calc(-1 * var(--parent-scroll-y));
+
 
         &:after {
             content:"";
@@ -298,10 +314,6 @@
 
         width:var(--size-box-w);
         height:var(--size-box-h);
-        margin-left: calc(var(--x) - var(--size-box-w) / 2);
-        margin-top: calc(var(--y) - var(--size-box-h) / 2);
-        // top:var(--size-box-h);
-        // margin-top: 0;
 
         display: flex;
 
