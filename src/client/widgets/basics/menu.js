@@ -22,8 +22,9 @@ class Menu extends MenuBase {
                 '- If `layout` is `circular`: diameter (in px)',
                 '- Else: square size or `[width, height]` array',
             ]},
-            alignV: {type: 'string', value: 'center', choices: ['center', 'top', 'bottom'], help: 'Set to `top` or `bottom` to change menu alignment (otherwise center)'},
-            alignH: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change menu alignment (otherwise center)'},
+            textAlign: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
+            menuAlignV: {type: 'string', value: 'center', choices: ['center', 'top', 'bottom'], help: 'Set to `top` or `bottom` to change menu alignment (otherwise center)'},
+            menuAlignH: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change menu alignment (otherwise center)'},
             layout: {type: 'string', value: 'circular', choices: ['circular', 'horizontal', 'vertical', 'grid'], help: [
                 'Defines whether the menu\'s layout should be rendered in a circle or in a box'
             ]},
@@ -38,7 +39,6 @@ class Menu extends MenuBase {
                 '`Array` of `number` defining the weights of each value in `values`',
                 'Ignored when `mode` is `grid`'
             ]},
-            textAlign: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
 
         })
 
@@ -55,8 +55,8 @@ class Menu extends MenuBase {
         `})
 
         this.widget.classList.add('text-align-' + this.getProp('textAlign'))
-        this.widget.classList.add('menu-align-h-' + this.getProp('alignH'))
-        this.widget.classList.add('menu-align-v-' + this.getProp('alignV'))
+        this.widget.classList.add('menu-align-h-' + this.getProp('menuAlignH'))
+        this.widget.classList.add('menu-align-v-' + this.getProp('menuAlignV'))
 
         this.menu = html`<menu></menu>`
         this.text = DOM.get(this.widget, '.text')[0]
