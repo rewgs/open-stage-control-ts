@@ -68,6 +68,9 @@ var cli = false
 for (let i in argv) {
     if (!cliOnly.includes(i)) cli = true
 }
+if (process.title === 'node' || process.title === 'node.exe') {
+    cli = true
+}
 
 
 var settings = {

@@ -24,7 +24,6 @@ function nodeMode() {
     console.warn('(INFO) Running with node')
 
     if (!settings.read('no-gui')) {
-        settings.cli = true
         settings.write('no-gui', true, true)
         console.warn('(INFO) Headless mode (--no-gui) enabled automatically')
     }
