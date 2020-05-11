@@ -223,7 +223,8 @@ Button.cssVariables = Button.prototype.constructor.cssVariables.concat(
 Button.dynamicProps = Button.prototype.constructor.dynamicProps.concat(
     'on',
     'off',
-    'norelease'
+    'norelease',
+    'label'
 )
 
 module.exports = Button
