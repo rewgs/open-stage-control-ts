@@ -2,18 +2,18 @@ var loopProtect = require('loop-protect'),
     {deepCopy} = require('../utils'),
     globals
 
-setTimeout(()=>{
-    globals = {
-        screen: {width: screen.width, height: screen.height},
-        env: deepCopy(ENV),
-        url: document.location.host,
-        platform: navigator.platform
-    }
-})
-
 class Vm {
 
     constructor() {
+
+        if (!globals) {
+            globals = {
+                screen: {width: screen.width, height: screen.height},
+                env: deepCopy(ENV),
+                url: document.location.host,
+                platform: navigator.platform
+            }
+        }
 
         this.sandbox = document.createElement('iframe')
         this.sandbox.style.display = 'none'
