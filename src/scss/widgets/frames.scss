@@ -29,3 +29,7 @@
         pointer-events: none;
     }
 }
+
+.editor-enabled .frame-container iframe {
+    pointer-events: none;
+}
