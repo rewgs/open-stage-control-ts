@@ -30,7 +30,7 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
         super({...options, html: html`
             <inner>
-                <iframe class="frame" src="" sandbox="allow-scripts allow-same-origin"></iframe>
+                <iframe class="frame" src="" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
             </inner>`
         })
 
