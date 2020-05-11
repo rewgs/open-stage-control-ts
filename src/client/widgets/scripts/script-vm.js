@@ -84,6 +84,7 @@ class ScriptVm extends Vm {
             if (target && target[0] === '/') {
                 args.unshift(address)
                 address = target
+                target = null
             }
 
             var overrides = {
