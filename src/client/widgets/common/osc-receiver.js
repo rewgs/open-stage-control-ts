@@ -53,7 +53,7 @@ module.exports = class OscReceiver {
 
     callback(args) {
 
-        if (typeof args !== 'object') args = [args]
+        if (!Array.isArray(args)) args = [args]
         var preArgs = this.usePreArgs ? (this.parent.getProp('preArgs') || []) : []
         if (!Array.isArray(preArgs) && preArgs !== '') preArgs = [preArgs]
         if (args.length >= preArgs.length) {
