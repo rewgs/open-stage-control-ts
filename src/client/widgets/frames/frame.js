@@ -18,7 +18,7 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
         }, ['decimals', 'bypass'], {
 
             value: {type: 'string', value: '', help: [
-                'External web page URL. Only local URLs are allowed (starting with `http://127.0.0.1/`, `http://10.x.x.x/`, `http://192.168.x.x/`, etc)',
+                'External web page URL.',
             ]}
 
         })
