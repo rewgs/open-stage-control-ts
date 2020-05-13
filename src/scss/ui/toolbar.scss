@@ -11,8 +11,10 @@ osc-toolbar {
     z-index: 99999999;
     cursor: pointer;
     &:after {
-        transition: text-shadow .1s, color .1s;
         content:"\f0c9";
+        width: 3rem;
+        display: inline-block;
+        overflow: hidden;
         font-size:13rem;
         font-family: FontAwesome;
         line-height: calc(var(--size) + 6rem);
@@ -29,7 +31,10 @@ osc-toolbar#start {
 
     left: var(--size);
     &:after {
-        content: "\f04b"
+        font-size: 11rem;
+        content: "\f04b";
+        width: auto;
+        margin-top:-1rem;
     }
     &.started:after {
         content: "\f04d";

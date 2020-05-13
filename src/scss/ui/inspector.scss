@@ -143,7 +143,6 @@ osc-inspector-checkbox {
     --color-fill: var(--color-ui-background);
     --alpha-fill: 1;
 
-    border-radius: 2rem;
 
     line-height: $field-height;
     height: $field-height;
@@ -166,6 +165,10 @@ osc-inspector-checkbox {
     position: relative;
     @include pseudo-fill($z: -1);
     z-index: 1;
+
+    &:after {
+        border-radius: 2rem;
+    }
 
     &.on {
         --color-fill: var(--color-widget);
@@ -244,14 +247,15 @@ osc-inspector-color {
 
     cursor: pointer;
 
-    border-radius: 2rem;
 
 
     --color-fill: var(--color-picker-value);
     --alpha-fill: 1;
     --widget-padding: 1rem;
     @include pseudo-fill();
-
+    &:after {
+        border-radius: 2rem;
+    }
 }
 
 .color-picker-modal {
