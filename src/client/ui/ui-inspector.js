@@ -18,7 +18,7 @@ class UiInspector extends UiWidget {
 
         this.mounted = false
 
-        this.foldedCategories = []
+        this.expandedCategories = ['widget']
 
         this.widget = null
 
@@ -26,12 +26,12 @@ class UiInspector extends UiWidget {
 
             if (e.target.classList.contains('category-header')) {
                 var name = e.target.getAttribute('data-name'),
-                    foldedIndex = this.foldedCategories.indexOf(name)
-                e.target.parentNode.classList.toggle('folded', foldedIndex < 0)
-                if (foldedIndex > -1) {
-                    this.foldedCategories.splice(foldedIndex, 1)
+                    expandedIndex = this.expandedCategories.indexOf(name)
+                e.target.parentNode.classList.toggle('expanded', expandedIndex < 0)
+                if (expandedIndex > -1) {
+                    this.expandedCategories.splice(expandedIndex, 1)
                 } else {
-                    this.foldedCategories.push(name)
+                    this.expandedCategories.push(name)
                 }
 
             }
@@ -135,7 +135,7 @@ class UiInspector extends UiWidget {
 
                 if (category) content.appendChild(category)
 
-                category = html`<osc-inspector-category class="${this.foldedCategories.indexOf(props[propName]) > -1 ? 'folded' : ''}"></osc-inspector-category>`
+                category = html`<osc-inspector-category class="${this.expandedCategories.indexOf(props[propName]) > -1 ? 'expanded' : ''}"></osc-inspector-category>`
 
                 field = html`<div class="category-header" data-name="${props[propName]}">${props[propName]}${propName === '_widget' && widgets.length > 1 ? `s (${widgets.length})` : ''}</div>`
 

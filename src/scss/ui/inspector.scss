@@ -115,7 +115,7 @@ osc-inspector-category {
 
     }
 
-    &.folded {
+    &:not(.expanded) {
 
         --alpha-fill: 0.10;
         margin-bottom: 0;
