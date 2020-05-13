@@ -12,15 +12,15 @@ osc-toolbar {
     cursor: pointer;
     &:after {
         transition: text-shadow .1s, color .1s;
-        content:"\f142";
+        content:"\f0c9";
+        font-size:13rem;
         font-family: FontAwesome;
-        line-height: calc(var(--size) + 4rem);
+        line-height: calc(var(--size) + 6rem);
     }
 
     &.on {
         &:after {
             color: var(--color-widget);
-            text-shadow: 0 0 8rem;
         }
     }
 }
