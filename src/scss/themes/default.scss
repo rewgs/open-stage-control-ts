@@ -18,6 +18,9 @@ $font-menu: sans-serif;
 
 
     --color-accent: #{$nord8};
+    --color-error: #{$nord11};
+    --color-warning: #{$nord13};
+    --color-success: #{$nord14};
 
     --color-context-menu: #{$nord6};
     --color-context-menu-text: #{$nord1};
@@ -30,6 +33,7 @@ $font-menu: sans-serif;
     --color-grid: rgba(0,0,0, 0.1);
     --color-notification: #{rgba(black, 0.8)};
     --color-widget: var(--color-accent);
+
 
 
 }
