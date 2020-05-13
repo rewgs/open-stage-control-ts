@@ -3,7 +3,7 @@ var Panel = require('./panel'),
     resize = require('../../events/resize'),
     {iconify} = require('../../ui/utils')
 
-module.exports = class Tab extends Panel {
+class Tab extends Panel {
 
     static description() {
 
@@ -130,3 +130,9 @@ module.exports = class Tab extends Panel {
     }
 
 }
+
+Tab.dynamicProps = Tab.prototype.constructor.dynamicProps.concat(
+    'label'
+)
+
+module.exports = Tab
