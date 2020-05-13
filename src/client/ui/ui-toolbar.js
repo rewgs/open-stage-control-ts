@@ -204,7 +204,7 @@ class UiToolbar extends UiWidget {
         super(options)
 
         this.menu = new ContextMenu({
-            position: [39, 1]
+            position: [40, 1]
         })
         this.opened = false
         this.menu.bindShortcuts(menuEntries)
