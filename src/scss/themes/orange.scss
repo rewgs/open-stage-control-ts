@@ -1,4 +1,7 @@
-$base: #181818;
-$accent: #d98533;
-
 @import 'default';
+
+:root {
+    --color-background: #404040;
+    --color-ui-background: #505050;
+    --color-accent: #d98533;
+}
