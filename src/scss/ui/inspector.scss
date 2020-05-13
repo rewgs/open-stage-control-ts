@@ -1,4 +1,4 @@
-$header-height: 30rem;
+$header-height: 28rem;
 $field-height: 22rem;
 $padding: 8rem;
 
@@ -87,7 +87,7 @@ osc-inspector-category {
         cursor: pointer;
         // color: var(--color-ui-background);
         height: $header-height;
-        line-height: $header-height + 1;
+        line-height: $header-height;
         // padding: 0 8rem;
         @include pseudo-fill($z: -1);
 
@@ -99,19 +99,13 @@ osc-inspector-category {
         &:before {
             position: relative;
             font-family: FontAwesome;
-            content: "\f04b";
+            content: "\f078";
             width: $field-height;
             text-align: left;
             display: inline-block;
             transform-origin: 2rem 3rem;
-            font-size: 7rem;
             width: 8rem;
-            height: 8rem;
-            line-height: 6rem;
             margin-right: 8rem;
-            top: -2rem;
-            transform: rotate(90deg);
-            transition: top .1s, transform .1s;
         }
 
     }
@@ -122,8 +116,7 @@ osc-inspector-category {
         margin-bottom: 0;
 
         .category-header:before {
-            transform: rotate(0deg);
-            top: 0;
+            content: "\f054";
         }
         osc-inspector-field {
             display: none;
@@ -141,7 +134,12 @@ osc-inspector-category {
 
 osc-inspector-checkbox {
 
-    --alpha-fill:0.5;
+    --widget-padding: 0;
+    --color-fill: var(--color-ui-background);
+    --alpha-fill-off: 1;
+    --alpha-fill-on: 0.5;
+
+    border-radius: 2rem;
 
     line-height: $field-height;
     height: $field-height;
@@ -152,21 +150,23 @@ osc-inspector-checkbox {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 4rem;
     border: 2rem solid var(--color-background);
-
     i {
         // color: transparent;
-        opacity: 0.25;
+        opacity: 0.5;
         margin-top: -1rem;
         margin-left: 1rem;
         pointer-events: none;
         font-size: 10rem;
     }
+
+    position: relative;
+    @include pseudo-fill($z: -1);
+    z-index: 1;
+
     &.on {
         position: relative;
-        z-index: 1;
-        @include pseudo-fill($z: -1);
+        --color-fill: var(--color-widget);
         i {
             opacity: 1;
             color: var(--color-text-solid);
@@ -184,7 +184,6 @@ osc-inspector-select {
     height: $field-height;
     width: $field-height;
     background: var(--color-background);
-    margin-left: 4rem;
     select {
         background: var(--color-background);
         // width: 100%;
@@ -208,7 +207,7 @@ osc-inspector-select {
         }
     }
     &:after{
-        content:"\f0d7";
+        content:"\f107";
         font-family: FontAwesome;
         position: absolute;
         line-height: $field-height;
@@ -235,13 +234,15 @@ osc-inspector-color {
     height: $field-height;
     width: $field-height;
     background: var(--color-background);
-    margin-left: 4rem;
 
     cursor: pointer;
 
+    border-radius: 2rem;
+
+
     --color-fill: var(--color-picker-value);
     --alpha-fill: 1;
-    --widget-padding: 1rem;
+    --widget-padding: 2rem;
     @include pseudo-fill();
 
 }
