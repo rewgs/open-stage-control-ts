@@ -1,4 +1,4 @@
-$header-height: 22rem;
+$header-height: 30rem;
 $field-height: 22rem;
 $padding: 8rem;
 
@@ -73,7 +73,7 @@ osc-inspector-field {
 osc-inspector-category {
 
     --alpha-fill: 0.5;
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: block;
     padding: 0 8rem;
 
@@ -92,7 +92,7 @@ osc-inspector-category {
         @include pseudo-fill($z: -1);
 
         &:after {
-            left:-($padding - 2);
+            left:-($padding - 1);
             right:-($padding - 1);
         }
 
@@ -141,6 +141,8 @@ osc-inspector-category {
 
 osc-inspector-checkbox {
 
+    --alpha-fill:0.5;
+
     line-height: $field-height;
     height: $field-height;
     width: $field-height;
@@ -151,6 +153,7 @@ osc-inspector-checkbox {
     align-items: center;
     justify-content: center;
     margin-left: 4rem;
+    border: 2rem solid var(--color-background);
 
     i {
         // color: transparent;
@@ -158,6 +161,7 @@ osc-inspector-checkbox {
         margin-top: -1rem;
         margin-left: 1rem;
         pointer-events: none;
+        font-size: 10rem;
     }
     &.on {
         position: relative;
@@ -237,11 +241,8 @@ osc-inspector-color {
 
     --color-fill: var(--color-picker-value);
     --alpha-fill: 1;
-    --widget-padding: 4rem;
+    --widget-padding: 1rem;
     @include pseudo-fill();
-    &:after {
-
-    }
 
 }
 

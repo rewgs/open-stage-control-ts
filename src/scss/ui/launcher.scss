@@ -43,10 +43,14 @@ $warning: rgb(209, 154, 47);
             padding: 0;
         }
 
-        background-color:  var(--color-ui-background);
+        border-top: 2rem solid var(--color-ui-background);
         max-height: calc(100% - var(--nav-height));
+        background-color:  var(--color-background);
+        osc-panel-inner {
+            background-color:  var(--color-background);
+        }
 
-        --color-background: --color-ui-background; // scrollbar
+        // --color-background: --color-ui-background; // scrollbar
     }
 
     osc-panel-inner {
@@ -112,6 +116,7 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
     width: 18rem;
     height: 18rem;
     background: var(--color-ui-background);
+    border: 0;
     --widget-padding: -1rem;
     i {
         color: var(--color-text);
