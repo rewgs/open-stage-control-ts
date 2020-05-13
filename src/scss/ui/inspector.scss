@@ -1,5 +1,5 @@
 $header-height: 28rem;
-$field-height: 22rem;
+$field-height: 24rem;
 $padding: 8rem;
 
 #osc-inspector {
@@ -13,15 +13,17 @@ osc-inspector-field {
     display: flex;
     flex-direction: row;
     line-height: $field-height;
-    margin-top: 4rem;
+    margin-top: 2rem;
     position: relative;
 
     label {
         width: 90rem;
-        order: 35;
+        // order: 35;
+        text-align: right;
         text-transform: none;
-        padding-left: 8rem;
+        padding-right: 8rem;
         cursor: help;
+        // background: rgba(white, 0.1);
     }
 
     textarea, input {
@@ -59,7 +61,7 @@ osc-inspector-field {
 
     .computed-value {
         position: absolute;
-        right: 94rem;
+        right: 4rem;
         text-align: right;
         pointer-events: none;
         opacity: 0.5;
@@ -136,8 +138,7 @@ osc-inspector-checkbox {
 
     --widget-padding: 0;
     --color-fill: var(--color-ui-background);
-    --alpha-fill-off: 1;
-    --alpha-fill-on: 0.5;
+    --alpha-fill: 1;
 
     border-radius: 2rem;
 
@@ -150,7 +151,7 @@ osc-inspector-checkbox {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2rem solid var(--color-background);
+    border: 1rem solid var(--color-background);
     i {
         // color: transparent;
         opacity: 0.5;
@@ -159,7 +160,6 @@ osc-inspector-checkbox {
         pointer-events: none;
         font-size: 10rem;
     }
-
     position: relative;
     @include pseudo-fill($z: -1);
     z-index: 1;
@@ -167,6 +167,8 @@ osc-inspector-checkbox {
     &.on {
         position: relative;
         --color-fill: var(--color-widget);
+        --alpha-fill: 0.5;
+
         i {
             opacity: 1;
             color: var(--color-text-solid);
@@ -184,6 +186,8 @@ osc-inspector-select {
     height: $field-height;
     width: $field-height;
     background: var(--color-background);
+    cursor: pointer;
+
     select {
         background: var(--color-background);
         // width: 100%;
@@ -242,7 +246,7 @@ osc-inspector-color {
 
     --color-fill: var(--color-picker-value);
     --alpha-fill: 1;
-    --widget-padding: 2rem;
+    --widget-padding: 1rem;
     @include pseudo-fill();
 
 }
