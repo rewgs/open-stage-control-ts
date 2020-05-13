@@ -1,6 +1,5 @@
 var Widget = require('../common/widget'),
     html = require('nanohtml'),
-    {urlParser} = require('../utils'),
     locales = require('../../locales'),
     StaticProperties = require('../mixins/static_properties')
 
@@ -19,7 +18,7 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
         }, ['decimals', 'bypass'], {
 
             value: {type: 'string', value: '', help: [
-                'External web page URL. Only local URLs are allowed (starting with `http://127.0.0.1/`, `http://10.x.x.x/`, `http://192.168.x.x/`, etc)',
+                'External web page URL.',
             ]}
 
         })
@@ -47,9 +46,7 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
         this.value = v
 
-        var parser = urlParser(this.value)
-
-        if (this.value && parser.isLocal()) {
+        if (this.value) {
             this.frame.setAttribute('src', this.value)
             this.widget.classList.remove('error')
             if (this.errorTextMounted) {

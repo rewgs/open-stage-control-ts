@@ -74,6 +74,7 @@
   - dropdown: close menu when receiving a value
   - dropdown: removed empty 1st option
   - switch: removed `showValues` (inconsistent with menu/dropdown, feature covered by `values` property)
+  - frame: allow loading non local urls
 
 - widget removals
   - `push`, `toggle`: merged into `button`
