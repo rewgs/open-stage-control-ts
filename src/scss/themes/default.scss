@@ -10,14 +10,16 @@ $font-menu: sans-serif;
     --nav-height: 40rem;
     --grid-width: 10;
 
-    --color-background: #{$nord0};
-    --color-ui-background: #{$nord1};
+
+    --color-background: #21252b;
+    --color-ui-background: #2c313a;
+    --color-accent: #6db5fd;
 
     --color-text: #{$nord4};
     --color-text-solid: #{$nord6};
 
 
-    --color-accent: #{$nord8};
+    --color-accent: #6db5fd;
     --color-error: #{$nord11};
     --color-warning: #{$nord13};
     --color-success: #{$nord14};
@@ -33,7 +35,5 @@ $font-menu: sans-serif;
     --color-grid: rgba(0,0,0, 0.1);
     --color-notification: #{rgba(black, 0.8)};
     --color-widget: var(--color-accent);
-
-
 
 }
