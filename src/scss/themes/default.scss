@@ -2,37 +2,34 @@ $font: 'Roboto';
 $font-mono: 'Roboto Mono';
 $font-menu: sans-serif;
 
-$base: rgb(25, 31, 42)!default;
-$accent: rgb(82, 168, 255)!default;
 
-$text: white!default;
+@import '../colors/nord';
 
 :root {
 
     --nav-height: 40rem;
     --grid-width: 10;
 
+    --color-background: #{$nord0};
+    --color-ui-background: #{$nord1};
 
-    --color-text: #{transparentize($text, .4)};
+    --color-text: #{$nord4};
+    --color-text-solid: #{$nord6};
 
-    --color-background: #{$base};
-    --color-ui-background: #{mix($base, black, 85)};
+
+    --color-accent: #{$nord8};
+
+    --color-context-menu: #{$nord6};
+    --color-context-menu-text: #{$nord1};
+
+
+    --alpha-scrollbar: 0.25;
+    --alpha-scrollbar-on: 0.75;
+    --scrollbar-size: 12rem;
 
     --color-grid: rgba(0,0,0, 0.1);
     --color-notification: #{rgba(black, 0.8)};
-
-    --color-context-menu: #fafafa;
-    --color-context-menu-text: #444;
-
-    --alpha-scrollbar: 0.25;
-    --alpha-scrollbar-on: 0.5;
-    --scrollbar-size: 12rem;
-
-    --color-text-solid: #{$text};
-    --color-text: #{transparentize($text, .4)};
-
-
-    --color-accent: #{$accent};
     --color-widget: var(--color-accent);
+
 
 }

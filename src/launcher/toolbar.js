@@ -119,7 +119,7 @@ class Toolbar {
             start.visible = !serverStarted
             stop.visible = !!serverStarted
             newWindow.visible = !!serverStarted
-            menu.popup({window: remote.getCurrentWindow(), x: parseInt(PXSCALE), y: parseInt(39 * PXSCALE)})
+            menu.popup({window: remote.getCurrentWindow(), x: parseInt(PXSCALE), y: parseInt(40 * PXSCALE)})
         })
 
         menu.on('menu-will-close', ()=>{
