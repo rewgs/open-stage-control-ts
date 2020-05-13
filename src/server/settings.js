@@ -159,5 +159,5 @@ module.exports = {
     cli: cli,
     configPath: baseDir,
     infos: infos,
-    appAddresses: ()=>address(settings.options['use-ssl'] ? 'https://' : 'http://', settings.options.port || 8080)
+    appAddresses: ()=>address(module.exports.read('use-ssl') ? 'https://' : 'http://', settings.options.port || 8080)
 }
