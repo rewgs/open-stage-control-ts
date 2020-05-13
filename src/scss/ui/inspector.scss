@@ -197,13 +197,14 @@ osc-inspector-select {
         padding: 4rem 6rem;
 
         position: absolute;
-        left:0;
+        right:2rem;
+        width: 127rem;
         opacity: 0;
         optgroup {
-            background: var(--color-background);
+            background: var(--color-ui-background);
             font-weight: bold;
             option {
-                background: var(--color-ui-background);
+                background: var(--color-background);
                 color: var(--color-text);
                 margin-left: -4rem;
                 font-weight: normal;
