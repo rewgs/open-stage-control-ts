@@ -1,6 +1,3 @@
-$error: rgb(249, 88, 37);
-$warning: rgb(209, 154, 47);
-
 #osc-launcher {
 
     osc-panel-header {
@@ -22,11 +19,12 @@ $warning: rgb(209, 154, 47);
     flex-direction: column;
 
     osc-panel-container.main {
-        background-color:  var(--color-background);
+        background-color:  var(--color-ui-background);
         min-height: 0;
         min-height: 40rem;
         osc-panel-content {
             padding: 8rem;
+            background-color:  var(--color-ui-background);
         }
     }
     osc-panel-content {
@@ -69,7 +67,7 @@ osc-settings-field {
     display: flex;
     flex-direction: row;
     margin: 2rem;
-    line-height: 20rem;
+    line-height: 22rem;
     position: relative;
     label {
         width: 100rem;
@@ -83,7 +81,7 @@ osc-settings-field {
     }
     input {
         appearance: none;
-        background: var(--color-ui-background);
+        background: var(--color-background);
         flex: 1;
         padding: 0 4rem;
         width: 100rem;
@@ -95,8 +93,7 @@ osc-settings-field {
     }
 
     &.error label {
-        color: $error;
-        opacity: 0.75;
+        color: var(--color-error);
     }
     &.restart label:after {
         content: "";
@@ -105,7 +102,7 @@ osc-settings-field {
         left:4rem;
         right:-4rem;
         bottom:0;
-        background: $warning;
+        background: var(--color-warning);
         opacity: 0.25;
         border-radius: 4rem;
     }
@@ -113,17 +110,15 @@ osc-settings-field {
 
 osc-settings-checkbox, osc-settings-reset, osc-settings-file {
     @extend osc-inspector-checkbox;
-    width: 18rem;
-    height: 18rem;
-    background: var(--color-ui-background);
-    border: 0;
+    // width: 18rem;
+    // height: 18rem;
     --widget-padding: -1rem;
     i {
         color: var(--color-text);
-        opacity: 0.5;
+        opacity: 0.75;
     }
     &:hover i {
-        opacity: .75;
+        opacity: 1;
     }
     &.on {
         --alpha-fill: 0.5;
@@ -131,6 +126,9 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
             color: var(--color-text-solid);
             opacity: 1;
         }
+    }
+    &:last-child {
+        border-left: 0;
     }
 }
 
@@ -157,13 +155,11 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
     }
 
     .warning {
-        color: $warning;
-        opacity: 0.75;
+        color: var(--color-warning);
     }
 
     .error {
-        color: $error;
-        opacity: 0.75;
+        color: var(--color-error);
     }
 
     .trace {
