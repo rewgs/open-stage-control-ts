@@ -16,6 +16,9 @@ osc-inspector-field {
     margin-top: 2rem;
     position: relative;
 
+    --widget-padding: -1rem;
+
+
     label {
         width: 90rem;
         // order: 35;
@@ -165,7 +168,6 @@ osc-inspector-checkbox {
     z-index: 1;
 
     &.on {
-        position: relative;
         --color-fill: var(--color-widget);
         --alpha-fill: 0.5;
 
