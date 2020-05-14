@@ -42,7 +42,7 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true, inter
 
         super({...options, html: html`<inner></inner>`})
 
-        this.setValueIntensity(this.getProp('mode') === 'intensity' ? this.getProp('range').min : 1)
+        this.setValueIntensity(this.getProp('mode') === 'intensity' ? this.getProp('range').min : this.getProp('range').max)
 
         var bR = this.getProp('borderRadius')
         if (parseInt(bR) == bR) bR += 'rem'
