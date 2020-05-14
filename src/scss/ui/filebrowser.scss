@@ -11,8 +11,7 @@ $padding: 8rem;
         flex-shrink: 0;
         line-height: 40rem;
         padding-left: $padding;
-        background: var(--color-background);
-        margin-bottom: 2rem;
+        background: var(--color-ui-button);
 
     }
     .file-list {
@@ -20,6 +19,7 @@ $padding: 8rem;
         flex:1;
         background: var(--color-background);
         padding: 0 $padding;
+        margin: 1rem 0;
     }
     .file {
         position: relative;
@@ -62,31 +62,31 @@ $padding: 8rem;
         display: flex;
         flex-direction: row;
         align-items: flex-end;
-        justify-content: flex-end;
-        height: 40rem;
+        justify-content: stretch;
+        height: 42rem + $padding * 2;
+        line-height: 38rem;
         flex-shrink: 0;
-        margin-top: $padding;
-        div {
-            margin-left: $padding;
+        border: $padding solid var(--color-ui-background);
+        padding: 1rem;
+        .btn, input {
+            margin: 1rem;;
             text-overflow: clip;
             min-width: 0;
+            background: var(--color-ui-button);
         }
         i {
             pointer-events: none;
         }
         .save-as {
             flex:1;
-            height: 40rem;
-            line-height: 40rem;
             border: 0;
             padding: 0 10rem;
             font-size: 120%;
-            top: -1rem;
             position: relative;
             background: var(--color-background);
             min-width: 0;
             &[disabled] {
-                display: none
+                visibility: hidden;
             }
         }
     }
