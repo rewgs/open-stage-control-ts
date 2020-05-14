@@ -17,7 +17,7 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
         return Widget.defaults({
 
-            _class_specific: 'matrix: widgets',
+            _class_specific: 'matrix',
 
             widgetType: {type: 'string', value: 'button', help: 'Defines the type of the widgets in the matrix'},
             quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},

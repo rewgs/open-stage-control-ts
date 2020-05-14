@@ -15,7 +15,7 @@ module.exports = class Keyboard extends Panel {
 
         return Widget.defaults({
 
-            _class_specific: 'matrix',
+            _class_specific: 'keyboard',
 
             keys: {type: 'number', value: 25, help: 'Defines the number keys'},
             start: {type: 'number', value: 48, help: [
@@ -33,7 +33,7 @@ module.exports = class Keyboard extends Panel {
             ]},
             toggles: {type: 'boolean', value: false, help: 'Set to `true` to make keys bahave like toggle buttons'}
 
-        }, ['_value', 'default', 'value', 'linkId'], {
+        }, [], {
 
             css: {type: 'string', value: '', help: [
                 'Available CSS variables:',
