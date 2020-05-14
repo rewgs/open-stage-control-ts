@@ -181,6 +181,7 @@ class Modal extends Panel {
             parent.modalBreakout += (this.value ? 1 : -1)
             if (parent.modalBreakout > 0) parent.container.classList.add('modal-breakout')
             else if (parent.modalBreakout === 0) parent.container.classList.remove('modal-breakout')
+            else parent.modalBreakout = 0
 
             parent = parent.parent
         }
@@ -189,6 +190,7 @@ class Modal extends Panel {
         this.modalBreakout += (this.value ? 1 : -1)
         if (this.modalBreakout > 0) this.container.classList.add('modal-breakout')
         else if (this.modalBreakout === 0) this.container.classList.remove('modal-breakout')
+        else this.modalBreakout = 0
 
 
     }
