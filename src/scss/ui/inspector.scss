@@ -77,7 +77,6 @@ osc-inspector-field {
 
 osc-inspector-category {
 
-    --alpha-fill: 0.5;
     margin-top: 1rem;
     display: block;
     padding: 0 8rem;
@@ -90,7 +89,6 @@ osc-inspector-category {
         position: relative;
         text-transform: none;
         cursor: pointer;
-        // color: var(--color-ui-background);
         height: $header-height;
         line-height: $header-height;
         // padding: 0 8rem;
@@ -104,7 +102,7 @@ osc-inspector-category {
         &:before {
             position: relative;
             font-family: FontAwesome;
-            content: "\f078";
+            content: "\f054";
             width: $field-height;
             text-align: left;
             display: inline-block;
@@ -115,16 +113,22 @@ osc-inspector-category {
 
     }
 
-    &:not(.expanded) {
+    osc-inspector-field {
+        display: none;
+    }
+    --alpha-fill: 1;
+    --color-fill: var(--color-ui-button);
 
-        --alpha-fill: 0.10;
-        margin-bottom: 0;
+    &.expanded {
+        // --alpha-fill: 1;
+        --alpha-fill: 0.5;
+        --color-fill: var(--color-widget);
 
         .category-header:before {
-            content: "\f054";
+            content: "\f078";
         }
         osc-inspector-field {
-            display: none;
+            display: flex;
         }
     }
 
@@ -140,9 +144,8 @@ osc-inspector-category {
 osc-inspector-checkbox {
 
     --widget-padding: 0;
-    --color-fill: var(--color-ui-background);
+    --color-fill: var(--color-ui-button);
     --alpha-fill: 1;
-
 
     line-height: $field-height;
     height: $field-height;
@@ -267,19 +270,26 @@ osc-inspector-color {
     .widget {
         background: var(--color-background);
         flex: 1;
-        width: 100%;
+        width:  auto;
+        margin: 8rem;
     }
 
     .actions {
-        margin-top: 8rem;
         display: flex;
         flex-direction: row;
+        align-items: flex-end;
+        justify-content: stretch;
+        height: 42rem + $padding * 2;
+        line-height: 38rem;
+        flex-shrink: 0;
+        border: $padding solid var(--color-ui-background);
+        padding: 1rem;
         .btn {
             flex: 1;
-            text-align: center;
-        }
-        :first-child {
-            margin-right: 8rem;
+            margin: 1rem;;
+            text-overflow: clip;
+            min-width: 0;
+            background: var(--color-ui-button);
         }
     }
 
