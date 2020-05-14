@@ -171,9 +171,13 @@ if (settings.cli) {
         launcher.webContents.send('server-started')
 
         if (!settings.read('no-gui')) {
-            global.serverProcess.stdout.once('data', (data) => {
-                global.clientWindows.push(openClient())
-            })
+            function cb(data) {
+                if (data.indexOf('Server started') > -1) {
+                    global.clientWindows.push(openClient())
+                    global.serverProcess.stdout.off('data', cb)
+                }
+            }
+            global.serverProcess.stdout.on('data', cb)
         }
 
         global.serverProcess.stdout.on('data', (data) => {
