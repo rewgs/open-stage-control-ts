@@ -4,6 +4,7 @@ Themes can be loaded with the `--theme` option. Multiple themes can be combined.
 
 Available themes (full color scheme):
 
+- `nord`: arctic color palette (https://www.nordtheme.com/)
 - `orange`: grey and orange theme
 
 ## Creating a custom theme

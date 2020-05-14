@@ -9,6 +9,8 @@ Open Stage Control relies on several other free softwares:
 
 https://github.com/jean-emmanuel/open-stage-control/network/dependencies
 
+The default theme is based on [Nord](https://www.nordtheme.com/), some UI components are inspired by the [Atom](https://atom.io/) text editor.
+
 ## Contributors
 
 https://github.com/jean-emmanuel/open-stage-control/graphs/contributors
