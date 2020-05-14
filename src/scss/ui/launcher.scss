@@ -74,6 +74,8 @@ osc-settings-field {
         text-align: right;
         margin-right: 8rem;
         position: relative;
+        line-height: 24rem;
+        height: 22rem;
         cursor: help;
         span {
             opacity: 0.5;
@@ -98,7 +100,7 @@ osc-settings-field {
     &.restart label:after {
         content: "";
         position: absolute;
-        top:0;
+        top:1rem;
         left:4rem;
         right:-4rem;
         bottom:0;
