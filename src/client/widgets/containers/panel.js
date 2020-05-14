@@ -17,12 +17,12 @@ class Panel extends Container() {
 
         return super.defaults({
 
-            _panel: 'panel',
+            _class_specific: 'panel',
 
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
 
-            _panel_widgets: 'panel: widget container',
+            _separator1: 'widget container',
 
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:'Defines how children are laid out.'},
             justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
@@ -30,7 +30,7 @@ class Panel extends Container() {
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             innerPadding: {type : 'boolean', value: true, help: 'Set to `false` to make the `padding` property apply only between children and not at the container\'s inner boundaries.'},
 
-            _panel_tabs: 'panel: tab container',
+            _separator2: 'tab container',
 
             verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
 

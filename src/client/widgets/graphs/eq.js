@@ -15,7 +15,7 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
 
         return Widget.defaults({
 
-            _eq:'eq',
+            _class_specific: 'eq',
 
             filters: {type: 'array', value: '', help: [
                 'Each item must be an object with the following properties',

@@ -13,7 +13,7 @@ module.exports = class Knob extends Slider {
 
         return super.defaults({
 
-            _knob:'knob',
+            _class_specific: 'knob',
 
             mode: {type: 'string', value: 'vertical', choices: ['vertical', 'circular', 'snap'], help: [
                 '- `circular`: relative move in circular motion',

@@ -89,7 +89,6 @@ osc-inspector-category {
 
     .category-header {
         position: relative;
-        text-transform: none;
         cursor: pointer;
         height: $header-height;
         line-height: $header-height;
@@ -115,7 +114,23 @@ osc-inspector-category {
 
     }
 
-    osc-inspector-field {
+    .separator {
+        height: $header-height;
+        line-height: $header-height + 1;
+        margin: 8rem 0;
+        --alpha-fill: 0.75;
+        position: relative;
+        @include pseudo-fill($z: -1);
+        padding: 0 16rem;
+        opacity: 0.75;
+        --color-fill: var(--color-background);
+        &:after {
+            left:-($padding - 1);
+            right:-($padding - 1);
+        }
+    }
+
+    osc-inspector-field, .separator {
         display: none;
     }
     --alpha-fill: 1;
@@ -131,6 +146,9 @@ osc-inspector-category {
         }
         osc-inspector-field {
             display: flex;
+        }
+        .separator {
+            display: block
         }
     }
 

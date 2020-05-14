@@ -14,7 +14,7 @@ module.exports = class File extends Widget {
 
         return super.defaults({
 
-            _input:'input',
+            _class_specific: 'input',
 
             align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
             directory: {type: 'string', value: 'auto', help: 'Default browsing directory'},

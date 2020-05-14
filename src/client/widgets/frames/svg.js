@@ -16,7 +16,7 @@ class Svg extends StaticProperties(Widget, {bypass: true}) {
 
         return super.defaults({
 
-            _svg:'svg',
+            _class_specific: 'svg',
 
             svg: {type: 'string', value: '', help: [
                 'Svg xml definition:',

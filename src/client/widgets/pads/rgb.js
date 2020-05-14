@@ -20,7 +20,7 @@ module.exports = class Rgb extends Widget {
 
         return super.defaults({
 
-            _rgb:'rgb',
+            _class_specific: 'rgb',
 
             snap: {type: 'boolean', value: false, help: [
                 'By default, the points are dragged from their initial position.',

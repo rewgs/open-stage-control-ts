@@ -16,12 +16,12 @@ class Script extends Widget {
 
         return super.defaults({
 
-            _script: 'script',
+            _class_specific: 'script',
 
             event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
             script: {},
 
-            _eventKey: 'event: keyboard',
+            _separator: 'event: keyboard',
 
             keyBinding: {type: 'string|array', value: '', help: 'Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation)'},
             keyRepeat: {type: 'boolean', value: true, help: 'Set to `false` to prevent keydown repeats when holding the key combo pressed'},

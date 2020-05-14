@@ -18,7 +18,7 @@ class Modal extends Panel {
 
         return Widget.defaults({
 
-            _modal: 'modal',
+            _class_specific: 'modal',
 
             label: {type: 'string|boolean', value: 'auto', help: [
                 'Set to `false` to hide completely',
@@ -28,7 +28,7 @@ class Modal extends Panel {
             doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the modal require a double tap to open instead of a single tap'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
 
-            _modalWidgets: 'modal: popup',
+            _separator: 'popup',
 
             popupLabel: {type: 'string|boolean', value: 'auto', help: 'Alternative label for the modal popup'},
             popupWidth: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},

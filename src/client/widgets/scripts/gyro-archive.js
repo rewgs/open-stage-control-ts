@@ -18,7 +18,7 @@ class Gyroscope extends Widget {
 
         return super.defaults({
 
-            _gyroscope: 'gyroscope',
+            _class_specific: 'gyroscope',
 
             frequency: {type: 'number', value: 30, help: 'Value update frequency (updates per seconds)'},
             normalize: {type: 'boolean', value: true, help: 'Normalize gravity related values'},

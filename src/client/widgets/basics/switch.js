@@ -15,7 +15,7 @@ class Switch extends MenuBase {
 
         return super.defaults({
 
-            _switch:'switch',
+            _class_specific: 'switch',
 
             layout: {type: 'string', value: 'vertical', choices: ['vertical', 'horizontal', 'grid'], help:''},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},

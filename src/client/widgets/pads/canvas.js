@@ -13,7 +13,7 @@ class CanvasWidget extends Canvas {
 
         return super.defaults({
 
-            _canvas:'canvas',
+            _class_specific: 'canvas',
 
 
             onCreate: {type: 'string', value: '', help: ' '},

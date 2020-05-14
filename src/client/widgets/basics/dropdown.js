@@ -15,7 +15,7 @@ class Dropdown extends MenuBase {
 
         return super.defaults({
 
-            _dropdown:'dropdown',
+            _class_specific: 'dropdown',
 
             align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
             values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [

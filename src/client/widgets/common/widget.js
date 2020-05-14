@@ -47,14 +47,14 @@ class Widget extends EventEmitter {
 
         var defaults = {
 
-            _widget:'widget',
+            _widget: 'widget',
 
             type: {type: 'string', value: 'auto', help: 'Widget type'},
             id: {type: 'string', value: 'auto', help: 'Widgets sharing the same `id` will act as clones and update each other\'s value(s) without sending extra osc messages.' },
             visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},
             interaction: {type: 'boolean', value: true, help: 'Set to `false` to disable pointer interactions.'},
 
-            _geometry:'geometry',
+            _geometry: 'geometry',
 
             left: {type: 'number|string', value: 'auto', help: [
                 'When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).',
@@ -68,7 +68,7 @@ class Widget extends EventEmitter {
             height: {type: 'number|percentage', value: 'auto', help: 'Widget height'},
             expand: {type: 'boolean|number', value: 'false', help: 'If parent\'s layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically.'},
 
-            _style:'style',
+            _style: 'style',
 
 
             colorBg: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},

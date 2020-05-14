@@ -15,7 +15,7 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
 
         return super.defaults({
 
-            _text: 'text',
+            _class_specific: 'text',
 
             vertical: {type: 'boolean', value: false, help: 'Set to `true` to display the text vertically'},
             wrap: {type: 'boolean', value: false, help: [

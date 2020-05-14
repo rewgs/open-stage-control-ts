@@ -16,7 +16,7 @@ class Tab extends Panel {
         return Widget.defaults({
 
 
-            _panel: 'panel',
+            _class_specific: 'panel',
 
             label: {type: 'string|boolean', value: 'auto', help: [
                 'Set to `false` to hide completely',
@@ -27,7 +27,7 @@ class Tab extends Panel {
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
             // detached: {type: 'boolean', value: true, help: 'Set to `false` if the tab contains `frame` widgets that should not be reloaded when the tab opens'},
 
-            _panel_widgets: 'panel: widget container',
+            _separator1: 'widget container',
 
             layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help:'Defines how children are laid out.'},
             justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
@@ -35,7 +35,7 @@ class Tab extends Panel {
             scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
             innerPadding: {type : 'boolean', value: true, help: 'Set to `false` to make the `padding` property apply only between children and not at the container\'s inner boundaries.'},
 
-            _panel_tabs: 'panel: tab container',
+            _separator2: 'tab container',
 
             verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
 
@@ -44,7 +44,7 @@ class Tab extends Panel {
             'colorStroke', 'alphaStroke', 'alphaFillOff', 'alphaFillOn'
         ], {
 
-            _children: 'children',
+            _children:'children',
 
             widgets: {type: 'array', value: [], help: 'Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously.'},
             tabs: {type: 'array', value: [], help: 'Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously'},

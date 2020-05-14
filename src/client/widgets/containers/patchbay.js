@@ -73,7 +73,7 @@ class PatchBay extends Container(Canvas) {
 
         return super.defaults({
 
-            _patchbay:'patchbay',
+            _class_specific: 'patchbay',
 
             inputs: {type: 'array|object', value: ['input_1', 'input_2'], help: [
                 '- `Array` of input names : `[\'input_1\', \'input_2\']`',

@@ -16,7 +16,7 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
 
         return super.defaults({
 
-            _plot:'plot',
+            _class_specific: 'plot',
 
             rangeX: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the x axis'},
             rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},

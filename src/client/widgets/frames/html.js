@@ -25,7 +25,7 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
 
         return super.defaults({
 
-            _html:'html',
+            _class_specific: 'html',
 
             html: {type: 'string', value: '', help: [
                 'Allowed HTML tags:',

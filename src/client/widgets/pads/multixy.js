@@ -19,7 +19,7 @@ module.exports = class MultiXy extends Pad {
 
         return super.defaults({
 
-            _mutlixy: 'multi xy',
+            _class_specific: 'multi xy',
 
             points: {type: 'integer|array', value: 2, help: [
                 'Defines the number of points on the pad',
@@ -27,7 +27,7 @@ module.exports = class MultiXy extends Pad {
             ]},
 
 
-            _xy: 'xy',
+            _separator: 'xy',
 
             pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size'},
             snap: {type: 'boolean', value: false, help: [

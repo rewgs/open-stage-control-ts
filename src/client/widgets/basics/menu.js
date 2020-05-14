@@ -16,7 +16,7 @@ class Menu extends MenuBase {
 
         return super.defaults({
 
-            _menu:'menu',
+            _class_specific: 'menu',
 
             size: {type: 'number|array', value: 200, help: [
                 '- If `layout` is `circular`: diameter (in px)',

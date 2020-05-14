@@ -15,7 +15,7 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
 
         return super.defaults({
 
-            _image:'image',
+            _class_specific: 'image',
 
             size: {type: 'string', value: 'cover', help: 'CSS background-size'},
             position: {type: 'string', value: 'center', help: 'CSS background-position'},

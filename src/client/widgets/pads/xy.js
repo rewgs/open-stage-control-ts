@@ -17,7 +17,7 @@ module.exports = class Xy extends Pad {
 
         return super.defaults({
 
-            _xy:'xy',
+            _class_specific: 'xy',
 
             pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size'},
             snap: {type: 'boolean', value: false, help: [
