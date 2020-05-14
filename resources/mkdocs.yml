@@ -15,8 +15,8 @@ theme:
     palette:
         primary: 'Indigo'
         accent: 'Indigo'
-    logo: 'img/logo.png'
-    favicon: 'img/logo_nobadge.png?6'
+    logo: 'img/logo_nobadge.png'
+    favicon: 'img/logo_nobadge.png'
     include_search_page: false
     search_index_only: true
 
