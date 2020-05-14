@@ -128,6 +128,7 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
         }
     }
     &:last-child {
+        margin-left: -1rem;
         border-left: 0;
     }
 }
