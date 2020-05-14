@@ -64,7 +64,7 @@ class ColorPicker extends UiWidget {
 
     open() {
 
-        this.label.innerHTML = this.name 
+        this.label.innerHTML = this.name
         this.modal.open()
         resize.check(this.rgb.container)
         this.opened = 1
