@@ -25,6 +25,8 @@ osc-inspector-field {
         text-align: right;
         text-transform: none;
         padding-right: 8rem;
+        line-height: $field-height + 1rem;
+        height: $field-height;
         cursor: help;
         // background: rgba(white, 0.1);
     }
