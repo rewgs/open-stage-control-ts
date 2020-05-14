@@ -95,10 +95,10 @@ class UiInspectorField extends UiWidget {
 
             let style = window.getComputedStyle(this.widget.container),
                 colorData = this.widget.constructor.cssVariables.find(x=>x.js === this.name),
-                val = '#000'
+                val = 'transparent'
 
             try {
-                val = chroma(style.getPropertyValue(colorData.css).trim()).hex('rgb')
+                val = chroma(style.getPropertyValue(colorData.css).trim()).hex('rgba')
             } catch(e) {}
 
             let picker = html`<osc-inspector-color type="text" name="${this.name}" value="${val}" style="--color-picker-value: ${val}"></osc-inspector-color>`

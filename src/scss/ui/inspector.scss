@@ -258,6 +258,7 @@ osc-inspector-color {
     @include pseudo-fill();
     &:after {
         border-radius: 2rem;
+        border: 1rem solid var(--color-ui-button)
     }
 }
 
