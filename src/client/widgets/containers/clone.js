@@ -20,11 +20,11 @@ class Clone extends Container() {
 
         return super.defaults({
 
-            _clone:'clone',
+            _class_specific: 'clone',
 
             widgetId: {type: 'string', value: '', help: '`id` of the widget to clone'},
 
-            _overrides:'overrides',
+            _separator: 'overrides',
 
             props: {type: 'object', value: {}, help: 'Cloned widget\'s properties to override'},
 

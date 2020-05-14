@@ -17,7 +17,7 @@ class Button extends Widget {
         return super.defaults({
 
 
-            _button: 'button',
+            _class_specific: 'button',
 
             label: {type: 'string|boolean', value: 'auto', help: [
                 'Set to `false` to hide completely',

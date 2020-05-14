@@ -18,7 +18,7 @@ class UiInspector extends UiWidget {
 
         this.mounted = false
 
-        this.expandedCategories = ['widget']
+        this.expandedCategories = ['_widget']
 
         this.widget = null
 
@@ -118,7 +118,7 @@ class UiInspector extends UiWidget {
 
         for (let propName in props) {
 
-            if (propName === '_children' || propName === 'tabs' || propName === 'widgets') continue
+            if (propName === '_children' || propName === 'tabs' || propName === 'widgets' || propName === '_props') continue
 
             let field,
                 shared = true
@@ -131,13 +131,18 @@ class UiInspector extends UiWidget {
 
             if (!shared) continue
 
-            if (propName.indexOf('_') === 0 && propName !== '_props') {
+
+            if (propName.indexOf('_separator') > -1) {
+
+                field = html`<div class="separator">${props[propName]}</div>`
+
+            } else if (propName.indexOf('_') === 0) {
 
                 if (category) content.appendChild(category)
 
-                category = html`<osc-inspector-category class="${this.expandedCategories.indexOf(props[propName]) > -1 ? 'expanded' : ''}"></osc-inspector-category>`
+                category = html`<osc-inspector-category class="${this.expandedCategories.indexOf(propName) > -1 ? 'expanded' : ''}"></osc-inspector-category>`
 
-                field = html`<div class="category-header" data-name="${props[propName]}">${props[propName]}${propName === '_widget' && widgets.length > 1 ? `s (${widgets.length})` : ''}</div>`
+                field = html`<div class="category-header" data-name="${propName}">${props[propName]}${propName === '_widget' && widgets.length > 1 ? `s (${widgets.length})` : ''}</div>`
 
             } else if (widget.props[propName] === undefined) {
 

@@ -15,7 +15,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         return Widget.defaults({
 
-            _encoder: 'encoder',
+            _class_specific: 'encoder',
 
             ticks: {type: 'number', value: 360, help: 'defines the granularity / verbosity of the encoder (number of step for a 360° arc)'},
             back: {type: '*', value: -1, help: 'Defines which value is sent when rotating the encoder anticlockwise'},

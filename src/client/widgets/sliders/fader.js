@@ -13,7 +13,7 @@ module.exports = class Fader extends Slider {
 
         return super.defaults({
 
-            _fader:'fader',
+            _class_specific: 'fader',
 
             design: {type: 'string', value: 'default', choices: ['default', 'round', 'compact'], help: 'Design style'},
             horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},

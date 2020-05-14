@@ -15,7 +15,7 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true, inter
 
         return super.defaults({
 
-            _led:'led',
+            _class_specific: 'led',
 
             mode: {type: 'string', value: 'intensity', choices: ['intensity', 'color'], help: 'Defines how value is interpreted (see `value`)'},
             range: {type: 'object', value: {min:0, max:1}, help: 'Value range'},

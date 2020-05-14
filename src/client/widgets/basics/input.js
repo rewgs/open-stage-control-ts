@@ -14,7 +14,7 @@ class Input extends Canvas {
 
         return super.defaults({
 
-            _input:'input',
+            _class_specific: 'input',
 
             align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
             unit: {type: 'string', value: '', help: 'Unit will be appended to the displayed widget\'s value (it doesn\'t affect osc messages)'},

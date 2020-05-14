@@ -15,7 +15,7 @@ module.exports = class Keyboard extends Panel {
 
         return Widget.defaults({
 
-            _matrix: 'matrix',
+            _class_specific: 'matrix',
 
             keys: {type: 'number', value: 25, help: 'Defines the number keys'},
             start: {type: 'number', value: 48, help: [

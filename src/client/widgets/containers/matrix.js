@@ -17,7 +17,7 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
         return Widget.defaults({
 
-            _matrix: 'matrix: widgets',
+            _class_specific: 'matrix: widgets',
 
             widgetType: {type: 'string', value: 'button', help: 'Defines the type of the widgets in the matrix'},
             quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
@@ -28,7 +28,7 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
                 'Note: by default, the widgets inherit from the matrix\' `id` and osc properties (`id` and `address` are appended with `/$`)'
             ]},
 
-            _matrixLayout: 'matrix: layout',
+            _separator: 'layout',
 
             layout: {type: 'string', value: 'horizontal', choices: ['horizontal', 'vertical', 'grid'], help: 'Defines how children are laid out.'},
             gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},

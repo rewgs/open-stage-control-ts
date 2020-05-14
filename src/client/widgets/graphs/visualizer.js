@@ -17,7 +17,7 @@ class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dot
 
         return Widget.defaults({
 
-            _visualizer:'visualizer',
+            _class_specific: 'visualizer',
 
             duration: {type: 'number', value: 1, help: 'Defines visualization duration in seconds'},
             framerate: {type: 'number', value: 30, help: 'Defines visualization framerate'},
