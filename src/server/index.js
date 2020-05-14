@@ -171,7 +171,7 @@ if (settings.cli) {
         launcher.webContents.send('server-started')
 
         if (!settings.read('no-gui')) {
-            function cb(data) {
+            var cb = (data)=>{
                 if (data.indexOf('Server started') > -1) {
                     global.clientWindows.push(openClient())
                     global.serverProcess.stdout.off('data', cb)
