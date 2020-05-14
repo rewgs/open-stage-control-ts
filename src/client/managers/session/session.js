@@ -122,9 +122,26 @@ var converters = [
                     break
 
 
+                case 'tab':
+                case 'panel':
+                case 'root':
+                    if (data.widgets && data.widgets.length) {
+                        data.innerPadding = false
+                        data.padding = 0
+                        data.alphaStroke = 0
+                    }
+                    break
+
                 case 'strip':
                     data.type = 'panel'
                     data.layout = data.horizontal ? 'horizontal' : 'vertical'
+                    data.alphaStroke = 0
+                    if (data.spacing) {
+                        data.padding = data.spacing
+                    } else {
+                        data.innerPadding = false
+                        data.padding = 0
+                    }
                     break
 
                 case 'matrix':
