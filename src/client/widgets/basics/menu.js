@@ -266,6 +266,7 @@ class Menu extends MenuBase {
             parent.modalBreakout += (this.opened ? 1 : -1)
             if (parent.modalBreakout > 0) parent.container.classList.add('modal-breakout')
             else if (parent.modalBreakout === 0) parent.container.classList.remove('modal-breakout')
+            else parent.modalBreakout = 0
 
             scrollX += parent.widget.scrollLeft
             scrollY += parent.widget.scrollTop
