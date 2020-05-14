@@ -62,7 +62,7 @@
     &.contains-alpha > inner {
         grid-template:
             "a a b" auto
-            "c c c" 20rem / 1fr;
+            "c c c" calc(20rem + var(--widget-spacing) * 2) / 1fr;
     }
 
     .widget {
@@ -115,7 +115,8 @@
 
     .alpha {
         grid-area: c;
-
+        height: auto!important;
+        width: auto!important;
         --alpha-stroke: 0;
         --alpha-fill-off: 0.1;
         --alpha-fill-on: 0.25;
