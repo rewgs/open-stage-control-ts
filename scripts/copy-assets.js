@@ -2,7 +2,7 @@ var cpr = require('cpr'),
     fs = require('fs'),
     path = require('path'),
     files = [
-        ['../resources/images/logo-nobadge.png', '../app/assets/favicon.png'],
+        ['../resources/images/logo_nobadge.png', '../app/assets/favicon.png'],
         ['../resources/images/logo.png', '../app/assets/logo.png'],
         ['../LICENSE', '../app/LICENSE'],
         ['../src/python/', '../app/server/python/'],
