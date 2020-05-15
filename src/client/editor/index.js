@@ -402,7 +402,7 @@ class Editor {
 
             while (!sameLevel && widget.parent !== widgetManager) {
                 let test = true
-                if (this.selectedWidgets[0].parent !== widget.parent) test = false
+                if (this.selectedWidgets.length && this.selectedWidgets[0].parent !== widget.parent) test = false
                 sameLevel = test
                 if (!sameLevel) widget = widget.parent
             }
