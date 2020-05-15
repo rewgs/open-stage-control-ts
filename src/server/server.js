@@ -78,7 +78,7 @@ function httpRoute(req, res) {
 
         } else if (/^\/(assets|client)\//.test(url)){
 
-            if (prod) res.setHeader("Cache-Control", "public, max-age=2592000");
+            if (prod) res.setHeader('Cache-Control', 'public, max-age=2592000')
             res.sendFile(path.resolve(__dirname + '/..' + url))
 
         } else {
