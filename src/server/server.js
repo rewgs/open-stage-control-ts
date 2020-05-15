@@ -23,6 +23,7 @@ var urlparser   = require('url'),
     ipc         = new Ipc(server),
     theme       = require('./theme').init(),
     zeroconf = require('./zeroconf'),
+    prod = !process.argv[0].includes('node_modules'),
     osc = {},
     clients = {},
     httpCheckTimeout
@@ -77,6 +78,7 @@ function httpRoute(req, res) {
 
         } else if (/^\/(assets|client)\//.test(url)){
 
+            if (prod) res.setHeader("Cache-Control", "public, max-age=2592000");
             res.sendFile(path.resolve(__dirname + '/..' + url))
 
         } else {
