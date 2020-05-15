@@ -7,6 +7,7 @@ var cpr = require('cpr'),
         ['../LICENSE', '../app/LICENSE'],
         ['../src/python/', '../app/server/python/'],
         ['../resources/fonts/', '../app/assets/fonts/'],
+        ['../src/html/launcher.html', '../app/launcher/index.html'],
     ]
 
 for (var i in files) {
@@ -46,3 +47,9 @@ appJson.optionalDependencies = {
 }
 
 fs.writeFileSync(path.resolve(__dirname + '/../app/package.json'), JSON.stringify(appJson, null, '  '))
+
+var clientHtml = fs.readFileSync(path.resolve(__dirname + '/../src/html/client.html'))
+    .toString()
+    .replace(/\$\{version\}/g, appJson.version)
+
+fs.writeFileSync(path.resolve(__dirname + '/../app/client/index.html'), clientHtml)
