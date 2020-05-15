@@ -335,7 +335,7 @@ module.exports = class Fader extends Slider {
             preserveDrawingBuffer: true
         })
 
-        ctx.font = this.ctx.font
+        ctx.font = this.fontWeight + ' ' + this.fontSize + 'px ' + this.fontFamily
         ctx.textBaseline = this.ctx.textBaseline
         ctx.textAlign = this.ctx.textAlign
 
