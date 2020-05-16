@@ -116,6 +116,14 @@ class Switch extends MenuBase {
         }
 
     }
+
+    setCssVariables() {
+
+        super.setCssVariables()
+
+        this.container.classList.toggle('padding-0', this.getProp('padding') === -1) 
+
+    }
 }
 
 Switch.cssVariables = Switch.prototype.constructor.cssVariables.concat(

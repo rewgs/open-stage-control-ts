@@ -66,7 +66,6 @@
     &:before {
         margin: var(--widget-spacing);
     }
-    padding:20rem;
 
     inner {
         position: relative;
@@ -75,6 +74,12 @@
         --widget-spacing: calc(var(--widget-padding) / 2);
         margin: calc(var(--widget-spacing) + 1rem);
 
+
+    }
+
+    &.padding-0 inner {
+        // style fix for padding == 0
+        margin: 0;
 
     }
 
