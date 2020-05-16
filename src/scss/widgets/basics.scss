@@ -73,7 +73,7 @@
         display: flex;
         flex-direction: column;
         --widget-spacing: calc(var(--widget-padding) / 2);
-        margin: calc(var(--widget-spacing));
+        margin: calc(var(--widget-spacing) + 1rem);
 
 
     }
