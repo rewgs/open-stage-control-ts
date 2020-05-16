@@ -52,7 +52,7 @@ class Editor {
         this.widgetTree.on('sorted', (event)=>{
 
             var {widget, oldIndex, newIndex} = event,
-                propName = widget.props.tabs.length ? 'tabs' : 'widgets'
+                propName = widget.props.tabs && widget.props.tabs.length ? 'tabs' : 'widgets'
 
             if (widget.props[propName].length < 2) return
 
