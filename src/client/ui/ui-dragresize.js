@@ -32,6 +32,7 @@ class UiDragResize extends UiWidget {
         this.width = 0
         this.height = 0
 
+        this.widgets = []
         this.mounted = false
 
         this.handles = DOM.get(this.container, '.handle')
@@ -94,6 +95,10 @@ class UiDragResize extends UiWidget {
 
         }, {element: this.container})
 
+        window.addEventListener('resize', ()=>{
+            if (this.mounted) this.updateRectangle()
+        })
+
         // this.handles[0]._ignore_css_transforms = true
 
     }
@@ -104,6 +109,7 @@ class UiDragResize extends UiWidget {
 
         this.container.parentNode.removeChild(this.container)
         this.mounted = false
+        this.widgets = []
 
 
     }
@@ -112,11 +118,22 @@ class UiDragResize extends UiWidget {
 
         this.clear()
 
-        widgets = widgets.slice().filter(w=>w.getProp('visible') && !(w instanceof Tab) && !(w instanceof Root))
+        this.widgets = widgets.slice().filter(w=>w.getProp('visible') && !(w instanceof Tab) && !(w instanceof Root))
 
-        if (!widgets.length) return
+        if (!this.widgets.length) return
 
-        var widget = widgets[0]
+        this.updateRectangle()
+
+        this.widgets[0].parentNode.appendChild(this.container)
+        this.mounted = true
+
+
+    }
+
+    updateRectangle() {
+
+        var widgets = this.widgets,
+            widget = widgets[0]
 
         var handlesVisibility = [
             widget.parent.getProp('layout') === 'default', // nw
@@ -144,9 +161,6 @@ class UiDragResize extends UiWidget {
         // this.cssTransformOrigin = widget.cssTransformOrigin
 
         this.updateCss()
-
-        parent.appendChild(this.container)
-        this.mounted = true
 
     }
 
