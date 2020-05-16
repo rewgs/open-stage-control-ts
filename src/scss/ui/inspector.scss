@@ -189,10 +189,6 @@ osc-inspector-checkbox {
     @include pseudo-fill($z: -1);
     z-index: 1;
 
-    &:after {
-        border-radius: 2rem;
-    }
-
     &.on {
         --color-fill: var(--color-widget);
         --alpha-fill: 0.5;
@@ -277,7 +273,6 @@ osc-inspector-color {
     --widget-padding: 1rem;
     @include pseudo-fill();
     &:after {
-        border-radius: 2rem;
         border: 1rem solid var(--color-ui-button)
     }
 }
