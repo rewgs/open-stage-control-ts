@@ -38,7 +38,7 @@
     --alpha-stroke: 0;
     --alpha-fill-off: 0.1;
     --alpha-fill-on: 1;
-    --widget-padding: -1;
+    --widget-padding: -1rem;
 
     inner {
         @include pseudo-stroke();

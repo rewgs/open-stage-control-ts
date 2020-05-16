@@ -346,7 +346,7 @@
     &.empty {
         @include pseudo-stroke();
         &:before {
-            content:"clone"
+            margin: var(--widget-spacing);
         }
     }
 
@@ -384,11 +384,11 @@
 
     --widget-padding: 4rem;
     --color-text-on: var(--color-background);
+    --alpha-fill-off: 0.15;
+    --alpha-fill-on: .75;
 
     > .toggle {
 
-        --alpha-fill-off: 0;
-        --alpha-fill-on: .75;
         --widget-padding: -1rem;
 
         position: absolute;
