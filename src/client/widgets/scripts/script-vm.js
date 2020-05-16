@@ -157,7 +157,7 @@ class ScriptVm extends Vm {
 
                 filter = Array.isArray(filter) ? filter : [filter]
 
-                var containers = this.filter.map(x=>this.resolveId(id)).reduce((a,b)=>a.concat(b), [])
+                var containers = filter.map(x=>this.resolveId(x)).reduce((a,b)=>a.concat(b), [])
 
                 if (!containers.length) return
                 filter = (widget)=>{
