@@ -83,6 +83,13 @@
             text-overflow: ellipsis;
             -webkit-writing-mode:vertical-rl;
             writing-mode:vertical-rl;
+            i {
+                transform: rotate(180deg);
+                writing-mode: initial;
+            }
+        }
+        i {
+            margin-top: -1rem;
         }
     }
 }
