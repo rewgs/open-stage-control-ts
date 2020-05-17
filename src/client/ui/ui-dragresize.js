@@ -146,8 +146,7 @@ class UiDragResize extends UiWidget {
             this.handles[i].style.display = handlesVisibility[i] ? '' : 'none'
         }
 
-        var parent = widget.parentNode,
-            lefts = widgets.map(w => w.container.offsetLeft),
+        var lefts = widgets.map(w => w.container.offsetLeft),
             tops = widgets.map(w => w.container.offsetTop),
             rights = widgets.map(w => w.container.offsetLeft + w.container.offsetWidth),
             bottoms = widgets.map(w => w.container.offsetTop + w.container.offsetHeight)
