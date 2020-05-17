@@ -60,12 +60,13 @@ Multiple widgets can be edited at once.
 
 ## Keyboard shortcuts
 
-The following shortcuts are available only when the editor is enabled:
-
 === "Linux / Windows"
 
     | Shortcut | Description |
     |---|---|
+    | ++ctrl+g++ | Toggle grid. |
+    | ++ctrl+t++ | Toggle session tree. |
+    | ++ctrl+i++ | Toggle inspector. |
     | ++"Click"++ | Widget selection. |
     | ++ctrl+"Click"++ | Multi-widget selection. Widgets can be toggled from selection by clicking on them individually.|
     | ++shift+"Click"+"Drag"++ | Draw a selection rectangle and attempt to select widgets in it (starts by selecting the widget under the cursor). If ++ctrl++ is pressed too, current selection is kept and will be merged with the new one if possible. |
@@ -89,6 +90,9 @@ The following shortcuts are available only when the editor is enabled:
 
     | Shortcut | Description |
     |---|---|
+    | ++cmd+g++ | Toggle grid. |
+    | ++cmd+t++ | Toggle session tree. |
+    | ++cmd+i++ | Toggle inspector. |
     | ++"Click"++ | Widget selection. |
     | ++cmd+"Click"++ | Multi-widget selection. Widgets can be toggled from selection by clicking on them individually.|
     | ++shift+"Click"+"Drag"++ | Draw a selection rectangle and attempt to select widgets in it (starts by selecting the widget under the cursor). If ++cmd++ is pressed too, current selection is kept and will be merged with the new one if possible. |
