@@ -12,7 +12,7 @@
 
 .button-container {
 
-    --alpha-fill-off: 0;
+    --alpha-fill-off: .15;
     --alpha-fill-on: .75;
     --widget-padding: -1rem;
     --color-text-on: var(--color-background);
@@ -57,17 +57,29 @@
 
 .switch-container {
 
+    --alpha-fill-off: .15;
     --alpha-fill-on: 0.75;
     --alpha-fill: var(--alpha-fill-off);
     --color-text-on: var(--color-background);
 
-    inner {
+    @include pseudo-stroke();
+    &:before {
+        margin: var(--widget-spacing);
+    }
 
+    inner {
         position: relative;
         display: flex;
         flex-direction: column;
+        --widget-spacing: calc(var(--widget-padding) / 2);
+        margin: calc(var(--widget-spacing) + 1rem);
 
-        @include pseudo-stroke();
+
+    }
+
+    &.padding-0 inner {
+        // style fix for padding == -1
+        margin: 0;
 
     }
 
@@ -96,6 +108,9 @@
         text-overflow: clip;
         overflow: hidden;
         @include pseudo-fill($z: -1);
+        &:after {
+            margin: calc(var(--widget-spacing) - 1rem);
+        }
 
         &.on {
             --alpha-fill: var(--alpha-fill-on);
@@ -118,10 +133,12 @@
 
 .menu-container {
 
-    --alpha-fill: 0.75;
+    --alpha-fill-off: .15;
+    --alpha-fill-on: .75;
+    --alpha-fill-hover: calc(var(--alpha-fill-on) / 2);
     --widget-padding: 1rem;
+    --text-padding: calc(var(--widget-padding) + 8rem);
 
-    border-radius: 0!important; // border radius breaks it somehow
     z-index: initial!important;
     // contain: style size;
 
@@ -148,6 +165,7 @@
         align-items: center;
         position: relative;
         @include pseudo-stroke();
+        @include pseudo-fill($z: -1);
 
         &.text-align-right .text {
             justify-content: flex-end;
@@ -179,8 +197,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-left: var(--widget-padding);
-        padding-right: var(--widget-padding);
+        padding-left: var(--text-padding);
     }
     .icon {
         order: 1;
@@ -191,11 +208,10 @@
         width: 30rem;
         height: calc(100% - 2rem);
         font-family: FontAwesome;
-        color: var(--color-stroke);
         font-size: 120%;
-        border-left: 1rem solid var(--color-stroke);
-        opacity: var(--alpha-stroke);
         margin: 1rem 0;
+        margin-right: var(--widget-padding);
+        z-index: 1;
         &:after {
             content:"\f107";
         }
@@ -290,10 +306,10 @@
             }
 
             &.on div:before {
-                opacity: var(--alpha-fill)!important;
+                opacity: var(--alpha-fill-on)!important;
             }
             &.active div:before, &:hover div:before {
-                opacity: calc(var(--alpha-fill) / 2);
+                opacity: var(--alpha-fill-hover);
             }
 
 
@@ -341,13 +357,13 @@
             &.on {
                 color: var(--color-background);
                 div:after {
-                    opacity: var(--alpha-fill)!important;
+                    opacity: var(--alpha-fill-on)!important;
                 }
             }
 
             &.active, &:hover {
                 div:after, div:after {
-                    opacity: calc(var(--alpha-fill) / 2);
+                    opacity: var(--alpha-fill-hover);
                 }
             }
 
@@ -374,10 +390,11 @@
 
 .dropdown-container {
 
-    --alpha-fill: 0.75;
+    --alpha-fill-off: .15;
+    --alpha-fill-on: .75;
     --widget-padding: 1rem;
+    --text-padding: calc(var(--widget-padding) + 8rem);
 
-    border-radius: 0!important; // border radius breaks it somehow
     z-index: initial!important;
     // contain: style size;
 
@@ -400,6 +417,7 @@
         align-items: stretch;
         position: relative;
         @include pseudo-stroke();
+        @include pseudo-fill($z: -1);
 
         &.right .text {
             justify-content: flex-end;
@@ -415,8 +433,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-left: var(--widget-padding);
-        padding-right: var(--widget-padding);
+        padding-left: var(--text-padding);
     }
     .icon {
         order: 1;
@@ -426,10 +443,8 @@
         align-items: center;
         width: 30rem;
         font-family: FontAwesome;
-        color: var(--color-stroke);
         font-size: 120%;
-        border-left: 1rem solid var(--color-stroke);
-        opacity: var(--alpha-stroke);
+        margin-right: var(--widget-padding);
         &:after {
             content:"\f107";
         }
@@ -456,6 +471,7 @@
 .input-container {
 
     --alpha-fill-off: 0.05;
+    --text-padding: calc(var(--widget-padding) + 8rem);
 
     inner {
         position: relative;
@@ -472,8 +488,7 @@
             text-align: left;
         }
 
-        padding-left: calc(var(--widget-padding) * 2);
-        padding-right: calc(var(--widget-padding) * 2);
+        padding: 0 var(--text-padding);
 
     }
 
@@ -527,8 +542,10 @@
 
 .file-container {
 
-    --alpha-fill: 0.75;
+    --alpha-fill-off: .15;
+    --alpha-fill-on: .75;
     --widget-padding: 1rem;
+    --text-padding: calc(var(--widget-padding) + 8rem);
 
     inner {
         flex:1;
@@ -538,6 +555,7 @@
         align-items: stretch;
         position: relative;
         @include pseudo-stroke();
+        @include pseudo-fill($z: -1);
 
         &.right .text {
             justify-content: flex-end;
@@ -553,8 +571,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-left: var(--widget-padding);
-        padding-right: var(--widget-padding);
+        padding-left: var(--text-padding);
         min-width: 0;
         overflow: hidden;
     }
@@ -566,10 +583,8 @@
         align-items: center;
         width: 30rem;
         font-family: FontAwesome;
-        color: var(--color-stroke);
         font-size: 120%;
-        border-left: 1rem solid var(--color-stroke);
-        opacity: var(--alpha-stroke);
+        margin-right: var(--widget-padding);
         &:after {
             content:"\f07c";
         }
