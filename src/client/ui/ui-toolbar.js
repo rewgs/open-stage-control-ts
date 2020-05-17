@@ -142,14 +142,14 @@ var menuEntries = [
                 label: locales('editor_grid'),
                 class: ()=>{return 'toggle ' + (editor.grid ? 'on' : 'off')},
                 action: editor.toggleGrid.bind(editor),
-                // shortcut: 'mod + g'
+                shortcut: 'mod + g'
 
             },
             {
                 label: locales('editor_tree'),
                 class: ()=>{return 'toggle ' + (leftUiSidePanel.minimized ? 'off' : 'on')},
                 action: ()=>{return leftUiSidePanel.minimized ? leftUiSidePanel.restore() : leftUiSidePanel.minimize()},
-                // shortcut: 'mod + t'
+                shortcut: 'mod + t'
 
 
             },
@@ -157,7 +157,7 @@ var menuEntries = [
                 label: locales('editor_inspector'),
                 class: ()=>{return 'toggle ' + (rightUiSidePanel.minimized ? 'off' : 'on')},
                 action: ()=>{return rightUiSidePanel.minimized ? rightUiSidePanel.restore() : rightUiSidePanel.minimize()},
-                // shortcut: 'mod + i'
+                shortcut: 'mod + i'
             }
         ]
     },

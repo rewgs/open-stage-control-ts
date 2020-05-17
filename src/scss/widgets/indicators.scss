@@ -38,7 +38,8 @@
     --alpha-stroke: 0;
     --alpha-fill-off: 0.1;
     --alpha-fill-on: 1;
-    --widget-padding: -1;
+    --widget-padding: -1rem;
+    --text-padding: calc(var(--widget-padding) + 8rem);
 
     inner {
         @include pseudo-stroke();
@@ -64,7 +65,7 @@
         overflow: hidden;
         text-align: center;
         word-wrap: break-word;
-        border: 2rem solid transparent;
+        padding: 0 var(--text-padding);
 
         &.right {
             text-align: right;
@@ -83,6 +84,13 @@
             text-overflow: ellipsis;
             -webkit-writing-mode:vertical-rl;
             writing-mode:vertical-rl;
+            i {
+                transform: rotate(180deg);
+                writing-mode: initial;
+            }
+        }
+        i {
+            margin-top: -1rem;
         }
     }
 }

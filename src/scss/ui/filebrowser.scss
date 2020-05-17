@@ -10,7 +10,7 @@ $padding: 8rem;
         height: 40rem;
         flex-shrink: 0;
         line-height: 40rem;
-        padding-left: $padding;
+        padding-left: $padding + 2rem;
         background: var(--color-ui-button);
 
     }
@@ -66,10 +66,12 @@ $padding: 8rem;
         height: 42rem + $padding * 2;
         line-height: 38rem;
         flex-shrink: 0;
-        border: $padding solid var(--color-ui-background);
-        padding: 1rem;
+        // border: $padding solid var(--color-ui-background);
+        padding: $padding;
+        background: var(--color-ui-background);
         .btn, input {
-            margin: 1rem;;
+            margin: 1rem;
+            margin-left: $padding;
             text-overflow: clip;
             min-width: 0;
             background: var(--color-ui-button);
