@@ -25,7 +25,7 @@ class Script extends Widget {
 
             keyBinding: {type: 'string|array', value: '', help: 'Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation)'},
             keyRepeat: {type: 'boolean', value: true, help: 'Set to `false` to prevent keydown repeats when holding the key combo pressed'},
-            keyType: {type: 'string', value: 'keyDown', choices: ['keydown', 'keyup', 'both'], help: 'Determines which key event trigger the script\'s execution'},
+            keyType: {type: 'string', value: 'keydown', choices: ['keydown', 'keyup', 'both'], help: 'Determines which key event trigger the script\'s execution'},
 
 
 
