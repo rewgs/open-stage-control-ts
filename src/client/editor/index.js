@@ -169,7 +169,7 @@ class Editor {
 
     handleKeyboard(combo, e){
 
-        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return
+        if (this.inspector.helpModalOpened || e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return
 
         e.preventDefault()
 
