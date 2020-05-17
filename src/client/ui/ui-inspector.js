@@ -85,6 +85,8 @@ class UiInspector extends UiWidget {
         this.lock = false
         this.clearTimeout = null
 
+        this.helpModalOpened = false
+
     }
 
     clear() {
@@ -269,7 +271,7 @@ class UiInspector extends UiWidget {
             computedValue = JSON.stringify(computedValue, null, ' ')
         }
 
-        new UiModal({closable: true, title: html`<span class="editor-help-title">${name}</span>`, html: true, content: html`
+        var modal = new UiModal({closable: true, title: html`<span class="editor-help-title">${name}</span>`, html: true, content: html`
             <div class="inspector-help">
 
                 <div class="header">
@@ -290,6 +292,12 @@ class UiInspector extends UiWidget {
                 </div>
             </div>
         `})
+
+
+        this.helpModalOpened = true
+        modal.on('close', ()=>{
+            this.helpModalOpened = false
+        })
 
     }
 
