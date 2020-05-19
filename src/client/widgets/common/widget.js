@@ -721,7 +721,7 @@ class Widget extends EventEmitter {
 
                 if (!this.isDynamicProp(propName)) {
 
-                    if ((!widget || !this.contains(widget)) && widget !== this && !(widget === this && updatedProps.length === 1 && updatedProps[0] === 'value')) {
+                    if ((!widget || !this.contains(widget)) && !(widget === this && updatedProps.length === 1 && updatedProps[0] === 'value')) {
                         reCreate = true
                         break
                     }
