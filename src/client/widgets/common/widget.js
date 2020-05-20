@@ -103,7 +103,10 @@ class Widget extends EventEmitter {
 
             _osc: 'osc',
 
-            address: {type: 'string', value: 'auto', help: 'OSC address for sending messages, it must start with a /'},
+            address: {type: 'string', value: 'auto', help: [
+                'OSC address for sending / receiving messages, it must start with a slash (`/`)',
+                'By default ("auto"), the widget\'s id is used: `/widget_id`',
+            ]},
             preArgs: {type: '*|array', value: '', help: [
                 'A value or array of values that will be prepended to the OSC messages.',
             ]},
@@ -837,7 +840,7 @@ class Widget extends EventEmitter {
                 var data = {},
                     oldData = {
                         preArgs: propName == 'preArgs' ? oldPropValue : this.getProp('preArgs'),
-                        address: propName == 'address' ? oldPropValue : this.getProp('address')
+                        address: propName == 'address' ? oldPropValue : (this.getProp('address') === 'auto' ? '/' + this.getProp('id') : this.getProp('address'))
                     }
                 data[propName] = this.getProp(propName)
                 widgetManager.registerWidget(this, data, oldData)

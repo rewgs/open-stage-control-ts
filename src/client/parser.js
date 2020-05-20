@@ -67,10 +67,6 @@ var Parser = class Parser {
             props.id = id
         }
 
-        // Generate default address (also handled in editor/edit-field)
-        props.address = props.address === 'auto' ? '/' + props.id : props.address
-
-
         // Remove props that don't apply
         for (let j in props) {
             if (defaults[j] === undefined || j[0] === '_') delete props[j]

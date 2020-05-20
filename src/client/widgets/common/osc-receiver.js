@@ -35,7 +35,9 @@ module.exports = class OscReceiver {
             if (address) this.address = address
 
             if (this.address[0] !== '/') {
-                this.prefix = this.parent.getProp('address') || this.parent.resolveProp('address', undefined, false, this)
+                var parentAddress = this.parent.getProp('address') || this.parent.resolveProp('address', undefined, false, this)
+                if (parentAddress === 'auto') parentAddress = '/' + this.parent.getProp('id')
+                this.prefix = parentAddress
                 if (this.prefix[this.prefix.length - 1] !== '/') this.prefix += '/'
             }
 
