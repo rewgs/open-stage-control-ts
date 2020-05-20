@@ -143,7 +143,7 @@ class WidgetManager extends EventEmitter {
                 preArgs: widget.getProp('preArgs'),
                 target: widget.getProp('target'),
                 typeTags: widget.getProp('typeTags'),
-                address: widget.getProp('address'),
+                address: widget.getProp('address') === 'auto' ? '/' + widget.getProp('id') : widget.getProp('address'),
             }
         })
 
