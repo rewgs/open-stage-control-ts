@@ -65,8 +65,13 @@ class UiInspectorField extends UiWidget {
                 JSON.stringify(this.value, null, '  ').replace(/\n\s\s\s\s/g, ' ').replace(/\n\s\s(\}|\])/g, ' $1') : this.value
 
 
-        var input = html`<textarea tabIndex="${this.tabIndex}" class="no-keybinding" name="${this.name}" rows="${stringValue.split('\n').length}">${stringValue}</textarea>`
+        var input = html`<textarea tabIndex="${this.tabIndex}" class="no-keybinding" name="${this.name}" rows="${stringValue.split('\n').length}"></textarea>`
 
+        if (this.default.value === 'auto' && stringValue === 'auto') {
+            input.placeholder = stringValue
+        } else {
+            input.textContent = stringValue
+        }
 
         this.container.appendChild(input)
 
