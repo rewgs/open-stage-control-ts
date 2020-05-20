@@ -59,7 +59,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-        | <h6 id="address">address<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#address" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | OSC address for sending messages, it must start with a / |
+        | <h6 id="address">address<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#address" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | OSC address for sending / receiving messages, it must start with a slash (`/`)<br/><br/>By default ("auto"), the widget's id is used: `/widget_id` |
         | <h6 id="preArgs">preArgs<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#preArgs" title="Permanent link">#</a></h6> | `*`&vert;<br/>`array` | <code>""</code> | A value or array of values that will be prepended to the OSC messages. |
         | <h6 id="typeTags">typeTags<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#typeTags" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Defines the osc argument types, one letter per argument (including preArgs)<br/>- If empty, the types are infered automatically from the values (with numbers casted to floats by default)<br/>- If there are more arguments than type letters, the last type is used for the extra arguments<br/><br/>See http://opensoundcontrol.org/spec-1_0 for existing typetags |
         | <h6 id="decimals">decimals<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#decimals" title="Permanent link">#</a></h6> | `integer` | <code>2</code> | Defines the number of decimals to send. |
