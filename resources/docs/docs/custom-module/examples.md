@@ -85,8 +85,6 @@ module.exports = {
 
 ```js
 
-var xyValue = [0, 0]
-
 module.exports = {
 
     oscInFilter:function(data){
