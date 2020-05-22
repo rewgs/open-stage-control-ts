@@ -1,5 +1,11 @@
 # CSS Tips
 
+## Browser inspector
+
+
+Hit `F12` to open the developers tools panel. The html/css inspector helps retreiving the class names needed to style specific parts of the widgets
+
+
 ## Inline syntax
 
 For simple use cases, the `css` property can be written as a HTML inline styles (without any CSS selector). CSS rules will apply to the widget element.
@@ -84,19 +90,3 @@ Media queries can also be used:
 [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) declared in the  [default theme](https://github.com/jean-emmanuel/open-stage-control/blob/master/src/scss/themes/default.scss) can be overriden.
 
 Widgets also rely on CSS variables for the style properties (colors, padding, etc). These are documented in the widgets' `css` property description.
-
-## Other tips
-
-#### Use the inspector
-
-Hit `F12` to open the developers tools panel. The html/css inspector helps retreiving the class names needed to style specific parts of the widgets.
-
-#### Panel's background-color
-
-This works for panel, strip and tabs:
-
-```css
-> .panel {
-    background-color: red;
-}
-```
