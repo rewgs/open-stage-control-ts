@@ -50,6 +50,7 @@ nav:
         - Custom module:
             - docs/custom-module/custom-module.md
             - docs/custom-module/managing-big-modules.md
+            - docs/custom-module/examples.md
         - Customization:
             - docs/customization/themes.md
             - docs/customization/css-tips.md
