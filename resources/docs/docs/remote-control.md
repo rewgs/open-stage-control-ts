@@ -115,7 +115,7 @@ Same as `/GET` but uses the widget's address instead of `/GET` to reply.
 
 ----
 
-#### `/SET target id value`
+#### `/SET id value`
 
 Set a widget's value as if it was interacted with from the interface. This is likely to make it send its value.
 
