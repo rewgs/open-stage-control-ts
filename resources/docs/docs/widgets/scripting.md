@@ -64,6 +64,14 @@ Returns the property called `"name"` of the first matching widget.
 
 ----
 
+#### `updateProp`: `function(id, name)`
+- `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
+- `name`: property name.
+
+Forcers a widget to check if one of its properties has changed and update itself if needed.
+
+----
+
 #### `httpGet`: `function(url, callback)`
 
 - `url`: url of the resource to fetch (local url only)

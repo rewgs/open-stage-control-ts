@@ -69,7 +69,7 @@ $padding: 8rem;
         // border: $padding solid var(--color-ui-background);
         padding: $padding;
         background: var(--color-ui-background);
-        .btn, input {
+        .btn {
             margin: 1rem;
             margin-left: $padding;
             text-overflow: clip;
@@ -82,6 +82,7 @@ $padding: 8rem;
         .save-as {
             flex:1;
             border: 0;
+            margin: 1rem;
             padding: 0 10rem;
             font-size: 120%;
             position: relative;

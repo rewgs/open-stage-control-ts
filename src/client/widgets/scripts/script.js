@@ -105,7 +105,7 @@ class Script extends Widget {
 
         this.scriptLock = true
         try {
-            this.script(context, this.parsersLocalScope)
+            this.script(context, this.builtIn ? this.parent.parsersLocalScope : this.parsersLocalScope)
         } catch(e) {
             console.log(e)
         }

@@ -132,6 +132,21 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.updateProp = (id, prop)=>{
+
+            var widgets = this.resolveId(id),
+                widget = this.getWidget()
+
+            if (widget.builtIn) widget = widget.parent
+
+            for (var i = widgets.length - 1; i >= 0; i--) {
+
+                widgets[i].updateProps(Array.isArray(prop) ? prop : [prop], widget)
+
+            }
+
+        }
+
         this.sandbox.contentWindow.httpGet = (url, callback)=>{
 
             var parser = urlParser(url),
@@ -263,7 +278,7 @@ class ScriptVm extends Vm {
 
         }
 
-        for (var imports of ['set', 'get', 'getProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
+        for (var imports of ['set', 'get', 'getProp', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
