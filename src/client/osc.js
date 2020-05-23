@@ -10,8 +10,12 @@ var Osc = class Osc extends EventEmitter {
         super()
 
         this.syncOnly = false
-        this.remoteControl = require('./remote-control')
+        this.remoteControl = {}
         this.serverTargets = []
+
+        setTimeout(()=>{
+            osc.remoteControl = require('./remote-control')
+        })
 
     }
 
