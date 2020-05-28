@@ -84,7 +84,7 @@ class WidgetManager extends EventEmitter {
     createAddressRef(widget, preArgs, address) {
 
         preArgs = widget ? widget.getProp('preArgs') : preArgs
-        address = widget ? widget.getProp('address') : address
+        address = widget ? widget.getProp('address') === 'auto' ? '/' + widget.getProp('id') : widget.getProp('address') : address
 
         if (!Array.isArray(preArgs) && preArgs !== '') preArgs = [preArgs]
         if (preArgs === '') preArgs = []
@@ -152,7 +152,7 @@ class WidgetManager extends EventEmitter {
                 newAddress = this.createAddressRef(widget),
                 hash = widget.hash
 
-            if (address && this.addressRoute[address].indexOf(hash) != -1) this.addressRoute[address].splice(this.addressRoute[address].indexOf(hash), 1)
+            if (address && address !== 'auto' && this.addressRoute[address].indexOf(hash) != -1) this.addressRoute[address].splice(this.addressRoute[address].indexOf(hash), 1)
 
             if (!this.addressRoute[newAddress]) this.addressRoute[newAddress] = []
             this.addressRoute[newAddress].push(hash)
