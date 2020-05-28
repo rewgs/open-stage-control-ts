@@ -81,6 +81,9 @@ In this context, `@{} / OSC{}` are also seen as variables (named `VAR_XXX`), not
 
 Parsing errors can be read in the DevTool console (F12).
 
+!!! warning
+    Modifying values in `locals` or `globals` **does not** trigger anything if they are used somewhere else.
+
 ## Javascript: `#{ <code> }`
 
 This is a shorthand for the `JS{{}}` syntax, the only difference being that `<code>` is automatically prepended with a `return` statement.
