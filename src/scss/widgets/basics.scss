@@ -477,7 +477,8 @@
         position: relative;
         @include pseudo-stroke();
         @include pseudo-fill(0.05);
-
+        justify-content: center;
+        align-items: center;
         display: flex;
         padding: var(--widget-padding);
         text-align: center;
@@ -514,7 +515,6 @@
         -webkit-appearance:none;
         appearance: none;
         text-align:inherit;
-        line-height: 50rem;
         vertical-align: top;
         letter-spacing: 1rem;
         -webkit-user-select: text;
