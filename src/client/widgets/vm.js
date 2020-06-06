@@ -10,6 +10,7 @@ class Vm {
             globals = {
                 screen: {width: screen.width, height: screen.height},
                 env: deepCopy(ENV),
+                ip: IP,
                 url: document.location.host,
                 platform: navigator.platform
             }

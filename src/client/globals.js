@@ -1,3 +1,4 @@
+window.IP = window.IP || ''
 window.ENV = window.ENV || {}
 location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, (s,k,v)=>{
     ENV[k]=v
