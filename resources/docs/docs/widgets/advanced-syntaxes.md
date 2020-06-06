@@ -72,8 +72,9 @@ This syntax allows writing formulas in pure javascript. The code will be compile
 - `console`: javascript console
 - `locals`: object for storing/reading arbitrary values. Changing its properties *does not* trigger any synchronisation even if the value is used somewhere else.
 - `globals`: same as `locals` but shared between all widgets, contains a few useful variables:
-    - `screen`: `{width, height}`
+    - `screen`: client screen dimensions (`{width, height}`)
     - `env`: client options (ie: url query options),
+    - `ip`: client's ip address,
     - `url`: server url,
     - `platform`: operating system as seen by the client
 

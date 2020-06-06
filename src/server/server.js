@@ -51,9 +51,12 @@ function httpRoute(req, res) {
 
     if (url === '/' || url.indexOf('/?') === 0) {
 
+        var ip = req.connection.remoteAddress.replace('::ffff:', '')
+
         fs.createReadStream(path.resolve(__dirname + '/../client/index.html'))
           .pipe(replaceStream('</body>', `
             <script>
+                window.IP=${JSON.stringify(ip)}
                 window.ENV=${JSON.stringify(clientOptions)}
                 window.READ_ONLY=${JSON.stringify(settings.read('read-only'))}
             </script></body>`))
