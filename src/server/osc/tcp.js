@@ -91,7 +91,7 @@ class OscTCPServer extends EventEmitter {
         this.addClient(new OscTCPClient({
             metadata: true,
             socket: socket,
-            address: socket.remoteAddress.indexOf('::ffff:') === 0 ? socket.remoteAddress.replace('::ffff:', '') : socket.remoteAddress,
+            address: socket.remoteAddress.replace('::ffff:', ''),
             port: socket.remotePort
         }))
 

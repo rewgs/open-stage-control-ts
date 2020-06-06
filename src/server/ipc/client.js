@@ -12,7 +12,7 @@ class Socket extends EventEmitter {
 
         this.id = id
 
-        this.address = address.indexOf('::ffff:') === 0 ? address.replace('::ffff:', '') : address
+        this.address = address.replace('::ffff:', '')
 
         this.socket = null
 
