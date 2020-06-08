@@ -1,5 +1,5 @@
 var {updateWidget, incrementWidget} = require('./data-workers'),
-    keyboardJS = require('keyboardjs'),
+    keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     {diff, diffToWidget} = require('./diff'),
     widgetManager = require('../managers/widgets'),
     {deepCopy} = require('../utils'),
