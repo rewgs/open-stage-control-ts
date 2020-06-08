@@ -1,6 +1,6 @@
 var html = require('nanohtml'),
     raw = require('nanohtml/raw'),
-    keyboardJS = require('keyboardjs'),
+    keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     UiWidget = require('./ui-widget'),
     mod = (navigator.platform || '').match('Mac') ? 'cmd' : 'ctrl',
     MENU_CONTAINER

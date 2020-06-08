@@ -1,5 +1,5 @@
 var Widget = require('../common/widget'),
-    keyboardJS = require('keyboardjs'),
+    keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     ScriptVm = require('./script-vm'),
     scriptVm = new ScriptVm()
 

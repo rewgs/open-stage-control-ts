@@ -5,7 +5,7 @@ var locales = require('../locales'),
     doubleClick = require('../events/double-click'),
     {icon} = require('./utils'),
     UiModal = require('./ui-modal'),
-    keyboardJS = require('keyboardjs')
+    keyboardJS = require('keyboardjs/dist/keyboard.min.js')
 
 
 module.exports = function UiFilebrowser(options, callback) {

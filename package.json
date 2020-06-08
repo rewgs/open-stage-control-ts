@@ -44,7 +44,7 @@
     "http-auth": "^4.1.2",
     "json5": "2.1.2",
     "jsondiffpatch": "0.4.1",
-    "keyboardjs": "github:jean-emmanuel/KeyboardJS",
+    "keyboardjs": "2.6.3",
     "licensify": "3.1.3",
     "loop-protect": "github:jean-emmanuel/loop-protect#v1.0.1",
     "minimatch": "3.0.4",
