@@ -840,9 +840,13 @@ class Widget extends EventEmitter {
                 var data = {},
                     oldData = {
                         preArgs: propName == 'preArgs' ? oldPropValue : this.getProp('preArgs'),
-                        address: propName == 'address' ? oldPropValue : (this.getProp('address') === 'auto' ? '/' + this.getProp('id') : this.getProp('address'))
+                        address: propName == 'address' ? oldPropValue : this.getProp('address')
                     }
                 data[propName] = this.getProp(propName)
+
+                if (data.address === 'auto')  data.address = '/' + this.getProp('id')
+                if (oldData.address === 'auto')  oldData.address = '/' + this.getProp('id')
+                
                 widgetManager.registerWidget(this, data, oldData)
                 return
 
