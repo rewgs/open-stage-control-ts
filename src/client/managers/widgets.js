@@ -152,7 +152,7 @@ class WidgetManager extends EventEmitter {
                 newAddress = this.createAddressRef(widget),
                 hash = widget.hash
 
-            if (address && address !== 'auto' && this.addressRoute[address].indexOf(hash) != -1) this.addressRoute[address].splice(this.addressRoute[address].indexOf(hash), 1)
+            if (address && this.addressRoute[address].indexOf(hash) != -1) this.addressRoute[address].splice(this.addressRoute[address].indexOf(hash), 1)
 
             if (!this.addressRoute[newAddress]) this.addressRoute[newAddress] = []
             this.addressRoute[newAddress].push(hash)
