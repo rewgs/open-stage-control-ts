@@ -81,3 +81,4 @@ ELECTRON_NOGPU = false
 CANVAS_FRAMERATE = 1
 LANG = 'en'
 ENV = {id: ''}
+IP = ''
