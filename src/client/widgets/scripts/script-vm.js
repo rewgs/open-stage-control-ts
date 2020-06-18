@@ -278,8 +278,14 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.unfocus = ()=>{
+
+            console.debug('ELECTRON.BLUR()')
+
+        }
+
         for (var imports of ['set', 'get', 'getProp', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
-            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout']) {
+            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'unfocus']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
 
