@@ -125,3 +125,9 @@ Reference:
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearInterval
 
 ----
+
+#### `unfocus`: `function()`
+
+*Built-in client only*: tells the operating system to give the focus to the window that was focused before.
+
+----

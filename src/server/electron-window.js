@@ -79,6 +79,12 @@ module.exports = function(options={}) {
     })
 
 
+    window.webContents.on('console-message', (event, level, message)=>{
+
+        if (level === 0 && message === 'ELECTRON.BLUR()') window.blur()
+
+    })
+
     window.webContents.setVisualZoomLevelLimits(1, 1)
 
     window.on('closed', function() {
