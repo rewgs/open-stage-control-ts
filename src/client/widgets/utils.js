@@ -32,7 +32,7 @@ module.exports = {
             var logScale = revertlog ? Math.abs(rangeIn[1] - rangeIn[0]) :
                             Math.abs(rangeOut[1] - rangeOut[0])
 
-            if (log !== true) logScale = Math.abs(log)
+            if (log !== true && log !== -1) logScale = Math.abs(log)
             else if (logScale >= 100) logScale /= 10
             else logScale = Math.max(logScale, 10)
 
