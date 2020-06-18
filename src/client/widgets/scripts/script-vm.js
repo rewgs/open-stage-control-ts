@@ -280,6 +280,7 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.unfocus = ()=>{
 
+            // built-in client only: electron will call window.blur()
             console.debug('ELECTRON.BLUR()')
 
         }
