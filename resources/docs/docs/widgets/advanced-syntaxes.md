@@ -44,7 +44,7 @@ This syntax allows listening on an osc address to define a property.
 
 - `address`: osc address to listen to; if the leading slash (`/`) is omitted, the address will be prefixed with the widget's `address` property
 - `default` (optional): default value returned before any message is received. Must be a primitive value, not an object or an array.
-- `usePreArgs` (optional): by default, osc listeners inherit the widget's `preArgs` and (these must be matched for the osc messages to be processed). Set to `false` bypass them.
+- `usePreArgs` (optional): by default, osc listeners inherit the widget's `preArgs` (these must be matched for the osc messages to be processed). Set to `false` bypass them.
 
 Options can contain `@{}` blocks.
 
