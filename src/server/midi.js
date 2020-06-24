@@ -63,7 +63,7 @@ class MidiConverter {
         try {
             [name, data] = JSON.parse(message)
         } catch (err) {
-            // console.log(err)
+            if (settings.read('debug')) console.error(`(DEBUG, MIDI) Could not parse python's output:\n    ${message}`)
         }
         if (name == 'log') {
             if (data.indexOf('ERROR') > -1) {
