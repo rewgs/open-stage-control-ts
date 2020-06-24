@@ -5,6 +5,9 @@ The `script` property allows widgets to run javascript code when their value upd
 - no `JS{{}}` wrapper, just the code
 - `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their value before the script's compilation
 
+!!! warning "Avoid advanced syntax in scripts"
+    To avoid syntax errors it is recommended to use `getProp()` and `get()` instead of `@{}` and `OSC{}`. `JS{{}}` and `#{}` blocks should be avoided here as well. 
+
 ## Event-dependent variables
 
 Depending on what triggered the script's execution, a few variables are available to help determine the execution conditions.
