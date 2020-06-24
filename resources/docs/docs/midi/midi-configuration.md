@@ -37,3 +37,7 @@ In order to send MIDI messages, a widget must have at least one `target` formatt
 
 !!! warning
     Messages received from a MIDI port only affect widgets that send to this port.
+
+## Debug
+
+Enabling the server's `debug` options will print some extra informations (sent/received midi messages, midi setup informations, etc)
