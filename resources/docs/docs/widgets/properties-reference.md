@@ -716,4 +716,4 @@
         | <h6 id="script_keyType">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keydown"</code> | Determines which key event trigger the script's execution<br/><br/>Choices: `keydown`, `keyup`, `both` |
 
 ??? api "<div id="variable">variable<a class="headerlink" href="#variable" title="Permanent link">#</a></div>"
-    Hold a value.
+    Receives / stores a value, to be used in scripts (using the get function) or in properties (using the @{} syntax).
