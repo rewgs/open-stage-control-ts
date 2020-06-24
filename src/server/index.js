@@ -21,9 +21,11 @@ if (settings.read('docs')) return openDocs()
 
 function nodeMode() {
 
+    console.warn('(INFO) Running with node')
+
     if (!settings.read('no-gui')) {
         settings.write('no-gui', true, true)
-        console.warn('(INFO) Headless mode (--no-gui) enabled automatically (running with node)')
+        console.warn('(INFO) Headless mode (--no-gui) enabled automatically')
     }
 
     process.on('uncaughtException', (err)=>{
@@ -153,8 +155,8 @@ if (settings.cli) {
 
     ipcMain.on('start',function(e, options){
 
-        var args = ['--', '--no-gui']
-        // if (process.platform === 'win32') args.unshift('--') // not needed with ELECTRON_RUN_AS_NODE since '--' is always prepended
+        var args = ['--no-gui']
+        if (process.platform === 'win32') args.unshift('--')
         for (var k in settings.read('options')) {
             args.push('--' + k)
             var val = settings.read(k)
@@ -165,7 +167,7 @@ if (settings.cli) {
             }
         }
 
-        global.serverProcess = spawn(process.argv[0], process.argv.slice(1).concat(args), {stdio: 'pipe', env: {'ELECTRON_RUN_AS_NODE':'1'}})
+        global.serverProcess = spawn(process.argv[0], process.argv.slice(1).concat(args), {stdio: 'pipe'/*, env: {"ELECTRON_RUN_AS_NODE":"1"}*/})
         launcher.webContents.send('server-started')
 
         if (!settings.read('no-gui')) {
