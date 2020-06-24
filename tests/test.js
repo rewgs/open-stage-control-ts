@@ -16,7 +16,7 @@ var widgets = {
     'Indicators':['led', 'text'],
     'Pads':['xy','rgb','multixy', 'canvas'],
     'Sliders':['fader','knob', 'encoder', 'range'],
-    'Scripts':['script'],
+    'Scripts':['script', 'variable'],
 }
 for (let k in widgets) {
     for (let type of widgets[k]) {
