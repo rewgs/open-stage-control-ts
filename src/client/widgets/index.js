@@ -48,6 +48,7 @@ module.exports.widgets = {
 
     // scripts
     script: require('./scripts/script'),
+    variable: require('./scripts/variable'),
 
 }
 
@@ -59,7 +60,7 @@ module.exports.categories = {
     'Indicators':['led', 'text'],
     'Pads':['xy','rgb','multixy'],
     'Sliders':['fader','knob', 'encoder', 'range'],
-    'Scripts':['script'],
+    'Scripts':['script', 'variable'],
 }
 
 var defaults = {}
