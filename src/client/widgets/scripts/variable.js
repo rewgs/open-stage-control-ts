@@ -5,7 +5,7 @@ module.exports = class Variable extends StaticProperties(Widget, {bypass: true, 
 
     static description() {
 
-        return 'Hold a value.'
+        return 'Receives / stores a value, to be used in scripts (using the get function) or in properties (using the @{} syntax).'
 
     }
 
