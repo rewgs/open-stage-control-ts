@@ -63,7 +63,7 @@ class MidiConverter {
         try {
             [name, data] = JSON.parse(message)
         } catch (err) {
-            // console.log(err)
+            if (settings.read('debug')) console.error(`(DEBUG, MIDI) Unparsed python log:\n    ${message}`)
         }
         if (name == 'log') {
             if (data.indexOf('ERROR') > -1) {
@@ -93,7 +93,9 @@ class MidiConverter {
                 }
             }
 
-            MidiConverter.parseIpc(results)
+            for (let r of results) {
+                MidiConverter.parseIpc(r)
+            }
         })
 
     }

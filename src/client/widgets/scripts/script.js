@@ -31,7 +31,7 @@ class Script extends Widget {
 
         }, [
 
-            'visible', 'label', 'interaction',
+            'visible', 'interaction',
             '_geometry', 'left', 'top', 'width', 'height', 'expand',
             '_style',  'colorBg', 'colorText', 'colorWidget', 'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOn', 'alphaFillOff', 'padding', 'css'
 
