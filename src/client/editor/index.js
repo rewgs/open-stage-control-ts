@@ -9,6 +9,8 @@ var {updateWidget, incrementWidget} = require('./data-workers'),
     UiInspector = require('../ui/ui-inspector'),
     UiTree = require('../ui/ui-tree'),
     UiDragResize = require('../ui/ui-dragresize'),
+    notifications = require('../ui/notifications'),
+    locales = require('../locales'),
     {leftUiSidePanel, rightUiSidePanel} = require('../ui/'),
     ipc = require('../ipc'),
     sessionManager
@@ -27,16 +29,43 @@ class Editor {
         this.inspector.on('update', (event)=>{
 
             var {propName, value} = event,
-                newWidgets = []
+                newWidgets = [],
+                error = false
 
             for (var w of this.selectedWidgets) {
-                if ((propName === 'label' || propName === 'popupLabel') && value === true) {
+
+                let previousValue = w.props[propName]
+
+                if ((propName === '' || propName === 'popupLabel') && value === true) {
                     w.props[propName] = 'auto'
                 } else {
                     w.props[propName] = value !== '' ? value : deepCopy(defaults[w.props.type][propName].value)
                 }
-                newWidgets.push(updateWidget(w, {changedProps: [propName], preventSelect: this.selectedWidgets.length > 1}))
+
+                try {
+
+                    newWidgets.push(updateWidget(w, {changedProps: [propName], preventSelect: this.selectedWidgets.length > 1}))
+
+                } catch (e) {
+
+                    w.props[propName] = previousValue
+                    updateWidget(w, {changedProps: [propName], preventSelect: this.selectedWidgets.length > 1})
+
+                    notifications.add({
+                        class: 'error',
+                        message: locales('inspector_error'),
+                        duration: 7000
+                    })
+                    console.error(
+                        `Error while setting ${propName} to: ${JSON.stringify(value)}.`,
+                        'It\'s probably a bug, please a new bug ticket with these informations (https://github.com/jean-emmanuel/open-stage-control/issues).'
+                    )
+                    console.error(e)
+                    error = true
+                }
             }
+
+            if (error) return
 
             this.pushHistory()
 
