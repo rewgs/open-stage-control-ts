@@ -41,7 +41,7 @@ class WidgetManager extends EventEmitter {
 
         if (linkId) {
             if (!Array.isArray(linkId)) linkId = [linkId]
-            linkId = linkId.map(x=>x.replace(/^>>\s*/, '')).filter(x=>x.indexOf('<<') < 0)
+            linkId = linkId.map(x=>String(x).replace(/^>>\s*/, '')).filter(x=>x.indexOf('<<') < 0)
             linkId = linkId.filter(x=>this.linkIdLock.indexOf(x)<0)
             this.linkIdLock = this.linkIdLock.concat(linkId)
             this.linkIdLockDepth++
@@ -118,7 +118,7 @@ class WidgetManager extends EventEmitter {
 
         if (linkId) {
             if (!Array.isArray(linkId)) linkId = [linkId]
-            linkId = linkId.map(x=>x.replace(/^<<\s*/, '')).filter(x=>x.indexOf('>>') < 0)
+            linkId = linkId.map(x=>String(x).replace(/^<<\s*/, '')).filter(x=>x.indexOf('>>') < 0)
             for (var i in linkId) {
                 if (linkId[i]) {
                     if (!this.linkIdRoute[linkId[i]]) this.linkIdRoute[linkId[i]] = []
@@ -185,6 +185,7 @@ class WidgetManager extends EventEmitter {
         if (scroll && this.scrollingWidgets.indexOf(hash) != -1) this.scrollingWidgets.splice(this.scrollingWidgets.indexOf(hash), 1)
 
         if (!Array.isArray(linkId)) linkId = [linkId]
+        linkId = linkId.map(x=>String(x))
         for (var i in linkId) {
             if (linkId[i] && this.linkIdRoute[linkId[i]] && this.linkIdRoute[linkId[i]].indexOf(hash) != -1) this.linkIdRoute[linkId[i]].splice(this.linkIdRoute[linkId[i]].indexOf(hash), 1)
         }
