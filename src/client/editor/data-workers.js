@@ -171,11 +171,12 @@ var incrementWidget = function(data, root){
     var id = data.id,
         address = data.address
 
-    if (id && address == '/'+id) {
+    if (id && address == '/' + id) {
 
         data.address = 'auto'
 
-    } else if (address){
+    } else if (address !== 'auto') {
+        
         var addressref
         while (fakeStore.address.indexOf(address) != -1 || widgetManager.getWidgetByAddress(addressref).length) {
             address = address.replace(/([0-9]*)$/,function(m){
