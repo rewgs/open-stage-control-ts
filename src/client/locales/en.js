@@ -40,6 +40,7 @@ module.exports = {
     // inspector
     inspector_color_confirm: 'Confirm',
     inspector_color_apply: 'Apply',
+    inspector_error: 'An error just occured, open F12 to read more.',
 
     // nosleep
     nosleep: 'Prevent sleep',
