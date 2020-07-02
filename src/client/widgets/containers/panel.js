@@ -223,8 +223,8 @@ class Panel extends Container() {
         if (!s) {
             return [this.widget.scrollLeft, this.widget.scrollTop]
         } else {
-            this.widget.scrollLeft = s[0]
-            this.widget.scrollTop = s[1]
+            if (s[0] !== undefined) this.widget.scrollLeft = s[0]
+            if (s[1] !== undefined) this.widget.scrollTop = s[1]
         }
 
     }
