@@ -6,7 +6,7 @@ The `script` property allows widgets to run javascript code when their value upd
 - `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their value before the script's compilation
 
 !!! warning "Avoid advanced syntax in scripts"
-    To avoid syntax errors it is recommended to use `getProp()` and `get()` instead of `@{}` and `OSC{}`. `JS{{}}` and `#{}` blocks should be avoided here as well. 
+    To avoid syntax errors it is recommended to use `getProp()` and `get()` instead of `@{}` and `OSC{}`. `JS{{}}` and `#{}` blocks should be avoided here as well.
 
 ## Event-dependent variables
 
@@ -134,3 +134,17 @@ Reference:
 *Built-in client only*: tells the operating system to give the focus to the window that was focused before.
 
 ----
+
+#### `getScroll`: `function(id)`
+- `id`: widget `id` as a string.
+
+Returns the scroll state of a container as a `[x, y]` array.
+
+----
+
+#### `setScroll`: `function(id, x, y)`
+- `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
+- `x`: horizontal scroll, `undefined` to use current value
+- `y`: vertical scroll, `undefined` to use current value
+
+Sets the scroll state of a container.
