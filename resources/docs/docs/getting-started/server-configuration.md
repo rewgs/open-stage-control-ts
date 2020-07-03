@@ -160,6 +160,13 @@ The **server** can be configured with many options, either from a terminal or wi
 
 Options name must be prepended with a double dash (`--`) in a terminal.
 
+!!! example "Example"
+    ```
+    open-stage-control --no-gui --load path/to/your/session.json --theme path/to/your/theme.css
+    ```
+
+    Launches the server in headless mode, and makes all clients load provided session and theme automatically. 
+
 
 ## Running in a terminal on Windows
 
