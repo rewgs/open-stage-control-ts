@@ -147,6 +147,32 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.getScroll = (id)=>{
+
+            var widgets = this.resolveId(id)
+
+            for (var i = widgets.length - 1; i >= 0; i--) {
+
+                if (widgets[i].scroll) return widgets[i].scroll()
+
+            }
+
+            return []
+
+        }
+
+        this.sandbox.contentWindow.setScroll = (id, x, y)=>{
+
+            var widgets = this.resolveId(id)
+
+            for (var i = widgets.length - 1; i >= 0; i--) {
+
+                if (widgets[i].scroll) widgets[i].scroll([x, y])
+
+            }
+
+        }
+
         this.sandbox.contentWindow.httpGet = (url, callback)=>{
 
             var parser = urlParser(url),
@@ -286,7 +312,7 @@ class ScriptVm extends Vm {
         }
 
         for (var imports of ['set', 'get', 'getProp', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
-            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'unfocus']) {
+            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'unfocus', 'setScroll', 'getScroll']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
 

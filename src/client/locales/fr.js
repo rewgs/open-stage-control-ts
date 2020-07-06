@@ -40,6 +40,7 @@ module.exports = {
     // inspector
     inspector_color_confirm: 'Confirmer',
     inspector_color_apply: 'Appliquer',
+    inspector_error: 'Une erreur vient de survenir, appuyez sur F12 pour en savoir plus.',
 
     // nosleep
     nosleep: 'Empêcher la veille',
