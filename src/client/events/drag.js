@@ -136,21 +136,22 @@ function mouseMultiWrapper(event) {
 }
 
 function mouseDownCapture(event, multitouch) {
-    if ((event.sourceCapabilities && event.sourceCapabilities.firesTouchEvents) || event.button == 2) return
-    event.pointerId = 'mouse'
+    if (event.pointerType === 'touch') return
+    // event.pointerId = 'mouse'
     event.multitouch = multitouch
     pointerDownHandler(event)
 }
 
 function mouseMoveCapture(event) {
-    event.pointerId = 'mouse'
+    if (event.pointerType === 'touch') return
+    // event.pointerId = 'mouse'
     event.inertia = event.ctrlKey ? 10 : 1
     pointerMoveFilter(event)
 }
 
 function mouseUpCapture(event){
-    if ((event.sourceCapabilities && event.sourceCapabilities.firesTouchEvents) || event.button == 2) return
-    event.pointerId = 'mouse'
+    if (event.pointerType === 'touch') return
+    // event.pointerId = 'mouse'
     pointerUpFilter(event)
 }
 
@@ -222,8 +223,8 @@ function triggerWidgetEvent(target, name, event) {
 // init
 
 DOM.ready(()=>{
-    if (!iOS) document.addEventListener('mousemove', mouseMoveCapture, true)
-    if (!iOS) document.addEventListener('mouseup', mouseUpCapture, true)
+    if (!iOS) document.addEventListener('pointermove', mouseMoveCapture, true)
+    if (!iOS) document.addEventListener('pointerup', mouseUpCapture, true)
     document.addEventListener('touchmove', touchMoveCapture, true)
     DOM.addEventListener(document, 'touchend touchcancel', touchUpCapture, true)
 
@@ -250,10 +251,10 @@ module.exports = {
 
         if (multitouch) {
             element.addEventListener('touchstart', touchMultiWrapper, false)
-            if (!iOS) element.addEventListener('mousedown', mouseMultiWrapper)
+            if (!iOS) element.addEventListener('pointerdown', mouseMultiWrapper)
         } else {
             element.addEventListener('touchstart', touchDownCapture, false)
-            if (!iOS) element.addEventListener('mousedown', mouseDownCapture)
+            if (!iOS) element.addEventListener('pointerdown', mouseDownCapture)
         }
 
     },
@@ -277,10 +278,10 @@ module.exports = {
 
         if (multitouch) {
             element.removeEventListener('touchstart', touchMultiWrapper, false)
-            if (!iOS) element.removeEventListener('mousedown', mouseMultiWrapper)
+            if (!iOS) element.removeEventListener('pointerdown', mouseMultiWrapper)
         } else {
             element.removeEventListener('touchstart', touchDownCapture, false)
-            if (!iOS) element.removeEventListener('mousedown', mouseDownCapture)
+            if (!iOS) element.removeEventListener('pointerdown', mouseDownCapture)
         }
 
     },
@@ -305,12 +306,12 @@ module.exports = {
 
         }
 
-        if (!iOS) element.addEventListener('mousedown', makeEventTraversing, true)
+        if (!iOS) element.addEventListener('pointerdown', makeEventTraversing, true)
         element.addEventListener('touchstart', makeEventTraversing, true)
 
         element.addEventListener('disableTraversingGestures', (e)=>{
             e.stopPropagation()
-            if (!iOS) element.removeEventListener('mousedown', makeEventTraversing, true)
+            if (!iOS) element.removeEventListener('pointerdown', makeEventTraversing, true)
             element.removeEventListener('touchstart', makeEventTraversing, true)
 
         })

@@ -109,17 +109,17 @@ class UiSelectArea {
 
     enable() {
 
-        document.addEventListener('mousedown',  this.bindedMousedown)
-        document.addEventListener('mousemove', this.bindedMousemove, true)
-        document.addEventListener('mouseup', this.bindedMouseup)
+        document.addEventListener('pointerdown',  this.bindedMousedown)
+        document.addEventListener('pointermove', this.bindedMousemove, true)
+        document.addEventListener('pointerup', this.bindedMouseup)
 
     }
 
     disable() {
 
-        document.removeEventListener('mousedown',  this.bindedMousedown)
-        document.removeEventListener('mousemove', this.bindedMousemove, true)
-        document.removeEventListener('mouseup', this.bindedMouseup)
+        document.removeEventListener('pointerdown',  this.bindedMousedown)
+        document.removeEventListener('pointermove', this.bindedMousemove, true)
+        document.removeEventListener('pointerup', this.bindedMouseup)
 
     }
 

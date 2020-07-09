@@ -22,8 +22,7 @@ if (macOs) {
 
 function mouseToFastClick(event) {
 
-    if (event.touchPunch) return
-    if (event.sourceCapabilities && event.sourceCapabilities.firesTouchEvents) return
+    if (event.pointerType === 'touch') return
     if (event.button == 2) event.preventDefault()
 
     var e = event
@@ -37,6 +36,9 @@ function mouseToFastClick(event) {
 function touchToFastClick(event) {
 
     var e = event.changedTouches[0]
+
+    e.shiftKey = event.shiftKey
+    e.ctrlKey = event.ctrlKey
 
     DOM.dispatchEvent(e.target, 'fast-click', e)
 
@@ -57,7 +59,7 @@ function touchToFastClick(event) {
 
 }
 
-if (!iOS) document.addEventListener('mousedown', mouseToFastClick, true)
+if (!iOS) document.addEventListener('pointerdown', mouseToFastClick, true)
 document.addEventListener('touchstart', touchToFastClick, {passive: false, capture: true})
 
 
