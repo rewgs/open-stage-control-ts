@@ -31,7 +31,12 @@ module.exports = class Keyboard extends Panel {
                 'Set to `null` to send send no argument in the osc message',
                 'Can be an `object` if the type needs to be specified (see preArgs)'
             ]},
-            toggles: {type: 'boolean', value: false, help: 'Set to `true` to make keys bahave like toggle buttons'}
+            mode: {type: 'string', value: 'push', choices: ['push', 'toggle', 'tap'], help: [
+                'Interraction mode:',
+                '- `push` (press & release)',
+                '- `toggle` (on/off switches)',
+                '- `tap` (no release)'
+            ]},
 
         }, [], {
 
@@ -80,7 +85,7 @@ module.exports = class Keyboard extends Panel {
 
             data.top = data.left = data.height = data.width = 'auto'
             data.type = 'button'
-            data.mode = this.getProp('toggles') ? 'toggle' : 'push'
+            data.mode = this.getProp('mode')
             data.id = this.getProp('id') + '/' + i
             data.label = false
             data.css = ''
