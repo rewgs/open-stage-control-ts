@@ -36,7 +36,7 @@ class Editor {
 
                 let previousValue = w.props[propName]
 
-                if ((propName === '' || propName === 'popupLabel') && value === true) {
+                if ((propName === 'label' || propName === 'popupLabel') && value === true) {
                     w.props[propName] = 'auto'
                 } else {
                     w.props[propName] = value !== '' ? value : deepCopy(defaults[w.props.type][propName].value)
