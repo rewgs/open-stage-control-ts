@@ -49,8 +49,7 @@ class Button extends Widget {
 
         this.state = 0
         this.active = false
-
-        if (this.getProp('led')) this.container.classList.add('led')
+        this.pulse = null
 
         var tap = this.getProp('mode') === 'tap',
             push = this.getProp('mode') === 'push' || tap
@@ -167,8 +166,22 @@ class Button extends Widget {
             if (options.send) this.sendValue()
             if (options.sync) this.changed(options)
 
+            // tap mode
             if (newstate && this.getProp('mode') === 'tap' && !options.tapRelease) {
+
+                // reset value
                 this.setValue(this.getProp('off'), {sync: false, send: false, tapRelease: true})
+
+                // pulse
+                clearTimeout(this.pulse)
+                this.container.classList.remove('pulse')
+                setTimeout(()=>{
+                    this.container.classList.add('pulse')
+                    this.pulse = setTimeout(()=>{
+                        this.container.classList.remove('pulse')
+                    }, 150)
+                }, 16)
+
             }
 
         }
