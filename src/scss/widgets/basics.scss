@@ -10,6 +10,12 @@
     height: 30rem;
 }
 
+
+@keyframes osc-button-pulse {
+    0% {opacity: var(--alpha-fill-on);}
+    100% {opacity: var(--alpha-fill-off);}
+}
+
 .button-container {
 
     --alpha-fill-off: .15;
@@ -46,11 +52,21 @@
         border: 2rem solid transparent;
     }
 
-    &.on, &.active {
+    &.on {
 
         --alpha-fill:var(--alpha-fill-on);
         color: var(--color-text-on);
 
+    }
+
+    // &.active {
+    //
+    //     color: var(--color-text-on);
+    //
+    // }
+
+    &.pulse inner:after {
+        animation: osc-button-pulse .15s 1 forwards;
     }
 
 }
