@@ -85,6 +85,9 @@ var converters = [
         version: '0.49.12',
         warning: true,
         global: (data)=>{
+
+            if (Array.isArray(data)) data = data[0]
+
             return {
                 session: data
             }
