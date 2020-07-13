@@ -67,6 +67,8 @@ This syntax allows writing formulas in pure javascript. The code will be compile
 - javascript [strict mode](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode) is always enabled
 - `setTimeout` and `setInterval` functions are not available
 
+A property cannot contain multiple `JS{{}}` blocks
+
 #### Available variables
 
 - `console`: javascript console
@@ -87,4 +89,7 @@ Parsing errors can be read in the DevTool console (F12).
 
 ## Javascript: `#{ <code> }`
 
-This is a shorthand for the `JS{{}}` syntax, the only difference being that `<code>` is automatically prepended with a `return` statement.
+This is a shorthand for the `JS{{}}` syntax, the only difference being that `<code>` is automatically prepended with a `return` statement. A property can contain multiple `#{}` blocks.
+
+!!! note "Compilation order"
+    `#{}` blocks are compiled after `JS{{}}` blocks
