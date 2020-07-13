@@ -630,6 +630,24 @@ class Widget extends EventEmitter {
             })
 
             try {
+                propValue = propValue.replace(/JS\{\{([\s\S]*)\}\}/g, (m, code)=>{
+
+                    if (!this.parsers[code]) this.parsers[code] = vm.compile(code, defaultScope)
+
+                    let r = this.parsers[code](jsScope, this.parsersLocalScope)
+
+                    if (r === undefined) r = ''
+
+                    return typeof r !== 'string' ? JSON.stringify(r) : r
+
+                })
+            } catch (err) {
+                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
+                console.log((this.getProp('id') || this.props.id) + '.' + propName + ': JS{{}} error:\n' + err + line)
+            }
+
+            try {
                 propValue = propValue.replace(/#\{(?:[^{}]|\{[^{}]*\})*\}/g, (m)=>{
                     // one bracket nesting allowed, if we need two: #\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}
 
@@ -648,24 +666,6 @@ class Widget extends EventEmitter {
                 let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
                     line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
                 console.log((this.getProp('id') || this.props.id) + '.' + propName + ': #{} error:\n' + err + line)
-            }
-
-            try {
-                propValue = propValue.replace(/JS\{\{([\s\S]*)\}\}/g, (m, code)=>{
-
-                    if (!this.parsers[code]) this.parsers[code] = vm.compile(code, defaultScope)
-
-                    let r = this.parsers[code](jsScope, this.parsersLocalScope)
-
-                    if (r === undefined) r = ''
-
-                    return typeof r !== 'string' ? JSON.stringify(r) : r
-
-                })
-            } catch (err) {
-                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
-                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
-                console.log((this.getProp('id') || this.props.id) + '.' + propName + ': JS{{}} error:\n' + err + line)
             }
 
             for (let k in variables) {
@@ -846,7 +846,7 @@ class Widget extends EventEmitter {
 
                 if (data.address === 'auto')  data.address = '/' + this.getProp('id')
                 if (oldData.address === 'auto')  oldData.address = '/' + this.getProp('id')
-                
+
                 widgetManager.registerWidget(this, data, oldData)
                 return
 
