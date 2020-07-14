@@ -1,5 +1,6 @@
 var widgetManager = require('../../managers/widgets'),
     stateManager = require('../../managers/state'),
+    cache = require('../../managers/cache'),
     {deepCopy} = require('../../utils'),
     {urlParser} = require('../utils'),
     Vm = require('../vm')
@@ -220,10 +221,10 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.storage = {
 
-            setItem: (k, v)=>localStorage.setItem(k, JSON.stringify(v)),
-            getItem: (k)=>JSON.parse(localStorage.getItem(k)),
-            removeItem: (k)=>localStorage.removeItem(k),
-            clear: ()=>localStorage.clear()
+            setItem: (k, v)=>cache.set('script.' + k, v),
+            getItem: (k)=>cache.get('script.' + k, v),
+            removeItem: (k)=>cache.remove('script.' + k, v),
+            clear: ()=>cache.clear('script.')
 
         }
 

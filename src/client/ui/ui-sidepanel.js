@@ -1,4 +1,5 @@
-var UiWidget = require('./ui-widget')
+var UiWidget = require('./ui-widget'),
+    cache = require('../managers/cache')
 
 class UiSidePanel extends UiWidget {
 
@@ -14,11 +15,13 @@ class UiSidePanel extends UiWidget {
         this.toggleButton = DOM.get(this.container, '.toggle-button')[0]
         this.content = DOM.get(this.container, 'osc-panel-content')[0]
 
+        this.cacheKey = 'ui.' + options.selector
+
         this.minWidth = options.size || 250
-        this.width = options.size || 250
+        this.width = cache.get(this.cacheKey + '.width') || options.size || 250
 
         this.disabled = false
-        this.minimized = false
+        this.minimized = cache.get(this.cacheKey + '.minimized') || false
         this.init = false
 
 
@@ -31,13 +34,14 @@ class UiSidePanel extends UiWidget {
         this.on('drag', (event)=>{
 
             this.width += this.resizeDirection * event[this.vertical ? 'movementY' : 'movementX'] / PXSCALE
-            this.container.style[this.vertical ? 'height' : 'width'] = this.width + 'rem'
+            this.updateWidth()
 
         }, {element: this.resizeHandle})
 
         this.on('dragend', (event)=>{
 
             this.width = parseInt(this.container[this.vertical ? 'offsetHeight' : 'offsetWidth']) / PXSCALE
+            cache.set(this.cacheKey + '.width', this.width)
             DOM.dispatchEvent(window, 'resize')
 
         }, {element: this.resizeHandle})
@@ -51,6 +55,7 @@ class UiSidePanel extends UiWidget {
 
         })
 
+        this.updateWidth()
         this.disable()
 
     }
@@ -78,6 +83,7 @@ class UiSidePanel extends UiWidget {
         if (this.minimized) return
 
         this.minimized = true
+        cache.set(this.cacheKey + '.minimized', true)
 
         if (!this.disabled) this.close()
 
@@ -89,9 +95,16 @@ class UiSidePanel extends UiWidget {
         if (!this.minimized) return
 
         this.minimized = false
+        cache.set(this.cacheKey + '.minimized', false)
 
         if (!this.disabled) this.open()
 
+
+    }
+
+    updateWidth() {
+
+        this.container.style[this.vertical ? 'height' : 'width'] = this.width + 'rem'
 
     }
 

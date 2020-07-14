@@ -1,5 +1,6 @@
 var ipc = require('../ipc'),
     widgetManager = require('./widgets'),
+    cache = require('./cache'),
     uiFilebrowser = require('../ui/ui-filebrowser'),
     uiFileupload = require('../ui/ui-fileupload'),
     notifications = require('../ui/notifications'),
@@ -15,7 +16,7 @@ var StateManager = class StateManager {
         this.statePath = ''
         this.lastDir = null
 
-        this.quickState = JSON.parse(localStorage.getItem('osc.state.quickState')) || null
+        this.quickState = cache.get('state.quickState') || null
 
         this.valueStateQueue = {}
         this.valueOldPropQueue = {}
