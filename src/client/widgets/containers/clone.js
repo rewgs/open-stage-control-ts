@@ -45,6 +45,8 @@ class Clone extends Container() {
         this.cloneTarget = null
         this.cloneClass = []
 
+        this.modalBreakout = 0
+
         this.container.classList.add('empty')
 
         this.bindTarget(this.getCloneTarget())
