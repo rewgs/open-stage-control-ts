@@ -3,17 +3,27 @@ var path = require('path'),
     shortcut = require('electron-localshortcut'),
     app = require('./electron-app'),
     settings = require('./settings'),
-    theme = require('./theme'),
-    screenSize = screen.getPrimaryDisplay().size
-
+    theme = require('./theme')
 
 module.exports = function(options={}) {
 
-    var window
+    var window,
+        currentScreen = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
+
+    if (process.platform === 'win32' && settings.read('last-used-screen')) {
+        // on windows, retreive last used screen
+        var lastScreen = screen.getAllDisplays().find(x=>x.id === settings.read('last-used-screen'))
+        if (lastScreen) currentScreen = lastScreen
+        else settings.write('last-used-screen', null)
+    }
+
+    var screenSize = currentScreen.size,
+        width = options.width || screenSize.width,
+        height = options.height || screenSize.height
 
     window = new BrowserWindow({
-        width: options.width || screenSize.width,
-        height: options.height || screenSize.height,
+        width: width,
+        height: height,
         title: options.title || settings.infos.appName,
         icon: path.resolve(__dirname + '/../assets/logo.png'),
         backgroundColor: options.color || theme.backgroundColor,
@@ -26,6 +36,12 @@ module.exports = function(options={}) {
         },
         show: false,
     })
+
+    var bounds = currentScreen.bounds,
+        x = Math.ceil(bounds.x + ((bounds.width - width) / 2)),
+        y = Math.ceil(bounds.y + ((bounds.height - height) / 2))
+
+    window.setBounds({x: x, y: y})
 
     window.once('ready-to-show', ()=>{
         window.show()
@@ -103,6 +119,13 @@ module.exports = function(options={}) {
             if ((input.key === 'w' || input.key === 'W') && input.control && input.type === 'keyDown') {
                 window.close()
             }
+        })
+    }
+
+    if (process.platform === 'win32') {
+        // on windows, store last used screen when closing
+        window.on('close', function() {
+            settings.write('last-used-screen', screen.getDisplayMatching(window.getBounds()).id)
         })
     }
 
