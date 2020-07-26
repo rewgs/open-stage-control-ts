@@ -1,8 +1,5 @@
 # Download the latest release
 
-!!! info "Open Stage Control v1 is currently in beta"
-    Give it a try and send your feedback on the [forum](https://openstagecontrol.discourse.group/t/open-stage-control-v1-0-0-beta/543) !
-
 <a href="https://github.com/jean-emmanuel/open-stage-control/releases/latest"> Open Stage Control <span id="osc-version"span></a>
 
 <div id="osc-assets">Loading assets...</div>
