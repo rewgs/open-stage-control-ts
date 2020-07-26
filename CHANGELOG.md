@@ -1,7 +1,8 @@
 # Changelog
 
-## v1.0.0-alpha
+## v1.0.0
 
+*This list is not exhaustive*
 
 - compatibility
   - dropped support for iOS 9
