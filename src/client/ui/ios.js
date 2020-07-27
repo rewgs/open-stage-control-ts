@@ -1,9 +1,13 @@
 // Prevent iOS Pull-To-Refresh
 
-var iOS13 = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1,
+var iOS13 = (
+        navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1 // iPad
+        || navigator.userAgent.match(/iPhone OS 13/) // iPhone
+    ),
     iOS = navigator.platform.match(/iPhone|iPod|iPad/) || iOS13
 
 if (iOS && !iOS13) {
+
     // prevent overscroll
     // breaks scrolling on iOS13 (besides it doesn't seem to be needed)
 
