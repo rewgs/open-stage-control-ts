@@ -58,7 +58,8 @@ window = {
     location: {},
     document: document,
     navigator: {
-        platform:''
+        platform:'',
+        userAgent: ''
     },
     NodeList: Array,
     WebSocket: Object,
