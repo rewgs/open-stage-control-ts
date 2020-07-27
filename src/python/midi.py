@@ -2,15 +2,13 @@ from head import *
 from list import *
 from utils import *
 
+ipc_send('version', '1.0.0')
+
 if 'list' in argv:
     list()
 
 if 'list-only' in argv:
     list()
-    exit()
-
-if 'version' in argv:
-    print('1.0.0')
     exit()
 
 # option: act as if displayed program is between 1-128 instead of 0-127
