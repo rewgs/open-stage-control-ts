@@ -22,7 +22,7 @@ def midi_str(message):
     mtype = message[0] & 0xF0
     s = 'UNKNOWN'
 
-    if mtype is SYSTEM_EXCLUSIVE:
+    if mtype == SYSTEM_EXCLUSIVE:
 
         s = 'SYSTEM_EXCLUSIVE: sysex=%s' % ' '.join([hex(x).replace('0x', '').zfill(2) for x in message])
 
@@ -33,15 +33,15 @@ def midi_str(message):
 
         try:
 
-            if mtype is NOTE_ON:
+            if mtype == NOTE_ON:
                 s = 'NOTE_ON: channel=%i, note=%i, velocity=%i' % (channel, message[1], message[2])
-            elif mtype is NOTE_OFF:
+            elif mtype == NOTE_OFF:
                 s = 'NOTE_OFF: channel=%i, note=%i' % (channel, message[1])
-            elif mtype is CONTROL_CHANGE:
+            elif mtype == CONTROL_CHANGE:
                 s = 'CONTROL_CHANGE: channel=%i, cc=%i, value=%i'% (channel, message[1], message[2])
-            elif mtype is PROGRAM_CHANGE:
+            elif mtype == PROGRAM_CHANGE:
                 s = 'PROGRAM_CHANGE: channel=%i, program=%i' % (channel, message[1])
-            elif mtype is PITCH_BEND:
+            elif mtype == PITCH_BEND:
                 s = 'PITCH_BEND: channel=%i, pitch=%i' % (channel, message[1] + message[2] * 128 if len(message) == 3 else message[1])
 
         except IndexError:

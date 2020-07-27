@@ -84,7 +84,7 @@ class MidiConverter {
 
         var pythonPath = settings.read('midi') ? settings.read('midi').filter(x=>x.includes('path=')).map(x=>x.split('=')[1])[0] : undefined
 
-        PythonShell.run('python/list.py', Object.assign({pythonPath}, pythonOptions), function(e, results) {
+        PythonShell.run('python/midi.py', Object.assign({pythonPath: pythonPath, args: ['list-only']}, pythonOptions), function(e, results) {
             if (e) {
                 if (e.code === 'ENOENT') {
                     console.error(`(ERROR, MIDI) Could not find python binary: ${e.message.replace(/spawn (.*) ENOENT/, '$1')}`)
