@@ -52,12 +52,12 @@ The module is executed in a restricted context, only a few globals are available
 
 ----
 
-#### `app`: [`Event Emitter`](https://nodejs.org/api/events.html#events_class_eventemitter)
- Useful for monitoring the events sent by the different clients. Event names can be found in [callbacks.js](https://github.com/jean-emmanuel/open-stage-control/blob/master/src/server/callbacks.js), callbacks are called with 2 arguments: `data` (object) and `client` (object: `{address, id}`)
+#### `app`
+[`Event Emitter`](https://nodejs.org/api/events.html#events_class_eventemitter), useful for monitoring the events sent by the different clients. Event names can be found in [callbacks.js](https://github.com/jean-emmanuel/open-stage-control/blob/master/src/server/callbacks.js), callbacks are called with 2 arguments: `data` (object) and `client` (object: `{address, id}`)
 
 ----
 
-#### `receive`: `function(host, port, address, ...args, options)`
+#### `receive(host, port, address, ...args, options)`
 
 Send osc/midi message to connected clients. `host` and `port` can be specified to simulate a specific origin for the message.
 
@@ -69,31 +69,31 @@ Send osc/midi message to connected clients. `host` and `port` can be specified t
 
 ----
 
-#### `send`: `function(host, port, address, ...args)`
+#### `send(host, port, address, ...args)`
 
 Send osc/midi to a target.
 
 ----
 
-#### `settings.read`: `function(name)`
+#### `settings.read(name)`
 
 Returns specified server option. `name` must be the option's long name without the leading dashes (ie: `"send"`, not `"s"`)
 
 ----
 
-#### `options`: `array`
+#### `options`
 
-Contains the extra options passed to `--custom-module` after the filename
+`Array` containing the extra options passed to `--custom-module` after the filename
 
 ----
 
-#### `loadJSON`: `function(path)`
+#### `loadJSON(path)`
 
 Loads a json file (path is relative to the custom module location)
 
 ----
 
-#### `saveJSON`: `function(path, object)`
+#### `saveJSON(path, object)`
 
 Saves an object/array to a json file (path is relative to the custom module location)
 
