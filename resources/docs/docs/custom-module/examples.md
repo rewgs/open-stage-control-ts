@@ -139,3 +139,100 @@ module.exports = {
 
 }
 ```
+
+## Simulate user input on a single client
+
+```js
+
+// keep track of connected clients
+
+var clients = []
+
+app.on('open', (data, client)=>{
+    if (!clients.includes(client.id)) clients.push(client.id)
+})
+
+app.on('close', (data, client)=>{
+    if (clients.includes(client.id)) clients.splice(clients.indexOf(client.id))
+})
+
+module.exports = {
+
+    oscInFilter:function(data){
+
+        var {address, args, host, port} = data
+
+        if (address === '/some_osc_address') {
+
+            // simulate user input on the first client in the array
+
+            receive('/SET', 'widget_id', 1, {clientId: clients[0]})
+
+            return // bypass original message
+        }
+
+        return {address, args, host, port}
+
+    }
+
+}
+
+
+```
+
+## MIDI routing
+
+```js
+var rouing = {
+    // midi cc vs widget id
+    60: 'fader_1',
+    61: 'fader_2',
+    // etc
+}
+
+module.exports = {
+
+    oscInFilter:function(data){
+        // Filter incomming osc messages
+
+        var {address, args, host, port} = data
+
+        if (host === 'midi') {
+
+            // MIDI routing !
+            if (address === '/control') {
+
+                // assign args to variables
+                var [channel, ctrl, value] = args.map(arg=>arg.value)
+
+                // simple conditions
+                if (ctrl === 80) receive('/SET', 'widget_id', value / 127)
+
+                // simple routing table (midi cc vs widget id)
+                if (routing[ctrl]) receive('/SET', routing[ctrl], value / 127)
+
+                // note: /SET simulates a user interaction and makes the widget send its osc message
+                // but it adds some delay (we wait for the UI to respond)
+                // AND it may trigger multiple replies if more than one client are connected.
+                // Alternatively, we could do this:
+                // send('/osc_address', value / 127)
+                // receive('/osc_address', value / 127)
+                // Or, to send /SET to a single client:
+                // receive('/SET', '/osc_address', value / 127, {clientId: ID})
+
+
+            }
+
+            return // bypass original message
+
+        }
+
+
+        // return data if you want the message to be processed
+        return {address, args, host, port}
+
+    }
+
+
+}
+```
