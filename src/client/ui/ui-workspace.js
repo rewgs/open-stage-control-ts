@@ -1,7 +1,7 @@
 var UiWidget = require('./ui-widget'),
     setScrollbarColor = require('./scrollbar-color')
 
-class UiWorksapce extends UiWidget {
+class UiWorkspace extends UiWidget {
 
     constructor(options) {
 
@@ -13,4 +13,4 @@ class UiWorksapce extends UiWidget {
 
 }
 
-module.exports = new UiWorksapce({selector: 'osc-workspace'})
+module.exports = new UiWorkspace({selector: 'osc-workspace'})
