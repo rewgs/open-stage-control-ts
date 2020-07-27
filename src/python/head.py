@@ -13,7 +13,7 @@ try:
     from rtmidi.midiconstants import *
 
     API = rtmidi.API_UNIX_JACK if 'jack' in argv else rtmidi.API_UNSPECIFIED
-    if API is rtmidi.API_UNIX_JACK and rtmidi.API_UNIX_JACK not in rtmidi.get_compiled_api():
+    if API == rtmidi.API_UNIX_JACK and rtmidi.API_UNIX_JACK not in rtmidi.get_compiled_api():
         API = rtmidi.API_UNSPECIFIED
         ipc_send('log', '(ERROR, MIDI) python-rtmidi was not compiled with jack midi support, falling back to default API')
 

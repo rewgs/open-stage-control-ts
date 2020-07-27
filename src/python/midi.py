@@ -5,6 +5,10 @@ from utils import *
 if 'list' in argv:
     list()
 
+if 'list-only' in argv:
+    list()
+    exit()
+
 # option: act as if displayed program is between 1-128 instead of 0-127
 PROGRAM_CHANGE_OFFSET = 'pc_offset' in argv
 
@@ -13,7 +17,11 @@ outputs = {}
 
 for arg in argv:
 
-    if type(arg) == str and ':' in arg:
+    if 'python/midi.py' in arg:
+
+        pass # in case we're using pre-compiled binaries
+
+    elif type(arg) == str and ':' in arg:
 
         name, ports = arg.split(':')
 
@@ -81,7 +89,7 @@ def create_callback(name):
 
             osc['address'] = MIDI_TO_OSC[mtype]
 
-            if mtype is SYSTEM_EXCLUSIVE:
+            if mtype == SYSTEM_EXCLUSIVE:
                 # Parse the provided data into a hex MIDI data string of the form  'f0 7e 7f 06 01 f7'.
                 v = ' '.join([hex(x).replace('0x', '').zfill(2) for x in message])
                 osc['args'].append({'type': 'string', 'value': v})
@@ -96,10 +104,10 @@ def create_callback(name):
                 if mtype == NOTE_OFF:
                     message[2] = 0
 
-                elif mtype is PITCH_BEND:
+                elif mtype == PITCH_BEND:
                     message = message[:1] + [message[1] + message[2] * 128] # convert  0-127 pair -> 0-16384 ->
 
-                elif mtype is PROGRAM_CHANGE and PROGRAM_CHANGE_OFFSET:
+                elif mtype == PROGRAM_CHANGE and PROGRAM_CHANGE_OFFSET:
                     message[-1] = message[-1] + 1
 
                 for data in message[1:]:
@@ -135,10 +143,10 @@ def midi_message(status, channel, data1=None, data2=None):
 
     msg = [(status & 0xF0) | (channel - 1 & 0xF)]
 
-    if data1 is not None:
+    if data1 != None:
         msg.append(data1 & 0x7F)
 
-        if data2 is not None:
+        if data2 != None:
             msg.append(data2 & 0x7F)
 
     return msg
@@ -160,7 +168,7 @@ def send_midi(name, event, *args):
 
     mtype = OSC_TO_MIDI[event]
 
-    if mtype is SYSTEM_EXCLUSIVE:
+    if mtype == SYSTEM_EXCLUSIVE:
 
         # unhexlify('f0 7e 7f 06 01 f7') creates a sysex message
         # from hex MIDI data string 'f0 7e 7f 06 01 f7'.
@@ -187,19 +195,19 @@ def send_midi(name, event, *args):
         args = [int(round(x)) for x in args]
         m = [mtype, args[0]]
 
-        if mtype is NOTE_ON:
-            if args[2] is 0:
+        if mtype == NOTE_ON:
+            if args[2] == 0:
                 mtype = NOTE_OFF
 
-        elif mtype is PITCH_BEND:
+        elif mtype == PITCH_BEND:
             args = args[:1] + [args[1] & 0x7f, (args[1] >> 7) & 0x7f] # convert 0-16384 -> 0-127 pair
 
-        elif mtype is PROGRAM_CHANGE and PROGRAM_CHANGE_OFFSET:
+        elif mtype == PROGRAM_CHANGE and PROGRAM_CHANGE_OFFSET:
             args[-1] = args[-1] - 1
 
         m = midi_message(mtype, *args)
 
-    if m is None:
+    if m == None:
 
         ipc_send('log','(ERROR, MIDI) could not convert osc to midi (%s %s)' % (event, " ".join([str(x) for x in args])))
 
