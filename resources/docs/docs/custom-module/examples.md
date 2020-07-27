@@ -193,7 +193,7 @@ var rouing = {
 module.exports = {
 
     oscInFilter:function(data){
-        // Filter incomming osc messages
+        // Filter incoming osc messages
 
         var {address, args, host, port} = data
 
