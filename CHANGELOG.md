@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2
+
+- bug fixes
+  - broken scrolling on iPhone iOS 13
+
 ## 1.0.1
 
 - UI
