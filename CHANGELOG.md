@@ -1,6 +1,11 @@
 # Changelog
 
-## v1.0.0
+## 1.0.1
+
+- UI
+  - windows' dimensions and position are now saved upon closing and restored at startup
+
+## 1.0.0
 
 *This list is not exhaustive*
 

@@ -7,23 +7,9 @@ var path = require('path'),
 
 module.exports = function(options={}) {
 
-    var window,
-        currentScreen = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
-
-    if (process.platform === 'win32' && settings.read('last-used-screen')) {
-        // on windows, retreive last used screen
-        var lastScreen = screen.getAllDisplays().find(x=>x.id === settings.read('last-used-screen'))
-        if (lastScreen) currentScreen = lastScreen
-        else settings.write('last-used-screen', null)
-    }
-
-    var screenSize = currentScreen.size,
-        width = options.width || screenSize.width,
-        height = options.height || screenSize.height
+    var window
 
     window = new BrowserWindow({
-        width: width,
-        height: height,
         title: options.title || settings.infos.appName,
         icon: path.resolve(__dirname + '/../assets/logo.png'),
         backgroundColor: options.color || theme.backgroundColor,
@@ -37,11 +23,27 @@ module.exports = function(options={}) {
         show: false,
     })
 
-    var bounds = currentScreen.bounds,
+
+    // default geometry
+    var currentScreen = screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),
+        screenSize = currentScreen.size,
+        width = options.width || screenSize.width,
+        height = options.height || screenSize.height,
+        bounds = currentScreen.bounds,
         x = Math.ceil(bounds.x + ((bounds.width - width) / 2)),
         y = Math.ceil(bounds.y + ((bounds.height - height) / 2))
 
-    window.setBounds({x: x, y: y})
+    window.setBounds({x, y, width, height})
+
+    // retreive last geometry
+    if (settings.read('geometry')) {
+        var geometry = settings.read('geometry')[options.id],
+            mScreen = screen.getDisplayMatching(geometry)
+        if (intersectionArea(geometry, mScreen.bounds) > 20000) {
+            // don't load geometry if the window is not visible enough
+            window.setBounds(geometry)
+        }
+    }
 
     window.once('ready-to-show', ()=>{
         window.show()
@@ -122,12 +124,12 @@ module.exports = function(options={}) {
         })
     }
 
-    if (process.platform === 'win32') {
-        // on windows, store last used screen when closing
-        window.on('close', function() {
-            settings.write('last-used-screen', screen.getDisplayMatching(window.getBounds()).id)
-        })
-    }
+    window.on('close', function() {
+        // save geometry
+        var geometry = settings.read('geometry') || {}
+        geometry[options.id] = window.getBounds()
+        settings.write('geometry', geometry)
+    })
 
     if (options.shortcuts) {
 
@@ -146,5 +148,16 @@ module.exports = function(options={}) {
     }
 
     return window
+
+}
+
+
+function intersectionArea(a, b) {
+    // intersectionArea between two rectangles
+
+    var width = Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x),
+        height = Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y)
+
+    return width * height
 
 }
