@@ -4,7 +4,7 @@
 
 - bug fixes
   - broken scrolling on iPhone iOS 13
-  - window geomtry issue  
+  - window geometry issue  
 
 ## 1.0.1
 
