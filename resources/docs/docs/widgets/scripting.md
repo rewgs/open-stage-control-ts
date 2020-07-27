@@ -34,14 +34,14 @@ Besides the variables available in the [javascript property syntax ](./advanced-
 
 ----
 
-#### `get`: `function(id)`
+#### `get(id)`
 - `id`: widget `id` as a string.
 
 Returns the value of the first matching widget.
 
 ----
 
-#### `set`: `function(id, value)`
+#### `set(id, value)`
 - `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
 - `value`: new value for the widget.
 
@@ -50,7 +50,7 @@ If the event that triggered the script's execution was initiated by a user inter
 
 ----
 
-#### `send`: `function(target, address, ...args)`
+#### `send(target, address, ...args)`
 - `target` (optional): `"ip:port"` or `"midi:device_name"` string. If omitted, the widget's target will be used.
 - `address`: osc address, must start with a `/`
 - `args`: value or `{type: "OSC_TYPE_LETTER", value: VALUE}` `object`
@@ -59,7 +59,7 @@ If the event that triggered the script's execution was not initiated by a user i
 
 ----
 
-#### `getProp`: `function(id, name)`
+#### `getProp(id, name)`
 - `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
 - `name`: property name.
 
@@ -67,7 +67,7 @@ Returns the property called `"name"` of the first matching widget.
 
 ----
 
-#### `updateProp`: `function(id, name)`
+#### `updateProp(id, name)`
 - `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
 - `name`: property name.
 
@@ -75,21 +75,21 @@ Forcers a widget to check if one of its properties has changed and update itself
 
 ----
 
-#### `httpGet`: `function(url, callback)`
+#### `httpGet(url, callback)`
 
 - `url`: url of the resource to fetch (local url only)
 - `callback`: function executed when/if the http request succeeds, with the response text as argument
 
 ----
 
-#### `stateGet`: `function(id)`
+#### `stateGet(id)`
 - `id`: widget `id` as a string, or array of `id` strings. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
 
 Returns a state object (`id:value`) for matching widget and all their children.
 
 ----
 
-#### `stateSet`: `function(state)`
+#### `stateSet(state)`
 
 Loads a state object. If the event that triggered the script's execution was initiated by a user interaction, this will make the updated widgets send their value as well.
 
@@ -97,13 +97,11 @@ Loads a state object. If the event that triggered the script's execution was ini
 
 #### `storage`: `localStorage`
 
-Allows storing data that persists upon refresh/relaunch.
-
-Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+Global [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) instance, allows storing data that persists upon refresh/relaunch.
 
 ----
 
-#### `setTimeout` / `setInterval`: `function(id, callback, delay)`
+#### `setTimeout(id, callback, delay)` / `setInterval(id, callback, delay)`
 
 These work like their native equivalent, with an extra (optional) `id` argument.
 
@@ -118,7 +116,7 @@ Reference:
 
 -----
 
-#### `clearTimeout` / `clearInterval`: `function(id)`
+#### `clearTimeout(id)` / `clearInterval(id)`
 
 Clear timeout with matching `id`.
 
@@ -129,20 +127,20 @@ Reference:
 
 ----
 
-#### `unfocus`: `function()`
+#### `unfocus()`
 
 *Built-in client only*: tells the operating system to give the focus to the window that was focused before.
 
 ----
 
-#### `getScroll`: `function(id)`
+#### `getScroll(id)`
 - `id`: widget `id` as a string.
 
 Returns the scroll state of a container as a `[x, y]` array.
 
 ----
 
-#### `setScroll`: `function(id, x, y)`
+#### `setScroll(id, x, y)`
 - `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
 - `x`: horizontal scroll, `undefined` to use current value
 - `y`: vertical scroll, `undefined` to use current value
