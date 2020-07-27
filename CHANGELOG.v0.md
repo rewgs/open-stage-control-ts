@@ -750,7 +750,7 @@ MathJS syntax is now deprecated and will be removed in the future, sessions usin
 
 - bug fixes
   - regression breaking touch traversing gestures
-  - clone widgets becomming unselectable for edition
+  - clone widgets becoming unselectable for edition
   - `preArgs` property still being coerced to an array
 
 ## 0.30.3
@@ -1054,7 +1054,7 @@ Read the changelog carefully, old sessions files are likely to need some adjuste
 - bug fixes
   - sessions opened from command line with relative paths are now added to the history with their absolute path
   - sending an empty message to a `text` widget resets it to its initial value and without ignoring its `value` property
-  - sending no value to a widget with `preArgs` is now possible : all the arguments found in incomming osc messages are now taken into account to match the widgets in the session
+  - sending no value to a widget with `preArgs` is now possible : all the arguments found in incoming osc messages are now taken into account to match the widgets in the session
   - regression breaking state quicksave from sidepanel
 - engine
   - downgraded to the latest *stable* electron release
