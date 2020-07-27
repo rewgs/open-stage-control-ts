@@ -9,6 +9,10 @@ if 'list-only' in argv:
     list()
     exit()
 
+if 'version' in argv:
+    print('1.0.0')
+    exit()
+
 # option: act as if displayed program is between 1-128 instead of 0-127
 PROGRAM_CHANGE_OFFSET = 'pc_offset' in argv
 
