@@ -1,5 +1,6 @@
 var {PythonShell} = require('python-shell'),
-    settings = require('./settings')
+    settings = require('./settings'),
+    midiVersion = '1.0.0'
 
 var pythonOptions = {
     scriptPath:__dirname,
@@ -76,6 +77,8 @@ class MidiConverter {
         } else if (name == 'error') {
             console.error('(ERROR, MIDI) ' + data)
             if (instance) instance.stop()
+        } else if (name == 'version' && data != midiVersion) {
+            console.error(`(WARNING, MIDI) binary version mismatch (${data} installed, ${midiVersion} expected)`)
         }
 
     }
