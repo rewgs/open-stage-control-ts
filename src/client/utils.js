@@ -38,7 +38,7 @@ module.exports = {
 
     isJSON: function(str) {
         // heuristic to avoid using JSON when unnecessary
-        // if the string doesn't starts with one of these chars
+        // if the string doesn't start with one of these chars
         // it's going to fail
         // ref in source: https://github.com/douglascrockford/JSON-js
         return ' 	\n+-eE{([0123456789tfn"'.indexOf(str[0]) !== -1
