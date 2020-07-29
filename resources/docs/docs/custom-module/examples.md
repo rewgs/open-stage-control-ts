@@ -183,7 +183,7 @@ module.exports = {
 ## MIDI routing
 
 ```js
-var rouing = {
+var routing = {
     // midi cc vs widget id
     60: 'fader_1',
     61: 'fader_2',
