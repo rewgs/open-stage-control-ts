@@ -1,6 +1,9 @@
 # Remote control
 
-All widgets that send osc messages respond to the same messages. Additionally, Open Stage Control responds to some general osc commands.
+When osc messages are received, the default behavior is to update the value of all widgets that match the address and preArgs. Additionally, Open Stage Control responds to some general osc commands.
+
+!!! note "Multi-client setup"
+    These commands are interpreted by each client connected to the server so there might be more than one reply. Using a custom module is the only way to send a message to a single client.
 
 
 ----
