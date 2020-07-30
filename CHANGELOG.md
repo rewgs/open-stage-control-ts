@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+- bug fixes
+  - modal: layout issue on iOS
+
+
 ## 1.0.2
 
 - bug fixes
