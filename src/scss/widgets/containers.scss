@@ -429,13 +429,15 @@
             color: var(--color-text-on);
         }
 
+        z-index: 9999999999999!important;
+        overflow: visible;
+
         contain: size;
         @supports not (contain: strict) {
             transform: none; // cancel new stacking context
-        }
+            z-index: initial!important; // iOS does it wrong otherwise
 
-        z-index: 9999999999999!important;
-        overflow: visible;
+        }
 
     }
 
