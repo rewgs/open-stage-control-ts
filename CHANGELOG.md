@@ -5,6 +5,12 @@
 - bug fixes
   - modal: layout issue on iOS
 
+- widgets
+  - panels: added `contain` property to allow scrolling in vertical/horizontal layouts
+
+- midi
+  - add support for named ports in midi configuration
+
 
 ## 1.0.2
 
