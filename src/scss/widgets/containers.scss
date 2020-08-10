@@ -61,14 +61,18 @@
                 position: relative!important;
                 height: auto!important;
                 min-height: auto!important;
-                min-width: auto!important;
                 max-height: 100%;
-                max-width: 100%;
             }
             > .flex-expand {
                 flex: 1
             }
         }
+
+        &.layout-horizontal.layout-contain > inner > .widget {
+            min-width: auto!important;
+            max-width: 100%;
+        }
+
         &.layout-vertical > inner {
             display: flex;
             flex-direction: column;
@@ -78,15 +82,18 @@
                 left:auto!important;
                 position: relative!important;
                 width: auto!important;
-                min-height: auto!important;
                 min-width: auto!important;
-                max-height: 100%;
                 max-width: 100%;
             }
             > .flex-expand {
                 flex: 1
             }
         }
+        &.layout-vertical.layout-contain > inner > .widget {
+            min-height: auto!important;
+            max-height: 100%;
+        }
+
         &.layout-grid > inner {
             display: grid;
             > .widget {
