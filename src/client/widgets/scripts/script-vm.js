@@ -222,8 +222,8 @@ class ScriptVm extends Vm {
         this.sandbox.contentWindow.storage = {
 
             setItem: (k, v)=>cache.set('script.' + k, v),
-            getItem: (k)=>cache.get('script.' + k, v),
-            removeItem: (k)=>cache.remove('script.' + k, v),
+            getItem: (k)=>cache.get('script.' + k),
+            removeItem: (k)=>cache.remove('script.' + k),
             clear: ()=>cache.clear('script.')
 
         }
