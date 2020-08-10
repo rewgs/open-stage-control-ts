@@ -25,7 +25,8 @@ for arg in argv:
 
     elif type(arg) == str and ':' in arg:
 
-        name, ports = arg.split(':')
+        name, *ports = arg.split(':')
+        ports = ':'.join(ports) # port names may contain colons
 
         inputs[name] = rtmidi.MidiIn(API, name if not JACK else name + '_in')
         outputs[name] = rtmidi.MidiOut(API, name if not JACK else name + '_out')
@@ -46,14 +47,30 @@ for arg in argv:
 
         elif ',' in ports:
 
-            in_port, out_port = [int(x) for x in ports.split(',')]
+            in_port, out_port = ports.split(',')
 
-            if in_port >= in_dev.get_port_count():
-                ipc_send('error', 'can\'t connect to input port %i' % in_port)
+            if in_port.isdigit() or in_port == '-1':
+                in_port = int(in_port)
+            else:
+                for i in range(in_dev.get_port_count()):
+                    if in_port.lower() in in_dev.get_port_name(i).lower():
+                        in_port = i
+                        break
+
+            if out_port.isdigit() or out_port == '-1':
+                out_port = int(out_port)
+            else:
+                for i in range(out_dev.get_port_count()):
+                    if out_port.lower() in out_dev.get_port_name(i).lower():
+                        out_port = i
+                        break
+
+            if type(in_port) != int or in_port >= in_dev.get_port_count():
+                ipc_send('error', 'can\'t connect to input port "%s"' % in_port)
                 break
 
-            if out_port >= out_dev.get_port_count():
-                ipc_send('error', 'can\'t connect to output port %i' % in_port)
+            if type(out_port) != int or out_port >= out_dev.get_port_count():
+                ipc_send('error', 'can\'t connect to output port "%s"' % out_port)
                 break
 
             if in_port != -1:

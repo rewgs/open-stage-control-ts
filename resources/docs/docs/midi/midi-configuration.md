@@ -2,31 +2,48 @@
 
 MIDI support requires additional software to be installed on the server's system:
 
-- python (2 or 3)
-- python package [python-rtmidi](https://spotlightkid.github.io/python-rtmidi/installation.html)
-
-To install `python-rtmidi`, run `pip install python-rtmidi` (python 2) in a terminal or `pip3 install python-rtmidi` (python 3).
+- [python 3](https://www.python.org/downloads/)
+- python package [python-rtmidi](https://spotlightkid.github.io/python-rtmidi/installation.html#from-pypi)
 
 !!! info "Why an additionnal dependency ?"
     Providing cross-platform MIDI support is not trivial, as it requires OS-specific compilation that cannot be automated within Open Stage Control's current packaging workflow. Using a python addon seems to be the best compromise so far : the core app remains easy to build, and the extra dependency is easy to install.
 
 ## Configuration
 
-When running the app, the `-m / --midi` switch must be set; it accepts the following options (separated by spaces):
+When running the app, the `-m / --midi` switch must be set and accepts the following options, separated by spaces.
 
-- `list`: prints the available MIDI ports to the console; numbers in the first column may be used for `input`/`output` definition below
-- `device_name:input,output`: connect to midi ports `input` and `output`; osc messages sent to target `midi:device_name` will be processed as midi events; Multiple devices can be declared. If the `device_name` contains white spaces, the declaration must be enquoted (ie `"spaced name:input,output"`). `device_name` doesn't need to match the actual midi device name, it is just an identifier (see [Widget settings](#widget-settings)).
-- `sysex`: parse incoming system exclusive messages (disabled by default)
-- `pc_offset`: send program changes with a `-1` offset to match some software/hardware implementations
-- `path=/path/to/python`: indicates where to find python or python3 binary in case open stage control doesn't (`Error: spawn python3 ENOENT`)
+!!! warning ""
+    If an option contains space characters, it must be enquoted.
 
-*Linux / Mac only:*
+**`list`**
 
-- `device_name:virtual`: creates a virtual midi device with one input port and one output port
+Print the available MIDI ports to the console when the server starts. This action is also available in the launcher's menu.
 
-*Linux only:*
+**`device_name:input,output`**
 
-- `jack`: use JACK MIDI instead of ALSA. `rtmidi` must be compiled with `--jack-midi` flag for this to work.
+Create a virtual MIDI device that will translate OSC messsages to MIDI messages
+
+- `device_name` is an arbitrary identifier that can be used as a target by widgets (see [Widget setup](#widget-setup))
+- `input` / `output` can be port numbers or strings (as reported by the `list` action). If a string is specified, the first port whose names contains the string will be used (comparison is case-insensitive).
+
+**`sysex`**
+
+Enable parsing of system exclusive messages (disabled by default).
+
+**`pc_offset`**
+
+Send program changes with a `-1` offset to match some software/hardware implementations
+
+
+**`path=/path/to/python`**
+
+Indicates where to find python binary in case open stage control doesn't (`Error: spawn python3 ENOENT`)
+
+
+**`device_name:virtual`** (*Linux / Mac only*): creates a virtual midi device with one input port and one output port
+
+
+**`jack`** (*Linux only*): use JACK MIDI instead of ALSA. `python-rtmidi` must be compiled with [jack support](https://spotlightkid.github.io/python-rtmidi/installation.html#linux) for this to work.
 
 
 ## Widget setup
