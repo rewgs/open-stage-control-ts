@@ -1,5 +1,3 @@
-!!! warning "Incomplete documentation"
-
 ## Widget selection
 
 Clicking on a widget, on a tab label or on an item in the project tree selects the widgets for edition:
