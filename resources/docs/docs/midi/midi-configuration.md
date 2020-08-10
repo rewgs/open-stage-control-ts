@@ -24,7 +24,7 @@ Print the available MIDI ports to the console when the server starts. This actio
 Create a virtual MIDI device that will translate OSC messsages to MIDI messages
 
 - `device_name` is an arbitrary identifier that can be used as a target by widgets (see [Widget setup](#widget-setup))
-- `input` / `output` can be port numbers or strings (as reported by the `list` action). If a string is specified, the first port whose names contains the string will be used (comparison is case-insensitive).
+- `input` / `output` can be port numbers or strings (as reported by the `list` action). If a string is specified, the first port whose name contains the string will be used (comparison is case-insensitive).
 
 **`sysex`**
 
