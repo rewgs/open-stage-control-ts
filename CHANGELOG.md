@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4
+
+- bug fixes
+  - script: broken `storage.getItem` and `storage.removeItem`
+
+
 ## 1.0.3
 
 - bug fixes
