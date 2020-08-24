@@ -4,6 +4,7 @@
 
 - bug fixes
   - script: broken `storage.getItem` and `storage.removeItem`
+  - regression breaking `remote-root` option when starting with the launcher
 
 
 ## 1.0.3
