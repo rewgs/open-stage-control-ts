@@ -22,7 +22,7 @@ module.exports = class Knob extends Slider {
             ]},
             spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
             pips: {type: 'boolean', value: false, help: 'Set to `true` to show the scale\'s breakpoints'},
-            dashed: {type: 'boolean', value: false, help: 'Set to `true` to display a dashed gauge'},
+            dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
             angle: {type: 'number', value: 270, help: 'Defines the angle\'s width of the knob, in degrees'},
             doubleTap: {type: 'boolean', value: false, help: [
                 'Set to `true` to make the knob reset to its `default` value when receiving a double tap.',
@@ -175,6 +175,8 @@ module.exports = class Knob extends Slider {
             minRadius = this.minDimension / 6 - (pips ? this.fontSize * 0.75 : PXSCALE),
             maxRadius = this.minDimension / 2 - (pips ? this.fontSize * 2 : PXSCALE)
 
+        if (dashed) dashed = Array.isArray(dashed) ? dashed.map(x=>parseFloat(x)) : [1.5, 1.5]
+
         var gaugeWidth = maxRadius - minRadius,
             gaugeRadius = maxRadius - gaugeWidth / 2
 
@@ -199,7 +201,7 @@ module.exports = class Knob extends Slider {
             this.ctx.stroke()
         }
 
-        if (dashed) this.ctx.setLineDash([1.5 * PXSCALE, 1.5 * PXSCALE])
+        if (dashed) this.ctx.setLineDash(dashed)
 
         if (this.cssVars.alphaFillOn) {
             this.ctx.globalAlpha = this.cssVars.alphaFillOn
