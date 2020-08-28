@@ -166,7 +166,7 @@ if (settings.cli) {
             }
         }
 
-        global.serverProcess = spawn(process.argv[0], args, {stdio: 'pipe', env: {'ELECTRON_RUN_AS_NODE':'1'}})
+        global.serverProcess = spawn(process.argv[0], args, {stdio: 'pipe', env: {...process.env, 'ELECTRON_RUN_AS_NODE':'1'}})
         launcher.webContents.send('server-started')
 
         if (!settings.read('no-gui')) {

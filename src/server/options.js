@@ -80,7 +80,7 @@ module.exports = {
     'disable-vsync': {type: 'boolean', describe: 'disable gui\'s vertical synchronization', restart: true},
     'force-gpu': {type: 'boolean', describe: 'ignore chrome\'s gpu blacklist', restart: true},
     'read-only': {type: 'boolean', describe: 'disable session editing and session history changes'},
-    'remote-saving': {type: 'string', describe: 'disable remote session saving for hosts that don\'t match the regular expresion',
+    'remote-saving': {type: 'string', describe: 'disable remote session saving for hosts that don\'t match the regular expression',
         check: (r, argv)=>{
             var msg = true
             try {
