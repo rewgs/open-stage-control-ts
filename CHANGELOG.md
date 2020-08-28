@@ -5,6 +5,9 @@
 - midi
   - added support for channel pressure and key pressure messages
 
+- widgets
+  - svg: removed support for non-standard `%x` and `%y` units; fixed layout update when resized; 
+
 ## 1.0.4
 
 - bug fixes
