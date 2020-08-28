@@ -3,10 +3,11 @@
 ## next
 
 - midi
-  - added support for channel pressure and key pressure messages
+  - add support for channel pressure and key pressure messages
 
 - widgets
-  - svg: removed support for non-standard `%x` and `%y` units; fixed layout update when resized; 
+  - svg: remove support for non-standard `%x` and `%y` units; fixed layout update when resized;
+  - knob: add support for custom dash/gap size in `dashed` property
 
 ## 1.0.4
 
