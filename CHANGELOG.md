@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+- midi
+  - added support for channel pressure and key pressure messages
+
 ## 1.0.4
 
 - bug fixes
