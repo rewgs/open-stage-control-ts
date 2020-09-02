@@ -90,9 +90,12 @@ class Fader extends Slider {
 
         super.dragHandle(...arguments)
 
+        var padding = this.gaugePadding
+        if (this.getProp('design') === 'compact') padding += this.cssVars.knobSize * PXSCALE / 2
+
         this.percent = this.getProp('horizontal')?
-            this.percent + ( e.movementX / (this.width - this.gaugePadding * 2)) * 100 / e.inertia * this.getProp('sensitivity'):
-            this.percent + (-e.movementY / (this.height - this.gaugePadding * 2)) * 100  / e.inertia * this.getProp('sensitivity')
+            this.percent + ( e.movementX / (this.width - padding * 2)) * 100 / e.inertia * this.getProp('sensitivity'):
+            this.percent + (-e.movementY / (this.height - padding * 2)) * 100  / e.inertia * this.getProp('sensitivity')
 
         this.setValue(this.percentToValue(this.percent), {send:true,sync:true,dragged:true})
 
@@ -182,7 +185,7 @@ class Fader extends Slider {
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
             dashed = this.dashed,
             compact = this.getProp('design') === 'compact',
-            knobHeight = this.cssVars.knobSize * PXSCALE, knobWidth = knobHeight * .6 * PXSCALE
+            knobHeight = this.cssVars.knobSize, knobWidth = knobHeight * .6
 
         this.clear()
 
@@ -252,7 +255,8 @@ class Fader extends Slider {
             this.ctx.fillStyle = this.cssVars.colorFill
 
             this.ctx.beginPath()
-            this.ctx.rect(this.gaugePadding, Math.min(d, height - this.gaugePadding - PXSCALE), width - this.gaugePadding * 2, PXSCALE)
+            d = d / (height - this.gaugePadding) * (height-this.gaugePadding - knobHeight)
+            this.ctx.rect(this.gaugePadding, d, width - this.gaugePadding * 2, knobHeight)
             this.ctx.fill()
 
             this.clearRect = [0, 0, width, height]
@@ -409,7 +413,7 @@ class Fader extends Slider {
 
 
 Fader.cssVariables = Fader.prototype.constructor.cssVariables.concat(
-    {js: 'knobSize', css: '--knob-size'}
+    {js: 'knobSize', css: '--knob-size', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE}
 )
 
 module.exports = Fader
