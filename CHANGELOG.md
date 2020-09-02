@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+- widgets
+  - knob: add `solid` & `line` designs
+
 ## 1.1.0
 
 - bug fixes

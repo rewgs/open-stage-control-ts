@@ -52,8 +52,7 @@
     --widget-padding: 1rem;
     --alpha-stroke: 0.75;
 
-    &.design-classic {
-        --alpha-stroke: 0.5;
+    &.design-solid, &.design-line {
         --alpha-fill-off: 0.25;
         --alpha-fill-on: 1;
     }
