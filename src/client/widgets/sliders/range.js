@@ -215,7 +215,7 @@ class Range extends Fader {
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
             dashed = this.getProp('dashed'),
             compact = this.getProp('design') === 'compact',
-            knobHeight = this.cssVars.knobSize * PXSCALE, knobWidth = knobHeight * .6 * PXSCALE
+            knobHeight = this.cssVars.knobSize, knobWidth = knobHeight * .6
 
         this.clear()
 
@@ -283,14 +283,17 @@ class Range extends Fader {
 
             this.ctx.globalAlpha = 1
             this.ctx.fillStyle = this.cssVars.colorFill
+            var compactAdjust = 1 / (height - this.gaugePadding) * (height-this.gaugePadding - knobHeight)
 
             this.ctx.beginPath()
-            this.ctx.rect(this.gaugePadding, Math.min(d, height - this.gaugePadding - PXSCALE), width - this.gaugePadding * 2, PXSCALE)
+            d *= compactAdjust
+            this.ctx.rect(this.gaugePadding, d, width - this.gaugePadding * 2, knobHeight)
             this.ctx.fill()
 
             // extra knob
             this.ctx.beginPath()
-            this.ctx.rect(this.gaugePadding, Math.min(d2, height - this.gaugePadding - PXSCALE), width - this.gaugePadding * 2, PXSCALE)
+            d2 *= compactAdjust
+            this.ctx.rect(this.gaugePadding, d2, width - this.gaugePadding * 2, knobHeight)
             this.ctx.fill()
 
 

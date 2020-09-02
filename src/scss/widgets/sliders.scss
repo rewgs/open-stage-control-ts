@@ -17,7 +17,7 @@
     height: 200rem;
 
     --widget-padding: 1rem;
-    --knob-size: 20;
+    --knob-size: 1rem;
 
     canvas {
         text-align: left;
@@ -29,6 +29,7 @@
     }
 
     &.design-default {
+        --knob-size: 20rem;
         --widget-padding: 10rem;
         --alpha-stroke: 0.5;
         --alpha-fill-off: 0.25;
@@ -36,6 +37,7 @@
     }
 
     &.design-round {
+        --knob-size: 20rem;
         --widget-padding: 10rem;
         --alpha-stroke: 0.25;
         --alpha-fill-off: 0.25;
