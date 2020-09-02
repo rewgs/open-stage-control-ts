@@ -1,6 +1,9 @@
 # Changelog
 
-## next
+## 1.1.0
+
+- bug fixes
+  - iOS 14+ scrolling issue
 
 - midi
   - add support for channel pressure and key pressure messages
