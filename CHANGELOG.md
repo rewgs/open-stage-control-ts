@@ -4,6 +4,7 @@
 
 - widgets
   - knob: add `solid` & `line` designs
+  - fader: add `knobSize` property
 
 ## 1.1.0
 
