@@ -818,6 +818,7 @@ class Widget extends EventEmitter {
             case 'alphaStroke':
             case 'alphaFillOff':
             case 'alphaFillOn':
+            case 'strokeWidth':
             case 'padding':
                 this.setCssVariables()
                 return
