@@ -300,10 +300,10 @@
                 z-index: 101;
             }
             &:first-child:before {
-                margin-left: 1rem;
+                margin-left: var(--stroke-width);
             }
             &:last-child:before {
-                margin-right: 1rem;
+                margin-right: var(--stroke-width);
             }
 
         }
@@ -336,11 +336,11 @@
                 z-index: 101;
             }
             &:first-child:before {
-                margin-top: 1rem;
+                margin-top: var(--stroke-width);
                 margin-left: 0;
             }
             &:last-child:before {
-                margin-bottom: 1rem;
+                margin-bottom: var(--stroke-width);
                 margin-right: 0;
             }
         }
