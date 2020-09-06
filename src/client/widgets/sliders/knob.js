@@ -176,8 +176,8 @@ module.exports = class Knob extends Slider {
             max = this.percentToAngle(100),
             dashed = this.getProp('dashed'),
             pips = this.getProp('pips'),
-            minRadius = this.minDimension / 6 - (pips ? this.fontSize * 0.75 : PXSCALE),
-            maxRadius = this.minDimension / 2 - (pips ? this.fontSize * 2 : PXSCALE)
+            minRadius = this.minDimension / 6 - (pips ? this.fontSize * 0.75 : 0) - this.cssVars.strokeWidth / 2,
+            maxRadius = this.minDimension / 2 - (pips ? this.fontSize * 2 : 0) - this.cssVars.strokeWidth / 2
 
         if (dashed) dashed = Array.isArray(dashed) ? dashed.map(x=>parseFloat(x)) : [1.5, 1.5]
 
@@ -218,14 +218,15 @@ module.exports = class Knob extends Slider {
 
 
             // stroke
+            if (this.cssVars.strokeWidth) {
+                this.ctx.globalAlpha = this.cssVars.alphaStroke
+                this.ctx.strokeStyle = this.cssVars.colorStroke
+                this.ctx.lineWidth = this.cssVars.strokeWidth
 
-            this.ctx.globalAlpha = this.cssVars.alphaStroke
-            this.ctx.strokeStyle = this.cssVars.colorStroke
-            this.ctx.lineWidth = PXSCALE
-
-            this.ctx.beginPath()
-            this.ctx.arc(this.width / 2, this.height / 2, maxRadius, 0, 2 * Math.PI)
-            this.ctx.stroke()
+                this.ctx.beginPath()
+                this.ctx.arc(this.width / 2, this.height / 2, maxRadius, 0, 2 * Math.PI)
+                this.ctx.stroke()
+            }
 
 
             // knob
