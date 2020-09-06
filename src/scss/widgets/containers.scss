@@ -606,11 +606,11 @@
     --color-white-key: #ccc;
     --color-black-key: #1A1A1A;
 
-    --widget-keypad: var(--widget-padding);
+    --widget-keypad:  calc(var(--widget-padding) + var(--stroke-width));
 
     > inner {
 
-        padding: var(--widget-padding);
+        padding: calc(var(--widget-padding) + var(--stroke-width));
         flex: 1;
         @include pseudo-stroke($z: 2);
         position: relative;
@@ -623,6 +623,7 @@
 
         --alpha-fill-off: var(--alpha-key-off);
         --alpha-fill-on: var(--alpha-key-on);
+        --stroke-width: 0!important;
         inner {
             margin: 1rem 0.5rem!important;
             --widget-padding: -1rem;
