@@ -269,7 +269,7 @@ module.exports = class Xy extends Pad {
         this.ctx.globalAlpha = this.active ? 1 : 0.75
         this.ctx.lineWidth = 1.5 * PXSCALE
         this.ctx.beginPath()
-        this.ctx.arc(x, y, pointSize, Math.PI * 2, false)
+        this.ctx.arc(x, y, pointSize - PXSCALE * 2, Math.PI * 2, false)
         this.ctx.stroke()
 
 
