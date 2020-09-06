@@ -6,6 +6,7 @@
   - remove support for extra args (avoid path issues)
 
 - widgets
+  - all: add `strokeWidth` style property
   - knob: add `solid` & `line` designs
   - fader: add `knobSize` property
 
