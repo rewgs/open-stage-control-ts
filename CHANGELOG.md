@@ -2,6 +2,9 @@
 
 ## next
 
+- custom module
+  - remove support for extra args (avoid path issues)
+
 - widgets
   - knob: add `solid` & `line` designs
   - fader: add `knobSize` property

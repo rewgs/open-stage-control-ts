@@ -91,7 +91,7 @@ class Fader extends Slider {
         super.dragHandle(...arguments)
 
         var padding = this.gaugePadding
-        if (this.getProp('design') === 'compact') padding += this.cssVars.knobSize * PXSCALE / 2
+        if (this.getProp('design') === 'compact') padding += this.cssVars.knobSize / 2
 
         this.percent = this.getProp('horizontal')?
             this.percent + ( e.movementX / (this.width - padding * 2)) * 100 / e.inertia * this.getProp('sensitivity'):
@@ -235,18 +235,21 @@ class Fader extends Slider {
         if (compact) {
 
             // stroke
+            if (this.cssVars.strokeWidth) {
 
-            this.ctx.globalAlpha = this.cssVars.alphaStroke
-            this.ctx.strokeStyle = this.cssVars.colorStroke
+                this.ctx.globalAlpha = this.cssVars.alphaStroke
+                this.ctx.strokeStyle = this.cssVars.colorStroke
 
-            this.ctx.beginPath()
-            this.ctx.moveTo(0, 0)
-            this.ctx.lineTo(width, 0)
-            this.ctx.lineTo(width, height)
-            this.ctx.lineTo(0, height)
-            this.ctx.closePath()
-            this.ctx.lineWidth = 2 * PXSCALE
-            this.ctx.stroke()
+                this.ctx.beginPath()
+                this.ctx.moveTo(0, 0)
+                this.ctx.lineTo(width, 0)
+                this.ctx.lineTo(width, height)
+                this.ctx.lineTo(0, height)
+                this.ctx.closePath()
+                this.ctx.lineWidth = 2 * this.cssVars.strokeWidth
+                this.ctx.stroke()
+
+            }
 
 
             // flat knob
