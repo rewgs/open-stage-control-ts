@@ -2,8 +2,8 @@
 
 ## next
 
-- custom module
-  - remove support for extra args (avoid path issues)
+- main
+  - remove support for extra args in the `custom-module` option fix some path issues
 
 - widgets
   - all: add `strokeWidth` style property
