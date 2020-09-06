@@ -145,13 +145,13 @@ class Canvas extends Widget {
             case 'alphaFillOff':
             case 'alphaFillOn':
             case 'colorBg':
-            case 'strokeWidth':
                 setTimeout(()=>{
                     this.cacheCanvasStyle()
                     this.batchDraw()
                 },10)
                 return
             case 'css':
+            case 'strokeWidth':
             case 'padding':
                 resize.check(this.canvas, true)
                 setTimeout(()=>{
