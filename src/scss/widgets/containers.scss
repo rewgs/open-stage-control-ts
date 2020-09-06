@@ -188,7 +188,7 @@
     &.contains-widgets {
 
         > inner {
-            margin: calc(var(--widget-spacing) + 1rem);
+            margin: calc(var(--widget-spacing) + var(--stroke-width));
         }
 
         &.no-inner-padding > inner {
@@ -533,6 +533,7 @@
 .patchbaynode-container {
 
     justify-content: center;
+    background: transparent;
 
 }
 .patchbay-container {
@@ -555,21 +556,23 @@
             display: flex;
             flex-direction: column;
             align-items:stretch;
-            margin-bottom: 1rem;
+            margin-bottom: var(--stroke-width);
             width: 25%;
         }
 
         .inputs, .outputs {
             position: relative;
             @include pseudo-stroke();
-            top: 1rem;
+            top: var(--stroke-width);
+            margin-top: -1rem;
+            height: calc(100% - var(--stroke-width) * 2 + 2rem);
         }
 
         .inputs:before {
-            border-width: 0 1rem 0 0;
+            border-width: 0 var(--stroke-width) 0 0;
         }
         .outputs:before {
-            border-width: 0 0 0 1rem;
+            border-width: 0 0 0 var(--stroke-width);
         }
     }
 
