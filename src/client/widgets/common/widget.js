@@ -1065,6 +1065,7 @@ Widget.dynamicProps = [
     'alphaFillOff',
     'alphaFillOn',
     'padding',
+    'strokeWidth',
     'css',
 
     'value',
