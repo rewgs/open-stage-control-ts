@@ -235,7 +235,7 @@ class Fader extends Slider {
         if (compact) {
 
             // stroke
-            if (this.cssVars.strokeWidth) {
+            if (this.cssVars.lineWidth) {
 
                 this.ctx.globalAlpha = this.cssVars.alphaStroke
                 this.ctx.strokeStyle = this.cssVars.colorStroke
@@ -246,7 +246,7 @@ class Fader extends Slider {
                 this.ctx.lineTo(width, height)
                 this.ctx.lineTo(0, height)
                 this.ctx.closePath()
-                this.ctx.lineWidth = 2 * this.cssVars.strokeWidth
+                this.ctx.lineWidth = 2 * this.cssVars.lineWidth
                 this.ctx.stroke()
 
             }

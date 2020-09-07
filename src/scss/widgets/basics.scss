@@ -88,7 +88,7 @@
         display: flex;
         flex-direction: column;
         --widget-spacing: calc(var(--widget-padding) / 2);
-        margin: calc(var(--widget-spacing) + var(--stroke-width));
+        margin: calc(var(--widget-spacing) + var(--line-width));
 
 
     }
@@ -125,7 +125,7 @@
         overflow: hidden;
         @include pseudo-fill($z: -1);
         &:after {
-            --stroke-width: 1rem;
+            --line-width: 1rem;
             margin: calc(var(--widget-spacing) - 1rem);
         }
 
@@ -250,7 +250,7 @@
 
         @include pseudo-stroke($z: 2);
         &:before {
-            border-width: var(--stroke-width);
+            border-width: var(--line-width);
         }
 
 
@@ -350,7 +350,7 @@
         display: flex;
 
         flex-direction: row;
-        padding: calc(var(--widget-padding) / 2 + var(--stroke-width));
+        padding: calc(var(--widget-padding) / 2 + var(--line-width));
 
         .item {
             position: relative;
