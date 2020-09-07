@@ -340,7 +340,7 @@ module.exports = class Knob extends Slider {
 
         if (pips) {
 
-            this.ctx.lineWidth = this.cssVars.lineWidth / 2 + 0.5 * PXSCALE
+            this.ctx.lineWidth = this.fontSize / 11 * 1.5
             this.ctx.strokeStyle = this.cssVars.colorStroke
             this.ctx.globalAlpha = this.cssVars.alphaPips
 
@@ -357,7 +357,6 @@ module.exports = class Knob extends Slider {
                 this.ctx.stroke()
 
             }
-
             var radius = maxRadius + (this.fontSize + this.cssVars.lineWidth / 2 + 2 * PXSCALE)
             this.ctx.fillStyle = this.cssVars.colorText
             this.ctx.globalAlpha = this.cssVars.alphaPipsText
