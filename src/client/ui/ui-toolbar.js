@@ -10,7 +10,7 @@ var UiWidget = require('./ui-widget'),
     {leftUiSidePanel, rightUiSidePanel} = require('../ui/')
 
 
-var recentSessions = []
+var recentSessions = [{label: locales('file_open_recent_wait'), class: 'disabled'}]
 var menuEntries = [
 
     {

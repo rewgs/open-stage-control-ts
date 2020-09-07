@@ -27,6 +27,7 @@ module.exports = {
     // file
     file_open: 'Ouvrir',
     file_open_recent: 'Récemment ouvert(s)',
+    file_open_recent_wait: 'Liste non chargée, veuillez fermer puis ouvrir le menu à nouveau',
     file_save: 'Enregistrer',
     file_save_as: 'Enregistrer sous...',
     file_import: 'Importer',
