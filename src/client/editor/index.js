@@ -529,7 +529,7 @@ class Editor {
             minLeft = Infinity
 
         if (increment) {
-            pastedData = pastedData.map(x=>incrementWidget(x))
+            pastedData = incrementWidget(pastedData)
         }
 
 

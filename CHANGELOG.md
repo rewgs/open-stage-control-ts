@@ -2,6 +2,9 @@
 
 ## next
 
+- bug fixes
+  - editor: id not incremented when pasting multiple widgets with id+1
+
 - main
   - remove support for extra args in the `custom-module` option (fixes some path issues)
 

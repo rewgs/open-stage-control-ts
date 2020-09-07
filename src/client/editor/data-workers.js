@@ -168,6 +168,13 @@ var incrementWidget = function(data, root){
         }
     }
 
+    if (Array.isArray(data)) {
+        for (let i in data) {
+            data[i] = incrementWidget(data[i], false)
+        }
+        return data
+    }
+
     var id = data.id,
         address = data.address
 
