@@ -234,11 +234,11 @@ class Range extends Fader {
         if (compact) {
             this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
         } else {
-            this.ctx.lineWidth = 2 * PXSCALE
+            this.ctx.lineWidth = this.cssVars.lineWidth
         }
 
 
-        if (dashed) this.ctx.setLineDash([PXSCALE, PXSCALE])
+        if (dashed) this.ctx.setLineDash([PXSCALE * dashed[0], PXSCALE * dashed[1]])
 
 
         if (this.cssVars.alphaFillOff) {
@@ -327,7 +327,7 @@ class Range extends Fader {
                 this.ctx.fillStyle = this.cssVars.colorWidget
 
                 this.ctx.beginPath()
-                this.ctx.rect(m - 3 * PXSCALE, _d, 6 * PXSCALE, PXSCALE)
+                this.ctx.rect(m - knobWidth / 6, _d, knobWidth / 3, PXSCALE)
                 this.ctx.fill()
 
             }
