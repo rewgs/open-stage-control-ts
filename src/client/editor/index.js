@@ -540,13 +540,13 @@ class Editor {
                 let top = pastedData[i].top,
                     left = pastedData[i].left
 
-                if (top.includes('%')) {
+                if (typeof top === 'string' && top.includes('%')) {
                     top = parseFloat(top) / 100 * this.selectedWidgets[0].widget.offsetHeight
                     pastedData[i]._atop = top
                     pastedData[i]._ptop = true
                 }
 
-                if (left.includes('%')) {
+                if (typeof left === 'string' && left.includes('%')) {
                     left = parseFloat(left) / 100 * this.selectedWidgets[0].widget.offsetWidth
                     pastedData[i]._aleft = left
                     pastedData[i]._pleft = true
