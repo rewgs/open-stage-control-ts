@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## 1.2.0
 
 - bug fixes
   - editor: id not incremented when pasting multiple widgets with id+1
