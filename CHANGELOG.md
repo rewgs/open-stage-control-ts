@@ -3,12 +3,16 @@
 ## next
 
 - main
-  - remove support for extra args in the `custom-module` option fix some path issues
+  - remove support for extra args in the `custom-module` option (fixes some path issues)
 
 - widgets
   - all: add `strokeWidth` style property
   - knob: add `solid` & `line` designs
   - fader: add `knobSize` property
+
+- editor
+  - preserve percentages in position/size
+  - add 'Relative units (%)' option to use percents automatically on new widgets
 
 ## 1.1.0
 

@@ -6,6 +6,7 @@ module.exports = {
     editor_grid: 'Grille',
     editor_tree: 'Arborescence',
     editor_inspector: 'Inspecteur',
+    editor_percents: 'Unités relatives (%)',
 
     // editor context-menu
     editor_show_in_tree: 'Voir dans l\'arborescence',

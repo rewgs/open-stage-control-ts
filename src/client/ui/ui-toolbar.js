@@ -158,6 +158,14 @@ var menuEntries = [
                 class: ()=>{return 'toggle ' + (rightUiSidePanel.minimized ? 'off' : 'on')},
                 action: ()=>{return rightUiSidePanel.minimized ? rightUiSidePanel.restore() : rightUiSidePanel.minimize()},
                 shortcut: 'mod + i'
+            },
+            {
+                separator: true
+            },
+            {
+                label: locales('editor_percents'),
+                class: ()=>{return 'toggle ' + (editor.usePercents ? 'on' : 'off')},
+                action: ()=>{editor.usePercents = !editor.usePercents}
             }
         ]
     },
