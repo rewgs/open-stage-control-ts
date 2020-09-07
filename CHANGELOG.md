@@ -9,7 +9,7 @@
   - remove support for extra args in the `custom-module` option (fixes some path issues)
 
 - widgets
-  - all: add `strokeWidth` style property
+  - all: add `lineWidth` style property
   - knob: add `solid` & `line` designs
   - fader: add `knobSize` property
 
