@@ -6,6 +6,7 @@ module.exports = {
     editor_grid: 'Grid',
     editor_tree: 'Project tree',
     editor_inspector: 'Inspector',
+    editor_percents: 'Relative units (%)',
 
     // editor context-menu
     editor_show_in_tree: 'Show in tree',
