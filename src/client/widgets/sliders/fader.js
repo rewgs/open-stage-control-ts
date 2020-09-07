@@ -204,7 +204,7 @@ class Fader extends Slider {
         if (compact) {
             this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
         } else {
-            this.ctx.lineWidth = 2 * PXSCALE
+            this.ctx.lineWidth = this.cssVars.lineWidth
         }
 
 
@@ -292,7 +292,7 @@ class Fader extends Slider {
             this.ctx.fillStyle = this.cssVars.colorStroke
 
             this.ctx.beginPath()
-            this.ctx.rect(m - 3 * PXSCALE, d, 6 * PXSCALE, PXSCALE)
+            this.ctx.rect(m - knobWidth / 6, d, knobWidth / 3, PXSCALE)
             this.ctx.fill()
 
             this.clearRect = [m - knobWidth / 2 - PXSCALE, this.gaugePadding - knobHeight / 2  - PXSCALE, knobWidth + 2 * PXSCALE, height - 2 * this.gaugePadding + knobHeight + 2 * PXSCALE]
@@ -358,7 +358,7 @@ class Fader extends Slider {
         if (!compact) m -= 16 * PXSCALE - this.cssVars.knobSize * .3 * PXSCALE
 
 
-        ctx.lineWidth = PXSCALE
+        ctx.lineWidth = this.fontSize / 11
         ctx.fillStyle = this.cssVars.colorText
         ctx.strokeStyle = this.cssVars.colorFill
 
