@@ -188,7 +188,7 @@
     &.contains-widgets {
 
         > inner {
-            margin: calc(var(--widget-spacing) + var(--stroke-width));
+            margin: calc(var(--widget-spacing) + var(--line-width));
         }
 
         &.no-inner-padding > inner {
@@ -300,10 +300,10 @@
                 z-index: 101;
             }
             &:first-child:before {
-                margin-left: var(--stroke-width);
+                margin-left: var(--line-width);
             }
             &:last-child:before {
-                margin-right: var(--stroke-width);
+                margin-right: var(--line-width);
             }
 
         }
@@ -336,11 +336,11 @@
                 z-index: 101;
             }
             &:first-child:before {
-                margin-top: var(--stroke-width);
+                margin-top: var(--line-width);
                 margin-left: 0;
             }
             &:last-child:before {
-                margin-bottom: var(--stroke-width);
+                margin-bottom: var(--line-width);
                 margin-right: 0;
             }
         }
@@ -556,23 +556,23 @@
             display: flex;
             flex-direction: column;
             align-items:stretch;
-            margin-bottom: var(--stroke-width);
+            margin-bottom: var(--line-width);
             width: 25%;
         }
 
         .inputs, .outputs {
             position: relative;
             @include pseudo-stroke();
-            top: var(--stroke-width);
+            top: var(--line-width);
             margin-top: -1rem;
-            height: calc(100% - var(--stroke-width) * 2 + 2rem);
+            height: calc(100% - var(--line-width) * 2 + 2rem);
         }
 
         .inputs:before {
-            border-width: 0 var(--stroke-width) 0 0;
+            border-width: 0 var(--line-width) 0 0;
         }
         .outputs:before {
-            border-width: 0 0 0 var(--stroke-width);
+            border-width: 0 0 0 var(--line-width);
         }
     }
 
@@ -606,11 +606,11 @@
     --color-white-key: #ccc;
     --color-black-key: #1A1A1A;
 
-    --widget-keypad:  calc(var(--widget-padding) + var(--stroke-width));
+    --widget-keypad:  calc(var(--widget-padding) + var(--line-width));
 
     > inner {
 
-        padding: calc(var(--widget-padding) + var(--stroke-width));
+        padding: calc(var(--widget-padding) + var(--line-width));
         flex: 1;
         @include pseudo-stroke($z: 2);
         position: relative;
@@ -623,7 +623,7 @@
 
         --alpha-fill-off: var(--alpha-key-off);
         --alpha-fill-on: var(--alpha-key-on);
-        --stroke-width: 0!important;
+        --line-width: 0!important;
         inner {
             margin: 1rem 0.5rem!important;
             --widget-padding: -1rem;

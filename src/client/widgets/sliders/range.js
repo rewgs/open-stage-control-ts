@@ -275,7 +275,7 @@ class Range extends Fader {
             this.ctx.lineTo(width, height)
             this.ctx.lineTo(0, height)
             this.ctx.closePath()
-            this.ctx.lineWidth = 2 * this.cssVars.strokeWidth
+            this.ctx.lineWidth = 2 * this.cssVars.lineWidth
             this.ctx.stroke()
 
 

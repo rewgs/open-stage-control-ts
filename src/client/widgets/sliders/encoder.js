@@ -213,7 +213,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
             min = this.percentToAngle(0),
             max = this.percentToAngle(100),
             minRadius = this.minDimension / 6,
-            maxRadius = this.minDimension / 2 - this.cssVars.strokeWidth,
+            maxRadius = this.minDimension / 2 - this.cssVars.lineWidth,
             gaugeWidth = maxRadius - minRadius,
             gaugeRadius = maxRadius - gaugeWidth / 2
 
@@ -245,11 +245,11 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
         }
 
         // stroke
-        if (this.cssVars.strokeWidth) {
+        if (this.cssVars.lineWidth) {
 
             this.ctx.globalAlpha = this.cssVars.alphaStroke
             this.ctx.strokeStyle = this.cssVars.colorStroke
-            this.ctx.lineWidth = this.cssVars.strokeWidth
+            this.ctx.lineWidth = this.cssVars.lineWidth
 
             if (this.minDimension > 40) {
                 this.ctx.beginPath()

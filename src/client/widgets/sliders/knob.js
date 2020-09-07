@@ -176,8 +176,8 @@ module.exports = class Knob extends Slider {
             max = this.percentToAngle(100),
             dashed = this.getProp('dashed'),
             pips = this.getProp('pips'),
-            minRadius = this.minDimension / 6 - (pips ? this.fontSize * 0.75 : 0) - this.cssVars.strokeWidth / 2,
-            maxRadius = this.minDimension / 2 - (pips ? this.fontSize * 2 : 0) - this.cssVars.strokeWidth / 2
+            minRadius = this.minDimension / 6 - (pips ? this.fontSize * 0.75 : 0) - this.cssVars.lineWidth / 2,
+            maxRadius = this.minDimension / 2 - (pips ? this.fontSize * 2 : 0) - this.cssVars.lineWidth / 2
 
         if (dashed) dashed = Array.isArray(dashed) ? dashed.map(x=>parseFloat(x)) : [1.5, 1.5]
 
@@ -218,10 +218,10 @@ module.exports = class Knob extends Slider {
 
 
             // stroke
-            if (this.cssVars.strokeWidth) {
+            if (this.cssVars.lineWidth) {
                 this.ctx.globalAlpha = this.cssVars.alphaStroke
                 this.ctx.strokeStyle = this.cssVars.colorStroke
-                this.ctx.lineWidth = this.cssVars.strokeWidth
+                this.ctx.lineWidth = this.cssVars.lineWidth
 
                 this.ctx.beginPath()
                 this.ctx.arc(this.width / 2, this.height / 2, maxRadius, 0, 2 * Math.PI)
@@ -233,7 +233,7 @@ module.exports = class Knob extends Slider {
 
             this.ctx.globalAlpha = 1
             this.ctx.strokeStyle = this.cssVars.colorFill
-            this.ctx.lineWidth = 2.5 * PXSCALE
+            this.ctx.lineWidth = this.cssVars.lineWidth + .5 * PXSCALE
 
             let r1 = minRadius + this.gaugePadding,
                 r2 = maxRadius - this.gaugePadding,
@@ -257,7 +257,7 @@ module.exports = class Knob extends Slider {
 
             // fill
             this.ctx.strokeStyle = this.cssVars.colorFill
-            this.ctx.lineWidth = 2 * PXSCALE
+            this.ctx.lineWidth = this.cssVars.lineWidth
 
             if (this.cssVars.alphaFillOff) {
                 this.ctx.globalAlpha = this.cssVars.alphaFillOff
@@ -281,7 +281,7 @@ module.exports = class Knob extends Slider {
 
             this.ctx.globalAlpha = 1
             this.ctx.strokeStyle = this.cssVars.colorBg
-            this.ctx.lineWidth = 2.5 * PXSCALE
+            this.ctx.lineWidth = this.cssVars.lineWidth + .5 * PXSCALE
 
             let r1 = minRadius,
                 r2 = maxRadius / 1.25 + PXSCALE ,
@@ -298,7 +298,7 @@ module.exports = class Knob extends Slider {
 
             // fill
             this.ctx.strokeStyle = this.cssVars.colorFill
-            this.ctx.lineWidth = 2 * PXSCALE
+            this.ctx.lineWidth = this.cssVars.lineWidth
 
             if (this.cssVars.alphaFillOff) {
                 this.ctx.globalAlpha = this.cssVars.alphaFillOff
@@ -322,10 +322,10 @@ module.exports = class Knob extends Slider {
 
             this.ctx.globalAlpha = 1
             this.ctx.strokeStyle = this.cssVars.colorFill
-            this.ctx.lineWidth = 2.5 * PXSCALE
+            this.ctx.lineWidth = this.cssVars.lineWidth
 
             let r1 = minRadius * 1.5,
-                r2 = maxRadius + 0.5 * PXSCALE,
+                r2 = maxRadius + this.cssVars.lineWidth / 2 - 0.5 * PXSCALE,
                 a  = 2 * Math.PI - d
 
             this.ctx.beginPath()
@@ -340,13 +340,13 @@ module.exports = class Knob extends Slider {
 
         if (pips) {
 
-            this.ctx.lineWidth = 1.5 * PXSCALE
+            this.ctx.lineWidth = this.cssVars.lineWidth / 2 + 0.5 * PXSCALE
             this.ctx.strokeStyle = this.cssVars.colorStroke
             this.ctx.globalAlpha = this.cssVars.alphaPips
 
             for (var pip of this.rangeKeys) {
 
-                let r1 = maxRadius + 3 * PXSCALE,
+                let r1 = maxRadius + this.cssVars.lineWidth / 2 + 2 * PXSCALE,
                     r2 = r1 + 4 * PXSCALE,
                     a = 2 * Math.PI - this.percentToAngle(pip)
 
@@ -358,7 +358,7 @@ module.exports = class Knob extends Slider {
 
             }
 
-            var radius = maxRadius + (this.fontSize + 4 * PXSCALE)
+            var radius = maxRadius + (this.fontSize + this.cssVars.lineWidth / 2 + 2 * PXSCALE)
             this.ctx.fillStyle = this.cssVars.colorText
             this.ctx.globalAlpha = this.cssVars.alphaPipsText
             for (var p in this.pipTexts) {

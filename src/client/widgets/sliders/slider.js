@@ -144,7 +144,7 @@ class Slider extends Canvas {
 
         super.cacheCanvasStyle(style)
 
-        this.gaugePadding = this.cssVars.padding + this.cssVars.strokeWidth
+        this.gaugePadding = this.cssVars.padding + this.cssVars.lineWidth
 
     }
 
