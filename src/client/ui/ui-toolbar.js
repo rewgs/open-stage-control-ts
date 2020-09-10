@@ -215,6 +215,7 @@ class UiToolbar extends UiWidget {
             position: [40, 1]
         })
         this.opened = false
+        this.entries = menuEntries
         this.menu.bindShortcuts(menuEntries)
 
         ipc.on('sessionList', (data)=>{
