@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+- scripting
+  - expose toolbar menu actions
+
 ## 1.2.0
 
 - bug fixes
