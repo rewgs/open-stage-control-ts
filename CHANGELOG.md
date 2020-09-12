@@ -4,8 +4,12 @@
 
 - scripting
   - expose toolbar menu actions
+
 - remote control
   - optimise small changes made with /EDIT
+
+- widgets
+  - button: add `wrap` and `vertical` properties  
 
 ## 1.2.0
 
