@@ -4,6 +4,8 @@
 
 - scripting
   - expose toolbar menu actions
+- remote control
+  - optimise small changes made with /EDIT
 
 ## 1.2.0
 
