@@ -50,6 +50,21 @@
         height: 100%;
         width: 100%;
         border: 2rem solid transparent;
+
+        &.wrap {
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        &.vertical {
+            transform: rotate(180deg);
+            text-overflow: ellipsis;
+            -webkit-writing-mode:vertical-rl;
+            writing-mode:vertical-rl;
+            i {
+                transform: rotate(180deg);
+                writing-mode: initial;
+            }
+        }
     }
 
     &.on {
