@@ -340,6 +340,7 @@ osc-panel-content {
             left:0;
             right:0;
             bottom:0;
+            background: rgba(black, 0.5);
         }
     }
 
@@ -351,6 +352,5 @@ osc-panel-content {
 
 #osc-container {
     background: var(--color-background);
-    background: black;
     overflow: auto;
 }
