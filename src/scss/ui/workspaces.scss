@@ -37,6 +37,10 @@ osc-panel-container {
         width: 0;
         box-shadow: 0 0 0 1rem var(--color-background);
 
+        &.minimized {
+            box-shadow: none;
+        }
+
         &:after {
             // hover trap to display toggle-button when closed
             content: "";
