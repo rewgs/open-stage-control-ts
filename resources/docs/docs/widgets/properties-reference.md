@@ -83,6 +83,8 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
         | <h6 id="button_label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#button_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/>- Insert icons using the prefix ^ followed by the icon's name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)<br/>- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal` |
+        | <h6 id="button_vertical">vertical<a class="headerlink" href="#button_vertical" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the text vertically |
+        | <h6 id="button_wrap">wrap<a class="headerlink" href="#button_wrap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically. |
         | <h6 id="button_on">on<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#button_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message |
         | <h6 id="button_off">off<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#button_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message. Must be different from `on`. |
         | <h6 id="button_mode">mode<a class="headerlink" href="#button_mode" title="Permanent link">#</a></h6> | `string` | <code>"toggle"</code> | Interraction mode:<br/>- `toggle` (classic on/off switch)<br/>- `push` (press & release)<br/>- `tap` (no release)<br/><br/>Choices: `toggle`, `push`, `tap` |
@@ -518,7 +520,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
         | <h6 id="text_vertical">vertical<a class="headerlink" href="#text_vertical" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the text vertically |
-        | <h6 id="text_wrap">wrap<a class="headerlink" href="#text_wrap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically.<br/><br/>This will not break overflowing words by default, word-breaking can be enabled by adding `word-break: break-all;` to the `css` property |
+        | <h6 id="text_wrap">wrap<a class="headerlink" href="#text_wrap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically. |
         | <h6 id="text_align">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Css text-align property.<br/><br/>Choices: `center`, `left`, `right` |
 ## Pads
 
