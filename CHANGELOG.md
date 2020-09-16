@@ -9,7 +9,8 @@
   - optimise small changes made with /EDIT
 
 - widgets
-  - button: add `wrap` and `vertical` properties  
+  - button: add `wrap` and `vertical` properties
+  - root: add `width` and `height` properties (helps building mobile layouts)
 
 ## 1.2.0
 
