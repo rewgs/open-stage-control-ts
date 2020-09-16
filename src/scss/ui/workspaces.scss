@@ -351,4 +351,6 @@ osc-panel-content {
 
 #osc-container {
     background: var(--color-background);
+    background: black;
+    overflow: auto;
 }
