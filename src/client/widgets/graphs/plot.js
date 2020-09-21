@@ -27,7 +27,7 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
             bars: {type: 'boolean', value: false, help: 'Set to `true` to use draw bars instead (disables `logScaleX` and forces `x axis` even spacing)'},
             pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
 
-        }, ['interaction', 'decimals', 'typeTags', 'bypass'], {
+        }, ['interaction', 'decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {
 
             value: {type: 'array|string', value: '', help: [
                 '- `Array` of `y` values',

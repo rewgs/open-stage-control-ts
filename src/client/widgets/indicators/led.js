@@ -23,7 +23,7 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true, inter
             logScale: {type: 'boolean', value: false, help: 'If `mode` is `intensity`, set to `true` to use logarithmic scale.'},
             borderRadius: {type: 'string', value: '', help: 'Css border-radius property.'},
 
-        }, ['interaction', 'decimals', 'bypass'], {
+        }, ['interaction', 'decimals', 'bypass', 'ignoreDefaults'], {
 
             value: {type: 'number|array|string', value: '', help: [
                 'If `mode` is `intensity`:',

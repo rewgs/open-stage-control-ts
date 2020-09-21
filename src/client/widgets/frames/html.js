@@ -37,7 +37,7 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
                 '&nbsp;&nbsp;<img>: src, width, height',
             ]},
 
-        }, ['decimals', 'bypass'], {})
+        }, ['decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {})
 
     }
 

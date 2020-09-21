@@ -32,7 +32,7 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
             rangeY: {type: 'object', value: {min:-6, max:6}, help: 'Defines the min and max values for the y axis (in dB)'},
             origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
 
-        }, ['interaction', 'decimals', 'typeTags', 'bypass'])
+        }, ['interaction', 'decimals', 'typeTags', 'bypass', 'ignoreDefaults'])
 
     }
 
