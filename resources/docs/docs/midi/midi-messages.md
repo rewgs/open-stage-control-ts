@@ -63,12 +63,15 @@ PitchWheel event.
 
 ----
 
-#### `/sysex msg v1 .. vN`
+#### `/sysex msg`
 
 System exclusive message.
 
-- `msg`: hexadecimal sysex data string of the form `f0 ... f7`. You may include placeholders of the form `nn` which will be replaced by `v1, .., vN` respectively.
-- `v1, .., vN`: values encoded as hexadecimal data strings to include in `msg`. Most probably, you will need to sepcify a [custom module](/docs/custom-module/) in order to convert numeric widget values into the required hexadecimal format. In general, this conversion will be different for each manufacturer / device.
+- `msg`: hexadecimal sysex data string of the form `f0 ... f7`.
+
+Other system messages may be sent (midi time code for example: `f1 <mtc value>`). Instead of a single hexadecimal string, arguments can be separated and defined either as hexadecimal bytes or as integers. When received, system messages are always formatted as a single hexadecimal string.
+
+
 
 ----
 

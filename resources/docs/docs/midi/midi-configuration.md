@@ -30,6 +30,10 @@ Create a virtual MIDI device that will translate OSC messsages to MIDI messages
 
 Enable parsing of system exclusive messages (disabled by default).
 
+**`mtc`**
+
+Enable parsing of midi time code messages (disabled by default). These will be received as raw sysex messages.
+
 **`pc_offset`**
 
 Send program changes with a `-1` offset to match some software/hardware implementations
