@@ -178,10 +178,9 @@
         margin: var(--widget-spacing);
     }
 
-    &.contains-tabs > inner > .navigation {
-        margin: 0 1rem;
-        &.vertical {
-            margin: 1rem 0;
+    &.contains-tabs {
+        > inner {
+            margin: calc(var(--line-width));
         }
     }
 
@@ -302,10 +301,10 @@
                 z-index: 101;
             }
             &:first-child:before {
-                margin-left: var(--line-width);
+                margin-left: 1rem;
             }
             &:last-child:before {
-                margin-right: var(--line-width);
+                margin-right: 1rem;
             }
 
         }
@@ -338,11 +337,11 @@
                 z-index: 101;
             }
             &:first-child:before {
-                margin-top: var(--line-width);
+                margin-top: 1rem;
                 margin-left: 0;
             }
             &:last-child:before {
-                margin-bottom: var(--line-width);
+                margin-bottom: 1rem;
                 margin-right: 0;
             }
         }
