@@ -10,7 +10,7 @@
   - remove variable args in sysex messages (dynamic properties and scripting can be used to this effect)
   - add support for sending sysex bytes as integers
   - allow sending any system message (eg MIDI time code)
-  - add support for receiving MIDI time code (as raw sysex)
+  - add support for receiving MIDI time code messages (as raw sysex) (requires adding the `mtc` flag to the midi configuration)
 
 
 ## 1.2.1
