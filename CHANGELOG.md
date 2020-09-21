@@ -4,6 +4,7 @@
 
 - bug fixes
   - editor: hide impossible actions from context-menu (eg adding widgets in tab containers)  
+  - panel: layout issue with tabs & lineWidth property
 
 ## 1.2.1
 
