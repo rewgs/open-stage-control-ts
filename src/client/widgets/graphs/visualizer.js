@@ -27,7 +27,7 @@ class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dot
             pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
             freeze: {type: 'boolean', value: false, help: 'Set to `true` to freeze current view and ignore incoming values'}
 
-        }, ['interaction', 'decimals', 'typeTags', 'bypass'], {})
+        }, ['interaction', 'decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {})
 
     }
 

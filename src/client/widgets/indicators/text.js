@@ -23,7 +23,7 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
             ]},
             align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Css text-align property.'},
 
-        }, ['interaction', 'decimals', 'bypass'], {})
+        }, ['interaction', 'decimals', 'bypass', 'ignoreDefaults'], {})
 
     }
 

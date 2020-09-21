@@ -22,7 +22,7 @@ class Svg extends StaticProperties(Widget, {bypass: true}) {
                 'Svg xml definition (will be wrapped in a `< svg />` element)',
             ]},
 
-        }, ['decimals', 'bypass'], {})
+        }, ['decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {})
 
     }
 
