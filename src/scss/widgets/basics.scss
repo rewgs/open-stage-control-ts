@@ -566,7 +566,7 @@
 
 }
 
-.editor-enabled .input-container:not(.editing) canvas {
+.editor-enabled .input-container:not(.editing) inner {
     // prevent input focus when selecting
     pointer-events: none;
 }

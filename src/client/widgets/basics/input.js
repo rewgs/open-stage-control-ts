@@ -44,8 +44,8 @@ class Input extends Canvas {
 
         if (this.getProp('interaction')) {
 
-            this.canvas.setAttribute('tabindex', 0)
-            this.canvas.addEventListener('focus', this.focus.bind(this))
+            this.widget.setAttribute('tabindex', 0)
+            this.widget.addEventListener('focus', this.focus.bind(this))
             this.input = html`<input class="no-keybinding"></input>`
             this.input.addEventListener('blur', (e)=>{
                 this.blur(this.tabKeyBlur)
@@ -72,7 +72,7 @@ class Input extends Canvas {
         if (this.focused) return
         this.focused = true
 
-        this.canvas.setAttribute('tabindex','-1')
+        this.widget.setAttribute('tabindex','-1')
         this.input.value = this.stringValue
         this.widget.insertBefore(this.input, this.canvas)
         this.input.focus()
@@ -87,7 +87,7 @@ class Input extends Canvas {
 
         if (change) this.inputChange()
 
-        this.canvas.setAttribute('tabindex','0')
+        this.widget.setAttribute('tabindex','0')
         this.widget.removeChild(this.input)
 
     }
