@@ -153,9 +153,10 @@ for name in inputs:
 
     inputs[name].set_callback(create_callback(name))
 
-    # Activate sysex support
-    if 'sysex' in argv:
-        inputs[name].ignore_types(False, True, True)
+    # sysex / mtc support
+    ignore_sysex = 'sysex' not in argv
+    ignore_mtc = 'mtc' not in argv
+    inputs[name].ignore_types(ignore_sysex, ignore_mtc, True)
 
 
 def midi_message(status, channel, data1=None, data2=None):
@@ -189,22 +190,16 @@ def send_midi(name, event, *args):
 
     if mtype == SYSTEM_EXCLUSIVE:
 
-        # unhexlify('f0 7e 7f 06 01 f7') creates a sysex message
-        # from hex MIDI data string 'f0 7e 7f 06 01 f7'.
-        # We expect all args to be hex strings! args[0] may contain placeholders of
-        # the form 'nn' that are replaced using args[1..N] to create the final message.
         try:
-            midiBytes = args[0].replace(' ', '')
-            i = 1
-            for m in sysexRegex.finditer(midiBytes):
-                midiBytes = midiBytes[:m.start()] + args[i].replace(' ', '') + midiBytes[m.end():]
-                i += 1
-
-            msg = unhexlify(midiBytes)
-
-            if (msg and msg.startswith(b'\xF0') and msg.endswith(b'\xF7') and
-                    all((val <= 0x7F for val in msg[1:-1]))):
-                m = msg
+            m = []
+            for arg in args:
+                if type(arg) is str:
+                    arg = arg.split(' ')
+                    arg = [int(x, 16) for x in arg]
+                    for x in arg:
+                        m.append(x)
+                else:
+                    m.append(int(arg))
 
         except:
             pass

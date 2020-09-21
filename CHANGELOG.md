@@ -6,6 +6,13 @@
   - editor: hide impossible actions from context-menu (eg adding widgets in tab containers)  
   - panel: layout issue with tabs & lineWidth property
 
+- midi
+  - remove variable args in sysex messages (dynamic properties and scripting can be used to this effect)
+  - add support for sending sysex bytes as integers
+  - allow sending any system message (eg MIDI time code)
+  - add support for receiving MIDI time code (as raw sysex)
+
+
 ## 1.2.1
 
 - scripting

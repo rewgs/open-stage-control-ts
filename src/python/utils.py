@@ -11,6 +11,9 @@ MIDI_TO_OSC = {
     POLY_PRESSURE: '/key_pressure'
 }
 
+for i in range(SYSTEM_EXCLUSIVE + 1, 256):
+    MIDI_TO_OSC[i] = '/sysex'
+
 OSC_TO_MIDI = {
     '/note': NOTE_ON,
     '/control': CONTROL_CHANGE,
