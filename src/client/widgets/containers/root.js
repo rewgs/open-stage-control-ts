@@ -34,7 +34,7 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
 
         }, [
             'visible', 'label',
-            '_geometry', 'left', 'top', 'expand',
+            'left', 'top', 'expand',
             'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOff',
         ], {
 
