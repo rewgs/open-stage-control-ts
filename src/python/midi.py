@@ -116,7 +116,7 @@ def create_callback(name):
             else:
 
                 status = message[0]
-                channel = (status & 0xF) + 1
+                channel = (status & 0x0F) + 1
 
                 osc['args'].append({'type': 'i', 'value': channel})
 
@@ -161,7 +161,7 @@ for name in inputs:
 
 def midi_message(status, channel, data1=None, data2=None):
 
-    msg = [(status & 0xF0) | (channel - 1 & 0xF)]
+    msg = [(status & 0xF0) | (channel - 1 & 0x0F)]
 
     if data1 != None:
         msg.append(data1 & 0x7F)
@@ -214,7 +214,7 @@ def send_midi(name, event, *args):
                 mtype = NOTE_OFF
 
         elif mtype == PITCH_BEND:
-            args = args[:1] + [args[1] & 0x7f, (args[1] >> 7) & 0x7f] # convert 0-16384 -> 0-127 pair
+            args = args[:1] + [args[1] & 0x7F, (args[1] >> 7) & 0x7F] # convert 0-16384 -> 0-127 pair
 
         elif mtype == PROGRAM_CHANGE and PROGRAM_CHANGE_OFFSET:
             args[-1] = args[-1] - 1
