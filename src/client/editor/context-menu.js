@@ -182,29 +182,32 @@ var handleClick = function(event) {
             separator: true
         })
 
-        actions.push({
-            label: icon('plus') + ' ' + locales('editor_addwidget'),
-            action: addActions
-        })
+        if (data.length == 1 && widget.childrenType !== 'tab') {
+            actions.push({
+                label: icon('plus') + ' ' + locales('editor_addwidget'),
+                action: addActions
+            })
+        }
 
+        if (data.length == 1 && widget.childrenType !== 'widget') {
+
+            actions.push({
+                label: icon('plus') + ' ' + locales('editor_addtab'),
+                action: ()=>{
+                    data[0].tabs = data[0].tabs || []
+                    data[0].tabs.push({})
+
+                    var indexes = {addedIndexes: [data[0].tabs.length -1]}
+                    updateWidget(editor.selectedWidgets[0], indexes)
+                    editor.pushHistory(indexes)
+
+                }
+            })
+
+        }
+        
     }
 
-    if (data.length == 1 && (!data[0].widgets || !data[0].widgets.length) && (data[0].tabs)) {
-
-        actions.push({
-            label: icon('plus') + ' ' + locales('editor_addtab'),
-            action: ()=>{
-                data[0].tabs = data[0].tabs || []
-                data[0].tabs.push({})
-
-                var indexes = {addedIndexes: [data[0].tabs.length -1]}
-                updateWidget(editor.selectedWidgets[0], indexes)
-                editor.pushHistory(indexes)
-
-            }
-        })
-
-    }
 
     if (parent !== widgetManager)  {
 

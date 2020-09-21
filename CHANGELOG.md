@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2
+
+- bug fixes
+  - editor: hide impossible actions from context-menu (eg adding widgets in tab containers)  
+
 ## 1.2.1
 
 - scripting
