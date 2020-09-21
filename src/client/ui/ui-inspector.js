@@ -175,6 +175,7 @@ class UiInspector extends UiWidget {
 
         if (category) content.appendChild(category)
 
+        this.lock = true
 
         if (this.mounted) {
             morph(this.container.firstChild, content)
@@ -183,6 +184,7 @@ class UiInspector extends UiWidget {
         }
 
         this.mounted = true
+        this.lock = false
 
         if (this.colorPicker.opened) {
 
@@ -194,6 +196,7 @@ class UiInspector extends UiWidget {
             }
 
         }
+
 
     }
 

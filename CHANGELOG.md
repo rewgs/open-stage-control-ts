@@ -4,6 +4,7 @@
 
 - bug fixes
   - editor: hide impossible actions from context-menu (eg adding widgets in tab containers)  
+  - editor: error when selecting a tab/root widget while a property field contains unsubmitted changes
   - panel: layout issue with tabs & lineWidth property
 
 - midi
