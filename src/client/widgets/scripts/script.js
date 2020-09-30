@@ -77,7 +77,7 @@ class Script extends Widget {
                 shift: false,
                 alt: false,
                 meta: false,
-            )
+            })
 
         }
 

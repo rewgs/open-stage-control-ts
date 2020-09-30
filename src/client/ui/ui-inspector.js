@@ -76,12 +76,9 @@ class UiInspector extends UiWidget {
         })
 
 
-        this.container.addEventListener('blur', this.onBlur.bind(this))
         this.container.addEventListener('change', this.onChange.bind(this))
         this.container.addEventListener('keydown', this.onKeydown.bind(this))
-        this.container.addEventListener('input', this.onFocus.bind(this))
-        this.container.addEventListener('focus', this.onFocus.bind(this))
-
+        this.container.addEventListener('input', this.onInput.bind(this))
 
         this.lock = false
         this.clearTimeout = null
@@ -207,7 +204,9 @@ class UiInspector extends UiWidget {
 
         this.lock = true
 
-        var input = event ? event.target : this.focusedInput
+        var input = this.focusedInput || event.target
+
+        this.focusedInput = null
 
         input.blur()
 
@@ -235,14 +234,26 @@ class UiInspector extends UiWidget {
 
     onKeydown(event) {
 
-        if (this.focusedInput && event.keyCode === 13 && !event.shiftKey) {
-            event.preventDefault()
-            DOM.dispatchEvent(this.focusedInput, 'change')
+        if (event.target.tagName === 'TEXTAREA') {
+
+            if (event.keyCode === 13 && !event.shiftKey) {
+
+                event.preventDefault()
+                DOM.dispatchEvent(event.target, 'change')
+
+            } else if (event.keyCode === 27) {
+
+                event.preventDefault()
+                event.target.value = event.target.textContent
+                event.target.blur()
+
+            }
+
         }
 
     }
 
-    onFocus(event) {
+    onInput(event) {
 
         this.focusedInput = event.target
 
@@ -250,12 +261,6 @@ class UiInspector extends UiWidget {
 
         this.focusedInput.setAttribute('rows',0)
         this.focusedInput.setAttribute('rows', this.focusedInput.value.split('\n').length)
-
-    }
-
-    onBlur(event) {
-
-        this.focusedInput = null
 
     }
 
