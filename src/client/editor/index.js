@@ -349,9 +349,9 @@ class Editor {
             case 'end':
                 if (!this.selectedWidgets.length || this.selectedWidgets[0].parent.children.length <= 1) return
 
-                var curWidget = this.selectedWidgets[0],
-                    index = curWidget.parent.children.indexOf(curWidget),
-                    maxIndex = curWidget.parent.children.length - 1,
+                var curWidget2 = this.selectedWidgets[0],
+                    index = curWidget2.parent.children.indexOf(curWidget2),
+                    maxIndex = curWidget2.parent.children.length - 1,
                     newIndex
 
                 if (combo === 'pagedown') newIndex = Math.min(index + 1, maxIndex)
@@ -361,7 +361,7 @@ class Editor {
 
                 if (index !== newIndex) {
                     this.widgetTree.trigger('sorted', {
-                        widget: curWidget.parent,
+                        widget: curWidget2.parent,
                         oldIndex: index,
                         newIndex: newIndex
                     })
