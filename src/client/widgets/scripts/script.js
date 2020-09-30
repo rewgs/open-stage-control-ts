@@ -54,17 +54,10 @@ class Script extends Widget {
 
         if (this.getProp('event') === 'value') {
 
-            try {
-                this.script = scriptVm.compile(this.getProp('script'), {
-                    id: '',
-                    value: 0
-                })
-            } catch(err) {
-                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
-                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
-                console.log((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
-                this.script = ()=>{}
-            }
+            this.compile({
+                id: '',
+                value: 0
+            })
 
         } else if (this.getProp('event') === 'keyboard' && this.getProp('keyBinding')) {
 
@@ -76,22 +69,32 @@ class Script extends Widget {
 
             })
 
-            try {
-                this.script = scriptVm.compile(this.getProp('script'), {
-                    type: '',
-                    key: '',
-                    code: 0,
-                    ctrl: false,
-                    shift: false,
-                    alt: false,
-                    meta: false,
-                })
-            } catch(err) {
-                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
-                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
-                console.log((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
-                this.script = ()=>{}
-            }
+            this.compile({
+                type: '',
+                key: '',
+                code: 0,
+                ctrl: false,
+                shift: false,
+                alt: false,
+                meta: false,
+            )
+
+        }
+
+    }
+
+    compîle(context) {
+
+        try {
+
+            this.script = scriptVm.compile(this.getProp('script'), context)
+
+        } catch(err) {
+
+            let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+                line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
+            console.log((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
+            this.script = ()=>{}
 
         }
 
