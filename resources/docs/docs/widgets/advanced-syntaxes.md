@@ -16,6 +16,10 @@ The property name (and the dot) can be omitted and defaults to `value` (`@{widge
 
 A widget can fetch its own properties or its direct parent's by using the keywords `this` or `parent` instead of `id`. When `this` or `parent` can be used, using the target widget's `id` instead won't work.
 
+#### `uuid`
+
+Each widget has a unique random identifier that can be retreived with the property name `uuid` (e.g. `@{this.uuid}`, `@{parent.uuid}`). 
+
 #### Dynamic properties
 
 Some properties, when changed, trigger a complete widget recreation that ends any ongoing user interaction. Also, updating these properties continuously (e.g. when linked to a slider's dynamic value) can be very cpu expensive.

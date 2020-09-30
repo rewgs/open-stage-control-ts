@@ -12,6 +12,9 @@
   - add keyboard shortcut to show widget in project tree
   - selected widget is not showed on top of the others anymore
 
+- widgets
+  - expose widgets unique identifiers as with property name "uuid"
+
 ## 1.3.0
 
 - bug fixes

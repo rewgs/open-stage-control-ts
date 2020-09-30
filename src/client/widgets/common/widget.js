@@ -357,6 +357,7 @@ class Widget extends EventEmitter {
 
         // Cache resolved props
         this.cachedProps = {}
+        this.cachedProps.uuid = this.hash
 
         for (var k in this.props) {
             if (k != 'widgets' && k != 'tabs') {
@@ -567,15 +568,16 @@ class Widget extends EventEmitter {
 
                     if (widgets[i] === widgetManager) continue
 
-                    if (widgets[i].props[k] !== undefined || k === 'value') {
+                    if (widgets[i].props[k] !== undefined || k === 'value' || k === 'uuid') {
 
                         if (k !== 'value' && originalPropName === k && widgets[i] === originalWidget) {
                             return 'ERR_CIRCULAR_REF'
                         }
 
-                        var r = k == 'value' ?
-                            widgets[i].getValue(true) :
-                            widgets[i].resolveProp(k, undefined, storeLinks, originalWidget, originalPropName)
+                        var r
+                        if (k === 'value') r = widgets[i].getValue(true)
+                        else if (k === 'uuid') r = widgets[i].hash
+                        else r = widgets[i].resolveProp(k, undefined, storeLinks, originalWidget, originalPropName)
 
                         if (subk !== undefined && r !== undefined) r = r[subk]
 
