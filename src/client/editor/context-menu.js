@@ -34,6 +34,7 @@ var handleClick = function(event) {
 
 
     if (event.type !== 'fast-right-click') {
+        if (editor.inspector.focusedInput) editor.inspector.onChange()
         editor.select(targetWidget, {multi: event.detail[multiSelectKey]})
     }
 
@@ -41,6 +42,7 @@ var handleClick = function(event) {
     if (event.type !== 'fast-right-click') return
 
     if (!event.detail.shiftKey && !event.detail[multiSelectKey] && editor.selectedWidgets.length <= 1) {
+        if (editor.inspector.focusedInput) editor.inspector.onChange()
         editor.select(targetWidget)
     }
 
