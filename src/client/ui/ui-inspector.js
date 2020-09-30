@@ -76,10 +76,11 @@ class UiInspector extends UiWidget {
         })
 
 
+        this.container.addEventListener('blur', this.onBlur.bind(this))
         this.container.addEventListener('change', this.onChange.bind(this))
         this.container.addEventListener('keydown', this.onKeydown.bind(this))
-        this.container.addEventListener('input', this.textAutoHeight.bind(this))
-        this.container.addEventListener('focus', this.textAutoHeight.bind(this))
+        this.container.addEventListener('input', this.onFocus.bind(this))
+        this.container.addEventListener('focus', this.onFocus.bind(this))
 
 
         this.lock = false
@@ -206,7 +207,7 @@ class UiInspector extends UiWidget {
 
         this.lock = true
 
-        var input = event.target
+        var input = event ? event.target : this.focusedInput
 
         input.blur()
 
@@ -234,21 +235,27 @@ class UiInspector extends UiWidget {
 
     onKeydown(event) {
 
-        var input = event.target
-
-        if (event.keyCode === 13 && !event.shiftKey) {
+        if (this.focusedInput && event.keyCode === 13 && !event.shiftKey) {
             event.preventDefault()
-            DOM.dispatchEvent(input, 'change')
+            DOM.dispatchEvent(this.focusedInput, 'change')
         }
 
     }
 
-    textAutoHeight(event) {
+    onFocus(event) {
 
-        var input = event.target
+        this.focusedInput = event.target
 
-        input.setAttribute('rows',0)
-        input.setAttribute('rows', input.value.split('\n').length)
+        // text autoheight
+
+        this.focusedInput.setAttribute('rows',0)
+        this.focusedInput.setAttribute('rows', this.focusedInput.value.split('\n').length)
+
+    }
+
+    onBlur(event) {
+
+        this.focusedInput = null
 
     }
 
