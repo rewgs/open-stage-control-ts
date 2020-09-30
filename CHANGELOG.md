@@ -2,9 +2,14 @@
 
 ## 1.3.1
 
+- bug fixes
+  - project tree: error when dropping a widget at its initial position
+
 - editor
   - validate property change when clicking on a widget
   - cancel property change when hitting escape
+  - add menu and keyboard shortcuts to reorder widgets
+  - add keyboard shortcut to show widget in project tree
 
 ## 1.3.0
 

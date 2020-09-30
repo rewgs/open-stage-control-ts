@@ -15,6 +15,11 @@ Clicking on a widget, on a tab label or on an item in the project tree selects t
 Right clicking on a widget displays a menu with the following actions
 
 - `Show in tree`: show widget in project tree (hidden when clicking in the project tree)
+- `Position`:
+    - `Send to back`: Send selected widget to back (first of siblings)
+    - `Send farther`: Send selected widget farther
+    - `Bring closer`: Bring selected widget closer
+    - `Bring to front`: Bring selected widget to front (last of siblings)
 - `Copy`: copy widget's data
 - `Cut`: copy widget's data and delete selected widget
 - `Paste`: paste copied widget in selected container
@@ -83,6 +88,12 @@ Multiple widgets can be edited at once.
     | ++ctrl+down++ | Select current widget's first child |
     | ++ctrl+right++ | Select current widget's next sibling |
     | ++ctrl+left++ | Select current widget's previous sibling |
+    | ++t++ | Show selected widget in the project tree |
+    | ++Home++ | Send selected widget to back |
+    | ++Page Up++ | Send selected widget farther |
+    | ++Page Down++ | Bring selected widget closer |
+    | ++End++ | Bring selected widget to front |
+
 
 === "Mac"
 
@@ -109,3 +120,8 @@ Multiple widgets can be edited at once.
     | ++cmd+down++ | Select current widget's first child |
     | ++cmd+right++ | Select current widget's next sibling |
     | ++cmd+left++ | Select current widget's previous sibling |
+    | ++t++ | Show selected widget in the project tree |
+    | ++Home++ | Send selected widget to back |
+    | ++Page Up++ | Send selected widget farther |
+    | ++Page Down++ | Bring selected widget closer |
+    | ++End++ | Bring selected widget to front |

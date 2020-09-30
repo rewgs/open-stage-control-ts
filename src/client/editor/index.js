@@ -170,7 +170,11 @@ class Editor {
                 'mod + down',
                 'mod + left',
                 'mod + right',
-                'f2'
+                'pageup',
+                'pagedown',
+                'home',
+                'end',
+                't'
             ]
 
             for (let c of combos) {
@@ -196,9 +200,9 @@ class Editor {
 
     handleKeyboard(combo, e){
 
-        if (this.inspector.helpModalOpened || e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return
+        if (this.inspector.helpModalOpened || e && e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return
 
-        e.preventDefault()
+        if (e) e.preventDefault()
 
         switch (combo) {
 
@@ -338,6 +342,37 @@ class Editor {
                 }
 
                 break
+
+            case 'pagedown':
+            case 'pageup':
+            case 'home':
+            case 'end':
+                if (!this.selectedWidgets.length || this.selectedWidgets[0].parent.children.length <= 1) return
+
+                var curWidget = this.selectedWidgets[0],
+                    index = curWidget.parent.children.indexOf(curWidget),
+                    maxIndex = curWidget.parent.children.length - 1,
+                    newIndex
+
+                if (combo === 'pagedown') newIndex = Math.min(index + 1, maxIndex)
+                else if (combo === 'pageup') newIndex = Math.max(index - 1, 0)
+                else if (combo === 'end') newIndex = maxIndex
+                else if (combo === 'home') newIndex = 0
+
+                if (index !== newIndex) {
+                    this.widgetTree.trigger('sorted', {
+                        widget: curWidget.parent,
+                        oldIndex: index,
+                        newIndex: newIndex
+                    })
+                }
+                break
+
+            case 't':
+                if (!this.selectedWidgets.length) return
+                this.widgetTree.showWidget(editor.selectedWidgets[0])
+                break
+
 
         }
 
