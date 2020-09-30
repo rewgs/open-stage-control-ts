@@ -18,9 +18,6 @@
 
 }
 
-.widget.editing {
-    z-index: 9999!important;
-}
 .widget.editing:after,
 .tablink.editing:after,
 .modal-container.editing > .popup > .popup-wrapper:after {

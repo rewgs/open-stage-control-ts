@@ -10,6 +10,7 @@
   - cancel property change when hitting escape
   - add menu and keyboard shortcuts to reorder widgets
   - add keyboard shortcut to show widget in project tree
+  - selected widget is not showed on top of the others anymore
 
 ## 1.3.0
 
