@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.1
+
+- editor
+  - validate property change when clicking on a widget
+  - cancel property change when hitting escape
+
 ## 1.3.0
 
 - bug fixes
