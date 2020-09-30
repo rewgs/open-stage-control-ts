@@ -63,7 +63,8 @@ var handleClick = function(event) {
                 label: icon('project-diagram') + ' ' + locales('editor_show_in_tree'),
                 action: ()=>{
                     editor.widgetTree.showWidget(editor.selectedWidgets[0])
-                }
+                },
+                shortcut: 't'
             })
             actions.push({
                 separator: true
@@ -71,14 +72,55 @@ var handleClick = function(event) {
 
         }
 
+        if (editor.selectedWidgets[0].parent.children.length > 1) {
+            actions.push({
+                label: icon('layer-group') + ' Position',
+                action: [
+                    {
+                        label: locales('editor_back'),
+                        action: ()=>{
+                            editor.handleKeyboard('home')
+                        },
+                        shortcut: 'Home'
+                    },
+                    {
+                        label: locales('editor_farther'),
+                        action: ()=>{
+                            editor.handleKeyboard('pageup')
+                        },
+                        shortcut: 'Page Up'
+                    },
+                    {
+                        label: locales('editor_closer'),
+                        action: ()=>{
+                            editor.handleKeyboard('pagedown')
+                        },
+                        shortcut: 'Page Down'
+                    },
+                    {
+                        label: locales('editor_front'),
+                        action: ()=>{
+                            editor.handleKeyboard('end')
+                        },
+                        shortcut: 'End'
+                    }
+                ]
+            })
+            actions.push({
+                separator: true
+            })
+        }
+
         actions.push({
             label: icon('copy') + ' ' + locales('editor_copy'),
-            action: editor.copyWidget.bind(editor)
+            action: editor.copyWidget.bind(editor),
+            shortcut: 'mod + c'
         })
 
         actions.push({
             label: icon('cut') + ' ' + locales('editor_cut'),
-            action: editor.cutWidget.bind(editor)
+            action: editor.cutWidget.bind(editor),
+            shortcut: 'mod + x'
         })
 
     }
@@ -101,13 +143,16 @@ var handleClick = function(event) {
                     label: icon('paste') + ' ' + locales('editor_paste'),
                     action: ()=>{
                         editor.pasteWidget(clickX, clickY)
-                    }
+                    },
+                    shortcut: 'mod + v'
                 })
                 pasteActions.push({
                     label: icon('plus-square') + ' ' + locales('editor_pasteindent'),
                     action: ()=>{
                         editor.pasteWidget(clickX, clickY, true)
-                    }
+                    },
+                    shortcut: 'mod + shift + v'
+
                 })
 
                 if (editor.idClipboard && widgetManager.getWidgetById(editor.idClipboard).length && editor.clipboard[0].type !== 'tab') {
@@ -219,7 +264,8 @@ var handleClick = function(event) {
 
         actions.push({
             label: icon('trash') + ' ' + locales('editor_delete'),
-            action: editor.deleteWidget.bind(editor)
+            action: editor.deleteWidget.bind(editor),
+            shortcut: 'delete'
         })
 
     }

@@ -10,6 +10,10 @@ module.exports = {
 
     // editor context-menu
     editor_show_in_tree: 'Show in tree',
+    editor_front: 'Bring to front',
+    editor_closer: 'Bring closer',
+    editor_back: 'Send to back',
+    editor_farther: 'Send farther',
     editor_copy: 'Copy',
     editor_cut: 'Cut',
     editor_paste: 'Paste',
