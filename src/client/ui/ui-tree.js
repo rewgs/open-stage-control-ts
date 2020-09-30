@@ -58,7 +58,7 @@ class UiTree extends UiWidget {
         this.sortables = []
         this.sortCallback = (event)=>{
             var widget = widgetManager.widgets[event.to.parentNode.getAttribute('data-widget')]
-            if (!widget) return
+            if (!widget || event.oldIndex === event.newIndex) return
             this.trigger('sorted', {
                 widget: widget,
                 oldIndex: event.oldIndex,
