@@ -83,7 +83,7 @@ class Script extends Widget {
 
     }
 
-    compîle(context) {
+    compile(context) {
 
         try {
 
