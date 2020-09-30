@@ -72,45 +72,6 @@ var handleClick = function(event) {
 
         }
 
-        if (editor.selectedWidgets[0].parent.children.length > 1) {
-            actions.push({
-                label: icon('layer-group') + ' Position',
-                action: [
-                    {
-                        label: locales('editor_back'),
-                        action: ()=>{
-                            editor.handleKeyboard('home')
-                        },
-                        shortcut: 'Home'
-                    },
-                    {
-                        label: locales('editor_farther'),
-                        action: ()=>{
-                            editor.handleKeyboard('pageup')
-                        },
-                        shortcut: 'Page Up'
-                    },
-                    {
-                        label: locales('editor_closer'),
-                        action: ()=>{
-                            editor.handleKeyboard('pagedown')
-                        },
-                        shortcut: 'Page Down'
-                    },
-                    {
-                        label: locales('editor_front'),
-                        action: ()=>{
-                            editor.handleKeyboard('end')
-                        },
-                        shortcut: 'End'
-                    }
-                ]
-            })
-            actions.push({
-                separator: true
-            })
-        }
-
         actions.push({
             label: icon('copy') + ' ' + locales('editor_copy'),
             action: editor.copyWidget.bind(editor),
@@ -174,6 +135,49 @@ var handleClick = function(event) {
 
         }
 
+    }
+
+    if (parent !== widgetManager && editor.selectedWidgets[0].parent.children.length > 1) {
+        actions.push({
+            separator: true
+        })
+        actions.push({
+            label: icon('layer-group') + ' Position',
+            action: [
+                {
+                    label: locales('editor_back'),
+                    action: ()=>{
+                        editor.handleKeyboard('home')
+                    },
+                    shortcut: 'Home'
+                },
+                {
+                    label: locales('editor_farther'),
+                    action: ()=>{
+                        editor.handleKeyboard('pageup')
+                    },
+                    shortcut: 'Page Up'
+                },
+                {
+                    label: locales('editor_closer'),
+                    action: ()=>{
+                        editor.handleKeyboard('pagedown')
+                    },
+                    shortcut: 'Page Down'
+                },
+                {
+                    label: locales('editor_front'),
+                    action: ()=>{
+                        editor.handleKeyboard('end')
+                    },
+                    shortcut: 'End'
+                }
+            ]
+        })
+
+    }
+
+    if (widget.childrenType !== undefined) {
 
         var addActions = []
 
