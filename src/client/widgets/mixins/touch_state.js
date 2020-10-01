@@ -6,7 +6,7 @@ module.exports = (self, options)=>{
     self.on('draginit',(e)=>{
         self.touched += 1
         if (self.touched == 1) {
-            self.trigger('touch', {stopPropagation :0, touch: 1})
+            self.trigger('touch', {stopPropagation: true, touch: 1})
         }
     }, options)
 
@@ -19,7 +19,7 @@ module.exports = (self, options)=>{
                 self.setValueTouchedQueue = undefined
             }
 
-            self.trigger('touch', {stopPropagation :true, touch: 0})
+            self.trigger('touch', {stopPropagation: true, touch: 0})
 
         } else if (self.touched > 1){
             self.touched -= 1
@@ -28,7 +28,7 @@ module.exports = (self, options)=>{
 
     self.onRemove = ()=>{
         if (self.touched > 0) {
-            self.trigger('touch', {stopPropagation :true, touch: 0})
+            self.trigger('touch', {stopPropagation: true, touch: 0})
         }
         self.__proto__.onRemove.call(self)
     }
