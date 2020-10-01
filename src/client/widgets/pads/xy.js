@@ -24,6 +24,7 @@ module.exports = class Xy extends Pad {
                 'By default, the points are dragged from their initial position.',
                 'If set to `true`, touching anywhere on the widget\'s surface will make them snap to the touching coordinates',
             ]},
+            ephemeral: {type: 'boolean', value: false, help: 'When set to `true`, the point will be drawn only chile touched.'},
             spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its default value when released'},
             pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
             rangeX: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the x axis'},
@@ -189,16 +190,19 @@ module.exports = class Xy extends Pad {
         var pointSize = this.pointSize,
             margin = this.padPadding,
             x = this.faders.x.percentToCoord(this.faders.x.percent),
-            y = this.faders.y.percentToCoord(this.faders.y.percent)
+            y = this.faders.y.percentToCoord(this.faders.y.percent),
+            ephemeral = this.getProp('ephemeral')
 
         this.clear()
 
 
-        this.ctx.fillStyle = this.cssVars.colorFill
-        this.ctx.globalAlpha = this.cssVars.alphaFillOn
-        this.ctx.beginPath()
-        this.ctx.arc(x, y, pointSize - 3 * PXSCALE, Math.PI * 2, false)
-        this.ctx.fill()
+        if (!ephemeral || this.active) {
+            this.ctx.fillStyle = this.cssVars.colorFill
+            this.ctx.globalAlpha = this.cssVars.alphaFillOn
+            this.ctx.beginPath()
+            this.ctx.arc(x, y, pointSize - 3 * PXSCALE, Math.PI * 2, false)
+            this.ctx.fill()
+        }
 
 
 
@@ -265,12 +269,14 @@ module.exports = class Xy extends Pad {
         if (!pipsDrawn) this.clearRect = [x - this.pointSize - 2 * PXSCALE, y - this.pointSize - 2 * PXSCALE, (this.pointSize + PXSCALE) * 4, (this.pointSize + PXSCALE) * 4]
 
 
-        this.ctx.strokeStyle = this.cssVars.colorStroke
-        this.ctx.globalAlpha = this.active ? 1 : 0.75
-        this.ctx.lineWidth = 1.5 * PXSCALE
-        this.ctx.beginPath()
-        this.ctx.arc(x, y, pointSize, Math.PI * 2, false)
-        this.ctx.stroke()
+        if (!ephemeral || this.active) {
+            this.ctx.strokeStyle = this.cssVars.colorStroke
+            this.ctx.globalAlpha = this.active ? 1 : 0.75
+            this.ctx.lineWidth = 1.5 * PXSCALE
+            this.ctx.beginPath()
+            this.ctx.arc(x, y, pointSize, Math.PI * 2, false)
+            this.ctx.stroke()
+        }
 
 
 
