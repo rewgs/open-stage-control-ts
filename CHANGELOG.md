@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.1
+## 1.4.0
 
 - bug fixes
   - project tree: error when dropping a widget at its initial position
