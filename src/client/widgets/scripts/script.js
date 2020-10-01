@@ -56,7 +56,8 @@ class Script extends Widget {
 
             this.compile({
                 id: '',
-                value: 0
+                value: 0,
+                touch: undefined
             })
 
         } else if (this.getProp('event') === 'keyboard' && this.getProp('keyBinding')) {
@@ -128,6 +129,7 @@ class Script extends Widget {
             this.run({
                 value: v,
                 id: options.id,
+                touch: options.touch
             })
 
             scriptVm.setValueOptions(options)

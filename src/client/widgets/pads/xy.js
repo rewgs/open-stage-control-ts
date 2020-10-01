@@ -37,11 +37,7 @@ module.exports = class Xy extends Pad {
             ]},
             sensitivity: {type: 'number', value: 1, help: 'Defines the pad\'s sensitivity when `snap` is `false` '},
 
-        }, [], {
-
-            touchAddress: {type: 'string', value:'', help: 'OSC address for touched state messages: `/touchAddress [preArgs] 0/1`)'},
-
-        })
+        }, [], {})
 
     }
 

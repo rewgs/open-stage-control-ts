@@ -49,11 +49,7 @@ class Fader extends Slider {
             ]},
             origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the fader\'s gauge'},
 
-        }, [], {
-
-            touchAddress: {type: 'string', value:'', help: 'OSC address for touched state messages: `/touchAddress [preArgs] 0/1`'},
-
-        }, Fader)
+        }, [], {}, Fader)
 
     }
 
