@@ -14,7 +14,9 @@
 
 - widgets
   - expose widgets unique identifiers with property name "uuid"
-  - xy/multixy: add `ephemeral` property 
+  - xy/multixy: add `ephemeral` property
+  - fader/knob/xy/range/multixy: remove `touchAddress` property
+  - fader/knob/xy/range/multixy: expose touch state in `script` property (`touchAddress` usages will be converted automatically)
 
 ## 1.3.0
 

@@ -213,7 +213,11 @@ class Widget extends EventEmitter {
             this.on('change', (e)=>{
                 if (e.widget === this && this.mounted && !e.options.fromEdit) this.script.setValue(this.value, {...e.options, id: e.options.id || e.id})
             })
-
+            if (String(this.getProp('script')).includes('touch')) {
+                this.on('touch', (e)=>{
+                    this.script.setValue(this.value, {id: this.getProp('id'), touch: e.touch, sync: false, send: true})
+                })
+            }
         }
 
         this.container = html`

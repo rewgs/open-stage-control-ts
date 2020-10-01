@@ -1,18 +1,13 @@
 module.exports = (self, options)=>{
 
-    var sendTouchState = self.getProp('touchAddress') && self.getProp('touchAddress').length
-
     self.touched = 0
     self.setValueTouchedQueue = undefined
 
     self.on('draginit',(e)=>{
         self.touched += 1
-        if (self.touched == 1 && sendTouchState)
-            self.sendValue({
-                address:self.getProp('touchAddress'),
-                v:1,
-                split:false
-            })
+        if (self.touched == 1) {
+            self.trigger('touch', {stopPropagation :0, touch: 1})
+        }
     }, options)
 
     self.on('dragend', (e)=>{
@@ -24,13 +19,7 @@ module.exports = (self, options)=>{
                 self.setValueTouchedQueue = undefined
             }
 
-            if (sendTouchState) {
-                self.sendValue({
-                    address:self.getProp('touchAddress'),
-                    v:0,
-                    split:false
-                })
-            }
+            self.trigger('touch', {stopPropagation :true, touch: 0})
 
         } else if (self.touched > 1){
             self.touched -= 1
@@ -38,12 +27,8 @@ module.exports = (self, options)=>{
     }, options)
 
     self.onRemove = ()=>{
-        if (sendTouchState && self.touched > 0) {
-            self.sendValue({
-                address:self.getProp('touchAddress'),
-                v:0,
-                split:false
-            })
+        if (self.touched > 0) {
+            self.trigger('touch', {stopPropagation :true, touch: 0})
         }
         self.__proto__.onRemove.call(self)
     }

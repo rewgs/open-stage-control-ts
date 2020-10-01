@@ -43,11 +43,7 @@ module.exports = class MultiXy extends Pad {
             logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
             sensitivity: {type: 'number', value: 1, help: 'Defines the pad\'s sensitivity when `snap` is `false` '},
 
-        }, [], {
-
-            touchAddress: {type: 'string', value:'', help: 'OSC address for touched state messages: `/touchAddress [preArgs] 0/1`'},
-
-        })
+        }, [], {})
 
     }
 
@@ -120,12 +116,7 @@ module.exports = class MultiXy extends Pad {
 
             e.stopPropagation = true
 
-            if (this.getProp('touchAddress')) {
-                this.sendValue({
-                    address: this.getProp('touchAddress'),
-                    v: [parseInt(id), 1],
-                })
-            }
+            this.trigger('touch', {stopPropagation: true, touch: [parseInt(id), 1]})
 
             this.pads[id].trigger('draginit', e)
 
@@ -151,12 +142,7 @@ module.exports = class MultiXy extends Pad {
 
             this.pads[i].trigger('dragend', e)
 
-            if (this.getProp('touchAddress')) {
-                this.sendValue({
-                    address: this.getProp('touchAddress'),
-                    v: [parseInt(this.touchMap[e.pointerId]), 0],
-                })
-            }
+            this.trigger('touch', {stopPropagation: true, touch: [parseInt(this.touchMap[e.pointerId]), 0]})
 
             delete this.touchMap[e.pointerId]
 

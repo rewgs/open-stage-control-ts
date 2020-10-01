@@ -16,6 +16,7 @@ Depending on what triggered the script's execution, a few variables are availabl
 
 - `id` (`string`): id of the widget that's reponsible for the value update
 - `value`: widget's value
+- `touch`: see [Touch state](#touch-state)
 
 **Event: keyboard** (script widget only)
 
@@ -27,10 +28,31 @@ Depending on what triggered the script's execution, a few variables are availabl
 - `alt` (`boolean`): `true` if alt key is pressed
 - `meta` (`boolean`): `true` if meta key is pressed
 
+## Touch state
+
+When some widgets are touched or released, a special event can be catched to trigger custom actions.
+
+If the variable `touch` is not `undefined`, this means it holds the widget's cuurent touch state:
+
+- `0/1` if the widget is single touch (`fader`, `knob` and `xy`)
+- `[i, 0/1]` if the widget is multi touch (`range` and `multixy`). In this case `i` is the touched handle's index, starting with `0`.
+
+Example script:
+
+```js
+if (touch !== undefined) {
+    // send touch state
+    send('/touch_address', touch)
+} else {
+    // do something with the value ?
+}
+```
+
+To avoid unwanted script executions, touch state events will only be catched if the script contains the word `touch`.
 
 ## Available variables
 
-Besides the variables available in the [javascript property syntax ](./advanced-syntaxes.md#available-variables), the following variables and functions are also accessible in this context.
+Besides the variables available in the [javascript property syntax ](./advanced-syntaxes.md#available-variables) and the ones listed above, the following variables and functions are accessible in this context.
 
 ----
 

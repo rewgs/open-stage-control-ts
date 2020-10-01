@@ -141,12 +141,7 @@ class Range extends Fader {
 
         if (!i) return
 
-        if (this.getProp('touchAddress')) {
-            this.sendValue({
-                address: this.getProp('touchAddress'),
-                v: [parseInt(i), 1],
-            })
-        }
+        this.trigger('touch', {stopPropagation: true, touch: [parseInt(i), 1]})
 
         if (e.shiftKey) {
             this.faders[0].trigger('drag', e)
@@ -167,12 +162,7 @@ class Range extends Fader {
         this.faders[i].trigger('dragend', e)
 
 
-        if (this.getProp('touchAddress')) {
-            this.sendValue({
-                address: this.getProp('touchAddress'),
-                v: [parseInt(i), 0],
-            })
-        }
+        this.trigger('touch', {stopPropagation: true, touch: [parseInt(i), 0]})
 
         delete this.touchMap[e.pointerId]
 

@@ -212,5 +212,27 @@ var converters = [
             }
 
         }
+    },
+    {
+        version: '1.3.1',
+        widget: (data)=>{
+
+            switch (data.type) {
+
+                case 'fader':
+                case 'knob':
+                case 'xy':
+                case 'range':
+                case 'multixy':
+                    if (data.touchAddress && String(data.touchAddress).length) {
+                        let touchVal = data.type.match(/range|multixy/) ? 'touch[0], touch[1]' : 'touch',
+                            originalScript = data.script ? ` else {\n // original script\n ${data.script}\n // -----------\n}` : ''
+                        data.script = `\nif (touch !== undefined) {\n // generated automatically\n // from touchAddress\n send("${data.touchAddress}", ${touchVal})\n}${originalScript}`
+                    }
+                    break
+
+            }
+
+        }
     }
 ]

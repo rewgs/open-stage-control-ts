@@ -48,11 +48,7 @@ module.exports = class Knob extends Slider {
             ]},
             origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the knob\'s gauge'},
 
-        }, [], {
-
-            touchAddress: {type: 'string', value:'', help: 'OSC address for touched state messages: `/touchAddress [preArgs] 0/1`'},
-
-        }, Knob)
+        }, [], {}, Knob)
 
     }
 
