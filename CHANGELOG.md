@@ -14,6 +14,7 @@
 
 - widgets
   - expose widgets unique identifiers with property name "uuid"
+  - xy/multixy: add `ephemeral` property 
 
 ## 1.3.0
 
