@@ -533,6 +533,7 @@
         | --- | --- | --- | --- |
         | <h6 id="xy_pointSize">pointSize<a class="headerlink" href="#xy_pointSize" title="Permanent link">#</a></h6> | `integer` | <code>20</code> | Defines the points' size |
         | <h6 id="xy_snap">snap<a class="headerlink" href="#xy_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
+        | <h6 id="xy_ephemeral">ephemeral<a class="headerlink" href="#xy_ephemeral" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the point will be drawn only chile touched. |
         | <h6 id="xy_spring">spring<a class="headerlink" href="#xy_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
         | <h6 id="xy_pips">pips<a class="headerlink" href="#xy_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
         | <h6 id="xy_rangeX">rangeX<a class="headerlink" href="#xy_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
@@ -541,12 +542,6 @@
         | <h6 id="xy_logScaleY">logScaleY<a class="headerlink" href="#xy_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale. |
         | <h6 id="xy_doubleTap">doubleTap<a class="headerlink" href="#xy_doubleTap" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`string` | <code>false</code> | Set to `true` to make the fader reset to its default value when receiving a double tap.<br/><br/>Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>` |
         | <h6 id="xy_sensitivity">sensitivity<a class="headerlink" href="#xy_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
-
-    === "osc"
-
-        | property | type |default | description |
-        | --- | --- | --- | --- |
-        | <h6 id="xy_touchAddress">touchAddress<a class="headerlink" href="#xy_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1`) |
 
 ??? api "<div id="rgb">rgb<a class="headerlink" href="#rgb" title="Permanent link">#</a></div>"
     Color picker with optional alpha slider.
@@ -576,6 +571,7 @@
         | --- | --- | --- | --- |
         | <h6 id="multixy_pointSize">pointSize<a class="headerlink" href="#multixy_pointSize" title="Permanent link">#</a></h6> | `integer` | <code>20</code> | Defines the points' size |
         | <h6 id="multixy_snap">snap<a class="headerlink" href="#multixy_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, the points are dragged from their initial position.<br/><br/>If set to `true`, touching anywhere on the widget's surface will make them snap to the touching coordinates |
+        | <h6 id="multixy_ephemeral">ephemeral<a class="headerlink" href="#multixy_ephemeral" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the points will be drawn only chile touched. |
         | <h6 id="multixy_spring">spring<a class="headerlink" href="#multixy_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its default value when released |
         | <h6 id="multixy_pips">pips<a class="headerlink" href="#multixy_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
         | <h6 id="multixy_rangeX">rangeX<a class="headerlink" href="#multixy_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
@@ -583,12 +579,6 @@
         | <h6 id="multixy_logScaleX">logScaleX<a class="headerlink" href="#multixy_logScaleX" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale. |
         | <h6 id="multixy_logScaleY">logScaleY<a class="headerlink" href="#multixy_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale. |
         | <h6 id="multixy_sensitivity">sensitivity<a class="headerlink" href="#multixy_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
-
-    === "osc"
-
-        | property | type |default | description |
-        | --- | --- | --- | --- |
-        | <h6 id="multixy_touchAddress">touchAddress<a class="headerlink" href="#multixy_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |
 ## Sliders
 
 ??? api "<div id="fader">fader<a class="headerlink" href="#fader" title="Permanent link">#</a></div>"
@@ -619,12 +609,6 @@
         | <h6 id="fader_steps">steps<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#fader_steps" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
         | <h6 id="fader_origin">origin<a class="headerlink" href="#fader_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the fader's gauge |
 
-    === "osc"
-
-        | property | type |default | description |
-        | --- | --- | --- | --- |
-        | <h6 id="fader_touchAddress">touchAddress<a class="headerlink" href="#fader_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |
-
 ??? api "<div id="knob">knob<a class="headerlink" href="#knob" title="Permanent link">#</a></div>"
     Rotative knob slider.
 
@@ -650,12 +634,6 @@
         | <h6 id="knob_sensitivity">sensitivity<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#knob_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the knob's sensitivity when `mode` is not `snap`  |
         | <h6 id="knob_steps">steps<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#knob_steps" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
         | <h6 id="knob_origin">origin<a class="headerlink" href="#knob_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the knob's gauge |
-
-    === "osc"
-
-        | property | type |default | description |
-        | --- | --- | --- | --- |
-        | <h6 id="knob_touchAddress">touchAddress<a class="headerlink" href="#knob_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |
 
 ??? api "<div id="encoder">encoder<a class="headerlink" href="#encoder" title="Permanent link">#</a></div>"
     A knob that sends a relative direction infomation instead of an absolute value.
@@ -704,12 +682,6 @@
         | <h6 id="range_sensitivity">sensitivity<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#range_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the fader's sensitivity when `snap` is `false`  |
         | <h6 id="range_steps">steps<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#range_steps" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number`&vert;<br/>`array` | <code>""</code> | Restricts the widget's value:<br/>- `auto`: use values defined in `range`<br/>- `number`: define a number of evenly spaced steps<br/>- `array`: use arbitrary values |
         | <h6 id="range_origin">origin<a class="headerlink" href="#range_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the fader's gauge |
-
-    === "osc"
-
-        | property | type |default | description |
-        | --- | --- | --- | --- |
-        | <h6 id="range_touchAddress">touchAddress<a class="headerlink" href="#range_touchAddress" title="Permanent link">#</a></h6> | `string` | <code>""</code> | OSC address for touched state messages: `/touchAddress [preArgs] 0/1` |
 ## Scripts
 
 ??? api "<div id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></div>"
