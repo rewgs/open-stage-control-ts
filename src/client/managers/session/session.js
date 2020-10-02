@@ -225,9 +225,9 @@ var converters = [
                 case 'range':
                 case 'multixy':
                     if (data.touchAddress && String(data.touchAddress).length) {
-                        let touchVal = data.type.match(/range|multixy/) ? 'touch[0], touch[1]' : 'touch',
+                        let sendScript = data.type.match(/range|multixy/) ? 'if (touch.length) send(address, touch[0], touch[1])\n else send(address, touch)' : 'send(address, touch)',
                             originalScript = data.script ? ` else {\n // original script\n ${data.script}\n // -----------\n}` : ''
-                        data.script = `\nif (touch !== undefined) {\n // generated automatically\n // from touchAddress\n send("${data.touchAddress}", ${touchVal})\n}${originalScript}`
+                        data.script = `\nif (touch !== undefined) {\n // generated automatically\n // from touchAddress\n var address = "${data.touchAddress}"\n ${sendScript}\n}${originalScript}`
                     }
                     break
 
