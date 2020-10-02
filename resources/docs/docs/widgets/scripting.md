@@ -32,7 +32,7 @@ Depending on what triggered the script's execution, a few variables are availabl
 
 When some widgets are touched or released, a special event can be catched to trigger custom actions.
 
-If the variable `touch` is not `undefined`, this means it holds the widget's cuurent touch state:
+If the variable `touch` is not `undefined`, this means it holds the widget's current touch state:
 
 - `0/1` for the widget's touch state (`fader`, `knob` and `xy`, `range` and `multixy`)
 - `[i, 0/1]` if the widget is multi touch (`range` and `multixy`). In this case `i` is the touched handle's index, starting with `0`.
