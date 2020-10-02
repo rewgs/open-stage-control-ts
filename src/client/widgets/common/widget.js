@@ -71,7 +71,6 @@ class Widget extends EventEmitter {
             _style: 'style',
 
 
-            colorBg: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
             colorText: {type: 'string', value: 'auto', help: 'Text color. Set to "auto" to inherit from parent widget.'},
             colorWidget: {type: 'string', value: 'auto', help: 'Widget\'s default accent color. Set to "auto" to inherit from parent widget.'},
             colorStroke: {type: 'string', value: 'auto', help: 'Stroke color. Set to "auto" to use `colorWidget`.'},

@@ -19,6 +19,7 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
             _class_specific: 'matrix',
 
+            colorBg: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
             widgetType: {type: 'string', value: 'button', help: 'Defines the type of the widgets in the matrix'},
             quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
             start: {type: 'integer', value: 0, help: 'First widget\'s index'},
