@@ -2,8 +2,8 @@
 
 ## 1.4.1
 
-- bug fixed
-  - multixy/range: prevent some extra touch state events
+- bug fixes
+  - multixy/range: prevent some extra touch state events;`
 
 ## 1.4.0
 
