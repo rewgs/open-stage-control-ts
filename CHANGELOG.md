@@ -2,9 +2,15 @@
 
 ## 1.4.2
 
+- bug fixes
+  - image: broken value validation
+
+- editor
+  - holding `alt` extends the north-west handle to the widget's size to ease dragging
+
 - widgets
   - remove `colorBg` for all widgets except containers
-  - widgets background color is now transparent by default (can be overridden with css) 
+  - widgets background color is now transparent by default (can be overridden with css)
 
 ## 1.4.1
 

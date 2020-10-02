@@ -1,4 +1,5 @@
 var UiWidget = require('./ui-widget'),
+    keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     html = require('nanohtml'),
     Tab, Root
 
@@ -100,6 +101,14 @@ class UiDragResize extends UiWidget {
         })
 
         // this.handles[0]._ignore_css_transforms = true
+
+        keyboardJS.withContext('editing', ()=>{
+            keyboardJS.bind('alt', (e)=>{
+                this.handles[0].classList.add('full')
+            }, (e)=>{
+                this.handles[0].classList.remove('full')
+            })
+        })
 
     }
 

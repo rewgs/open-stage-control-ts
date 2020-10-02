@@ -55,7 +55,7 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
 
     setValue(v, options={}) {
 
-        if (typeof this.value !== 'string') return
+        if (typeof v !== 'string') return
 
         var s = v==null ? '' : '' + v,
             cache_query = ''

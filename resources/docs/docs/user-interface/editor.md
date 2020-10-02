@@ -46,10 +46,9 @@ The project tree displays the whole widget structure of the session. Widgets can
 
 ## Widget resizing / dragging
 
-Selected widget can be resized using its south, south-east and east handles. It can be dragged with its north-west handle. If the widget's position/size was written in percents, the editor will try to keep using percents.
+Selected widget can be resized using its south, south-east and east handles. It can be dragged with its north-west handle (holding ++alt++ extends this handle to the widget's size to ease dragging). If the widget's position/size was written in percents, the editor will try to keep using percents.
 
 When the grid is enabled, widget resizing / dragging snaps to a 10 pixel wide grid.
-
 
 ## Multi-widgets editing
 
