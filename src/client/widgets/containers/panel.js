@@ -19,6 +19,7 @@ class Panel extends Container() {
 
             _class_specific: 'panel',
 
+            colorBg: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
             variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
             traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
 
@@ -241,6 +242,8 @@ class Panel extends Container() {
                 this.setTraversing()
                 return
 
+            case 'colorBg':
+                this.setCssVariables()
             case 'colorText':
             case 'colorWidget':
             case 'colorFill':
@@ -248,7 +251,6 @@ class Panel extends Container() {
             case 'alphaStroke':
             case 'alphaFillOff':
             case 'alphaFillOn':
-            case 'colorBg':
             case 'padding':
                 for (var w of this.children) {
                     if (w) w.onPropChanged(propName)
@@ -286,7 +288,12 @@ class Panel extends Container() {
 
 }
 
+Panel.cssVariables = Panel.prototype.constructor.cssVariables.concat(
+    {js: 'colorBg', css: '--color-background'}
+)
+
 Panel.dynamicProps = Panel.prototype.constructor.dynamicProps.concat(
+    'colorBg',
     'variables',
     'traversing'
 )

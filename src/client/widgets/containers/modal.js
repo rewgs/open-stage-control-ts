@@ -20,6 +20,7 @@ class Modal extends Panel {
 
             _class_specific: 'modal',
 
+            colorBg: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
             label: {type: 'string|boolean', value: 'auto', help: [
                 'Set to `false` to hide completely',
                 '- Insert icons using the prefix ^ followed by the icon\'s name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)',

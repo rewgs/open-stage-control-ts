@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.2
+
+- widgets
+  - remove `colorBg` for all widgets except containers
+  - widgets background color is now transparent by default (can be overridden with css) 
+
 ## 1.4.1
 
 - bug fixes
