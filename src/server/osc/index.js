@@ -164,6 +164,11 @@ class OscServer {
                 return
             }
 
+            if (isNaN(parseInt(data.port))) {
+                console.error('(ERROR, OSC) Invalid port: ' + data.port)
+                return
+            }
+
             if (tcpInPort && oscTCPServer.clients[data.host] && oscTCPServer.clients[data.host][data.port]) {
 
                 oscTCPServer.clients[data.host][data.port].send({
