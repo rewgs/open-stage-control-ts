@@ -5,6 +5,7 @@
 - bug fixes
   - image: broken value validation
   - menu/dropdown: use correct z-index
+  - dropdown: prevent dropdown from opening when selecting the widget for edition
 
 - editor
   - holding `alt` extends the north-west handle to the widget's size to ease dragging
