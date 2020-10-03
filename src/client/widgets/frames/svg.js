@@ -14,15 +14,19 @@ class Svg extends StaticProperties(Widget, {bypass: true}) {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'svg',
-
-            svg: {type: 'string', value: '', help: [
-                'Svg xml definition (will be wrapped in a `< svg />` element)',
-            ]},
-
-        }, ['decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {})
+        return super.defaults().extend({
+            class_specific: {
+                svg: {type: 'string', value: '', help: [
+                    'Svg xml definition (will be wrapped in a `< svg />` element)',
+                ]},
+            },
+            osc: {
+                decimals: null,
+                typeTags: null,
+                bypass: null,
+                ignoreDefaults: null
+            }
+        })
 
     }
 

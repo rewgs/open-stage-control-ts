@@ -1,11 +1,10 @@
 var Panel = require('./panel'),
-    Widget = require('../common/widget'),
     StaticProperties = require('../mixins/static_properties'),
     parser = require('../../parser'),
     {deepCopy} = require('../../utils')
 
 
-class Matrix extends StaticProperties(Panel, {scroll: false}) {
+class Matrix extends StaticProperties(Panel) {
 
     static description() {
 
@@ -15,28 +14,22 @@ class Matrix extends StaticProperties(Panel, {scroll: false}) {
 
     static defaults() {
 
-        return Widget.defaults({
-
-            _class_specific: 'matrix',
-
-            colorBg: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
-            widgetType: {type: 'string', value: 'button', help: 'Defines the type of the widgets in the matrix'},
-            quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
-            start: {type: 'integer', value: 0, help: 'First widget\'s index'},
-            props: {type: 'object', value: {}, help: [
-                'Defines a set of property to override the widgets\' defaults.',
-                'Formulas in this field are resolved with an extra variable representing each widget\'s index: `$`',
-                'Note: by default, the widgets inherit from the matrix\' `id` and osc properties (`id` and `address` are appended with `/$`)'
-            ]},
-
-            _separator: 'layout',
-
-            layout: {type: 'string', value: 'horizontal', choices: ['horizontal', 'vertical', 'grid'], help: 'Defines how children are laid out.'},
-            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
-            traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},
-            innerPadding: {type : 'boolean', value: true, help: 'Set to `false` to make the `padding` property apply only between children and not at the container\'s inner boundaries.'},
-
-        }, [], {})
+        return super.defaults().extend({
+            class_specific: {
+                widgetType: {type: 'string', value: 'button', help: 'Defines the type of the widgets in the matrix'},
+                quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
+                start: {type: 'integer', value: 0, help: 'First widget\'s index'},
+                props: {type: 'object', value: {}, help: [
+                    'Defines a set of property to override the widgets\' defaults.',
+                    'Formulas in this field are resolved with an extra variable representing each widget\'s index: `$`',
+                    'Note: by default, the widgets inherit from the matrix\' `id` and osc properties (`id` and `address` are appended with `/$`)'
+                ]},
+            },
+            style: {
+                layout: {type: 'string', value: 'horizontal', choices: ['horizontal', 'vertical', 'grid'], help: 'Defines how children are laid out.'},
+                verticalTabs: null,
+            }
+        })
 
     }
 

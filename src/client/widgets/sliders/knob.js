@@ -11,44 +11,45 @@ module.exports = class Knob extends Slider {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'knob',
-
-            design: {type: 'string', value: 'default', choices: ['default', 'solid', 'line'], help: [
-                'Design style',
-                'Note: "solid" design uses "colorStroke" for the central knob color.'
-            ]},
-            mode: {type: 'string', value: 'vertical', choices: ['vertical', 'circular', 'snap'], help: [
-                '- `circular`: relative move in circular motion',
-                '- `snap`: snap to touch position and move in vertical motion',
-                '- `vertical`: relative move in vertical motion',
-            ]},
-            spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
-            pips: {type: 'boolean', value: false, help: 'Set to `true` to show the scale\'s breakpoints'},
-            dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
-            angle: {type: 'number', value: 270, help: 'Defines the angle\'s width of the knob, in degrees'},
-            doubleTap: {type: 'boolean', value: false, help: [
-                'Set to `true` to make the knob reset to its `default` value when receiving a double tap.',
-                'Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)'
-            ]},
-            range: {type: 'object', value: {min:0,max:1}, help: [
-                'Defines the breakpoints of the fader\'s scale:',
-                '- keys can be percentages and/or `min` / `max`',
-                '- values can be `number` or `object` if a custom label is needed',
-                'Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`)'
-            ]},
-            logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale. Set to `-1` for exponential scale.'},
-            sensitivity: {type: 'number', value: 1, help: 'Defines the knob\'s sensitivity when `mode` is not `snap` '},
-            steps: {type: 'string|number|array', value: '', help: [
-                'Restricts the widget\'s value:',
-                '- `auto`: use values defined in `range`',
-                '- `number`: define a number of evenly spaced steps',
-                '- `array`: use arbitrary values',
-            ]},
-            origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the knob\'s gauge'},
-
-        }, [], {}, Knob)
+        return super.defaults(Knob).extend({
+            style: {
+                _separator_knob_style: 'Knob style',
+                design: {type: 'string', value: 'default', choices: ['default', 'solid', 'line'], help: [
+                    'Design style',
+                    'Note: "solid" design uses "colorStroke" for the central knob color.'
+                ]},
+                pips: {type: 'boolean', value: false, help: 'Set to `true` to show the scale\'s breakpoints'},
+                dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
+                angle: {type: 'number', value: 270, help: 'Defines the angle\'s width of the knob, in degrees'},
+            },
+            class_specific: {
+                mode: {type: 'string', value: 'vertical', choices: ['vertical', 'circular', 'snap'], help: [
+                    '- `circular`: relative move in circular motion',
+                    '- `snap`: snap to touch position and move in vertical motion',
+                    '- `vertical`: relative move in vertical motion',
+                ]},
+                spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
+                doubleTap: {type: 'boolean', value: false, help: [
+                    'Set to `true` to make the knob reset to its `default` value when receiving a double tap.',
+                    'Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)'
+                ]},
+                range: {type: 'object', value: {min:0,max:1}, help: [
+                    'Defines the breakpoints of the fader\'s scale:',
+                    '- keys can be percentages and/or `min` / `max`',
+                    '- values can be `number` or `object` if a custom label is needed',
+                    'Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`)'
+                ]},
+                logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale. Set to `-1` for exponential scale.'},
+                sensitivity: {type: 'number', value: 1, help: 'Defines the knob\'s sensitivity when `mode` is not `snap` '},
+                steps: {type: 'string|number|array', value: '', help: [
+                    'Restricts the widget\'s value:',
+                    '- `auto`: use values defined in `range`',
+                    '- `number`: define a number of evenly spaced steps',
+                    '- `array`: use arbitrary values',
+                ]},
+                origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the knob\'s gauge'},
+            }
+        })
 
     }
 

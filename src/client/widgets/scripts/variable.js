@@ -1,7 +1,7 @@
 var Widget = require('../common/widget'),
     StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Variable extends StaticProperties(Widget, {bypass: true, interaction: false, visible: false}) {
+module.exports = class Variable extends StaticProperties(Widget, {interaction: false, visible: false}) {
 
     static description() {
 
@@ -11,15 +11,14 @@ module.exports = class Variable extends StaticProperties(Widget, {bypass: true, 
 
     static defaults() {
 
-        return super.defaults({
-
-
-        }, [
-            'visible', 'interaction',
-            '_geometry', 'left', 'top', 'width', 'height', 'expand',
-            '_style',  'colorBg', 'colorText', 'colorWidget', 'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOn', 'alphaFillOff', 'padding', 'css',
-            'decimals', 'bypass'
-        ], {})
+        return super.defaults().extend({
+            widget: {
+                visible: null,
+                interaction: null
+            },
+            geometry: null,
+            style: null,
+        })
 
     }
 

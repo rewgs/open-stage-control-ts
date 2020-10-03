@@ -13,16 +13,17 @@ class Dropdown extends MenuBase {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'dropdown',
-
-            align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
-            values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
-                '`Array` of possible values to switch between : `[1,2,3]`',
-                '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
-            ]}
-
+        return super.defaults().extend({
+            style: {
+                _separator_dropdown_style: 'Dropdown style',
+                align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
+            },
+            class_specific: {
+                values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
+                    '`Array` of possible values to switch between : `[1,2,3]`',
+                    '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
+                ]}
+            }
         })
 
     }

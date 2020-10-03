@@ -7,10 +7,12 @@
 
 - editor
   - holding `alt` extends the north-west handle to the widget's size to ease dragging
+  - widget properties reordered (e.g. -related properties, even widget-specific, are now under the "style" category)
 
 - widgets
   - remove `colorBg` for all widgets except containers
   - widgets background color is now transparent by default (can be overridden with css)
+  - keyboard: added `colorBlack` and `colorWhite` properties to customize key colors
 
 ## 1.4.1
 

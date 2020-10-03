@@ -23,21 +23,25 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'html',
-
-            html: {type: 'string', value: '', help: [
-                'Allowed HTML tags:',
-                '&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,',
-                '&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,',
-                '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre',
-                'Allowed attributes:',
-                '&nbsp;&nbsp;<*>: class, style, title',
-                '&nbsp;&nbsp;<img>: src, width, height',
-            ]},
-
-        }, ['decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {})
+        return super.defaults().extend({
+            class_specific: {
+                html: {type: 'string', value: '', help: [
+                    'Allowed HTML tags:',
+                    '&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,',
+                    '&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,',
+                    '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre',
+                    'Allowed attributes:',
+                    '&nbsp;&nbsp;<*>: class, style, title',
+                    '&nbsp;&nbsp;<img>: src, width, height',
+                ]},
+            },
+            osc: {
+                decimals: null,
+                typeTags: null,
+                bypass: null,
+                ignoreDefaults: null
+            }
+        })
 
     }
 

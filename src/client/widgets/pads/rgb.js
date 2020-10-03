@@ -18,21 +18,17 @@ module.exports = class Rgb extends Widget {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'rgb',
-
-            snap: {type: 'boolean', value: false, help: [
-                'By default, the points are dragged from their initial position.',
-                'If set to `true`, touching anywhere on the widget\'s surface will make them snap to the touching coordinates',
-            ]},
-            spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its default value when released'},
-            range: {type: 'object', value: {min: 0, max: 255}, help: 'Defines the widget\'s output scale.'},
-            alpha:{type: 'boolean', value: false, help: 'Set to `true` to enable alpha channel'},
-            rangeAlpha: {type: 'object', value: {min: 0, max: 1}, help: 'Defines the widget\'s output scale for the alpha channel.'},
-
-        }, ['color'], {
-
+        return super.defaults().extend({
+            class_specific: {
+                snap: {type: 'boolean', value: false, help: [
+                    'By default, the points are dragged from their initial position.',
+                    'If set to `true`, touching anywhere on the widget\'s surface will make them snap to the touching coordinates',
+                ]},
+                spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its default value when released'},
+                range: {type: 'object', value: {min: 0, max: 255}, help: 'Defines the widget\'s output scale.'},
+                alpha:{type: 'boolean', value: false, help: 'Set to `true` to enable alpha channel'},
+                rangeAlpha: {type: 'object', value: {min: 0, max: 1}, help: 'Defines the widget\'s output scale for the alpha channel.'},
+            }
         })
 
     }

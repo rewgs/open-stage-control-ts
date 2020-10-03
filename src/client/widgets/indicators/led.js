@@ -13,27 +13,36 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true, inter
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'led',
-
-            mode: {type: 'string', value: 'intensity', choices: ['intensity', 'color'], help: 'Defines how value is interpreted (see `value`)'},
-            range: {type: 'object', value: {min:0, max:1}, help: 'Value range'},
-            alphaRange: {type: 'object', value: {min:0, max:1}, help: 'Alpha range (if `mode` is `color`)'},
-            logScale: {type: 'boolean', value: false, help: 'If `mode` is `intensity`, set to `true` to use logarithmic scale.'},
-            borderRadius: {type: 'string', value: '', help: 'Css border-radius property.'},
-
-        }, ['interaction', 'decimals', 'bypass', 'ignoreDefaults'], {
-
-            value: {type: 'number|array|string', value: '', help: [
-                'If `mode` is `intensity`:',
-                '- `Number`: `intensity` between `range.min` and `range.max`',
-                'If `mode` is `color`:',
-                '- `Array`: `[r, g, b]` (`r`, `g` and `b` between `range.min` and `range.max`)',
-                '- `Array`: `[r, g, b, alpha]` (`alpha` between `alphaRange.min` and `alphaRange.max`)',
-                '- `String`: CSS color',
-            ]}
-
+        return super.defaults().extend({
+            widget: {
+                interaction: null
+            },
+            style: {
+                _separator_led_style: 'Led style',
+                borderRadius: {type: 'string', value: '', help: 'Css border-radius property.'},
+            },
+            class_specific: {
+                mode: {type: 'string', value: 'intensity', choices: ['intensity', 'color'], help: 'Defines how value is interpreted (see `value`)'},
+                range: {type: 'object', value: {min:0, max:1}, help: 'Value range'},
+                alphaRange: {type: 'object', value: {min:0, max:1}, help: 'Alpha range (if `mode` is `color`)'},
+                logScale: {type: 'boolean', value: false, help: 'If `mode` is `intensity`, set to `true` to use logarithmic scale.'},
+            },
+            value: {
+                value: {type: 'number|array|string', value: '', help: [
+                    'If `mode` is `intensity`:',
+                    '- `Number`: `intensity` between `range.min` and `range.max`',
+                    'If `mode` is `color`:',
+                    '- `Array`: `[r, g, b]` (`r`, `g` and `b` between `range.min` and `range.max`)',
+                    '- `Array`: `[r, g, b, alpha]` (`alpha` between `alphaRange.min` and `alphaRange.max`)',
+                    '- `String`: CSS color',
+                ]}
+            },
+            osc: {
+                decimals: null,
+                typeTags: null,
+                bypass: null,
+                ignoreDefaults: null
+            }
         })
 
     }

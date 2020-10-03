@@ -13,25 +13,26 @@ class Switch extends MenuBase {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'switch',
-
-            layout: {type: 'string', value: 'vertical', choices: ['vertical', 'horizontal', 'grid'], help:''},
-            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
-            values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
-                '`Array` of possible values to switch between : `[1,2,3]`',
-                '`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
-            ]},
-            mode: {type: 'string', value: 'tap', choices: ['tap', 'slide', 'click'], help: [
-                'Interraction mode:',
-                '- `tap`: activates when the pointer is down but prevents further scrolling',
-                '- `slide`: same as `tap` but allows sliding between values',
-                '- `click`: activates upon click only and allows further scrolling',
-            ]},
-            colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
-
-        }, [], {}, Switch)
+        return super.defaults(Switch).extend({
+            style: {
+                _separator_switch_style: 'Switch style',
+                colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
+                layout: {type: 'string', value: 'vertical', choices: ['vertical', 'horizontal', 'grid'], help:''},
+                gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            },
+            class_specific: {
+                values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
+                    '`Array` of possible values to switch between : `[1,2,3]`',
+                    '`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
+                ]},
+                mode: {type: 'string', value: 'tap', choices: ['tap', 'slide', 'click'], help: [
+                    'Interraction mode:',
+                    '- `tap`: activates when the pointer is down but prevents further scrolling',
+                    '- `slide`: same as `tap` but allows sliding between values',
+                    '- `click`: activates upon click only and allows further scrolling',
+                ]},
+            }
+        })
 
     }
 
@@ -121,7 +122,7 @@ class Switch extends MenuBase {
 
         super.setCssVariables()
 
-        this.container.classList.toggle('padding-0', this.getProp('padding') === -1) 
+        this.container.classList.toggle('padding-0', this.getProp('padding') === -1)
 
     }
 }

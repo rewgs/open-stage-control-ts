@@ -14,29 +14,26 @@ class Script extends Widget {
 
     static defaults() {
 
-        return super.defaults({
+        return super.defaults().extend({
+            widget: {
+                visible: null,
+                interaction: null
+            },
+            geometry: null,
+            style: null,
+            class_specific: {
+                event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
+                script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.'},
 
-            _class_specific: 'script',
+                _separator: 'event: keyboard',
 
-            event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
-            script: {},
-
-            _separator: 'event: keyboard',
-
-            keyBinding: {type: 'string|array', value: '', help: 'Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation)'},
-            keyRepeat: {type: 'boolean', value: true, help: 'Set to `false` to prevent keydown repeats when holding the key combo pressed'},
-            keyType: {type: 'string', value: 'keydown', choices: ['keydown', 'keyup', 'both'], help: 'Determines which key event trigger the script\'s execution'},
-
-
-
-        }, [
-
-            'visible', 'interaction',
-            '_geometry', 'left', 'top', 'width', 'height', 'expand',
-            '_style',  'colorBg', 'colorText', 'colorWidget', 'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOn', 'alphaFillOff', 'padding', 'lineWidth', 'css'
-
-        ], {
-            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.'},
+                keyBinding: {type: 'string|array', value: '', help: 'Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation)'},
+                keyRepeat: {type: 'boolean', value: true, help: 'Set to `false` to prevent keydown repeats when holding the key combo pressed'},
+                keyType: {type: 'string', value: 'keydown', choices: ['keydown', 'keyup', 'both'], help: 'Determines which key event trigger the script\'s execution'},
+            },
+            value: {
+                script: null
+            }
         })
 
     }

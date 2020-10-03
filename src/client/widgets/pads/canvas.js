@@ -11,15 +11,12 @@ class CanvasWidget extends Canvas {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'canvas',
-
-
-            onCreate: {type: 'string', value: '', help: ' '},
-            onTouch: {type: 'string', value: '', help: ' '},
-
-        }, [], {})
+        return super.defaults().extend({
+            class_specific: {
+                onCreate: {type: 'string', value: '', help: ' '},
+                onTouch: {type: 'string', value: '', help: ' '},
+            }
+        })
 
     }
 

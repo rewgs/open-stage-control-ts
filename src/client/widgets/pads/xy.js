@@ -15,29 +15,30 @@ module.exports = class Xy extends Pad {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'xy',
-
-            pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size'},
-            snap: {type: 'boolean', value: false, help: [
-                'By default, the points are dragged from their initial position.',
-                'If set to `true`, touching anywhere on the widget\'s surface will make them snap to the touching coordinates',
-            ]},
-            ephemeral: {type: 'boolean', value: false, help: 'When set to `true`, the point will be drawn only chile touched.'},
-            spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its default value when released'},
-            pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
-            rangeX: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the x axis'},
-            rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
-            logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale.'},
-            logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
-            doubleTap: {type: 'boolean|string', value: false, help: [
-                'Set to `true` to make the fader reset to its default value when receiving a double tap.',
-                'Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>`'
-            ]},
-            sensitivity: {type: 'number', value: 1, help: 'Defines the pad\'s sensitivity when `snap` is `false` '},
-
-        }, [], {})
+        return super.defaults().extend({
+            style: {
+                _separator_xy_style: 'Xy style',
+                pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size'},
+                ephemeral: {type: 'boolean', value: false, help: 'When set to `true`, the point will be drawn only while touched.'},
+                pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
+            },
+            class_specific: {
+                snap: {type: 'boolean', value: false, help: [
+                    'By default, the points are dragged from their initial position.',
+                    'If set to `true`, touching anywhere on the widget\'s surface will make them snap to the touching coordinates',
+                ]},
+                spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its default value when released'},
+                rangeX: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the x axis'},
+                rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
+                logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale.'},
+                logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
+                doubleTap: {type: 'boolean|string', value: false, help: [
+                    'Set to `true` to make the fader reset to its default value when receiving a double tap.',
+                    'Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>`'
+                ]},
+                sensitivity: {type: 'number', value: 1, help: 'Defines the pad\'s sensitivity when `snap` is `false` '},
+            }
+        })
 
     }
 

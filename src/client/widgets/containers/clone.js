@@ -18,19 +18,19 @@ class Clone extends Container() {
 
     static defaults() {
 
-        return super.defaults({
+        var defaults = super.defaults().extend({
 
-            _class_specific: 'clone',
+            class_specific: {
+                widgetId: {type: 'string', value: '', help: '`id` of the widget to clone'},
+                props: {type: 'object', value: {}, help: 'Cloned widget\'s properties to override'},
+            },
+            value: null,
+            osc: null
+        })
+        
+        defaults.style = {css: defaults.style.css}
 
-            widgetId: {type: 'string', value: '', help: '`id` of the widget to clone'},
-            props: {type: 'object', value: {}, help: 'Cloned widget\'s properties to override'},
-
-        }, [
-            'colorBg', 'colorText', 'colorWidget', 'colorFill', 'colorStroke', 'alphaStroke', 'alphaFillOff', 'alphaFillOn', 'padding', 'lineWidth',
-            'label', 'color',
-            '_value', 'default', 'value', 'script', 'linkId',
-            '_osc', 'decimals', 'address', 'preArgs', 'typeTags', 'target', 'ignoreDefaults', 'bypass'
-        ])
+        return defaults
 
     }
 

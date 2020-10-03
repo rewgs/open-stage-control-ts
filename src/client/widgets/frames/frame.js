@@ -13,14 +13,18 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
     static defaults() {
 
-        return super.defaults({
-
-        }, ['decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {
-
-            value: {type: 'string', value: '', help: [
-                'External web page URL.',
-            ]}
-
+        return super.defaults().extend({
+            value: {
+                value: {type: 'string', value: '', help: [
+                    'External web page URL.',
+                ]}
+            },
+            osc: {
+                decimals: null,
+                typeTags: null,
+                bypass: null,
+                ignoreDefaults: null
+            }
         })
 
     }

@@ -10,8 +10,10 @@ class PatchBayNode extends Widget {
 
     static defaults() {
 
-        return super.defaults({
-            label: {type: 'string', value: ''}
+        return super.defaults().extend({
+            style: {
+                label: {type: 'string', value: ''}
+            }
         })
 
     }
@@ -71,27 +73,25 @@ class PatchBay extends Container(Canvas) {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'patchbay',
-
-            inputs: {type: 'array|object', value: ['input_1', 'input_2'], help: [
-                '- `Array` of input names : `[\'input_1\', \'input_2\']`',
-                '- `Object` of `"label_1": "input_1"` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
-                '',
-                'Patchbay inputs can be connected to one or more outputs and will send messages of the following form when they are connected/disconnected: ',
-                '`/patchbay_address input_x output_x output_y etc`',
-                'If no output is connected to the input, the message will be `/patchbay_address input_x`',
-                'The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1`'
-            ]},
-            outputs: {type: 'array|object', value: ['output_1', 'output_2'], help: 'List of output values the inputs can connect to (see `inputs`).'},
-
-        }, [], {
-
-            css: {type: 'string', value: '', help: [
-                'The inputs/ouputs width can be adjusted by using the  `.nodes` selector:',
-                '`.nodes { width: 25% }`',
-            ]}
+        return super.defaults().extend({
+            style: {
+                css: {type: 'string', value: '', help: [
+                    'The inputs/ouputs width can be adjusted by using the  `.nodes` selector:',
+                    '`.nodes { width: 25% }`',
+                ]}
+            },
+            class_specific: {
+                inputs: {type: 'array|object', value: ['input_1', 'input_2'], help: [
+                    '- `Array` of input names : `[\'input_1\', \'input_2\']`',
+                    '- `Object` of `"label_1": "input_1"` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
+                    '',
+                    'Patchbay inputs can be connected to one or more outputs and will send messages of the following form when they are connected/disconnected: ',
+                    '`/patchbay_address input_x output_x output_y etc`',
+                    'If no output is connected to the input, the message will be `/patchbay_address input_x`',
+                    'The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1`'
+                ]},
+                outputs: {type: 'array|object', value: ['output_1', 'output_2'], help: 'List of output values the inputs can connect to (see `inputs`).'},
+            }
         })
 
     }

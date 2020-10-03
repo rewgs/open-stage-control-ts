@@ -13,29 +13,46 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
 
     static defaults() {
 
+        return super.defaults().extend({
+            widget: {
+                interaction: null
+            },
+            style: {
+                _separator_plot_style: 'Plot style',
+                dots: {type: 'boolean', value: false, help: 'Draw dots on the line'},
+                bars: {type: 'boolean', value: false, help: 'Set to `true` to use draw bars instead (disables `logScaleX` and forces `x axis` even spacing)'},
+                pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
+            },
+            class_specific: {
+                filters: {type: 'array', value: '', help: [
+                    'Each item must be an object with the following properties',
+                    '- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")',
+                    '- `freq`: number (filter\'s resonant frequency, default: 1000)',
+                    '- `q`: number (Q factor, default: 1)',
+                    '- `gain`: number (default: 0)',
+                    '- `on`: boolean (default: true)',
+                    'See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode'
 
-        return super.defaults({
-
-            _class_specific: 'plot',
-
-            rangeX: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the x axis'},
-            rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
-            logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis (base 10). Set to a `number` to define the logarithm\'s base.'},
-            logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm\'s base.'},
-            origin: {type: 'number', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it.'},
-            dots: {type: 'boolean', value: false, help: 'Draw dots on the line'},
-            bars: {type: 'boolean', value: false, help: 'Set to `true` to use draw bars instead (disables `logScaleX` and forces `x axis` even spacing)'},
-            pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
-
-        }, ['interaction', 'decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {
-
-            value: {type: 'array|string', value: '', help: [
-                '- `Array` of `y` values',
-                '- `Array` of `[x, y]` `array` values',
-                '- `String` `array`',
-                '- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points\' coordinates',
-            ]}
-
+                ]},
+                pips: {type: 'boolean', value: true, help: 'Set to false to hide the scale'},
+                rangeX: {type: 'object', value: {min: 20, max: 22000}, help: 'Defines the min and max values for the x axis (in Hz, logarithmic scale)'},
+                rangeY: {type: 'object', value: {min:-6, max:6}, help: 'Defines the min and max values for the y axis (in dB)'},
+                origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
+            },
+            value: {
+                value: {type: 'array|string', value: '', help: [
+                    '- `Array` of `y` values',
+                    '- `Array` of `[x, y]` `array` values',
+                    '- `String` `array`',
+                    '- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points\' coordinates',
+                ]}
+            },
+            osc: {
+                decimals: null,
+                typeTags: null,
+                bypass: null,
+                ignoreDefaults: null
+            }
         })
 
     }
