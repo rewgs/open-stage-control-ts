@@ -195,14 +195,14 @@ module.exports = class Knob extends Slider {
             this.ctx.strokeStyle = this.cssVars.colorFill
             this.ctx.lineWidth = gaugeWidth - this.gaugePadding * 2
 
+            if (dashed) this.ctx.setLineDash(dashed)
+
             if (this.cssVars.alphaFillOff) {
                 this.ctx.globalAlpha = this.cssVars.alphaFillOff
                 this.ctx.beginPath()
                 this.ctx.arc(this.width / 2, this.height / 2, gaugeRadius, min, max)
                 this.ctx.stroke()
             }
-
-            if (dashed) this.ctx.setLineDash(dashed)
 
             if (this.cssVars.alphaFillOn) {
                 this.ctx.globalAlpha = this.cssVars.alphaFillOn
@@ -256,14 +256,14 @@ module.exports = class Knob extends Slider {
             this.ctx.strokeStyle = this.cssVars.colorFill
             this.ctx.lineWidth = this.cssVars.lineWidth
 
+            if (dashed) this.ctx.setLineDash(dashed)
+
             if (this.cssVars.alphaFillOff) {
                 this.ctx.globalAlpha = this.cssVars.alphaFillOff
                 this.ctx.beginPath()
                 this.ctx.arc(this.width / 2, this.height / 2, maxRadius, min, max)
                 this.ctx.stroke()
             }
-
-            if (dashed) this.ctx.setLineDash(dashed)
 
             if (this.cssVars.alphaFillOn) {
                 this.ctx.globalAlpha = this.cssVars.alphaFillOn
@@ -297,14 +297,14 @@ module.exports = class Knob extends Slider {
             this.ctx.strokeStyle = this.cssVars.colorFill
             this.ctx.lineWidth = this.cssVars.lineWidth
 
+            if (dashed) this.ctx.setLineDash(dashed)
+
             if (this.cssVars.alphaFillOff) {
                 this.ctx.globalAlpha = this.cssVars.alphaFillOff
                 this.ctx.beginPath()
                 this.ctx.arc(this.width / 2, this.height / 2, maxRadius, min, max)
                 this.ctx.stroke()
             }
-
-            if (dashed) this.ctx.setLineDash(dashed)
 
             if (this.cssVars.alphaFillOn) {
                 this.ctx.globalAlpha = this.cssVars.alphaFillOn
