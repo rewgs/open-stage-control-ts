@@ -253,7 +253,9 @@ class UiInspector extends UiWidget {
 
     help(name) {
 
-        var defaultValue = defaults[this.widget.getProp('type')][name],
+        var _defaults = defaults[this.widget.getProp('type')],
+            category = Object.keys(_defaults).find(x=>_defaults[x].hasOwnProperty(name)),
+            defaultValue = _defaults[category][name],
             dynamic =  this.widget.isDynamicProp(name),
             htmlHelp = Array.isArray(defaultValue.help) ? defaultValue.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : defaultValue.help
 
