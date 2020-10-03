@@ -14,6 +14,8 @@
   - remove `colorBg` for all widgets except containers
   - widgets background color is now transparent by default (can be overridden with css)
   - keyboard: added `colorBlack` and `colorWhite` properties to customize key colors
+  - dropdown/menu: add `label` property (with support easy key/value display)
+  - dropdown/menu: add `icon` toggle property
 
 ## 1.4.1
 

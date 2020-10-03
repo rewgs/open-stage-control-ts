@@ -16,6 +16,8 @@ class Dropdown extends MenuBase {
         return super.defaults().extend({
             style: {
                 _separator_dropdown_style: 'Dropdown style',
+                label: {type: 'string|boolean', value: 'auto', help: 'Displayed text (defaults to current value). Keywords `%key` and `%value` will be replaced by the widget\'s selected key/value.'},
+                icon: {type: 'boolean', value: 'true', help: 'Set to `false` to hide the dropdown icon'},
                 align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
             },
             class_specific: {
@@ -33,9 +35,15 @@ class Dropdown extends MenuBase {
         super({...options, html: html`
             <inner>
                 <div class="text"></div>
-                <div class="icon"></div>
             </inner>
+
         `})
+
+        if (this.getProp('icon')) {
+            this.widget.appendChild(html`<div class="icon"></div>`)
+        } else {
+            this.container.classList.add('no-icon')
+        }
 
         if (this.getProp('align') === 'left') this.widget.classList.add('left')
         if (this.getProp('align') === 'right') this.widget.classList.add('right')
@@ -50,6 +58,7 @@ class Dropdown extends MenuBase {
         })
 
         this.select.selectedIndex = -1
+        this.selected = -1
         this.container.classList.add('noselect')
 
     }
@@ -76,8 +85,9 @@ class Dropdown extends MenuBase {
         this.value = this.values[i]
 
         if (!options.fromLocal) this.select.selectedIndex = i
+        this.selected = i
 
-        this.text.textContent = i === -1 ? '' : this.select.options[i].textContent
+        this.setLabel()
 
         if (document.activeElement === this.select && iOS) {
             // force menu close on ios

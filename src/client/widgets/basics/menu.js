@@ -24,6 +24,8 @@ class Menu extends MenuBase {
             },
             style: {
                 _separator_menu_style: 'Menu style',
+                label: {type: 'string|boolean', value: 'auto', help: 'Displayed text (defaults to current value). Keywords `%key` and `%value` will be replaced by the widget\'s selected key/value.'},
+                icon: {type: 'boolean', value: 'true', help: 'Set to `false` to hide the dropdown icon'},
                 textAlign: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
                 menuAlignV: {type: 'string', value: 'center', choices: ['center', 'top', 'bottom'], help: 'Set to `top` or `bottom` to change menu alignment (otherwise center)'},
                 menuAlignH: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change menu alignment (otherwise center)'},
@@ -53,10 +55,15 @@ class Menu extends MenuBase {
         super({...options, html: html`
             <inner>
                 <div class="text"></div>
-                <div class="icon"></div>
             </inner>
 
         `})
+
+        if (this.getProp('icon')) {
+            this.widget.appendChild(html`<div class="icon"></div>`)
+        } else {
+            this.container.classList.add('no-icon')
+        }
 
         this.widget.classList.add('text-align-' + this.getProp('textAlign'))
         this.widget.classList.add('menu-align-h-' + this.getProp('menuAlignH'))
@@ -295,7 +302,8 @@ class Menu extends MenuBase {
             this.selected = i
             DOM.each(this.menu, '.on', (el)=>{el.classList.remove('on')})
             DOM.get(this.menu, '.item')[i].classList.add('on')
-            this.text.innerHTML = iconify(this.keys[i])
+
+            this.setLabel()
 
         }
 
@@ -311,6 +319,9 @@ class Menu extends MenuBase {
 
         switch (propName) {
 
+            case 'label':
+                this.setLabel()
+                return
             case 'size':
                 this.setSize()
                 return
@@ -346,6 +357,7 @@ class Menu extends MenuBase {
 }
 
 Menu.dynamicProps = Menu.prototype.constructor.dynamicProps.concat(
+    'label',
     'size',
     'layout',
     'columns',

@@ -171,6 +171,10 @@
     --widget-padding: 1rem;
     --text-padding: calc(var(--widget-padding) + 8rem);
 
+    &.no-icon {
+        --text-padding: var(--widget-padding);
+    }
+
     // z-index: initial!important;
     // contain: style size;
 
@@ -434,6 +438,9 @@
     --grid-columns: 2;
     overflow: hidden;
 
+    &.no-icon {
+        --text-padding: var(--widget-padding);
+    }
 
     &.on {
         z-index: 9999999999999!important;
