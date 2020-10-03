@@ -12,6 +12,13 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
     static defaults() {
 
         return super.defaults().extend({
+            style: {
+                _separator_knob_style: null,
+                design: null,
+                pips: null,
+                dashed: null,
+                angle: null,
+            },
             class_specific: {
                 ticks: {type: 'number', value: 360, help: 'defines the granularity / verbosity of the encoder (number of step for a 360° arc)'},
                 back: {type: '*', value: -1, help: 'Defines which value is sent when rotating the encoder anticlockwise'},
