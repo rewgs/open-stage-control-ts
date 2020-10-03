@@ -171,8 +171,9 @@
     --widget-padding: 1rem;
     --text-padding: calc(var(--widget-padding) + 8rem);
 
-    &.no-icon {
-        --text-padding: var(--widget-padding);
+    &.no-icon .text {
+        padding-left: var(--widget-padding);
+        padding-right: var(--widget-padding);
     }
 
     // z-index: initial!important;
@@ -234,6 +235,10 @@
         justify-content: center;
         align-items: center;
         padding-left: var(--text-padding);
+        white-space: pre;
+        overflow: hidden;
+        text-align: center;
+        word-wrap: break-word;
     }
     .icon {
         order: 1;
@@ -438,8 +443,9 @@
     --grid-columns: 2;
     overflow: hidden;
 
-    &.no-icon {
-        --text-padding: var(--widget-padding);
+    &.no-icon .text {
+        padding-left: var(--widget-padding);
+        padding-right: var(--widget-padding);
     }
 
     &.on {
@@ -473,6 +479,10 @@
         justify-content: center;
         align-items: center;
         padding-left: var(--text-padding);
+        white-space: pre;
+        overflow: hidden;
+        text-align: center;
+        word-wrap: break-word;
     }
     .icon {
         order: 1;
