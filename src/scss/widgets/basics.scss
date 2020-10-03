@@ -515,6 +515,11 @@
 
 }
 
+.editor-enabled .dropdown-container:not(.editing) select {
+    // prevent input focus when selecting
+    pointer-events: none;
+}
+
 
 
 .input-container {
