@@ -17,37 +17,40 @@ doc.push(`
     `
 )
 
-for (var propName in base) {
+for (var categoryName in base) {
+    doc.push(`\n
 
-    var prop = base[propName],
-        permalink = propName
+=== "${categoryName}"
 
-    if (propName[0] === '_' && propName !== '_props') {
-        doc.push(`\n
-
-    === "${prop}"
-
-        | property | type |default | description |
-        | --- | --- | --- | --- |`
-        )
-    }
-
-    if (propName === '_props' || propName[0] === '_') continue
-
-    var help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
-        dynamic = baseClass.dynamicProps.includes(propName) ? '<sup><i class="fas fa-bolt" title="dynamic"></i></sup>' : ''
-
-    if (prop.choices) {
-        if (help) help += '<br/><br/>'
-        help += 'Choices: ' + prop.choices.map(x=>'`' + x + '`').join(', ')
-    }
-
-    doc.push(`
-        | <h6 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
+    | property | type |default | description |
+    | --- | --- | --- | --- |`
     )
+    var notEmpty = false
+
+    for (var propName in base[categoryName]) {
+
+        var prop = base[categoryName][propName],
+            permalink = propName
+
+        if (propName === '_props' || propName[0] === '_') continue
+
+        var help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
+            dynamic = baseClass.dynamicProps.includes(propName) ? '<sup><i class="fas fa-bolt" title="dynamic"></i></sup>' : ''
+
+        if (prop.choices) {
+            if (help) help += '<br/><br/>'
+            help += 'Choices: ' + prop.choices.map(x=>'`' + x + '`').join(', ')
+        }
+
+        doc.push(`
+        | <h6 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
+        )
+        notEmpty = true
+
+    }
+    if (!notEmpty) doc.pop()
 
 }
-
 
 for (var k in widgets.categories) {
     var category = widgets.categories[k]
@@ -63,9 +66,7 @@ for (var k in widgets.categories) {
     for (var kk in category) {
         var type = category[kk],
             defaults = widgets.widgets[type].defaults(),
-            description = widgets.widgets[type].description(),
-            separator = false
-
+            description = widgets.widgets[type].description()
 
         doc.push(`
 
@@ -74,40 +75,42 @@ for (var k in widgets.categories) {
 
         )
 
-        for (var propName in defaults) {
-
-            var prop = defaults[propName],
-                permalink = type + '_' + propName
-
-            if (propName[0] === '_' && propName !== '_props') {
-                if (separator) doc.pop()
-                if (doc[doc.length -1].trim()[0] === '=') doc.pop()
-                doc.push(`\n
-    === "${prop}"
+        for (var categoryName in defaults) {
+            doc.push(`\n
+    === "${categoryName == 'class_specific' ? type : categoryName}"
 
         | property | type |default | description |
         | --- | --- | --- | --- |`
-                )
-                separator = true
-            }
-
-            if (propName === '_props' || propName[0] === '_' || JSON.stringify(prop) == JSON.stringify(base[propName])) continue
-
-            var help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
-                dynamic = widgets.widgets[type].dynamicProps.includes(propName) ? '<sup><i class="fas fa-bolt" title="dynamic"></i></sup>' : ''
-
-            if (prop.choices) {
-                if (help) help += '<br/><br/>'
-                help += 'Choices: ' + prop.choices.map(x=>'`' + x + '`').join(', ')
-            }
-
-            doc.push(`
-        | <h6 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
             )
-            separator = false
+            var notEmpty = false
+
+            for (var propName in defaults[categoryName]) {
+
+                var prop = defaults[categoryName][propName],
+                    permalink = type + '_' + propName
+
+
+                if (propName === '_props' || propName[0] === '_' || JSON.stringify(prop) == JSON.stringify((base[categoryName]||{})[propName])) continue
+
+                var help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
+                    dynamic = widgets.widgets[type].dynamicProps.includes(propName) ? '<sup><i class="fas fa-bolt" title="dynamic"></i></sup>' : ''
+
+                if (prop.choices) {
+                    if (help) help += '<br/><br/>'
+                    help += 'Choices: ' + prop.choices.map(x=>'`' + x + '`').join(', ')
+                }
+                doc.push(`
+            | <h6 id="${permalink}">${propName}${dynamic}<a class="headerlink" href="#${permalink}" title="Permanent link">#</a></h6> | \`${prop.type.replace(/\|/g,'\`&vert;<br/>\`')}\` | <code>${(JSON.stringify(prop.value, null, '&nbsp;') || '').replace(/\n/g,'<br/>').replace('{','\\{')}</code> | ${help} |`
+                )
+                notEmpty = true
+            }
+
+            if (!notEmpty) doc.pop()
+
+
+
         }
 
-        if (separator) doc.pop()
 
     }
 }
