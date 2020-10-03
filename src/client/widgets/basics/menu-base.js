@@ -1,4 +1,5 @@
 var Widget = require('../common/widget'),
+    {iconify} = require('../../ui/utils'),
     {deepEqual} = require('../../utils')
 
 class MenuBase extends Widget {
@@ -40,6 +41,19 @@ class MenuBase extends Widget {
             }
         }
         return index
+
+    }
+
+    setLabel() {
+
+        var string = this.getProp('label') === 'auto' ? '%value' : this.getProp('label'),
+            i = this.selected
+
+        if (i > -1 && string) {
+            this.text.innerHTML = iconify(string.replace(/%value/g, JSON.stringify(this.value)).replace(/%key/g, this.keys[i]))
+        } else {
+            this.text.innerHTML = ''
+        }
 
     }
 
