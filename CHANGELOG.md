@@ -4,7 +4,7 @@
 
 - bug fixes
   - image: broken value validation
-  - menu: use correct z-index
+  - menu/dropdown: use correct z-index
 
 - editor
   - holding `alt` extends the north-west handle to the widget's size to ease dragging
