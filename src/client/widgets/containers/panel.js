@@ -288,10 +288,6 @@ class Panel extends Container() {
 
 }
 
-Panel.cssVariables = Panel.prototype.constructor.cssVariables.concat(
-    {js: 'colorBg', css: '--color-background'}
-)
-
 Panel.dynamicProps = Panel.prototype.constructor.dynamicProps.concat(
     'colorBg',
     'variables',
