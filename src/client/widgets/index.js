@@ -38,7 +38,7 @@ module.exports.widgets = {
     xy: require('./pads/xy'),
     rgb: require('./pads/rgb'),
     multixy: require('./pads/multixy'),
-    canvas: require('./pads/canvas'),
+    // canvas: require('./pads/canvas'),
 
     // sliders
     fader: require('./sliders/fader'),

@@ -43,124 +43,117 @@ class Widget extends EventEmitter {
 
     }
 
-    static defaults(insert={}, except=[], push={}, Class=Widget) {
+    static defaults(Class=Widget) {
 
         var defaults = {
+            widget: {
+                type: {type: 'string', value: 'auto', help: 'Widget type'},
+                id: {type: 'string', value: 'auto', help: 'Widgets sharing the same `id` will act as clones and update each other\'s value(s) without sending extra osc messages.' },
+                visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},
+                interaction: {type: 'boolean', value: true, help: 'Set to `false` to disable pointer interactions.'},
+            },
+            geometry: {
+                left: {type: 'number|string', value: 'auto', help: [
+                    'When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).',
+                    'Otherwise, the widget will be absolutely positioned'
+                ]},
+                top: {type: 'number|percentage', value: 'auto', help: [
+                    'When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).',
+                    'Otherwise, the widget will be absolutely positioned'
+                ]},
+                width: {type: 'number|percentage', value: 'auto', help: 'Widget width'},
+                height: {type: 'number|percentage', value: 'auto', help: 'Widget height'},
+                expand: {type: 'boolean|number', value: 'false', help: 'If parent\'s layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically.'},
+            },
+            style: {
+                colorText: {type: 'string', value: 'auto', help: 'Text color. Set to "auto" to inherit from parent widget.'},
+                colorWidget: {type: 'string', value: 'auto', help: 'Widget\'s default accent color. Set to "auto" to inherit from parent widget.'},
+                colorStroke: {type: 'string', value: 'auto', help: 'Stroke color. Set to "auto" to use `colorWidget`.'},
+                colorFill: {type: 'string', value: 'auto', help: 'Fill color. Set to "auto" to use `colorWidget`.'},
+                alphaStroke: {type: 'number', value: 'auto', help: 'Stroke color opacity.'},
+                alphaFillOff: {type: 'number', value: 'auto', help: 'Fill color opacity (off).'},
+                alphaFillOn: {type: 'number', value: 'auto', help: 'Fill color opacity (on).'},
+                lineWidth: {type: 'number', value: 'auto', help: 'Stroke width.'},
+                padding: {type: 'number', value: 'auto', help: 'Inner spacing.'},
+                css: {type: 'string', value: '', help: [
+                    'CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.',
+                    'Available css variables:',
+                    ...Class.cssVariables.map(x=>'- `' + x.css + '`: `' + x.js + '`')
+                ]},
+            },
+            class_specific: {
 
-            _widget: 'widget',
-
-            type: {type: 'string', value: 'auto', help: 'Widget type'},
-            id: {type: 'string', value: 'auto', help: 'Widgets sharing the same `id` will act as clones and update each other\'s value(s) without sending extra osc messages.' },
-            visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},
-            interaction: {type: 'boolean', value: true, help: 'Set to `false` to disable pointer interactions.'},
-
-            _geometry: 'geometry',
-
-            left: {type: 'number|string', value: 'auto', help: [
-                'When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).',
-                'Otherwise, the widget will be absolutely positioned'
-            ]},
-            top: {type: 'number|percentage', value: 'auto', help: [
-                'When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).',
-                'Otherwise, the widget will be absolutely positioned'
-            ]},
-            width: {type: 'number|percentage', value: 'auto', help: 'Widget width'},
-            height: {type: 'number|percentage', value: 'auto', help: 'Widget height'},
-            expand: {type: 'boolean|number', value: 'false', help: 'If parent\'s layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically.'},
-
-            _style: 'style',
-
-
-            colorText: {type: 'string', value: 'auto', help: 'Text color. Set to "auto" to inherit from parent widget.'},
-            colorWidget: {type: 'string', value: 'auto', help: 'Widget\'s default accent color. Set to "auto" to inherit from parent widget.'},
-            colorStroke: {type: 'string', value: 'auto', help: 'Stroke color. Set to "auto" to use `colorWidget`.'},
-            colorFill: {type: 'string', value: 'auto', help: 'Fill color. Set to "auto" to use `colorWidget`.'},
-            alphaStroke: {type: 'number', value: 'auto', help: 'Stroke color opacity.'},
-            alphaFillOff: {type: 'number', value: 'auto', help: 'Fill color opacity (off).'},
-            alphaFillOn: {type: 'number', value: 'auto', help: 'Fill color opacity (on).'},
-
-            lineWidth: {type: 'number', value: 'auto', help: 'Stroke width.'},
-            padding: {type: 'number', value: 'auto', help: 'Inner spacing.'},
-
-
-
-            css: {type: 'string', value: '', help: [
-                'CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.',
-                'Available css variables:',
-                ...Class.cssVariables.map(x=>'- `' + x.css + '`: `' + x.js + '`')
-            ]},
-
-            _value: 'value',
-
-            value: {type: '*', value: '', help: 'Define the widget\'s value depending on other widget\'s values / properties using the advanced property syntax'},
-            default: {type: '*', value: '', help: 'If set, the widget will be initialized with this value when the session is loaded.'},
-            linkId: {type: 'string|array', value: '', help: [
-                'Widgets sharing the same `linkId` update each other\'s value(s) AND send their respective osc messages.',
-                'When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)',
-                'When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending)'
-            ]},
-            script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.'},
-
-            _osc: 'osc',
-
-            address: {type: 'string', value: 'auto', help: [
-                'OSC address for sending / receiving messages, it must start with a slash (`/`)',
-                'By default ("auto"), the widget\'s id is used: `/widget_id`',
-            ]},
-            preArgs: {type: '*|array', value: '', help: [
-                'A value or array of values that will be prepended to the OSC messages.',
-            ]},
-            typeTags: {type: 'string', value: '', help: [
-                'Defines the osc argument types, one letter per argument (including preArgs)',
-                '- If empty, the types are infered automatically from the values (with numbers casted to floats by default)',
-                '- If there are more arguments than type letters, the last type is used for the extra arguments',
-                'See http://opensoundcontrol.org/spec-1_0 for existing typetags'
-            ]},
-            decimals: {type: 'integer', value: 2, help: [
-                'Defines the number of decimals to send.',
-            ]},
-            target: {type: 'string|array|null', value: '', help: [
-                'This defines the targets of the widget\'s OSC messages',
-                '- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:port"]`',
-                '- If midi is enabled, targets can be `midi:device_name`',
-                '- If no target is set, messages can still be sent if the server has default targets',
-            ]},
-            ignoreDefaults: {type: 'boolean', value: false, help: 'Set to `true` to ignore the server\'s default targets'},
-            bypass: {type: 'boolean', value: false, help: 'Set to `true` to prevent the widget from sending any osc message'}
-
-        }
-
-        // okay that's bad, but keys happen to be ordered anyway...
-
-        var alterDefaults = {}
-
-        for (var k in defaults) {
-            if (k === '_value') {
-                for (var l in insert) {
-                    alterDefaults[l] = insert[l]
-                }
+            },
+            value: {
+                value: {type: '*', value: '', help: 'Define the widget\'s value depending on other widget\'s values / properties using the advanced property syntax'},
+                default: {type: '*', value: '', help: 'If set, the widget will be initialized with this value when the session is loaded.'},
+                linkId: {type: 'string|array', value: '', help: [
+                    'Widgets sharing the same `linkId` update each other\'s value(s) AND send their respective osc messages.',
+                    'When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)',
+                    'When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending)'
+                ]},
+                script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.'},
+            },
+            osc: {
+                address: {type: 'string', value: 'auto', help: [
+                    'OSC address for sending / receiving messages, it must start with a slash (`/`)',
+                    'By default ("auto"), the widget\'s id is used: `/widget_id`',
+                ]},
+                preArgs: {type: '*|array', value: '', help: [
+                    'A value or array of values that will be prepended to the OSC messages.',
+                ]},
+                typeTags: {type: 'string', value: '', help: [
+                    'Defines the osc argument types, one letter per argument (including preArgs)',
+                    '- If empty, the types are infered automatically from the values (with numbers casted to floats by default)',
+                    '- If there are more arguments than type letters, the last type is used for the extra arguments',
+                    'See http://opensoundcontrol.org/spec-1_0 for existing typetags'
+                ]},
+                decimals: {type: 'integer', value: 2, help: [
+                    'Defines the number of decimals to send.',
+                ]},
+                target: {type: 'string|array|null', value: '', help: [
+                    'This defines the targets of the widget\'s OSC messages',
+                    '- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:port"]`',
+                    '- If midi is enabled, targets can be `midi:device_name`',
+                    '- If no target is set, messages can still be sent if the server has default targets',
+                ]},
+                ignoreDefaults: {type: 'boolean', value: false, help: 'Set to `true` to ignore the server\'s default targets'},
+                bypass: {type: 'boolean', value: false, help: 'Set to `true` to prevent the widget from sending any osc message'}
             }
-            if (except.indexOf(k) < 0) alterDefaults[k] = defaults[k]
         }
 
-        for (var m in push) {
-            if (!alterDefaults[m]) alterDefaults[m] = []
-            if (typeof push[m] === 'string') alterDefaults[m] = push[m]
-            else Object.assign(alterDefaults[m], push[m])
-        }
-
-        alterDefaults._props = function() {
-            var props = {}
-            for (var k in this) {
-                if (k[0] !== '_') {
-                    props[k] = this[k].value
+        Object.defineProperty(defaults, '_props', {
+            enumerable: false,
+            value: function(){
+                let props = {}
+                for (let category in this) {
+                    for (let k in this[category]) {
+                        if (k[0] === '_') continue
+                        props[k] = this[category][k].value
+                    }
                 }
+                return props
             }
-            return props
-        }
+        })
 
+        Object.defineProperty(defaults, 'extend', {
+            enumerable: false,
+            value: function(obj){
+                for (let i in obj) {
+                    if (obj[i] === null) delete this[i]
+                    else {
+                        if (this[i] === undefined) this[i] = {}
+                        Object.assign(this[i], obj[i])
+                        for (let j in obj[i]) {
+                            if (obj[i][j] === null) delete this[i][j]
+                        }
+                    }
+                }
+                return this
+            }
+        })
 
-        return alterDefaults
+        return defaults
 
     }
 

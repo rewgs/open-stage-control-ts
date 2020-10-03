@@ -13,17 +13,25 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'text',
-
-            vertical: {type: 'boolean', value: false, help: 'Set to `true` to display the text vertically'},
-            wrap: {type: 'boolean', value: false, help: [
-                'Set to `true` to wrap long lines automatically.',
-            ]},
-            align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Css text-align property.'},
-
-        }, ['interaction', 'decimals', 'bypass', 'ignoreDefaults'], {})
+        return super.defaults().extend({
+            widget: {
+                interaction: null
+            },
+            style: {
+                _separator_text_style: 'Text style',
+                vertical: {type: 'boolean', value: false, help: 'Set to `true` to display the text vertically'},
+                wrap: {type: 'boolean', value: false, help: [
+                    'Set to `true` to wrap long lines automatically.',
+                ]},
+                align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Css text-align property.'},
+            },
+            osc: {
+                decimals: null,
+                typeTags: null,
+                bypass: null,
+                ignoreDefaults: null
+            }
+        })
 
     }
 

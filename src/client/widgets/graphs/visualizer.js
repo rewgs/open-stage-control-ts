@@ -1,5 +1,4 @@
 var {clip} = require('../utils'),
-    Widget = require('../common/widget'),
     Plot = require('./plot'),
     StaticProperties = require('../mixins/static_properties'),
     canvasQueue = require('../common/queue')
@@ -15,19 +14,29 @@ class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dot
 
     static defaults() {
 
-        return Widget.defaults({
-
-            _class_specific: 'visualizer',
-
-            duration: {type: 'number', value: 1, help: 'Defines visualization duration in seconds'},
-            framerate: {type: 'number', value: 30, help: 'Defines visualization framerate'},
-            rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
-            origin: {type: 'number', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
-            logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm\'s base.'},
-            pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
-            freeze: {type: 'boolean', value: false, help: 'Set to `true` to freeze current view and ignore incoming values'}
-
-        }, ['interaction', 'decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {})
+        return super.defaults().extend({
+            widget: {
+                interaction: null
+            },
+            style: {
+                _separator_visualizer_style: 'Visualizer style',
+                pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
+            },
+            class_specific: {
+                duration: {type: 'number', value: 1, help: 'Defines visualization duration in seconds'},
+                framerate: {type: 'number', value: 30, help: 'Defines visualization framerate'},
+                rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
+                origin: {type: 'number', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
+                logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis (base 10). Set to a `number` to define the logarithm\'s base.'},
+                freeze: {type: 'boolean', value: false, help: 'Set to `true` to freeze current view and ignore incoming values'}
+            },
+            osc: {
+                decimals: null,
+                typeTags: null,
+                bypass: null,
+                ignoreDefaults: null
+            }
+        })
 
     }
 

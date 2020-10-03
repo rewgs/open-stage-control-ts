@@ -1,6 +1,5 @@
 var {mapToScale} = require('../utils'),
     Plot = require('./plot'),
-    Widget = require('../common/widget'),
     StaticProperties = require('../mixins/static_properties')
 
 class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smooth:true}) {
@@ -13,26 +12,33 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
 
     static defaults() {
 
-        return Widget.defaults({
+        return super.defaults().extend({
+            widget: {
+                interaction: null
+            },
+            class_specific: {
+                filters: {type: 'array', value: '', help: [
+                    'Each item must be an object with the following properties',
+                    '- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")',
+                    '- `freq`: number (filter\'s resonant frequency, default: 1000)',
+                    '- `q`: number (Q factor, default: 1)',
+                    '- `gain`: number (default: 0)',
+                    '- `on`: boolean (default: true)',
+                    'See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode'
 
-            _class_specific: 'eq',
-
-            filters: {type: 'array', value: '', help: [
-                'Each item must be an object with the following properties',
-                '- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")',
-                '- `freq`: number (filter\'s resonant frequency, default: 1000)',
-                '- `q`: number (Q factor, default: 1)',
-                '- `gain`: number (default: 0)',
-                '- `on`: boolean (default: true)',
-                'See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode'
-
-            ]},
-            pips: {type: 'boolean', value: true, help: 'Set to false to hide the scale'},
-            rangeX: {type: 'object', value: {min: 20, max: 22000}, help: 'Defines the min and max values for the x axis (in Hz, logarithmic scale)'},
-            rangeY: {type: 'object', value: {min:-6, max:6}, help: 'Defines the min and max values for the y axis (in dB)'},
-            origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
-
-        }, ['interaction', 'decimals', 'typeTags', 'bypass', 'ignoreDefaults'])
+                ]},
+                pips: {type: 'boolean', value: true, help: 'Set to false to hide the scale'},
+                rangeX: {type: 'object', value: {min: 20, max: 22000}, help: 'Defines the min and max values for the x axis (in Hz, logarithmic scale)'},
+                rangeY: {type: 'object', value: {min:-6, max:6}, help: 'Defines the min and max values for the y axis (in dB)'},
+                origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
+            },
+            osc: {
+                decimals: null,
+                typeTags: null,
+                bypass: null,
+                ignoreDefaults: null
+            }
+        })
 
     }
 

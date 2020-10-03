@@ -18,7 +18,7 @@ class UiInspector extends UiWidget {
 
         this.mounted = false
 
-        this.expandedCategories = ['_widget']
+        this.expandedCategories = ['widget']
 
         this.widget = null
 
@@ -114,64 +114,51 @@ class UiInspector extends UiWidget {
 
         this.widget = widget
 
-        let category
+        for (let categoryName in props) {
 
-        for (let propName in props) {
+            if (categoryName === 'children') continue
 
-            if (propName === '_children' || propName === 'tabs' || propName === 'widgets' || propName === '_props') continue
+            let category = html`<osc-inspector-category class="${this.expandedCategories.indexOf(categoryName) > -1 ? 'expanded' : ''}"></osc-inspector-category>`,
+                categoryLabel = categoryName === 'class_specific' ? widget.props.type : categoryName
 
-            let field,
-                shared = true
+            category.appendChild(html`
+                <div class="category-header" data-name="${categoryName}">${categoryLabel}${categoryName === 'widget' && widgets.length > 1 ? `s (${widgets.length})` : ''}</div>
+            `)
 
-            for (var w of widgets) {
-                if (defaults[w.props.type][propName] === undefined) {
-                    shared = false
+            let notEmpty
+
+            for (let propName in props[categoryName]) {
+
+                // skip if property is not shared between selected widgets
+                if (widgets.some((w)=>{
+                    for (let c in defaults[w.props.type]) {
+                        if (!defaults[w.props.type][c].hasOwnProperty(propName)) return false
+                    }
+                })) continue
+
+                let field = propName.includes('_separator') ?
+                    html`<div class="separator">${props[categoryName][propName]}</div>` :
+                    new UiInspectorField({
+                        parent: this,
+                        widget: widget,
+                        name: propName,
+                        value: widget.props[propName],
+                        default: defaults[widget.props.type][categoryName][propName],
+                        tabIndex: tabIndex++
+                    }).container
+
+                if (field)  {
+                    category.appendChild(field)
+                    notEmpty = true
                 }
-            }
-
-            if (!shared) continue
-
-
-            if (propName.indexOf('_separator') > -1) {
-
-                field = html`<div class="separator">${props[propName]}</div>`
-
-            } else if (propName.indexOf('_') === 0) {
-
-                if (category) content.appendChild(category)
-
-                category = html`<osc-inspector-category class="${this.expandedCategories.indexOf(propName) > -1 ? 'expanded' : ''}"></osc-inspector-category>`
-
-                field = html`<div class="category-header" data-name="${propName}">${props[propName]}${propName === '_widget' && widgets.length > 1 ? `s (${widgets.length})` : ''}</div>`
-
-            } else if (widget.props[propName] === undefined) {
-
-                continue
-
-            } else {
-
-                field = new UiInspectorField({
-                    parent: this,
-                    widget: widget,
-                    name: propName,
-                    value: widget.props[propName],
-                    default: defaults[w.props.type][propName],
-                    tabIndex: tabIndex++
-                }).container
-
-                if (!field) continue
 
             }
-            if (category) {
-                category.appendChild(field)
-            } else {
-                content.appendChild(field)
-            }
 
+            if (notEmpty) {
+                content.appendChild(category)
+            }
 
         }
-
-        if (category) content.appendChild(category)
 
         this.lock = true
 

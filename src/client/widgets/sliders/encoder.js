@@ -1,7 +1,5 @@
 var Knob = require('./knob'),
-    Widget = require('../common/widget'),
     StaticProperties = require('../mixins/static_properties')
-
 
 module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range: {min: 0, max: 1}, sensitivity: 1, steps: ''}) {
 
@@ -13,32 +11,26 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
     static defaults() {
 
-        return Widget.defaults({
-
-            _class_specific: 'encoder',
-
-            ticks: {type: 'number', value: 360, help: 'defines the granularity / verbosity of the encoder (number of step for a 360° arc)'},
-            back: {type: '*', value: -1, help: 'Defines which value is sent when rotating the encoder anticlockwise'},
-            forth: {type: '*', value: 1, help: 'Defines which value is sent when rotating the encoder clockwise'},
-            release: {type: 'number', value: '', help: [
-                'Defines which value is sent when releasing the encoder:',
-                '- Set to `null` to send send no argument in the osc message',
-                '- Can be an `object` if the type needs to be specified'
-            ]},
-            mode: {type: 'string', value: 'circular', choices: ['circular', 'snap', 'vertical'], help: [
-                '- `circular`: relative move in circular motion',
-                '- `snap`: snap to touch position and move in vertical motion',
-                '- `vertical`: relative move in vertical motion',
-            ]},
-            doubleTap: {type: 'boolean', value: false, help: [
-                'Set to `true` to make the fader reset to its `default` value when receiving a double tap.',
-                'Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)'
-            ]},
-
-        }, [], {
-
-            touchAddress: {type: 'string', value:'', help: 'OSC address for touched state messages: `/touchAddress [preArgs] 0/1`'},
-
+        return super.defaults().extend({
+            class_specific: {
+                ticks: {type: 'number', value: 360, help: 'defines the granularity / verbosity of the encoder (number of step for a 360° arc)'},
+                back: {type: '*', value: -1, help: 'Defines which value is sent when rotating the encoder anticlockwise'},
+                forth: {type: '*', value: 1, help: 'Defines which value is sent when rotating the encoder clockwise'},
+                release: {type: 'number', value: '', help: [
+                    'Defines which value is sent when releasing the encoder:',
+                    '- Set to `null` to send send no argument in the osc message',
+                    '- Can be an `object` if the type needs to be specified'
+                ]},
+                mode: {type: 'string', value: 'circular', choices: ['circular', 'snap', 'vertical'], help: [
+                    '- `circular`: relative move in circular motion',
+                    '- `snap`: snap to touch position and move in vertical motion',
+                    '- `vertical`: relative move in vertical motion',
+                ]},
+                doubleTap: {type: 'boolean', value: false, help: [
+                    'Set to `true` to make the fader reset to its `default` value when receiving a double tap.',
+                    'Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)'
+                ]},
+            }
         })
 
     }

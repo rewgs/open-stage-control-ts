@@ -11,45 +11,46 @@ class Fader extends Slider {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'fader',
-
-            design: {type: 'string', value: 'default', choices: ['default', 'round', 'compact'], help: 'Design style'},
-            knobSize: {type: 'number', value: 'auto', help: 'Fader knob size'},
-            horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
-            pips: {type: 'boolean', value: false, help: 'Set to `true` to show range breakpoints (ignored if `design` is `compact`)'},
-            dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
-            gradient: {type: 'array|object', value: [], help: [
-                'When set, the meter\'s gauge will be filled with a linear color gradient',
-                '- each item must be a CSS color string.',
-                '- as an `object`: each key must be a number between 0 and 1',
-                '- each item must be a CSS color string.',
-                'Examples: `[\'blue\', \'red\']`, {\'0\': \'blue\', \'0.9\': \'blue\', \'1\': \'red\'} '
-            ]},
-            snap: {type: 'boolean', value: false, help: 'By default, dragging the widget will modify it\'s value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position'},
-            spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
-            doubleTap: {type: 'boolean', value: false, help: [
-                'Set to `true` to make the fader reset to its `default` value when receiving a double tap.',
-                'Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)'
-            ]},
-            range: {type: 'object', value: {min:0,max:1}, help: [
-                'Defines the breakpoints of the fader\'s scale:',
-                '- keys can be percentages and/or `min` / `max`',
-                '- values can be `number` or `object` if a custom label is needed',
-                'Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`)'
-            ]},
-            logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale. Set to `-1` for exponential scale.'},
-            sensitivity: {type: 'number', value: 1, help: 'Defines the fader\'s sensitivity when `snap` is `false` '},
-            steps: {type: 'string|number|array', value: '', help: [
-                'Restricts the widget\'s value:',
-                '- `auto`: use values defined in `range`',
-                '- `number`: define a number of evenly spaced steps',
-                '- `array`: use arbitrary values',
-            ]},
-            origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the fader\'s gauge'},
-
-        }, [], {}, Fader)
+        return super.defaults(Fader).extend({
+            style: {
+                _separator_fader_style: 'Fader style',
+                design: {type: 'string', value: 'default', choices: ['default', 'round', 'compact'], help: 'Design style'},
+                knobSize: {type: 'number', value: 'auto', help: 'Fader knob size'},
+                horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
+                pips: {type: 'boolean', value: false, help: 'Set to `true` to show range breakpoints (ignored if `design` is `compact`)'},
+                dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
+                gradient: {type: 'array|object', value: [], help: [
+                    'When set, the meter\'s gauge will be filled with a linear color gradient',
+                    '- each item must be a CSS color string.',
+                    '- as an `object`: each key must be a number between 0 and 1',
+                    '- each item must be a CSS color string.',
+                    'Examples: `[\'blue\', \'red\']`, {\'0\': \'blue\', \'0.9\': \'blue\', \'1\': \'red\'} '
+                ]},
+            },
+            class_specific: {
+                snap: {type: 'boolean', value: false, help: 'By default, dragging the widget will modify it\'s value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position'},
+                spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
+                doubleTap: {type: 'boolean', value: false, help: [
+                    'Set to `true` to make the fader reset to its `default` value when receiving a double tap.',
+                    'Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)'
+                ]},
+                range: {type: 'object', value: {min:0,max:1}, help: [
+                    'Defines the breakpoints of the fader\'s scale:',
+                    '- keys can be percentages and/or `min` / `max`',
+                    '- values can be `number` or `object` if a custom label is needed',
+                    'Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`)'
+                ]},
+                logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale. Set to `-1` for exponential scale.'},
+                sensitivity: {type: 'number', value: 1, help: 'Defines the fader\'s sensitivity when `snap` is `false` '},
+                steps: {type: 'string|number|array', value: '', help: [
+                    'Restricts the widget\'s value:',
+                    '- `auto`: use values defined in `range`',
+                    '- `number`: define a number of evenly spaced steps',
+                    '- `array`: use arbitrary values',
+                ]},
+                origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the fader\'s gauge'},
+            }
+        })
 
     }
 

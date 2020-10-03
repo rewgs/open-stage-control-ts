@@ -14,36 +14,37 @@ class Button extends Widget {
 
     static defaults() {
 
-        return super.defaults({
+        return super.defaults(Button).extend({
+            style: {
+                _separator_button_style: 'Button style',
+                colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
+                label: {type: 'string|boolean', value: 'auto', help: [
+                    'Set to `false` to hide completely',
+                    '- Insert icons using the prefix ^ followed by the icon\'s name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)',
+                    '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
+                ]},
+                vertical: {type: 'boolean', value: false, help: 'Set to `true` to display the text vertically'},
+                wrap: {type: 'boolean', value: false, help: [
+                    'Set to `true` to wrap long lines automatically.',
+                ]},
+            },
+            class_specific: {
+                on: {type: '*', value: 1, help: [
+                    'Set to `null` to send send no argument in the osc message',
+                ]},
+                off: {type: '*', value: 0, help: [
+                    'Set to `null` to send send no argument in the osc message. Must be different from `on`.',
+                ]},
+                mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'tap'], help: [
+                    'Interraction mode:',
+                    '- `toggle` (classic on/off switch)',
+                    '- `push` (press & release)',
+                    '- `tap` (no release)'
+                ]},
+                doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
 
-
-            _class_specific: 'button',
-
-            label: {type: 'string|boolean', value: 'auto', help: [
-                'Set to `false` to hide completely',
-                '- Insert icons using the prefix ^ followed by the icon\'s name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)',
-                '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
-            ]},
-            vertical: {type: 'boolean', value: false, help: 'Set to `true` to display the text vertically'},
-            wrap: {type: 'boolean', value: false, help: [
-                'Set to `true` to wrap long lines automatically.',
-            ]},
-            on: {type: '*', value: 1, help: [
-                'Set to `null` to send send no argument in the osc message',
-            ]},
-            off: {type: '*', value: 0, help: [
-                'Set to `null` to send send no argument in the osc message. Must be different from `on`.',
-            ]},
-            mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'tap'], help: [
-                'Interraction mode:',
-                '- `toggle` (classic on/off switch)',
-                '- `push` (press & release)',
-                '- `tap` (no release)'
-            ]},
-            doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
-            colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
-
-        }, [], {}, Button)
+            }
+        })
 
     }
 

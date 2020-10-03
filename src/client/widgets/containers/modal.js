@@ -1,5 +1,4 @@
 var Panel = require('./panel'),
-    Widget = require('../common/widget'),
     {icon, iconify} = require('../../ui/utils'),
     resize = require('../../events/resize'),
     doubletab = require('../mixins/double_tap'),
@@ -16,45 +15,35 @@ class Modal extends Panel {
 
     static defaults() {
 
-        return Widget.defaults({
-
-            _class_specific: 'modal',
-
-            colorBg: {type: 'string', value: 'auto', help: 'Panel background color. Set to "auto" to inherit from parent widget.'},
-            label: {type: 'string|boolean', value: 'auto', help: [
-                'Set to `false` to hide completely',
-                '- Insert icons using the prefix ^ followed by the icon\'s name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)',
-                '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
-            ]},
-            doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the modal require a double tap to open instead of a single tap'},
-            variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
-            traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
-
-            _separator: 'popup',
-
-            popupLabel: {type: 'string|boolean', value: 'auto', help: 'Alternative label for the modal popup'},
-            popupWidth: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
-            popupHeight: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
-            popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
-            popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
-
-            _separator1: 'widget container',
-
-            layout: {type: 'string', value: 'default', choices: ['default', 'vertical', 'horizontal', 'grid'], help: 'Defines how children are laid out.'},
-            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
-            contain: {type: 'boolean', value: true, help:'If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel.'},
-            scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
-            innerPadding: {type : 'boolean', value: true, help: 'Set to `false` to make the `padding` property apply only between children and not at the container\'s inner boundaries.'},
-
-        }, [], {
-
-            _children: 'children',
-
-            widgets: {type: 'array', value: [], help: 'Each element of the array must be a widget object'},
-            value: {type: 'integer', value: '', help: [
-                'Defines the modal\'s state:`0` for closed, `1` for opened'
-            ]},
-
+        return super.defaults().extend({
+            class_specific: {
+                doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the modal require a double tap to open instead of a single tap'},
+            },
+            geometry: {
+                _separator_modal_geometry: 'Modal geometry',
+                popupWidth: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
+                popupHeight: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
+                popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
+                popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
+            },
+            style: {
+                _separator_modal_style: 'Modal style',
+                label: {type: 'string|boolean', value: 'auto', help: [
+                    'Set to `false` to hide completely',
+                    '- Insert icons using the prefix ^ followed by the icon\'s name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)',
+                    '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
+                ]},
+                popupLabel: {type: 'string|boolean', value: 'auto', help: 'Alternative label for the modal popup'},
+                verticalTabs: null,
+            },
+            children: {
+                tab: null
+            },
+            value: {
+                value: {type: 'integer', value: '', help: [
+                    'Defines the modal\'s state:`0` for closed, `1` for opened'
+                ]},
+            }
         })
 
     }

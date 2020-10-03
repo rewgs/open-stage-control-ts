@@ -12,14 +12,15 @@ class Input extends Canvas {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'input',
-
-            align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
-            unit: {type: 'string', value: '', help: 'Unit will be appended to the displayed widget\'s value (it doesn\'t affect osc messages)'},
-            asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'}
-
+        return super.defaults().extend({
+            style: {
+                _separator_input_style: 'Input style',
+                align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
+                unit: {type: 'string', value: '', help: 'Unit will be appended to the displayed widget\'s value (it doesn\'t affect osc messages)'},
+            },
+            class_specific: {
+                asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'}
+            }
         })
 
     }

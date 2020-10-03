@@ -12,16 +12,17 @@ module.exports = class File extends Widget {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'file',
-
-            align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
-            directory: {type: 'string', value: 'auto', help: 'Default browsing directory'},
-            extension: {type: 'string', value: '*', help: 'Only display files with this extension'},
-            hidePath: {type: 'boolean', value: false, help: 'Set to `true` to only display the filename (the whole path will still be used as value)'},
-            allowDir:  {type: 'boolean', value: false, help: 'Allow selecting a folder (by pressing "open" when no file is selected)'}
-
+        return super.defaults().extend({
+            style: {
+                _separator_file_style: 'File style',
+                align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
+                hidePath: {type: 'boolean', value: false, help: 'Set to `true` to only display the filename (the whole path will still be used as value)'},
+            },
+            class_specific: {
+                directory: {type: 'string', value: 'auto', help: 'Default browsing directory'},
+                extension: {type: 'string', value: '*', help: 'Only display files with this extension'},
+                allowDir:  {type: 'boolean', value: false, help: 'Allow selecting a folder (by pressing "open" when no file is selected)'}
+            }
         })
 
     }

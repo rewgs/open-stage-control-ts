@@ -14,32 +14,36 @@ class Menu extends MenuBase {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'menu',
-
-            size: {type: 'number|array', value: 200, help: [
-                '- If `layout` is `circular`: diameter (in px)',
-                '- Else: square size or `[width, height]` array',
-            ]},
-            textAlign: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
-            menuAlignV: {type: 'string', value: 'center', choices: ['center', 'top', 'bottom'], help: 'Set to `top` or `bottom` to change menu alignment (otherwise center)'},
-            menuAlignH: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change menu alignment (otherwise center)'},
-            layout: {type: 'string', value: 'circular', choices: ['circular', 'horizontal', 'vertical', 'grid'], help: [
-                'Defines whether the menu\'s layout should be rendered in a circle or in a box'
-            ]},
-            gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
-            toggle: {type: 'boolean', value: false, help: 'Set to `true` to make the menu stay opened after mouse/touch release'},
-            doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the menu require a double tap to be opened instead of a single tap'},
-            values: {type: 'array|object', value: [1, 2, 3], help: [
-                '`Array` of possible values to switch between : `[1,2,3]`',
-                '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
-            ]},
-            weights: {type: 'array', value: '', help: [
-                '`Array` of `number` defining the weights of each value in `values`',
-                'Ignored when `mode` is `grid`'
-            ]},
-
+        return super.defaults().extend({
+            geometry: {
+                _separator_menu_geometry: 'Menu geometry',
+                size: {type: 'number|array', value: 200, help: [
+                    '- If `layout` is `circular`: diameter (in px)',
+                    '- Else: square size or `[width, height]` array',
+                ]},
+            },
+            style: {
+                _separator_menu_style: 'Menu style',
+                textAlign: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
+                menuAlignV: {type: 'string', value: 'center', choices: ['center', 'top', 'bottom'], help: 'Set to `top` or `bottom` to change menu alignment (otherwise center)'},
+                menuAlignH: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change menu alignment (otherwise center)'},
+                layout: {type: 'string', value: 'circular', choices: ['circular', 'horizontal', 'vertical', 'grid'], help: [
+                    'Defines whether the menu\'s layout should be rendered in a circle or in a box'
+                ]},
+                gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
+            },
+            class_specific: {
+                toggle: {type: 'boolean', value: false, help: 'Set to `true` to make the menu stay opened after mouse/touch release'},
+                doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the menu require a double tap to be opened instead of a single tap'},
+                values: {type: 'array|object', value: [1, 2, 3], help: [
+                    '`Array` of possible values to switch between : `[1,2,3]`',
+                    '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
+                ]},
+                weights: {type: 'array', value: '', help: [
+                    '`Array` of `number` defining the weights of each value in `values`',
+                    'Ignored when `mode` is `grid`'
+                ]},
+            }
         })
 
     }

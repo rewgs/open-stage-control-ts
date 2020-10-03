@@ -39,7 +39,7 @@ class Editor {
                 if ((propName === 'label' || propName === 'popupLabel') && value === true) {
                     w.props[propName] = 'auto'
                 } else {
-                    w.props[propName] = value !== '' ? value : deepCopy(defaults[w.props.type][propName].value)
+                    w.props[propName] = value !== '' ? value : deepCopy(defaults[w.props.type]._props()[propName])
                 }
 
                 try {

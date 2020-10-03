@@ -13,25 +13,31 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
 
     static defaults() {
 
-        return super.defaults({
-
-            _class_specific: 'image',
-
-            size: {type: 'string', value: 'cover', help: 'CSS background-size'},
-            position: {type: 'string', value: 'center', help: 'CSS background-position'},
-            repeat: {type: 'string', value: 'no-repeat', help: 'CSS background-repeat'},
-            cache: {type: 'boolean', value: true, help: [
-                'Set to false to disable image caching (forces file reload when updating or editing the widget).',
-                'When true, sending `reload` to the widget reloads its image without changing its value'
-            ]}
-
-        }, ['decimals', 'typeTags', 'bypass', 'ignoreDefaults'], {
-
-            value: {type: 'string', value: '', help: [
-                '- File `url` or `path` (relative to the session file location by default, falling back to absolute path)',
-                '- Base64 encoded image : `data:image/...`'
-            ]}
-
+        return super.defaults().extend({
+            style: {
+                _separator_image_style: 'Image style',
+                size: {type: 'string', value: 'cover', help: 'CSS background-size'},
+                position: {type: 'string', value: 'center', help: 'CSS background-position'},
+                repeat: {type: 'string', value: 'no-repeat', help: 'CSS background-repeat'},
+            },
+            class_specific: {
+                cache: {type: 'boolean', value: true, help: [
+                    'Set to false to disable image caching (forces file reload when updating or editing the widget).',
+                    'When true, sending `reload` to the widget reloads its image without changing its value'
+                ]}
+            },
+            value: {
+                value: {type: 'string', value: '', help: [
+                    '- File `url` or `path` (relative to the session file location by default, falling back to absolute path)',
+                    '- Base64 encoded image : `data:image/...`'
+                ]}
+            },
+            osc: {
+                decimals: null,
+                typeTags: null,
+                bypass: null,
+                ignoreDefaults: null
+            }
         })
 
     }

@@ -3,7 +3,7 @@ var Panel = require('./panel'),
     parser = require('../../parser')
 
 
-module.exports = class Keyboard extends Panel {
+class Keyboard extends Panel {
 
     static description() {
 
@@ -13,39 +13,34 @@ module.exports = class Keyboard extends Panel {
 
     static defaults() {
 
-        return Widget.defaults({
-
-            _class_specific: 'keyboard',
-
-            keys: {type: 'number', value: 25, help: 'Defines the number keys'},
-            start: {type: 'number', value: 48, help: [
-                'MIDI note number to start with (default is C4)',
-                'Standard keyboards settings are: `[25, 48]`, `[49, 36]`, `[61, 36]`, `[88, 21]`'
-            ]},
-            traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},
-            on: {type: '*', value: 1, help: [
-                'Set to `null` to send send no argument in the osc message',
-                'Can be an `object` if the type needs to be specified (see preArgs)'
-            ]},
-            off: {type: '*', value: 0, help: [
-                'Set to `null` to send send no argument in the osc message',
-                'Can be an `object` if the type needs to be specified (see preArgs)'
-            ]},
-            mode: {type: 'string', value: 'push', choices: ['push', 'toggle', 'tap'], help: [
-                'Interraction mode:',
-                '- `push` (press & release)',
-                '- `toggle` (on/off switches)',
-                '- `tap` (no release)'
-            ]},
-
-        }, [], {
-
-            css: {type: 'string', value: '', help: [
-                'Available CSS variables:',
-                '- `--color-white:color;` (white keys color)',
-                '- `--color-black:color;` (black keys color)'
-            ]}
-
+        return Widget.defaults().extend({
+            style: {
+                _separator_keyboard_style: 'Keyboard style',
+                colorWhite: {type: 'string', value: 'auto', help: 'White keys color.'},
+                colorBlack: {type: 'string', value: 'auto', help: 'Black keys color.'},
+            },
+            class_specific: {
+                keys: {type: 'number', value: 25, help: 'Defines the number keys'},
+                start: {type: 'number', value: 48, help: [
+                    'MIDI note number to start with (default is C4)',
+                    'Standard keyboards settings are: `[25, 48]`, `[49, 36]`, `[61, 36]`, `[88, 21]`'
+                ]},
+                traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},
+                on: {type: '*', value: 1, help: [
+                    'Set to `null` to send send no argument in the osc message',
+                    'Can be an `object` if the type needs to be specified (see preArgs)'
+                ]},
+                off: {type: '*', value: 0, help: [
+                    'Set to `null` to send send no argument in the osc message',
+                    'Can be an `object` if the type needs to be specified (see preArgs)'
+                ]},
+                mode: {type: 'string', value: 'push', choices: ['push', 'toggle', 'tap'], help: [
+                    'Interraction mode:',
+                    '- `push` (press & release)',
+                    '- `toggle` (on/off switches)',
+                    '- `tap` (no release)'
+                ]},
+            }
         })
 
     }
@@ -125,3 +120,10 @@ module.exports = class Keyboard extends Panel {
     }
 
 }
+
+Keyboard.cssVariables = Keyboard.prototype.constructor.cssVariables.concat(
+    {js: 'colorWhite', css: '--color-white-key'},
+    {js: 'colorBlack', css: '--color-black-key'}
+)
+
+module.exports = Keyboard
