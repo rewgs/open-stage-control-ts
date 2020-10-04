@@ -393,14 +393,16 @@
 
 .modal-container {
 
-    --widget-padding: 4rem;
+    --widget-padding: -1rem;
+    --popup-padding: 4rem;
+
     --color-text-on: var(--color-background);
     --alpha-fill-off: 0.15;
     --alpha-fill-on: .75;
 
     > .toggle {
 
-        --widget-padding: -1rem;
+        // --widget-padding: -1rem;
 
         position: absolute;
         top:0;
@@ -479,6 +481,8 @@
             > .popup-content {
                 // contain:unset; // == no restrain
                 padding: 0;
+                --widget-padding: var(--popup-padding);
+
                 &:before {
                     content: none;
                 }
