@@ -17,7 +17,7 @@
   - keyboard: added `colorBlack` and `colorWhite` properties to customize key colors
   - dropdown/menu: add `label` property (with support easy key/value display)
   - dropdown/menu: add `icon` toggle property
-  - modal: add `popupPadding` property to control the buttons and the container's padding independently
+  - modal: add `popupPadding` property to control the button's and the container's padding independently
 
 ## 1.4.1
 
