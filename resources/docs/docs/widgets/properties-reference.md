@@ -116,6 +116,8 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
+            | <h6 id="dropdown_label">label<a class="headerlink" href="#dropdown_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Displayed text (defaults to current value). Keywords `%key` and `%value` will be replaced by the widget's selected key/value. |
+            | <h6 id="dropdown_icon">icon<a class="headerlink" href="#dropdown_icon" title="Permanent link">#</a></h6> | `boolean` | <code>"true"</code> | Set to `false` to hide the dropdown icon |
             | <h6 id="dropdown_align">align<a class="headerlink" href="#dropdown_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
 
     === "dropdown"
@@ -137,6 +139,8 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
+            | <h6 id="menu_label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#menu_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Displayed text (defaults to current value). Keywords `%key` and `%value` will be replaced by the widget's selected key/value. |
+            | <h6 id="menu_icon">icon<a class="headerlink" href="#menu_icon" title="Permanent link">#</a></h6> | `boolean` | <code>"true"</code> | Set to `false` to hide the dropdown icon |
             | <h6 id="menu_textAlign">textAlign<a class="headerlink" href="#menu_textAlign" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
             | <h6 id="menu_menuAlignV">menuAlignV<a class="headerlink" href="#menu_menuAlignV" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `top` or `bottom` to change menu alignment (otherwise center)<br/><br/>Choices: `center`, `top`, `bottom` |
             | <h6 id="menu_menuAlignH">menuAlignH<a class="headerlink" href="#menu_menuAlignH" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change menu alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
@@ -248,6 +252,7 @@
             | <h6 id="modal_innerPadding">innerPadding<a class="headerlink" href="#modal_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
             | <h6 id="modal_label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/>- Insert icons using the prefix ^ followed by the icon's name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)<br/>- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal` |
             | <h6 id="modal_popupLabel">popupLabel<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_popupLabel" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Alternative label for the modal popup |
+            | <h6 id="modal_popupPadding">popupPadding<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_popupPadding" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Modal's inner spacing. |
 
     === "modal"
 
@@ -727,10 +732,6 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="encoder_css">css<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#encoder_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-background`: `colorBg`<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--widget-padding`: `padding`<br/>- `--line-width`: `lineWidth`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--alpha-pips`: `alphaPips`<br/>- `--alpha-pips-text`: `alphaPipsText` |
-            | <h6 id="encoder_design">design<a class="headerlink" href="#encoder_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Note: "solid" design uses "colorStroke" for the central knob color.<br/><br/>Choices: `default`, `solid`, `line` |
-            | <h6 id="encoder_pips">pips<a class="headerlink" href="#encoder_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show the scale's breakpoints |
-            | <h6 id="encoder_dashed">dashed<a class="headerlink" href="#encoder_dashed" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`array` | <code>false</code> | Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]` |
-            | <h6 id="encoder_angle">angle<a class="headerlink" href="#encoder_angle" title="Permanent link">#</a></h6> | `number` | <code>270</code> | Defines the angle's width of the knob, in degrees |
 
     === "encoder"
 
