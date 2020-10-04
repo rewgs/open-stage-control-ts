@@ -9,7 +9,7 @@
 
 - editor
   - holding `alt` extends the north-west handle to the widget's size to ease dragging
-  - widget properties reordered (e.g. -related properties, even widget-specific, are now under the "style" category)
+  - widget properties reordered (e.g. style-related properties, even widget-specific, are now under the "style" category)
 
 - widgets
   - remove `colorBg` for all widgets except containers
