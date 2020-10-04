@@ -131,9 +131,14 @@ class UiInspector extends UiWidget {
 
                 // skip if property is not shared between selected widgets
                 if (widgets.some((w)=>{
-                    for (let c in defaults[w.props.type]) {
-                        if (!defaults[w.props.type][c].hasOwnProperty(propName)) return false
+                    let shared = false
+                    for (let c in defaults[widget.props.type]) {
+                        if (defaults[w.props.type][c].hasOwnProperty(propName)) {
+                            shared = true
+                            break
+                        }
                     }
+                    return !shared
                 })) continue
 
                 let field = propName.includes('_separator') ?
