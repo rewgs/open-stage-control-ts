@@ -596,13 +596,13 @@ class Editor {
             for (let i in pastedData) {
 
                 if (pastedData[i]._pleft) {
-                    pastedData[i].left = ((pastedData[i]._aleft - minLeft + x) * 100 / this.selectedWidgets[0].widget.offsetWidth).toFixed(2) + '%'
+                    pastedData[i].left = ((pastedData[i]._aleft - minLeft + x) * 100 / this.selectedWidgets[0].widget.offsetWidth).toFixed(2).replace(/\.?0+$/, '') + '%'
                 } else {
                     pastedData[i].left += - minLeft + x
                 }
 
                 if (pastedData[i]._ptop) {
-                    pastedData[i].top = ((pastedData[i]._atop - minTop + y) * 100 / this.selectedWidgets[0].widget.offsetHeight).toFixed(2) + '%'
+                    pastedData[i].top = ((pastedData[i]._atop - minTop + y) * 100 / this.selectedWidgets[0].widget.offsetHeight).toFixed(2).replace(/\.?0+$/, '') + '%'
                 } else {
                     pastedData[i].top += - minTop + y
                 }
@@ -654,8 +654,8 @@ class Editor {
             clone.top  = y
 
             if (this.usePercents) {
-                clone.top = (100 * y / editor.selectedWidgets[0].widget.offsetHeight).toFixed(2) + '%'
-                clone.left= (100 * x / editor.selectedWidgets[0].widget.offsetWidth).toFixed(2) + '%'
+                clone.top = (100 * y / editor.selectedWidgets[0].widget.offsetHeight).toFixed(2).replace(/\.?0+$/, '') + '%'
+                clone.left= (100 * x / editor.selectedWidgets[0].widget.offsetWidth).toFixed(2).replace(/\.?0+$/, '') + '%'
             }
 
 
@@ -727,7 +727,7 @@ class Editor {
             if (w.props.width !== undefined && w.parent.getProp('layout') !== 'vertical') {
                 var newWidth = Math.max(nW, GRIDWIDTH) / PXSCALE
                 if (typeof w.props.width === 'string' && w.props.width.indexOf('%') > -1) {
-                    w.props.width = (100 * PXSCALE * newWidth / w.container.parentNode.offsetWidth).toFixed(2) + '%'
+                    w.props.width = (100 * PXSCALE * newWidth / w.container.parentNode.offsetWidth).toFixed(2).replace(/\.?0+$/, '') + '%'
                 } else {
                     w.props.width = newWidth
                 }
@@ -736,7 +736,7 @@ class Editor {
             if (w.props.height !== undefined && w.parent.getProp('layout') !== 'horizontal') {
                 var newHeight = Math.max(nH, GRIDWIDTH) / PXSCALE
                 if (typeof w.props.height === 'string' && w.props.height.indexOf('%') > -1) {
-                    w.props.height = (100 * PXSCALE * newHeight / w.container.parentNode.offsetHeight).toFixed(2) + '%'
+                    w.props.height = (100 * PXSCALE * newHeight / w.container.parentNode.offsetHeight).toFixed(2).replace(/\.?0+$/, '') + '%'
                 } else {
                     w.props.height = newHeight
                 }
@@ -762,13 +762,13 @@ class Editor {
 
             var newTop = Math.max(parseInt(w.container.offsetTop) / PXSCALE + deltaY, 0)
             if (typeof w.props.top === 'string' && w.props.top.indexOf('%') > -1) {
-                w.props.top = (100 * PXSCALE * newTop / w.container.parentNode.offsetHeight).toFixed(2) + '%'
+                w.props.top = (100 * PXSCALE * newTop / w.container.parentNode.offsetHeight).toFixed(2).replace(/\.?0+$/, '') + '%'
             } else {
                 w.props.top = newTop
             }
             var newLeft = Math.max(parseInt(w.container.offsetLeft) / PXSCALE + deltaX, 0)
             if (typeof w.props.left === 'string' && w.props.left.indexOf('%') > -1) {
-                w.props.left = (100 * PXSCALE * newLeft / w.container.parentNode.offsetWidth).toFixed(2) + '%'
+                w.props.left = (100 * PXSCALE * newLeft / w.container.parentNode.offsetWidth).toFixed(2).replace(/\.?0+$/, '') + '%'
             } else {
                 w.props.left = newLeft
             }
