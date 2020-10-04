@@ -133,7 +133,7 @@ class UiInspector extends UiWidget {
                 if (widgets.some((w)=>{
                     let shared = false
                     for (let c in defaults[widget.props.type]) {
-                        if (defaults[w.props.type][c].hasOwnProperty(propName)) {
+                        if (defaults[w.props.type][c] && defaults[w.props.type][c].hasOwnProperty(propName)) {
                             shared = true
                             break
                         }
