@@ -121,6 +121,8 @@ class UiInspector extends UiWidget {
             let category = html`<osc-inspector-category class="${this.expandedCategories.indexOf(categoryName) > -1 ? 'expanded' : ''}"></osc-inspector-category>`,
                 categoryLabel = categoryName === 'class_specific' ? widget.props.type : categoryName
 
+            if (widgets.length > 1 && categoryName === 'class_specific') categoryLabel = 'shared properties'
+
             category.appendChild(html`
                 <div class="category-header" data-name="${categoryName}">${categoryLabel}${categoryName === 'widget' && widgets.length > 1 ? `s (${widgets.length})` : ''}</div>
             `)
