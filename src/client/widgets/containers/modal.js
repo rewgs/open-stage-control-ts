@@ -34,6 +34,7 @@ class Modal extends Panel {
                     '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
                 ]},
                 popupLabel: {type: 'string|boolean', value: 'auto', help: 'Alternative label for the modal popup'},
+                popupPadding: {type: 'number', value: 'auto', help: 'Modal\'s inner spacing.'},
                 verticalTabs: null,
             },
             children: {
@@ -115,7 +116,6 @@ class Modal extends Panel {
 
 
         this.popupContent.classList.add('layout-' + this.getProp('layout'))
-        this.popupContent.style.setProperty('--widget-padding', this.getProp('padding') != 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
 
         this.label = html`<label></label>`
         this.updateLabel()
@@ -247,7 +247,9 @@ class Modal extends Panel {
                 } else {
                     this.labelChange = true
                 }
-
+                return
+            case 'popupPadding':
+                this.setCssVariables()
                 return
 
         }
@@ -255,21 +257,17 @@ class Modal extends Panel {
     }
 
 
-    setCssVariables() {
-
-        super.setCssVariables()
-
-        if (!this.popupContent) return
-
-        this.popupContent.style.setProperty('--widget-padding', this.getProp('padding') !== 'auto' ? parseFloat(this.getProp('padding')) + 'rem' : '')
-
-    }
 
 }
 
+Modal.cssVariables = Modal.prototype.constructor.cssVariables.concat(
+    {js: 'popupPadding', css: '--popup-padding', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE},
+)
+
 Modal.dynamicProps = Modal.prototype.constructor.dynamicProps.concat(
     'label',
-    'popupLabel'
+    'popupLabel',
+    'popupPadding'
 )
 
 module.exports = Modal
