@@ -25,6 +25,7 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
                 colorStroke: null,
                 alphaStroke: null,
                 alphaFillOff: null,
+                lineWidth: null
             }
         })
 
