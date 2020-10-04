@@ -25,6 +25,7 @@ class Tab extends Panel {
                 alphaStroke: null,
                 alphaFillOff: null,
                 alphaFillOn: null,
+                lineWidth: null
             }
         })
 
