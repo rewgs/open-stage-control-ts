@@ -207,7 +207,7 @@ class Widget extends EventEmitter {
             })
             if (String(this.getProp('script')).includes('touch')) {
                 this.on('touch', (e)=>{
-                    this.script.setValue(this.value, {id: this.getProp('id'), touch: e.touch, sync: false, send: true})
+                    this.script.setValue(this.value, {id: this.getProp('id'), touch: e.touch, sync: true, send: true})
                 })
             }
         }

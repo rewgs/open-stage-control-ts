@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.1
+
+- bug fixes
+  - widgets: touch state scripts not triggering some synchronization mechanism
+
 ## 1.5.0
 
 - bug fixes
