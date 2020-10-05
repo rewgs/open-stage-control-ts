@@ -1,7 +1,7 @@
 var Knob = require('./knob'),
     StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range: {min: 0, max: 1}, sensitivity: 1, steps: ''}) {
+module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range: {min: 0, max: 1}}) {
 
     static description() {
 
@@ -20,7 +20,9 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
                 angle: null,
             },
             class_specific: {
-                ticks: {type: 'number', value: 360, help: 'defines the granularity / verbosity of the encoder (number of step for a 360° arc)'},
+                origin: null,
+                steps: null,
+                sensitivity: {type: 'number', value: 1, help: 'When set between 0 and 1, reduces the encoder\'s verbosity'},
                 back: {type: '*', value: -1, help: 'Defines which value is sent when rotating the encoder anticlockwise'},
                 forth: {type: '*', value: 1, help: 'Defines which value is sent when rotating the encoder clockwise'},
                 release: {type: 'number', value: '', help: [
@@ -48,6 +50,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         this.previousPercent = 50
         this.percent = 50
+        this.ignoredValues = 0
         this.setValue(this.getProp('release'), {dragged: true})
 
     }
@@ -100,7 +103,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         if ((this.getProp('mode') === 'vertical' && !e.traversing) || e.ctrlKey) {
             // vertical
-            this.setPercent(-100 * (e.movementY / e.inertia * this.getProp('sensitivity')) / this.height + this.percent)
+            this.setPercent(-100 * e.movementY / this.height + this.percent)
 
         } else {
             // snap or circular
@@ -128,6 +131,8 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
     dragendHandle(e, data, traversing) {
 
+        this.ignoredValues = 0
+
         if (this.getProp('release') === '') return
 
         this.previousPercent = 50
@@ -151,9 +156,6 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
     }
 
     setPercent(percent) {
-
-        var div = 100 / this.getProp('ticks')
-        percent = Math.round(percent / div) * div
 
         this.previousPercent = this.percent
         this.percent = percent
@@ -195,9 +197,25 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         ) return
 
+
+        // sensitivity = ingore value updates
+        var sensitivityIgnore = false
+        if (this.getProp('sensitivity') < 1) {
+            if (v != this.getProp('release')) {
+                this.ignoredValues += 1
+                if (this.ignoredValues <= 1 / this.getProp('sensitivity')) {
+                    sensitivityIgnore = true
+                } else {
+                    this.ignoredValues = 0
+                }
+            }
+        }
+
         this.value = v
 
         this.batchDraw()
+
+        if (sensitivityIgnore) return
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
