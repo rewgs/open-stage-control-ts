@@ -5,6 +5,10 @@
 - bug fixes
   - widgets: touch state scripts not triggering some synchronization mechanism
 
+- widgets
+  - encoder: remove `steps`, `ticks` and `origin` properties
+  - encoder: make `sensitivity` work with values below 1
+
 ## 1.5.0
 
 - bug fixes
