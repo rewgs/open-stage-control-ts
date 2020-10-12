@@ -21,7 +21,7 @@ class Matrix extends StaticProperties(Panel) {
                 start: {type: 'integer', value: 0, help: 'First widget\'s index'},
                 props: {type: 'object', value: {}, help: [
                     'Defines a set of property to override the widgets\' defaults.',
-                    'Formulas in this field are resolved with an extra variable representing each widget\'s index: `$`',
+                    'JS{{}} and #{} blocks in this field are resolved with an extra variable representing each widget\'s index: `$` (e.g. `#{$}`)',
                     'Note: by default, the widgets inherit from the matrix\' `id` and osc properties (`id` and `address` are appended with `/$`)'
                 ]},
             },
