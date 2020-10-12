@@ -309,7 +309,7 @@
             | <h6 id="matrix_widgetType">widgetType<a class="headerlink" href="#matrix_widgetType" title="Permanent link">#</a></h6> | `string` | <code>"button"</code> | Defines the type of the widgets in the matrix |
             | <h6 id="matrix_quantity">quantity<a class="headerlink" href="#matrix_quantity" title="Permanent link">#</a></h6> | `number` | <code>4</code> | Defines the number of widgets in the matrix |
             | <h6 id="matrix_start">start<a class="headerlink" href="#matrix_start" title="Permanent link">#</a></h6> | `integer` | <code>0</code> | First widget's index |
-            | <h6 id="matrix_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>Formulas in this field are resolved with an extra variable representing each widget's index: `$`<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |
+            | <h6 id="matrix_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>JS{{}} and #{} blocks in this field are resolved with an extra variable representing each widget's index: `$` (e.g. `#{$}`)<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |
 
     === "value"
 
