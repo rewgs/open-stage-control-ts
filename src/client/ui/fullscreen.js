@@ -1,10 +1,11 @@
 var screenfull = require('screenfull'),
     UiModal = require('./ui-modal'),
-    locales = require('../locales')
+    locales = require('../locales'),
+    iOS = require('./ios')
 
 var fullscreen
 
-if (screenfull.isEnabled) {
+if (screenfull.isEnabled && !iOS) {
 
     fullscreen = screenfull
 

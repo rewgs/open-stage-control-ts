@@ -4,6 +4,8 @@
 
 - bug fixes
   - launcher: midi device names containing multiple spaces not parsed correctly
+  - fullscreen: lack of support not detected on some ios devices
+  - multixy: labels not hidden when `ephemeral` is `true`
 
 ## 1.5.1
 
