@@ -118,6 +118,8 @@ module.exports = class MultiXy extends Pad {
 
             this.pads[id].trigger('draginit', e)
 
+            if (this.getProp('ephemeral')) this.batchDraw()
+
         }, {element: this.widget, multitouch: true})
 
         this.on('drag',(e)=>{
@@ -143,6 +145,8 @@ module.exports = class MultiXy extends Pad {
             this.trigger('touch', {stopPropagation: true, touch: [parseInt(this.touchMap[e.pointerId]), 0]})
 
             delete this.touchMap[e.pointerId]
+
+            if (this.getProp('ephemeral')) this.batchDraw()
 
         }, {element: this.widget, multitouch: true})
 
@@ -209,7 +213,11 @@ module.exports = class MultiXy extends Pad {
 
         this.clear()
 
+
         for (var i=0;i<this.npoints;i++) {
+
+            if (this.pads[i].getProp('ephemeral') && !this.pads[i].active) continue
+
             var margin = this.padPadding,
                 x = clip(this.pads[i].faders.x.percent,[0,100]) / 100 * (this.width - 2 * margin) + margin,
                 y = (100 - clip(this.pads[i].faders.y.percent,[0,100])) / 100 * (this.height - 2 * margin) + margin,
