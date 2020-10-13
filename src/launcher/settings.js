@@ -171,7 +171,7 @@ class Settings {
                         toggle.classList.toggle('on', v)
                     } else if (v && data.type === 'array'){
                         v = v.replace(/("[^"]*"|'[^']*')/g, (m)=>{
-                            return m.substr(1, m.length - 2).replace(/\s/, '_SPaCE_')
+                            return m.substr(1, m.length - 2).replace(/\s/g, '_SPaCE_')
                         })
                         v = v.split(' ')
                         v = v.map(x=>x.replace(/_SPaCE_/g, ' '))
