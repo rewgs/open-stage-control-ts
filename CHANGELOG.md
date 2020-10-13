@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.2
+
+- bug fixes
+  - launcher: midi device names containing multiple spaces not parsed correctly
+
 ## 1.5.1
 
 - bug fixes
