@@ -7,6 +7,9 @@
   - fullscreen: lack of support not detected on some ios devices
   - multixy: labels not hidden when `ephemeral` is `true`
 
+- remote control
+  - add `/SESSION/OPEN` and `/SESSION/SAVE` commands
+
 ## 1.5.1
 
 - bug fixes
