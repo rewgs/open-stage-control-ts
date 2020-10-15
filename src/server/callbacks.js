@@ -207,7 +207,7 @@ module.exports =  {
                 if (err) return ipc.send('notify', {
                     class: 'error',
                     locale: 'remotesave_fail',
-                    message: err
+                    message: ' (' + err.message + ')'
                 }, clientId)
 
 
