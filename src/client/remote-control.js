@@ -236,7 +236,7 @@ var callbacks = {
 
         if (!Array.isArray(args)) args = [args]
 
-        if (typeof args === 'string') sessionManager.requestOpen(args[0])
+        sessionManager.requestOpen(args[0])
 
     },
     '/SESSION/SAVE': function(args) {
