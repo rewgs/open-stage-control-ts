@@ -2,6 +2,7 @@ var {updateWidget} = require('./editor/data-workers'),
     editor = require('./editor'),
     widgetManager = require('./managers/widgets'),
     stateManager = require('./managers/state'),
+    sessionManager = require('./managers/session'),
     deepExtend = require('deep-extend'),
     notifications = require('./ui/notifications')
 
@@ -231,6 +232,22 @@ var callbacks = {
         })
 
     },
+    '/SESSION/OPEN': function(args) {
+
+        if (!Array.isArray(args)) args = [args]
+
+        if (typeof args === 'string') sessionManager.requestOpen(args[0])
+
+    },
+    '/SESSION/SAVE': function(args) {
+
+        if (!Array.isArray(args)) args = [args]
+
+        sessionManager.save(args[0])
+
+    }
+
+
 
 }
 

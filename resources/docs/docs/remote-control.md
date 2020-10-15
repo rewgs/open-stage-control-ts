@@ -169,3 +169,15 @@ Save the state of all widgets in the temporary slot.
 #### `/STATE/RECALL`
 
 Reload saved state from the temporary slot.
+
+----
+
+#### `/SESSION/OPEN path.json`
+
+Open session file `path.json`.
+
+----
+
+#### `/SESSION/SAVE path.json`
+
+Save current session to `path.json`. If `path.json` is omitted, current session's path is used.
