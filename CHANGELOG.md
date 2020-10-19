@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.3
+
+- bug fixes
+  - editor: error when `preArgs` and `address` are modified at the same time (affects `/EDIT` command and matrix/clone widgets)
+
 ## 1.5.2
 
 - bug fixes
