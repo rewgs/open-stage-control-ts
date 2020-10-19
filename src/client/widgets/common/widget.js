@@ -730,8 +730,7 @@ class Widget extends EventEmitter {
 
                 } else {
 
-                    this.cachedProps[propName] = propValue
-                    changedProps.push({propName, oldPropValue})
+                    changedProps.push({propName, propValue, oldPropValue})
 
                 }
 
@@ -745,13 +744,11 @@ class Widget extends EventEmitter {
 
         }
 
-        if (options && options.fromEditor) {
-            this.checkLinkedProps(propNames)
-        }
 
         if (changedProps.length) {
 
             for (var i in changedProps) {
+                this.cachedProps[changedProps[i].propName] = changedProps[i].propValue
                 this.onPropChanged(changedProps[i].propName, options, changedProps[i].oldPropValue)
             }
 
@@ -762,6 +759,10 @@ class Widget extends EventEmitter {
                 options: options
             })
 
+        }
+
+        if (options && options.fromEditor) {
+            this.checkLinkedProps(propNames)
         }
 
     }
