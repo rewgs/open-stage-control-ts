@@ -115,6 +115,11 @@ Replies `/GET address preArg1 preArg2 ... value`
 
 Same as `/GET` but uses the widget's address instead of `/GET` to reply.
 
+----
+
+#### `/NOTIFY message`
+
+Sends a notification message to the client.
 
 ----
 
@@ -169,6 +174,18 @@ Save the state of all widgets in the temporary slot.
 #### `/STATE/RECALL`
 
 Reload saved state from the temporary slot.
+
+----
+
+#### `/STATE/OPEN path.state`
+
+Open state file `path.state`.
+
+----
+
+#### `/STATE/SAVE path.state`
+
+Save state session to `path.state`. If `path.state` is omitted, current session's path is used.
 
 ----
 

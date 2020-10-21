@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.4
+
+- remote control
+  - add `/STATE/OPEN` and `/STATE/SAVE` commands
+  - ignore unsaved changes when loading a session with `/SESSION/OPEN`
+
 ## 1.5.3
 
 - bug fixes

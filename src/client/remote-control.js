@@ -223,6 +223,20 @@ var callbacks = {
         stateManager.quickLoad()
 
     },
+    '/STATE/OPEN': function(args) {
+
+        if (!Array.isArray(args)) args = [args]
+
+        stateManager.requestOpen(args[0])
+
+    },
+    '/STATE/SAVE': function(args) {
+
+        if (!Array.isArray(args)) args = [args]
+
+        stateManager.save(args[0])
+
+    },
     '/NOTIFY': function(args) {
 
         if (!Array.isArray(args)) args = [args]
