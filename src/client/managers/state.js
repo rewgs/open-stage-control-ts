@@ -112,11 +112,17 @@ var StateManager = class StateManager {
 
     }
 
+    requestOpen(path) {
+
+        ipc.send('stateOpen', {path: path})
+
+    }
+
     browse() {
 
         uiFilebrowser({extension: 'state', directory: this.lastDir}, (path)=>{
             this.lastDir = path[0]
-            ipc.send('stateOpen',{path: path})
+            this.requestOpen(path)
         })
 
     }

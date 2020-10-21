@@ -133,7 +133,6 @@ var SessionManager = class SessionManager {
 
     requestOpen(path) {
 
-        if (editor.unsavedSession && !confirm(locales('session_unsaved'))) return
         ipc.send('sessionOpen', {path: path})
 
     }
@@ -145,7 +144,7 @@ var SessionManager = class SessionManager {
         uiFilebrowser({extension: 'json', directory: this.lastDir}, (path)=>{
             if (editor.unsavedSession && !confirm(locales('session_unsaved'))) return
             this.lastDir = path[0]
-            ipc.send('sessionOpen',{path:path})
+            this.requestOpen(path)
         })
 
     }
