@@ -11,6 +11,12 @@ html {
     background-color: var(--osc-background-color)!important;
 }
 
+@media screen and (min-width:1220px) {
+    .md-nav__title[for=__drawer] {
+        background-color: transparent!important;
+    }
+}
+
 .md-header-nav__title {
     padding-top: 1px;
     padding-left: 0!important

@@ -1,159 +1,188 @@
 The **server** can be configured with many options, either from a terminal or with the help of the **launcher**.
 
-!!! abstract "Options"
+## Options
 
-    ===  "send"
+!!! quote ""
+    #### `send`
 
-        Defines the default osc/midi targets. These will be added to the widget's individual targets. Targets must be separated by a space and formatted as follows:
+    Defines the default osc/midi targets. These will be added to the widget's individual targets. Targets must be separated by a space and formatted as follows:
 
-        - `ip_address:port`
-        - `host_name:port`
-        - `midi:device_name`
+    - `ip_address:port`
+    - `host_name:port`
+    - `midi:device_name`
 
-    ===  "load"
+!!! quote ""
+    #### `load`
 
-        Path to a session file (.json). All clients connecting the server will load it.
+    Path to a session file (.json). All clients connecting the server will load it.
 
-    ===  "state"
+!!! quote ""
+    #### `state`
 
-        Path to a state file (.state). All clients connecting the server will load it.
+    Path to a state file (.state). All clients connecting the server will load it.
 
 
-    ===  "custom-module"
+!!! quote ""
+    #### `custom-module`
 
-        Path to a custom module file (.js).
+    Path to a custom module file (.js).
 
 
-    ===  "port"
+!!! quote ""
+    #### `port`
 
-        HTTP port for the server (default: `8080`).
+    HTTP port for the server (default: `8080`).
 
 
-    ===  "osc-port"
+!!! quote ""
+    #### `osc-port`
 
-        OSC (UDP) input port (default: `port`).
+    OSC (UDP) input port (default: `port`).
 
 
-    ===  "tcp-port"
+!!! quote ""
+    #### `tcp-port`
 
-        OSC (TCP) input port.
+    OSC (TCP) input port.
 
 
-    ===  "tcp-targets"
+!!! quote ""
+    #### `tcp-targets`
 
-        TCP servers to connect to. When sending osc messages, if the target matches one of these, TCP protocol will be used instead of UDP.  Targets must be separated by a space and formatted as follows:
+    TCP servers to connect to. When sending osc messages, if the target matches one of these, TCP protocol will be used instead of UDP.  Targets must be separated by a space and formatted as follows:
 
-        - `ip_address:port`
-        - `host_name:port`
+    - `ip_address:port`
+    - `host_name:port`
 
 
-    ===  "midi"
+!!! quote ""
+    #### `midi`
 
-        MIDI options separated by spaces, MIDI support must be enabled, see [MIDI configuration](../midi/midi-configuration.md).
+    MIDI options separated by spaces, MIDI support must be enabled, see [MIDI configuration](../midi/midi-configuration.md).
 
 
-    ===  "debug"
+!!! quote ""
+    #### `debug`
 
-        Print sent and receiced messages in the console. This may impact performances and should not be enabled in production.
+    Print sent and receiced messages in the console. This may impact performances and should not be enabled in production.
 
 
 
-    ===  "no-gui"
+!!! quote ""
+    #### `no-gui`
 
-        Disable built-in client window.
+    Disable built-in client window.
 
 
-    ===  "fullscreen"
+!!! quote ""
+    #### `fullscreen`
 
-        Start the built-in client window in fullscreen.
+    Start the built-in client window in fullscreen.
 
 
-    ===  "theme"
+!!! quote ""
+    #### `theme`
 
-        Theme names or paths. See [Themes](../customization/themes.md).
+    Theme names or paths. See [Themes](../customization/themes.md).
 
 
-    ===  "client-options"
+!!! quote ""
+    #### `client-options`
 
-        Default [client options](../client-options.md), separated by spaces.
+    Default [client options](../client-options.md), separated by spaces.
 
 
-    ===  "disable-vsync"
+!!! quote ""
+    #### `disable-vsync`
 
-        Disable built-in client window's vertical synchronization.
+    Disable built-in client window's vertical synchronization.
 
 
-    ===  "force-gpu"
+!!! quote ""
+    #### `force-gpu`
 
-        Disable built-in client window's gpu blacklist (may improve rendering performance in some cases).
+    Disable built-in client window's gpu blacklist (may improve rendering performance in some cases).
 
 
-    ===  "read-only"
+!!! quote ""
+    #### `read-only`
 
-        Disable session editing, and file saving.
+    Disable session editing, and file saving.
 
 
-    ===  "remote-saving"
+!!! quote ""
+    #### `remote-saving`
 
-        Disable file saving for hosts that don't match the regular expression.
+    Disable file saving for hosts that don't match the regular expression.
 
-        Sessions are saved and opened on the server's filesystem. It is possible to limit this feature to specific client with a regular expression. For example, `"127.0.0.1|192.168.0.10"` disables remote saving except for clients with ip addresses `127.0.0.1` (the server's local address) and `192.168.0.10`.
+    Sessions are saved and opened on the server's filesystem. It is possible to limit this feature to specific client with a regular expression. For example, `"127.0.0.1|192.168.0.10"` disables remote saving except for clients with ip addresses `127.0.0.1` (the server's local address) and `192.168.0.10`.
 
 
-    ===  "remote-root"
+!!! quote ""
+    #### `remote-root`
 
-        Set file browsing root folder.
+    Set file browsing root folder. Prevent writing files outside of this folder.
 
-    ===  "authentication"
+!!! quote ""
+    #### `authentication`
 
-        Restrict access to `user:password` (remote clients will be prompted for these credentials).
+    Restrict access to `user:password` (remote clients will be prompted for these credentials).
 
-    ===  "instance-name"
+!!! quote ""
+    #### `instance-name`
 
-        Server's name on zeroconf/bonjour network. Incremented automatically if not available.
+    Server's name on zeroconf/bonjour network. Incremented automatically if not available.
 
-    ===  "use-ssl"
+!!! quote ""
+    #### `use-ssl`
 
-        Use HTTPS protocol instead of HTTP (a self-signed certificate will be created)
+    Use HTTPS protocol instead of HTTP (a self-signed certificate will be created)
 
 
 
-!!! abstract "Command-line options"
+## Command-line options
 
-    The following options can only be set from a terminal.
+The following options can only be set from a terminal.
 
-    ===  "disable-gpu"
+!!! quote ""
+    #### `disable-gpu`
 
-        Disable hardware acceleration for the launcher window and the built-in client window.
+    Disable hardware acceleration for the launcher window and the built-in client window.
 
 
-    ===  "inspect"
+!!! quote ""
+    #### `inspect`
 
-        Enable node inspector.
+    Enable node inspector.
 
 
-    ===  "cache-dir"
+!!! quote ""
+    #### `cache-dir`
 
-        Override default cache directory (contains browser cache and localStorage data).
+    Override default cache directory (contains browser cache and localStorage data).
 
 
-    ===  "config-file"
+!!! quote ""
+    #### `config-file`
 
-        Override default config file location (contains session history and launcher config). Defaults to `cache-dir/config.json`.
+    Override default config file location (contains session history and launcher config). Defaults to `cache-dir/config.json`.
 
 
-    ===  "help"
+!!! quote ""
+    #### `help`
 
-        Show help.
+    Show help.
 
-    ===  "docs"
+!!! quote ""
+    #### `docs`
 
-        Serve documentation website locally and open it with the system\'s default browser
+    Serve documentation website locally and open it with the system\'s default browser
 
 
-    ===  "version"
+!!! quote ""
+    #### `version`
 
-        Show version number.
+    Show version number.
 
 
 ## Running in a terminal
