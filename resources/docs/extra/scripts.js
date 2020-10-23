@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', ()=>{
 
-    if (window.location.hash) {
+    if (window.location.hash && window.location.href.includes('properties-reference')) {
         // show target in tabs/details
         document.querySelectorAll('[id='+window.location.hash.split("#")[1]+']').forEach(function(item){
             var tab = item.closest('.tabbed-content'),
