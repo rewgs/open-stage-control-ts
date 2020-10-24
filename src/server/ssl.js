@@ -12,7 +12,7 @@ function randomSerialNumber() {
 
     var mostSiginficativeHexAsInt = parseInt(hexString[0], 16)
     if (mostSiginficativeHexAsInt < 8) {
-      return hexString
+        return hexString
     }
 
     mostSiginficativeHexAsInt -= 8
@@ -29,6 +29,7 @@ function createCertificate() {
     cert.publicKey = keys.publicKey
     cert.validity.notBefore = new Date()
     cert.validity.notAfter.setFullYear(cert.validity.notBefore.getFullYear() + 1)
+    cert.serialNumber = randomSerialNumber()
 
     var attrs = [
         {name:'commonName',value: settings.infos.name},
