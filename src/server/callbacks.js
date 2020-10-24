@@ -3,7 +3,7 @@ var path = require('path'),
     settings = require('./settings'),
     osc = require('./osc'),
     {ipc} = require('./server'),
-    {deepCopy} = require('./utils'),
+    {deepCopy, resolveHomeDir} = require('./utils'),
     theme = require('./theme')
 
 var widgetHashTable = {},
@@ -146,11 +146,7 @@ module.exports =  {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
-        if (data.path && data.path.startsWith('~')) {
-            // Resolve '~' to user's home directory
-            var p = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
-            if (p) data.path = data.path.replace( '~', p )
-        }
+        data.path = resolveHomeDir(data.path)
 
         fs.readFile(data.path, 'utf8', (err, result)=>{
 
@@ -192,13 +188,9 @@ module.exports =  {
 
             if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
-            if (data.path.startsWith('~')) {
-                // Resolve '~' to user's home directory
-                var p = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
-                if (p) data.path = data.path.replace( '~', p )
-            }
+            data.path = resolveHomeDir(data.path)
 
-            var root = settings.read('remote-root')
+            var root = resolveHomeDir(settings.read('remote-root'))
             if (root && !data.path.includes(root)) {
                 console.error('(ERROR) Could not save: path outside of remote-root')
                 return ipc.send('notify', {
@@ -432,20 +424,12 @@ module.exports =  {
     listDir(data, clientId) {
         // remote file browser backend
 
-        var p = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
+        if (data.path) data.path[0] = resolveHomeDir(data.path[0])
+        else data.path = [resolveHomeDir('~/')]
 
-        if (data.path) {
-            // Resolve '~' to user's home directory
-            if (data.path[0].startsWith('~')) {
-                p = data.path[0].replace( '~', p )
-            }
-            else {
-                p = path.resolve(...data.path)
-            }
-            //console.log(`Resolved path: ${p}`);
-        }
+        var p = path.resolve(...data.path),
+            root = resolveHomeDir(settings.read('remote-root'))
 
-        var root = settings.read('remote-root')
         if (root && !p.includes(root)) p = root
 
         fs.readdir(p, (err, files)=>{
