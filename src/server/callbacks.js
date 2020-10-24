@@ -146,6 +146,12 @@ module.exports =  {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
+        if (data.path && data.path.startsWith('~')) {
+            // Resolve '~' to user's home directory
+            var p = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
+            if (p) data.path = data.path.replace( '~', p )
+        }
+
         fs.readFile(data.path, 'utf8', (err, result)=>{
 
             var error
@@ -185,6 +191,12 @@ module.exports =  {
         if (data.path) {
 
             if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
+
+            if (data.path.startsWith('~')) {
+                // Resolve '~' to user's home directory
+                var p = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
+                if (p) data.path = data.path.replace( '~', p )
+            }
 
             var root = settings.read('remote-root')
             if (root && !data.path.includes(root)) {
