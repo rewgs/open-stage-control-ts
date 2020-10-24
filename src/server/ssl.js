@@ -5,6 +5,20 @@ var settings = require('./settings'),
 
 forge.options.usePureJavaScript = true
 
+// Generate a random Serial number for the certificate
+// matth-c3 @ https://github.com/digitalbazaar/forge/issues/673#issuecomment-500900852
+function randomSerialNumber() {
+    var hexString = forge.util.bytesToHex(forge.random.getBytesSync(16))
+
+    var mostSiginficativeHexAsInt = parseInt(hexString[0], 16)
+    if (mostSiginficativeHexAsInt < 8) {
+      return hexString
+    }
+
+    mostSiginficativeHexAsInt -= 8
+    return mostSiginficativeHexAsInt.toString() + hexString.substring(1)
+}
+
 function createCertificate() {
 
     console.log('(INFO) Creating self signed ssl certificate...')
@@ -40,8 +54,8 @@ if (!certificate) {
 
     var cert = pki.certificateFromPem(certificate.cert)
 
-    if (new Date() > new Date(cert.validity.notAfter)) {
-        console.log('(INFO) Self-signed ssl certificate has expired')
+    if (new Date() > new Date(cert.validity.notAfter) || cert.serialNumber === '00') {
+        console.log('(INFO) Self-signed ssl certificate in cache has expired or is invalid')
         createCertificate()
     } else {
         console.log('(INFO) Using self-signed ssl certificate in cache')
