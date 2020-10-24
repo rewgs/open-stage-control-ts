@@ -4,6 +4,7 @@
 
 - bug fixes
   - ssl: generate unique certificates (with random serial numbers) to avoid reuse errors. Certificates generated with older versions of o-s-c will be updated automatically.
+  - `~/` path prefix not recognized when using remote control commands like `/SESSION/SAVE`
 
 - remote control
   - add `/STATE/OPEN` and `/STATE/SAVE` commands
