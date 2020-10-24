@@ -2,6 +2,9 @@
 
 ## 1.5.4
 
+- bug fixes
+  - ssl: generate unique certificates (with random serial numbers) to avoid reuse errors. Certificates generated with older versions of o-s-c will be updated automatically.
+
 - remote control
   - add `/STATE/OPEN` and `/STATE/SAVE` commands
   - ignore unsaved changes when loading a session with `/SESSION/OPEN`
