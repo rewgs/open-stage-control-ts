@@ -1,5 +1,5 @@
 !!! info ""
-    Define static argument values using the [`preArgs`](/docs/widgets-reference/#preArgs) option in order to complete the respective MIDI message.
+    Define static argument values using the [`preArgs`](/docs/widgets/properties-reference/#preArgs) option in order to complete the respective MIDI message.
 
 ----
 
@@ -11,15 +11,15 @@ NoteOn event or noteOff if velocity equals `0`.
 - `note`: integer between 0 and 127
 - `velocity`: integer between 0 and 127
 
-Example:
+!!! example "Example"
 
-A push button might be configured as follows in order to send a MIDI note whose velocity is defined by the button's on/off value:
+    A push button might be configured as follows in order to send a MIDI note whose velocity is defined by the button's on/off value:
 
-- `address`: /note
-- `preArgs`: [1, 60] (for MIDI channel 1, and note 60 / C4)
-- `on`: 100 (for noteOn velocity of 100 on button push)
-- `off`: 0 (to send a noteOff on button release)
-- `target`: ["midi:device_name"] (where device_name is one of the declared midi devices defined during [setup](#setup))
+    - `address`: `/note`
+    - `preArgs`: `[1, 60]` (for MIDI channel 1, and note 60 / C4)
+    - `on`: `100` (for noteOn velocity of 100 on button push)
+    - `off`: `0` (to send a noteOff on button release)
+    - `target`: `midi:device_name` (where device_name is one of the declared midi devices defined during [setup](../midi-configuration))
 
 ----
 
@@ -31,14 +31,14 @@ Control change event.
 - `cc`: integer between 0 and 127
 - `value`: integer between 0 and 127
 
-Example:
+!!! example "Example"
 
-A fader might be configured as follows in order to send a MIDI control message (a volume control in this example):
+    A fader might be configured as follows in order to send a MIDI control message (a volume control in this example):
 
-- `address`: /control
-- `pre-args`: [1, 7] (MIDI channel 1, control number 7 generally used as volume control)
-- `range`: {"min": 0, "max": 127} (MIDI values are encoded in this range)
-- `target`: ["midi:device_name"]
+    - `address`: `/control`
+    - `pre-args`: `[1, 7]` (MIDI channel 1, control number 7 generally used as volume control)
+    - `range`: `{"min": 0, "max": 127}` (MIDI values are encoded in this range)
+    - `target`: `midi:device_name`
 
 ----
 
@@ -50,7 +50,7 @@ Program change event.
 - `program`: integer between 0 and 127*
 
 !!! info
-    \* Some devices / softwares display the `program` value between 1 and 128, thus interpreting `program change 0` as `program change 1` and so on. Enable the `pc_offset` option to make Open Stage Control behave this way.
+    \* Some devices / softwares display the `program` value between 1 and 128, thus interpreting `program change 0` as `program change 1` and so on. Add the `pc_offset` parameter to the server's `midi` option to make Open Stage Control behave this way.
 
 ----
 

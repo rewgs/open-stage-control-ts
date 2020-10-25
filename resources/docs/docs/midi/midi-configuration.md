@@ -44,7 +44,7 @@ Enabling MIDI support in Open Stage Control requires additional softwares to be 
 
 ## Configuration
 
-When running the app, the `-m / --midi` switch must be set and accepts the following options, separated by spaces.
+The server's `midi` option accepts the following parameters, separated by spaces.
 
 !!! warning ""
     If an option contains space characters, it must be enquoted.
@@ -57,7 +57,7 @@ Print the available MIDI ports to the console when the server starts. This actio
 
 Create a virtual MIDI device that will translate OSC messsages to MIDI messages
 
-- `device_name` is an arbitrary identifier that can be used as a target by widgets (see [Widget setup](#widget-setup))
+- `device_name` is an arbitrary identifier that can be used as a target by widgets (see [Widget setup](#widget-setup)). It doesn't have to match any device's real name.
 - `input` / `output` can be port numbers or strings (as reported by the `list` action). If a string is specified, the first port whose name contains the string will be used (comparison is case-insensitive).
 
 **`sysex`**
@@ -90,9 +90,25 @@ In order to send MIDI messages, a widget must have at least one `target` formatt
 
 `midi:device_name` (where `device_name` is one of the declared midi devices)
 
+Its `address` and `preArgs` properties must be set according to Open Stage Control's [midi messages](../midi-messages) specification.
+
 !!! warning
     Messages received from a MIDI port only affect widgets that send to this port.
 
 ## Debug
 
 Enabling the server's `debug` options will print some extra informations (sent/received midi messages, midi setup informations, etc)
+
+## Example configuration
+
+Setting the server's `midi` option as follows:
+
+```
+sysex synth:1,2 daw:3,3
+```
+
+- enables sysex support (sysex messages will not be ignored)
+- creates a midi device "synth" connected with input 1 and output 2
+- creates a midi device "daw" connected with input 3 and output 3
+
+If a widget has its `target` set to `midi:synth`, it will receive MIDI from port 1 and send MIDI to port 2.
