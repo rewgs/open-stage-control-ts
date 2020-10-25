@@ -10,7 +10,7 @@
 - remote control
   - add `/STATE/OPEN` and `/STATE/SAVE` commands
   - ignore unsaved changes when loading a session with `/SESSION/OPEN`
-  - resolve relative file paths according to the `remote-root` setting  
+  - resolve relative file paths against `remote-root` setting  
 
 ## 1.5.3
 
