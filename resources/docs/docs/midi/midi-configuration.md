@@ -1,4 +1,4 @@
-## Installatuion
+## Installation
 
 Enabling MIDI support in Open Stage Control requires additional softwares to be installed on the server's system:
 
