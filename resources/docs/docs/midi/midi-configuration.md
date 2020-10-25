@@ -1,12 +1,34 @@
-## Requirements
+## Installatuion
 
-MIDI support requires additional software to be installed on the server's system:
+Enabling MIDI support in Open Stage Control requires additional softwares to be installed on the server's system:
 
 - [python 3](https://www.python.org/downloads/)
 - python package [python-rtmidi](https://spotlightkid.github.io/python-rtmidi/installation.html#from-pypi)
 
-!!! info "Why an additionnal dependency ?"
-    Providing cross-platform MIDI support is not trivial, as it requires OS-specific compilation that cannot be automated within Open Stage Control's current packaging workflow. Using a python addon seems to be the best compromise so far : the core app remains easy to build, and the extra dependency is easy to install.
+??? example "Linux"
+
+    - Install `python3` and `python3-pip` from your distribution's package repository
+    - Install `python-rtmidi` from a terminal:
+    ```bash
+    python3 -m pip install python-rtmidi --upgrade
+    ```
+
+??? example "Mac"
+
+    - Download and install [Python 3 for Mac OS](https://www.python.org/downloads/mac-osx/)
+    - Install `python-rtmidi` from a terminal:
+    ```bash
+    python -m pip install python-rtmidi --upgrade
+    ```
+
+??? example "Windows"
+
+    - Download and install [Python 3 for Windows](https://www.python.org/downloads/windows/)
+    - **make sure to check the option** "Add Python 3.x to PATH"
+    - Install `python-rtmidi` from a terminal:
+    ```bash
+    python -m pip install python-rtmidi --upgrade
+    ```
 
 ## Configuration
 
@@ -41,7 +63,7 @@ Send program changes with a `-1` offset to match some software/hardware implemen
 
 **`path=/path/to/python`**
 
-Indicates where to find python binary in case open stage control doesn't (`Error: spawn python3 ENOENT`)
+Indicates where to find python binary in case open stage control doesn't (`Error: spawn python3 ENOENT`).
 
 
 **`device_name:virtual`** (*Linux / Mac only*): creates a virtual midi device with one input port and one output port
