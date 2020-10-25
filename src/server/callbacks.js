@@ -148,6 +148,8 @@ module.exports =  {
 
         data.path = resolveHomeDir(data.path)
 
+        if (!path.isAbsolute(data.path) && settings.read('remote-root')) data.path =  path.resolve(resolveHomeDir(settings.read('remote-root')), data.path)
+
         fs.readFile(data.path, 'utf8', (err, result)=>{
 
             var error
@@ -189,6 +191,8 @@ module.exports =  {
             if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
             data.path = resolveHomeDir(data.path)
+
+            if (!path.isAbsolute(data.path) && settings.read('remote-root')) data.path =  path.resolve(settings.read('remote-root'), data.path)
 
             var root = resolveHomeDir(settings.read('remote-root'))
             if (root && !path.normalize(data.path).includes(path.normalize(root))) {
