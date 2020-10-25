@@ -3,7 +3,7 @@
 ## Browser inspector
 
 
-Hit `F12` to open the developers tools panel. The html/css inspector helps retreiving the class names needed to style specific parts of the widgets
+Hit ++f12++ to open the developers tools panel. The html/css inspector helps retreiving the class names needed to style specific parts of the widgets: hit ++ctrl+shift+c++ or click on the inspect icon (![x](/img/inspect.png)) and click on a element in the interface to reveal its html code.
 
 
 ## Inline syntax
