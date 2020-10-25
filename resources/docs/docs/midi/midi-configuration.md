@@ -16,7 +16,13 @@ Enabling MIDI support in Open Stage Control requires additional softwares to be 
 ??? example "Mac"
 
     - Download and install [Python 3 for Mac OS](https://www.python.org/downloads/mac-osx/)
-    - Install `python-rtmidi` from a terminal:
+    - Download [get-pip.py](https://bootstrap.pypa.io/get-pip.py) in the folder of your choice
+    - Install `pip` (package installer for python)
+    ```
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python get-pip.py
+    ```
+    - Install `python-rtmidi`:
     ```bash
     python -m pip install python-rtmidi --upgrade
     ```
@@ -25,7 +31,13 @@ Enabling MIDI support in Open Stage Control requires additional softwares to be 
 
     - Download and install [Python 3 for Windows](https://www.python.org/downloads/windows/)
     - **make sure to check the option** "Add Python 3.x to PATH"
-    - Install `python-rtmidi` from a terminal:
+    - Open a terminal (++win+r++)
+    - Install `pip` (package installer for python)
+    ```
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python get-pip.py
+    ```
+    - Install `python-rtmidi`:
     ```bash
     python -m pip install python-rtmidi --upgrade
     ```
