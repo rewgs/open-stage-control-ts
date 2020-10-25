@@ -10,8 +10,8 @@ theme:
     name: 'material'
     custom_dir: 'overrides'
     features:
-        - tabs
-        - instant
+        - navigation.tabs
+        - navigation.instant
     palette:
         primary: 'Indigo'
         accent: 'Indigo'
