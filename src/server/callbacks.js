@@ -191,7 +191,7 @@ module.exports =  {
             data.path = resolveHomeDir(data.path)
 
             var root = resolveHomeDir(settings.read('remote-root'))
-            if (root && !data.path.includes(root)) {
+            if (root && !path.normalize(data.path).includes(path.normalize(root))) {
                 console.error('(ERROR) Could not save: path outside of remote-root')
                 return ipc.send('notify', {
                     class: 'error',
@@ -430,7 +430,7 @@ module.exports =  {
         var p = path.resolve(...data.path),
             root = resolveHomeDir(settings.read('remote-root'))
 
-        if (root && !p.includes(root)) p = root
+        if (root && !path.normalize(p).includes(path.normalize(root))) p = root
 
         fs.readdir(p, (err, files)=>{
             if (err) {
