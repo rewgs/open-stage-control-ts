@@ -17,6 +17,7 @@ Enabling MIDI support in Open Stage Control requires additional softwares to be 
 
     - Download and install [Python 3 for Mac OS](https://www.python.org/downloads/mac-osx/)
     - Download [get-pip.py](https://bootstrap.pypa.io/get-pip.py) in the folder of your choice
+    - Open a terminal
     - Install `pip` (package installer for python)
     ```
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
