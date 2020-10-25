@@ -182,7 +182,7 @@ var incrementWidget = function(data, root){
 
         data.address = 'auto'
 
-    } else if (address !== 'auto') {
+    } else if (!address.match(/^auto|\/control|\/note|\/program|\/sysex|\/key_pressure|\/channel_pressure|\/pitch/) !== 'auto') {
 
         var addressref
         while (fakeStore.address.indexOf(address) != -1 || widgetManager.getWidgetByAddress(addressref).length) {

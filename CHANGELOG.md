@@ -6,6 +6,7 @@
   - ssl: generate unique certificates (with random serial numbers) to avoid reuse errors. Certificates generated with older versions of o-s-c will be updated automatically.
   - `~/` path prefix not recognized when using remote control commands like `/SESSION/SAVE`
   - `~/` path prefix not recognized in `remote-root` option
+  - editor: paste ID+1: midi-related addresses should not be incremented
 
 - remote control
   - add `/STATE/OPEN` and `/STATE/SAVE` commands
