@@ -10,7 +10,6 @@ var EventEmitter = require('../../events/event-emitter'),
     OscReceiver = require('./osc-receiver'),
     {deepCopy, deepEqual, isJSON} = require('../../utils'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw'),
     morph = require('nanomorph'),
     sanitizeHtml = require('sanitize-html'),
     updateWidget = ()=>{},
@@ -1025,13 +1024,13 @@ class Widget extends EventEmitter {
                 this.container.removeChild(this.extraHtml)
                 this.extraHtml = null
             } else {
-                var newHtml = html`<div class="html"></div>`
+                let newHtml = html`<div class="html"></div>`
                 newHtml.innerHTML = extraHtml
                 morph(this.extraHtml, newHtml)
             }
 
         } else if (extraHtml) {
-            var newHtml = html`<div class="html"></div>`
+            let newHtml = html`<div class="html"></div>`
             newHtml.innerHTML = extraHtml
             this.container.insertBefore(newHtml, this.widget)
             this.extraHtml = newHtml
