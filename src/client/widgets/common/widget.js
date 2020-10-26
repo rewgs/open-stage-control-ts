@@ -1012,7 +1012,7 @@ class Widget extends EventEmitter {
 
     updateHtml(){
 
-        var extraHtml = this.getProp('html') ? sanitizeHtml(this.getProp('html'), {
+        var extraHtml = this.getProp('html') !== '' ? sanitizeHtml(this.getProp('html'), {
             allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe'),
             allowedAttributes: {
                 '*': [ 'title', 'class', 'style', 'type'],
