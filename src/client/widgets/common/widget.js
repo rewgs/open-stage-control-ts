@@ -10,6 +10,9 @@ var EventEmitter = require('../../events/event-emitter'),
     OscReceiver = require('./osc-receiver'),
     {deepCopy, deepEqual, isJSON} = require('../../utils'),
     html = require('nanohtml'),
+    raw = require('nanohtml/raw'),
+    morph = require('nanomorph'),
+    sanitizeHtml = require('sanitize-html'),
     updateWidget = ()=>{},
     Script
 
@@ -75,6 +78,17 @@ class Widget extends EventEmitter {
                 alphaFillOn: {type: 'number', value: 'auto', help: 'Fill color opacity (on).'},
                 lineWidth: {type: 'number', value: 'auto', help: 'Stroke width.'},
                 padding: {type: 'number', value: 'auto', help: 'Inner spacing.'},
+                html: {type: 'string', value: '', help: [
+                    'Custom html content to be inserted in the widget (before the widget\'s content).',
+                    'The code is automatically wrapped in &lt;div class="html">&lt;/div>',
+                    'Allowed HTML tags:',
+                    '&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,',
+                    '&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,',
+                    '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre',
+                    'Allowed attributes:',
+                    '&nbsp;&nbsp;&lt;*>: class, style, title',
+                    '&nbsp;&nbsp;&lt;img>: src, width, height',
+                ]},
                 css: {type: 'string', value: '', help: [
                     'CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.',
                     'Available css variables:',
@@ -225,6 +239,9 @@ class Widget extends EventEmitter {
         this.setContainerStyles()
         this.setCssVariables()
         this.setVisibility()
+
+        this.extraHtml = null
+        if (this.getProp('html')) this.updateHtml()
 
     }
 
@@ -800,6 +817,11 @@ class Widget extends EventEmitter {
                 this.container.classList.toggle('no-interaction', !this.getProp('interaction'))
                 return
 
+            case 'html':
+                this.updateHtml()
+                resize.check(this.container)
+                return
+
             case 'css': {
                 this.setContainerStyles(['css'])
                 var re = /width|height|display|margin|padding|flex/
@@ -988,6 +1010,35 @@ class Widget extends EventEmitter {
 
     }
 
+    updateHtml(){
+
+        var extraHtml = this.getProp('html') ? sanitizeHtml(this.getProp('html'), {
+            allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe'),
+            allowedAttributes: {
+                '*': [ 'title', 'class', 'style', 'type'],
+                'img': [ 'src' ,  'title', 'class', 'style', 'width', 'height']
+            }
+        }) : null
+
+        if (this.extraHtml) {
+            if (!extraHtml) {
+                this.container.removeChild(this.extraHtml)
+                this.extraHtml = null
+            } else {
+                var newHtml = html`<div class="html"></div>`
+                newHtml.innerHTML = extraHtml
+                morph(this.extraHtml, newHtml)
+            }
+
+        } else if (extraHtml) {
+            var newHtml = html`<div class="html"></div>`
+            newHtml.innerHTML = extraHtml
+            this.container.insertBefore(newHtml, this.widget)
+            this.extraHtml = newHtml
+        }
+
+    }
+
     isVisible() {
 
         return this.getProp('visible') && this.parent.isVisible()
@@ -1065,6 +1116,7 @@ Widget.dynamicProps = [
     'alphaFillOn',
     'padding',
     'lineWidth',
+    'html',
     'css',
 
     'value',

@@ -24,17 +24,6 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
     static defaults() {
 
         return super.defaults().extend({
-            class_specific: {
-                html: {type: 'string', value: '', help: [
-                    'Allowed HTML tags:',
-                    '&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,',
-                    '&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,',
-                    '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre',
-                    'Allowed attributes:',
-                    '&nbsp;&nbsp;<*>: class, style, title',
-                    '&nbsp;&nbsp;<img>: src, width, height',
-                ]},
-            },
             osc: {
                 decimals: null,
                 typeTags: null,
@@ -56,11 +45,13 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
         if (!this.getProp('border')) this.container.classList.add('noborder')
         this.frame = DOM.get(this.widget, '.frame')[0]
 
-        if (this.getProp('html') !== '') this.updateHtml()
+        if (this.getProp('html') !== '') this.updateHtmlLegacy()
 
     }
 
-    updateHtml(){
+    updateHtml(){}
+
+    updateHtmlLegacy(){
 
         var newHtml = this.frame.cloneNode(false)
 
@@ -77,7 +68,7 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
         switch (propName) {
 
             case 'html':
-                this.updateHtml()
+                this.updateHtmlLegacy()
                 return
 
         }
@@ -86,9 +77,5 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
 
 
 }
-
-Html.dynamicProps = Html.prototype.constructor.dynamicProps.concat(
-    'html'
-)
 
 module.exports = Html

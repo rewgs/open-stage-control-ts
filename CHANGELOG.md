@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0
+
+- widgets
+  - all: add `html` property to allow inserting custom content in widgets (label, value, etc) and style it with the `css` property.
+
 ## 1.5.4
 
 - bug fixes
