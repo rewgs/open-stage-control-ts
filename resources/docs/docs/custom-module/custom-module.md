@@ -99,6 +99,12 @@ Saves an object/array to a json file (path is relative to the custom module loca
 
 ----
 
+#### `require(path)`
+
+Load another javascript module. Returns the value of `module.exports` defined in this module. If `path` is a relative path, it will be resolved against its parent module's path. See [Managing Big Modules](../managing-big-modules)
+
+----
+
 #### Other javascript globals
 - `console`
 - `setTimeout`
@@ -107,3 +113,8 @@ Saves an object/array to a json file (path is relative to the custom module loca
 - `clearInterval`
 
 ----
+
+
+## Autoreload
+
+Custom modules (including submodules loaded with `require()`) are reloaded automatically when they are modified. Upon reload, timers (`setTimeout` and `setInterval`) and event listeners (added to the  `app` object) are reset.

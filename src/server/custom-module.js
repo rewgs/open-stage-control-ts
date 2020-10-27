@@ -16,7 +16,7 @@ class CustomModule {
         this.oscOutFilter = null
 
         this.submodule = !!parentDir
-        this.filename = this.submodule ? path.resolve(parentDir, file) : file
+        this.filename = this.submodule && !path.isAbsolute(file) ? path.resolve(parentDir, file) : file
 
         this.timeouts = []
         this.intervals = []
@@ -27,7 +27,7 @@ class CustomModule {
             loadJSON: (url)=>{
                 if (url.split('.').pop() === 'json') {
                     try {
-                        url = path.resolve(path.dirname(customModule), url)
+                        url = path.resolve(path.dirname(this.filename), url)
                         return JSON.parse(fs.readFileSync(url, 'utf8'))
                     } catch(e) {
                         console.error('(ERROR) could not load json file from ' + url)
@@ -39,7 +39,7 @@ class CustomModule {
             },
             saveJSON: (url, data)=>{
                 if (url.split('.').pop() === 'json') {
-                    url = path.resolve(path.dirname(customModule), url)
+                    url = path.resolve(path.dirname(this.filename), url)
                     try {
                         return fs.writeFileSync(url, JSON.stringify(data, null, '  '))
                     } catch(e) {
