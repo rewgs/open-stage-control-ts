@@ -5,6 +5,9 @@
 - widgets
   - all: add `html` property to allow inserting custom content in widgets (label, value, etc) and style it with the `css` property.
 
+- custom module
+  - automatically reload custom module when the file is modified
+
 ## 1.5.4
 
 - bug fixes
