@@ -8,15 +8,16 @@ var settings = require('./settings'),
 
 class CustomModule {
 
-    constructor(file, context, parentDir) {
+    constructor(file, context, parent=null) {
 
         this.exports = null
         this.init = null
         this.oscInFilter = null
         this.oscOutFilter = null
 
-        this.submodule = !!parentDir
-        this.filename = this.submodule && !path.isAbsolute(file) ? path.resolve(parentDir, file) : file
+        this.parent = parent
+        this.submodule = !!parent
+        this.filename = this.submodule && !path.isAbsolute(file) ? path.resolve(path.dirname(parent.filename), file) : file
 
         this.timeouts = []
         this.intervals = []
@@ -62,7 +63,13 @@ class CustomModule {
         this.load()
 
         this.watcher = chokidar.watch(this.filename).on('change', ()=>{
-            this.reload()
+            if (this.submodule) {
+                console.log('(INFO) Submodule changed: ' + this.filename)
+                this.parent.reload()
+            } else {
+                console.log('(INFO) Custom module changed: ' + this.filename)
+                this.reload()
+            }
         })
 
         // remove require function (not needed at runtime)
@@ -142,7 +149,7 @@ class CustomModule {
     reload() {
 
         this.unload()
-        console.log('(INFO) Reloading custom module: ' + this.filename)
+        console.log('(INFO) Reloading custom module...')
         if (this.load()) {
             console.log('(INFO) Custom module reloaded successfully')
         } else {
@@ -179,7 +186,7 @@ class CustomModule {
 
     require(filename) {
 
-        var mod = new CustomModule(filename, this.context, path.dirname(this.filename))
+        var mod = new CustomModule(filename, this.context, this.parent || this)
         this.submodules.push(mod)
 
         return mod.exports
