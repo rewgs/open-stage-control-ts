@@ -153,7 +153,7 @@ class CustomModule {
         if (this.load()) {
             console.log('(INFO) Custom module reloaded successfully')
         } else {
-            console.log('(ERROR) Failed to reload custom module')
+            console.error('(ERROR) Failed to reload custom module')
             this.unload()
         }
     }
