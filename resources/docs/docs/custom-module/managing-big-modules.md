@@ -1,6 +1,4 @@
-Custom modules don't let you use node's `require` function at runtime, but you can manage your sources in multiple files and bundle them into a single file before loading it in OSC.
-
-The common pattern for this is using the [browserify](http://browserify.org/) library:
+Starting with `v1.6.0`, custom modules can load submodules with the `require()` function.
 
 **1**. define some variable in `number.js`
 
@@ -22,8 +20,3 @@ module.exports = {
     }
 }
 ```
-
-
-**3**. bundle your sources into `custom-module.js`:
-
-`browserify main.js -o custom-module.js --standalone module.exports`
