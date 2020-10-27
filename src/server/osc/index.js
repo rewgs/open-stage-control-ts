@@ -41,7 +41,7 @@ class OscServer {
                 }
                 this.receiveOsc({host, port, address, args:args.map(x=>this.parseArg(x))}, options.clientId)
             },
-        }) : null
+        }) : {}
 
     }
 
