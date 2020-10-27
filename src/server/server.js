@@ -157,9 +157,11 @@ var bindCallbacks = function(callbacks) {
 
         var clientInfos = {address: client.address, id: client.id}
 
+        var customModule = settings.read('custom-module')
+
         for (let name in callbacks) {
             client.on(name, (data)=>{
-                if (osc.customModule) {
+                if (customModule) {
                     osc.customModuleEventEmitter.emit(name, data, clientInfos)
                 }
                 callbacks[name](data, client.id)
