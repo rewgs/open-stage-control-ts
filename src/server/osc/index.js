@@ -8,7 +8,8 @@ var path = require('path'),
     midi = settings.read('midi') ? require('../midi') : false,
     oscUDPServer = require('./udp'),
     oscTCPServer = require('./tcp'),
-    EventEmitter = require('events').EventEmitter
+    EventEmitter = require('events').EventEmitter,
+    CustomModule = require('../custom-module')
 
 
 if (midi) midi = new midi()
@@ -18,94 +19,29 @@ class OscServer {
     constructor(){
 
         this.customModuleEventEmitter = new EventEmitter()
-        this.customModule = (()=>{
-
-            var customModule = settings.read('custom-module')
-
-            if (!customModule) return false
-
-            var file = (()=>{
-                    try {
-                        return fs.readFileSync(customModule, 'utf8')
-                    } catch(err) {
-                        console.error('(ERROR) Custom module not found: ' + customModule)
-                        return false
-                    }
-                })(),
-                mod,
-                context = vm.createContext({
-                    console,
-                    sendOsc: this.sendOsc.bind(this),
-                    receiveOsc: this.receiveOsc.bind(this),
-                    send: (host, port, address, ...args)=>{
-                        this.sendOsc({host, port, address, args:args.map(x=>this.parseArg(x))})
-                    },
-                    receive: (host, port, address, ...args)=>{
-                        if (host[0] === '/') {
-                            // host and port can be skipped
-                            if (address !== undefined) args.unshift(address)
-                            if (port !== undefined) args.unshift(port)
-                            address = host
-                            host = port = undefined
-                        }
-                        var lastArg = args[args.length - 1],
-                            options = {}
-                        if (typeof lastArg === 'object' && lastArg !== null && lastArg.clientId !== undefined) {
-                            options = args.pop()
-                        }
-                        this.receiveOsc({host, port, address, args:args.map(x=>this.parseArg(x))}, options.clientId)
-                    },
-                    loadJSON: (url)=>{
-                        if (url.split('.').pop() === 'json') {
-                            try {
-                                url = path.resolve(path.dirname(customModule), url)
-                                return JSON.parse(fs.readFileSync(url, 'utf8'))
-                            } catch(e) {
-                                console.error('(ERROR) could not load json file from ' + url)
-                                console.error(e.message)
-                            }
-                        } else {
-                            console.error('(ERROR) unauthorized file type for loadJSON')
-                        }
-                    },
-                    saveJSON: (url, data)=>{
-                        if (url.split('.').pop() === 'json') {
-                            url = path.resolve(path.dirname(customModule), url)
-                            try {
-                                return fs.writeFileSync(url, JSON.stringify(data, null, '  '))
-                            } catch(e) {
-                                console.error('(ERROR) could not save json file to ' + url)
-                                console.error(e.message)
-                            }
-                        } else {
-                            console.error('(ERROR) unauthorized file type for saveJSON')
-                        }
-                    },
-                    app: this.customModuleEventEmitter,
-                    setTimeout, clearTimeout,
-                    setInterval, clearInterval,
-                    settings,
-                    module: {},
-                })
-
-            try {
-                // remove require function (not needed at runtime)
-                // wrong: this.constructor.constructor("return process")().mainModule.require
-                process.mainModule.require = process.dlopen = null
-                // run
-                mod = vm.runInContext(file, context, {
-                    filename: customModule
-                })
-                if (context.module.exports) mod = context.module.exports
-            } catch(err) {
-                console.error(err)
-                return false
-            }
-
-            return mod
-
-        })()
-
+        this.customModule = settings.read('custom-module') ? new CustomModule(settings.read('custom-module'), {
+            app: this.customModuleEventEmitter,
+            sendOsc: this.sendOsc.bind(this),
+            receiveOsc: this.receiveOsc.bind(this),
+            send: (host, port, address, ...args)=>{
+                this.sendOsc({host, port, address, args:args.map(x=>this.parseArg(x))})
+            },
+            receive: (host, port, address, ...args)=>{
+                if (host[0] === '/') {
+                    // host and port can be skipped
+                    if (address !== undefined) args.unshift(address)
+                    if (port !== undefined) args.unshift(port)
+                    address = host
+                    host = port = undefined
+                }
+                var lastArg = args[args.length - 1],
+                    options = {}
+                if (typeof lastArg === 'object' && lastArg !== null && lastArg.clientId !== undefined) {
+                    options = args.pop()
+                }
+                this.receiveOsc({host, port, address, args:args.map(x=>this.parseArg(x))}, options.clientId)
+            },
+        }) : null
 
     }
 
