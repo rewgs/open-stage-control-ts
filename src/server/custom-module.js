@@ -1,23 +1,28 @@
 var settings = require('./settings'),
     fs = require('fs'),
     vm = require('vm'),
-    chokidar = require('chokidar')
+    chokidar = require('chokidar'),
+    path = require('path')
+
 
 
 class CustomModule {
 
-    constructor(file, context) {
+    constructor(file, context, parentDir) {
 
+        this.exports = null
         this.init = null
         this.oscInFilter = null
         this.oscOutFilter = null
 
-        this.filename = file
+        this.submodule = !!parentDir
+        this.filename = this.submodule ? path.resolve(parentDir, file) : file
 
         this.timeouts = []
         this.intervals = []
+        this.submodules = []
 
-        this.context = {
+        this.context = this.submodule ? context : {
             ...context,
             loadJSON: (url)=>{
                 if (url.split('.').pop() === 'json') {
@@ -51,14 +56,18 @@ class CustomModule {
             clearTimeout: this.clearTimeout.bind(this),
             setInterval: this.setInterval.bind(this),
             clearInterval: this.clearInterval.bind(this),
-            module: {exports: {}}
+            require: this.require.bind(this)
         }
 
         this.load()
 
-        chokidar.watch(this.filename).on('change', ()=>{
+        this.watcher = chokidar.watch(this.filename).on('change', ()=>{
             this.reload()
         })
+
+        // remove require function (not needed at runtime)
+        // wrong: this.constructor.constructor("return process")().mainModule.require
+        process.mainModule.require = process.dlopen = null
 
     }
 
@@ -69,12 +78,13 @@ class CustomModule {
         try {
             code = fs.readFileSync(this.filename, 'utf8')
         } catch(err) {
-            console.error('(ERROR) Custom module not found: ' + this.filename)
+            console.error(`(ERROR) ${this.submodule ? 'Submodule' : 'Custom module'} not found: ${this.filename}`)
             return false
         }
 
         var context = vm.createContext({
-            ...this.context
+            ...this.context,
+            module: {exports: {}}
         })
 
         try {
@@ -90,6 +100,7 @@ class CustomModule {
         this.init = context.module.exports.init || null
         this.oscInFilter = context.module.exports.oscInFilter || null
         this.oscOutFilter = context.module.exports.oscOutFilter || null
+        this.exports = context.module.exports
 
         return true
 
@@ -97,6 +108,7 @@ class CustomModule {
 
     unload() {
 
+        this.exports = null
         this.init = null
         this.oscInFilter = null
         this.oscOutFilter = null
@@ -114,6 +126,15 @@ class CustomModule {
 
         for (let name of this.context.app.eventNames()) {
             this.context.app.removeAllListeners(name)
+        }
+
+        for (let mod of this.submodules) {
+            mod.unload()
+        }
+        this.submodules = []
+
+        if (this.submodule) {
+            this.watcher.close()
         }
 
     }
@@ -154,6 +175,15 @@ class CustomModule {
         if (this.intervals.includes(interval)) {
             this.intervals.splice(this.intervals.indexOf(interval), 1)
         }
+    }
+
+    require(filename) {
+
+        var mod = new CustomModule(filename, this.context, path.dirname(this.filename))
+        this.submodules.push(mod)
+
+        return mod.exports
+
     }
 
 }
