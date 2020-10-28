@@ -10,6 +10,9 @@
   - automatically reload custom module when the file is modified
   - add support for loading submodules with `require()`
 
+- theme
+  - automatically reload theme when the file is modified
+
 ## 1.5.4
 
 - bug fixes
