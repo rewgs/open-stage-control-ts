@@ -79,6 +79,8 @@ If the event that triggered the script's execution was initiated by a user inter
 
 If the event that triggered the script's execution was not initiated by a user interaction, this function will have no effect.
 
+This function ignores the widget's `bypass` property.
+
 ----
 
 #### `getProp(id, name)`

@@ -100,7 +100,7 @@ class ScriptVm extends Vm {
             var widget = this.getWidget()
             if (widget.builtIn) widget = widget.parent
 
-            widget.sendValue(overrides)
+            widget.sendValue(overrides, {force: true})
 
         }
 
