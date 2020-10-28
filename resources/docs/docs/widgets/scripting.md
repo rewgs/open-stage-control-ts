@@ -1,12 +1,11 @@
 # Scripting
 
-The `script` property allows widgets to run javascript code when their value update. It differs from the [javascript property syntax ](./advanced-syntaxes.md#available-variables) in the following ways:
+The `script` property allows widgets to run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) code when their value update.
 
-- no `JS{{}}` wrapper, just the code
-- `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their value before the script's compilation
+!!! info "It's slightly different from the [javascript property syntax ](./advanced-syntaxes/#javascript-js-code)"
 
-!!! warning "Avoid advanced syntax in scripts"
-    To avoid syntax errors it is recommended to use `getProp()` and `get()` instead of `@{}` and `OSC{}`. `JS{{}}` and `#{}` blocks should be avoided here as well.
+    - no `JS{{}}` wrapper, just the code
+    - `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their literal value before the script's compilation, therefore **it is recommended to avoid these syntaxes** and use `getProp()` and `get()` instead.
 
 ## Event-dependent variables
 
