@@ -404,8 +404,6 @@ module.exports =  {
 
     reloadCss() {
         // (dev) hot css reload
-
-        theme.load()
         ipc.send('reloadCss')
     },
 

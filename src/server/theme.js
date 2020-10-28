@@ -1,6 +1,8 @@
 var fs = require('fs'),
     path = require('path'),
-    settings = require('./settings')
+    settings = require('./settings'),
+    chokidar = require('chokidar'),
+    ipc
 
 class Theme {
 
@@ -9,6 +11,7 @@ class Theme {
         this.themes = []
         this.files = []
         this.css = []
+        this.watcher = null
 
         this.defaultColor = '#151a24'
         this.backgroundColor = this.defaultColor
@@ -30,6 +33,12 @@ class Theme {
                 console.error('(ERROR) Theme not found: "' + theme)
             }
         }
+
+        this.watcher = chokidar.watch(this.files).on('change', ()=>{
+            if (!ipc) ipc = require('./server').ipc
+            this.load()
+            ipc.send('reloadCss')
+        })
 
         this.load()
 
