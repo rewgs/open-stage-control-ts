@@ -59,7 +59,7 @@ class ScriptVm extends Vm {
 
         super.registerGlobals()
 
-        this.sandbox.contentWindow.set = (id, value)=>{
+        this.sandbox.contentWindow.set = (id, value, extraOptions = {send: true, sync: true})=>{
 
             var options = this.getValueOptions()
             options.fromScript = true
@@ -67,11 +67,24 @@ class ScriptVm extends Vm {
             // if (id === options.id) options.sync = false // loop stop
             // if (this.getWidget() === options.widget) options.sync = false // loop stop
 
-            var widgets = this.resolveId(id)
+            if (extraOptions.send === false) options.send = false
+            if (extraOptions.sync === false) options.sync = false
+
+            var widgets
+            if (id.includes('*')) {
+                var widget = this.getWidget()
+                if (widget.builtIn) widget = widget.parent
+                widgets = this.resolveId(
+                    Object.keys(widgetManager.idRoute).filter(key => key.match(new RegExp('^' + id.replace(/\*/g, '.*') + '$')))
+                ).filter(w => w !== widget)
+            } else {
+                widgets = this.resolveId(id)
+            }
+
 
             for (var i = widgets.length - 1; i >= 0; i--) {
 
-                return widgets[i].setValue(value, options)
+                widgets[i].setValue(value, options)
 
             }
 
