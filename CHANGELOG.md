@@ -4,7 +4,11 @@
 
 - widgets
   - all: add `html` property to allow inserting custom content in widgets (label, value, etc) and style it with the `css` property.
-  - scripting: `send()` now ignores the widget's `bypass` property (allows bypassing default messages and define custom ones).
+
+- scripting:
+  - `send()`: ignore the widget's `bypass` property (allows bypassing default messages and define custom ones)
+  - `set()`: add supports for wildcards in the id parameter
+  - `set()`: add a 3rd optional parameter for preventing further script executions and/or osc messages from being sent
 
 - custom module
   - automatically reload custom module when the file is modified

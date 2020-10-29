@@ -62,12 +62,15 @@ Returns the value of the first matching widget.
 
 ----
 
-#### `set(id, value)`
-- `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
+#### `set(id, value, options)`
+- `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget. `id` can contains wildcards ('\*'), in which case all matching widgets will be affected **except** the emitting widget.
 - `value`: new value for the widget.
+- `options` (optional): `object`, accepts the following items:
+    - `sync: false` (prevents widgets from triggering synchronization and scripts)
+    - `send: false` (prevents widgets from sending osc messages)
 
-Sets the value of the first matching widget.
-If the event that triggered the script's execution was initiated by a user interaction, this will make the widget send its value as well.
+Sets the value of matching widgets.
+If the event that triggered the script's execution was initiated by a user interaction, this will make the widget send its value as well (unless `options` is set to `{send: false}`).
 
 ----
 
@@ -75,6 +78,8 @@ If the event that triggered the script's execution was initiated by a user inter
 - `target` (optional): `"ip:port"` or `"midi:device_name"` string. If omitted, the widget's target will be used.
 - `address`: osc address, must start with a `/`
 - `args`: value or `{type: "OSC_TYPE_LETTER", value: VALUE}` `object`
+
+Sends an osc message.
 
 If the event that triggered the script's execution was not initiated by a user interaction, this function will have no effect.
 
@@ -94,7 +99,7 @@ Returns the property called `"name"` of the first matching widget.
 - `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
 - `name`: property name.
 
-Forcers a widget to check if one of its properties has changed and update itself if needed.
+Forces a widget to check if one of its properties has changed and update itself if needed.
 
 ----
 
@@ -175,9 +180,11 @@ Sets the scroll state of a container.
 #### `toolbar(i1, i2, ...)`
 - `iX`: menu entry index
 
-Trigger toolbar action at specified index. Examples:
+Trigger toolbar action at specified index.
 
-- `toolbar(0, 0)` -> Open a new session
-- `toolbar(3)` -> Toggle full screen
+!!! example "Examples"
 
-Actions will only be triggered if initiated with a user interaction. Fullscreen cannot be toggled with a simulated interaction (i.e. using `/SET`)
+    - `toolbar(0, 0)` -> Open a new session
+    - `toolbar(3)` -> Toggle full screen
+
+    Actions will only be triggered if initiated with a user interaction. Fullscreen cannot be toggled with a simulated interaction (i.e. using `/SET`)
