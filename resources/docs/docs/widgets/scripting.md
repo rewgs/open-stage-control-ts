@@ -69,7 +69,7 @@ Returns the value of the first matching widget.
     - `sync: false` (prevents widgets from triggering synchronization and scripts)
     - `send: false` (prevents widgets from sending osc messages)
 
-Sets the value of the first matching widget or, if `ìd` contains wildcards, affects all matching widgets **except** the emitting widget.
+Sets the value of the first matching widget. If `ìd` contains wildcards, affects all matching widgets **except** the emitting widget.
 
 If the event that triggered the script's execution was initiated by a user interaction, this will make the widget send its value as well (unless `options` is set to `{send: false}`).
 
