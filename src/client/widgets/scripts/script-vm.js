@@ -78,7 +78,7 @@ class ScriptVm extends Vm {
                     Object.keys(widgetManager.idRoute).filter(key => key.match(new RegExp('^' + id.replace(/\*/g, '.*') + '$')))
                 ).filter(w => w !== widget)
             } else {
-                widgets = this.resolveId(id)
+                widgets = this.resolveId(id).slice(0, 1)
             }
 
 
