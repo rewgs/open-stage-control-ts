@@ -40,7 +40,7 @@ class Range extends Fader {
                 visible: false,
                 horizontal:this.getProp('horizontal'),
                 default:this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
-                origin: this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,,
+                origin: this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
                 snap:this.getProp('snap'),
                 spring:this.getProp('spring'),
                 range:this.getProp('range'),
