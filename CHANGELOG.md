@@ -2,6 +2,10 @@
 
 ## 1.6.0
 
+- bug fixes
+  - range: error when setting `default` property
+  - range: fix `doubleTap` property
+
 - widgets
   - all: add `html` property to allow inserting custom content in widgets (label, value, etc) and style it with the `css` property.
 
