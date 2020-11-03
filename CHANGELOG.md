@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.1
+
+- widgets
+  - keyboard: make `on` and `off` properties dynamic
+
 ## 1.6.0
 
 - bug fixes
