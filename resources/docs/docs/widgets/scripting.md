@@ -96,6 +96,13 @@ Returns the property called `"name"` of the first matching widget.
 
 ----
 
+#### `getIndex(id)`
+- `id` (optional): widget `id` as a string. Defaults to `"this"`.
+
+Returns the widget's index in its container.
+
+----
+
 #### `updateProp(id, name)`
 - `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
 - `name`: property name.

@@ -162,6 +162,13 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.getIndex = (id = 'this')=>{
+
+            var widget = this.resolveId(id).pop()
+            if (widget) return widget.parent.children.indexOf(widget)
+
+        }
+
         this.sandbox.contentWindow.getScroll = (id)=>{
 
             var widgets = this.resolveId(id)
@@ -346,7 +353,7 @@ class ScriptVm extends Vm {
 
         }
 
-        for (var imports of ['set', 'get', 'getProp', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
+        for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'unfocus', 'setScroll', 'getScroll', 'toolbar']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }

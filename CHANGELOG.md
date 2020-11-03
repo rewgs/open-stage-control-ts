@@ -2,8 +2,12 @@
 
 ## 1.6.1
 
+- bug fixes
+  - keyboard: prevent `script` property from being copied to each key
+
 - widgets
   - keyboard: make `on` and `off` properties dynamic
+  - script: add `getIndex` function
 
 ## 1.6.0
 
