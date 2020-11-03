@@ -51,7 +51,7 @@ class Keyboard extends Panel {
 
         this.childrenType = undefined
         this.value = []
-
+        
         this.on('change',(e)=>{
 
             if (e.widget === this) return
@@ -72,8 +72,7 @@ class Keyboard extends Panel {
         var start = parseInt(this.getProp('start')),
             keys = parseInt(this.getProp('keys'))
 
-        var strData = JSON.stringify(options.props),
-            pattern = 'wbwbwwbwbwbw',
+        var pattern = 'wbwbwwbwbwbw',
             whiteKeys = 0, whiteKeys2 = 0, i
 
         for (i = start; i < keys + start && i < 109; i++) {
@@ -84,17 +83,20 @@ class Keyboard extends Panel {
 
         for (i = start; i < keys + start && i < 109; i++) {
 
-            var data = JSON.parse(strData)
-
-            data.top = data.left = data.height = data.width = 'auto'
-            data.type = 'button'
-            data.mode = this.getProp('mode')
-            data.id = this.getProp('id') + '/' + i
-            data.label = false
-            data.css = ''
-            data.bypass = true
-            data.on = 1
-            data.off = 0
+            var data = {
+                top: 'auto',
+                left: 'auto',
+                height: 'auto',
+                width: 'auto',
+                type: 'button',
+                mode: this.getProp('mode'),
+                id: this.getProp('id') + '/' + i,
+                label: false,
+                css: '',
+                bypass: true,
+                on: 1,
+                off: 0,
+            }
 
             var key = parser.parse({
                 data: data,
