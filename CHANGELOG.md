@@ -8,6 +8,7 @@
 - widgets
   - keyboard: make `on` and `off` properties dynamic
   - script: add `getIndex` function
+  - matrix/keyboard: `id` variable in script is now the `id` of the child widget that triggered the event
 
 ## 1.6.0
 
