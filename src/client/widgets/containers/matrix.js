@@ -1,10 +1,9 @@
 var Panel = require('./panel'),
-    StaticProperties = require('../mixins/static_properties'),
     parser = require('../../parser'),
     {deepCopy} = require('../../utils')
 
 
-class Matrix extends StaticProperties(Panel) {
+class Matrix extends Panel {
 
     static description() {
 
