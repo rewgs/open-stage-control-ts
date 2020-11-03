@@ -51,21 +51,27 @@ class Keyboard extends Panel {
 
         this.childrenType = undefined
         this.value = []
-        
+
         this.on('change',(e)=>{
 
-            if (e.widget === this) return
+            var widget = e.widget
 
-            this.value[e.widget._index] = e.widget.getValue()
+            if (widget === this) return
+
+            this.value[widget._index] = widget.getValue()
 
             if (e.options.send) {
                 var start = parseInt(this.getProp('start'))
                 this.sendValue({
-                    v: [e.widget._index + start, e.widget.getValue() ? this.getProp('on') : this.getProp('off')]
+                    v: [e.widget._index + start, widget.getValue() ? this.getProp('on') : this.getProp('off')]
                 })
             }
 
-            this.changed(e.options)
+            this.changed({
+                ...e.options,
+                id: widget.getProp('id')
+            })
+
 
         })
 

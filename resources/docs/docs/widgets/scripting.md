@@ -17,6 +17,9 @@ Depending on what triggered the script's execution, a few variables are availabl
 - `value`: widget's value
 - `touch`: see [Touch state](#touch-state)
 
+??? infos "Keyboard & Matrix"
+    In keyboards and matrices, `id` is the id of the child widget that triggered the event.
+
 **Event: keyboard** (script widget only)
 
 - `type` (`string`): `keydown` or `keyup`
