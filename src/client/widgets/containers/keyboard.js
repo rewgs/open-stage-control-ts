@@ -57,6 +57,14 @@ class Keyboard extends Panel {
             if (e.widget === this) return
 
             this.value[e.widget._index] = e.widget.getValue()
+
+            if (e.options.send) {
+                var start = parseInt(this.getProp('start'))
+                this.sendValue({
+                    v: [e.widget._index + start, e.widget.getValue() ? this.getProp('on') : this.getProp('off')]
+                })
+            }
+
             this.changed(e.options)
 
         })
@@ -84,16 +92,9 @@ class Keyboard extends Panel {
             data.id = this.getProp('id') + '/' + i
             data.label = false
             data.css = ''
-
-            data.target = '@{parent.target}'
-            data.decimals = '@{parent.decimals}'
-
-            data.address = '@{parent.address}'
-            data.preArgs = `JS{{
-                var a = @{parent.preArgs};
-                var b = typeof a === 'string' && a === '' ? [] : Array.isArray(a) ? a : [a];
-                return b.concat([${i}])
-            }}`
+            data.bypass = true
+            data.on = 1
+            data.off = 0
 
             var key = parser.parse({
                 data: data,
@@ -119,7 +120,23 @@ class Keyboard extends Panel {
 
     }
 
+    setValue(v, options={}) {
+
+        if (!Array.isArray(v) || v.length !== 2) return
+        if (v[1] !== this.getProp('on') && v[1] !== this.getProp('off')) return
+
+        var start = parseInt(this.getProp('start'))
+        this.children[v[0] - start].setValue(v[1] === this.getProp('on') ? 1 : 0, options)
+
+    }
+
 }
+
+
+Keyboard.dynamicProps = Keyboard.prototype.constructor.dynamicProps.concat(
+    'on',
+    'off',
+)
 
 Keyboard.cssVariables = Keyboard.prototype.constructor.cssVariables.concat(
     {js: 'colorWhite', css: '--color-white-key'},
