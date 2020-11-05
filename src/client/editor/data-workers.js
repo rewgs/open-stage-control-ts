@@ -2,13 +2,14 @@ var widgetManager = require('../managers/widgets'),
     resize = require('../events/resize'),
     stateManager = require('../managers/state'),
     parser = require('../parser'),
-    Panel,
+    Panel, Matrix,
     editor,
     scrollState = {}
 
 setTimeout(()=>{
     editor = require('./')
     Panel = require('../widgets/containers/panel')
+    Matrix = require('../widgets/containers/matrix')
 })
 
 function updateWidget(widget, options={}) {
@@ -43,6 +44,7 @@ function updateWidget(widget, options={}) {
     }
 
     var reuseChildren = options.reuseChildren !== false && widget instanceof Panel
+                        && !(widget instanceof Matrix)
 
     var children = undefined,
         removedChildren = []

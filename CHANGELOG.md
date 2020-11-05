@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.2
+
+- bug fixes
+  - matrix: issues when changing non-dynamic properties (matrix' content not properly removed)
+
 ## 1.6.1
 
 - bug fixes
