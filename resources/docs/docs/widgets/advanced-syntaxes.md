@@ -34,12 +34,12 @@ Some properties have much cheaper update routines and can be considered as `dyna
 
 #### Object properties
 
-If the retreived property is an object (`{}`) or an array (`[]`), a subset can be retreived directly by appending a dot and a key (array index or object key) : `@{parent.variables.key}`
+If the retreived property is an object (`{}`), a subset can be retreived directly by appending a dot and a key (array index or object key) : `@{parent.variables.key}`
 
 
 #### Nesting
 
-The inheritance syntax supports 1-level nesting : `@{fader_@{toggle_1}}`
+The inheritance syntax supports 1-level nesting for defining the target widget's id dynamically : `@{fader_@{toggle_1}}`
 
 
 ## OSC listeners: `OSC{address, default, usePreArgs}`
