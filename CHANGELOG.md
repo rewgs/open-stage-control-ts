@@ -4,6 +4,7 @@
 
 - bug fixes
   - matrix: issues when changing non-dynamic properties (content not properly removed)
+  - input: apply default value when receiving an empty value or no value at all
 
 ## 1.6.1
 

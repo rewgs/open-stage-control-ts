@@ -126,6 +126,8 @@ class Input extends Canvas {
             this.value = v
         }
 
+        if (this.value === '' || this.value === null) this.value = this.getProp('default')
+
         this.stringValue = this.getStringValue()
         this.batchDraw()
 
