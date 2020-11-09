@@ -12,7 +12,7 @@
 
 - widgets
   - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
-
+  - input: add `validation` property (allows defining a regular expression that the valud must match)
 - midi
   - accept sending sysex strings without spaces between the bytes
 

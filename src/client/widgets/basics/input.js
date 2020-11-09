@@ -20,7 +20,7 @@ class Input extends Canvas {
             },
             class_specific: {
                 asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'},
-                fieldValidator: {type: 'string', value: '', help: [
+                validation: {type: 'string', value: '', help: [
                     'Regular expression: if the submitted value doesn\'t match the regular expression, it will be reset to the last valid value.',
                     'If leading and trailing slashes are omitted, they will be added automatically and the flag will be set to "gm"',
                     'Examples:',
@@ -44,7 +44,7 @@ class Input extends Canvas {
         this.stringValue = ''
         this.focused = false
         this.tabKeyBlur = false
-        this.fieldValidator = null
+        this.validation = null
 
         if (this.getProp('vertical')) this.widget.classList.add('vertical')
         if (this.getProp('align') === 'left') this.widget.classList.add('left')
@@ -62,14 +62,14 @@ class Input extends Canvas {
             })
             var asYouType = this.getProp('asYouType')
 
-            if (this.getProp('fieldValidator') !== '') {
-                var fieldValidator = String(this.getProp('fieldValidator')),
-                    flags = fieldValidator.match(/^\/.*\/.*$/) ? fieldValidator.split('/').pop() : 'gm',
-                    validator = fieldValidator.match(/^\/.*\/.*$/) ? fieldValidator.replace(/^\/(.*)\/.*$/, '$1') : fieldValidator
+            if (this.getProp('validation') !== '') {
+                var validation = String(this.getProp('validation')),
+                    flags = validation.match(/^\/.*\/.*$/) ? validation.split('/').pop() : 'gm',
+                    regExpString = validation.match(/^\/.*\/.*$/) ? validation.replace(/^\/(.*)\/.*$/, '$1') : validation
 
-                if (!validator.match(/^\^.*\$$/)) validator = '^' + validator + '$'
+                if (!regExpString.match(/^\^.*\$$/)) regExpString = '^' + regExpString + '$'
 
-                this.fieldValidator = new RegExp(validator, flags)
+                this.validation = new RegExp(regExpString, flags)
             }
 
             this.input.addEventListener('keydown', (e)=>{
@@ -114,7 +114,7 @@ class Input extends Canvas {
 
     inputChange() {
 
-        if (this.fieldValidator && !this.input.value.match(this.fieldValidator)) {
+        if (this.validation && !this.input.value.match(this.validation)) {
             this.input.value = this.value
             return
         }
