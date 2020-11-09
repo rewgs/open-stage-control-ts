@@ -43,13 +43,6 @@ class UiConsole extends UiSidePanel {
             error(...arguments)
         }
 
-        // window.onerror = function(message){
-        //     _this.log('error', message)
-        //     onerror(...arguments)
-        // }
-
-
-
         // this.input.addEventListener('keydown', (event)=>{
         //     if (event.keyCode === 13 && !event.shiftKey) {
         //
