@@ -223,6 +223,8 @@ class UiInspector extends UiWidget {
             value: v
         })
 
+        // this may not be reached if an error is thrown
+        // but the lock will undone at the next inspect() call
         this.lock = false
     }
 
