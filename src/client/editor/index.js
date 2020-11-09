@@ -64,7 +64,7 @@ class Editor {
                     )
                     throw e
                     // console.error(e)
-                    error = true
+                    // error = true
                 }
             }
 

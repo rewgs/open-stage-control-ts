@@ -1,10 +1,8 @@
-var UiWidget = require('./ui-widget'),
-    UiSidePanel = require('./ui-sidepanel'),
+var UiSidePanel = require('./ui-sidepanel'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     locales = require('../locales'),
-    {icon} = require('./utils'),
-    cache = require('../managers/cache')
+    {icon} = require('./utils')
 
 class UiConsole extends UiSidePanel {
 
@@ -30,8 +28,7 @@ class UiConsole extends UiSidePanel {
 
         var _this = this,
             log = console.log,
-            error = console.error,
-            onerror = window.onerror
+            error = console.error
 
         console.log = function(message){
             _this.log('log', message)
