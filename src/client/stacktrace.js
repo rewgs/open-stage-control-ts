@@ -1,6 +1,6 @@
 var StackTrace = require('stacktrace-js'),
     ipc = require('./ipc'),
-    uiConsole = require('./ui/ui-console')
+    uiConsole
 
 window.onerror = function(msg,url,row,col, error) {
 
@@ -18,11 +18,13 @@ window.onerror = function(msg,url,row,col, error) {
 
         }).join('\n')
 
+        if (!uiConsole) uiConsole = require('./ui/ui-console')
         uiConsole.log('error', `${msg}\n${stringifiedStack}`)
         ipc.send('errorLog', `(ERROR, CLIENT) ${msg}\n${stringifiedStack}`)
 
     }).catch(()=>{
 
+        if (!uiConsole) uiConsole = require('./ui/ui-console')
         uiConsole.log('error', `${msg}\n    at ${url}:${row}:${col}\n    (no stacktrace available)`)
         ipc.send('errorLog', `(ERROR, CLIENT) ${msg}\n    at ${url}:${row}:${col}\n    (no stacktrace available)`)
 
