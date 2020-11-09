@@ -114,11 +114,6 @@ class Input extends Canvas {
 
     inputChange() {
 
-        if (this.validation && !this.input.value.match(this.validation)) {
-            this.input.value = this.value
-            return
-        }
-
         this.setValue(this.input.value, {sync:true, send:true})
 
     }
@@ -143,6 +138,11 @@ class Input extends Canvas {
     }
 
     setValue(v, options={} ) {
+
+        if (this.validation && !String(v).match(this.validation)) {
+            this.input.value = this.value
+            return
+        }
 
         try {
             this.value = JSON.parse(v)
