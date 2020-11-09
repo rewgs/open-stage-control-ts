@@ -69,12 +69,7 @@ class Input extends Canvas {
 
                 if (!validator.match(/^\^.*\$$/)) validator = '^' + validator + '$'
 
-                try {
-                    this.fieldValidator = new RegExp(validator, flags)
-                } catch(err) {
-                    console.error((this.getProp('id') || this.props.id) + '.' + propName + ':\n')
-                    console.error(err)
-                }
+                this.fieldValidator = new RegExp(validator, flags)
             }
 
             this.input.addEventListener('keydown', (e)=>{

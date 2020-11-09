@@ -43,10 +43,10 @@ class UiConsole extends UiSidePanel {
             error(...arguments)
         }
 
-        window.onerror = function(message){
-            _this.log('error', message)
-            onerror(...arguments)
-        }
+        // window.onerror = function(message){
+        //     _this.log('error', message)
+        //     onerror(...arguments)
+        // }
 
 
 
@@ -82,9 +82,13 @@ class UiConsole extends UiSidePanel {
         `)
 
         if (typeof message === 'object') {
-            try {
-                message = JSON.stringify(message)
-            } catch (_) {}
+            if (!(message instanceof Error)) {
+                try {
+                    message = JSON.stringify(message)
+                } catch (_) {}
+            } else {
+                message = String(message) + message.stack
+            }
         }
 
         node.textContent = message
