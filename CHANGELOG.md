@@ -4,7 +4,7 @@
 
 **Important change**
 
-Prebuilt binaries are now supplied only for 64bit Linux/MacOs/Windows. Other platforms should use the `node` package.
+Prebuilt binaries are now supplied only for 64bit Linux/MacOs/Windows. Other platforms should use the `node` package or build it from sources.
 
 **MIDI support**
 
@@ -23,7 +23,7 @@ As of this version, packages except the `node` package are bundled with a midi b
 
 - widgets
   - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
-  - input: add `validation` property (allows defining a regular expression that the valud must match)
+  - input: add `validation` property (allows defining a regular expression that the value must match)
 - midi
   - accept sending sysex strings without spaces between the bytes
   - load prebuilt midi binary on 64bit linux/windows/osx
