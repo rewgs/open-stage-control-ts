@@ -212,7 +212,7 @@ var converters = [
             }
 
             var label = data.label === undefined ?  'auto' : data.label
-            if (label !== false && data.type && !data.type.match(/button|menu|modal|clone|html/)) {
+            if (label !== false && data.type && !data.type.match(/button|menu|modal|clone|html|tab/)) {
                 label = label === 'auto' ? '@{this.id}' : label
                 data.html = label
             }
