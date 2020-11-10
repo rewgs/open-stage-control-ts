@@ -1,46 +1,55 @@
 ## Installation
 
-Enabling MIDI support in Open Stage Control requires additional softwares to be installed on the server's system:
 
-- [python 3](https://www.python.org/downloads/)
-- python package [python-rtmidi](https://spotlightkid.github.io/python-rtmidi/installation.html#from-pypi)
+=== "Linux / Windows / OSX"
 
-??? example "Linux"
+    Since version `1.7.0`, Open Stage Control comes bundled with built-in MIDI support if you're using the 64bit package for Linux, OSX or Windows.
 
-    - Install `python3` and `python3-pip` from your distribution's package repository
-    - Install `python-rtmidi` from a terminal by executing this command
-    ```bash
-    python3 -m pip install python-rtmidi --upgrade
-    ```
 
-??? example "Mac"
+=== "Other systems"
 
-    - Download and install [Python 3 for Mac OS](https://www.python.org/downloads/mac-osx/)
-    - Open a terminal
-    - Install `pip` (package installer for python) by executing these commands
-    ```
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    python get-pip.py
-    ```
-    - Install `python-rtmidi` by executing this command
-    ```bash
-    python -m pip install python-rtmidi --upgrade
-    ```
+    Enabling MIDI support on other systems or when building Open Stage Control from sources requires additional softwares to be installed on the server's system:
 
-??? example "Windows"
+    - [python 3](https://www.python.org/downloads/)
+    - python package [python-rtmidi](https://spotlightkid.github.io/python-rtmidi/installation.html#from-pypi)
 
-    - Download and install [Python 3 for Windows](https://www.python.org/downloads/windows/)
-    - **make sure to check the option** "Add Python 3.x to PATH"
-    - Open a terminal (++win+r++)
-    - Install `pip` (package installer for python) by executing these commands
-    ```
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    python get-pip.py
-    ```
-    - Install `python-rtmidi` by executing this command
-    ```bash
-    python -m pip install python-rtmidi --upgrade
-    ```
+
+    ??? example "Linux"
+
+        - Install `python3` and `python3-pip` from your distribution's package repository
+        - Install `python-rtmidi` from a terminal by executing this command
+        ```bash
+        python3 -m pip install python-rtmidi --upgrade
+        ```
+
+    ??? example "Mac"
+
+        - Download and install [Python 3 for Mac OS](https://www.python.org/downloads/mac-osx/)
+        - Open a terminal
+        - Install `pip` (package installer for python) by executing these commands
+        ```
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        python get-pip.py
+        ```
+        - Install `python-rtmidi` by executing this command
+        ```bash
+        python -m pip install python-rtmidi --upgrade
+        ```
+
+    ??? example "Windows"
+
+        - Download and install [Python 3 for Windows](https://www.python.org/downloads/windows/)
+        - **make sure to check the option** "Add Python 3.x to PATH"
+        - Open a terminal (++win+r++)
+        - Install `pip` (package installer for python) by executing these commands
+        ```
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        python get-pip.py
+        ```
+        - Install `python-rtmidi` by executing this command
+        ```bash
+        python -m pip install python-rtmidi --upgrade
+        ```
 
 ## Configuration
 
@@ -73,15 +82,15 @@ Enable parsing of midi time code messages (disabled by default). These will be r
 Send program changes with a `-1` offset to match some software/hardware implementations
 
 
-**`path=/path/to/python`**
-
-Indicates where to find python binary in case open stage control doesn't (`Error: spawn python3 ENOENT`).
-
-
 **`device_name:virtual`** (*Linux / Mac only*): creates a virtual midi device with one input port and one output port
 
 
 **`jack`** (*Linux only*): use JACK MIDI instead of ALSA. `python-rtmidi` must be compiled with [jack support](https://spotlightkid.github.io/python-rtmidi/installation.html#linux) for this to work.
+
+
+**`path=/path/to/python`**
+
+Indicates where to find python binary in case open stage control doesn't (`Error: spawn python3 ENOENT`). *Only use this if you know what you are doing.*
 
 
 ## Widget setup

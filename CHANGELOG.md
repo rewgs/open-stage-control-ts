@@ -1,6 +1,17 @@
 # Changelog
 
-## 1.6.3
+## 1.7.0
+
+**Important change**
+
+Prebuilt binaries are now supplied only for 64bit Linux/MacOs/Windows. Other platforms should use the `node` package.
+
+**MIDI support**
+
+As of this version, packages except the `node` package are bundled with a midi binary that will be used whenever midi's `path` option is not set. It is no longer necessary to install `python` and `python-rtmidi`.
+
+**Changelog**
+
 
 - bug fixes
   - missing context menu (copy, paste) in inspector inputs
@@ -15,6 +26,7 @@
   - input: add `validation` property (allows defining a regular expression that the valud must match)
 - midi
   - accept sending sysex strings without spaces between the bytes
+  - load prebuilt midi binary on 64bit linux/windows/osx
 
 - misc
   - sessions converted from v0 will use the widget's html property to display the former label property
