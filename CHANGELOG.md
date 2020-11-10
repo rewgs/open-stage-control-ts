@@ -1,13 +1,60 @@
 # Changelog
 
+## 1.6.3
+
+- bug fixes
+  - missing context menu (copy, paste) in inspector inputs
+  - osc listeners not resolving "auto" address
+  - `ELECTRON_RUN_AS_NODE` headless mode not working without `--no-gui` option
+
+- editor
+  - add console panel under the inspector to ease debugging
+
+- widgets
+  - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
+  - input: add `validation` property (allows defining a regular expression that the valud must match)
+- midi
+  - accept sending sysex strings without spaces between the bytes
+
+- misc
+  - sessions converted from v0 will use the widget's html property to display the former label property
+
+## 1.6.2
+
+- bug fixes
+  - matrix: issues when changing non-dynamic properties (content not properly removed)
+  - input: apply default value when receiving an empty value or no value at all
+
+## 1.6.1
+
+- bug fixes
+  - keyboard: prevent `script` property from being copied to each key
+
+- widgets
+  - keyboard: make `on` and `off` properties dynamic
+  - script: add `getIndex` function
+  - matrix/keyboard: `id` variable in script is now the `id` of the child widget that triggered the event
+
 ## 1.6.0
+
+- bug fixes
+  - range: error when setting `default` property
+  - range: fix `doubleTap` property
 
 - widgets
   - all: add `html` property to allow inserting custom content in widgets (label, value, etc) and style it with the `css` property.
 
+- scripting:
+  - `send()`: ignore the widget's `bypass` property (allows bypassing default messages and define custom ones)
+  - `set()`: add supports for wildcards in the id parameter
+  - `set()`: add a 3rd optional parameter for preventing further script executions and/or osc messages from being sent
+
 - custom module
   - automatically reload custom module when the file is modified
   - add support for loading submodules with `require()`
+
+- theme
+  - automatically reload theme when the file is modified
 
 ## 1.5.4
 

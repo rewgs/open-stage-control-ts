@@ -52,7 +52,10 @@ class CustomModule {
                 }
             },
             console: console,
-            settings: settings,
+            settings: {
+                read: settings.read,
+                appAddresses: settings.appAddresses,
+            },
             setTimeout: this.setTimeout.bind(this),
             clearTimeout: this.clearTimeout.bind(this),
             setInterval: this.setInterval.bind(this),
@@ -153,7 +156,7 @@ class CustomModule {
         if (this.load()) {
             console.log('(INFO) Custom module reloaded successfully')
         } else {
-            console.log('(ERROR) Failed to reload custom module')
+            console.error('(ERROR) Failed to reload custom module')
             this.unload()
         }
     }

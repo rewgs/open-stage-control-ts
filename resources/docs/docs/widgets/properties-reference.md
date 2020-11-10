@@ -42,6 +42,7 @@
         | <h6 id="alphaFillOn">alphaFillOn<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#alphaFillOn" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fill color opacity (on). |
         | <h6 id="lineWidth">lineWidth<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#lineWidth" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Stroke width. |
         | <h6 id="padding">padding<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#padding" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Inner spacing. |
+        | <h6 id="html">html<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#html" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Custom html content to be inserted in the widget (before the widget's content).<br/><br/>The code is automatically wrapped in &lt;div class="html">&lt;/div><br/><br/>Allowed HTML tags:<br/><br/>&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,<br/><br/>&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,<br/><br/>&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre<br/><br/>Allowed attributes:<br/><br/>&nbsp;&nbsp;&lt;*>: class, style, title<br/><br/>&nbsp;&nbsp;&lt;img>: src, width, height |
         | <h6 id="css">css<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Available css variables:<br/>- `--color-background`: `colorBg`<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--widget-padding`: `padding`<br/>- `--line-width`: `lineWidth`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke` |
 
 
@@ -341,8 +342,8 @@
             | <h6 id="keyboard_keys">keys<a class="headerlink" href="#keyboard_keys" title="Permanent link">#</a></h6> | `number` | <code>25</code> | Defines the number keys |
             | <h6 id="keyboard_start">start<a class="headerlink" href="#keyboard_start" title="Permanent link">#</a></h6> | `number` | <code>48</code> | MIDI note number to start with (default is C4)<br/><br/>Standard keyboards settings are: `[25, 48]`, `[49, 36]`, `[61, 36]`, `[88, 21]` |
             | <h6 id="keyboard_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#keyboard_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable traversing gestures |
-            | <h6 id="keyboard_on">on<a class="headerlink" href="#keyboard_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
-            | <h6 id="keyboard_off">off<a class="headerlink" href="#keyboard_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
+            | <h6 id="keyboard_on">on<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#keyboard_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
+            | <h6 id="keyboard_off">off<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#keyboard_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message<br/><br/>Can be an `object` if the type needs to be specified (see preArgs) |
             | <h6 id="keyboard_mode">mode<a class="headerlink" href="#keyboard_mode" title="Permanent link">#</a></h6> | `string` | <code>"push"</code> | Interraction mode:<br/>- `push` (press & release)<br/>- `toggle` (on/off switches)<br/>- `tap` (no release)<br/><br/>Choices: `push`, `toggle`, `tap` |
 
 ??? api "<div id="patchbay">patchbay<a class="headerlink" href="#patchbay" title="Permanent link">#</a></div>"
@@ -455,12 +456,6 @@
 
 ??? api "<div id="html">html<a class="headerlink" href="#html" title="Permanent link">#</a></div>"
     Simple HTML parser.
-
-    === "html"
-
-        | property | type |default | description |
-        | --- | --- | --- | --- |
-            | <h6 id="html_html">html<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#html_html" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Allowed HTML tags:<br/><br/>&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,<br/><br/>&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,<br/><br/>&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre<br/><br/>Allowed attributes:<br/><br/>&nbsp;&nbsp;<*>: class, style, title<br/><br/>&nbsp;&nbsp;<img>: src, width, height |
 
 ??? api "<div id="image">image<a class="headerlink" href="#image" title="Permanent link">#</a></div>"
     Load a image (url or base64-encoded).

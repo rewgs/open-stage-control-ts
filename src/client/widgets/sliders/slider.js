@@ -56,7 +56,7 @@ class Slider extends Canvas {
             } else {
 
                 doubletab(this.widget, ()=>{
-                    this.setValue(this.getSpringValue(),{sync:true, send:true, fromLocal:true})
+                    this.setValue(this.getSpringValue(),{sync:true, send:true, fromLocal:true, doubleTab:true})
                 })
 
             }
@@ -184,7 +184,7 @@ class Slider extends Canvas {
     setValue(v,options={}) {
 
         if (typeof v != 'number') return
-        if (this.touched && !options.dragged) return this.setValueTouchedQueue = [v, options]
+        if (this.touched && !options.dragged && !options.doubleTab) return this.setValueTouchedQueue = [v, options]
 
         var value = clip(v,[this.rangeValsMin,this.rangeValsMax])
 

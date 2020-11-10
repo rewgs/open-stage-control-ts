@@ -1,5 +1,9 @@
 module.exports = {
 
+    // console
+    console_title: 'Console',
+    console_clear: 'Vider la console',
+
     // editor
     editor: 'Editeur',
     editor_enabled: 'Activé',
@@ -46,7 +50,7 @@ module.exports = {
     // inspector
     inspector_color_confirm: 'Confirmer',
     inspector_color_apply: 'Appliquer',
-    inspector_error: 'Une erreur vient de survenir, appuyez sur F12 pour en savoir plus.',
+    inspector_error: 'Une erreur vient de survenir, ouvrez la console pour en savoir plus.',
 
     // nosleep
     nosleep: 'Empêcher la veille',

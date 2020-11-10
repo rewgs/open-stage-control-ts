@@ -3,8 +3,7 @@ var path = require('path'),
     settings = require('./settings'),
     osc = require('./osc'),
     {ipc} = require('./server'),
-    {deepCopy, resolveHomeDir} = require('./utils'),
-    theme = require('./theme')
+    {deepCopy, resolveHomeDir} = require('./utils')
 
 var widgetHashTable = {},
     clipboard = {clipboard: null, idClipboard: null}
@@ -404,8 +403,6 @@ module.exports =  {
 
     reloadCss() {
         // (dev) hot css reload
-
-        theme.load()
         ipc.send('reloadCss')
     },
 

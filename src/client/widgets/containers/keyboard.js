@@ -1,6 +1,7 @@
 var Panel = require('./panel'),
     Widget = require('../common/widget'),
-    parser = require('../../parser')
+    parser = require('../../parser'),
+    {mapToScale} = require('../utils')
 
 
 class Keyboard extends Panel {
@@ -28,11 +29,12 @@ class Keyboard extends Panel {
                 traversing: {type: 'boolean', value: true, help: 'Set to `false` to disable traversing gestures'},
                 on: {type: '*', value: 1, help: [
                     'Set to `null` to send send no argument in the osc message',
-                    'Can be an `object` if the type needs to be specified (see preArgs)'
                 ]},
                 off: {type: '*', value: 0, help: [
                     'Set to `null` to send send no argument in the osc message',
-                    'Can be an `object` if the type needs to be specified (see preArgs)'
+                ]},
+                velocity: {type: 'boolean', value: false, help: [
+                    'Set to `true` to map the touch coordinates between `off` (top) and `on` (bottom). Requires `on` and `off` to be numbers',
                 ]},
                 mode: {type: 'string', value: 'push', choices: ['push', 'toggle', 'tap'], help: [
                     'Interraction mode:',
@@ -51,21 +53,53 @@ class Keyboard extends Panel {
 
         this.childrenType = undefined
         this.value = []
+        this.keyHeight = 100
+
+        this.on('resize', (e)=>{
+            this.keyHeight = e.height
+        }, {element: this.widget})
+
 
         this.on('change',(e)=>{
 
-            if (e.widget === this) return
+            var widget = e.widget
 
-            this.value[e.widget._index] = e.widget.getValue()
-            this.changed(e.options)
+            if (widget === this) return
+
+
+            var value
+            if (widget.getValue()) {
+                if (this.getProp('velocity')) {
+                    var height = widget._black ? this.keyHeight * 0.65 : this.keyHeight
+                    value = mapToScale(e.options.y, [0, height * 0.9], [this.getProp('off'), this.getProp('on')], this.decimals)
+                } else {
+                    value = this.getProp('on')
+                }
+            } else {
+                value = this.getProp('off')
+            }
+
+            this.value[widget._index] = value
+
+            if (e.options.send) {
+                var start = parseInt(this.getProp('start'))
+                this.sendValue({
+                    v: [e.widget._index + start, value]
+                })
+            }
+
+            this.changed({
+                ...e.options,
+                id: widget.getProp('id')
+            })
+
 
         })
 
         var start = parseInt(this.getProp('start')),
             keys = parseInt(this.getProp('keys'))
 
-        var strData = JSON.stringify(options.props),
-            pattern = 'wbwbwwbwbwbw',
+        var pattern = 'wbwbwwbwbwbw',
             whiteKeys = 0, whiteKeys2 = 0, i
 
         for (i = start; i < keys + start && i < 109; i++) {
@@ -76,24 +110,20 @@ class Keyboard extends Panel {
 
         for (i = start; i < keys + start && i < 109; i++) {
 
-            var data = JSON.parse(strData)
-
-            data.top = data.left = data.height = data.width = 'auto'
-            data.type = 'button'
-            data.mode = this.getProp('mode')
-            data.id = this.getProp('id') + '/' + i
-            data.label = false
-            data.css = ''
-
-            data.target = '@{parent.target}'
-            data.decimals = '@{parent.decimals}'
-
-            data.address = '@{parent.address}'
-            data.preArgs = `JS{{
-                var a = @{parent.preArgs};
-                var b = typeof a === 'string' && a === '' ? [] : Array.isArray(a) ? a : [a];
-                return b.concat([${i}])
-            }}`
+            var data = {
+                top: 'auto',
+                left: 'auto',
+                height: 'auto',
+                width: 'auto',
+                type: 'button',
+                mode: this.getProp('mode'),
+                id: this.getProp('id') + '/' + i,
+                label: false,
+                css: '',
+                bypass: true,
+                on: 1,
+                off: 0,
+            }
 
             var key = parser.parse({
                 data: data,
@@ -111,6 +141,7 @@ class Keyboard extends Panel {
             } else {
                 key.container.classList.add('black')
                 key.container.style.setProperty('--rank', whiteKeys2)
+                key._black = true
             }
 
             this.value[i - start] = this.getProp('off')
@@ -119,7 +150,23 @@ class Keyboard extends Panel {
 
     }
 
+    setValue(v, options={}) {
+
+        if (!Array.isArray(v) || v.length !== 2) return
+        if (v[1] !== this.getProp('on') && v[1] !== this.getProp('off')) return
+
+        var start = parseInt(this.getProp('start'))
+        this.children[v[0] - start].setValue(v[1] === this.getProp('on') ? 1 : 0, options)
+
+    }
+
 }
+
+
+Keyboard.dynamicProps = Keyboard.prototype.constructor.dynamicProps.concat(
+    'on',
+    'off',
+)
 
 Keyboard.cssVariables = Keyboard.prototype.constructor.cssVariables.concat(
     {js: 'colorWhite', css: '--color-white-key'},

@@ -18,7 +18,7 @@ A widget can fetch its own properties or its direct parent's by using the keywor
 
 #### `uuid`
 
-Each widget has a unique random identifier that can be retreived with the property name `uuid` (e.g. `@{this.uuid}`, `@{parent.uuid}`). 
+Each widget has a unique random identifier that can be retreived with the property name `uuid` (e.g. `@{this.uuid}`, `@{parent.uuid}`).
 
 #### Dynamic properties
 
@@ -34,12 +34,12 @@ Some properties have much cheaper update routines and can be considered as `dyna
 
 #### Object properties
 
-If the retreived property is an object (`{}`) or an array (`[]`), a subset can be retreived directly by appending a dot and a key (array index or object key) : `@{parent.variables.key}`
+If the retreived property is an object (`{}`), a subset can be retreived directly by appending a dot and a key (array index or object key) : `@{parent.variables.key}`
 
 
 #### Nesting
 
-The inheritance syntax supports 1-level nesting : `@{fader_@{toggle_1}}`
+The inheritance syntax supports 1-level nesting for defining the target widget's id dynamically : `@{fader_@{toggle_1}}`
 
 
 ## OSC listeners: `OSC{address, default, usePreArgs}`
@@ -65,7 +65,7 @@ Options can contain `@{}` blocks.
 
 ## Javascript: `JS{{ <code> }}`
 
-This syntax allows writing formulas in pure javascript. The code will be compiled as a function and executed in a restricted context.
+This syntax allows writing formulas in [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript). The code will be compiled as a function and executed in a restricted context.
 
 - if no `return` statement is found, the formula will return an empty string
 - javascript [strict mode](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode) is always enabled
@@ -84,7 +84,7 @@ A property cannot contain multiple `JS{{}}` blocks
     - `url`: server url,
     - `platform`: operating system as seen by the client
 
-In this context, `@{} / OSC{}` are also seen as variables (named `VAR_XXX`), not as the value they hold,
+In this context, `@{} / OSC{}` are also seen as variables (named `VAR_XXX`), not as the value they hold.
 
 Parsing errors can be read in the DevTool console (F12).
 

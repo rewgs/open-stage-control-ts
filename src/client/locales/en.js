@@ -1,5 +1,10 @@
 module.exports = {
 
+    // console
+    console_title: 'Console',
+    console_clear: 'Clear console',
+
+
     // editor
     editor: 'Editor',
     editor_enabled: 'Enabled',
@@ -46,7 +51,7 @@ module.exports = {
     // inspector
     inspector_color_confirm: 'Confirm',
     inspector_color_apply: 'Apply',
-    inspector_error: 'An error just occured, open F12 to read more.',
+    inspector_error: 'An error just occured, open the console to read more.',
 
     // nosleep
     nosleep: 'Prevent sleep',

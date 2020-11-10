@@ -19,7 +19,14 @@ class Input extends Canvas {
                 unit: {type: 'string', value: '', help: 'Unit will be appended to the displayed widget\'s value (it doesn\'t affect osc messages)'},
             },
             class_specific: {
-                asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'}
+                asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'},
+                validation: {type: 'string', value: '', help: [
+                    'Regular expression: if the submitted value doesn\'t match the regular expression, it will be reset to the last valid value.',
+                    'If leading and trailing slashes are omitted, they will be added automatically and the flag will be set to "gm"',
+                    'Examples:',
+                    '- `^[0-9]*$` accepts digits only, any number of them',
+                    '- `/^[a-z\s]{0,10}$/i` accept between 0 and 10 alphabetic characters and spaces (case insensitive)',
+                ]}
             }
         })
 
@@ -37,6 +44,7 @@ class Input extends Canvas {
         this.stringValue = ''
         this.focused = false
         this.tabKeyBlur = false
+        this.validation = null
 
         if (this.getProp('vertical')) this.widget.classList.add('vertical')
         if (this.getProp('align') === 'left') this.widget.classList.add('left')
@@ -53,6 +61,17 @@ class Input extends Canvas {
                 this.tabKeyBlur = false
             })
             var asYouType = this.getProp('asYouType')
+
+            if (this.getProp('validation') !== '') {
+                var validation = String(this.getProp('validation')),
+                    flags = validation.match(/^\/.*\/.*$/) ? validation.split('/').pop() : 'gm',
+                    regExpString = validation.match(/^\/.*\/.*$/) ? validation.replace(/^\/(.*)\/.*$/, '$1') : validation
+
+                if (!regExpString.match(/^\^.*\$$/)) regExpString = '^' + regExpString + '$'
+
+                this.validation = new RegExp(regExpString, flags)
+            }
+
             this.input.addEventListener('keydown', (e)=>{
                 if (e.keyCode === 13) this.blur() // enter
                 else if (e.keyCode === 27) this.blur(false) // esc
@@ -120,11 +139,18 @@ class Input extends Canvas {
 
     setValue(v, options={} ) {
 
+        if (this.validation && !String(v).match(this.validation)) {
+            this.input.value = this.value
+            return
+        }
+
         try {
             this.value = JSON.parse(v)
         } catch (err) {
             this.value = v
         }
+
+        if (this.value === '' || this.value === null) this.value = this.getProp('default')
 
         this.stringValue = this.getStringValue()
         this.batchDraw()

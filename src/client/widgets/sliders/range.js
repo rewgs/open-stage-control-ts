@@ -40,6 +40,7 @@ class Range extends Fader {
                 visible: false,
                 horizontal:this.getProp('horizontal'),
                 default:this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
+                origin: this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
                 snap:this.getProp('snap'),
                 spring:this.getProp('spring'),
                 range:this.getProp('range'),
@@ -67,10 +68,9 @@ class Range extends Fader {
 
         this.touchMap = {}
 
-        this.setValue([
-            this.faders[0].rangeValsMin,
-            this.faders[1].rangeValsMax
-        ])
+
+        this.originValue = this.faders.map(f => f.originValue)
+        this.setValue(this.getSpringValue())
 
     }
 
@@ -170,15 +170,20 @@ class Range extends Fader {
 
     setValue(v, options={}) {
 
+        if (!this.faders) return // prevent Fader.constructor
         if (!v || !v.length || v.length!=2) return
-
 
         this.faders[0].rangeValsMax = v[1]
         this.faders[1].rangeValsMin = v[0]
 
         if (!options.dragged) {
-            this.faders[0].setValue(v[0])
-            this.faders[1].setValue(v[1])
+            var opt = {
+                ...options,
+                send: false,
+                sync: false
+            }
+            this.faders[0].setValue(v[0], opt)
+            this.faders[1].setValue(v[1], opt)
         }
         this.value = [
             this.faders[0].getValue(),

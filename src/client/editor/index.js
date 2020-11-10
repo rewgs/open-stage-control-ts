@@ -9,6 +9,7 @@ var {updateWidget, incrementWidget} = require('./data-workers'),
     UiInspector = require('../ui/ui-inspector'),
     UiTree = require('../ui/ui-tree'),
     UiDragResize = require('../ui/ui-dragresize'),
+    uiConsole = require('../ui/ui-console'),
     notifications = require('../ui/notifications'),
     locales = require('../locales'),
     {leftUiSidePanel, rightUiSidePanel} = require('../ui/'),
@@ -51,17 +52,19 @@ class Editor {
                     w.props[propName] = previousValue
                     updateWidget(w, {changedProps: [propName], preventSelect: this.selectedWidgets.length > 1})
 
-                    notifications.add({
+                    if (uiConsole.minimized || rightUiSidePanel.minimized) notifications.add({
                         class: 'error',
                         message: locales('inspector_error'),
                         duration: 7000
                     })
                     console.error(
-                        `Error while setting ${propName} to: ${JSON.stringify(value)}.`,
-                        'It\'s probably a bug, please a new bug ticket with these informations (https://github.com/jean-emmanuel/open-stage-control/issues).'
+                        `Error while setting ${propName} to: ${JSON.stringify(value)}.\n` +
+                        'It\'s probably a bug, please open a new bug ticket with the followigin informations at' +
+                        'https://github.com/jean-emmanuel/open-stage-control/issues'
                     )
-                    console.error(e)
-                    error = true
+                    throw e
+                    // console.error(e)
+                    // error = true
                 }
             }
 

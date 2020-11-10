@@ -1,10 +1,9 @@
 var Panel = require('./panel'),
-    StaticProperties = require('../mixins/static_properties'),
     parser = require('../../parser'),
     {deepCopy} = require('../../utils')
 
 
-class Matrix extends StaticProperties(Panel) {
+class Matrix extends Panel {
 
     static description() {
 
@@ -45,22 +44,16 @@ class Matrix extends StaticProperties(Panel) {
 
             if (e.widget === this) return
 
-            if (this.getProp('widgetType') === 'clone') {
+            var widget = this.getProp('widgetType') === 'clone' ? e.widget.parent : e.widget
 
-                if (e.widget.parent.parent !== this) return
+            if (widget.parent !== this) return
 
-                this.value[e.widget.parent._index] = e.widget.getValue()
+            this.value[widget._index] = e.widget.getValue()
 
-            } else {
-
-                if (e.widget.parent !== this) return
-
-                this.value[e.widget._index] = e.widget.getValue()
-
-
-            }
-
-            this.changed(e.options)
+            this.changed({
+                ...e.options,
+                id: widget.getProp('id')
+            })
 
         })
 
