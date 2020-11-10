@@ -17,8 +17,9 @@ var midiBinaries = {
 
 var pythonPathOverride
 if (process.arch === 'x64' && midiBinaries[process.platform]) {
-    if (fs.existsSync(path.resolve(__dirname, midiBinaries[process.platform]))) {
-        pythonPathOverride = midiBinaries[process.platform]
+    var p = path.resolve(__dirname, midiBinaries[process.platform])
+    if (fs.existsSync(p)) {
+        pythonPathOverride = p
     }
 }
 
