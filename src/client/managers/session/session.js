@@ -240,5 +240,16 @@ var converters = [
             }
 
         }
+    },
+    {
+        version: '1.6.2',
+        widget: (data)=>{
+
+            if (data.script && String(data.script).includes('toolbar(')) {
+                // new "console" submenu in toolbar at index 3
+                data.script = String(data.script).replace('toolbar(4)', 'toolbar(5)').replace('toolbar(3)', 'toolbar(4)')
+            }
+
+        }
     }
 ]
