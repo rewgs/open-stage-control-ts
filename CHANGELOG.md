@@ -17,6 +17,7 @@ As of this version, packages except the `node` package are bundled with a midi b
   - missing context menu (copy, paste) in inspector inputs
   - osc listeners not resolving "auto" address
   - `ELECTRON_RUN_AS_NODE` headless mode not working without `--no-gui` option
+  - ios: clone widget not laid out properly in horizontal panels
 
 - editor
   - add console bottom panel

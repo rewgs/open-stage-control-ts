@@ -369,17 +369,20 @@
 
         --widget-spacing: 0;
         flex: 1;
+        position: relative;
 
         > .widget {
             border:0!important;
             box-shadow: none!important;
-            position: relative!important;
-            left:auto!important;
-            bottom:auto!important;
-            right:auto!important;
-            top: auto!important;
-            width: 100%!important;
-            height: 100%!important;
+            // on ios, relative position + 100% size and auto position
+            // does not work well in flex panels
+            position: absolute!important;
+            left:0!important;
+            bottom:0!important;
+            right:0!important;
+            top: 0!important;
+            width: auto!important;
+            height: auto!important;
             min-height: initial!important;
             max-height: initial!important;
             min-width: initial!important;
