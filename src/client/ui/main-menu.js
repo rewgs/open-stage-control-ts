@@ -175,7 +175,8 @@ var menuEntries = [
             {
                 label: locales('console_enabled'),
                 class: ()=>{return 'toggle ' + (uiConsole.minimized ? 'off' : 'on')},
-                action: ()=>{return uiConsole.minimized ? uiConsole.restore() : uiConsole.minimize()}
+                action: ()=>{return uiConsole.minimized ? uiConsole.restore() : uiConsole.minimize()},
+                shortcut: 'mod + k'
             },
             {
                 separator: true

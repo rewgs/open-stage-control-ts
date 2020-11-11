@@ -110,4 +110,4 @@ class UiConsole extends UiSidePanel {
 
 }
 
-module.exports = new UiConsole({selector: '#osc-console', size: 40})
+module.exports = new UiConsole({selector: '#osc-console', minSize: 40, size: 200, minimized: true})

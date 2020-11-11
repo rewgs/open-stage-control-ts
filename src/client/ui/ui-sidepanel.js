@@ -17,11 +17,13 @@ class UiSidePanel extends UiWidget {
 
         this.cacheKey = 'ui.' + options.selector
 
-        this.minWidth = options.size === undefined ? 250 : options.size
-        this.width = cache.get(this.cacheKey + '.width') || options.size || 250
+        var size = cache.get(this.cacheKey + '.width') || 250
+        this.minWidth = options.minSize !== undefined ? options.minSize : options.minSize
+        this.width = size !== undefined ? size : (options.size !== undefined ? options.size : 250)
 
         this.disabled = false
-        this.minimized = cache.get(this.cacheKey + '.minimized') || false
+        var minimized = cache.get(this.cacheKey + '.minimized')
+        this.minimized = minimized !== null ? minimized : (options.minimized || false)
         this.init = false
 
 
