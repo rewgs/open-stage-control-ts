@@ -2,6 +2,7 @@ var EventEmitter = require('../../events/event-emitter'),
     osc = require('../../osc'),
     nanoid = require('nanoid/generate'),
     widgetManager = require('../../managers/widgets'),
+    uiConsole = require('../../ui/ui-console'),
     {urlParser} = require('../utils'),
     Vm = require('../vm'),
     vm = new Vm(),
@@ -215,6 +216,7 @@ class Widget extends EventEmitter {
                 script: this.getProp('script'),
                 event: 'value'
             }, builtIn: true, parent: this})
+            this.script._not_editable = true
             this.on('change', (e)=>{
                 if (e.widget === this && this.mounted && !e.options.fromEdit) {
                     this.script.setValue(e.options.widget ? e.options.widget.value : this.value, {...e.options, id: e.options.id || e.id})
@@ -659,9 +661,7 @@ class Widget extends EventEmitter {
 
                 })
             } catch (err) {
-                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
-                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
-                console.error((this.getProp('id') || this.props.id) + '.' + propName + ': JS{{}} error:\n' + err + line)
+                this.errorProp(propName, 'JS{{}}', err)
             }
 
             try {
@@ -680,9 +680,7 @@ class Widget extends EventEmitter {
 
                 })
             } catch (err) {
-                let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
-                    line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
-                console.error((this.getProp('id') || this.props.id) + '.' + propName + ': #{} error:\n' + err + line)
+                this.errorProp(propName, '#{}', err)
             }
 
             for (let k in variables) {
@@ -876,6 +874,25 @@ class Widget extends EventEmitter {
 
         }
 
+    }
+
+    errorProp(name, type, error) {
+
+        let stackline = error.stack ? (error.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
+            line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - (type.includes('{}') ? 1 : 0)) : '',
+            id = this.getProp('id') || this.props.id,
+            widget = this // used for edit link in console
+
+        while (widget._not_editable) {
+            // ignore non editable
+            widget = widget.parent
+        }
+
+        // ignore clone wrapper
+        if (widget.parent !== widgetManager && widget.parent.getProp('type') === 'clone') widget = widget.parent
+
+        console._error(`${id}.${name} ${type} error${line}: ${error}`)
+        uiConsole.log('error', `<span class="edit-widget" data-widget="${widget.hash}">${id}</span>.${name} ${type} error${line}: ${error}`, true)
     }
 
     setContainerStyles(styles = ['geometry', 'css', 'visibility']) {

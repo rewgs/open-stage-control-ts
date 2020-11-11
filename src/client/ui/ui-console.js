@@ -26,18 +26,18 @@ class UiConsole extends UiSidePanel {
         this.length = 0
         this.maxLength = 200
 
-        var _this = this,
-            log = console.log,
-            error = console.error
+        var _this = this
 
+        console._log = console.log
         console.log = function(message){
             _this.log('log', message)
-            log(...arguments)
+            console._log(...arguments)
         }
 
+        console._error = console.error
         console.error = function(message){
             _this.log('error', message)
-            error(...arguments)
+            console._error(...arguments)
         }
 
         // this.input.addEventListener('keydown', (event)=>{
@@ -63,7 +63,7 @@ class UiConsole extends UiSidePanel {
 
     }
 
-    log(type, message) {
+    log(type, message, html) {
 
         var node = this.messages.appendChild(html`
             <osc-console-message class="${type}">
@@ -81,7 +81,11 @@ class UiConsole extends UiSidePanel {
             }
         }
 
-        node.textContent = message
+        if (html) {
+            node.innerHTML = message
+        } else {
+            node.textContent = message
+        }
         if (type !== 'error' && node.textContent.match(/error/i)) node.classList.add('error')
 
         node.scrollIntoView()

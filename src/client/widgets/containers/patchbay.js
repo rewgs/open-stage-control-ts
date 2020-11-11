@@ -150,6 +150,7 @@ class PatchBay extends Container(Canvas) {
                 parent: this
             })
             w.container.classList.add('not-editable')
+            w._not_editable = true
             this.inputsWidgets.push(w)
             this.inputNodes.push(w.container)
         }

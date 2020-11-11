@@ -89,9 +89,7 @@ class Script extends Widget {
 
         } catch(err) {
 
-            let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
-                line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
-            console.error((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
+            this.errorProp('script', 'javascript', err)
             this.script = ()=>{}
 
         }
@@ -108,9 +106,7 @@ class Script extends Widget {
         try {
             this.script(context, this.builtIn ? this.parent.parsersLocalScope : this.parsersLocalScope)
         } catch(err) {
-            let stackline = err.stack ? (err.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
-                line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - 2) : ''
-            console.error((this.getProp('id') || this.props.id) + '.script error:\n' + err + line)
+            this.errorProp('script', 'javascript', err)
         }
         this.scriptLock = false
 

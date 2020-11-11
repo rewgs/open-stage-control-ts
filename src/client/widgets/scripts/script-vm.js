@@ -271,7 +271,7 @@ class ScriptVm extends Vm {
                 try {
                     callback()
                 } catch(e) {
-                    console.log(e)
+                    this.errorProp('script', 'setTimeout', e)
                 }
                 this.setWidget()
                 this.setValueOptions()
@@ -309,7 +309,7 @@ class ScriptVm extends Vm {
                 try {
                     callback()
                 } catch(e) {
-                    console.log(e)
+                    this.errorProp('script', 'setInterval', e)
                 }
                 this.setWidget()
                 this.setValueOptions()

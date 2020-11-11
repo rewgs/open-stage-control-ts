@@ -51,9 +51,27 @@ osc-console-message {
     white-space: pre;
     &.error {
         color: var(--color-error);
+        --color-stroke: var(--color-error);
     }
 
     margin-bottom: 4rem;
+
+    .edit-widget {
+        cursor: pointer;
+        display: inline-block;
+        padding: 2rem;
+        background: var(--color-ui-background);
+        border-radius: 2rem;
+        user-select: inherit;
+        &.editing {
+            --alpha-stroke: 0.75;
+            position: relative;
+            @include pseudo-stroke($z: 0);
+            &:before {
+                border-style: dashed;
+            }
+        }
+    }
 }
 
 osc-console-input {
