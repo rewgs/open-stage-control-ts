@@ -12,7 +12,7 @@ class UiConsole extends UiSidePanel {
 
         this.header = DOM.get(this.container, 'osc-panel-header')[0]
 
-        this.header.appendChild(html`<label>${locales('console_title')}</label>`)
+        this.header.appendChild(html`<label>${locales('console')}</label>`)
         this.messages = this.content.appendChild(html`<osc-console></osc-console>`)
         // this.inputWrapper = this.container.appendChild(html`<osc-console-input></osc-console-inpu>`)
         // this.input = this.inputWrapper.appendChild(html`<textarea></textarea>`)

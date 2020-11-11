@@ -19,7 +19,7 @@ As of this version, packages except the `node` package are bundled with a midi b
   - `ELECTRON_RUN_AS_NODE` headless mode not working without `--no-gui` option
 
 - editor
-  - add console panel under the inspector to ease debugging
+  - add console bottom panel
 
 - widgets
   - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
