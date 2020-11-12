@@ -160,11 +160,6 @@ var menuEntries = [
                 shortcut: 'mod + i'
             },
             {
-                label: locales('console_title'),
-                class: ()=>{return 'toggle ' + (uiConsole.minimized ? 'off' : 'on')},
-                action: ()=>{return uiConsole.minimized ? uiConsole.restore() : uiConsole.minimize()}
-            },
-            {
                 separator: true
             },
             {
@@ -172,6 +167,24 @@ var menuEntries = [
                 class: ()=>{return 'toggle ' + (editor.usePercents ? 'on' : 'off')},
                 action: ()=>{editor.usePercents = !editor.usePercents}
             }
+        ]
+    },
+    {
+        label: locales('console'),
+        action: [
+            {
+                label: locales('console_enabled'),
+                class: ()=>{return 'toggle ' + (uiConsole.minimized ? 'off' : 'on')},
+                action: ()=>{return uiConsole.minimized ? uiConsole.restore() : uiConsole.minimize()},
+                shortcut: 'mod + k'
+            },
+            {
+                separator: true
+            },
+            {
+                label: locales('console_clear'),
+                action: uiConsole.clear.bind(uiConsole),
+            },
         ]
     },
     {

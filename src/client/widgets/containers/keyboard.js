@@ -133,6 +133,7 @@ class Keyboard extends Panel {
 
             key._index = i - start
             key.container.classList.add('not-editable')
+            key._not_editable = true
             key.container.classList.add('key')
 
             if (pattern[i % 12] == 'w') {

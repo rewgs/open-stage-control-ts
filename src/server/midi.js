@@ -1,24 +1,38 @@
 var {PythonShell} = require('python-shell'),
+    fs = require('fs'),
+    path = require('path'),
     settings = require('./settings'),
-    midiVersion = '1.2.0'
+    midiVersion = '1.7.0'
 
 var pythonOptions = {
     scriptPath:__dirname,
     mode:'text',
 }
 
+var midiBinaries = {
+    linux: 'osc-midi-linux',
+    darwin: 'osc-midi-osx',
+    win32: 'osc-midi-windows.exe'
+}
+
+var pythonPathOverride
+if (process.arch === 'x64' && midiBinaries[process.platform]) {
+    var p = path.resolve(__dirname, midiBinaries[process.platform])
+    if (fs.existsSync(p)) {
+        pythonPathOverride = p
+    }
+}
+
 class MidiConverter {
 
     constructor() {
-
-        var pythonPath = settings.read('midi').filter(x=>x.includes('path=')).map(x=>x.split('=')[1])[0]
 
         this.py = new PythonShell('python/midi.py', Object.assign({
             args: [
                 settings.read('debug') ? 'debug' : '',
                 ...settings.read('midi')
             ],
-            pythonPath
+            pythonPath: MidiConverter.getPythonPath()
         }, pythonOptions))
 
         this.py.childProcess.on('error', (e)=>{
@@ -85,9 +99,7 @@ class MidiConverter {
 
     static list() {
 
-        var pythonPath = settings.read('midi') ? settings.read('midi').filter(x=>x.includes('path=')).map(x=>x.split('=')[1])[0] : undefined
-
-        PythonShell.run('python/midi.py', Object.assign({pythonPath: pythonPath, args: ['list-only']}, pythonOptions), function(e, results) {
+        PythonShell.run('python/midi.py', Object.assign({pythonPath: MidiConverter.getPythonPath(), args: ['list-only']}, pythonOptions), function(e, results) {
             if (e) {
                 if (e.code === 'ENOENT') {
                     console.error(`(ERROR, MIDI) Could not find python binary: ${e.message.replace(/spawn (.*) ENOENT/, '$1')}`)
@@ -100,6 +112,16 @@ class MidiConverter {
                 MidiConverter.parseIpc(r)
             }
         })
+
+    }
+
+    static getPythonPath() {
+
+        var pythonPath = settings.read('midi') ? settings.read('midi').filter(x=>x.includes('path=')).map(x=>x.split('=')[1])[0] : undefined
+
+        if (!pythonPath && pythonPathOverride) pythonPath = pythonPathOverride
+
+        return pythonPath
 
     }
 

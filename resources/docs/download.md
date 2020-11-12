@@ -1,5 +1,8 @@
 # Download the latest release
 
+!!! tip ""
+    [*Click here*](/docs/getting-started/introduction/#installation) to read the installation guide.
+
 <a href="https://github.com/jean-emmanuel/open-stage-control/releases/latest"> Open Stage Control <span id="osc-version"span></a>
 
 <div id="osc-assets">Loading assets...</div>

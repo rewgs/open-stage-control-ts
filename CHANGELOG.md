@@ -1,20 +1,33 @@
 # Changelog
 
-## 1.6.3
+## 1.7.0
+
+**Important change**
+
+Prebuilt binaries are now supplied only for 64bit Linux/MacOs/Windows. Other platforms should use the `node` package or build it from sources.
+
+**MIDI support**
+
+As of this version, packages except the `node` package are bundled with a midi binary that will be used whenever midi's `path` option is not set. It is no longer necessary to install `python` and `python-rtmidi`.
+
+**Changelog**
+
 
 - bug fixes
   - missing context menu (copy, paste) in inspector inputs
   - osc listeners not resolving "auto" address
   - `ELECTRON_RUN_AS_NODE` headless mode not working without `--no-gui` option
+  - ios: clone widget not laid out properly in horizontal panels
 
-- editor
-  - add console panel under the inspector to ease debugging
+- ui
+  - add console bottom panel with a simple script interpreter
 
 - widgets
   - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
-  - input: add `validation` property (allows defining a regular expression that the valud must match)
+  - input: add `validation` property (allows defining a regular expression that the value must match)
 - midi
   - accept sending sysex strings without spaces between the bytes
+  - load prebuilt midi binary on 64bit linux/windows/osx
 
 - misc
   - sessions converted from v0 will use the widget's html property to display the former label property

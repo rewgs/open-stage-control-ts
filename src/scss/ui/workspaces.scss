@@ -6,7 +6,7 @@ osc-workspace {
     --color-stroke: var(--color-widget);
 
     // optimize layout recalc
-    position: absolute;
+    position: fixed;
     top:0;
     left:0;
     right:0;
@@ -14,7 +14,13 @@ osc-workspace {
 
     display: flex;
     flex-direction: row;
-    overflow: hidden;
+
+    &.vertical {
+        flex-direction: column;
+    }
+    &.horizontal {
+        flex-direction: row;
+    }
 
 }
 
@@ -24,6 +30,12 @@ osc-panel-container {
     display:flex;
     flex-direction: column;
 
+    &.vertical {
+        flex-direction: column;
+    }
+    &.horizontal {
+        flex-direction: row;
+    }
 
     &.center {
         flex: 1;
@@ -328,6 +340,10 @@ osc-panel-content {
 
 }
 
+#main {
+    flex: 1;
+    min-height: 40rem;
+}
 
 #osc-greeting-header {
     --alpha-fill: 0.75;

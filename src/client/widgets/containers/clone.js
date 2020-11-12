@@ -27,7 +27,7 @@ class Clone extends Container() {
             value: null,
             osc: null
         })
-        
+
         defaults.style = {css: defaults.style.css}
 
         return defaults
@@ -98,6 +98,7 @@ class Clone extends Container() {
 
             if (e.widget !== this) {
                 e.widget.container.classList.add('not-editable')
+                e.widget._not_editable = true
             }
 
         })

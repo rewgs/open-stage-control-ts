@@ -52,7 +52,7 @@ class Editor {
                     w.props[propName] = previousValue
                     updateWidget(w, {changedProps: [propName], preventSelect: this.selectedWidgets.length > 1})
 
-                    if (uiConsole.minimized || rightUiSidePanel.minimized) notifications.add({
+                    if (uiConsole.minimized) notifications.add({
                         class: 'error',
                         message: locales('inspector_error'),
                         duration: 7000

@@ -361,7 +361,7 @@ module.exports =  {
         // cache widget osc data to reduce bandwidth usage
 
         if (!widgetHashTable[clientId])  {
-            widgetHashTable[clientId] = {}
+            widgetHashTable[clientId] = {CONSOLE: {}}
         }
 
         if (!widgetHashTable[clientId][data.hash])  {

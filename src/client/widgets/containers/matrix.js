@@ -80,6 +80,7 @@ class Matrix extends Panel {
 
                 widget._index = i
                 widget.container.classList.add('not-editable')
+                widget._not_editable = true
 
                 this.value[i] = widget.getValue()
 
@@ -152,6 +153,7 @@ class Matrix extends Panel {
                     this.children[i].updateProps(Object.keys(data), this, options)
                     // this.children[i] might have been recreated
                     this.children[i].container.classList.add('not-editable')
+                    this.children[i]._not_editable = true
 
                 }
 

@@ -28,11 +28,11 @@ iOS devices must be of version `10.3` or higher.
 
 ## Installation
 
-??? example "Linux"
+??? example "Linux 64bit"
 
     **Ubuntu / Debian**
 
-    - [Download](/download) `open-stage-control-VERSION-ARCH.deb`
+    - [Download](/download) `open-stage-control-VERSION-amd64.deb`
     - Install it by running this as root in a terminal:
     ```bash
     dpkg -i path/to/open-stage-control-VERSION-ARCH.deb
@@ -40,18 +40,25 @@ iOS devices must be of version `10.3` or higher.
 
     **Other linux distributions**
 
-    - [Download](/download) `open-stage-control-VERSION-linux-ARCH.zip`
+    - [Download](/download) `open-stage-control-VERSION-linux-x64.zip`
     - Extract it in the location of your choice
     - The file inside it named `open-stage-control` is the app's main executable
 
-??? example "Mac"
+??? example "Mac 64bit"
 
     - [Download](/download) `open-stage-control-VERSION-osx.zip`
     - Extract it in the location of your choice
     - Drag `open-stage-control.app` in your `Application` folder
 
-??? example "Windows"
+??? example "Windows 64bit"
 
-    - [Download](/download) `open-stage-control-VERSION-win32-ARCH.zip`
+    - [Download](/download) `open-stage-control-VERSION-win32-x64.zip`
     - Extract it in the location of your choice
     - The file inside it named `open-stage-control.exe` is the app's main executable
+
+??? example "Other systems"
+
+    - Install [Node.js](https://nodejs.org/en/download/package-manager/)
+    - Download `open-stage-control-VERSION-node.zip`
+    - Extract it in the location of your choice
+    - In a terminal, run `node /path/to/open-stage-control-VERSION-node --help`

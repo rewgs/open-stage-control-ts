@@ -44,7 +44,7 @@ class Ipc extends EventEmitter {
             this.socket.send('["pong"]')
         })
 
-        document.cookie = 'client_id=' + uuid
+        document.cookie = 'client_id=' + uuid + ';samesite=strict'
 
         try {
             this.open()

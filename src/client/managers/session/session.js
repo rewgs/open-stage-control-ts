@@ -212,7 +212,7 @@ var converters = [
             }
 
             var label = data.label === undefined ?  'auto' : data.label
-            if (label !== false && data.type && !data.type.match(/button|menu|modal|clone|html/)) {
+            if (label !== false && data.type && data.type && !data.type.match(/button|menu|modal|clone|html|tab/)) {
                 label = label === 'auto' ? '@{this.id}' : label
                 data.html = label
             }
@@ -237,6 +237,17 @@ var converters = [
                     }
                     break
 
+            }
+
+        }
+    },
+    {
+        version: '1.6.2',
+        widget: (data)=>{
+
+            if (data.script && String(data.script).includes('toolbar(')) {
+                // new "console" submenu in toolbar at index 3
+                data.script = String(data.script).replace('toolbar(4)', 'toolbar(5)').replace('toolbar(3)', 'toolbar(4)')
             }
 
         }
