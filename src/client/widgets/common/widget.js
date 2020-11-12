@@ -2,7 +2,6 @@ var EventEmitter = require('../../events/event-emitter'),
     osc = require('../../osc'),
     nanoid = require('nanoid/generate'),
     widgetManager = require('../../managers/widgets'),
-    uiConsole = require('../../ui/ui-console'),
     {urlParser} = require('../utils'),
     Vm = require('../vm'),
     vm = new Vm(),
@@ -14,7 +13,7 @@ var EventEmitter = require('../../events/event-emitter'),
     morph = require('nanomorph'),
     sanitizeHtml = require('sanitize-html'),
     updateWidget = ()=>{},
-    Script
+    Script, uiConsole
 
 
 var oscReceiverState = {}
@@ -36,6 +35,7 @@ DOM.ready(()=>{
 
 setTimeout(()=>{
     updateWidget = require('../../editor/data-workers').updateWidget
+    uiConsole = require('../../ui/ui-console')
 })
 
 class Widget extends EventEmitter {
