@@ -17,7 +17,7 @@ class Switch extends MenuBase {
             style: {
                 _separator_switch_style: 'Switch style',
                 colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
-                layout: {type: 'string', value: 'vertical', choices: ['vertical', 'horizontal', 'grid'], help:''},
+                layout: {type: 'string', value: 'vertical', choices: ['vertical', 'horizontal', 'grid'], help:'Defines how items should be laid out'},
                 gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns of a value css grid-template definition.'},
             },
             class_specific: {
