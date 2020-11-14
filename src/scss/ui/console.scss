@@ -58,7 +58,6 @@ osc-console-message {
     position: relative;
     padding-left: 10rem;
     &:before {
-        content: "▮";
         font-family: FontAwesome;
         width: 6rem;
         display: inline-block;
@@ -66,11 +65,16 @@ osc-console-message {
         position: absolute;
         left: 0;
     }
+    &.log:before, &.error:before {
+        content: "";
+        border-left: 2rem solid;
+        top: 0;
+        bottom: 0;
+        left: 2rem;
+        opacity: 0.75;
+    }
     &.error {
         color: var(--color-error);
-        &:before {
-            content: "▮"
-        }
     }
     &.input {
         &:before {
