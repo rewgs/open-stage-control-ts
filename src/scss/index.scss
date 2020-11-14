@@ -74,11 +74,11 @@ body {
         color: inherit!important;
     }
     padding:10rem;
-    user-select:initial;
-    cursor: initial;
+    user-select:text;
+    cursor: text;
     * {
-        user-select:initial;
-        cursor: initial;
+        user-select:text;
+        cursor: text;
     }
     overflow:auto;
     white-space:pre;

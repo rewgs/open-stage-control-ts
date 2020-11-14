@@ -78,7 +78,7 @@ osc-console-message {
     }
     &.input {
         &:before {
-            content: "\f105"
+            content: "\f105";
         }
     }
     &.output {
@@ -91,10 +91,8 @@ osc-console-message {
         }
 
         &.value {
-            opacity: 0.5;
-            // &:before {
-            //     opacity: 0.5;
-            // }
+            color: var(--color-accent);
+            opacity: 1;
         }
     }
 
