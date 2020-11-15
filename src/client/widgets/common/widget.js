@@ -591,9 +591,21 @@ class Widget extends EventEmitter {
                         }
 
                         var r
-                        if (k === 'value') r = widgets[i].getValue(true)
-                        else if (k === 'uuid') r = widgets[i].hash
-                        else r = widgets[i].resolveProp(k, undefined, storeLinks, originalWidget, originalPropName)
+                        switch (k) {
+                            case 'value':
+                                r = widgets[i].getValue(true)
+                                break
+                            case 'uuid':
+                                r = widgets[i].hash
+                                break
+                            case 'tabs':
+                            case 'widgets':
+                                r = widgets[i].props[k]
+                                break
+                            default:
+                                r = widgets[i].resolveProp(k, undefined, storeLinks, originalWidget, originalPropName)
+                                break
+                        }
 
                         if (subk !== undefined && r !== undefined) r = r[subk]
 
