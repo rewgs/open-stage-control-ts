@@ -21,6 +21,7 @@ class Modal extends Panel {
             },
             geometry: {
                 _separator_modal_geometry: 'Modal geometry',
+                relative: {type: 'boolean', value: false, help: 'Set to `true` to make the modal\'s position and size relative to the button\'s.'},
                 popupWidth: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
                 popupHeight: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
                 popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
@@ -114,7 +115,7 @@ class Modal extends Panel {
         this.init = false
         this.labelChange = true
 
-
+        this.container.classList.toggle('relative', this.getProp('relative'))
         this.popupContent.classList.add('layout-' + this.getProp('layout'))
 
         this.label = html`<label></label>`
