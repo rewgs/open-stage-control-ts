@@ -54,6 +54,15 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
     }
 
 
+    setContainerStyles(styles) {
+
+        super.setContainerStyles(styles)
+
+        this.container.classList.toggle('auto-height', this.getProp('height') === 'auto')
+
+    }
+
+
 }
 
 

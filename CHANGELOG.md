@@ -18,6 +18,7 @@ As of this version, packages except the `node` package are bundled with a midi b
   - osc listeners not resolving "auto" address
   - `ELECTRON_RUN_AS_NODE` headless mode not working without `--no-gui` option
   - ios: clone widget not laid out properly in horizontal panels
+  - missing vertical scrollbar when root's height overflows the workspace 
 
 - ui
   - add console bottom panel with a simple script interpreter
