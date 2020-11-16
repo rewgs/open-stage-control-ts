@@ -99,7 +99,11 @@ function httpRoute(req, res) {
                     res.sendFile(path.resolve(sessionPath + url))
                 } catch(e) {
                     // absolute resolution
-                    res.sendFile(path.resolve(url))
+                    try {
+                        res.sendFile(path.resolve(url))
+                    } catch(e) {
+                        console.error(`(ERROR, HTTP) File not found: ${url}`)
+                    }
                 }
             } else if (url.includes('/osc-ping')) {
                 httpCheck(true)
