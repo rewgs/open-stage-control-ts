@@ -27,7 +27,7 @@ As of this version, packages except the `node` package are bundled with a midi b
 - widgets
   - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
   - input: add `validation` property (allows defining a regular expression that the value must match)
-  - modal: add `relative` geometry property
+  - modal: add `relative` position property
 
 - midi
   - accept sending sysex strings without spaces between the bytes

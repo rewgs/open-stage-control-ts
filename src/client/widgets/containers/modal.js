@@ -21,11 +21,11 @@ class Modal extends Panel {
             },
             geometry: {
                 _separator_modal_geometry: 'Modal geometry',
-                relative: {type: 'boolean', value: false, help: 'Set to `true` to make the modal\'s position and size relative to the button\'s.'},
                 popupWidth: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
                 popupHeight: {type: 'number|percentage', value: '80%', help: 'Modal popup\'s size'},
                 popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
                 popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
+                relative: {type: 'boolean', value: false, help: 'Set to `true` to make the modal\'s position relative to the button\'s position.'},
             },
             style: {
                 _separator_modal_style: 'Modal style',

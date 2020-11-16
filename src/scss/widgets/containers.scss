@@ -523,12 +523,13 @@
             right: auto;
             top: auto;
             bottom: auto;
-            position: absolute;
             width: var(--width, 100%);
             height: var(--height, 100%);
             margin-top: calc(-1 * var(--widget-spacing));
             margin-left: calc(-1 * var(--widget-spacing));
             padding: var(--widget-spacing);
+            align-items:flex-start;
+            justify-content: flex-start;
         }
     }
 
