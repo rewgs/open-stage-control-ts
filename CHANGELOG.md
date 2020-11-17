@@ -20,6 +20,7 @@ As of this version, packages except the `node` package are bundled with a midi b
   - ios: clone widget not laid out properly in horizontal panels
   - ui: missing vertical scrollbar when root's height overflows the workspace
   - server: provide readable error when a file requested by the client file is not found  
+  - tab: content not drawn when changing visible property
 
 - ui
   - add console bottom panel with a simple script interpreter
