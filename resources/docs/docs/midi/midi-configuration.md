@@ -75,7 +75,7 @@ Enable parsing of system exclusive messages (disabled by default).
 
 **`mtc`**
 
-Enable parsing of midi time code messages (disabled by default). These will be received as raw sysex messages.
+Enable parsing of midi time code messages (disabled by default).
 
 **`pc_offset`**
 
