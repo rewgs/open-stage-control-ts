@@ -23,6 +23,10 @@ module.exports =  {
 
         if (settings.read('load') && !data.hotReload) return this.sessionOpen({path: settings.read('load')}, clientId)
 
+        if (!widgetHashTable[clientId])  {
+            widgetHashTable[clientId] = {CONSOLE: {typeTags: ''}}
+        }
+
     },
 
     close(data, clientId) {
@@ -359,10 +363,6 @@ module.exports =  {
 
     addWidget(data, clientId) {
         // cache widget osc data to reduce bandwidth usage
-
-        if (!widgetHashTable[clientId])  {
-            widgetHashTable[clientId] = {CONSOLE: {}}
-        }
 
         if (!widgetHashTable[clientId][data.hash])  {
             widgetHashTable[clientId][data.hash] = {}
