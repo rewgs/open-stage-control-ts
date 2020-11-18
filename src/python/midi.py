@@ -1,6 +1,7 @@
 from head import *
 from list import *
 from utils import *
+from mtc import *
 
 ipc_send('version', '1.7.0')
 
@@ -13,6 +14,10 @@ if 'list-only' in argv:
 
 # option: act as if displayed program is between 1-128 instead of 0-127
 PROGRAM_CHANGE_OFFSET = 'pc_offset' in argv
+# option: parse sysex
+ignore_sysex = 'sysex' not in argv
+# option: parse mtc
+ignore_mtc = 'mtc' not in argv
 
 inputs = {}
 outputs = {}
@@ -108,7 +113,16 @@ def create_callback(name):
 
             osc['address'] = MIDI_TO_OSC[mtype]
 
-            if mtype == SYSTEM_EXCLUSIVE:
+            if not ignore_mtc and is_mtc(message):
+
+                mtc = mtc_decode(message, name)
+                if mtc is None:
+                    return
+                else:
+                    osc['address'] = MIDI_TO_OSC[MIDI_TIME_CODE]
+                    osc['args'].append({'type': 'string', 'value': mtc})
+
+            elif mtype == SYSTEM_EXCLUSIVE:
                 # Parse the provided data into a hex MIDI data string of the form  'f0 7e 7f 06 01 f7'.
                 v = ' '.join([hex(x).replace('0x', '').zfill(2) for x in message])
                 osc['args'].append({'type': 'string', 'value': v})
@@ -134,7 +148,7 @@ def create_callback(name):
 
 
             if debug:
-                ipc_send('log','(DEBUG, MIDI) in: %s From: midi:%s' % (midi_str(message), name))
+                ipc_send('log','(DEBUG, MIDI) in: %s From: midi:%s' % (midi_str(message, name), name))
 
             ipc_send('osc', osc)
 
@@ -154,8 +168,6 @@ for name in inputs:
     inputs[name].set_callback(create_callback(name))
 
     # sysex / mtc support
-    ignore_sysex = 'sysex' not in argv
-    ignore_mtc = 'mtc' not in argv
     inputs[name].ignore_types(ignore_sysex, ignore_mtc, True)
 
 
@@ -188,22 +200,27 @@ def send_midi(name, event, *args):
 
     mtype = OSC_TO_MIDI[event]
 
-    if mtype == SYSTEM_EXCLUSIVE:
+    if mtype == SYSTEM_EXCLUSIVE or mtype == MIDI_TIME_CODE:
 
-        try:
-            m = []
-            for arg in args:
-                if type(arg) is str:
-                    arg = arg.replace(' ', '')                          # remove spaces
-                    arg = [arg[i:i+2] for i in range(0, len(arg), 2)]   # split in 2 chars bytes
-                    arg = [int(x, 16) for x in arg]                     # parse hex bytes
-                    for x in arg:
-                        m.append(x)
-                else:
-                    m.append(int(arg))
+        if mtype == MIDI_TIME_CODE:
 
-        except:
-            pass
+            m = mtc_encode(args)
+
+        else:
+            try:
+                m = []
+                for arg in args:
+                    if type(arg) is str:
+                        arg = arg.replace(' ', '')                          # remove spaces
+                        arg = [arg[i:i+2] for i in range(0, len(arg), 2)]   # split in 2 chars bytes
+                        arg = [int(x, 16) for x in arg]                     # parse hex bytes
+                        for x in arg:
+                            m.append(x)
+                    else:
+                        m.append(int(arg) & 0x7F)
+
+            except:
+                pass
 
     else:
 
@@ -231,7 +248,7 @@ def send_midi(name, event, *args):
         outputs[name].send_message(m)
 
         if debug:
-            ipc_send('log','(DEBUG, MIDI) out: %s To: midi:%s' % (midi_str(m), name))
+            ipc_send('log','(DEBUG, MIDI) out: %s To: midi:%s' % (midi_str(m, name), name))
 
 
 while True:

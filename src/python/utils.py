@@ -1,4 +1,5 @@
 from head import *
+from mtc import *
 
 MIDI_TO_OSC = {
     NOTE_ON: '/note',
@@ -7,6 +8,7 @@ MIDI_TO_OSC = {
     PROGRAM_CHANGE: '/program',
     PITCH_BEND: '/pitch',
     SYSTEM_EXCLUSIVE: '/sysex',
+    MIDI_TIME_CODE: '/mtc',
     CHANNEL_PRESSURE: '/channel_pressure',
     POLY_PRESSURE: '/key_pressure'
 }
@@ -17,16 +19,22 @@ OSC_TO_MIDI = {
     '/program': PROGRAM_CHANGE,
     '/pitch': PITCH_BEND,
     '/sysex': SYSTEM_EXCLUSIVE,
+    '/mtc': MIDI_TIME_CODE,
     '/channel_pressure': CHANNEL_PRESSURE,
     '/key_pressure': POLY_PRESSURE
 }
 
-def midi_str(message):
+def midi_str(message, port):
 
     mtype = message[0] & 0xF0
     s = 'UNKNOWN'
 
-    if mtype == SYSTEM_EXCLUSIVE:
+
+    if is_mtc(message):
+
+        s = 'MTC: timecode: %s' % mtc_decode(message, None)
+
+    elif mtype == SYSTEM_EXCLUSIVE:
 
         s = 'SYSTEM_EXCLUSIVE: sysex=%s' % ' '.join([hex(x).replace('0x', '').zfill(2) for x in message])
 

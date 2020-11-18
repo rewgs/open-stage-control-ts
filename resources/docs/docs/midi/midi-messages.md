@@ -69,9 +69,18 @@ System exclusive message.
 
 - `msg`: hexadecimal sysex data string of the form `f0 ... f7`.
 
-Other system messages may be sent (midi time code for example: `f1 <mtc value>`). Instead of a single hexadecimal string, arguments can be separated and defined either as hexadecimal bytes or as integers. When received, system messages are always formatted as a single hexadecimal string.
+Instead of a single hexadecimal string, arguments can be separated and defined either as hexadecimal bytes or as integers. When received, system messages are always formatted as a single hexadecimal string.
+
+----
+
+#### `/mtc timecode`
+
+MIDI time code message.
+
+- `timecode`: `hh:mm:ss:ff` string.
 
 
+Instead of a single hexadecimal string, arguments can be separated and defined either as hexadecimal bytes or as integers. When received, system messages are always formatted as a single hexadecimal string.
 
 ----
 

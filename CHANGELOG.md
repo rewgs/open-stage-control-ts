@@ -22,7 +22,7 @@ As of this version, packages except the `node` package are bundled with a midi b
   - server: provide readable error when a file requested by the client file is not found  
   - tab: content not drawn when changing visible property
   - matrix: addresses not generated property when matrix' address is `auto`
-  
+
 - ui
   - add console bottom panel with a simple script interpreter
 
@@ -34,6 +34,7 @@ As of this version, packages except the `node` package are bundled with a midi b
 - midi
   - accept sending sysex strings without spaces between the bytes
   - load prebuilt midi binary on 64bit linux/windows/osx
+  - add support for midi time code messages
 
 - misc
   - sessions converted from v0 will use the widget's html property to display the former label property
