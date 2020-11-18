@@ -101,7 +101,7 @@ class Matrix extends Panel {
         return {
             type: this.getProp('widgetType'),
             id: '@{parent.id}/' + i,
-            address: '@{parent.address}/' + i,
+            address: '#{@{parent.address} == "auto" ? "/" + @{parent.id} : @{parent.address}}/' + i,
             preArgs: '@{parent.preArgs}',
             target: '@{parent.target}',
             decimals: '@{parent.decimals}',

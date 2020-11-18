@@ -21,7 +21,8 @@ As of this version, packages except the `node` package are bundled with a midi b
   - ui: missing vertical scrollbar when root's height overflows the workspace
   - server: provide readable error when a file requested by the client file is not found  
   - tab: content not drawn when changing visible property
-
+  - matrix: addresses not generated property when matrix' address is `auto`
+  
 - ui
   - add console bottom panel with a simple script interpreter
 
