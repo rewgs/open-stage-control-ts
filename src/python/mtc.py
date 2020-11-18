@@ -39,7 +39,9 @@ def mtc_decode(message, port):
     else:
 
         mtc_bytes = message[5:-1]
-        mtc_bytes[0] = mtc_bytes[0] & 31
+
+        
+    mtc_bytes[0] = mtc_bytes[0] & 31
 
     return ":".join([str(x).zfill(2) for x in mtc_bytes])
 
