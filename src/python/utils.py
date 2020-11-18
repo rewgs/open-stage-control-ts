@@ -32,7 +32,7 @@ def midi_str(message, port):
 
     if is_mtc(message):
 
-        s = 'MTC: timecode: %s' % mtc_decode(message, None)
+        s = 'MTC: timecode=%s' % mtc_decode(message, None)
 
     elif mtype == SYSTEM_EXCLUSIVE:
 
