@@ -18,7 +18,7 @@ def mtc_decode(message, port):
         data = message[1] & 0xF
 
         if port not in mtc or mtc[port][4] == 8:
-            # 4th item is a piece counter
+            # last item is a piece counter
             mtc[port] = [0, 0, 0, 0, 0]
 
         mtc_index = 3 - piece // 2
