@@ -11,28 +11,28 @@ mtc = {}
 
 def mtc_decode(message, port):
     # with bits ©jeffmikels @ https://github.com/jeffmikels/timecode_tools/blob/master/tools.py (MIT)
-
+    # TODO: backward playback ?
     if message[0] == MIDI_TIME_CODE:
+
+        if port not in mtc:
+            mtc[port] = [0, 0, 0, 0, 0, 0 ,0 ,0]
 
         piece = (message[1] >> 4) & 0xF
         data = message[1] & 0xF
+        mtc[port][piece] = data
 
-        if port not in mtc or mtc[port][4] == 8:
-            # last item is a piece counter
-            mtc[port] = [0, 0, 0, 0, 0]
+        if piece == 7:
+            mtc_bytes = [0, 0, 0, 0]
+            for i in range(8):
 
-        mtc_index = 3 - piece // 2
-        if piece % 2 == 0:
-            # 'even' pieces came from the low nibble
-            mtc[port][mtc_index] += data
-        else:
-            # 'odd' pieces came from the high nibble
-            mtc[port][mtc_index] += data * 16
+                mtc_index = 3 - i // 2
+                if i % 2 == 0:
+                    # 'even' pieces came from the low nibble
+                    mtc_bytes[mtc_index] += mtc[port][i]
+                else:
+                    # 'odd' pieces came from the high nibble
+                    mtc_bytes[mtc_index] += mtc[port][i] * 16
 
-        mtc[port][4] += 1
-
-        if mtc[port][4] == 8 and (piece == 1 or piece == 7):
-            mtc_bytes = mtc[port][0:4]
         else:
             return None
 
@@ -40,7 +40,7 @@ def mtc_decode(message, port):
 
         mtc_bytes = message[5:-1]
 
-        
+
     mtc_bytes[0] = mtc_bytes[0] & 31
 
     return ":".join([str(x).zfill(2) for x in mtc_bytes])
