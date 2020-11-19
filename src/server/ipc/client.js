@@ -57,6 +57,8 @@ class Socket extends EventEmitter {
             }, hearbeatTimeout)
         }, hearbeatInterval)
 
+        this.emit('created')
+
     }
 
     close() {

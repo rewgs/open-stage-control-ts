@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.1
+
+- bug fixes
+  - regression causing server errors
+
 ## 1.7.0
 
 **Important change**

@@ -23,14 +23,19 @@ module.exports =  {
 
         if (settings.read('load') && !data.hotReload) return this.sessionOpen({path: settings.read('load')}, clientId)
 
-        if (!widgetHashTable[clientId])  {
-            widgetHashTable[clientId] = {CONSOLE: {typeTags: ''}}
-        }
-
     },
 
     close(data, clientId) {
         // client disconnected
+
+    },
+
+    created(data, clientId) {
+        // client created or reconnected
+
+        if (!widgetHashTable[clientId])  {
+            widgetHashTable[clientId] = {CONSOLE: {typeTags: ''}}
+        }
 
     },
 
