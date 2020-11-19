@@ -138,7 +138,7 @@ Loads a state object. If the event that triggered the script's execution was ini
 
 ----
 
-#### `storage`: `localStorage`
+#### `storage`
 
 Global [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) instance, allows storing data that persists upon refresh/relaunch.
 
