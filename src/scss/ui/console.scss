@@ -48,6 +48,7 @@ osc-console {
     padding: $padding;
     overflow-y: auto;
     border-bottom: 1rem solid var(--color-background);
+    user-select: text;
 }
 
 osc-console-message {
