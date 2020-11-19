@@ -49,6 +49,8 @@ class Ipc extends EventEmitter {
 
             }
 
+            this.clients[id].emit('created')
+
         })
 
     }
