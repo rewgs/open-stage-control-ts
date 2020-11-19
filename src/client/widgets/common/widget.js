@@ -127,7 +127,7 @@ class Widget extends EventEmitter {
                 ]},
                 target: {type: 'string|array|null', value: '', help: [
                     'This defines the targets of the widget\'s OSC messages',
-                    '- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:port"]`',
+                    '- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:portA", "ip:portB"]`',
                     '- If midi is enabled, targets can be `midi:device_name`',
                     '- If no target is set, messages can still be sent if the server has default targets',
                 ]},
