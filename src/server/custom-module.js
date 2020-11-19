@@ -86,7 +86,7 @@ class CustomModule {
         var code
 
         try {
-            code = fs.readFileSync(this.filename, 'utf8')
+            code = fs.readFileSync(this.filename, {encoding: 'utf8', flag: 'rs'}) // flag 'rs' to avoid cache issue on windows
         } catch(err) {
             console.error(`(ERROR) ${this.submodule ? 'Submodule' : 'Custom module'} not found: ${this.filename}`)
             return false
