@@ -80,8 +80,6 @@ MIDI time code message.
 - `timecode`: `hh:mm:ss:ff` string.
 
 
-Instead of a single hexadecimal string, arguments can be separated and defined either as hexadecimal bytes or as integers. When received, system messages are always formatted as a single hexadecimal string.
-
 ----
 
 #### `/channel_pressure channel pressure`
