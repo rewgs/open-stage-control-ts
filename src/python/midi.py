@@ -3,7 +3,7 @@ from list import *
 from utils import *
 from mtc import *
 
-ipc_send('version', '1.7.0-mtc')
+ipc_send('version', '1.7.2')
 
 if 'list' in argv:
     list()

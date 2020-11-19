@@ -2,7 +2,7 @@ var {PythonShell} = require('python-shell'),
     fs = require('fs'),
     path = require('path'),
     settings = require('./settings'),
-    midiVersion = '1.7.0-mtc'
+    midiVersion = '1.7.2'
 
 var pythonOptions = {
     scriptPath:__dirname,
