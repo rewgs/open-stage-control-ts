@@ -55,7 +55,7 @@ osc-console-message {
     user-select: text;
     cursor: text;
     display: block;
-    white-space: pre;
+    white-space: pre-line;
     position: relative;
     padding-left: 10rem;
     &:before {
@@ -98,6 +98,10 @@ osc-console-message {
     }
 
     margin-bottom: 4rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 
     .edit-widget {
         cursor: pointer;
