@@ -219,15 +219,15 @@ class Editor {
                 break
 
             case 'mod + c':
-                this.copyWidget()
+                if (!window.getSelection().toString().length) this.copyWidget()
                 break
 
             case 'mod + x':
-                this.cutWidget()
+                if (!window.getSelection().toString().length) this.cutWidget()
                 break
 
             case 'mod + v':
-                this.pasteWidget(this.mousePosition.x, this.mousePosition.y, false)
+                if (!window.getSelection().toString().length) this.pasteWidget(this.mousePosition.x, this.mousePosition.y, false)
                 break
 
             case 'mod + shift + v':
