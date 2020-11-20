@@ -22,6 +22,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
             class_specific: {
                 origin: null,
                 steps: null,
+                ticks: {type: 'number', value: '', help: 'Defines the granularity / verbosity of the encoder (number of step for a 360° arc)'},
                 sensitivity: {type: 'number', value: 1, help: 'When set between 0 and 1, reduces the encoder\'s verbosity'},
                 back: {type: '*', value: -1, help: 'Defines which value is sent when rotating the encoder anticlockwise'},
                 forth: {type: '*', value: 1, help: 'Defines which value is sent when rotating the encoder clockwise'},
@@ -160,7 +161,19 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
         this.previousPercent = this.percent
         this.percent = percent
 
-        if (this.percent === this.previousPercent) return
+        if (this.getProp('ticks')) {
+
+            var div = 100 / this.getProp('ticks'),
+                p =  Math.round(this.percent / div) * div,
+                pp =  Math.round(this.previousPercent / div) * div
+
+            if (p === pp) return
+
+        } else {
+
+            if (this.percent === this.previousPercent) return
+
+        }
 
         var dir = this.percent > this.previousPercent
 

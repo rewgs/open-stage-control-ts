@@ -1,10 +1,15 @@
 # Changelog
 
+## 1.7.3
+
+- widgets
+  - encoder: add  `ticks` property back
+
 ## 1.7.2
 
 - bug fixes
   - midi: mtc parsing error
-  - custom module: hot reload cache issue on windows 
+  - custom module: hot reload cache issue on windows
 
 
 ## 1.7.1
