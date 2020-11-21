@@ -2,6 +2,9 @@
 
 ## 1.7.3
 
+- bug fixes
+  - custom module: prevent reloading the module while the file is being written to
+
 - widgets
   - encoder: add  `ticks` property back
 

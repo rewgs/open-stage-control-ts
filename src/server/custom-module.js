@@ -65,7 +65,7 @@ class CustomModule {
 
         this.load()
 
-        this.watcher = chokidar.watch(this.filename).on('change', ()=>{
+        this.watcher = chokidar.watch(this.filename, {awaitWriteFinish: {stabilityThreshold: 200}}).on('change', ()=>{
             if (this.submodule) {
                 console.log('(INFO) Submodule changed: ' + this.filename)
                 this.parent.reload()
