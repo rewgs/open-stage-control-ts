@@ -4,6 +4,7 @@
 
 - bug fixes
   - custom module / theme: prevent reloading the module while the file is being written to
+  - server: if a theme is used, attempt to resolve image urls against the theme file's location
 
 - widgets
   - encoder: add  `ticks` property back

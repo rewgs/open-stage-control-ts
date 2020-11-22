@@ -38,6 +38,9 @@ if (settings.read('client-options')) {
     }
 }
 
+var resolveDirs = theme.files.map(x=>path.dirname(x))
+resolveDirs = resolveDirs.filter((x, index)=>{return resolveDirs.indexOf(x) === index})
+resolveDirs.push('') // absolute
 
 function httpRoute(req, res) {
 
@@ -91,20 +94,22 @@ function httpRoute(req, res) {
             url = url.replace(/^\/([^/]*:)/, '$1') // strip leading slash
 
             if (url.match(/.(svg|jpg|jpeg|png|apng|gif|webp|tiff|xbm|bmp|ico|ttf|otf|woff|woff2|html|css|js)(\?[0-9]*)?$/i)) {
-                try {
-                    // relative resolution (to session path)
-                    var id = urlparser.parse('?' + req.headers.cookie, true).query.client_id,
-                        sessionPath = path.dirname(ipc.clients[id].sessionPath)
 
-                    res.sendFile(path.resolve(sessionPath + url))
-                } catch(e) {
-                    // absolute resolution
+                // Resolution order: session path, theme path, absolute path
+
+                var id = urlparser.parse('?' + req.headers.cookie, true).query.client_id,
+                    sessionPath = path.dirname(ipc.clients[id].sessionPath)
+
+                for (var i = -1; i < resolveDirs.length; i++) {
+                    var p = i === -1 ? sessionPath : resolveDirs[i]
                     try {
-                        res.sendFile(path.resolve(url))
-                    } catch(e) {
-                        console.error(`(ERROR, HTTP) File not found: ${url}`)
-                    }
+                        res.sendFile(path.resolve(p, url))
+                        return true
+                    } catch(e) {}
                 }
+
+                console.error(`(ERROR, HTTP) File not found: ${url}`)
+
             } else if (url.includes('/osc-ping')) {
                 httpCheck(true)
             } else {
