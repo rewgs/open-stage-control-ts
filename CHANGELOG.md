@@ -4,6 +4,7 @@
 
 - bug fixes
   - custom module / theme: prevent reloading the module while the file is being written to
+  - modal/button: prevent error when `label` is updated
 
 - widgets
   - encoder: add  `ticks` property back

@@ -202,6 +202,8 @@ class Button extends Widget {
 
     updateLabel() {
 
+        if (!this.label) return
+
         if (this.getProp('label') === false) {
 
             if (this.widget.contains(this.label)) this.widget.removeChild(this.label)

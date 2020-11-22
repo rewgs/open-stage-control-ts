@@ -207,6 +207,8 @@ class Modal extends Panel {
 
     updateLabel() {
 
+        if (!this.label) return
+
         if (this.getProp('label') === false) {
 
             if (this.container.contains(this.label)) this.container.removeChild(this.label)
