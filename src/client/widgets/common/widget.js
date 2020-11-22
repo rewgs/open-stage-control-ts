@@ -1,6 +1,6 @@
 var EventEmitter = require('../../events/event-emitter'),
     osc = require('../../osc'),
-    nanoid = require('nanoid/generate'),
+    {nanoid} = require('nanoid'),
     widgetManager = require('../../managers/widgets'),
     {urlParser} = require('../utils'),
     Vm = require('../vm'),
@@ -180,7 +180,7 @@ class Widget extends EventEmitter {
         this.errors = {}
         this.parent = options.parent
         this.parentNode = options.parentNode
-        this.hash = options.hash || nanoid('abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ', 10)
+        this.hash = options.hash || nanoid(10)
         this.children = []
         this.reCreateOptions = options.reCreateOptions
         this.removed = false

@@ -1,6 +1,6 @@
 var EventEmitter = require('../events/event-emitter'),
     cache = require('../managers/cache'),
-    nanoid = require('nanoid/generate'), uuid,
+    {nanoid} = require('nanoid'), uuid,
     notifications,
     locales
 
@@ -8,7 +8,7 @@ var localUuid = ENV.id || cache.get('osc.uuid', false)
 if (localUuid) {
     uuid = localUuid
 } else {
-    uuid = nanoid('0123456789abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ', 10)
+    uuid = nanoid(10)
     cache.set('uuid', uuid, false)
 }
 
