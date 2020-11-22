@@ -102,8 +102,9 @@ function httpRoute(req, res) {
 
                 for (var i = -1; i < resolveDirs.length; i++) {
                     var p = i === -1 ? sessionPath : resolveDirs[i]
+                    p = path.resolve(path.join(p, url))
                     try {
-                        res.sendFile(path.resolve(p, url))
+                        res.sendFile(p)
                         return true
                     } catch(e) {}
                 }
