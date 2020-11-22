@@ -36,7 +36,7 @@ class Theme {
             }
         }
 
-        if (!this.files.length) {
+        if (this.files.length) {
 
             this.watcher = chokidar.watch(this.files, {awaitWriteFinish: {stabilityThreshold: 200}}).on('change', ()=>{
                 if (!ipc) ipc = require('./server').ipc
