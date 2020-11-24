@@ -33,7 +33,7 @@ function createCertificate() {
 
     var attrs = [
         {name:'commonName',value: settings.infos.name},
-        {name:'subjectAltName',value:[]}
+        {name:'subjectAltName',value: settings.infos.productName}
     ]
 
     cert.setSubject(attrs)
@@ -55,7 +55,11 @@ if (!certificate) {
 
     var cert = pki.certificateFromPem(certificate.cert)
 
-    if (new Date() > new Date(cert.validity.notAfter) || cert.serialNumber === '00') {
+    if (
+        cert.serialNumber === '00' ||
+        new Date() > new Date(cert.validity.notAfter) ||
+        cert.subject.attributes[1].value !== settings.infos.productName
+    ) {
         console.log('(INFO) Self-signed ssl certificate in cache has expired or is invalid')
         createCertificate()
     } else {
