@@ -1,4 +1,4 @@
-var {remote} = eval('require(\'electron\')'),
+var {remote} = require('electron'),
     {Menu, MenuItem} = remote.require('electron'),
     menu = new Menu()
 

@@ -18,7 +18,8 @@ module.exports = function(options={}) {
         autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: !!options.node,
-
+            contextIsolation: !options.node,
+            enableRemoteModule: !!options.node
         },
         show: false,
     })

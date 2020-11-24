@@ -1,4 +1,4 @@
-var {remote, ipcRenderer} = eval('require(\'electron\')'),
+var {remote, ipcRenderer} = require('electron'),
     {Menu, MenuItem} = remote.require('electron'),
     menu = new Menu(),
     terminal = require('./terminal'),

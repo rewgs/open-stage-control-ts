@@ -23,21 +23,5 @@ build({
     exclude: [
         'electron',
         './fsevents.node'  // osx binary module, to be copied as is
-    ],
-    transforms: [
-        [babelify, {
-            'presets': [
-                ['@babel/env', {
-                    'targets': {
-                        'node': '6',
-                    },
-                    'useBuiltIns': 'usage',
-                    'corejs': 3
-                }]
-            ],
-            'plugins': ['@babel/plugin-proposal-object-rest-spread'],
-            'global': true,
-            'only': ['**/ws/', '**/yargs/', '**/find-up/', '**/locate-path', '**/p-locate']
-        }]
     ]
 })()

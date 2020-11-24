@@ -1,4 +1,4 @@
-var {remote, ipcRenderer} = eval('require(\'electron\')'),
+var {remote, ipcRenderer} = require('electron'),
     {dialog} = remote.require('electron'),
     fs = remote.require('fs'),
     settings = remote.getGlobal('settings'),

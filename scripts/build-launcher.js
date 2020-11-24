@@ -9,5 +9,8 @@ build({
         detectGlobals: false,
         bare: true,
         noParse: ['**/mathjs/dist/math.min.js']
-    }
+    },
+    exclude: [
+        'electron',
+    ]
 })()

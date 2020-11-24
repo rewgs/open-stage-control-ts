@@ -1,4 +1,4 @@
-var {ipcRenderer} = eval('require(\'electron\')'),
+var {ipcRenderer} = require('electron'),
     ansiHTML = require('ansi-html'),
     html = require('nanohtml')
 
