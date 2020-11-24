@@ -180,7 +180,7 @@ class Widget extends EventEmitter {
         this.errors = {}
         this.parent = options.parent
         this.parentNode = options.parentNode
-        this.hash = options.hash || nanoid(10)
+        this.hash = options.hash || 'W' + nanoid(9)
         this.children = []
         this.reCreateOptions = options.reCreateOptions
         this.removed = false
