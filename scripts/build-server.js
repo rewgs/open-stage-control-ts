@@ -20,7 +20,10 @@ build({
         browserField: false,
     },
     ignore: 'serialport',
-    exclude: ['electron', './fsevents.node'], // osx binary module, to be copied as is
+    exclude: [
+        'electron',
+        './fsevents.node'  // osx binary module, to be copied as is
+    ],
     transforms: [
         [babelify, {
             'presets': [
