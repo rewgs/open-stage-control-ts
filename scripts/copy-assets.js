@@ -8,6 +8,7 @@ var cpr = require('cpr'),
         ['../src/python/', '../app/server/python/'],
         ['../resources/fonts/', '../app/assets/fonts/'],
         ['../src/html/launcher.html', '../app/launcher/index.html'],
+        ['../node_modules/fsevents/fsevents.node', '../app/server/fsevents.node'],
     ]
 
 for (var i in files) {
