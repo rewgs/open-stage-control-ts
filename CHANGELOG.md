@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.4
+
+- bug fixes
+  - editor: cloned `dropdown` and `input` widgets not opening when selected.
+
 ## 1.7.3
 
 - bug fixes

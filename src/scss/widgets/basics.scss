@@ -516,9 +516,16 @@
 
 }
 
-.editor-enabled .dropdown-container:not(.editing) select {
-    // prevent input focus when selecting
-    pointer-events: none;
+.editor-enabled {
+    .dropdown-container select {
+        // prevent input focus when selecting
+        pointer-events: none;
+    }
+    .clone-container.editing .dropdown-container select,
+    .dropdown-container.editing select {
+        // prevent input focus when selecting
+        pointer-events: auto;
+    }
 }
 
 
@@ -589,9 +596,16 @@
 
 }
 
-.editor-enabled .input-container:not(.editing) inner {
-    // prevent input focus when selecting
-    pointer-events: none;
+.editor-enabled {
+    .input-container select {
+        // prevent input focus when selecting
+        pointer-events: none;
+    }
+    .clone-container.editing .input-container select,
+    .input-container.editing select {
+        // prevent input focus when selecting
+        pointer-events: auto;
+    }
 }
 
 
