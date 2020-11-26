@@ -15,10 +15,14 @@ if (settings.remote.read('checkForUpdates') && navigator.onLine) {
 
     request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
-            var data = JSON.parse(request.responseText)
+            var data = JSON.parse(request.responseText),
+                current = 'v' + window.PACKAGE.version,
+                latest = data[0].name
 
-            if (semver.gt(data[0].name, 'v' + window.PACKAGE.version)) {
-                terminal.log(`(INFO) A new version is available : <a target="_blank" href="https://github.com/jean-emmanuel/open-stage-control/releases">${data[0].name}</a>`, 'info')
+            if (semver.gt(latest, current)) {
+                terminal.log(`(INFO) A new version is available : <a target="_blank" href="https://github.com/jean-emmanuel/open-stage-control/releases">${latest}</a>`, 'info')
+            } else if (semver.gt(current, latest)) {
+                terminal.log(`(INFO) Using unreleased version ${current}`, 'info')
             }
 
         }
