@@ -42,6 +42,8 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
             </inner>
         `})
 
+        this.noValueState = true
+        
         if (!this.getProp('border')) this.container.classList.add('noborder')
         this.frame = DOM.get(this.widget, '.frame')[0]
 

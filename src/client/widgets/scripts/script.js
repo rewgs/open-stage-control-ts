@@ -42,6 +42,8 @@ class Script extends Widget {
 
         super({...options, html: null})
 
+        this.noValueState = true
+
         this.builtIn = options.builtIn
 
         this.scriptLock = false

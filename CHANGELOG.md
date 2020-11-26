@@ -3,7 +3,8 @@
 ## 1.7.4
 
 - bug fixes
-  - editor: cloned `dropdown` and `input` widgets not opening when selected.
+  - editor: cloned `dropdown` and `input` widgets not opening when selected
+  - widgets: prevent value-stateless widgets (tap buttons, clone, scripts, html and svg) from sending a value for cross-client synchronization (leads to unexpected script execution) and exclude them from state saves
 
 ## 1.7.3
 

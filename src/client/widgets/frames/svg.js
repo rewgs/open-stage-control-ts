@@ -38,6 +38,8 @@ class Svg extends StaticProperties(Widget, {bypass: true}) {
             </inner>
         `})
 
+        this.noValueState = true
+
         this.frame = DOM.get(this.widget, '.frame')[0]
 
         this.height = undefined

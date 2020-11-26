@@ -41,6 +41,8 @@ class Clone extends Container() {
 
         super({...options, html: html`<div class="clone"></div>`})
 
+        this.noValueState = true
+
         this.cloneLock = false
         this.cloneTarget = null
         this.cloneClass = []

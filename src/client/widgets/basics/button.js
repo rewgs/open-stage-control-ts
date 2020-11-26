@@ -132,7 +132,7 @@ class Button extends Widget {
 
         }
 
-
+        if (tap) this.noValueState = true
 
         this.value = this.getProp('off')
 

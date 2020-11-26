@@ -35,7 +35,7 @@ var StateManager = class StateManager {
 
             if (filter && !filter(widget)) continue
 
-            if (widget.setValue && widget.getValue) {
+            if (widget.setValue && widget.getValue && !widget.noValueState) {
 
                 var v = widget.getValue()
 
@@ -83,7 +83,7 @@ var StateManager = class StateManager {
 
             var widget = widgetManager.widgets[i]
 
-            if (widget.sendValue) {
+            if (widget.sendValue && !widget.noValueState) {
                 widget.sendValue(null, options)
             }
         }
