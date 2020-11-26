@@ -22,7 +22,7 @@ if (settings.remote.read('checkForUpdates') && navigator.onLine) {
             if (semver.gt(latest, current)) {
                 terminal.log(`(INFO) A new version is available : <a target="_blank" href="https://github.com/jean-emmanuel/open-stage-control/releases">${latest}</a>`, 'info')
             } else if (semver.gt(current, latest)) {
-                terminal.log(`(INFO) Using unreleased version ${current}`, 'info')
+                terminal.log(`(WARNING) Using development version ${current}`, 'warning')
             }
 
         }
