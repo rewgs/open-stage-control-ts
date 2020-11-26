@@ -1,6 +1,7 @@
 var terminal = require('./terminal'),
     settings = require('./settings'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    semver = require('semver')
 
 require('./toolbar')
 require('./context-menu')
@@ -16,7 +17,7 @@ if (settings.remote.read('checkForUpdates') && navigator.onLine) {
         if (request.status >= 200 && request.status < 400) {
             var data = JSON.parse(request.responseText)
 
-            if (data[0].name != 'v' + window.PACKAGE.version) {
+            if (semver.gt(data[0].name, 'v' + window.PACKAGE.version)) {
                 terminal.log(`(INFO) A new version is available : <a target="_blank" href="https://github.com/jean-emmanuel/open-stage-control/releases">${data[0].name}</a>`, 'info')
             }
 
