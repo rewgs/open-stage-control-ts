@@ -2,7 +2,7 @@
 
 The `script` property allows widgets to run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) code when their value update.
 
-!!! info "It's slightly different from the [javascript property syntax ](./advanced-syntaxes/#javascript-js-code)"
+!!! info "It's slightly different from the [javascript property syntax ](../advanced-syntaxes/#javascript-js-code)"
 
     - no `JS{{}}` wrapper, just the code
     - `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their literal value before the script's compilation, therefore **it is recommended to avoid these syntaxes** and use `getProp()` and `get()` instead.
