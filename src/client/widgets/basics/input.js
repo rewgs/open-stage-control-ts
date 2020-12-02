@@ -139,7 +139,7 @@ class Input extends Canvas {
 
     setValue(v, options={} ) {
 
-        if (this.validation && !String(v).match(this.validation)) {
+        if (this.validation && !this.getStringValue(v).match(this.validation)) {
             this.input.value = this.value
             return
         }
@@ -152,7 +152,7 @@ class Input extends Canvas {
 
         if (this.value === '' || this.value === null) this.value = this.getProp('default')
 
-        this.stringValue = this.getStringValue()
+        this.stringValue = this.getStringValue(this.value)
         this.batchDraw()
 
         if (options.send && !options.fromSync) this.sendValue()
@@ -184,11 +184,11 @@ class Input extends Canvas {
 
     }
 
-    getStringValue() {
-        if (this.value === undefined) return ''
-        return typeof this.value != 'string' ?
-            JSON.stringify(deepCopy(this.value, this.decimals)).replace(/,/g, ', ') :
-            this.value
+    getStringValue(v) {
+        if (v === undefined) return ''
+        return typeof v != 'string' ?
+            JSON.stringify(deepCopy(v, this.decimals)).replace(/,/g, ', ') :
+            v
     }
 
 }
