@@ -4,12 +4,41 @@ var {clip} = require('../utils'),
 
 var faderDefaults = Fader.defaults()._props()
 
+var rangePassedProps = ['horizontal', 'snap', 'steps', 'spring', 'range', 'decimals', 'logScale', 'sensitivity']
+
+class SubFader extends Fader {
+
+    getProp(propName) {
+
+        if (rangePassedProps.includes(propName)) {
+
+            return this.parent.getProp(propName)
+
+        } else {
+
+            return super.getProp(propName)
+
+        }
+
+    }
+
+}
+
 class Range extends Fader {
 
     static description() {
 
         return 'A fader with two heads for setting a range.'
 
+    }
+
+    static defaults() {
+
+        return super.defaults(Fader).extend({
+            class_specific: {
+                origin: null,
+            }
+        })
     }
 
     constructor(options) {
@@ -21,34 +50,19 @@ class Range extends Fader {
         `})
 
         this.faders = [
-            new Fader({props:{
+            new SubFader({props:{
                 ...faderDefaults,
                 pips:false,
                 visible: false,
-                horizontal:this.getProp('horizontal'),
                 default:this.getProp('default').length === 2 ? this.getProp('default')[0] : this.getProp('range').min,
-                snap:this.getProp('snap'),
-                steps:this.getProp('steps'),
-                spring:this.getProp('spring'),
-                range:this.getProp('range'),
-                decimals:this.getProp('decimals'),
-                logScale:this.getProp('logScale'),
-                sensitivity:this.getProp('sensitivity'),
+                origin:this.getProp('default').length === 2 ? this.getProp('default')[0] : this.getProp('range').min,
             }, parent: this}),
-            new Fader({props:{
+            new SubFader({props:{
                 ...faderDefaults,
                 pips:false,
                 visible: false,
-                horizontal:this.getProp('horizontal'),
                 default:this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
-                origin: this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
-                steps:this.getProp('steps'),
-                snap:this.getProp('snap'),
-                spring:this.getProp('spring'),
-                range:this.getProp('range'),
-                decimals:this.getProp('decimals'),
-                logScale:this.getProp('logScale'),
-                sensitivity:this.getProp('sensitivity'),
+                origin:this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
             }, parent: this})
         ]
 
@@ -210,7 +224,7 @@ class Range extends Fader {
         var d = Math.round(fader.percentToCoord(fader.valueToPercent(this.faders[this.getProp('horizontal')?0:1].value))),
             d2 = Math.round(fader.percentToCoord(fader.valueToPercent(this.faders[this.getProp('horizontal')?1:0].value))),
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
-            dashed = this.getProp('dashed'),
+            dashed = this.dashed,
             compact = this.getProp('design') === 'compact',
             knobHeight = this.cssVars.knobSize, knobWidth = knobHeight * .6
 
@@ -373,6 +387,18 @@ class Range extends Fader {
 
     }
 
+    onPropChanged(propName, options, oldPropValue) {
+
+        if (super.onPropChanged(...arguments)) return true
+
+        if (rangePassedProps.includes(propName)) {
+            for (var f of this.faders) {
+                f.onPropChanged(...arguments)
+            }
+        }
+
+    }
+
     onRemove() {
 
         this.faders[0].onRemove()
@@ -382,10 +408,5 @@ class Range extends Fader {
     }
 
 }
-
-
-Range.dynamicProps = Range.prototype.constructor.dynamicProps
-    .filter(n => !['spring', 'decimals', 'steps'].includes(n))
-
 
 module.exports = Range
