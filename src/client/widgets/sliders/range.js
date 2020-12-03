@@ -337,12 +337,12 @@ class Range extends Fader {
             this.ctx.fillStyle = this.cssVars.colorFill
 
             this.ctx.beginPath()
-            this.ctx.arc(m, d, 3 * PXSCALE, 0, 2 * Math.PI)
+            this.ctx.arc(m, d, knobHeight / 6, 0, 2 * Math.PI)
             this.ctx.fill()
 
             // extra knob
             this.ctx.beginPath()
-            this.ctx.arc(m, d2, 3 * PXSCALE, 0, 2 * Math.PI)
+            this.ctx.arc(m, d2, knobHeight / 6, 0, 2 * Math.PI)
             this.ctx.fill()
 
 
@@ -351,16 +351,16 @@ class Range extends Fader {
                 this.ctx.fillStyle = this.cssVars.colorFill
 
                 this.ctx.beginPath()
-                this.ctx.arc(m, d, 10 * PXSCALE, 0, 2 * Math.PI)
+                this.ctx.arc(m, d, knobHeight / 2, 0, 2 * Math.PI)
                 this.ctx.fill()
 
                 // extra knob
                 this.ctx.beginPath()
-                this.ctx.arc(m, d2, 10 * PXSCALE, 0, 2 * Math.PI)
+                this.ctx.arc(m, d2, knobHeight / 2, 0, 2 * Math.PI)
                 this.ctx.fill()
             }
 
-            this.clearRect = [m - 11 * PXSCALE, this.gaugePadding - 11 * PXSCALE, 22 * PXSCALE, height - 2 * this.gaugePadding + 22 * PXSCALE]
+            this.clearRect = [m - knobHeight / 2 - PXSCALE, this.gaugePadding - knobHeight / 2 - PXSCALE, knobHeight + 2 * PXSCALE, height - 2 * this.gaugePadding + knobHeight + 2 * PXSCALE]
 
         }
 
