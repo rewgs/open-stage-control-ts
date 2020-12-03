@@ -28,6 +28,7 @@ class Range extends Fader {
                 horizontal:this.getProp('horizontal'),
                 default:this.getProp('default').length === 2 ? this.getProp('default')[0] : this.getProp('range').min,
                 snap:this.getProp('snap'),
+                steps:this.getProp('steps'),
                 spring:this.getProp('spring'),
                 range:this.getProp('range'),
                 decimals:this.getProp('decimals'),
@@ -41,6 +42,7 @@ class Range extends Fader {
                 horizontal:this.getProp('horizontal'),
                 default:this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
                 origin: this.getProp('default').length === 2 ? this.getProp('default')[1] : this.getProp('range').max,
+                steps:this.getProp('steps'),
                 snap:this.getProp('snap'),
                 spring:this.getProp('spring'),
                 range:this.getProp('range'),
@@ -383,7 +385,7 @@ class Range extends Fader {
 
 
 Range.dynamicProps = Range.prototype.constructor.dynamicProps
-    .filter(n => !['spring', 'decimals'].includes(n))
+    .filter(n => !['spring', 'decimals', 'steps'].includes(n))
 
 
 module.exports = Range

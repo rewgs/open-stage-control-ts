@@ -6,6 +6,7 @@
   - editor: cloned `dropdown` and `input` widgets not opening when selected
   - widgets: prevent value-stateless widgets (tap buttons, clone, scripts, html and svg) from sending a value for cross-client synchronization (leads to unexpected script execution) and exclude them from state saves
   - input: apply `decimals` number before checking the value against the `validation` expression
+  - range: `steps` property not working
 
 ## 1.7.3
 
