@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.5
+
+- bug fixes
+  - ios: cloned menu not displayed correctly
+
 ## 1.7.4
 
 - bug fixes
