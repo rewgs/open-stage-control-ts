@@ -1,24 +1,18 @@
 # Advanced syntaxes
 
+Advanced syntaxes are special blocks of code that can be written in the widgets properties to customize the widgets and how they behave. These blocks end up replaced with the value they hold before the widgets' evualate the properties they're in.
+
+
 ## Inheritance: `@{id.property}`
 
-Widgets can use each other's properties values and update automatically when they change by using this syntax.
+The inheritance syntax returns either a widget's value or one of its properties. When using this syntax, value or property changes will be applied automatically.
 
-- `id`: the target widget's `id`
-- `property`: is the target widget's property name
+- `id`: target widget's `id`. A widget can fetch its own properties or its direct parent's by using the keywords `this` or `parent` instead of `id`. When `this` or `parent` can be used, using the target widget's `id` instead won't work.
+- `property`: target widget's property name. If ommitted (along with the dot), the widget's value will be returned (`@{widgetId}` is the same as `@{widgetId.value}`). `value` always resolves to the target widget's current value, not its `value` property.
 
 
-#### Value
-
-The property name (and the dot) can be omitted and defaults to `value` (`@{widgetId}` => `@{widgetId.value}`). `value` always resolves to the target widget's current value, not its `value` property
-
-#### `this` & `parent`
-
-A widget can fetch its own properties or its direct parent's by using the keywords `this` or `parent` instead of `id`. When `this` or `parent` can be used, using the target widget's `id` instead won't work.
-
-#### `uuid`
-
-Each widget has a unique random identifier that can be retreived with the property name `uuid` (e.g. `@{this.uuid}`, `@{parent.uuid}`).
+!!! note "Unique indentifier"
+    Each widget has a unique random identifier that can be retreived with the property name `uuid` (e.g. `@{this.uuid}`, `@{parent.uuid}`).
 
 #### Dynamic properties
 
@@ -44,7 +38,7 @@ The inheritance syntax supports 1-level nesting for defining the target widget's
 
 ## OSC listeners: `OSC{address, default, usePreArgs}`
 
-This syntax allows listening on an osc address to define a property.
+The OSC listener syntax returns the value received on specified address (or the `default` value if none has been received yet).
 
 - `address`: osc address to listen to; if the leading slash (`/`) is omitted, the address will be prefixed with the widget's `address` property
 - `default` (optional): default value returned before any message is received. Must be a primitive value, not an object or an array.
@@ -71,7 +65,7 @@ This syntax allows writing formulas in [Javascript](https://developer.mozilla.or
 - javascript [strict mode](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode) is always enabled
 - `setTimeout` and `setInterval` functions are not available
 
-A property cannot contain multiple `JS{{}}` blocks
+A property *cannot* contain multiple `JS{{}}` blocks
 
 #### Available variables
 
@@ -84,16 +78,18 @@ A property cannot contain multiple `JS{{}}` blocks
     - `url`: server url,
     - `platform`: operating system as seen by the client
 
-In this context, `@{} / OSC{}` are also seen as variables (named `VAR_XXX`), not as the value they hold.
+In this context, `@{} / OSC{}` are seen as variables, they are simply replaced as the value they hold. When they change, the whole block will be evaluated again.
 
-Parsing errors can be read in the DevTool console (F12).
+Parsing errors can be read in the console (++ctrl+k++).
 
 !!! warning
     Modifying values in `locals` or `globals` **does not** trigger anything if they are used somewhere else.
 
 ## Javascript: `#{ <code> }`
 
-This is a shorthand for the `JS{{}}` syntax, the only difference being that `<code>` is automatically prepended with a `return` statement. A property can contain multiple `#{}` blocks.
+This is a shorthand for the `JS{{}}` syntax, the only difference being that `<code>` is automatically prepended with a `return` statement.
+
+A property *can* contain multiple `#{}` blocks.
 
 !!! note "Compilation order"
     `#{}` blocks are compiled after `JS{{}}` blocks
