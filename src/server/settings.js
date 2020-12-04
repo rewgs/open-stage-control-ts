@@ -148,11 +148,23 @@ module.exports = {
 
         if (!tmp && configPathExists) {
 
-            config[key] = value
-            fs.writeFile(configPath, JSON.stringify(config, null, 4), function(err, data) {
-                if (err) throw err
-            })
+            if (process.send) {
+                // server running as child process of launcher
+                // -> just pass the modification to the launcher process
+                process.send(['settings.write', [key, value]])
+            } else {
+                config[key] = value
+                fs.writeFile(configPath, JSON.stringify(config, null, 4), function(err, data) {
+                    if (err) throw err
+                })
 
+            }
+
+        }
+
+        // we are in launcher process -> update server process' config
+        if (global.serverProcess) {
+            global.serverProcess.send(['settings.write', [key, value]])
         }
 
     },
@@ -160,4 +172,15 @@ module.exports = {
     configPath: baseDir,
     infos: infos,
     appAddresses: ()=>address(module.exports.read('use-ssl') ? 'https://' : 'http://', settings.options.port || 8080)
+}
+
+if (process.send) {
+    // server running as child process of launcher
+    // update local config when the main config is modified
+    process.on('message', function(data) {
+        var [command, args] = data
+        if (command === 'settings.write') {
+            module.exports.write(args[0], args[1], true)
+        }
+    })
 }

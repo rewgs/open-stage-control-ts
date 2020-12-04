@@ -108,7 +108,7 @@ if (settings.cli) {
         path = require('path'),
         address = 'file://' + path.resolve(__dirname + '/../launcher/' + 'index.html'),
         {ipcMain} = require('electron'),
-        {spawn} = require('child_process'),
+        {fork} = require('child_process'),
         launcher
 
     process.on('exit',()=>{
@@ -152,7 +152,7 @@ if (settings.cli) {
 
     ipcMain.on('start',function(e, options){
 
-        var args = ['--', app.getAppPath(), '--no-gui']
+        var args = ['--no-gui']
 
         // if (process.platform === 'win32') args.unshift('--') // not needed with ELECTRON_RUN_AS_NODE since '--' is always prepended
         for (var k in settings.read('options')) {
@@ -165,7 +165,7 @@ if (settings.cli) {
             }
         }
 
-        global.serverProcess = spawn(process.argv[0], args, {stdio: 'pipe', env: {...process.env, 'ELECTRON_RUN_AS_NODE':'1'}})
+        global.serverProcess = fork(app.getAppPath(), args, {stdio: 'pipe', env: process.env})
         launcher.webContents.send('server-started')
 
         if (!settings.read('no-gui')) {
@@ -184,6 +184,15 @@ if (settings.cli) {
 
         global.serverProcess.stderr.on('data', (data) => {
             console.error(String(data).trim())
+        })
+
+
+
+        global.serverProcess.on('message', (data) => {
+            var [command, args] = data
+            if (command === 'settings.write') {
+                settings.write(args[0], args[1], false)
+            }
         })
 
         global.serverProcess.on('close', (code) => {

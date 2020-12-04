@@ -6,7 +6,8 @@
   - editor: cloned `dropdown` and `input` widgets not opening when selected
   - widgets: prevent value-stateless widgets (tap buttons, clone, scripts, html and svg) from sending a value for cross-client synchronization (leads to unexpected script execution) and exclude them from state saves
   - input: apply `decimals` number before checking the value against the `validation` expression
-  - range: `steps` and `dashed` property not working; remove `origin` property 
+  - range: `steps` and `dashed` property not working; remove `origin` property
+  - config conflicts between launcher and server (affecting at least session history)
 
 ## 1.7.3
 
