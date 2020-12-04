@@ -21,6 +21,7 @@ class Matrix extends Panel {
                 props: {type: 'object', value: {}, help: [
                     'Defines a set of property to override the widgets\' defaults.',
                     'JS{{}} and #{} blocks in this field are resolved with an extra variable representing each widget\'s index: `$` (e.g. `#{$}`)',
+                    'Advanced syntax blocks (@{}, OSC{}, JS{{}} and #{}) are resolved at the matrix\' scope (ie @{this.variables} returns the matrix\' variables property, not its parent\'s)',
                     'Note: by default, the widgets inherit from the matrix\' `id` and osc properties (`id` and `address` are appended with `/$`)'
                 ]},
             },
