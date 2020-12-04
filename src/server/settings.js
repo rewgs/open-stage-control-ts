@@ -177,7 +177,7 @@ module.exports = {
 if (process.send) {
     // server running as child process of launcher
     // update local config when the main config is modified
-    process.on('message', function(data) {
+    process.on('message', function(data) {
         var [command, args] = data
         if (command === 'settings.write') {
             module.exports.write(args[0], args[1], true)
