@@ -4,6 +4,7 @@
 
 - bug fixes
   - ios: cloned menu not displayed correctly
+  - engine: downgrade to fix startup issue on windows 
 
 ## 1.7.4
 

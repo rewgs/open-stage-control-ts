@@ -2,7 +2,7 @@
   "name": "open-stage-control",
   "productName": "Open Stage Control",
   "description": "Libre and modular OSC / MIDI controller",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "author": {
     "name": "Jean-Emmanuel Doucet",
     "email": "jean-emmanuel@ammd.net"
@@ -34,6 +34,7 @@
     "core-js": "3.7.0",
     "cpr": "3.0.1",
     "deep-extend": "0.6.0",
+    "electron": "7.1.11",
     "electron-installer-debian": "3.1.0",
     "electron-localshortcut": "3.2.1",
     "electron-packager": "15.1.0",
@@ -76,7 +77,7 @@
     "yargs": "16.1.1"
   },
   "optionalDependencies": {
-    "electron": "11.0.3",
+    "electron": "7.1.11",
     "electron-installer-debian": "3.1.0"
   },
   "scripts": {
