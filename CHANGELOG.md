@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+- editor
+  - display color picked values with css rgba notation instead of hexadecimal
+
 ## 1.7.5
 
 - bug fixes

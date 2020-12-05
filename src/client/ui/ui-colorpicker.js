@@ -81,14 +81,14 @@ class ColorPicker extends UiWidget {
 
     apply() {
 
-        this.value = chroma(this.rgb.value).hex()
+        this.value = chroma(this.rgb.getValue(true)).css('rgba')
         this.trigger('change')
 
     }
 
     confirm() {
 
-        this.value = chroma(this.rgb.value).hex()
+        this.value = chroma(this.rgb.getValue(true)).css('rgba')
         this.trigger('change')
         this.close()
 
