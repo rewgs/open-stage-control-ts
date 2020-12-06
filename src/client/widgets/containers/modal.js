@@ -26,6 +26,7 @@ class Modal extends Panel {
                 popupLeft: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
                 popupTop: {type: 'number|percentage', value: 'auto', help: 'Modal popup\'s position'},
                 relative: {type: 'boolean', value: false, help: 'Set to `true` to make the modal\'s position relative to the button\'s position.'},
+                ignoreTabs: {type: 'boolean', value: false, help: 'Set to `true` to allow the modal overflowing its tab ancestors.'},
             },
             style: {
                 _separator_modal_style: 'Modal style',
@@ -168,9 +169,10 @@ class Modal extends Panel {
 
     fixParents() {
 
-        var parent = this.parent
+        var parent = this.parent,
+            stop = this.getProp('ignoreTabs') ? /root/ : /root|tab/
 
-        while (parent && parent.props && !parent.getProp('type').match(/tab|root/)) {
+        while (parent && parent.props && !parent.getProp('type').match(stop)) {
 
             parent.modalBreakout += (this.value ? 1 : -1)
             if (parent.modalBreakout > 0) parent.container.classList.add('modal-breakout')

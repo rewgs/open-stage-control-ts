@@ -8,6 +8,10 @@
 - editor
   - display color picked values with css rgba notation instead of hexadecimal
 
+- widgets
+  - modal: add `ignoreTabs` option (allows overflowing tab ancestors)
+  - menu: add `ignoreTabs` option
+
 ## 1.7.5
 
 - bug fixes

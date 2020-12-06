@@ -1,6 +1,6 @@
 var MenuBase = require('./menu-base'),
     {iconify} = require('../../ui/utils'),
-    doubletab = require('../mixins/double_tap'),
+    doubletap = require('../mixins/double_tap'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw')
 
@@ -21,6 +21,8 @@ class Menu extends MenuBase {
                     '- If `layout` is `circular`: diameter (in px)',
                     '- Else: square size or `[width, height]` array',
                 ]},
+                ignoreTabs: {type: 'boolean', value: false, help: 'Set to `true` to allow the menu overflowing its tab ancestors.'},
+
             },
             style: {
                 _separator_menu_style: 'Menu style',
@@ -80,7 +82,7 @@ class Menu extends MenuBase {
 
         if (this.getProp('doubleTap')) {
 
-            doubletab(this.widget, (e)=>{
+            doubletap(this.widget, (e)=>{
                 if (this.opened) return
                 this.open(e)
             })
@@ -270,9 +272,10 @@ class Menu extends MenuBase {
 
         var parent = this.parent,
             scrollX = 0,
-            scrollY = 0
+            scrollY = 0,
+            stop = this.getProp('ignoreTabs') ? /root/ : /root|tab/
 
-        while (parent && parent.props && !parent.getProp('type').match(/tab|root/)) {
+        while (parent && parent.props && !parent.getProp('type').match(stop)) {
 
             parent.modalBreakout += (this.opened ? 1 : -1)
             if (parent.modalBreakout > 0) parent.container.classList.add('modal-breakout')
