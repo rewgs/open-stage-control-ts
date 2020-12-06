@@ -2,6 +2,9 @@
 
 ## next
 
+- bug fixes
+  - (harmless) error raised when starting the server from the launcher with `debug` set to `true`
+
 - editor
   - display color picked values with css rgba notation instead of hexadecimal
 

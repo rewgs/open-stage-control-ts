@@ -152,7 +152,7 @@ if (settings.cli) {
 
     ipcMain.on('start',function(e, options){
 
-        var args = ['--no-gui']
+        var args = ['--', '--no-gui']
 
         // if (process.platform === 'win32') args.unshift('--') // not needed with ELECTRON_RUN_AS_NODE since '--' is always prepended
         for (var k in settings.read('options')) {
