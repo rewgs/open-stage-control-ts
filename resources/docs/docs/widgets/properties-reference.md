@@ -135,6 +135,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="menu_size">size<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#menu_size" title="Permanent link">#</a></h6> | `number`&vert;<br/>`array` | <code>200</code> | - If `layout` is `circular`: diameter (in px)<br/>- Else: square size or `[width, height]` array |
+            | <h6 id="menu_ignoreTabs">ignoreTabs<a class="headerlink" href="#menu_ignoreTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to allow the menu overflowing its tab ancestors. |
 
     === "style"
 
@@ -241,6 +242,7 @@
             | <h6 id="modal_popupLeft">popupLeft<a class="headerlink" href="#modal_popupLeft" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Modal popup's position |
             | <h6 id="modal_popupTop">popupTop<a class="headerlink" href="#modal_popupTop" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Modal popup's position |
             | <h6 id="modal_relative">relative<a class="headerlink" href="#modal_relative" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the modal's position relative to the button's position. |
+            | <h6 id="modal_ignoreTabs">ignoreTabs<a class="headerlink" href="#modal_ignoreTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to allow the modal overflowing its tab ancestors. |
 
     === "style"
 
