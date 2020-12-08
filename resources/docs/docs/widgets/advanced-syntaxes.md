@@ -78,7 +78,7 @@ A property *cannot* contain multiple `JS{{}}` blocks
     - `url`: server url,
     - `platform`: operating system as seen by the client
 
-In this context, `@{} / OSC{}` are seen as variables, they are simply replaced as the value they hold. When they change, the whole block will be evaluated again.
+In this context, `@{} / OSC{}` are seen as variables. When they change, the whole block will be evaluated again.
 
 Parsing errors can be read in the console (++ctrl+k++).
 
