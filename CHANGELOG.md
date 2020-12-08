@@ -1,12 +1,12 @@
 # Changelog
 
-## next
+## 1.7.6
 
 - bug fixes
   - (harmless) error raised when starting the server from the launcher with `debug` set to `true`
 
 - editor
-  - display color picked values with css rgba notation instead of hexadecimal
+  - display/save color picked values with css rgba notation instead of hexadecimal
 
 - widgets
   - modal: add `ignoreTabs` option (allows overflowing tab ancestors)
