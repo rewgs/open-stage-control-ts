@@ -26,7 +26,6 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
                 align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Css text-align property.'},
             },
             osc: {
-                decimals: null,
                 typeTags: null,
                 bypass: null,
                 ignoreDefaults: null
@@ -56,7 +55,7 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
 
         this.value = v === '' || v === null ? this.getProp('default') : v
 
-        var s = String(this.value)
+        var s = String(this.getValue(true))
         if (s.indexOf('^') > -1) {
             this.text.innerHTML = iconify(s.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g,'<br/>'))
         } else {
