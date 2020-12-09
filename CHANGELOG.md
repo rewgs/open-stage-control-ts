@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.7
+
+- bug fixes
+  - startup regression
+
 ## 1.7.6
 
 - bug fixes
