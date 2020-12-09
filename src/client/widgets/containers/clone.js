@@ -293,6 +293,9 @@ class Clone extends Container() {
                 this.bindTarget(this.getCloneTarget())
                 if (this.cloneTarget) this.createClone()
                 return
+            case 'props':
+                if (this.children[0]) this.updateClone()
+                return
             case 'colorText':
             case 'colorWidget':
             case 'colorFill':
@@ -322,7 +325,8 @@ class Clone extends Container() {
 }
 
 Clone.dynamicProps = Clone.prototype.constructor.dynamicProps.concat(
-    'widgetId'
+    'widgetId',
+    'props'
 )
 
 module.exports = Clone

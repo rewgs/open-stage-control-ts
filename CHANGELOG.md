@@ -6,6 +6,9 @@
   - canvas-based widgets not drawn when placed in a modal while having a conditional visibility set
   - text: missing `decimals` property
 
+- widgets
+  - clone: make `props` property dynamic (avoid full widget rebuild when possible)
+
 
 ## 1.7.7
 
