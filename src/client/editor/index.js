@@ -26,7 +26,7 @@ class Editor {
 
     constructor() {
 
-        this.inspector = new UiInspector({selector: '#osc-inspector'})
+        this.inspector = new UiInspector({element: rightUiSidePanel.content})
         this.inspector.on('update', (event)=>{
 
             var {propName, value} = event,
@@ -77,7 +77,7 @@ class Editor {
         })
 
 
-        this.widgetTree = new UiTree({selector: '#osc-tree'})
+        this.widgetTree = new UiTree({element: leftUiSidePanel.content, editor: this})
         this.widgetTree.on('sorted', (event)=>{
 
             var {widget, oldIndex, newIndex} = event,

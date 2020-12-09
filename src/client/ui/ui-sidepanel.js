@@ -14,6 +14,8 @@ class UiSidePanel extends UiWidget {
         this.resizeHandle = DOM.get(this.container, '.resize-handle')[0]
         this.toggleButton = DOM.get(this.container, '.toggle-button')[0]
         this.content = DOM.get(this.container, 'osc-panel-content')[0]
+        this.contentWrapper = this.content.parentNode
+        this.mounted = true
 
         this.cacheKey = 'ui.' + options.selector
 
@@ -115,6 +117,10 @@ class UiSidePanel extends UiWidget {
         this.container.style[this.vertical ? 'height' : 'width'] = this.width + 'rem'
         this.container.style[this.vertical ? 'minHeight' : 'minWidth'] = this.minWidth + 'rem'
         this.container.classList.remove('minimized')
+        if (!this.mounted) {
+            this.contentWrapper.appendChild(this.content)
+            this.mounted = true
+        }
 
         DOM.dispatchEvent(window, 'resize')
 
@@ -125,6 +131,10 @@ class UiSidePanel extends UiWidget {
         this.container.style[this.vertical ? 'height' : 'width'] = 0
         this.container.style[this.vertical ? 'minHeight' : 'minWidth'] = 0
         this.container.classList.add('minimized')
+        if (this.mounted) {
+            this.contentWrapper.removeChild(this.content)
+            this.mounted = false
+        }
 
         DOM.dispatchEvent(window, 'resize')
 
