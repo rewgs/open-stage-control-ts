@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.8
+
+- bug fixes
+  - canvas-based widgets not drawn when placed in a modal while having a conditional visibility set
+
+
 ## 1.7.7
 
 - bug fixes

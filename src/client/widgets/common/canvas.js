@@ -115,15 +115,9 @@ class Canvas extends Widget {
 
     }
 
-    isVisible() {
-
-        return this.hasSize && super.isVisible()
-
-    }
-
     batchDraw() {
 
-        if (this.visible) canvasQueue.push(this)
+        if (this.hasSize && this.visible) canvasQueue.push(this)
 
     }
 
