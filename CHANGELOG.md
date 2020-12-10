@@ -5,10 +5,13 @@
 - bug fixes
   - canvas-based widgets not drawn when placed in a modal while having a conditional visibility set
   - text: missing `decimals` property
+  - clone: fix usage of osc listener syntax (acts as if clone has an `address` property set to `auto`)
 
 - widgets
   - clone: make `props` property dynamic (avoid full widget rebuild when possible)
 
+- misc
+  - increase client console history size and allow changing it with client url options
 
 ## 1.7.7
 

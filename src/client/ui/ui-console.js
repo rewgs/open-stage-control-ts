@@ -27,7 +27,7 @@ class UiConsole extends UiSidePanel {
         })
 
         this.length = 0
-        this.maxLength = 200
+        this.maxLength = ENV.consoleLength || 300
 
         this.history = ['']
         this.cursor = 0
