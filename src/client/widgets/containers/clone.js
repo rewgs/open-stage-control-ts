@@ -36,7 +36,7 @@ class Clone extends Container() {
 
     constructor(options) {
 
-        options.props.label = ''
+        options.props.address = 'auto'
         options.props.variables = '@{parent.variables}'
 
         super({...options, html: html`<div class="clone"></div>`})
