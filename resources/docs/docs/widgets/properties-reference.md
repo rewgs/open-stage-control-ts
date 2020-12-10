@@ -288,7 +288,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="clone_widgetId">widgetId<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#clone_widgetId" title="Permanent link">#</a></h6> | `string` | <code>""</code> | `id` of the widget to clone |
-            | <h6 id="clone_props">props<a class="headerlink" href="#clone_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Cloned widget's properties to override |
+            | <h6 id="clone_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#clone_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Cloned widget's properties to override |
 
 ??? api "<div id="matrix">matrix<a class="headerlink" href="#matrix" title="Permanent link">#</a></div>"
     Generic matrix for creating rows/columns of widgets.
