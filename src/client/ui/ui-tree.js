@@ -21,8 +21,7 @@ class UiTree extends UiWidget {
         this.mounted = false
         this.list = this.container.appendChild(html`<ol style="--depth: 1"></ol`)
         this.dragDummy = html`<span></span>`
-        this.deferredUpdateTimeout = null
-        this.editor = options.editor
+
 
         this.expanded = {}
 
@@ -85,21 +84,6 @@ class UiTree extends UiWidget {
     }
 
     updateTree(selectedWidgets) {
-
-        if (this.parent.mounted) {
-            this.deferredUpdateTree(selectedWidgets)
-        } else {
-            clearTimeout(this.deferredUpdateTimeout)
-            this.deferredUpdateTimeout = setTimeout(()=>{
-                this.deferredUpdateTree(selectedWidgets)
-            })
-        }
-
-    }
-
-    deferredUpdateTree(selectedWidgets) {
-
-        this.deferredUpdateTimeout = null
 
         for (var s of this.sortables) {
             s.destroy()
