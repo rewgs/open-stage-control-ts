@@ -6,7 +6,7 @@
     $padding: 16rem;
     $line-height: 28rem;
     padding: 0 $padding;
-
+    padding-right: 0;
 
     text-transform: none;
     line-height: $line-height;
@@ -18,7 +18,8 @@
         position: relative;
         padding-left: 16rem;
         display: inline-block;
-        
+        min-width: 100%;
+
         ol:before {
             content: "";
             position: absolute;
@@ -93,7 +94,7 @@
         @include pseudo-fill($z: -1);
         &:after {
             left: calc(-1 * var(--depth) * 16rem - #{$padding});
-            right: -($padding - 1);
+            right: 1rem;
             bottom: auto;
             height: $line-height;
             top: 0;
