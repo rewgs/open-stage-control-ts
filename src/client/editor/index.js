@@ -77,7 +77,7 @@ class Editor {
         })
 
 
-        this.widgetTree = new UiTree({selector: '#osc-tree'})
+        this.widgetTree = new UiTree({selector: '#osc-tree', parent: leftUiSidePanel})
         this.widgetTree.on('sorted', (event)=>{
 
             var {widget, oldIndex, newIndex} = event,

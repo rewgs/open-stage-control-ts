@@ -256,6 +256,10 @@ osc-panel-container {
         display: none;
     }
 
+    &.minimized osc-panel-inner {
+        display: none;
+    }
+
 }
 
 osc-modal-container {
