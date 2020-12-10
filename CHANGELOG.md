@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.9
+
+- bug fixes
+  - project tree: layout issue with deeply nested widgets
+
 ## 1.7.8
 
 - bug fixes
