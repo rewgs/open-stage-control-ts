@@ -2,9 +2,8 @@ var settings = require('./settings'),
     fs = require('fs'),
     vm = require('vm'),
     chokidar = require('chokidar'),
-    path = require('path')
-
-
+    path = require('path'),
+    modulePathExtended = false
 
 class CustomModule {
 
@@ -60,7 +59,16 @@ class CustomModule {
             clearTimeout: this.clearTimeout.bind(this),
             setInterval: this.setInterval.bind(this),
             clearInterval: this.clearInterval.bind(this),
-            require: this.require.bind(this)
+            require: this.require.bind(this),
+            nativeRequire: require
+        }
+
+        if (!this.submodule && !modulePathExtended) {
+            require('module').globalPaths.push(
+                path.resolve(path.dirname(this.filename)),
+                path.resolve(path.dirname(this.filename), 'node_modules')
+            )
+            modulePathExtended = true
         }
 
         this.load()
@@ -74,10 +82,6 @@ class CustomModule {
                 this.reload()
             }
         })
-
-        // remove require function (not needed at runtime)
-        // wrong: this.constructor.constructor("return process")().mainModule.require
-        process.mainModule.require = process.dlopen = null
 
     }
 
@@ -94,6 +98,8 @@ class CustomModule {
 
         var context = vm.createContext({
             ...this.context,
+            __dirname: path.resolve(path.dirname(this.filename)),
+            __filename: path.resolve(this.filename),
             module: {exports: {}}
         })
 
@@ -117,6 +123,15 @@ class CustomModule {
     }
 
     unload() {
+
+        if (this.exports && this.exports.unload) {
+            try {
+                this.exports.unload()
+            } catch(e) {
+                console.error('(ERROR) Error while unloading custom module')
+                console.error(e)
+            }
+        }
 
         this.exports = null
         this.init = null

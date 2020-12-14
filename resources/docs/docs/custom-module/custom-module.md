@@ -1,12 +1,17 @@
 # Custom module
 
+Using the server's `custom-module` option, users can load a custom javascript module that filters incoming and outgoing OSC / MIDI messages.
+
 ## Writing a custom module
 
-Using the `-c / --custom-module` command-line switch, users can load a javascript file to tune the way Open Stage Control behaves regarding osc.
 
 ```js
 
-// Do whatever you want, initialize some variables, declare some functions, ...
+// Do whatever you want
+// initialize variables
+// declare functions
+// load modules
+// etc
 
 module.exports = {
 
@@ -40,7 +45,11 @@ module.exports = {
 
         // return data if you want the message to be and sent
         return {address, args, host, port}
-    }
+    },
+
+    unload: function(){
+        // this will be executed when the custom module is reloaded
+    },
 
 }
 
@@ -87,12 +96,6 @@ Returns the server's http addresses.
 
 ----
 
-#### `options`
-
-`Array` containing the extra options passed to `--custom-module` after the filename
-
-----
-
 #### `loadJSON(path)`
 
 Loads a json file (path is relative to the custom module location)
@@ -107,16 +110,27 @@ Saves an object/array to a json file (path is relative to the custom module loca
 
 #### `require(path)`
 
-Load another javascript module. Returns the value of `module.exports` defined in this module. If `path` is a relative path, it will be resolved against its parent module's path. See [Managing Big Modules](../managing-big-modules)
+Load another javascript module. Returns the value of `module.exports` defined in this module. If `path` is a relative path, it will be resolved against its parent module's path. See [Managing Big Modules](../managing-big-modules).
+
+This function is different from node's native `require` function, it's merely a way to split a custom module into separate files.
+
+----
+
+#### `nativeRequire(moduleName)`
+
+This function can be used to load native node modules or locally installed modules (e.g. with npm) if a `node_modules` folder is found in the custom module's location.
 
 ----
 
 #### Other javascript globals
+
 - `console`
 - `setTimeout`
 - `clearTimeout`
 - `setInterval`
 - `clearInterval`
+- `__dirname`
+- `__filename`
 
 ----
 
@@ -124,3 +138,30 @@ Load another javascript module. Returns the value of `module.exports` defined in
 ## Autoreload
 
 Custom modules (including submodules loaded with `require()`) are reloaded automatically when they are modified. Upon reload, timers (`setTimeout` and `setInterval`) and event listeners (added to the  `app` object) are reset.
+
+??? "Reloading native modules"
+
+    When using modules loaded with `nativeRequire()`, you may need to tell the custom module how to unload some components to allow reloading using the `module.exports.unload` definition. For example, if a port is bound using the `http` module, you'll need to unbind it otherwise the custom module will fail to bind it again when reloading:
+
+    ```js
+
+    var http = nativeRequire('http'),
+        server = http.createServer((req, res)=>{
+        res.writeHead(200)
+        res.end('Hello world')
+    })
+
+    server.listen(5555, 'localhost')
+
+
+    module.exports = {
+
+        unload: function() {
+
+            server.close()
+            // otherwise you'd get "Error: listen EADDRINUSE: address already in use 127.0.0.1:5555"
+
+        }
+
+    }
+    ```
