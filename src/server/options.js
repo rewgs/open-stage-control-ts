@@ -17,7 +17,7 @@ module.exports = {
             return fs.existsSync(arg) ? true : 'State file not found: ' + arg
         }
     },
-    'c': {alias: 'custom-module', type: 'string', file: {name: 'OSC Custom module (.js)', extensions: ['js']}, describe: 'custom module file to load (.js)',
+    'c': {alias: 'custom-module', type: 'string', file: {name: 'OSC Custom module (.js)', extensions: ['js']}, describe: 'custom module file to load (.js)\n WARNING: custom module can access the file system, use at your own risk.',
         check: (arg)=>{
             return fs.existsSync(arg) ? true : 'Custom module file not found: ' + arg
         },

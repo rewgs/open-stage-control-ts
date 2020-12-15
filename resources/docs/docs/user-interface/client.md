@@ -23,6 +23,9 @@
     - Project tree: toggle project tree's visibility
     - Inspector: toggle inspector's visibility
     - Relative units (%): when enabled, newly created widgets will have their position and size set in percents.
+- Console
+    - Enable: toggle console's state
+    - Clear console: remove logged messages from the console
 - Fullscreen: toggle fullscreen
 - Prevent sleep (mobile only): attempt to prevent device from going to sleep when idle
 

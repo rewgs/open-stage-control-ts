@@ -1,9 +1,12 @@
 # Changelog
 
-## 1.7.9
+## 1.8.0
 
 - bug fixes
   - project tree: layout issue with deeply nested widgets
+
+- custom module
+  - add `nativeRequire` function (allows loading native node modules or locally installed moduled)
 
 ## 1.7.8
 

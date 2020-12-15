@@ -27,6 +27,8 @@ The **server** can be configured with many options, either from a terminal or wi
 
     Path to a custom module file (.js).
 
+    **WARNING:** custom module can access the file system, use at your own risk.
+
 
 !!! quote ""
     #### `port`
