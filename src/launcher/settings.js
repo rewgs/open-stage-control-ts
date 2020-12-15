@@ -1,7 +1,7 @@
 var {remote, ipcRenderer} = require('electron'),
     {dialog} = remote.require('electron'),
     fs = remote.require('fs'),
-    settings = remote.getGlobal('settings'),
+    {settings} = remote.getGlobal('launcherSharedGlobals'),
     {icon} = require('../client/ui/utils'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),

@@ -2,8 +2,12 @@ require('source-map-support').install({handleUncaughtExceptions: false})
 
 var dev = process.argv[0].includes('node_modules'),
     settings = require('./settings'),
-    docsServer, serverStarted
-
+    docsServer,
+    app = null,
+    launcher = null,
+    clientWindows = [],
+    serverProcess = null,
+    node = false
 
 function openDocs() {
 
@@ -18,7 +22,6 @@ function openDocs() {
 
 if (settings.read('docs')) return openDocs()
 
-
 function nodeMode() {
 
     if (!settings.read('no-gui')) {
@@ -30,6 +33,8 @@ function nodeMode() {
         console.error('(ERROR) A JavaScript error occurred in the main process:')
         console.error(err.stack)
     })
+
+    node = true
 
 }
 if (process.title === 'node' || process.title === 'node.exe' || process.env.ELECTRON_RUN_AS_NODE) {
@@ -52,26 +57,6 @@ if (process.title === 'node' || process.title === 'node.exe' || process.env.ELEC
 
 }
 
-function start() {
-
-    if (!serverStarted) {
-
-        var server = require('./server'),
-            osc = require('./osc'),
-            callbacks = require('./callbacks'),
-            zeroconf = require('./zeroconf')
-
-        server.bindCallbacks(callbacks)
-
-        serverStarted = true
-        process.on('exit',()=>{
-            if (osc.midi) osc.midi.stop()
-            zeroconf.unpublishAll()
-        })
-
-    }
-
-}
 
 function openClient() {
 
@@ -83,10 +68,10 @@ function openClient() {
         win.on('error', ()=>{
             console.log('ERR')
         })
-        return win
+        clientWindows.push(win)
     }
     if (app.isReady()) {
-        return launch()
+        launch()
     } else {
         app.on('ready',function(){
             launch()
@@ -95,32 +80,90 @@ function openClient() {
 
 }
 
+function startServerProcess() {
 
-if (settings.cli) {
+    var args = [ '--no-gui']
 
-    start()
-    if (!settings.read('no-gui')) openClient()
+    for (var k in settings.read('options')) {
+        args.push('--' + k)
+        var val = settings.read(k)
+        if (typeof val === 'object') {
+            args = args.concat(val)
+        } else if (typeof val !== 'boolean') {
+            args.push(val)
+        }
+    }
 
+    var {fork} = require('child_process')
 
-} else {
+    serverProcess = fork(app.getAppPath(), args, {stdio: 'pipe', env: process.env})
 
-    var app = require('./electron-app'),
-        path = require('path'),
-        address = 'file://' + path.resolve(__dirname + '/../launcher/' + 'index.html'),
-        {ipcMain} = require('electron'),
-        {fork} = require('child_process'),
-        launcher
+    if (!settings.read('no-gui')) {
+        var cb = (data)=>{
+            if (data.indexOf('Server started') > -1) {
+                openClient()
+                serverProcess.stdout.off('data', cb)
+            }
+        }
+        serverProcess.stdout.on('data', cb)
+    }
 
-    process.on('exit',()=>{
-        if (global.serverProcess) global.serverProcess.kill()
+    serverProcess.stdout.on('data', (data) => {
+        console.log(String(data).trim())
     })
 
+    serverProcess.stderr.on('data', (data) => {
+        var str = String(data).trim()
+        if (str.includes('--debug')) return
+        console.error(str)
+    })
+
+
+
+    serverProcess.on('message', (data) => {
+        var [command, args] = data
+        if (command === 'settings.write') {
+            settings.write(args[0], args[1], false)
+        }
+    })
+
+    serverProcess.on('close', (code) => {
+        console.log('(INFO) Server stopped')
+        serverProcess = null
+        if (global.defaultClient) global.defaultClient.close()
+    })
+
+    if (launcher) {
+        serverProcess.on('close', (code) => {
+            if (!launcher.isDestroyed()) launcher.webContents.send('server-stopped')
+        })
+        launcher.webContents.send('server-started')
+    }
+
+}
+
+function stopServerProcess() {
+
+    if (serverProcess) serverProcess.kill()
+    for (var w of [...clientWindows]) {
+        if (w && !w.isDestroyed()) w.close()
+    }
+    clientWindows = []
+
+}
+
+function startLauncher() {
+
+    global.launcherSharedGlobals = {
+        settings: settings,
+        openDocs: openDocs,
+        midilist: require('./midi').list
+    }
+    var path = require('path'),
+        address = 'file://' + path.resolve(__dirname + '/../launcher/' + 'index.html'),
+        {ipcMain} = require('electron')
+
     app.on('ready',function(){
-        global.settings = settings
-        global.openDocs = openDocs
-        global.midilist = require('./midi').list
-        global.serverProcess = null
-        global.clientWindows = []
         launcher = require('./electron-window')({address:address, shortcuts:dev, width:680, height:(40 + 200 + 20 + 24 * Object.keys(settings.options).filter(x=>settings.options[x].launcher !== false).length / 2), node:true, color:'#151a24', id: 'launcher'})
         launcher.on('close', ()=>{
             process.stdout.write = stdoutWrite
@@ -152,75 +195,63 @@ if (settings.cli) {
 
     ipcMain.on('start',function(e, options){
 
-        var args = [ '--no-gui']
-
-        // if (process.platform === 'win32') args.unshift('--') // not needed with ELECTRON_RUN_AS_NODE since '--' is always prepended
-        for (var k in settings.read('options')) {
-            args.push('--' + k)
-            var val = settings.read(k)
-            if (typeof val === 'object') {
-                args = args.concat(val)
-            } else if (typeof val !== 'boolean') {
-                args.push(val)
-            }
-        }
-
-        global.serverProcess = fork(app.getAppPath(), args, {stdio: 'pipe', env: process.env})
-        launcher.webContents.send('server-started')
-
-        if (!settings.read('no-gui')) {
-            var cb = (data)=>{
-                if (data.indexOf('Server started') > -1) {
-                    global.clientWindows.push(openClient())
-                    global.serverProcess.stdout.off('data', cb)
-                }
-            }
-            global.serverProcess.stdout.on('data', cb)
-        }
-
-        global.serverProcess.stdout.on('data', (data) => {
-            console.log(String(data).trim())
-        })
-
-        global.serverProcess.stderr.on('data', (data) => {
-            var str = String(data).trim()
-            if (str.includes('--debug')) return
-            console.error(str)
-        })
-
-
-
-        global.serverProcess.on('message', (data) => {
-            var [command, args] = data
-            if (command === 'settings.write') {
-                settings.write(args[0], args[1], false)
-            }
-        })
-
-        global.serverProcess.on('close', (code) => {
-            console.log('(INFO) Server stopped')
-            global.serverProcess = null
-            if (global.defaultClient) global.defaultClient.close()
-            if (!launcher.isDestroyed()) launcher.webContents.send('server-stopped')
-        })
+        startServerProcess()
 
     })
 
     ipcMain.on('stop',function(e, options){
 
-        if (global.serverProcess) global.serverProcess.kill()
-        for (var w of [...global.clientWindows]) {
-            if (w && !w.isDestroyed()) w.close()
-        }
-        global.clientWindows = []
+        stopServerProcess()
 
     })
 
     ipcMain.on('openClient',function(e, options){
 
-        global.clientWindows.push(openClient())
+        openClient()
 
     })
 
+}
+
+
+if (node || (settings.cli && settings.read('no-gui'))) {
+
+    // node mode: minimal server startup
+
+    var server = require('./server'),
+        osc = require('./osc'),
+        callbacks = require('./callbacks'),
+        zeroconf = require('./zeroconf')
+
+    server.bindCallbacks(callbacks)
+
+    serverStarted = true
+    process.on('exit',()=>{
+        if (osc.midi) osc.midi.stop()
+        zeroconf.unpublishAll()
+    })
+
+
+} else {
+
+    // normal mode:
+    // - electron process: launcher and/or built-in client(s)
+    // - node process: server (node mode in a forked process)
+
+    app = require('./electron-app')
+    process.on('exit',()=>{
+        if (serverProcess) serverProcess.kill()
+    })
+
+
+    if (settings.cli) {
+
+        startServerProcess()
+
+    } else {
+
+        startLauncher()
+
+    }
 
 }

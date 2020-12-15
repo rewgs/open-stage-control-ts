@@ -3,8 +3,7 @@ var {remote, ipcRenderer} = require('electron'),
     menu = new Menu(),
     terminal = require('./terminal'),
     settings = require('./settings'),
-    midilist = remote.getGlobal('midilist'),
-    openDocs = remote.getGlobal('openDocs'),
+    {midilist, openDocs} = remote.getGlobal('launcherSharedGlobals'),
     serverStarted = false,
     serverStart = ()=>{
         if (serverStarted) return
