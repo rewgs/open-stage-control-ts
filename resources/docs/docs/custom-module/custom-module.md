@@ -120,6 +120,11 @@ This function is different from node's native `require` function, it's merely a 
 
 This function can be used to load native node modules or locally installed modules (e.g. with npm) if a `node_modules` folder is found in the custom module's location.
 
+??? "Installing node modules: resources"
+    - https://nodejs.dev/
+    - https://nodejs.dev/learn/an-introduction-to-the-npm-package-manager
+    - https://nodejs.dev/learn/the-package-json-guide
+
 ----
 
 #### Other javascript globals
