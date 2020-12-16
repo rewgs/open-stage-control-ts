@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.1
+
+- bug fixes
+  - script: stops triggering osc messages under some circumstances 
+
 ## 1.8.0
 
 - bug fixes

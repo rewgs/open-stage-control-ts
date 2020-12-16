@@ -131,7 +131,7 @@ class Script extends Widget {
                 touch: options.touch
             })
 
-            scriptVm.setValueOptions(options)
+            scriptVm.setValueOptions()
 
             return returnValue
 
