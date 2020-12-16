@@ -4,15 +4,18 @@ $padding: 8rem;
     display: flex;
     flex-direction: column;
     flex: 1;
-
+    overflow: hidden;
 
     .ariane {
         height: 40rem;
         flex-shrink: 0;
         line-height: 40rem;
         padding-left: $padding + 2rem;
+        padding-right: $padding + 2rem;
         background: var(--color-ui-button);
-
+        overflow-x: auto;
+        overflow-y: hidden;
+        --scrollbar-size: 4rem;
     }
     .file-list {
         overflow-y: auto;
