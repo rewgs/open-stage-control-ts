@@ -4,6 +4,7 @@
 
 - bug fixes
   - project tree: layout issue with deeply nested widgets
+  - ios 10.3 regression
 
 - custom module
   - add `nativeRequire` function (allows loading native node modules or locally installed moduled)

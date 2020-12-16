@@ -34,10 +34,13 @@ var bundle = build({
         insertGlobals: false,
         noParse: ['**/*.min.js', '**/jquery.ui.js'],
         cache: {},
-        packageCache: {}
+        packageCache: {},
     },
     plugins: watch ? [require('watchify')] : [],
-    transforms: transforms
+    transforms: transforms,
+    ignore: [
+        'postcss' // only needed by sanitize-html if <style> is allowed; somehow fails at object spread syntax transpilation
+    ]
 })
 
 if (watch) {
