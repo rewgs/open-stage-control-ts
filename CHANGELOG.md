@@ -1,9 +1,14 @@
 # Changelog
 
+## 1.8.2
+
+- bug fixes
+  - custom module: parsing issue when sending widget data using `receive()` (`type` attribute errouneously parsed as an osc typetag) 
+
 ## 1.8.1
 
 - bug fixes
-  - script: stops triggering osc messages under some circumstances 
+  - script: stops triggering osc messages under some circumstances
 
 ## 1.8.0
 

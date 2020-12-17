@@ -76,7 +76,7 @@ class OscServer {
             case 'string':
                 return {type: 's', value:arg}
             case 'object':
-                if (arg.type) return arg
+                if (arg.type && arg.type.length === 1) return arg
             default:
                 return {type: 's', value:JSON.stringify(arg)}
         }
