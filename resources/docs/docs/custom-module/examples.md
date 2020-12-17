@@ -236,3 +236,41 @@ module.exports = {
 
 }
 ```
+
+
+## Read file
+
+```js
+
+var fs = nativeRequire('fs')
+
+module.exports = {
+
+    oscOutFilter:function(data){
+        // Filter outgoing osc messages
+
+        var {address, args, host, port} = data
+
+        if (address === '/file') {
+
+            fs.readFile(args[0].value, 'utf8' , (err, data) => {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+                receive('/html', data)
+            })
+
+            return // bypass original message
+
+        }
+
+
+        // return data if you want the message to be processed
+        return {address, args, host, port}
+
+    }
+
+
+}
+```
