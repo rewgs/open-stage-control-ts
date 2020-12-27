@@ -1042,13 +1042,7 @@ class Widget extends EventEmitter {
 
     updateHtml(){
 
-        var extraHtml = this.getProp('html') !== '' ? sanitizeHtml(this.getProp('html'), {
-            allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe'),
-            allowedAttributes: {
-                '*': [ 'title', 'class', 'style', 'type'],
-                'img': [ 'src' ,  'title', 'class', 'style', 'width', 'height']
-            }
-        }) : null
+        var extraHtml = this.getProp('html') !== '' ? sanitizeHtml(this.getProp('html'), Widget.sanitizeHtmlOptions) : null
 
         if (this.extraHtml) {
             if (!extraHtml) {
@@ -1109,6 +1103,18 @@ class Widget extends EventEmitter {
 
     }
 
+}
+
+Widget.sanitizeHtmlOptions = {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe'),
+    allowedAttributes: {
+        '*': [ 'title', 'class', 'style'],
+        'img': [ 'src' ,  'title', 'class', 'style', 'width', 'height'],
+        'a': ['href', 'target']
+    },
+    transformTags: {
+        'a': sanitizeHtml.simpleTransform('a', {target: '_blank'})
+    }
 }
 
 Widget.parsersContexts = {}

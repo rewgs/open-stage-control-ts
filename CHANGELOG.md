@@ -1,9 +1,14 @@
 # Changelog
 
+## 1.8.2
+
+- widgets
+  - html property: allow "href" attribute on "a" elements
+
 ## 1.8.1
 
 - bug fixes
-  - script: stops triggering osc messages under some circumstances 
+  - script: stops triggering osc messages under some circumstances
 
 ## 1.8.0
 
