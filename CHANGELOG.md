@@ -2,8 +2,12 @@
 
 ## 1.8.2
 
+- bug fixes
+  - menu: allow manual line breaks ("`\n`") in labels / values
+
 - widgets
   - html property: allow "href" attribute on "a" elements
+
 
 ## 1.8.1
 
