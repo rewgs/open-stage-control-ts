@@ -49,8 +49,9 @@ class MenuBase extends Widget {
         var string = this.getProp('label') === 'auto' ? '%value' : this.getProp('label'),
             i = this.selected
 
+
         if (i > -1 && string) {
-            this.text.innerHTML = iconify(String(string).replace(/%value/g, JSON.stringify(this.value)).replace(/%key/g, this.keys[i]))
+            this.text.innerHTML = iconify(String(string).replace(/%value/g, typeof this.value === 'string' ? this.value : JSON.stringify(this.value)).replace(/%key/g, this.keys[i]))
         } else {
             this.text.innerHTML = ''
         }

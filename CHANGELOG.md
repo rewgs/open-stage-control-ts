@@ -3,7 +3,12 @@
 ## 1.8.2
 
 - bug fixes
-  - custom module: parsing issue when sending widget data using `receive()` (`type` attribute errouneously parsed as an osc typetag) 
+  - menu: allow manual line breaks ("`\n`") in labels / values
+  - custom module: parsing issue when sending widget data using `receive()` (`type` attribute errouneously parsed as an osc typetag)
+
+- widgets
+  - html property: allow "href" attribute on "a" elements
+
 
 ## 1.8.1
 

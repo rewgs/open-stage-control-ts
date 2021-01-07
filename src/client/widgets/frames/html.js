@@ -4,14 +4,6 @@ var Widget = require('../common/widget'),
     sanitizeHtml = require('sanitize-html'),
     StaticProperties = require('../mixins/static_properties')
 
-var sanitizeOptions = {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe'),
-    allowedAttributes: {
-        '*': [ 'title', 'class', 'style'],
-        'img': [ 'src' ,  'title', 'class', 'style', 'width', 'height']
-    }
-}
-
 class Html extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
@@ -43,7 +35,7 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
         `})
 
         this.noValueState = true
-        
+
         if (!this.getProp('border')) this.container.classList.add('noborder')
         this.frame = DOM.get(this.widget, '.frame')[0]
 
@@ -57,7 +49,7 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
 
         var newHtml = this.frame.cloneNode(false)
 
-        newHtml.innerHTML = sanitizeHtml(this.getProp('html'), sanitizeOptions)
+        newHtml.innerHTML = sanitizeHtml(this.getProp('html'), Widget.sanitizeHtmlOptions)
 
         morph(this.frame, newHtml)
 
