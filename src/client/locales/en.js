@@ -91,6 +91,9 @@ module.exports = {
     state_recallsuccess: 'State recalled',
     state_sendsuccess: 'State sent',
 
+    // tree
+    tree_filter: 'Filter',
+
     // misc
     error: 'Error'
 

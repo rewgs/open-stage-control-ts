@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+- project tree
+  - add an input for filtering displayed widget by id
+
 ## 1.8.2
 
 - bug fixes

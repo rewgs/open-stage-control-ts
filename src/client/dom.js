@@ -56,7 +56,7 @@ module.exports = {
         if (selector.indexOf(' ') === -1 && selector.indexOf(',') === -1) {
             if (selector.indexOf('#') === 0 && context === document) {
                 nodes = [document.getElementById(selector.substr(1, selector.length - 1))]
-            } else if (selector.indexOf('.') === 0)  {
+            } else if (selector.lastIndexOf('.') === 0)  {
                 nodes = context.getElementsByClassName(selector.substr(1, selector.length - 1))
             }
         }

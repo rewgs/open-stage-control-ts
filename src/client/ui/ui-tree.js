@@ -3,6 +3,7 @@ var UiWidget = require('./ui-widget'),
     doubleClick = require('../events/double-click'),
     Sortable = require('sortablejs'),
     morph = require('nanomorph'),
+    locales = require('../locales'),
     Root, Panel, Matrix, Keyboard, widgetManager,
     init = false
 
@@ -19,6 +20,7 @@ class UiTree extends UiWidget {
         super(options)
 
         this.mounted = false
+        this.filter = this.container.appendChild(html`<input class="filter" type="text" placeholder="${locales('tree_filter')}..."/>`)
         this.list = this.container.appendChild(html`<ol style="--depth: 1"></ol`)
         this.dragDummy = html`<span></span>`
         this.deferredUpdateTimeout = null
@@ -66,8 +68,15 @@ class UiTree extends UiWidget {
             })
         }
 
-        widgetManager.on('prop-changed', (e)=>{
-            console.log(e)
+        this.filter.addEventListener('change', ()=>{
+            this.applyFilter()
+        })
+        var filterTypeTimeout = null
+        this.filter.addEventListener('keydown', ()=>{
+            clearTimeout(filterTypeTimeout)
+            filterTypeTimeout = setTimeout(()=>{
+                this.applyFilter()
+            }, 100)
         })
 
     }
@@ -134,7 +143,7 @@ class UiTree extends UiWidget {
         })
 
         this.mounted = true
-
+        this.applyFilter()
 
     }
 
@@ -204,6 +213,30 @@ class UiTree extends UiWidget {
         }
 
         return node
+
+    }
+
+    applyFilter() {
+
+        var filter = this.filter.value
+
+        if (!filter) {
+            this.list.classList.remove('filter-active')
+        } else {
+            this.list.classList.add('filter-active')
+
+            var show = []
+            DOM.each(this.list, 'li', (element)=>{
+                var match = element.innerText.includes(filter)
+                element.classList.toggle('filter-hide', !match)
+                if (match) show.push(element)
+            })
+
+            DOM.each(this.list, '.container.filter-hide', (element)=>{
+                if (show.some(el=>element.contains(el))) element.classList.remove('filter-hide')
+            })
+
+        }
 
     }
 

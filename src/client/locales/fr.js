@@ -90,6 +90,9 @@ module.exports = {
     state_recallsuccess: 'État de l\'interface restauré',
     state_sendsuccess: 'État de de l\'interface envoyé',
 
+    // tree
+    tree_filter: 'Filtrer',
+
     // misc
     error: 'Erreur'
 

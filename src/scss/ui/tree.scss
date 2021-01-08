@@ -13,7 +13,6 @@
 
 
     ol {
-
         list-style: none;
         position: relative;
         padding-left: 16rem;
@@ -107,11 +106,32 @@
         @include pseudo-fill($z: -1);
         &:after {
             left: calc(-1 * var(--depth) * 16rem - #{$padding});
-            right: -($padding - 1);
+            right: 1rem;
             bottom: auto;
             height: $line-height;
             opacity: 0.1;
         }
+    }
+
+
+    > ol {
+        margin-top:  $line-height + 5rem;
+    }
+
+    .filter {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: calc(100% + #{$padding});
+        display: block;
+        background: var(--color-background);
+        font-family: $font-mono;
+        line-height: $field-height;
+        padding: 4rem $padding;
+    }
+
+    .filter-active .filter-hide {
+        display:none;
     }
 
 }
