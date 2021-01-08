@@ -3,10 +3,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     require('./globals')
     require('./stacktrace')
 
-    var locales = require('./locales'),
-        html = require('nanohtml')
-
-    DOM.get(document, '#osc-greeting-header')[0].appendChild(html`${PACKAGE.productName} <span class="version">v${PACKAGE.version}</span>`)
+    var locales = require('./locales')
 
     DOM.init()
 

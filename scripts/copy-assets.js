@@ -51,6 +51,6 @@ fs.writeFileSync(path.resolve(__dirname + '/../app/package.json'), JSON.stringif
 
 var clientHtml = fs.readFileSync(path.resolve(__dirname + '/../src/html/client.html'))
     .toString()
-    .replace(/\$\{version\}/g, appJson.version)
+    .replace(/\$\{([^\}]+)\}/g, (m, p1)=>{return appJson[p1]})
 
 fs.writeFileSync(path.resolve(__dirname + '/../app/client/index.html'), clientHtml)
