@@ -2,6 +2,9 @@
 
 ## next
 
+- bug fixes
+  - keyboard: allow note numbers up to 127
+
 - project tree
   - add an input for filtering displayed widget by id
 
