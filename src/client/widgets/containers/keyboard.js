@@ -102,13 +102,13 @@ class Keyboard extends Panel {
         var pattern = 'wbwbwwbwbwbw',
             whiteKeys = 0, whiteKeys2 = 0, i
 
-        for (i = start; i < keys + start && i < 109; i++) {
+        for (i = start; i < keys + start && i < 128; i++) {
             if (pattern[i % 12] == 'w') whiteKeys++
         }
 
         this.container.style.setProperty('--nkeys', whiteKeys)
 
-        for (i = start; i < keys + start && i < 109; i++) {
+        for (i = start; i < keys + start && i < 128; i++) {
 
             var data = {
                 top: 'auto',

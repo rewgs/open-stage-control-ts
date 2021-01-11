@@ -3,6 +3,7 @@
 ## next
 
 - bug fixes
+  - keyboard: allow note numbers up to 127
   - server: return http 404 error when a user-requested resource is not found instead of keeping a pending request
 
 - project tree
