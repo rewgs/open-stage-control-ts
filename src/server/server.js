@@ -110,6 +110,8 @@ function httpRoute(req, res) {
                 }
 
                 console.error(`(ERROR, HTTP) File not found: ${url}`)
+                res.writeHead(404)
+                res.end()
 
             } else if (url.includes('/osc-ping')) {
                 httpCheck(true)

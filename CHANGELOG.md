@@ -2,6 +2,9 @@
 
 ## next
 
+- bug fixes
+  - server: return http 404 error when a user-requested resource is not found instead of keeping a pending request
+
 - project tree
   - add an input for filtering displayed widget by id
 
