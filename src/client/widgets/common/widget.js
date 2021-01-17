@@ -1065,7 +1065,13 @@ class Widget extends EventEmitter {
 
     isVisible() {
 
-        return this.getProp('visible') && this.parent.isVisible()
+        return this.getProp('visible') && this.parent.childrenVisible()
+
+    }
+
+    childrenVisible() {
+
+        return this.isVisible()
 
     }
 

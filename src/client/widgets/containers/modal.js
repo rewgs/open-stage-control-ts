@@ -127,9 +127,9 @@ class Modal extends Panel {
     }
 
 
-    isVisible() {
+    childrenVisible() {
 
-        return this.init && this.value && super.isVisible()
+        return this.init && this.value && this.isVisible()
 
     }
 
