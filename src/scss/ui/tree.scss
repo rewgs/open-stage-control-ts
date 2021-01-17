@@ -115,7 +115,7 @@
 
 
     > ol {
-        margin-top:  $line-height + 5rem;
+        margin-top:  $line-height + 2rem;
     }
 
     .filter {
@@ -125,8 +125,8 @@
         width: calc(100% + #{$padding});
         display: block;
         background: var(--color-background);
-        font-family: $font-mono;
-        line-height: $field-height;
+        font-family: $font;
+        line-height: $field-height - 4rem;
         padding: 4rem $padding;
     }
 
