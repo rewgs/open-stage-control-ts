@@ -403,6 +403,7 @@ class Editor {
         this.enabled = true
 
         document.body.classList.add('editor-enabled')
+        document.body.classList.remove('editor-disabled')
 
         this.widgetTree.updateTree(this.selectedWidgets)
 
@@ -424,6 +425,7 @@ class Editor {
         this.unselect()
         this.selectedWidgets = []
 
+        document.body.classList.add('editor-disabled')
         document.body.classList.remove('editor-enabled')
 
         keyboardJS.setContext('global')

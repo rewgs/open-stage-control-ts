@@ -2,6 +2,9 @@
 
 ## 1.8.4
 
+- ui
+  - hide the console toggle button when the bottom panel is minimized and the editor is disabled 
+
 - widgets
   - file: add `mode` property, for choosing between `open` and `save` modes
 
