@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.4
+
+- widgets
+  - file: add `mode` property, for choosing between `open` and `save` modes
+
 ## 1.8.3
 
 - bug fixes

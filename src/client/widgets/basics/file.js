@@ -17,6 +17,7 @@ module.exports = class File extends Widget {
                 _separator_file_style: 'File style',
                 align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
                 hidePath: {type: 'boolean', value: false, help: 'Set to `true` to only display the filename (the whole path will still be used as value)'},
+                mode: {type: 'string', value: 'open', choices: ['open', 'save'], help: 'File browser mode'},
             },
             class_specific: {
                 directory: {type: 'string', value: 'auto', help: 'Default browsing directory'},
@@ -47,7 +48,8 @@ module.exports = class File extends Widget {
             uiFilebrowser({
                 extension: this.getProp('extension').replace(/^\.?(.*)$/, '$1'),
                 directory: this.getProp('directory') === 'auto' ? undefined : this.getProp('directory'),
-                loadDir: this.getProp('allowDir')
+                loadDir: this.getProp('allowDir'),
+                save: this.getProp('mode') === 'save'
             }, (path)=>{
 
                 this.setValue(path.join(path[0][0] === '/' ? '/' : '\\'), {
