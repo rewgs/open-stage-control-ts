@@ -43,9 +43,17 @@ class MidiConverter {
             }
         })
 
+        this.running = true
+        this.py.childProcess.on('exit', (code)=>{
+            if (code === null) console.error(`(ERROR, MIDI) Midi bridge process crashed`)
+            this.running = false
+        })
+
     }
 
     send(data) {
+
+        if (!this.running) return
 
         var args = []
         for (let i in data.args) {

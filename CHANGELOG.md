@@ -2,8 +2,11 @@
 
 ## 1.8.4
 
+- midi
+  - display an error when the midi bridge process crashes and prevent further errors when attempting to send messages
+
 - ui
-  - hide the console toggle button when the bottom panel is minimized and the editor is disabled 
+  - hide the console toggle button when the bottom panel is minimized and the editor is disabled
 
 - widgets
   - file: add `mode` property, for choosing between `open` and `save` modes
