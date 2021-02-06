@@ -4,6 +4,7 @@
 
 - bug fixes
   - midi: debug messages displayed as errors
+  - launcher: broken context menu
 
 ## 1.8.4
 
