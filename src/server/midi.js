@@ -2,7 +2,7 @@ var {PythonShell} = require('python-shell'),
     fs = require('fs'),
     path = require('path'),
     settings = require('./settings'),
-    midiVersion = '1.7.2'
+    midiVersion = '1.8.4'
 
 var pythonOptions = {
     scriptPath:__dirname,
@@ -94,11 +94,12 @@ class MidiConverter {
             } else {
                 console.log(data)
             }
+        } else if (name == 'debug') {
+            console.error('(DEBUG, MIDI) ' + data)
         } else if (name ==  'osc') {
             instance.receiveOsc(data)
         } else if (name == 'error') {
             console.error('(ERROR, MIDI) ' + data)
-            if (instance) instance.stop()
         } else if (name == 'version' && data != midiVersion) {
             console.error(`(WARNING, MIDI) binary version mismatch (${data} installed, ${midiVersion} expected)`)
         }
