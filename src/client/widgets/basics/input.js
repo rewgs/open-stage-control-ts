@@ -43,7 +43,6 @@ class Input extends Canvas {
         this.value = ''
         this.stringValue = ''
         this.focused = false
-        this.tabKeyBlur = false
         this.validation = null
 
         if (this.getProp('vertical')) this.widget.classList.add('vertical')
@@ -57,8 +56,7 @@ class Input extends Canvas {
             this.widget.addEventListener('focus', this.focus.bind(this))
             this.input = html`<input class="no-keybinding"></input>`
             this.input.addEventListener('blur', (e)=>{
-                this.blur(this.tabKeyBlur)
-                this.tabKeyBlur = false
+                this.blur(true)
             })
             var asYouType = this.getProp('asYouType')
 
@@ -75,7 +73,6 @@ class Input extends Canvas {
             this.input.addEventListener('keydown', (e)=>{
                 if (e.keyCode === 13) this.blur() // enter
                 else if (e.keyCode === 27) this.blur(false) // esc
-                else if (e.keyCode === 9) this.tabKeyBlur = true // tab
                 else if (asYouType) {
                     setTimeout(()=>{
                         this.inputChange()

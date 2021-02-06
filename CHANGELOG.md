@@ -4,6 +4,7 @@
 
 - bug fixes
   - input: prevent focus when selecting the widget for edition
+  - input: submit content when leaving focus, not only when hitting `enter` or `tab` (`esc` still cancels)
 
 - midi
   - display an error when the midi bridge process crashes and prevent further errors when attempting to send messages
