@@ -37,7 +37,7 @@ for arg in argv:
         outputs[name] = rtmidi.MidiOut(API, name if not JACK else name + '_out')
 
         if debug:
-            ipc_send('log','(DEBUG, MIDI) device "%s" created' % name)
+            ipc_send('debug','device "%s" created' % name)
 
 
         if ports == 'virtual':
@@ -46,9 +46,12 @@ for arg in argv:
                 inputs[name].open_virtual_port('midi_in')
                 outputs[name].open_virtual_port('midi_out')
                 if debug:
-                    ipc_send('log','(DEBUG, MIDI) virtual ports opened for device "%s"' % name)
+                    ipc_send('debug','virtual ports opened for device "%s"' % name)
             except:
-                ipc_send('error', 'can\'t open virtual port "%s"' % name)
+                ipc_send('error', 'failed to open virtual ports for device "%s"' % name)
+                ipc_send('error', traceback.format_exc())
+                inputs[name] = None
+                outputs[name] = None
 
         elif ',' in ports:
 
@@ -70,31 +73,33 @@ for arg in argv:
                         out_port = i
                         break
 
-            if type(in_port) != int or in_port >= in_dev.get_port_count():
-                ipc_send('error', 'can\'t connect to input port "%s"' % in_port)
-                break
-
-            if type(out_port) != int or out_port >= out_dev.get_port_count():
-                ipc_send('error', 'can\'t connect to output port "%s"' % out_port)
-                break
-
             if in_port != -1:
 
                 try:
                     inputs[name].open_port(in_port, 'midi_in')
                     if debug:
-                        ipc_send('log','(DEBUG, MIDI) device "%s" connected to input port %s (%s)' % (name, in_port, in_dev.get_port_name(in_port)))
+                        ipc_send('debug','device "%s" connected to input port %s (%s)' % (name, in_port, in_dev.get_port_name(in_port)))
                 except:
-                    ipc_send('error', 'can\'t connect input to port %i: %s' % (in_port, in_dev.get_port_name(in_port)))
+                    if type(in_port) != int or in_port >= in_dev.get_port_count():
+                        ipc_send('error', 'can\'t connect "%s" to input port "%s" (port not in list)' % (name, in_port))
+                    else:
+                        ipc_send('error', 'failed to connect "%s" to input port %s' % (name, in_port))
+                        ipc_send('error', traceback.format_exc())
+                    inputs[name] = None
 
             if out_port != -1:
 
                 try:
                     outputs[name].open_port(out_port, 'midi_out')
                     if debug:
-                        ipc_send('log','(DEBUG, MIDI) device "%s" connected to output port %s (%s)' % (name, out_port, out_dev.get_port_name(out_port)))
+                        ipc_send('debug','device "%s" connected to output port %s (%s)' % (name, out_port, out_dev.get_port_name(out_port)))
                 except:
-                    ipc_send('error', 'can\'t connect to output port %i: %s' % (out_port, out_dev.get_port_name(out_port)))
+                    if type(out_port) != int or out_port >= out_dev.get_port_count():
+                        ipc_send('error', 'can\'t connect "%s" to output port "%s" (port not in list)' % (name, out_port))
+                    else:
+                        ipc_send('error', 'failed to connect "%s" to output port %s' % (name, out_port))
+                        ipc_send('error', traceback.format_exc())
+                    outputs[name] = None
 
 
 def create_callback(name):
@@ -148,7 +153,7 @@ def create_callback(name):
 
 
             if debug:
-                ipc_send('log','(DEBUG, MIDI) in: %s From: midi:%s' % (midi_str(message, name), name))
+                ipc_send('debug','in: %s From: midi:%s' % (midi_str(message, name), name))
 
             ipc_send('osc', osc)
 
@@ -159,16 +164,18 @@ def create_callback(name):
         try:
             receive_midi(event, data)
         except:
-            ipc_send('log', '(ERROR, MIDI) %s' % traceback.format_exc())
+            ipc_send('error', traceback.format_exc())
 
     return callback_error_wrapper
 
 for name in inputs:
 
-    inputs[name].set_callback(create_callback(name))
+    if inputs[name] is not None:
 
-    # sysex / mtc support
-    inputs[name].ignore_types(ignore_sysex, ignore_mtc, True)
+        inputs[name].set_callback(create_callback(name))
+
+        # sysex / mtc support
+        inputs[name].ignore_types(ignore_sysex, ignore_mtc, True)
 
 
 def midi_message(status, channel, data1=None, data2=None):
@@ -189,11 +196,15 @@ sysexRegex = re.compile(r'([^0-9A-Fa-f])\1(\1\1)*')
 def send_midi(name, event, *args):
 
     if name not in outputs:
-        ipc_send('log','(ERROR, MIDI) unknown output (%s)' % name)
+        ipc_send('error','unknown device "%s"' % name)
+        return
+
+    if outputs[name] is None:
+        ipc_send('error','device "%s" has no opened output port' % name)
         return
 
     if event not in OSC_TO_MIDI:
-        ipc_send('log','(ERROR, MIDI) invalid address (%s)' % event)
+        ipc_send('error','invalid address (%s)' % event)
         return
 
     m = None
@@ -241,14 +252,14 @@ def send_midi(name, event, *args):
 
     if m == None:
 
-        ipc_send('log','(ERROR, MIDI) could not convert osc to midi (%s %s)' % (event, " ".join([str(x) for x in args])))
+        ipc_send('error','could not convert osc to midi (%s %s)' % (event, " ".join([str(x) for x in args])))
 
     else:
 
         outputs[name].send_message(m)
 
         if debug:
-            ipc_send('log','(DEBUG, MIDI) out: %s To: midi:%s' % (midi_str(m, name), name))
+            ipc_send('debug','out: %s To: midi:%s' % (midi_str(m, name), name))
 
 
 while True:
@@ -263,4 +274,4 @@ while True:
         msg[1] = msg[1].lower()
         send_midi(*msg)
     except:
-        ipc_send('log', '(ERROR, MIDI) %s' % traceback.format_exc())
+        ipc_send('error', traceback.format_exc())

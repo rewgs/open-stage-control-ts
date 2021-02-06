@@ -5,9 +5,7 @@
 - bug fixes
   - input: prevent focus when selecting the widget for edition
   - input: submit content when leaving focus, not only when hitting `enter` or `tab` (`esc` still cancels)
-
-- midi
-  - display an error when the midi bridge process crashes and prevent further errors when attempting to send messages
+  - midi: prevent midi bridge from stopping when an error occurs; provide meaningfull errors when connection fails
 
 - ui
   - hide the console toggle button when the bottom panel is minimized and the editor is disabled
