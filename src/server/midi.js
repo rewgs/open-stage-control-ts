@@ -45,7 +45,7 @@ class MidiConverter {
 
         this.running = true
         this.py.childProcess.on('exit', (code)=>{
-            if (code === null) console.error(`(ERROR, MIDI) Midi bridge process crashed`)
+            if (code === null) console.error('(ERROR, MIDI) Midi bridge process crashed')
             this.running = false
         })
 
