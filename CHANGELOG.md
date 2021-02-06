@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.5
+
+- bug fixes
+  - midi: debug messages displayed as errors
+
 ## 1.8.4
 
 - bug fixes

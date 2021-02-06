@@ -86,7 +86,7 @@ class MidiConverter {
         try {
             [name, data] = JSON.parse(message)
         } catch (err) {
-            if (settings.read('debug')) console.error(`(DEBUG, MIDI) Unparsed python log:\n    ${message}`)
+            if (settings.read('debug')) console.error(`(ERROR, MIDI) Unparsed python log:\n    ${message}`)
         }
         if (name == 'log') {
             if (data.indexOf('ERROR') > -1) {
@@ -95,7 +95,7 @@ class MidiConverter {
                 console.log(data)
             }
         } else if (name == 'debug') {
-            console.error('(DEBUG, MIDI) ' + data)
+            console.log('(DEBUG, MIDI) ' + data)
         } else if (name ==  'osc') {
             instance.receiveOsc(data)
         } else if (name == 'error') {
