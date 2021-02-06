@@ -25,11 +25,12 @@ class Switch extends MenuBase {
                     '`Array` of possible values to switch between : `[1,2,3]`',
                     '`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
                 ]},
-                mode: {type: 'string', value: 'tap', choices: ['tap', 'slide', 'click'], help: [
+                mode: {type: 'string', value: 'tap', choices: ['tap', 'slide', 'click', 'flip'], help: [
                     'Interraction mode:',
                     '- `tap`: activates when the pointer is down but prevents further scrolling',
                     '- `slide`: same as `tap` but allows sliding between values',
                     '- `click`: activates upon click only and allows further scrolling',
+                    '- `flip`: selects the next value upon click regardless of where the widget is touched',
                 ]},
             }
         })
@@ -79,9 +80,13 @@ class Switch extends MenuBase {
             this.on('drag', (e)=>{
                 if (this.getProp('mode') === 'slide' || e.traversing) dragCallback(e, true)
             } , {element: this.widget})
-        } else {
+        } else if (this.getProp('mode') === 'click') {
             this.widget.addEventListener('click', dragCallback)
-
+        } else if (this.getProp('mode') === 'flip') {
+            this.widget.addEventListener('click', ()=>{
+                var i = (this.getIndex(this.value) + 1) % this.values.length
+                this.setValue(this.values[i], {sync: true, send: true})
+            })
         }
 
     }

@@ -12,7 +12,8 @@
 
 - widgets
   - file: add `mode` property, for choosing between `open` and `save` modes
-
+  - switch: add `flip` mode
+    
 ## 1.8.3
 
 - bug fixes
