@@ -75,3 +75,11 @@ html {
     margin-right: .6rem;
 }
 </style>
+
+<div>
+<a
+  href="https://www.patreon.com/openstagecontrol?fan_landing=true"
+  class="md-button md-button-small patreon-icon"
+>
+  Support on Patreon
+</a></div>
