@@ -7,13 +7,16 @@
   - input: submit content when leaving focus, not only when hitting `enter` or `tab` (`esc` still cancels)
   - midi: prevent midi bridge from stopping when an error occurs; provide meaningfull errors when connection fails
 
+- editor
+  - inspector: hitting ctrl+s while editing a property will submit the change before saving
+
 - ui
   - hide the console toggle button when the bottom panel is minimized and the editor is disabled
 
 - widgets
   - file: add `mode` property, for choosing between `open` and `save` modes
   - switch: add `flip` mode
-    
+
 ## 1.8.3
 
 - bug fixes

@@ -93,6 +93,10 @@ var SessionManager = class SessionManager {
 
         if (path) this.setSessionPath(path)
 
+        if (editor.inspector.focusedInput) {
+            editor.inspector.focusedInput.blur()
+        }
+
         if (!this.sessionPath) return this.saveAs()
 
         ipc.send('sessionSave', {
