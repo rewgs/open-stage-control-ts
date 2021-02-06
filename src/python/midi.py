@@ -121,7 +121,7 @@ def create_callback(name):
             if not ignore_mtc and is_mtc(message):
 
                 mtc = mtc_decode(message, name)
-                if mtc is None:
+                if mtc == None:
                     return
                 else:
                     osc['address'] = MIDI_TO_OSC[MIDI_TIME_CODE]
@@ -170,7 +170,7 @@ def create_callback(name):
 
 for name in inputs:
 
-    if inputs[name] is not None:
+    if inputs[name] != None:
 
         inputs[name].set_callback(create_callback(name))
 
@@ -199,7 +199,7 @@ def send_midi(name, event, *args):
         ipc_send('error','unknown device "%s"' % name)
         return
 
-    if outputs[name] is None:
+    if outputs[name] == None:
         ipc_send('error','device "%s" has no opened output port' % name)
         return
 
