@@ -597,12 +597,12 @@
 }
 
 .editor-enabled {
-    .input-container select {
+    .input-container inner {
         // prevent input focus when selecting
         pointer-events: none;
     }
-    .clone-container.editing .input-container select,
-    .input-container.editing select {
+    .clone-container.editing .input-container inner,
+    .input-container.editing inner {
         // prevent input focus when selecting
         pointer-events: auto;
     }

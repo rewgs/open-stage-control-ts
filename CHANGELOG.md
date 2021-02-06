@@ -2,6 +2,9 @@
 
 ## 1.8.4
 
+- bug fixes
+  - input: prevent focus when selecting the widget for edition
+
 - midi
   - display an error when the midi bridge process crashes and prevent further errors when attempting to send messages
 
