@@ -49,8 +49,8 @@ module.exports = class MultiXy extends Pad {
 
         super(options)
 
-        this.npoints = typeof this.getProp('points') == 'object' ? this.getProp('points').length : this.getProp('points')
-        this.labels = typeof this.getProp('points') == 'object'
+        this.npoints = Array.isArray(this.getProp('points')) ? this.getProp('points').length : this.getProp('points') || 0
+        this.labels = Array.isArray(this.getProp('points'))
         this.pointSize = parseInt(this.getProp('pointSize'))
 
         this.pads = []
