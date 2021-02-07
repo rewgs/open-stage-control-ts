@@ -235,7 +235,7 @@ def send_midi(name, event, *args):
 
     else:
 
-        args = [int(round(x)) for x in args]
+        args = [int(round(float(x))) for x in args]
         m = [mtype, args[0]]
 
         if mtype == NOTE_ON:
