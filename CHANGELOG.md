@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.6
+
+- bug fixes
+  - range: per-fader touch event not emitted properly 
+
 ## 1.8.5
 
 - bug fixes

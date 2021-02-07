@@ -138,6 +138,8 @@ class Range extends Fader {
 
         if (!id) return
 
+        this.trigger('touch', {stopPropagation: true, touch: [parseInt(id), 1]})
+
         for (var f of this.faders) {
             f.percent = clip(f.percent,[
                 f.valueToPercent(f.rangeValsMin),
@@ -156,8 +158,6 @@ class Range extends Fader {
         var i = this.touchMap[e.pointerId]
 
         if (!i) return
-
-        this.trigger('touch', {stopPropagation: true, touch: [parseInt(i), 1]})
 
         if (e.shiftKey) {
             this.faders[0].trigger('drag', e)
