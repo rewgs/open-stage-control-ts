@@ -2,7 +2,8 @@ var Widget = require('../common/widget'),
     Xy = require('./xy'),
     Fader = require('../sliders/fader'),
     {clip, mapToScale, hsbToRgb, rgbToHsb} = require('../utils'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    touchstate = require('../mixins/touch_state')
 
 var faderDefaults = Fader.defaults()._props(),
     xyDefaults = Xy.defaults()._props()
@@ -38,6 +39,8 @@ module.exports = class Rgb extends Widget {
         super({...options, html: html`<inner></inner>`})
 
         this.container.classList.toggle('contains-alpha', this.getProp('alpha'))
+
+        this.preventChildrenTouchState = true
 
         this.pad = new Xy({props:{
             ...xyDefaults,
@@ -102,6 +105,9 @@ module.exports = class Rgb extends Widget {
         if (this.getProp('alpha') && initValue.length < 4) {
             initValue[3] = this.getProp('rangeAlpha').min
         }
+
+
+        touchstate(this, {element: this.widget, multitouch: true, ignoreCustomBindings: true})
 
         if (this.getProp('spring')) {
 

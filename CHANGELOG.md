@@ -3,7 +3,9 @@
 ## 1.8.6
 
 - bug fixes
-  - range: per-fader touch event not emitted properly 
+  - range: per-fader touch event not emitted properly
+  - rgb: fix `spring` property
+  - rgb: touch event not emitted
 
 ## 1.8.5
 

@@ -1,5 +1,7 @@
 module.exports = (self, options)=>{
 
+    if (self.parent.preventChildrenTouchState) return
+
     self.touched = 0
     self.setValueTouchedQueue = undefined
 

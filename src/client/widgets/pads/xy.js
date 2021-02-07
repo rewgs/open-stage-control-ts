@@ -46,6 +46,8 @@ module.exports = class Xy extends Pad {
 
         super(options)
 
+        this.preventChildrenTouchState = true
+
         this.faders = {
             x: new Fader({props:{
                 ...faderDefaults,

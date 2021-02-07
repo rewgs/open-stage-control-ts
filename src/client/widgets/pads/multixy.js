@@ -53,6 +53,7 @@ module.exports = class MultiXy extends Pad {
         this.labels = Array.isArray(this.getProp('points'))
         this.pointSize = parseInt(this.getProp('pointSize'))
 
+        this.preventChildrenTouchState = true
         this.pads = []
 
         for (let i = 0; i < this.npoints; i++) {

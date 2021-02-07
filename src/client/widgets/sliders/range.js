@@ -49,6 +49,8 @@ class Range extends Fader {
             <canvas></canvas>
         `})
 
+        this.preventChildrenTouchState = true
+
         this.faders = [
             new SubFader({props:{
                 ...faderDefaults,
