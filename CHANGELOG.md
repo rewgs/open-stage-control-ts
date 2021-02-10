@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+- midi
+  - add active sensing messages support
+
 ## 1.8.6
 
 - bug fixes

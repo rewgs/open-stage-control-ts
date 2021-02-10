@@ -18,6 +18,8 @@ PROGRAM_CHANGE_OFFSET = 'pc_offset' in argv
 ignore_sysex = 'sysex' not in argv
 # option: parse mtc
 ignore_mtc = 'mtc' not in argv
+# option: parse active sensing
+ignore_active_sensing = 'active_sensing' not in argv
 
 inputs = {}
 outputs = {}
@@ -174,8 +176,8 @@ for name in inputs:
 
         inputs[name].set_callback(create_callback(name))
 
-        # sysex / mtc support
-        inputs[name].ignore_types(ignore_sysex, ignore_mtc, True)
+        # sysex / mtc / active sensing support
+        inputs[name].ignore_types(ignore_sysex, ignore_mtc, ignore_active_sensing)
 
 
 def midi_message(status, channel, data1=None, data2=None):

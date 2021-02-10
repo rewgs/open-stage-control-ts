@@ -77,6 +77,11 @@ Enable parsing of system exclusive messages (disabled by default).
 
 Enable parsing of midi time code messages (disabled by default).
 
+**`active_sensing`**
+
+Enable parsing of midi active sensing messages (disabled by default).
+
+
 **`pc_offset`**
 
 Send program changes with a `-1` offset to match some software/hardware implementations
