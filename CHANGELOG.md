@@ -8,6 +8,9 @@
 - remote control
   - restore `/TABS` command (for opening tabs by ids)
 
+- widgets
+  - encoder: expose rotation speed in script (as `locals.speed`)
+
 ## 1.8.6
 
 - bug fixes

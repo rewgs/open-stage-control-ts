@@ -11,7 +11,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
     static defaults() {
 
-        return super.defaults().extend({
+        var defaults = super.defaults().extend({
             style: {
                 _separator_knob_style: null,
                 design: null,
@@ -43,6 +43,13 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
             }
         })
 
+        defaults.value.script.help.push(
+            'Additionnal variables:',
+            '- `locals.speed`: encoder\'s speed (reduce `sensitivity to increase averaging`)'
+        )
+
+        return defaults
+
     }
 
     constructor(options) {
@@ -52,6 +59,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
         this.previousPercent = 50
         this.percent = 50
         this.ignoredValues = 0
+        this.speed = []
         this.setValue(this.getProp('release'), {dragged: true})
 
     }
@@ -138,6 +146,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         this.previousPercent = 50
         this.percent = 50
+        this.speed = []
         this.setValue(this.getProp('release'), {sync: true, send: true, dragged: true})
 
     }
@@ -185,6 +194,8 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         var val = dir ? this.getProp('forth') : this.getProp('back')
 
+        this.speed.push(Math.abs(this.percent - this.previousPercent))
+
         this.setValue(val, {
             sync: true,
             send: true,
@@ -224,11 +235,20 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
             }
         }
 
+
         this.value = v
 
         this.batchDraw()
 
         if (sensitivityIgnore) return
+
+        if (this.speed.length) {
+            var s = this.speed.reduce((a,c)=>a+c) / this.speed.length
+            this.speed= []
+            this.parsersLocalScope.speed = s
+        } else {
+            this.parsersLocalScope.speed = 0
+        }
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
