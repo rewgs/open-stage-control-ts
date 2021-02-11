@@ -259,10 +259,21 @@ var callbacks = {
 
         sessionManager.save(args[0])
 
+    },
+    '/TABS': function(args) {
+
+        if (!Array.isArray(args)) args = [args]
+
+        for (let id of args) {
+            let ws = widgetManager.getWidgetById(id)
+            for (let w of ws) {
+                if (w.getProp('type') === 'tab') {
+                    var index = w.parent.children.indexOf(w)
+                    w.parent.setValue(index, {sync: true, send: false})
+                }
+            }
+        }
     }
-
-
-
 }
 
 module.exports = {

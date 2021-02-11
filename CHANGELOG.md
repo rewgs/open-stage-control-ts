@@ -5,6 +5,9 @@
 - midi
   - add active sensing messages support
 
+- remote control
+  - restore `/TABS` command (for opening tabs by ids)
+
 ## 1.8.6
 
 - bug fixes

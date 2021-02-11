@@ -198,3 +198,9 @@ Open session file `path.json`.
 #### `/SESSION/SAVE path.json`
 
 Save current session to `path.json`. If `path.json` is omitted, current session's path is used.
+
+----
+
+#### `/TABS tab_id1 tab_id2 ...`
+
+Open the tabs designated by the id parameters.
