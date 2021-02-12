@@ -3,7 +3,7 @@
 ## next
 
 - midi
-  - add active sensing messages support
+  - add active sensing messages support (received as sysex)
 
 - remote control
   - restore `/TABS` command (for opening tabs by ids)

@@ -79,7 +79,7 @@ Enable parsing of midi time code messages (disabled by default).
 
 **`active_sensing`**
 
-Enable parsing of midi active sensing messages (disabled by default).
+Enable parsing of midi active sensing messages (disabled by default). Active sensing messages will be received as sysex. 
 
 
 **`pc_offset`**
