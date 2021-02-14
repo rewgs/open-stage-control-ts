@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## 1.8.7
 
 - midi
   - add active sensing messages support (received as sysex)

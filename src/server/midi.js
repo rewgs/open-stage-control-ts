@@ -1,8 +1,11 @@
 var {PythonShell} = require('python-shell'),
     fs = require('fs'),
     path = require('path'),
-    settings = require('./settings'),
-    midiVersion = '1.8.4'
+    settings = require('./settings')
+
+// last o-s-c version that changed midi sources
+// must match version in midi.py / bundled midi executable
+var midiVersion = '1.8.7'
 
 var pythonOptions = {
     scriptPath:__dirname,
