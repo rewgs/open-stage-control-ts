@@ -749,6 +749,12 @@
             | <h6 id="encoder_forth">forth<a class="headerlink" href="#encoder_forth" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Defines which value is sent when rotating the encoder clockwise |
             | <h6 id="encoder_release">release<a class="headerlink" href="#encoder_release" title="Permanent link">#</a></h6> | `number` | <code>""</code> | Defines which value is sent when releasing the encoder:<br/>- Set to `null` to send send no argument in the osc message<br/>- Can be an `object` if the type needs to be specified |
 
+    === "value"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="encoder_script">script<a class="headerlink" href="#encoder_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Additionnal variables:<br/>- `locals.speed`: encoder's speed (reduce `sensitivity to increase averaging`) |
+
 ??? api "<div id="range">range<a class="headerlink" href="#range" title="Permanent link">#</a></div>"
     A fader with two heads for setting a range.
 
