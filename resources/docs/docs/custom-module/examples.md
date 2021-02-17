@@ -274,3 +274,31 @@ module.exports = {
 
 }
 ```
+
+## Display RTSP Stream
+
+```js
+// requires ffmpeg installed on the system
+// and rtsp-ffmpeg installed in the custom module's folder (by running npm install rtsp-ffmpeg)
+
+var rtsp = nativeRequire('rtsp-ffmpeg')
+
+var stream = new rtsp.FFMpeg({
+    input: 'rtsp://freja.hiof.no:1935/rtplive/_definst_/hessdalen03.stream',
+})
+
+stream.on('data', (data)=>{
+
+    // send frame to image widget with address set to "/stream"
+    receive('/stream', 'data:image/jpeg;base64,' + data.toString('base64'))
+
+})
+
+module.exports = {
+
+    unload: ()=>{
+        stream.stop()
+    }
+
+}
+```
