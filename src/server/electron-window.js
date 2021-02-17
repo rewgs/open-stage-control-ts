@@ -114,8 +114,9 @@ module.exports = function(options={}) {
 
     window.loadURL(options.address)
 
-    if (process.platform !== 'darwin') {
+    if (process.platform === 'linux') {
         // already registered in app menu on macOs
+        // already bound to alt+f4 on windows
         window.webContents.on('before-input-event', (e, input)=>{
             // using before-input-event because electron-localshortcut
             // gets azerty keyboards wrong (ctrl + z would also be catched)

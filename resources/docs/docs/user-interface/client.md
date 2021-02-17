@@ -49,7 +49,7 @@ Modals are virtual popup windows that may contain various content: file browser,
 
 ## Keyboard shortcuts
 
-=== "Linux / Windows"
+=== "Linux"
 
     | Shortcut | Description |
     |---|---|
@@ -59,6 +59,17 @@ Modals are virtual popup windows that may contain various content: file browser,
     | ++ctrl+shift+s++ | save session as... |
     | ++ctrl+o++ | open a session file |
     | ++ctrl+w++ | close client |
+
+=== "Windows"
+
+    | Shortcut | Description |
+    |---|---|
+    | ++ctrl+e++ | enable/disable editor |
+    | ++ctrl+k++ | show/hide console |
+    | ++ctrl+s++ | save session |
+    | ++ctrl+shift+s++ | save session as... |
+    | ++ctrl+o++ | open a session file |
+    | ++alt+f4++ | close client |
 
 === "Mac"
 

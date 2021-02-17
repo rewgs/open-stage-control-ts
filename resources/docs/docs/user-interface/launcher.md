@@ -26,11 +26,17 @@ The console diplays various informations, runtime errors and server debug messag
 
 ## Keyboard shortcuts
 
-=== "Linux / Windows"
+=== "Linux"
 
     | Shortcut | Description |
     |---|---|
     | ++ctrl+w++ | close window |
+
+=== "Windows"
+
+    | Shortcut | Description |
+    |---|---|
+    | ++alt+f4++ | close window |
 
 === "Mac"
 

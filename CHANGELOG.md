@@ -1,5 +1,11 @@
 # Changelog
 
+# 1.8.8
+
+- windows
+  - remove `ctrl+w` shortcut for closing a window (use `alt+f4` instead)
+
+
 ## 1.8.7
 
 - midi
