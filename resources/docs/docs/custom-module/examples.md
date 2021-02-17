@@ -280,6 +280,7 @@ module.exports = {
 ```js
 // requires ffmpeg installed on the system
 // and rtsp-ffmpeg installed in the custom module's folder (by running npm install rtsp-ffmpeg)
+// see https://github.com/agsh/rtsp-ffmpeg#ffmpeg for available options
 
 var rtsp = nativeRequire('rtsp-ffmpeg')
 
