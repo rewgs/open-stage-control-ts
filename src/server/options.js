@@ -58,7 +58,7 @@ module.exports = {
     'd': {alias: 'debug', type: 'boolean', describe: 'log received osc messages in the console'},
     'n': {alias: 'no-gui', type: 'boolean', describe: 'disable default gui'},
     'fullscreen': {type: 'boolean', describe: 'launch in fullscreen mode (only affects the default client gui)'},
-    't': {alias: 'theme', type: 'array', describe: 'theme name or path (multiple values allowed)'},
+    't': {alias: 'theme', type: 'array', file: {name: 'css file (.css)', extensions: ['css']}, describe: 'theme name or path (multiple values allowed)'},
     'client-options': {type: 'array', describe: 'client options (opt=value pairs)',
         check: (o)=>{
             return o.some(item=>!item.match(/^[^=]*=[^=]*$/)) ?

@@ -25,15 +25,23 @@ class Theme {
 
         if (!this.themes.length) return this
 
-        for (let theme of this.themes) {
+        if (this.themes.length > 1 && fs.existsSync(this.themes.join(' '))) {
 
-            if (theme.includes('.css') && fs.existsSync(theme)) {
-                this.files.push(theme)
-            } else if (!theme.includes('.css') && fs.existsSync(path.resolve(__dirname + '/../assets/themes/' + theme + '.css'))) {
-                this.files.push(path.resolve(__dirname + '/../assets/themes/' + theme + '.css'))
-            } else {
-                console.error('(ERROR) Theme not found: "' + theme)
+            this.files.push(this.themes.join(' '))
+
+        } else {
+
+            for (let theme of this.themes) {
+
+                if (theme.includes('.css') && fs.existsSync(theme)) {
+                    this.files.push(theme)
+                } else if (!theme.includes('.css') && fs.existsSync(path.resolve(__dirname + '/../assets/themes/' + theme + '.css'))) {
+                    this.files.push(path.resolve(__dirname + '/../assets/themes/' + theme + '.css'))
+                } else {
+                    console.error('(ERROR) Theme not found: "' + theme)
+                }
             }
+
         }
 
         if (this.files.length) {

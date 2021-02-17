@@ -2,6 +2,9 @@
 
 # 1.8.8
 
+- launcher
+  - add file browser button for the `theme` option and fix parsing path containing spaces if only one theme is set
+
 - windows
   - remove `ctrl+w` shortcut for closing a window (use `alt+f4` instead)
 
