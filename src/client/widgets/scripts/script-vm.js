@@ -61,7 +61,7 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.set = (id, value, extraOptions = {send: true, sync: true})=>{
 
-            var options = this.getValueOptions()
+            var options = deepCopy(this.getValueOptions())
             options.fromScript = true
 
             // if (id === options.id) options.sync = false // loop stop

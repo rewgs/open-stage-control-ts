@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.8.9
+
+- bug fixes
+  - script: issue when using the `options` argument in `set()` (options leaked to subsequent set() calls in the script)
+
 # 1.8.8
 
 - launcher
