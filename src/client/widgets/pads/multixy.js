@@ -283,7 +283,6 @@ module.exports = class MultiXy extends Pad {
             case 'alphaFillOn':
             case 'padding':
             case 'lineWidth':
-            case 'decimals':
                 for (var w of this.pads) {
                     w.onPropChanged(propName)
                 }
