@@ -4,6 +4,7 @@
 
 - bug fixes
   - script: issue when using the `options` argument in `set()` (options leaked to subsequent set() calls in the script)
+   - multixy: `decimals` property not applied
 
 # 1.8.8
 

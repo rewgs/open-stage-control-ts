@@ -235,11 +235,11 @@ module.exports = class MultiXy extends Pad {
 
     }
 
-    getValue() {
+    getValue(withdecimals) {
 
         var v = []
         for (var i=0;i<this.pads.length * 2;i=i+2) {
-            [v[i],v[i+1]] = this.pads[i/2].getValue()
+            [v[i],v[i+1]] = this.pads[i/2].getValue(withdecimals)
         }
         return v
 
@@ -283,6 +283,7 @@ module.exports = class MultiXy extends Pad {
             case 'alphaFillOn':
             case 'padding':
             case 'lineWidth':
+            case 'decimals':
                 for (var w of this.pads) {
                     w.onPropChanged(propName)
                 }
