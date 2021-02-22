@@ -154,6 +154,7 @@ module.exports = class MultiXy extends Pad {
         this.on('change',(e)=>{
             if (e.widget == this) return
             e.stopPropagation = true
+            if (e.options.spring) e.options.dragged = true
             this.setValue(this.getValue(), e.options)
         })
 
