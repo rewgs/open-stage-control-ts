@@ -20,7 +20,7 @@ class CustomModule {
 
         this.timeouts = []
         this.intervals = []
-        this.submodules = []
+        this.submodules = {}
 
         this.context = this.submodule ? context : {
             ...context,
@@ -153,10 +153,10 @@ class CustomModule {
             this.context.app.removeAllListeners(name)
         }
 
-        for (let mod of this.submodules) {
-            mod.unload()
+        for (let name in this.submodules) {
+            this.submodules[name].unload()
         }
-        this.submodules = []
+        this.submodules = {}
 
         if (this.submodule) {
             this.watcher.close()
@@ -204,10 +204,13 @@ class CustomModule {
 
     require(filename) {
 
-        var mod = new CustomModule(filename, this.context, this.parent || this)
-        this.submodules.push(mod)
+        if (!this.submodules[filename]) {
 
-        return mod.exports
+            this.submodules[filename] = new CustomModule(filename, this.context, this.parent || this)
+
+        }
+
+        return this.submodules[filename].exports
 
     }
 

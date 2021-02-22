@@ -6,6 +6,7 @@
   - script: issue when using the `options` argument in `set()` (options leaked to subsequent set() calls in the script)
    - multixy: `decimals` property not applied
    - multixy: spring behavior not working until all points are released  
+   - custom module: prevent require() from reading submodules files each time and instead return the object in memory 
 
 # 1.8.8
 
