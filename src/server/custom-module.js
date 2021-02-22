@@ -87,6 +87,11 @@ class CustomModule {
 
     load() {
 
+        if (this.submodule && path.resolve(this.filename) === path.resolve(this.parent.filename)){
+            this.exports = this.parent.exports
+            return true
+        }
+
         var code
 
         try {
