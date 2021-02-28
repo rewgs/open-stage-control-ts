@@ -180,6 +180,65 @@ module.exports = {
 
 ```
 
+## Auto-save client state
+
+```js
+// store state in a variable
+var state = {}
+
+// keep track of connected clients
+var clients = []
+
+app.on('sessionOpened', (data, client)=>{
+
+    // client connected (and in a session)
+    if (!clients.includes(client.id)) clients.push(client.id)
+
+    // when a client opens a session, send the state
+    // but only if it's the only connected client (otherwise, let the regular sync happen)
+    if (clients.length === 1) {
+        receive('/STATE/SET', state, {clientId: clients[0]})
+    }
+
+})
+
+app.on('close', (data, client)=>{
+
+    // client disconnected
+    if (clients.includes(client.id)) clients.splice(clients.indexOf(client.id))
+
+})
+
+// request 1st client's state every 10 seconds
+setInterval(()=>{
+
+    if (clients.length > 0) {
+        receive('/STATE/GET', '127.0.0.1:8888', {clientId: clients[0]})
+    }
+
+}, 10000)
+
+
+module.exports = {
+
+    oscOutFilter: function(data) {
+
+        if (data.address === '/STATE/GET') {
+            // update state variable when the client responds
+            state = data.args[0].value
+
+            // bypass the osc message
+            return
+        }
+
+        return data
+
+    }
+
+}
+
+```
+
 ## MIDI routing
 
 ```js
