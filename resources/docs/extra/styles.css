@@ -102,6 +102,10 @@ details.api summary:before {
     display: none!important;
 }
 
+details summary div {
+    display: inline-block;
+}
+
 i[title="dynamic"] {
     color: var(--osc-accent-color);
 }
