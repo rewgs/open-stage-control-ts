@@ -4,9 +4,12 @@ Open Stage Control
 
 *Libre and modular OSC / MIDI controller*
 
-https://openstagecontrol.ammd.net/
+
+Website: https://openstagecontrol.ammd.net/
+Forum: https://openstagecontrol.discourse.group/
+IRC: Freenode #openstagecontrol
 
 ----
 
-Copyleft © Jean-Emmanuel Doucet @ [AMMD](http://ammd.net) 2014-2020.
+Copyleft © Jean-Emmanuel Doucet @ [AMMD](http://ammd.net) 2014-2021.
 This program is a free software released under the [GNU/GPL3](ttps://github.com/jean-emmanuel/open-stage-control/blob/master/LICENSE) license.
