@@ -4,6 +4,7 @@
 
 - bug fixes
   - modal: issues with children's visibility
+  - console: allow multiple arguments in console.log()
 
 - scripting
   - add `setFocus` function to focus an input widget programmatically

@@ -37,13 +37,17 @@ class UiConsole extends UiSidePanel {
 
         console._log = console.log
         console.log = function(message){
-            _this.log('log', message)
+            for (let arg of arguments) {
+                _this.log('log', arg)
+            }
             console._log(...arguments)
         }
 
         console._error = console.error
         console.error = function(message){
-            _this.log('error', message)
+            for (let arg of arguments) {
+                _this.log('error', arg)
+            }
             console._error(...arguments)
         }
 
