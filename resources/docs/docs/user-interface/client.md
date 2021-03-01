@@ -55,6 +55,7 @@ Modals are virtual popup windows that may contain various content: file browser,
     |---|---|
     | ++ctrl+e++ | enable/disable editor |
     | ++ctrl+k++ | show/hide console |
+    | ++ctrl+l++ | clear console |
     | ++ctrl+s++ | save session |
     | ++ctrl+shift+s++ | save session as... |
     | ++ctrl+o++ | open a session file |
@@ -66,6 +67,7 @@ Modals are virtual popup windows that may contain various content: file browser,
     |---|---|
     | ++ctrl+e++ | enable/disable editor |
     | ++ctrl+k++ | show/hide console |
+    | ++ctrl+l++ | clear console |
     | ++ctrl+s++ | save session |
     | ++ctrl+shift+s++ | save session as... |
     | ++ctrl+o++ | open a session file |
@@ -77,6 +79,7 @@ Modals are virtual popup windows that may contain various content: file browser,
     |---|---|
     | ++cmd+e++ | enable/disable editor |
     | ++cmd+k++ | show/hide console |
+    | ++cmd+l++ | clear console |
     | ++cmd+s++ | save session |
     | ++cmd+shift+s++ | save session as... |
     | ++cmd+o++ | open a session file |

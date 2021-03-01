@@ -184,6 +184,7 @@ var menuEntries = [
             {
                 label: locales('console_clear'),
                 action: uiConsole.clear.bind(uiConsole),
+                shortcut: 'mod + l'
             },
         ]
     },
