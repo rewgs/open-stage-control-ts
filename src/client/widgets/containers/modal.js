@@ -126,13 +126,6 @@ class Modal extends Panel {
 
     }
 
-
-    childrenVisible() {
-
-        return this.init && this.value && this.isVisible()
-
-    }
-
     setValue(v, options={}) {
 
         if (this.init === undefined) return
