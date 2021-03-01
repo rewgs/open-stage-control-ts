@@ -6,6 +6,9 @@
   - modal: issues with children's visibility
   - console: allow multiple arguments in console.log()
 
+- launcher
+  - add many keyboard shortcuts
+
 - scripting
   - add `setFocus` function to focus an input widget programmatically
 
