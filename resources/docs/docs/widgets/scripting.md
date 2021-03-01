@@ -170,6 +170,16 @@ Reference:
 
 ----
 
+#### `setFocus(id)`
+
+- `id` (optional): widget `id` as a string
+
+Give focus to a widget (ie input widget).
+
+*Built-in client only*: tells the operating system to give the focus to the client window
+
+----
+
 #### `unfocus()`
 
 *Built-in client only*: tells the operating system to give the focus to the window that was focused before.

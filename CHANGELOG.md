@@ -5,6 +5,9 @@
 - bug fixes
   - modal: issues with children's visibility
 
+- scripting
+  - add `setFocus` function to focus an input widget programmatically
+
 # 1.8.9
 
 - bug fixes
