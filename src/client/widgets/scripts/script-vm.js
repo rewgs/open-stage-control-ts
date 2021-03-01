@@ -373,8 +373,17 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.openUrl = (url)=>{
+
+            var options = this.getValueOptions()
+
+            if (options.send) window.open(url, '_blank')
+
+        }
+
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
-            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus', 'setScroll', 'getScroll', 'toolbar']) {
+            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus', 'setScroll', 'getScroll', 'toolbar',
+            'openUrl']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
 

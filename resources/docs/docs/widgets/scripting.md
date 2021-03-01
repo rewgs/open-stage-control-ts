@@ -161,7 +161,7 @@ Reference:
 
 #### `clearTimeout(id)` / `clearInterval(id)`
 
-Clear timeout with matching `id`.
+Clears timeout with matching `id`.
 
 Reference:
 
@@ -174,7 +174,7 @@ Reference:
 
 - `id` (optional): widget `id` as a string
 
-Give focus to a widget (ie input widget).
+Gives focus to a widget (ie input widget).
 
 *Built-in client only*: tells the operating system to give the focus to the client window
 
@@ -205,7 +205,7 @@ Sets the scroll state of a container.
 #### `toolbar(i1, i2, ...)`
 - `iX`: menu entry index
 
-Trigger toolbar action at specified index.
+Triggers toolbar action at specified index.
 
 !!! example "Examples"
 
@@ -213,3 +213,12 @@ Trigger toolbar action at specified index.
     - `toolbar(3)` -> Toggle full screen
 
     Actions will only be triggered if initiated with a user interaction. Fullscreen cannot be toggled with a simulated interaction (i.e. using `/SET`)
+
+
+#### `openUrl(url)`
+- `url`: http(s) url
+
+*Built-in client only*: opens url with the system's default browser
+*External client only*: opens url in a new tab
+
+If the event that triggered the script's execution was not initiated by a user interaction, this function will have no effect.

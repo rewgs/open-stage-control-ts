@@ -8,6 +8,8 @@
 - custom module
   - expose `process` global
 
+- scripting
+  - add `openUrl` function
 
 ## 1.8.10
 
