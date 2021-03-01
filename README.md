@@ -5,9 +5,9 @@ Open Stage Control
 *Libre and modular OSC / MIDI controller*
 
 
-Website: https://openstagecontrol.ammd.net/
-Forum: https://openstagecontrol.discourse.group/
-IRC: Freenode #openstagecontrol
+- Website: https://openstagecontrol.ammd.net/
+- Forum: https://openstagecontrol.discourse.group/
+- IRC: Freenode #openstagecontrol
 
 ----
 
