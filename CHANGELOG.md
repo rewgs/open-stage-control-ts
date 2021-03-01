@@ -2,6 +2,9 @@
 
 ## next
 
+- bug fixes
+  - switch: widget not reacting at first touch when traversing is enabled on parent
+
 - custom module
   - expose `process` global
 

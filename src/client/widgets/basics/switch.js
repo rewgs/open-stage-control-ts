@@ -56,6 +56,10 @@ class Switch extends MenuBase {
             var index = 0,
                 node = e.target
 
+            if (e.target === this.widget && e.traversing === true && e.firstTarget) {
+                node = e.firstTarget
+            }
+
             if (touchFix && e.isTouch) {
                 // special traversing touch fix
                 node = document.elementFromPoint(e.clientX, e.clientY)
