@@ -13,6 +13,9 @@
 - scripting
   - add `setFocus` function to focus an input widget programmatically
 
+- misc
+  - add `usePercents` client option 
+
 # 1.8.9
 
 - bug fixes
