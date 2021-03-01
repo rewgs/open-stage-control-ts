@@ -1,6 +1,12 @@
 # Changelog
 
-# 1.8.10
+## next
+
+- custom module
+  - expose `process` global
+
+
+## 1.8.10
 
 - bug fixes
   - modal: issues with children's visibility
@@ -14,9 +20,9 @@
   - add `setFocus` function to focus an input widget programmatically
 
 - misc
-  - add `usePercents` client option 
+  - add `usePercents` client option
 
-# 1.8.9
+## 1.8.9
 
 - bug fixes
   - script: issue when using the `options` argument in `set()` (options leaked to subsequent set() calls in the script)
@@ -24,7 +30,7 @@
    - multixy: spring behavior not working until all points are released  
    - custom module: prevent require() from reading submodules files each time and instead return the object in memory
 
-# 1.8.8
+## 1.8.8
 
 - launcher
   - add file browser button for the `theme` option and fix parsing path containing spaces if only one theme is set
