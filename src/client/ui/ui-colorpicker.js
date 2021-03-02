@@ -100,13 +100,6 @@ class ColorPicker extends UiWidget {
 
     }
 
-    childrenVisible() {
-
-        return true
-
-    }
-
-
     setName(n = '') {
 
         this.name = n

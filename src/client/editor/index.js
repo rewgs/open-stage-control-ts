@@ -130,7 +130,7 @@ class Editor {
             this.idClipboard = data.idClipboard
         })
 
-        this.usePercents = false
+        this.usePercents = !!ENV.usePercents
 
         this.enabled = false
         this.grid = true

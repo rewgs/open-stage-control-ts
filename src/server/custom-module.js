@@ -60,7 +60,8 @@ class CustomModule {
             setInterval: this.setInterval.bind(this),
             clearInterval: this.clearInterval.bind(this),
             require: this.require.bind(this),
-            nativeRequire: require
+            nativeRequire: require,
+            process: process
         }
 
         if (!this.submodule && !modulePathExtended) {

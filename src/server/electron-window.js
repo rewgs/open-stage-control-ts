@@ -101,6 +101,7 @@ module.exports = function(options={}) {
     window.webContents.on('console-message', (event, level, message)=>{
 
         if (level === 0 && message === 'ELECTRON.BLUR()') window.blur()
+        if (level === 0 && message === 'ELECTRON.FOCUS()') window.focus()
 
     })
 

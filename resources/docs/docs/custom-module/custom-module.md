@@ -136,6 +136,7 @@ This function can be used to load native node modules or locally installed modul
 - `clearInterval`
 - `__dirname`
 - `__filename`
+- `process`
 
 ----
 
