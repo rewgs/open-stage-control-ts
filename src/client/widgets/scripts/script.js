@@ -22,7 +22,7 @@ class Script extends Widget {
             geometry: null,
             style: null,
             class_specific: {
-                event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
+                event: {type: 'string', value: 'value', choices: ['value', 'keyboard', 'once'], help: 'Define which events trigger the script\'s execution.'},
                 script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.'},
 
                 _separator: 'event: keyboard',
@@ -79,6 +79,14 @@ class Script extends Widget {
                 meta: false,
             })
 
+        } else if (this.getProp('event') === 'once') {
+
+            this.compile({})
+            setTimeout(()=>{
+                this.run({}, {send: true, sync: true})
+            })
+
+
         }
 
     }
@@ -98,10 +106,11 @@ class Script extends Widget {
 
     }
 
-    run(context) {
+    run(context, options) {
 
         if (this.scriptLock) return
 
+        scriptVm.setValueOptions(options)
         scriptVm.setWidget(this)
 
         this.scriptLock = true
@@ -114,6 +123,7 @@ class Script extends Widget {
         this.scriptLock = false
 
         scriptVm.setWidget()
+        scriptVm.setValueOptions()
 
         return returnValue
 
@@ -123,15 +133,11 @@ class Script extends Widget {
 
         if (this.getProp('event') === 'value') {
 
-            scriptVm.setValueOptions(options)
-
             var returnValue = this.run({
                 value: v,
                 id: options.id,
                 touch: options.touch
-            })
-
-            scriptVm.setValueOptions()
+            }, options)
 
             return returnValue
 
@@ -157,7 +163,7 @@ class Script extends Widget {
             shift: e.shiftKey,
             alt: e.altKey,
             meta: e.metaKey
-        })
+        }, {send: true, sync: true})
 
 
     }
