@@ -88,10 +88,10 @@ Multiple widgets can be edited at once.
     | ++ctrl+right++ | Select current widget's next sibling |
     | ++ctrl+left++ | Select current widget's previous sibling |
     | ++t++ | Show selected widget in the project tree |
-    | ++Home++ | Send selected widget to back |
-    | ++Page Up++ | Send selected widget farther |
-    | ++Page Down++ | Bring selected widget closer |
-    | ++End++ | Bring selected widget to front |
+    | ++"Home"++ | Send selected widget to back |
+    | ++"Page Up"++ | Send selected widget farther |
+    | ++"Page Down"++ | Bring selected widget closer |
+    | ++"End"++ | Bring selected widget to front |
 
 
 === "Mac"
@@ -120,7 +120,7 @@ Multiple widgets can be edited at once.
     | ++cmd+right++ | Select current widget's next sibling |
     | ++cmd+left++ | Select current widget's previous sibling |
     | ++t++ | Show selected widget in the project tree |
-    | ++Home++ | Send selected widget to back |
-    | ++Page Up++ | Send selected widget farther |
-    | ++Page Down++ | Bring selected widget closer |
-    | ++End++ | Bring selected widget to front |
+    | ++"Home"++ | Send selected widget to back |
+    | ++"Page Up"++ | Send selected widget farther |
+    | ++"Page Down"++ | Bring selected widget closer |
+    | ++"End"++ | Bring selected widget to front |
