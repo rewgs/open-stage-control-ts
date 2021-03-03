@@ -34,6 +34,10 @@ Depending on what triggered the script's execution, a few variables are availabl
 - `alt` (`boolean`): `true` if alt key is pressed
 - `meta` (`boolean`): `true` if meta key is pressed
 
+**Event: once** (script widget only)
+
+When set on this mode, the script is called only once, when it is created.
+
 ## Touch state
 
 When some widgets are touched or released, a special event can be catched to trigger custom actions.
