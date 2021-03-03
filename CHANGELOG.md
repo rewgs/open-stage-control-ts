@@ -4,6 +4,11 @@
 
 - bug fixes
   - switch: widget not reacting at first touch when traversing is enabled on parent
+  - sliders: disable mousewheel when `spring` is enabled
+
+- widgets
+  - script: add `once` event mode
+  - encoder: remove `spring` property
 
 - custom module
   - expose `process` global

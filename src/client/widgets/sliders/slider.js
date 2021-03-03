@@ -104,7 +104,7 @@ class Slider extends Canvas {
 
     mousewheelHandle(e) {
 
-        if (e.deltaX) return
+        if (e.deltaX || this.getProp('spring')) return
 
         e.preventDefault()
         e.stopPropagation()
