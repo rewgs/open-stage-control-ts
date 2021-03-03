@@ -1,42 +1,53 @@
 # Scripting
 
-The `script` property allows widgets to run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) code when their value update.
+The `script` property allows widgets to run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) upon specific events.
 
 !!! info "It's slightly different from the [javascript property syntax ](../advanced-syntaxes/#javascript-js-code)"
 
     - no `JS{{}}` wrapper, just the code
     - `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their literal value before the script's compilation, therefore **it is recommended to avoid these syntaxes** and use `getProp()` and `get()` instead.
 
-## Event-dependent variables
+## Event types
 
-Depending on what triggered the script's execution, a few variables are available to help determine the execution conditions.
+!!! note ""
+    The `value` event is the only one available for all widgets except the `script` widget.
 
-**Event: value**
+=== "Event: value"
 
-- `id` (`string`): id of the widget that's reponsible for the value update
-- `value`: widget's value
-- `touch`: see [Touch state](#touch-state)
+    When set on this mode, the script is called when the widget receives a value.
 
-??? infos "Keyboard & Matrix"
-    In keyboards and matrices, `id` is the id of the child widget that triggered the event, and `value` is an array containing the children's values.
-    The touched widget's value can be retrieved with:
-    ```javascript
-    value[getIndex(id)]
-    ```
+    The following variables are available in this context:
 
-**Event: keyboard** (script widget only)
+    - `id` (`string`): id of the widget that's reponsible for the value update
+    - `value`: widget's value
+    - `touch`: see [Touch state](#touch-state)
 
-- `type` (`string`): `keydown` or `keyup`
-- `key` (`string`): key name,
-- `code` (`number`): key code
-- `ctrl` (`boolean)`: `true` if ctrl key is pressed
-- `shift` (`boolean`): `true` if shift key is pressed
-- `alt` (`boolean`): `true` if alt key is pressed
-- `meta` (`boolean`): `true` if meta key is pressed
+    ??? infos "Keyboard & Matrix"
+        In keyboards and matrices, `id` is the id of the child widget that triggered the event, and `value` is an array containing the children's values.
+        The touched widget's value can be retrieved with:
+        ```javascript
+        value[getIndex(id)]
+        ```
 
-**Event: once** (script widget only)
+=== "Event: keyboard"
 
-When set on this mode, the script is called only once, when it is created.
+    When set on this mode, the script is called when the key(s) defined in the widget's `keyBinding` property are pressed.
+
+
+    The following variables are available in this context:
+
+
+    - `type` (`string`): `keydown` or `keyup`
+    - `key` (`string`): key name,
+    - `code` (`number`): key code
+    - `ctrl` (`boolean)`: `true` if ctrl key is pressed
+    - `shift` (`boolean`): `true` if shift key is pressed
+    - `alt` (`boolean`): `true` if alt key is pressed
+    - `meta` (`boolean`): `true` if meta key is pressed
+
+=== "Event: once"
+
+    When set on this mode, the script is called only once, when it is created.
 
 ## Touch state
 
