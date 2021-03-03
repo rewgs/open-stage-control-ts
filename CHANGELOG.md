@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## 1.8.11
 
 - bug fixes
   - switch: widget not reacting at first touch when traversing is enabled on parent
