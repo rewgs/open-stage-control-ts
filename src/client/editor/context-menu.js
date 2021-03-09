@@ -44,7 +44,7 @@ var handleClick = function(event) {
             var siblings = targetWidget.parent.children,
                 from = siblings.indexOf(editor.selectedWidgets[0]),
                 to = siblings.indexOf(targetWidget),
-                range = siblings.slice(Math.min(from, to), Math.max(from, to) + 1)
+                range = siblings.slice(Math.min(from, to), Math.max(from, to) + 1).filter(w=>!editor.selectedWidgets.includes(w))
 
             targetWidget = editor.selectedWidgets.concat(range)
         }
