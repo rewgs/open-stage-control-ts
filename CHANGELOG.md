@@ -1,9 +1,13 @@
 # Changelog
 
+
 ## 1.8.12
 
 - project tree
   - select range of contiguous widgets with shift + click
+
+- misc
+  - plot: remove unused `filters` property; fix description for `rangeX` and `rangeY`
 
 ## 1.8.11
 
