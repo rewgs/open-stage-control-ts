@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.12
+
+- project tree
+  - select range of contiguous widgets with shift + click
+
 ## 1.8.11
 
 - bug fixes

@@ -35,6 +35,20 @@ var handleClick = function(event) {
 
     if (event.type !== 'fast-right-click') {
         if (editor.inspector.focusedInput) editor.inspector.onChange()
+
+        if (
+            event.target.tagName === 'LI' && // Project tree
+            event.detail.shiftKey &&
+            editor.selectedWidgets.length > 0
+        ) {
+            var siblings = targetWidget.parent.children,
+                from = siblings.indexOf(editor.selectedWidgets[0]),
+                to = siblings.indexOf(targetWidget),
+                range = siblings.slice(Math.min(from, to), Math.max(from, to) + 1)
+
+            targetWidget = editor.selectedWidgets.concat(range)
+        }
+
         editor.select(targetWidget, {multi: event.detail[multiSelectKey]})
     }
 
@@ -58,7 +72,7 @@ var handleClick = function(event) {
 
     if (parent !== widgetManager)  {
 
-        if (event.target.tagName !== 'LI') {
+        if (event.target.tagName !== 'LI') { // not Project tree
             actions.push({
                 label: icon('project-diagram') + ' ' + locales('editor_show_in_tree'),
                 action: ()=>{
