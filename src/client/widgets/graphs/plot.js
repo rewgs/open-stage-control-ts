@@ -24,19 +24,9 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
                 pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
             },
             class_specific: {
-                filters: {type: 'array', value: '', help: [
-                    'Each item must be an object with the following properties',
-                    '- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")',
-                    '- `freq`: number (filter\'s resonant frequency, default: 1000)',
-                    '- `q`: number (Q factor, default: 1)',
-                    '- `gain`: number (default: 0)',
-                    '- `on`: boolean (default: true)',
-                    'See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode'
-
-                ]},
                 pips: {type: 'boolean', value: true, help: 'Set to false to hide the scale'},
-                rangeX: {type: 'object', value: {min: 20, max: 22000}, help: 'Defines the min and max values for the x axis (in Hz, logarithmic scale)'},
-                rangeY: {type: 'object', value: {min:-6, max:6}, help: 'Defines the min and max values for the y axis (in dB)'},
+                rangeX: {type: 'object', value: {min: 0, max: 1}, help: 'Defines the min and max values for the x axis'},
+                rangeY: {type: 'object', value: {min: 0, max:1}, help: 'Defines the min and max values for the y axis'},
                 origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
             },
             value: {
