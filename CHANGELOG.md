@@ -11,6 +11,7 @@
 
 - misc
   - plot: remove unused `filters` property; fix description for `rangeX` and `rangeY`
+  - console: focus input when the console opens
 
 ## 1.8.11
 
