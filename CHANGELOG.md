@@ -3,6 +3,9 @@
 
 ## 1.8.12
 
+- bug fixes:
+  - project tree: filter input position issue when scrolling
+
 - project tree
   - select range of contiguous widgets with shift + click
 

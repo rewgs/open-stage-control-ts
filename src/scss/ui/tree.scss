@@ -114,20 +114,15 @@
     }
 
 
-    > ol {
-        margin-top:  $line-height + 2rem;
-    }
-
     .filter {
-        position: absolute;
-        left: 0;
-        right: 0;
-        width: calc(100% + #{$padding});
+        margin-left: #{-$padding * 2};
+        width: calc(100% + #{$padding * 2});
         display: block;
-        background: var(--color-background);
+        background: linear-gradient(to right,var(--color-background), transparent);
         font-family: $font;
         line-height: $field-height - 4rem;
         padding: 4rem $padding;
+        padding-left: #{$padding * 2};
     }
 
     .filter-active .filter-hide {
