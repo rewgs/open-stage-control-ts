@@ -31,10 +31,10 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
             },
             value: {
                 value: {type: 'array|string', value: '', help: [
-                    '- `Array` of `y` values',
-                    '- `Array` of `[x, y]` `array` values',
-                    '- `String` `array`',
-                    '- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points\' coordinates',
+                    '- `Array` of `y` values: `[y1, y2, ...]`',
+                    '- `Array` of `[x, y]` `array` values: `[[x1 , y1], [x2, y2], ...]`',
+                    '- `String` `array`: `"[y1, y2, ...]"` or `"[[x1 , y1], [x2, y2], ...]"`',
+                    '- `String` `object` to update specific coordinates only: `"{0: y1, 1: y2}"` or `"{0: [x1, y1], 1: [x2, y2]}"`',
                 ]}
             },
             osc: {
