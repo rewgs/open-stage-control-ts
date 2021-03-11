@@ -502,17 +502,16 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="plot_filters">filters<a class="headerlink" href="#plot_filters" title="Permanent link">#</a></h6> | `array` | <code>""</code> | Each item must be an object with the following properties<br/>- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")<br/>- `freq`: number (filter's resonant frequency, default: 1000)<br/>- `q`: number (Q factor, default: 1)<br/>- `gain`: number (default: 0)<br/>- `on`: boolean (default: true)<br/><br/>See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode |
             | <h6 id="plot_pips">pips<a class="headerlink" href="#plot_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to hide the scale |
-            | <h6 id="plot_rangeX">rangeX<a class="headerlink" href="#plot_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 20,<br/>&nbsp;"max": 22000<br/>}</code> | Defines the min and max values for the x axis (in Hz, logarithmic scale) |
-            | <h6 id="plot_rangeY">rangeY<a class="headerlink" href="#plot_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": -6,<br/>&nbsp;"max": 6<br/>}</code> | Defines the min and max values for the y axis (in dB) |
+            | <h6 id="plot_rangeX">rangeX<a class="headerlink" href="#plot_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
+            | <h6 id="plot_rangeY">rangeY<a class="headerlink" href="#plot_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
             | <h6 id="plot_origin">origin<a class="headerlink" href="#plot_origin" title="Permanent link">#</a></h6> | `number`&vert;<br/>`boolean` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
 
     === "value"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="plot_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#plot_value" title="Permanent link">#</a></h6> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values<br/>- `Array` of `[x, y]` `array` values<br/>- `String` `array`<br/>- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points' coordinates |
+            | <h6 id="plot_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#plot_value" title="Permanent link">#</a></h6> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values: `[y1, y2, ...]`<br/>- `Array` of `[x, y]` `array` values: `[[x1 , y1], [x2, y2], ...]`<br/>- `String` `array`: `"[y1, y2, ...]"` or `"[[x1 , y1], [x2, y2], ...]"`<br/>- `String` `object` to update specific coordinates only: `"{0: y1, 1: y2}"` or `"{0: [x1, y1], 1: [x2, y2]}"` |
 
 ??? api "<div id="eq">eq<a class="headerlink" href="#eq" title="Permanent link">#</a></div>"
     Draws logarithmic frequency response from an array of filter objects.
@@ -529,17 +528,17 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="eq_filters">filters<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#eq_filters" title="Permanent link">#</a></h6> | `array` | <code>""</code> | Each item must be an object with the following properties<br/>- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")<br/>- `freq`: number (filter's resonant frequency, default: 1000)<br/>- `q`: number (Q factor, default: 1)<br/>- `gain`: number (default: 0)<br/>- `on`: boolean (default: true)<br/><br/>See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode |
             | <h6 id="eq_pips">pips<a class="headerlink" href="#eq_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to hide the scale |
             | <h6 id="eq_rangeX">rangeX<a class="headerlink" href="#eq_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 20,<br/>&nbsp;"max": 22000<br/>}</code> | Defines the min and max values for the x axis (in Hz, logarithmic scale) |
             | <h6 id="eq_rangeY">rangeY<a class="headerlink" href="#eq_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": -6,<br/>&nbsp;"max": 6<br/>}</code> | Defines the min and max values for the y axis (in dB) |
             | <h6 id="eq_origin">origin<a class="headerlink" href="#eq_origin" title="Permanent link">#</a></h6> | `number`&vert;<br/>`boolean` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
+            | <h6 id="eq_filters">filters<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#eq_filters" title="Permanent link">#</a></h6> | `array` | <code>""</code> | Each item must be an object with the following properties<br/>- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")<br/>- `freq`: number (filter's resonant frequency, default: 1000)<br/>- `q`: number (Q factor, default: 1)<br/>- `gain`: number (default: 0)<br/>- `on`: boolean (default: true)<br/><br/>See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode |
 
     === "value"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="eq_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#eq_value" title="Permanent link">#</a></h6> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values<br/>- `Array` of `[x, y]` `array` values<br/>- `String` `array`<br/>- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points' coordinates |
+            | <h6 id="eq_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#eq_value" title="Permanent link">#</a></h6> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values: `[y1, y2, ...]`<br/>- `Array` of `[x, y]` `array` values: `[[x1 , y1], [x2, y2], ...]`<br/>- `String` `array`: `"[y1, y2, ...]"` or `"[[x1 , y1], [x2, y2], ...]"`<br/>- `String` `object` to update specific coordinates only: `"{0: y1, 1: y2}"` or `"{0: [x1, y1], 1: [x2, y2]}"` |
 
 ??? api "<div id="visualizer">visualizer<a class="headerlink" href="#visualizer" title="Permanent link">#</a></div>"
     Display its value over time.
@@ -556,9 +555,8 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="visualizer_filters">filters<a class="headerlink" href="#visualizer_filters" title="Permanent link">#</a></h6> | `array` | <code>""</code> | Each item must be an object with the following properties<br/>- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")<br/>- `freq`: number (filter's resonant frequency, default: 1000)<br/>- `q`: number (Q factor, default: 1)<br/>- `gain`: number (default: 0)<br/>- `on`: boolean (default: true)<br/><br/>See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode |
             | <h6 id="visualizer_pips">pips<a class="headerlink" href="#visualizer_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to hide the scale |
-            | <h6 id="visualizer_rangeX">rangeX<a class="headerlink" href="#visualizer_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 20,<br/>&nbsp;"max": 22000<br/>}</code> | Defines the min and max values for the x axis (in Hz, logarithmic scale) |
+            | <h6 id="visualizer_rangeX">rangeX<a class="headerlink" href="#visualizer_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
             | <h6 id="visualizer_rangeY">rangeY<a class="headerlink" href="#visualizer_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
             | <h6 id="visualizer_origin">origin<a class="headerlink" href="#visualizer_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
             | <h6 id="visualizer_duration">duration<a class="headerlink" href="#visualizer_duration" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines visualization duration in seconds |
@@ -570,7 +568,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="visualizer_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visualizer_value" title="Permanent link">#</a></h6> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values<br/>- `Array` of `[x, y]` `array` values<br/>- `String` `array`<br/>- `String` `object` to update specific coordinates only: `{0:1, 4:0}` will change the 1st and 5th points' coordinates |
+            | <h6 id="visualizer_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visualizer_value" title="Permanent link">#</a></h6> | `array`&vert;<br/>`string` | <code>""</code> | - `Array` of `y` values: `[y1, y2, ...]`<br/>- `Array` of `[x, y]` `array` values: `[[x1 , y1], [x2, y2], ...]`<br/>- `String` `array`: `"[y1, y2, ...]"` or `"[[x1 , y1], [x2, y2], ...]"`<br/>- `String` `object` to update specific coordinates only: `"{0: y1, 1: y2}"` or `"{0: [x1, y1], 1: [x2, y2]}"` |
 ## Indicators
 
 ??? api "<div id="led">led<a class="headerlink" href="#led" title="Permanent link">#</a></div>"
