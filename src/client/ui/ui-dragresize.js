@@ -38,11 +38,13 @@ class UiDragResize extends UiWidget {
 
         this.handles = DOM.get(this.container, '.handle')
         this.dragging = null
+        this.copying = null
+        this.shiftKey = false
 
         this.on('draginit', (event)=>{
 
             var node = event.firstTarget
-            if (event.shiftKey || !this.handles.includes(node)) return
+            if ((event.shiftKey && !event.altKey) || !this.handles.includes(node)) return
 
             this.initLeft = this.left
             this.initTop = this.top
@@ -85,14 +87,19 @@ class UiDragResize extends UiWidget {
 
         this.on('dragend', (event)=>{
 
+            if (!this.dragging) return
+
             var node = event.firstTarget
             if (!this.handles.includes(node)) return
 
             this.container.classList.remove('dragging')
             this.left = Math.max(0, this.left)
             this.top = Math.max(0, this.top)
+            this.shiftKey = event.shiftKey
             this.trigger(this.dragging.indexOf('left') > -1 ? 'move' : 'drag-resize', this)
             this.dragging = null
+            this.copying = null
+            this.shiftKey = false
 
         }, {element: this.container})
 
@@ -107,6 +114,13 @@ class UiDragResize extends UiWidget {
                 this.handles[0].classList.add('full')
             }, (e)=>{
                 this.handles[0].classList.remove('full')
+            })
+            keyboardJS.bind('alt+c', (e)=>{
+                this.copying = true
+                this.container.classList.add('copying')
+            }, (e)=>{
+                this.copying = false
+                this.container.classList.remove('copying')
             })
         })
 

@@ -109,9 +109,16 @@ class Editor {
         this.widgetDragResize.on('move', (e)=>{
             var left  =  Math.round(e.left / GRIDWIDTH) * GRIDWIDTH,
                 top  =  Math.round(e.top / GRIDWIDTH) * GRIDWIDTH
-            var dX = left - e.initLeft,
-                dY = top - e.initTop
-            this.moveWidget(dX, dY)
+
+            if (e.copying) {
+                this.copyWidget()
+                this.select(this.selectedWidgets[0].parent)
+                this.pasteWidget(left, top, e.shiftKey)
+            } else {
+                var dX = left - e.initLeft,
+                    dY = top - e.initTop
+                this.moveWidget(dX, dY)
+            }
         })
         this.widgetDragResize.on('drag-resize', (e)=>{
             var width  =  Math.round(e.width / GRIDWIDTH) * GRIDWIDTH,
