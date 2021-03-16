@@ -112,8 +112,9 @@ class Editor {
 
             if (e.copying) {
                 this.copyWidget()
+                var index = Math.max(...this.selectedWidgets.map(w=>w.parent.children.indexOf(w)))
                 this.select(this.selectedWidgets[0].parent)
-                this.pasteWidget(left, top, e.shiftKey)
+                this.pasteWidget(left, top, e.shiftKey, index + 1)
             } else {
                 var dX = left - e.initLeft,
                     dY = top - e.initTop
@@ -565,7 +566,7 @@ class Editor {
 
     }
 
-    pasteWidget(x, y, increment) {
+    pasteWidget(x, y, increment, index) {
 
         if (!this.selectedWidgets.length || this.clipboard === null) return
         if (
@@ -632,12 +633,17 @@ class Editor {
         var store = this.clipboard[0].type === 'tab' ? 'tabs' : 'widgets'
 
         this.selectedWidgets[0].props[store] = this.selectedWidgets[0].props[store] || []
-        this.selectedWidgets[0].props[store] = this.selectedWidgets[0].props[store].concat(pastedData)
 
-        var indexes = {addedIndexes: []}
+        var indexes = {addedIndexes: []},
+            start = index || this.selectedWidgets[0].props[store].length
+
+        this.selectedWidgets[0].props[store].splice(start, 0, ...pastedData)
+
         for (let i = 0; i < pastedData.length; i++) {
-            indexes.addedIndexes.push(this.selectedWidgets[0].props[store].length - 1 - i )
+            indexes.addedIndexes.push(start + pastedData.length - 1 - i )
         }
+
+        if (index)indexes.reuseChildren=false
 
         updateWidget(this.selectedWidgets[0], indexes)
 
