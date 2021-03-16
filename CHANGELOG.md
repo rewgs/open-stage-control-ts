@@ -1,5 +1,12 @@
 # Changelog
 
+## next
+
+- ui
+  - add `alt`+`wheel` for local zoom centered on cursor
+
+- editor
+  - add `alt+c+drag` and `alt+shift+c+drag` for duplicating dragged widgets
 
 ## 1.8.12
 
