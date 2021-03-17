@@ -2,6 +2,11 @@
 
 ## next
 
+- widgets
+  - file: show save icon when mode is set to save
+  - file: center icon when hidePath is set to true
+
+
 - ui
   - add `alt`+`wheel` for local zoom centered on cursor
 
