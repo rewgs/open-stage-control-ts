@@ -13,7 +13,7 @@ document.addEventListener('wheel', function(event) {
 
         if (event.deltaY === 0) return
 
-        var d = - event.deltaY / (10 * Math.abs(event.deltaY))
+        let d = - event.deltaY / (10 * Math.abs(event.deltaY))
         if (!isNaN(d)) {
             PXSCALE = parseFloat(d) + parseFloat(PXSCALE)
             document.documentElement.style.setProperty('font-size', PXSCALE + 'px')
@@ -22,7 +22,7 @@ document.addEventListener('wheel', function(event) {
     }
     if (event.altKey) {
         event.preventDefault()
-        var d = - event.deltaY / (10 * Math.abs(event.deltaY))
+        let d = - event.deltaY / (10 * Math.abs(event.deltaY))
         if (!isNaN(d)) {
             localZoom = Math.max(parseFloat(d) + parseFloat(localZoom), 1)
             applylocalZoom()
