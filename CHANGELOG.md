@@ -5,6 +5,7 @@
 
 - bug fixes:
   - project tree: filter input position issue when scrolling
+  - sliders/pads: apply `spring` property dynamically
 
 - project tree
   - select range of contiguous widgets with shift + click

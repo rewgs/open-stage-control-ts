@@ -281,6 +281,21 @@ module.exports = class Xy extends Pad {
 
     }
 
+    onPropChanged(propName, options, oldPropValue) {
+
+        if (super.onPropChanged(...arguments)) return true
+
+        switch (propName) {
+
+            case 'spring':
+                if (this.getProp('spring') && !this.touched) this.setValue([this.faders.x.getSpringValue(),this.faders.y.getSpringValue()], {...options})
+                return
+
+        }
+
+    }
+
+
     onRemove() {
 
         this.faders.x.onRemove()

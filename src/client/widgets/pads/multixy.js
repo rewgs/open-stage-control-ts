@@ -118,6 +118,7 @@ module.exports = class MultiXy extends Pad {
             this.trigger('touch', {stopPropagation: true, touch: [parseInt(id), 1]})
 
             this.pads[id].trigger('draginit', e)
+            this.pads[id].touched = 1
 
             if (this.getProp('ephemeral')) this.batchDraw()
 
@@ -141,6 +142,7 @@ module.exports = class MultiXy extends Pad {
 
             e.stopPropagation = true
 
+            this.pads[i].touched = 0
             this.pads[i].trigger('dragend', e)
 
             this.trigger('touch', {stopPropagation: true, touch: [parseInt(this.touchMap[e.pointerId]), 0]})
@@ -288,7 +290,13 @@ module.exports = class MultiXy extends Pad {
                     w.onPropChanged(propName)
                 }
                 return
-
+            case 'spring':
+                for (var w of this.pads) {
+                    w.cachedProps[propName] = this.getProp(propName)
+                    w.onPropChanged(propName, options)
+                }
+                this.batchDraw()
+            return
         }
 
     }

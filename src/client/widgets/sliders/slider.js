@@ -232,6 +232,9 @@ class Slider extends Canvas {
             case 'steps':
                 this.setSteps()
                 return
+            case 'spring':
+                if (this.getProp('spring') && !this.touched) this.setValue(this.getSpringValue(), {...options})
+                return
 
         }
 

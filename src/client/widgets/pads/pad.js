@@ -28,6 +28,8 @@ class Pad extends Canvas {
 
 }
 
-Pad.dynamicProps = Pad.prototype.constructor.dynamicProps.filter(n => n !== 'decimals')
+Pad.dynamicProps = Pad.prototype.constructor.dynamicProps.filter(n => n !== 'decimals').concat([
+    'spring'
+])
 
 module.exports = Pad
