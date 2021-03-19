@@ -286,17 +286,17 @@ module.exports = class MultiXy extends Pad {
             case 'alphaFillOn':
             case 'padding':
             case 'lineWidth':
-                for (var w of this.pads) {
+                for (let w of this.pads) {
                     w.onPropChanged(propName)
                 }
                 return
             case 'spring':
-                for (var w of this.pads) {
+                for (let w of this.pads) {
                     w.cachedProps[propName] = this.getProp(propName)
                     w.onPropChanged(propName, options)
                 }
                 this.batchDraw()
-            return
+                return
         }
 
     }
