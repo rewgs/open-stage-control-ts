@@ -1,12 +1,12 @@
 # Changelog
 
-## next
+## 1.8.13
 
 - widgets
   - file: show save icon when mode is set to save
   - file: center icon when hidePath is set to true
-
-
+  - sliders/pads: apply `spring` property dynamically
+  
 - ui
   - add `alt`+`wheel` for local zoom centered on cursor
 
