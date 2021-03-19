@@ -1,5 +1,17 @@
 # Changelog
 
+## next
+
+- widgets
+  - file: show save icon when mode is set to save
+  - file: center icon when hidePath is set to true
+
+
+- ui
+  - add `alt`+`wheel` for local zoom centered on cursor
+
+- editor
+  - add `alt+c+drag` and `alt+shift+c+drag` for duplicating dragged widgets
 
 ## 1.8.12
 

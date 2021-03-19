@@ -644,6 +644,11 @@
         min-width: 0;
         overflow: hidden;
     }
+
+    &.hide-path .text {
+        display: none;
+    }
+
     .icon {
         order: 1;
         display: block;
@@ -657,6 +662,10 @@
         &:after {
             content:"\f07c";
         }
+    }
+
+    &.save .icon:after {
+        content:"\f0c7";
     }
 
 }

@@ -40,6 +40,10 @@
         display: block;
     }
 
+    &.copying {
+        --color-accent: var(--color-warning);
+    }
+
     .handle {
 
         $size: 10rem;

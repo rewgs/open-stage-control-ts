@@ -39,6 +39,8 @@ module.exports = class File extends Widget {
 
         if (this.getProp('align') === 'left') this.widget.classList.add('left')
         if (this.getProp('align') === 'right') this.widget.classList.add('right')
+        if (this.getProp('mode') === 'save') this.widget.classList.add('save')
+        if (this.getProp('hidePath')) this.widget.classList.add('hide-path')
 
         this.text = DOM.get(this.widget, '.text')[0]
         this.widget.addEventListener('fast-click', (e)=>{
