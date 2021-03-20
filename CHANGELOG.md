@@ -6,6 +6,9 @@
   - add `mod+d` and `mod+shift+d` for duplicating widgets
   - use a temporary clipboard when duplicating widgets
 
+- misc
+  - inspector: move `script` property to `scripting` category
+
 
 ## 1.8.13
 

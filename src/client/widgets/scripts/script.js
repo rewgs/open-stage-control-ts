@@ -21,18 +21,16 @@ class Script extends Widget {
             },
             geometry: null,
             style: null,
-            class_specific: {
+            scripting: {
                 event: {type: 'string', value: 'value', choices: ['value', 'keyboard', 'once'], help: 'Define which events trigger the script\'s execution.'},
-                script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.'},
 
                 _separator: 'event: keyboard',
 
                 keyBinding: {type: 'string|array', value: '', help: 'Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation)'},
                 keyRepeat: {type: 'boolean', value: true, help: 'Set to `false` to prevent keydown repeats when holding the key combo pressed'},
                 keyType: {type: 'string', value: 'keydown', choices: ['keydown', 'keyup', 'both'], help: 'Determines which key event trigger the script\'s execution'},
-            },
-            value: {
-                script: null
+
+                script: {type: 'script', value: '', help: 'Script executed whenever the widget\'s receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.'},
             }
         })
 

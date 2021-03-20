@@ -106,7 +106,6 @@ class Widget extends EventEmitter {
                     'When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)',
                     'When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending)'
                 ]},
-                script: {type: 'script', value: '', help: ['Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
             },
             osc: {
                 address: {type: 'string', value: 'auto', help: [
@@ -133,6 +132,9 @@ class Widget extends EventEmitter {
                 ]},
                 ignoreDefaults: {type: 'boolean', value: false, help: 'Set to `true` to ignore the server\'s default targets'},
                 bypass: {type: 'boolean', value: false, help: 'Set to `true` to prevent the widget from sending any osc message'}
+            },
+            scripting: {
+                script: {type: 'script', value: '', help: ['Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
             }
         }
 
