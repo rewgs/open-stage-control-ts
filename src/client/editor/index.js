@@ -111,10 +111,7 @@ class Editor {
                 top  =  Math.round(e.top / GRIDWIDTH) * GRIDWIDTH
 
             if (e.copying) {
-                this.copyWidget()
-                var index = Math.max(...this.selectedWidgets.map(w=>w.parent.children.indexOf(w)))
-                this.select(this.selectedWidgets[0].parent)
-                this.pasteWidget(left, top, e.shiftKey, index + 1)
+                this.duplicateWidget(left, top, e.shiftKey)
             } else {
                 var dX = left - e.initLeft,
                     dY = top - e.initTop
@@ -132,6 +129,7 @@ class Editor {
         this.selectedWidgets = []
 
         this.clipboard = null
+        this.tmpClipboard = null
         this.idClipboard = null
         ipc.on('clipboard', (data)=>{
             this.clipboard = data.clipboard
@@ -166,6 +164,8 @@ class Editor {
                 'mod + x',
                 'mod + v',
                 'mod + shift + v',
+                'mod + d',
+                'mod + shift + d',
                 macOs ? 'backspace' : 'delete',
                 'alt + up',
                 'alt + down',
@@ -243,6 +243,14 @@ class Editor {
 
             case 'mod + shift + v':
                 this.pasteWidget(this.mousePosition.x, this.mousePosition.y, true)
+                break
+
+            case 'mod + d':
+                this.duplicateWidget(this.mousePosition.x, this.mousePosition.y, false)
+                break
+
+            case 'mod + shift + d':
+                this.duplicateWidget(this.mousePosition.x, this.mousePosition.y, true)
                 break
 
             case 'backspace':
@@ -544,7 +552,7 @@ class Editor {
 
     }
 
-    copyWidget() {
+    copyWidget(tmp) {
 
         if (!this.selectedWidgets.length) return
         if (this.selectedWidgets[0].getProp('type') === 'root') return
@@ -559,6 +567,19 @@ class Editor {
 
     }
 
+    duplicateWidget(x, y, increment) {
+
+        if (!this.selectedWidgets.length) return
+        if (this.selectedWidgets[0].getProp('type') === 'root') return
+
+        this.tmpClipboard = deepCopy(this.selectedWidgets.map((w)=>w.props))
+        var index = Math.max(...this.selectedWidgets.map(w=>w.parent.children.indexOf(w)))
+        this.select(this.selectedWidgets[0].parent)
+        this.pasteWidget(x, y, increment, index + 1, true)
+        this.select(this.selectedWidgets[0].children[index + 1])
+
+    }
+
     cutWidget() {
 
         this.copyWidget()
@@ -566,16 +587,19 @@ class Editor {
 
     }
 
-    pasteWidget(x, y, increment, index) {
+    pasteWidget(x, y, increment, index, tmp) {
 
         if (!this.selectedWidgets.length || this.clipboard === null) return
+
+        var clipboard = tmp ? this.tmpClipboard : this.clipboard
+
         if (
             this.selectedWidgets[0].childrenType === undefined ||
-            this.clipboard[0].type === 'tab' && this.selectedWidgets[0].childrenType === 'widget' ||
-            this.clipboard[0].type !== 'tab' && this.selectedWidgets[0].childrenType === 'tab'
+            clipboard[0].type === 'tab' && this.selectedWidgets[0].childrenType === 'widget' ||
+            clipboard[0].type !== 'tab' && this.selectedWidgets[0].childrenType === 'tab'
         ) return
 
-        var pastedData = deepCopy(this.clipboard),
+        var pastedData = deepCopy(clipboard),
             minTop = Infinity,
             minLeft = Infinity
 
@@ -630,7 +654,7 @@ class Editor {
 
         // paste data
 
-        var store = this.clipboard[0].type === 'tab' ? 'tabs' : 'widgets'
+        var store = clipboard[0].type === 'tab' ? 'tabs' : 'widgets'
 
         this.selectedWidgets[0].props[store] = this.selectedWidgets[0].props[store] || []
 

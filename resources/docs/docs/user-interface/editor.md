@@ -79,6 +79,8 @@ Multiple widgets can be edited at once.
     | ++ctrl+x++ | Cut selected widgets |
     | ++ctrl+v++ | Paste clipboard in selected widget |
     | ++ctrl+shift+v++ | Paste and increment id |
+    | ++ctrl+d++ | Duplicate selected widget |
+    | ++ctrl+shift+d++ | Duplicate selected widget and increment id |
     | ++alt+c+"Drag"++ | Paste selection to position |
     | ++alt+c+shift+"Drag"++ | Paste selection to dragged position and increment id |
     | ++up++ <br/>++down++ <br/>++left++ <br/>++right++ | Move selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
@@ -113,6 +115,8 @@ Multiple widgets can be edited at once.
     | ++cmd+x++ | Cut selected widgets |
     | ++cmd+v++ | Paste clipboard in selected widget |
     | ++cmd+shift+v++ | Paste and increment id |
+    | ++cmd+d++ | Duplicate selected widget |
+    | ++cmd+shift+d++ | Duplicate selected widget and increment id |
     | ++alt+c+"Drag"++ | Paste selection to position |
     | ++alt+c+shift+"Drag"++ | Paste selection to dragged position and increment id |
     | ++up++ <br/>++down++ <br/>++left++ <br/>++right++ | Move selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
