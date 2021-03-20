@@ -2,6 +2,9 @@
 
 ## 1.8.14
 
+- bug fixes
+  - `alt+shift+c` not working when pressed before dragging
+
 - editor
   - add `mod+d` and `mod+shift+d` for duplicating widgets
   - use a temporary clipboard when duplicating widgets

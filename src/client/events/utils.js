@@ -21,6 +21,7 @@ module.exports = {
             pointerId: e.pointerId,
             pointerType: e.pointerType,
             button: e.button,
+            altKey: e.altKey,
             ctrlKey: e.ctrlKey,
             shiftKey: e.shiftKey,
             inertia: e.multitouch ? 1 : e.inertia,
