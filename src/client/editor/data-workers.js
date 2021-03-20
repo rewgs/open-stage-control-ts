@@ -184,10 +184,12 @@ var incrementWidget = function(data, root){
 
         data.address = 'auto'
 
-    } else if (!address.match(/^auto|\/control|\/note|\/program|\/sysex|\/key_pressure|\/channel_pressure|\/pitch/) !== 'auto') {
+    } else if (!address.match(/^(auto|\/control|\/note|\/program|\/sysex|\/mtc|\/key_pressure|\/channel_pressure|\/pitch)$/)) {
 
-        var addressref
+        var addressref = widgetManager.createAddressRef(null, data.preArgs,address)
+
         while (fakeStore.address.indexOf(address) != -1 || widgetManager.getWidgetByAddress(addressref).length) {
+
             address = address.replace(/([0-9]*)$/,function(m){
                 var n = parseInt(m)+1
                 n = isNaN(n)?1:n
