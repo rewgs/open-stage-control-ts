@@ -8,6 +8,7 @@
 
 - misc
   - inspector: move `script` property to `scripting` category
+  - ui: minor style tweaks
 
 
 ## 1.8.13

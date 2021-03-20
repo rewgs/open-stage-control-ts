@@ -124,9 +124,12 @@ osc-inspector-category {
         padding: 0 16rem;
         opacity: 0.75;
         --color-fill: var(--color-background);
+
         &:after {
             left:-($padding - 1);
             right:-($padding - 1);
+            background: linear-gradient(to right,var(--color-fill), transparent);
+
         }
     }
 
