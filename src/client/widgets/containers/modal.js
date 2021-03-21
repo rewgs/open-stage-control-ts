@@ -3,7 +3,8 @@ var Panel = require('./panel'),
     resize = require('../../events/resize'),
     doubletab = require('../mixins/double_tap'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw')
+    raw = require('nanohtml/raw'),
+    iOS13 = require('../../ui/ios') === 13
 
 class Modal extends Panel {
 
@@ -66,6 +67,14 @@ class Modal extends Panel {
 
         this.container.appendChild(this.popup)
         this.popupContent = DOM.get(this.popup, '.popup-content')[0]
+
+
+        if (iOS13) {
+            for (let dir in this.iosScrollbars) {
+                this.container.removeChild(this.iosScrollbars[dir].container)
+                this.popupContent.appendChild(this.iosScrollbars[dir].container)
+            }
+        }
 
         // convert dimensions / coordinates to rem
         var geometry = {}

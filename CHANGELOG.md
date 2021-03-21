@@ -5,6 +5,7 @@
 - bug fixes
   - `alt+shift+c` not working when pressed before dragging
   - incremental pasting issue with address property
+  - generate scrollbars for panels on iOS 13+ 
 
 - editor
   - add `mod+d` and `mod+shift+d` for duplicating widgets

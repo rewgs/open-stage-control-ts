@@ -3,8 +3,8 @@
 var iOS13 = (
         navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1 // iPad
         || navigator.userAgent.match(/iPhone OS (1[3-9])/) // iPhone
-    ),
-    iOS = navigator.platform.match(/iPhone|iPod|iPad/) || iOS13
+    ) ? 13 : 0,
+    iOS = iOS13 || navigator.platform.match(/iPhone|iPod|iPad/)
 
 if (iOS && !iOS13) {
 
@@ -37,6 +37,9 @@ if (iOS && !iOS13) {
         }
     }, supportsPassiveOption ? {passive: false} : false)
 
+
 }
+
+if (iOS13) document.body.classList.add('iOS13')
 
 module.exports = iOS
