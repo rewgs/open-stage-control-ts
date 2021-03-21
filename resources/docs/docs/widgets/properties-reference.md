@@ -53,7 +53,6 @@
         | <h6 id="value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#value" title="Permanent link">#</a></h6> | `*` | <code>""</code> | Define the widget's value depending on other widget's values / properties using the advanced property syntax |
         | <h6 id="default">default<a class="headerlink" href="#default" title="Permanent link">#</a></h6> | `*` | <code>""</code> | If set, the widget will be initialized with this value when the session is loaded. |
         | <h6 id="linkId">linkId<a class="headerlink" href="#linkId" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Widgets sharing the same `linkId` update each other's value(s) AND send their respective osc messages.<br/><br/>When prefixed with >>, the `linkId` will make the widget act as a master (sending but not receiving)<br/><br/>When prefixed with <<, the `linkId` will make the widget act as a slave (receiving but not sending) |
-        | <h6 id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 
 
 === "osc"
@@ -67,6 +66,13 @@
         | <h6 id="target">target<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#target" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array`&vert;<br/>`null` | <code>""</code> | This defines the targets of the widget's OSC messages<br/>- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:portA", "ip:portB"]`<br/>- If midi is enabled, targets can be `midi:device_name`<br/>- If no target is set, messages can still be sent if the server has default targets |
         | <h6 id="ignoreDefaults">ignoreDefaults<a class="headerlink" href="#ignoreDefaults" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to ignore the server's default targets |
         | <h6 id="bypass">bypass<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#bypass" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to prevent the widget from sending any osc message |
+
+
+=== "scripting"
+
+    | property | type |default | description |
+    | --- | --- | --- | --- |
+        | <h6 id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 ## Basics
 
 ??? api "<div id="button">button<a class="headerlink" href="#button" title="Permanent link">#</a></div>"
@@ -746,7 +752,7 @@
             | <h6 id="encoder_forth">forth<a class="headerlink" href="#encoder_forth" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Defines which value is sent when rotating the encoder clockwise |
             | <h6 id="encoder_release">release<a class="headerlink" href="#encoder_release" title="Permanent link">#</a></h6> | `number` | <code>""</code> | Defines which value is sent when releasing the encoder:<br/>- Set to `null` to send send no argument in the osc message<br/>- Can be an `object` if the type needs to be specified |
 
-    === "value"
+    === "scripting"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
@@ -783,12 +789,12 @@
 ??? api "<div id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></div>"
     Evaluates a script each time it receives a value.
 
-    === "script"
+    === "scripting"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="script_event">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Choices: `value`, `keyboard`, `once` |
             | <h6 id="script_script">script<a class="headerlink" href="#script_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
+            | <h6 id="script_event">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Choices: `value`, `keyboard`, `once` |
             | <h6 id="script_keyBinding">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation) |
             | <h6 id="script_keyRepeat">keyRepeat<a class="headerlink" href="#script_keyRepeat" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
             | <h6 id="script_keyType">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keydown"</code> | Determines which key event trigger the script's execution<br/><br/>Choices: `keydown`, `keyup`, `both` |
