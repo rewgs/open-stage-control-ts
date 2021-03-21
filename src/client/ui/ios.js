@@ -1,8 +1,9 @@
 // Prevent iOS Pull-To-Refresh
 
 var iOS13 = (
-        navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1 // iPad
+        navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1 // safari iPad
         || navigator.userAgent.match(/iPhone OS (1[3-9])/) // iPhone
+        || navigator.userAgent.match(/i(Pad|Phone); CPU OS 1[3-9]/) // chrome iPad
     ) ? 13 : 0,
     iOS = iOS13 || navigator.platform.match(/iPhone|iPod|iPad/)
 
