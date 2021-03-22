@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.15
+
+- bug fixes
+  - editor: error when duplicating widget while if the clipboard is empty
+
 ## 1.8.14
 
 - bug fixes

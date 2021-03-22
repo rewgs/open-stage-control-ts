@@ -589,9 +589,11 @@ class Editor {
 
     pasteWidget(x, y, increment, index, tmp) {
 
-        if (!this.selectedWidgets.length || this.clipboard === null) return
+        if (!this.selectedWidgets.length) return
 
         var clipboard = tmp ? this.tmpClipboard : this.clipboard
+
+        if (clipboard === null) return
 
         if (
             this.selectedWidgets[0].childrenType === undefined ||
