@@ -22,7 +22,7 @@ document.addEventListener('wheel', function(event) {
     }
     if (event.altKey) {
         event.preventDefault()
-        let d = - event.deltaY / (10 * Math.abs(event.deltaY))
+        let d = - event.deltaY / (10 * Math.abs(event.deltaY)) * 2
         if (!isNaN(d)) {
             localZoom = Math.max(parseFloat(d) + parseFloat(localZoom), 1)
             applylocalZoom()
@@ -32,8 +32,8 @@ document.addEventListener('wheel', function(event) {
 
 document.addEventListener('mousemove', function(event) {
     mousePos = [
-        event.screenX / screen.width * 100,
-        event.screenY / screen.height * 100
+        event.pageX / window.innerWidth * 100,
+        event.pageY / window.innerHeight * 100
     ]
     if (localZoom !== 1) {
         applylocalZoom()

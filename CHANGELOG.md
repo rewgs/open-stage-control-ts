@@ -4,6 +4,10 @@
 
 - bug fixes
   - editor: error when duplicating widget while if the clipboard is empty
+  - ui: local zoom move issue when not in fullscreen
+
+- misc
+  - faster local zoom  
 
 ## 1.8.14
 
