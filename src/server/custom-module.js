@@ -201,7 +201,7 @@ class CustomModule {
         }
     }
 
-    clearInterval(id) {
+    clearInterval(interval) {
         clearInterval(interval)
         if (this.intervals.includes(interval)) {
             this.intervals.splice(this.intervals.indexOf(interval), 1)
