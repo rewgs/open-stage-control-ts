@@ -5,7 +5,8 @@
 - bug fixes
   - editor: error when duplicating widget while if the clipboard is empty
   - ui: local zoom move issue when not in fullscreen
-  - custom module: `clearInterval()` not working 
+  - custom module: `clearInterval()` not working
+  - regression breaking style attribute in html property 
 
 - misc
   - faster local zoom  
