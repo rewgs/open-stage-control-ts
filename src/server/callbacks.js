@@ -3,7 +3,8 @@ var path = require('path'),
     settings = require('./settings'),
     osc = require('./osc'),
     {ipc} = require('./server'),
-    {deepCopy, resolveHomeDir} = require('./utils')
+    {deepCopy, resolveHomeDir} = require('./utils'),
+    fragmentManager
 
 var widgetHashTable = {},
     clipboard = {clipboard: null, idClipboard: null}
@@ -130,15 +131,9 @@ module.exports =  {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
-        module.exports.fileRead(data, clientId, true, (result)=>{
+        fragmentManager = fragmentManager || require('./fragments')
 
-            ipc.send('fragmentLoad', {path: data.path, fileContent: result}, clientId)
-
-        }, (error)=>{
-
-            ipc.send('errorLog', `Could not open fragment file:\n ${error}`)
-
-        })
+        fragmentManager.loadFragment(data.path, clientId)
 
     },
 

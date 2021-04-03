@@ -22,7 +22,7 @@ module.exports = {
     resolveHomeDir: function(p) {
         // Resolve '~' to user's home directory
         if (!p) return ''
-        return String(p).replace(/^~/, process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'])
+        return String(p).replace(/^(~|\/~)/, process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'])
     }
 
 

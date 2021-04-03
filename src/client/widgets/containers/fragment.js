@@ -2,6 +2,7 @@ var Container = require('../common/container'),
     widgetManager = require('../../managers/widgets'),
     resize = require('../../events/resize'),
     parser = require('../../parser'),
+    {deepCopy, deepEqual} = require('../../utils'),
     html = require('nanohtml'),
     sessionManager
 

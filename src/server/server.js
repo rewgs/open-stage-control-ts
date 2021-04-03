@@ -22,7 +22,8 @@ var urlparser   = require('url'),
     Ipc         = require('./ipc/server'),
     ipc         = new Ipc(server),
     theme       = require('./theme').init(),
-    zeroconf = require('./zeroconf'),
+    zeroconf    = require('./zeroconf'),
+    {resolveHomeDir} = require('./utils'),
     prod = !process.argv[0].includes('node_modules'),
     osc = {},
     clients = {},
@@ -40,7 +41,24 @@ if (settings.read('client-options')) {
 
 var resolveDirs = theme.files.map(x=>path.dirname(x))
 resolveDirs = resolveDirs.filter((x, index)=>{return resolveDirs.indexOf(x) === index})
-resolveDirs.push('') // absolute
+resolveDirs.push(settings.read('remote-root') || '') // remote-root / absolute
+
+function resolvePath(url, clientId) {
+
+    var sessionPath = path.dirname(ipc.clients[clientId].sessionPath)
+
+    url = resolveHomeDir(url)
+
+    for (var i = sessionPath ? -1 : 0; i < resolveDirs.length; i++) {
+        var p = i === -1 ? sessionPath : resolveDirs[i]
+        p = path.resolve(path.join(p, url))
+
+        if (fs.existsSync(p)) return p
+    }
+
+    return false
+
+}
 
 function httpRoute(req, res) {
 
@@ -98,13 +116,11 @@ function httpRoute(req, res) {
                 // Resolution order: session path, theme path, absolute path
 
                 var id = urlparser.parse('?' + req.headers.cookie, true).query.client_id,
-                    sessionPath = path.dirname(ipc.clients[id].sessionPath)
+                    resolvedPath = resolvePath(url.replace(/%20/g, ' '), id)
 
-                for (var i = -1; i < resolveDirs.length; i++) {
-                    var p = i === -1 ? sessionPath : resolveDirs[i]
-                    p = path.resolve(path.join(p, url))
+                if (resolvedPath) {
                     try {
-                        res.sendFile(p)
+                        res.sendFile(resolvedPath)
                         return true
                     } catch(e) {}
                 }
@@ -187,7 +203,8 @@ var bindCallbacks = function(callbacks) {
 module.exports =  {
     ipc:ipc,
     bindCallbacks:bindCallbacks,
-    clients:clients
+    clients:clients,
+    resolvePath:resolvePath
 }
 
 osc = require('./osc').server
