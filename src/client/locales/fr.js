@@ -28,6 +28,11 @@ module.exports = {
     editor_addtab: 'Ajouter onglet',
     editor_delete: 'Supprimer',
 
+    editor_fragment: 'Fragment',
+    editor_fragment_export: 'Exporter',
+    editor_fragment_import: 'Importer',
+
+
     // loadings
     loading_upload: 'Téléversement...',
     loading_newclient: 'Connexion d\'un nouveau client...',

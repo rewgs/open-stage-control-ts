@@ -354,7 +354,7 @@
 }
 
 
-.clone-container {
+.clone-container, .fragment-container {
 
     &.empty {
         @include pseudo-stroke();
@@ -367,7 +367,8 @@
         content: none
     }
 
-    > .clone {
+    > .clone,
+    > .fragment {
 
         --widget-spacing: 0;
         flex: 1;

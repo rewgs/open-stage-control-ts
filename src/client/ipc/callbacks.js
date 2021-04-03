@@ -45,6 +45,12 @@ module.exports = {
 
     },
 
+    fragmentLoad: function(data){
+
+        session.setFragment(data)
+
+    },
+
     stateLoad: function(data){
 
         state.load(data.state, data.send, data.path)
@@ -75,6 +81,12 @@ module.exports = {
 
     error: function(data){
         new UiModal({title: raw(utils.icon('exclamation-triangle') + '&nbsp; ' + locales('error')), content: raw(data), closable:true})
+    },
+
+    errorLog: function(data) {
+
+        console.error(data)
+
     },
 
     reloadCss: function(){

@@ -29,6 +29,10 @@ module.exports = {
     editor_addtab: 'Add tab',
     editor_delete: 'Delete',
 
+    editor_fragment: 'Fragment',
+    editor_fragment_export: 'Export',
+    editor_fragment_import: 'Import',
+
     // loadings
     loading_upload: 'Uploading file...',
     loading_newclient: 'New client connecting...',

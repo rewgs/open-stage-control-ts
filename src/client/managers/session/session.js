@@ -4,12 +4,12 @@ var semver = require('semver'),
 
 module.exports = class Session {
 
-    constructor(data) {
+    constructor(data, type) {
 
         if (data === null) {
 
             data = {
-                session: {type: 'root'}
+                content: {type: 'root'}
             }
 
 
@@ -23,7 +23,7 @@ module.exports = class Session {
                 if (semver.lte(version, converter.version)) {
 
                     if (converter.global) data = converter.global(data)
-                    if (converter.widget) this.applyConvert(data.session, converter.widget)
+                    if (converter.widget) this.applyConvert(data.content, converter.widget)
 
                     if (converter.warning) warning = true
 
@@ -36,13 +36,34 @@ module.exports = class Session {
 
                 new UiModal({title: locales('session_oldversion_title'), content: locales('session_oldversion'), icon: 'exclamation-triangle', closable:true})
 
-
             }
 
         }
 
+
+
+        if (type === 'session' && data.type === 'fragment') {
+            // opening fragment as a session
+            if (data.content.type === 'tab') {
+                data.content = {type: 'root', tabs: [data.content]}
+            } else {
+                data.content = {type: 'root', widgets: [data.content]}
+            }
+        }
+
+        if (type === 'fragment' && data.type === 'session') {
+            // opening session as a fragment
+            data.content.type = 'panel'
+        }
+
+        data.createdWith = PACKAGE.productName
         data.version = PACKAGE.version
-        data.type = PACKAGE.productName + ' ' + 'session'
+        if (type) data.type = type
+
+        // push content to end of file
+        var c = data.content
+        delete data.content
+        data.content = c
 
         this.data = data
 
@@ -68,7 +89,7 @@ module.exports = class Session {
 
     getRoot() {
 
-        return this.data.session
+        return this.data.content
 
     }
 
@@ -249,6 +270,16 @@ var converters = [
                 // new "console" submenu in toolbar at index 3
                 data.script = String(data.script).replace('toolbar(4)', 'toolbar(5)').replace('toolbar(3)', 'toolbar(4)')
             }
+
+        }
+    },
+    {
+        version: '1.8.15',
+        global: (data)=>{
+
+            data.content = data.session
+            delete data.session
+            return data
 
         }
     }

@@ -9,14 +9,19 @@ var ipc = require('../../ipc/'),
     {saveAs} = require('file-saver'),
     widgetManager = require('../widgets'),
     locales = require('../../locales'),
-    Session = require('./session')
+    Session = require('./session'),
+    {deepCopy, deepEqual} = require('../../utils'),
+    EventEmitter = require('../../events/event-emitter')
 
 
-var SessionManager = class SessionManager {
+var SessionManager = class SessionManager extends EventEmitter {
 
     constructor() {
 
+        super()
+
         this.session = null
+        this.fragments = {}
         this.lock = false
         this.lastDir = null
         this.setSessionPath('')
@@ -41,7 +46,7 @@ var SessionManager = class SessionManager {
             try {
 
                 uiConsole.clear()
-                this.session = new Session(session)
+                this.session = new Session(session, 'session')
                 container.innerHTML = ''
                 parser.reset()
                 parser.parse({
@@ -130,7 +135,7 @@ var SessionManager = class SessionManager {
 
     open(data) {
 
-        this.load(data.session, ()=>{
+        this.load(data.fileContent, ()=>{
             this.setSessionPath(data.path)
             ipc.send('sessionOpened', {path: data.path})
         })
@@ -191,6 +196,44 @@ var SessionManager = class SessionManager {
     setSessionPath(path) {
 
         this.sessionPath = path
+
+    }
+
+    setFragment(data) {
+
+        var {path, fileContent} = data
+
+        this.fragments[path] = new Session(fileContent, 'fragment')
+
+        this.trigger('fragment-updated', {path: path})
+
+
+    }
+
+    getFragment(path, data) {
+
+        return this.fragments[path]
+
+    }
+
+    saveFragment(data) {
+
+        uiFilebrowser({extension: 'json', save:true, directory: this.lastDir}, (path)=>{
+            this.lastDir = path[0]
+            ipc.send('sessionSave', {
+                session: new Session({
+                    content: data,
+                    version: PACKAGE.version
+                }, 'fragment'),
+                path: path
+            })
+        })
+
+    }
+
+    loadFragment(path) {
+
+        ipc.send('fragmentLoad', {path})
 
     }
 

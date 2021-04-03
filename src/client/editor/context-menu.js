@@ -5,7 +5,9 @@ var {updateWidget} = require('./data-workers'),
     editor = require('./'),
     locales = require('../locales'),
     ContextMenu = require('../ui/context-menu'),
-    contextMenu = new ContextMenu()
+    contextMenu = new ContextMenu(),
+    sessionManager
+
 
 
 var multiSelectKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
@@ -273,6 +275,21 @@ var handleClick = function(event) {
 
     }
 
+
+    if (parent !== widgetManager && data.length === 1) {
+
+        actions.push({
+            separator: true
+        })
+
+        actions.push({
+            label: icon('file-download') + ' ' + locales('editor_fragment_export'),
+            action: ()=>{
+                sessionManager = sessionManager || require('../managers/session')
+                sessionManager.saveFragment(editor.selectedWidgets[0].props)
+            }
+        })
+    }
 
     if (parent !== widgetManager)  {
 

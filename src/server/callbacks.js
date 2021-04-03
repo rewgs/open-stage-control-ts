@@ -115,7 +115,28 @@ module.exports =  {
         module.exports.fileRead(data, clientId, true, (result)=>{
 
             ipc.clients[clientId].sessionPath = data.path // for resolving local file requests
-            ipc.send('sessionOpen', {path: data.path, session: result}, clientId)
+            ipc.send('sessionOpen', {path: data.path, fileContent: result}, clientId)
+
+        }, (error)=>{
+
+            ipc.send('error', `Could not open session file:\n ${error}`)
+
+        })
+
+    },
+
+    fragmentLoad(data, clientId) {
+        // attempt to read session file
+
+        if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
+
+        module.exports.fileRead(data, clientId, true, (result)=>{
+
+            ipc.send('fragmentLoad', {path: data.path, fileContent: result}, clientId)
+
+        }, (error)=>{
+
+            ipc.send('errorLog', `Could not open fragment file:\n ${error}`)
 
         })
 
@@ -147,7 +168,7 @@ module.exports =  {
 
     },
 
-    fileRead(data, clientId, ok, callback) {
+    fileRead(data, clientId, ok, callback, errorCallback) {
         // private function
 
         if (!ok) return
@@ -173,7 +194,7 @@ module.exports =  {
                 }
             }
 
-            if (error) ipc.send('error', `Could not open file (${error})`)
+            if (error && errorCallback) errorCallback(error)
 
         })
 
@@ -249,6 +270,10 @@ module.exports =  {
         module.exports.fileRead(data, clientId, true, (result)=>{
 
             ipc.send('stateLoad', {state: result, path: data.path, send: true}, clientId)
+
+        }, (error)=>{
+
+            ipc.send('error', `Could not open state file:\n ${error}`)
 
         })
 
