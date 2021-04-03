@@ -1,12 +1,25 @@
 # Changelog
 
+## 1.9.0
+
+**Warning** Sessions saved with this version will not open in older versions (sessions saved with older version will open in this version).  
+
+- bug fixes
+  - remote-root option not applied on resources loaded by the client app (css images, etc)
+
+- editor
+  - context menu: add `export` action to export a widget as a fragment file
+
+- widget
+  - **new** `fragment` widgets (under `containers`): embedded session or fragment file with overridable properties.
+
 ## 1.8.15
 
 - bug fixes
   - editor: error when duplicating widget while if the clipboard is empty
   - ui: local zoom move issue when not in fullscreen
   - custom module: `clearInterval()` not working
-  - regression breaking style attribute in html property 
+  - regression breaking style attribute in html property
 
 - misc
   - faster local zoom  

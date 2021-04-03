@@ -12,7 +12,7 @@ class Fragment extends Container() {
 
     static description() {
 
-        return 'Embedded session or fragment with overridable properties.'
+        return 'Embedded session or fragment file with overridable properties.'
 
     }
 
