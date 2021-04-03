@@ -21,11 +21,7 @@ class FragmentManager {
             then(result)
         }, (error)=>{
             ipc.send('errorLog', `Could not open fragment file:\n ${error}`, clientId)
-            this.watchers[pathId].close()
-            delete this.watchers[pathId]
-            delete this.fragments[pathId]
-            delete this.clients[pathId]
-
+            this.deleteFragment(pathId)
         })
 
     }
@@ -54,12 +50,19 @@ class FragmentManager {
                     }
                 })
             }).on('unlink', ()=>{
-                this.watchers[pathId].close()
-                delete this.watchers[pathId]
-                delete this.fragments[pathId]
+                this.deleteFragment(pathIdv)
             })
 
         }
+
+    }
+
+    deleteFragment(pathId) {
+
+        this.watchers[pathId].close()
+        delete this.clients[pathId]
+        delete this.fragments[pathId]
+        delete this.fragments[pathId]
 
     }
 
