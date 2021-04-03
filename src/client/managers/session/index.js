@@ -10,7 +10,6 @@ var ipc = require('../../ipc/'),
     widgetManager = require('../widgets'),
     locales = require('../../locales'),
     Session = require('./session'),
-    {deepCopy, deepEqual} = require('../../utils'),
     EventEmitter = require('../../events/event-emitter')
 
 

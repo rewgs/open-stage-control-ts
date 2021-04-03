@@ -1,7 +1,6 @@
 var {resolvePath, ipc} = require('./server'),
     callbacks = require('./callbacks'),
-    chokidar = require('chokidar'),
-    fs = require('fs')
+    chokidar = require('chokidar')
 
 class FragmentManager {
 
@@ -26,7 +25,6 @@ class FragmentManager {
             delete this.watchers[pathId]
             delete this.fragments[pathId]
             delete this.clients[pathId]
-            console.log('ERROR')
 
         })
 
