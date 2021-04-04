@@ -296,20 +296,6 @@ class Clone extends Container() {
             case 'props':
                 if (this.children[0]) this.updateClone()
                 return
-            case 'colorText':
-            case 'colorWidget':
-            case 'colorFill':
-            case 'colorStroke':
-            case 'alphaStroke':
-            case 'alphaFillOff':
-            case 'alphaFillOn':
-            case 'colorBg':
-            case 'lineWidth':
-            case 'padding':
-                for (var w of this.children) {
-                    if (w) w.onPropChanged(propName)
-                }
-                return
 
         }
 
