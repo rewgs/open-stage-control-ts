@@ -297,6 +297,16 @@
             | <h6 id="clone_widgetId">widgetId<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#clone_widgetId" title="Permanent link">#</a></h6> | `string` | <code>""</code> | `id` of the widget to clone |
             | <h6 id="clone_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#clone_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Cloned widget's properties to override |
 
+??? api "<div id="fragment">fragment<a class="headerlink" href="#fragment" title="Permanent link">#</a></div>"
+    Embedded session or fragment file with overridable properties.
+
+    === "fragment"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="fragment_file">file<a class="headerlink" href="#fragment_file" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Fragment file path (relative to the session or theme file location by default, falling back to absolute path) |
+            | <h6 id="fragment_props">props<a class="headerlink" href="#fragment_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Fragment widget's properties to override |
+
 ??? api "<div id="matrix">matrix<a class="headerlink" href="#matrix" title="Permanent link">#</a></div>"
     Generic matrix for creating rows/columns of widgets.
 
@@ -490,7 +500,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="image_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#image_value" title="Permanent link">#</a></h6> | `string` | <code>""</code> | - File `url` or `path` (relative to the session file location by default, falling back to absolute path)<br/>- Base64 encoded image : `data:image/...` |
+            | <h6 id="image_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#image_value" title="Permanent link">#</a></h6> | `string` | <code>""</code> | - File `url` or `path` (relative to the session or theme file location by default, falling back to absolute path)<br/>- Base64 encoded image : `data:image/...` |
 ## Graphs
 
 ??? api "<div id="plot">plot<a class="headerlink" href="#plot" title="Permanent link">#</a></div>"

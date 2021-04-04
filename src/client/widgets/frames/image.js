@@ -28,7 +28,7 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
             },
             value: {
                 value: {type: 'string', value: '', help: [
-                    '- File `url` or `path` (relative to the session file location by default, falling back to absolute path)',
+                    '- File `url` or `path` (relative to the session or theme file location by default, falling back to absolute path)',
                     '- Base64 encoded image : `data:image/...`'
                 ]}
             },
