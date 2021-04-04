@@ -131,7 +131,7 @@ module.exports =  {
 
         if (Array.isArray(data.path)) data.path = path.resolve(...data.path)
 
-        fragmentManager = fragmentManager || require('./fragments')
+        fragmentManager = fragmentManager || require('./fragment-manager')
 
         fragmentManager.loadFragment(data.path, clientId)
 

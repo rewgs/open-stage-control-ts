@@ -12,57 +12,53 @@ class FragmentManager {
 
     }
 
-    read(path, resolvedPath, clientId, then) {
+    read(path, clientId, then) {
 
-        var pathId = path + '->' + resolvedPath
-
-        callbacks.fileRead({path: resolvedPath}, clientId, true, (result)=>{
-            this.fragments[pathId] = result
+        callbacks.fileRead({path: path}, clientId, true, (result)=>{
+            this.fragments[path] = result
             then(result)
         }, (error)=>{
             ipc.send('errorLog', `Could not open fragment file:\n ${error}`, clientId)
-            this.deleteFragment(pathId)
+            this.deleteFragment(path)
         })
 
     }
 
     loadFragment(path, clientId) {
 
-        var resolvedPath = resolvePath(path, clientId),
-            pathId = path + '->' + resolvedPath
-
+        var resolvedPath = resolvePath(path, clientId)
 
         if (!resolvedPath) return ipc.send('errorLog', `Fragment file not found: ${path}`, clientId)
 
-        if (!this.clients[pathId]) this.clients[pathId] = []
-        if (!this.clients[pathId].includes(clientId)) this.clients[pathId].push(clientId)
+        if (!this.clients[resolvedPath]) this.clients[resolvedPath] = []
+        if (!this.clients[resolvedPath].includes(clientId)) this.clients[resolvedPath].push(clientId)
 
         if (!this.fragments[resolvedPath]) {
 
-            this.fragments[pathId] = this.read(path, resolvedPath, clientId, (result)=>{
-                ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[pathId]}, clientId)
+            this.fragments[resolvedPath] = this.read(resolvedPath, clientId, (result)=>{
+                ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath]}, clientId)
             })
 
-            this.watchers[pathId] = chokidar.watch(resolvedPath, {awaitWriteFinish: {stabilityThreshold: 200}}).on('change', ()=>{
-                this.fragments[pathId] = this.read(path, resolvedPath, clientId, (result)=>{
-                    for (let id of this.clients[pathId]) {
-                        ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[pathId]}, id)
+            this.watchers[resolvedPath] = chokidar.watch(resolvedPath, {awaitWriteFinish: {stabilityThreshold: 200}}).on('change', ()=>{
+                this.fragments[resolvedPath] = this.read(resolvedPath, clientId, (result)=>{
+                    for (let id of this.clients[resolvedPath]) {
+                        ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath]}, id)
                     }
                 })
             }).on('unlink', ()=>{
-                this.deleteFragment(pathIdv)
+                this.deleteFragment(resolvedPath)
             })
 
         }
 
     }
 
-    deleteFragment(pathId) {
+    deleteFragment(path) {
 
-        this.watchers[pathId].close()
-        delete this.clients[pathId]
-        delete this.fragments[pathId]
-        delete this.fragments[pathId]
+        this.watchers[path].close()
+        delete this.clients[path]
+        delete this.fragments[path]
+        delete this.fragments[path]
 
     }
 

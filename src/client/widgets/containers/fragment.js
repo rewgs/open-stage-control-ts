@@ -21,7 +21,7 @@ class Fragment extends Container() {
         var defaults = super.defaults().extend({
 
             class_specific: {
-                file: {type: 'string', value: '', help: 'fragment file path'},
+                file: {type: 'string', value: '', help: 'Fragment file path'},
                 props: {type: 'object', value: {}, help: 'Fragment widget\'s properties to override'},
             },
             value: null,
