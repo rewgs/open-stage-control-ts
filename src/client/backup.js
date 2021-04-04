@@ -16,10 +16,11 @@ module.exports = {
             cache.set('backup', {
                 session: session.session.data,
                 sessionPath: session.sessionPath,
+                fragments: session.fragments,
                 state: state.get(),
                 history: editor.history,
                 historyState: editor.historyState,
-                editorEnabled: editor.enabled
+                editorEnabled: editor.enabled,
             }, false)
         }
 
@@ -37,6 +38,9 @@ module.exports = {
             var data = localBackup
 
             cache.remove('backup', false)
+            for (let k in data.fragments) {
+                session.setFragment({path: k, fileContent: JSON.parse(data.fragments[k])})
+            }
             session.load(data.session, ()=>{
 
                 state.set(data.state, false)
