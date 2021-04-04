@@ -3,6 +3,7 @@ var Container = require('../common/container'),
     resize = require('../../events/resize'),
     parser = require('../../parser'),
     {deepCopy, deepEqual} = require('../../utils'),
+    {diff, diffToWidget} = require('../../editor/diff'),
     html = require('nanohtml'),
     sessionManager
 
@@ -68,7 +69,7 @@ class Fragment extends Container() {
 
         if (this.getProp('file')) {
             if (sessionManager.getFragment(this.getProp('file'))) {
-                this.createFragment()
+                this.createFragment(true)
             } else {
                 sessionManager.loadFragment(this.getProp('file'))
             }
@@ -77,7 +78,7 @@ class Fragment extends Container() {
 
     }
 
-    createFragment() {
+    createFragment(init) {
 
         var fragment = sessionManager.getFragment(this.getProp('file'))
 
@@ -92,12 +93,12 @@ class Fragment extends Container() {
             parent: this
         })
 
-        this.updateContainer()
+        this.updateContainer(!init)
 
     }
 
 
-    updateContainer() {
+    updateContainer(checkResize) {
 
 
         if (this.children[0]) {
@@ -116,7 +117,7 @@ class Fragment extends Container() {
                 w.container.classList.add('not-editable')
             }
 
-            resize.check(this.widget)
+            if (checkResize) resize.check(this.widget)
 
         } else if (this.fragmentClass.length) {
 
@@ -130,7 +131,59 @@ class Fragment extends Container() {
 
     }
 
+    updateFragment() {
+
+
+        var fragment = sessionManager.getFragment(this.getProp('file'))
+
+        if (!fragment) return
+
+        var data = {...deepCopy(fragment.getRoot()), ...this.getProp('props')},
+            fragmentWidget = this.children[0]
+
+        var delta = diff.diff(fragmentWidget.props, data) || {},
+            [widget, patch] = diffToWidget(fragmentWidget, delta),
+            changedProps = Object.keys(patch)
+
+        if (changedProps.length) {
+
+            diff.patch(widget.props, patch)
+
+
+            if (changedProps.some(x => !widget.isDynamicProp(x))) {
+
+                fragmentWidget.reCreateWidget({reuseChildren: false})
+                this.updateContainer(false)
+
+            } else {
+
+                widget.updateProps(changedProps, this)
+                this.updateContainer(true)
+
+            }
+
+        }
+
+    }
+
+    onPropChanged(propName, options, oldPropValue) {
+
+        if (super.onPropChanged(...arguments)) return true
+
+        switch (propName) {
+
+            case 'props':
+                if (this.children[0]) this.updateFragment()
+                return
+
+        }
+
+    }
+
 }
 
+Fragment.dynamicProps = Fragment.prototype.constructor.dynamicProps.concat(
+    'props'
+)
 
 module.exports = Fragment
