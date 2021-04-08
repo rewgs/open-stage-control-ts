@@ -98,6 +98,18 @@ menu.append(new MenuItem({type: 'submenu' , label: 'Console', submenu: [
 menu.append(new MenuItem({
     type: 'separator'
 }))
+menu.append(new MenuItem({
+    label: 'Always on top',
+    type: 'checkbox',
+    checked: settings.remote.read('alwaysOnTop'),
+    click: (e)=>{
+        settings.remote.write('alwaysOnTop', e.checked)
+        remote.getCurrentWindow().setAlwaysOnTop(e.checked)
+    }
+}))
+menu.append(new MenuItem({
+    type: 'separator'
+}))
 // menu.append(new MenuItem({
 //     label: 'Restart',
 //     click: ()=>{

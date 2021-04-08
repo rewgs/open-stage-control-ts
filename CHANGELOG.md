@@ -13,6 +13,9 @@
 - widget
   - **new** `fragment` widgets (under `containers`): embedded session or fragment file with overridable properties.
 
+- launcher
+  - add `Always on top` menu toggle
+
 ## 1.8.15
 
 - bug fixes

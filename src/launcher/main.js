@@ -30,3 +30,9 @@ if (settings.remote.read('checkForUpdates') && navigator.onLine) {
     request.send()
 
 }
+
+if (settings.remote.read('alwaysOnTop')) {
+    
+    remote.getCurrentWindow().setAlwaysOnTop(true)
+
+}
