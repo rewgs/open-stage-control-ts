@@ -23,7 +23,7 @@ module.exports = class Session {
                 if (semver.lte(version, converter.version)) {
 
                     if (converter.global) data = converter.global(data)
-                    if (converter.widget) this.applyConvert(data.content, converter.widget)
+                    if (converter.widget) this.applyConvert(data.session || data.content, converter.widget)
 
                     if (converter.warning) warning = true
 
