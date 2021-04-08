@@ -5,7 +5,7 @@ var {PythonShell} = require('python-shell'),
 
 // last o-s-c version that changed midi sources
 // must match version in midi.py / bundled midi executable
-var midiVersion = '1.8.7'
+var midiVersion = '1.9.0'
 
 var pythonOptions = {
     scriptPath:__dirname,
@@ -32,6 +32,7 @@ class MidiConverter {
 
         this.py = new PythonShell('python/midi.py', Object.assign({
             args: [
+                '--params',
                 settings.read('debug') ? 'debug' : '',
                 ...settings.read('midi')
             ],
@@ -111,7 +112,7 @@ class MidiConverter {
 
     static list() {
 
-        PythonShell.run('python/midi.py', Object.assign({pythonPath: MidiConverter.getPythonPath(), args: ['list-only']}, pythonOptions), function(e, results) {
+        PythonShell.run('python/midi.py', Object.assign({pythonPath: MidiConverter.getPythonPath(), args: ['--params', 'list-only']}, pythonOptions), function(e, results) {
             if (e) {
                 if (e.code === 'ENOENT') {
                     console.error(`(ERROR, MIDI) Could not find python binary: ${e.message.replace(/spawn (.*) ENOENT/, '$1')}`)

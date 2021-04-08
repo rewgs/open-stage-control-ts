@@ -3,7 +3,9 @@ from list import *
 from utils import *
 from mtc import *
 
-ipc_send('version', '1.8.7')
+ipc_send('version', '1.9.0')
+
+argv = argv[argv.index('--params') + 1:]
 
 if 'list' in argv:
     list()
@@ -26,11 +28,7 @@ outputs = {}
 
 for arg in argv:
 
-    if 'python/midi.py' in arg:
-
-        pass # in case we're using pre-compiled binaries
-
-    elif type(arg) == str and ':' in arg:
+    if type(arg) == str and ':' in arg:
 
         name, *ports = arg.split(':')
         ports = ':'.join(ports) # port names may contain colons
