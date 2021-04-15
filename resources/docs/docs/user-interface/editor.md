@@ -28,6 +28,7 @@ Right clicking on a widget displays a menu with the following actions
     - `Clone` : create a clone widget targetting the copied widget
 - `Add widget`: create a new widget in selected container
 - `Add tab`: create a new tab in selected container
+- `Export`: export as fragment file
 - `Delete`: delete selected tab or widget
 
 

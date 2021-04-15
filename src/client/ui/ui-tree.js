@@ -4,6 +4,8 @@ var UiWidget = require('./ui-widget'),
     Sortable = require('sortablejs'),
     morph = require('nanomorph'),
     locales = require('../locales'),
+    raw = require('nanohtml/raw'),
+    {icon} = require('./utils'),
     Root, Panel, Matrix, Keyboard, widgetManager,
     init = false
 
@@ -20,6 +22,7 @@ class UiTree extends UiWidget {
         super(options)
 
         this.mounted = false
+        this.container.appendChild(html`<div class="fragment-mode-warning" title="${locales('fragment_mode_explanation')}">${raw(icon('exclamation-triangle'))} ${locales('fragment_mode_warning')}</div>`)
         this.filter = this.container.appendChild(html`<input class="filter" type="text" placeholder="${locales('tree_filter')}..."/>`)
         this.list = this.container.appendChild(html`<ol style="--depth: 1"></ol`)
         this.dragDummy = html`<span></span>`

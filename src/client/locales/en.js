@@ -48,6 +48,11 @@ module.exports = {
     file_import: 'Import',
     file_export: 'Export',
 
+    // fragment mode
+    fragment_mode: 'Fragment mode',
+    fragment_mode_warning: 'Fragment mode enabled',
+    fragment_mode_explanation: 'The session will be saved as a fragment: only the first child of root will be saved.',
+
     // fullscreen
     fullscreen: 'Fullscreen',
     fullscreen_unnavailable: 'Fullscreen not available',

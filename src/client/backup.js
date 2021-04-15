@@ -15,6 +15,7 @@ module.exports = {
         if (session.session) {
             cache.set('backup', {
                 session: session.session.data,
+                saveMode: session.saveMode,
                 sessionPath: session.sessionPath,
                 fragments: session.fragments,
                 state: state.get(),
@@ -43,6 +44,7 @@ module.exports = {
             }
             session.load(data.session, ()=>{
 
+                session.setSaveMode(data.saveMode)
                 state.set(data.state, false)
 
                 editor.clearHistory()

@@ -129,4 +129,18 @@
         display:none;
     }
 
+    .fragment-mode-warning {
+        margin-left: #{-$padding * 2};
+        width: calc(100% + #{$padding * 2});
+        color: var(--color-warning);
+        padding: 8rem $padding;
+        padding-left: #{$padding * 2};
+        line-height: $field-height - 4rem;
+        display: none;
+    }
+
+}
+
+.fragment-mode .fragment-mode-warning {
+    display: block!important;
 }

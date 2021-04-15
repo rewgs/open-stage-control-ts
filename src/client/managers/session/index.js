@@ -20,6 +20,7 @@ var SessionManager = class SessionManager extends EventEmitter {
         super()
 
         this.session = null
+        this.saveMode = 'session'
         this.fragments = {}
         this.lock = false
         this.lastDir = null
@@ -55,6 +56,7 @@ var SessionManager = class SessionManager extends EventEmitter {
                 })
                 editor.clearHistory()
                 DOM.get(document, '#osc-greeting-header')[0].classList.add('hidden')
+                this.setSaveMode(this.session.isFragment ? 'fragment' : 'session')
 
             } catch (err) {
                 uiLoading(false)
@@ -103,10 +105,28 @@ var SessionManager = class SessionManager extends EventEmitter {
 
         if (!this.sessionPath) return this.saveAs()
 
-        ipc.send('sessionSave', {
-            session: this.session.toJSON(),
-            path: this.sessionPath
-        })
+        if (this.saveMode === 'session') {
+
+            ipc.send('sessionSave', {
+                session: this.session.toJSON(),
+                path: this.sessionPath
+            })
+
+        } else {
+
+            var data = this.session.data.content.widgets.length ?
+                this.session.data.content.widgets[0] :
+                this.session.data.content.tabs[0]
+
+            ipc.send('sessionSave', {
+                session: new Session({
+                    content: data,
+                    version: PACKAGE.version
+                }, 'fragment'),
+                path: this.sessionPath
+            })
+
+        }
 
     }
 
@@ -233,6 +253,13 @@ var SessionManager = class SessionManager extends EventEmitter {
     loadFragment(path) {
 
         ipc.send('fragmentLoad', {path})
+
+    }
+
+    setSaveMode(mode) {
+
+        this.saveMode = mode
+        document.body.classList.toggle('fragment-mode', mode === 'fragment')
 
     }
 

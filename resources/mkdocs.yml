@@ -44,6 +44,7 @@ nav:
             - docs/widgets/properties-reference.md
             - docs/widgets/advanced-syntaxes.md
             - docs/widgets/scripting.md
+            - docs/widgets/fragments.md
         - MIDI:
             - MIDI configuration: docs/midi/midi-configuration.md
             - MIDI messages: docs/midi/midi-messages.md

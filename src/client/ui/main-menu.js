@@ -51,6 +51,11 @@ var menuEntries = [
                 class: ()=>{return READ_ONLY || sessionManager.session === null ? 'disabled' :''}
             },
             {
+                label: locales('fragment_mode'),
+                class: ()=>{return 'toggle ' + (sessionManager.saveMode === 'fragment' ? 'on' : 'off')},
+                action: ()=>{sessionManager.setSaveMode(sessionManager.saveMode === 'session' ? 'fragment' : 'session')}
+            },
+            {
                 separator: true
             },
             {

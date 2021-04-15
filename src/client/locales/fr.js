@@ -53,6 +53,11 @@ module.exports = {
     fs_unnavailable: 'Plein écran indisponible',
     fs_addtohome: 'Vous devez ajouter cette page à votre écran d\'accueil pour pouvoir l\'ouvrir en plein écran.',
 
+    // fragment mode
+    fragment_mode: 'Mode fragment',
+    fragment_mode_warning: 'Mode fragment activé',
+    fragment_mode_explanation: 'La session sera enregistrée sous forme de fragment : seul le premier descendant de l\'élément root sera sauvegardé.',
+
     // inspector
     inspector_color_confirm: 'Confirmer',
     inspector_color_apply: 'Appliquer',

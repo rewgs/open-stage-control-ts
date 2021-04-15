@@ -49,6 +49,7 @@ module.exports = class Session {
             } else {
                 data.content = {type: 'root', widgets: [data.content]}
             }
+            this.isFragment = true
         }
 
         if (type === 'fragment' && data.type === 'session') {
