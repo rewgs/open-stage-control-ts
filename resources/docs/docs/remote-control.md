@@ -123,6 +123,12 @@ Sends a notification message to the client.
 
 ----
 
+#### `/LOG message`
+
+Print message in the client's console.
+
+----
+
 #### `/SET id value`
 
 Set a widget's value as if it was interacted with from the interface. This is likely to make it send its value.

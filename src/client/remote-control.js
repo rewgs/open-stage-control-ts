@@ -246,6 +246,11 @@ var callbacks = {
         })
 
     },
+    '/LOG': function(args) {
+
+        console.log(args)
+
+    },
     '/SESSION/OPEN': function(args) {
 
         if (!Array.isArray(args)) args = [args]
