@@ -117,6 +117,13 @@ class Input extends Canvas {
 
     resizeHandle(event){
 
+        if (this.fontSize && event.height !== this.fontSize) {
+            // little hack to prevent flex layout issues
+            // alternate fix is to set css 'height: 100%;' on the canvas element
+            // but it produces a big drawing context for just one line of text.
+            event.height = this.fontSize
+        }
+
         super.resizeHandle(event)
 
         // if (this.getProp('vertical')){
