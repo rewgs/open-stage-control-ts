@@ -165,6 +165,8 @@ class UiTree extends UiWidget {
             node[0].scrollIntoView({block: 'center'})
         }
 
+        if (this.parent.minimized) this.parent.restore()
+
     }
 
     select() {

@@ -11,6 +11,7 @@
 
 - editor
   - context menu: add `export` action to export a widget as a fragment file
+  - show project tree if minimzed when clicking on "Show in tree"
 
 - widget
   - **new** `fragment` widgets (under `containers`): embedded session or fragment file with overridable properties.
