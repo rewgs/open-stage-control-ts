@@ -16,6 +16,7 @@
         | <h6 id="id">id<a class="headerlink" href="#id" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widgets sharing the same `id` will act as clones and update each other's value(s) without sending extra osc messages. |
         | <h6 id="visible">visible<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visible" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the widget. |
         | <h6 id="interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#interaction" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable pointer interactions. |
+        | <h6 id="comments">comments<a class="headerlink" href="#comments" title="Permanent link">#</a></h6> | `string` | <code>""</code> | User comments. |
 
 
 === "geometry"
@@ -305,7 +306,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="fragment_file">file<a class="headerlink" href="#fragment_file" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Fragment file path (relative to the session or theme file location by default, falling back to absolute path) |
-            | <h6 id="fragment_props">props<a class="headerlink" href="#fragment_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Fragment widget's properties to override |
+            | <h6 id="fragment_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#fragment_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Fragment widget's properties to override |
 
 ??? api "<div id="matrix">matrix<a class="headerlink" href="#matrix" title="Permanent link">#</a></div>"
     Generic matrix for creating rows/columns of widgets.
