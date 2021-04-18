@@ -7,6 +7,7 @@
 - bug fixes
   - remote-root option not applied on resources loaded by the client app (css images, etc)
   - input: display issue when resizing the window
+  - launcher: cancel stopping the server when there are unsaved changes in the built-in client
 
 - editor
   - context menu: add `export` action to export a widget as a fragment file

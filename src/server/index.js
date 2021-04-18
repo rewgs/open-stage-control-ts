@@ -144,11 +144,23 @@ function startServerProcess() {
 
 function stopServerProcess() {
 
-    if (serverProcess) serverProcess.kill()
-    for (var w of [...clientWindows]) {
-        if (w && !w.isDestroyed()) w.close()
+    if (settings.read('no-gui')) {
+        if (serverProcess) serverProcess.kill()
+        return
     }
-    clientWindows = []
+
+    var toClose = [...clientWindows].filter(w=>w && !w.isDestroyed()),
+        closed = 0
+    for (var w of toClose) {
+        w.on('closed', ()=>{
+            closed++
+            if (closed === toClose.length) {
+                clientWindows = []
+                if (serverProcess) serverProcess.kill()
+            }
+        })
+        w.close()
+    }
 
 }
 
