@@ -14,6 +14,7 @@
 
 - widget
   - **new** `fragment` widgets (under `containers`): embedded session or fragment file with overridable properties.
+  - add `comments` property to all widgets
 
 - launcher
   - add `Always on top` menu toggle

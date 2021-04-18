@@ -54,6 +54,7 @@ class Widget extends EventEmitter {
                 id: {type: 'string', value: 'auto', help: 'Widgets sharing the same `id` will act as clones and update each other\'s value(s) without sending extra osc messages.' },
                 visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},
                 interaction: {type: 'boolean', value: true, help: 'Set to `false` to disable pointer interactions.'},
+                comments: {type: 'string', value: '', help: 'User comments.'},
             },
             geometry: {
                 left: {type: 'number|string', value: 'auto', help: [
