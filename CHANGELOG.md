@@ -2,6 +2,9 @@
 
 ## 1.9.1
 
+- bug fixes
+  - button: all writing strings like `"1.0"` in `label` without removing the decimals
+
 - midi
   - allow sending note off with velocity
   - add option for receiving note off with velocity

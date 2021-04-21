@@ -703,7 +703,7 @@ class Widget extends EventEmitter {
                 propValue = propValue.replace(new RegExp(k, 'g'), v)
             }
 
-            if (isJSON(propValue)) {
+            if (isJSON(propValue) && (propName !== 'label' || propValue === 'false')) {
                 try {
                     propValue = JSON.parse(propValue)
                 } catch (err) {}
