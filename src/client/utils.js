@@ -43,6 +43,11 @@ module.exports = {
         // ref in source: https://github.com/douglascrockford/JSON-js
         return ' 	\n+-eE{([0123456789tfn"'.indexOf(str[0]) !== -1
 
+    },
+
+    isJSONObject: function(str) {
+        // same, but only for object/array/bool/null
+        return '{[tfn'.indexOf(str[0]) !== -1
     }
 
 }
