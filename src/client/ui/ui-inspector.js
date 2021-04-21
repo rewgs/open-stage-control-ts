@@ -204,19 +204,12 @@ class UiInspector extends UiWidget {
 
         input.blur()
 
-        var v
         var str = input.value.replace(/[‟“”]/g, '"').replace(/[‘’]/g, '\'') // convert invalid quote characters
+        var v = str
 
         try {
             v = JSON.parseFlex(str)
-            if (typeof v === 'string') {
-                // escape backslashes in simple strings only
-                v = JSON.parseFlex(str.replace(/\\/g, '__BACKSLASH__'))
-                v = v.replace(/__BACKSLASH__/g, '\\')
-            }
-        } catch(err) {
-            v = str
-        }
+        } catch(err) {}
 
         this.trigger('update', {
             propName: input.name,
