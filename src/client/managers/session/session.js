@@ -230,6 +230,9 @@ var converters = [
                         }
                     `
                     break
+                case 'script':
+                    data.script = String(data.script).replace(/^JS{{(.*)}}$/, '$1')
+                    break
 
             }
 

@@ -7,11 +7,14 @@
   - editor: use css variable `--grid-width` at startup (allow overriding) and after disabling & enabling the grid
 
 - widgets
-  - menu/switch/dropdown: reset value to `undefined` when receiving a value that's not defined in `values` 
+  - menu/switch/dropdown: reset value to `undefined` when receiving a value that's not defined in `values`
 
 - midi
   - allow sending note off with velocity
   - add option for receiving note off with velocity
+
+- misc
+  - v0->v1 session conversion: remove `JS{{}}` in script property
 
 ## 1.9.0
 
