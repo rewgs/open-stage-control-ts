@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.1
+
+- midi
+  - allow sending note off with velocity
+  - add option for receiving note off with velocity
+
 ## 1.9.0
 
 **Warning** Sessions saved with this version will not open in older versions (sessions saved with older version will open in this version).  

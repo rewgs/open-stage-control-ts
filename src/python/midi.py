@@ -14,14 +14,6 @@ if 'list-only' in argv:
     list()
     exit()
 
-# option: act as if displayed program is between 1-128 instead of 0-127
-PROGRAM_CHANGE_OFFSET = 'pc_offset' in argv
-# option: parse sysex
-ignore_sysex = 'sysex' not in argv
-# option: parse mtc
-ignore_mtc = 'mtc' not in argv
-# option: parse active sensing
-ignore_active_sensing = 'active_sensing' not in argv
 
 inputs = {}
 outputs = {}
@@ -140,12 +132,13 @@ def create_callback(name):
                 osc['args'].append({'type': 'i', 'value': channel})
 
                 if mtype == NOTE_OFF:
-                    message[2] = 0
+                    if not note_off_velocity:
+                        message[2] = 0
 
                 elif mtype == PITCH_BEND:
                     message = message[:1] + [message[1] + message[2] * 128] # convert  0-127 pair -> 0-16384 ->
 
-                elif mtype == PROGRAM_CHANGE and PROGRAM_CHANGE_OFFSET:
+                elif mtype == PROGRAM_CHANGE and program_change_offset:
                     message[-1] = message[-1] + 1
 
                 for data in message[1:]:
@@ -245,7 +238,7 @@ def send_midi(name, event, *args):
         elif mtype == PITCH_BEND:
             args = args[:1] + [args[1] & 0x7F, (args[1] >> 7) & 0x7F] # convert 0-16384 -> 0-127 pair
 
-        elif mtype == PROGRAM_CHANGE and PROGRAM_CHANGE_OFFSET:
+        elif mtype == PROGRAM_CHANGE and program_change_offset:
             args[-1] = args[-1] - 1
 
         m = midi_message(mtype, *args)

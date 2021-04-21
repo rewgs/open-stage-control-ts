@@ -79,12 +79,15 @@ Enable parsing of midi time code messages (disabled by default).
 
 **`active_sensing`**
 
-Enable parsing of midi active sensing messages (disabled by default). Active sensing messages will be received as sysex. 
-
+Enable parsing of midi active sensing messages (disabled by default). Active sensing messages will be received as sysex.
 
 **`pc_offset`**
 
 Send program changes with a `-1` offset to match some software/hardware implementations
+
+**`note_off_velocity`**
+
+Enable receiving noteOff messages with a velocity and on a different address than noteOn messages.
 
 
 **`device_name:virtual`** (*Linux / Mac only*): creates a virtual midi device with one input port and one output port
@@ -95,7 +98,9 @@ Send program changes with a `-1` offset to match some software/hardware implemen
 
 **`path=/path/to/python`**
 
-Indicates where to find python binary in case open stage control doesn't (`Error: spawn python3 ENOENT`). *Only use this if you know what you are doing.*
+*Only use this if you know what you are doing. This option should not be set when using the officla Linux / Windows / OSX packages.*
+
+Indicates where to find python binary in case open stage control doesn't (`Error: spawn python3 ENOENT`).
 
 
 ## Widget setup

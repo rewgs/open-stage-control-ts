@@ -5,7 +5,7 @@
 
 #### `/note channel note velocity`
 
-NoteOn event or noteOff if velocity equals `0`.
+NoteOn event or noteOff if velocity equals `0`. Incoming noteOff events will be received as `/note` with velocity 0 if `note_off_velocity` is not set during [setup](../midi-configuration).
 
 - `channel`: integer between 1 and 16
 - `note`: integer between 0 and 127
@@ -20,6 +20,12 @@ NoteOn event or noteOff if velocity equals `0`.
     - `on`: `100` (for noteOn velocity of 100 on button push)
     - `off`: `0` (to send a noteOff on button release)
     - `target`: `midi:device_name` (where device_name is one of the declared midi devices defined during [setup](../midi-configuration))
+
+----
+
+#### `/note_off channel note velocity`
+
+NoteOff event with any velocity. Incoming noteOff events will be received as `/note_off` if `note_off_velocity` is set during [setup](../midi-configuration).
 
 ----
 

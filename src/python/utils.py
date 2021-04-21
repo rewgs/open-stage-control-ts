@@ -15,6 +15,7 @@ MIDI_TO_OSC = {
 
 OSC_TO_MIDI = {
     '/note': NOTE_ON,
+    '/note_off': NOTE_OFF,
     '/control': CONTROL_CHANGE,
     '/program': PROGRAM_CHANGE,
     '/pitch': PITCH_BEND,
@@ -23,6 +24,10 @@ OSC_TO_MIDI = {
     '/channel_pressure': CHANNEL_PRESSURE,
     '/key_pressure': POLY_PRESSURE
 }
+
+if note_off_velocity:
+    MIDI_TO_OSC[NOTE_OFF] = '/note_off'
+
 
 def midi_str(message, port):
 
@@ -48,7 +53,7 @@ def midi_str(message, port):
             if mtype == NOTE_ON:
                 s = 'NOTE_ON: channel=%i, note=%i, velocity=%i' % (channel, message[1], message[2])
             elif mtype == NOTE_OFF:
-                s = 'NOTE_OFF: channel=%i, note=%i' % (channel, message[1])
+                s = 'NOTE_OFF: channel=%i, note=%i, velocity=%i' % (channel, message[1], message[2])
             elif mtype == CONTROL_CHANGE:
                 s = 'CONTROL_CHANGE: channel=%i, cc=%i, value=%i'% (channel, message[1], message[2])
             elif mtype == PROGRAM_CHANGE:

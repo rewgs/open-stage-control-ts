@@ -30,4 +30,15 @@ except:
 if version_info.major == 3:
     raw_input = input
 
+# option: print debug messages
 debug = 'debug' in argv
+# option: act as if displayed program is between 1-128 instead of 0-127
+program_change_offset = 'pc_offset' in argv
+# option: parse sysex
+ignore_sysex = 'sysex' not in argv
+# option: parse mtc
+ignore_mtc = 'mtc' not in argv
+# option: parse active sensing
+ignore_active_sensing = 'active_sensing' not in argv
+# option: note off velocity
+note_off_velocity = 'note_off_velocity' in argv

@@ -51,7 +51,7 @@ module.exports = {
     },
     'm': {alias: 'midi', type: 'array', describe: 'midi router settings',
         check: (o)=>{
-            var err = o.filter(item=>!item.match(/^(list|debug|jack|sysex|mtc|active_sensing|pc_offset|path=(.*)|[^:]+:(virtual|[^,]+,[^,]+))$/))
+            var err = o.filter(item=>!item.match(/^(list|debug|jack|sysex|mtc|active_sensing|note_off_velocity|pc_offset|path=(.*)|[^:]+:(virtual|[^,]+,[^,]+))$/))
             return err.length ? `Invalid option${err.length > 1 ? 's' : ''}: ${err.join(', ')}` : true
         }
     },
