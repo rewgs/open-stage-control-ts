@@ -405,9 +405,9 @@ class Editor {
 
         this.grid = !this.grid
 
-        GRIDWIDTH = this.grid ? 10 : 1
+        GRIDWIDTH = this.grid ? GRIDWIDTH_CSS : 1
 
-        document.documentElement.style.setProperty('--grid-width', GRIDWIDTH)
+        document.body.style.setProperty('--grid-width', GRIDWIDTH)
         document.body.classList.toggle('no-grid', GRIDWIDTH == 1)
 
     }

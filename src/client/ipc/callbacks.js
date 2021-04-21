@@ -98,7 +98,9 @@ module.exports = {
         setTimeout(()=>{
             var root = widgetManager.getWidgetById('root')[0]
             if (root) root.onPropChanged('color')
-            GRIDWIDTH =  parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
+            GRIDWIDTH_CSS =  parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
+            editor.toggleGrid()
+            editor.toggleGrid()
         },200)
 
 

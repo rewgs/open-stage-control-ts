@@ -11,7 +11,9 @@ window.PACKAGE = require('../../package.json')
 window.LOADING = null
 
 window.READ_ONLY = window.READ_ONLY || false
-window.GRIDWIDTH = 10
+window.GRIDWIDTH_CSS = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
+window.GRIDWIDTH = GRIDWIDTH_CSS
+
 
 
 window.ELECTRON_NOGPU = false
