@@ -113,17 +113,16 @@ class Switch extends MenuBase {
 
         var i = this.getIndex(v)
 
+        this.value = this.values[i]
+
+        DOM.each(this.widget, '.on', (el)=>{el.classList.remove('on')})
 
         if (i !== -1) {
-
-            this.value = this.values[i]
-
-            DOM.each(this.widget, '.on', (el)=>{el.classList.remove('on')})
             DOM.get(this.widget, 'value')[i].classList.add('on')
-
-            if (options.send) this.sendValue(this.value)
-            if (options.sync) this.changed(options)
         }
+
+        if (options.send) this.sendValue(this.value)
+        if (options.sync) this.changed(options)
 
     }
 

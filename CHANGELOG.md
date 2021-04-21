@@ -4,7 +4,10 @@
 
 - bug fixes
   - button: all writing strings like `"1.0"` in `label` without removing the decimals
-  - editor: use css variable `--grid-width` at startup (allow overriding) and after disabling & enabling the grid 
+  - editor: use css variable `--grid-width` at startup (allow overriding) and after disabling & enabling the grid
+
+- widgets
+  - menu/switch/dropdown: reset value to `undefined` when receiving a value that's not defined in `values` 
 
 - midi
   - allow sending note off with velocity

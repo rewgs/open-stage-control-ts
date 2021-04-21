@@ -300,16 +300,14 @@ class Menu extends MenuBase {
 
         var i = this.getIndex(v)
 
+        this.value = this.values[i]
+        this.selected = i
+        DOM.each(this.menu, '.on', (el)=>{el.classList.remove('on')})
+        this.setLabel()
+
         if (i !== -1) {
-            this.value = this.values[i]
-            this.selected = i
-            DOM.each(this.menu, '.on', (el)=>{el.classList.remove('on')})
             DOM.get(this.menu, '.item')[i].classList.add('on')
-
-            this.setLabel()
-
         }
-
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
