@@ -5,7 +5,7 @@ var {PythonShell} = require('python-shell'),
 
 // last o-s-c version that changed midi sources
 // must match version in midi.py / bundled midi executable
-var midiVersion = '1.9.0'
+var midiVersion = '1.9.1'
 
 var pythonOptions = {
     scriptPath:__dirname,
