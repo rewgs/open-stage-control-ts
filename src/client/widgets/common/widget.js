@@ -114,7 +114,8 @@ class Widget extends EventEmitter {
                     'By default ("auto"), the widget\'s id is used: `/widget_id`',
                 ]},
                 preArgs: {type: '*|array', value: '', help: [
-                    'A value or array of values that will be prepended to the OSC messages.',
+                    'A value or array of values that will be prepended to the widget\'s value in the OSC messages it sends.',
+                    'Incoming messages must match these to affect by the widget.',
                 ]},
                 typeTags: {type: 'string', value: '', help: [
                     'Defines the osc argument types, one letter per argument (including preArgs)',
