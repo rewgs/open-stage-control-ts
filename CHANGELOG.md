@@ -3,7 +3,7 @@
 ## 1.9.1
 
 - bug fixes
-  - button: all writing strings like `"1.0"` in `label` without removing the decimals
+  - button: allow writing strings like `"1.0"` in `label` without removing the decimals
   - editor: use css variable `--grid-width` at startup (allow overriding) and after disabling & enabling the grid
 
 - widgets
