@@ -224,14 +224,14 @@ var converters = [
                     data.script = `
                         // converted from keys widget data
                         if (type === 'keyup') {
-                            ${String(data.keyUp).replace(/^JS{{(.*)}}$/, '$1')}
+                            ${String(data.keyUp).trim().replace(/JS\{\{(.*)\}\}/s, '$1').trim()}
                         } else if (type === 'keydown') {
-                            ${String(data.keyDown).replace(/^JS{{(.*)}}$/, '$1')}
+                            ${String(data.keyDown).trim().replace(/JS\{\{(.*)\}\}/s, '$1').trim()}
                         }
                     `
                     break
                 case 'script':
-                    data.script = String(data.script).replace(/^JS{{(.*)}}$/, '$1')
+                    data.script = String(data.script).trim().replace(/JS\{\{(.*)\}\}/s, '$1').trim()
                     break
 
             }
