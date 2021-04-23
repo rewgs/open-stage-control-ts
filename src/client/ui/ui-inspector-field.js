@@ -67,6 +67,8 @@ class UiInspectorField extends UiWidget {
 
         var input = html`<textarea tabIndex="${this.tabIndex}" class="no-keybinding" name="${this.name}" rows="${stringValue.split('\n').length}"></textarea>`
 
+        if (this.name === 'id' && this.widget.props.type === 'root') input.disabled = true
+
         if (this.default.value === 'auto' && stringValue === 'auto') {
             input.placeholder = stringValue
         } else {
