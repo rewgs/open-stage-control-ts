@@ -83,7 +83,7 @@ class UiConsole extends UiSidePanel {
                     this.input.value = this.history[this.cursor]
                     event.preventDefault()
                 }
-            } else if (event.keyCode === 9) {
+            } else if (event.keyCode === 9 && this.input.value !== '') {
                 var cur = this.input.selectionStart,
                     val = this.input.value
                 this.input.value = val.slice(0, cur) + '  ' + val.slice(cur)
