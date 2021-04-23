@@ -6,6 +6,7 @@
   - button: allow writing strings like `"1.0"` in `label` without removing the decimals
   - editor: use css variable `--grid-width` at startup and after disabling & enabling the grid
   - launcher: regression preventing server halt when built-in client is closed manually beforehand
+  - scripting: prevent crash (built-in client only) when using the variable `navigator`
 
 - widgets
   - menu/switch/dropdown: reset value to `undefined` when receiving a value that's not defined in `values`

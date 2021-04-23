@@ -54,7 +54,8 @@ class UiConsole extends UiSidePanel {
 
         this.script = new Script({props:{
             id: 'CONSOLE',
-            script: 'return eval(value)',
+            // detached context++ reading global navigator == crash electron
+            script: 'var navigator; return eval(value)',
             event: 'value'
         }, parent: widgetManager})
         this.script._not_editable = true

@@ -90,6 +90,11 @@ class Vm {
             contextKeys = ['__VARS'],
             contextValues = [{}]
 
+        // detached context + reading global navigator == crash electron
+        if (code.indexOf('navigator') !== -1) {
+            contextInit += 'var navigator;'
+        }
+
         if  (defaultContext) {
             for (var k in defaultContext) {
                 contextInit += `var ${k} = ${k} === undefined ? ${JSON.stringify(defaultContext[k])} : ${k};`
