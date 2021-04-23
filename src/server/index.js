@@ -151,6 +151,9 @@ function stopServerProcess() {
 
     var toClose = [...clientWindows].filter(w=>w && !w.isDestroyed()),
         closed = 0
+
+    if (toClose.length === 0) serverProcess.kill()
+        
     for (var w of toClose) {
         w.on('closed', ()=>{
             closed++
