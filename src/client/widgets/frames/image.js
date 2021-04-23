@@ -16,9 +16,9 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
         return super.defaults().extend({
             style: {
                 _separator_image_style: 'Image style',
-                size: {type: 'string', value: 'cover', help: 'CSS background-size'},
-                position: {type: 'string', value: 'center', help: 'CSS background-position'},
-                repeat: {type: 'string', value: 'no-repeat', help: 'CSS background-repeat'},
+                size: {type: 'string', value: 'cover', choices: ['cover', 'contain', 'auto'], help: 'CSS background-size'},
+                position: {type: 'string', value: 'center', choices: ['center', 'center top', 'center bottom', 'left center', 'left top', 'left bottom', 'right center', 'right top', 'right bottom'], help: 'CSS background-position'},
+                repeat: {type: 'string', value: 'no-repeat', choices: ['no-repeat', 'repeat', 'repeat-x', 'repeat-y', 'space', 'round'], help: 'CSS background-repeat'},
             },
             class_specific: {
                 cache: {type: 'boolean', value: true, help: [

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.2
+
+- widgets
+  - image: add pre defined values for `size`, `position` and `repeat` properties
+
 ## 1.9.1
 
 - bug fixes
