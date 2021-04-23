@@ -21,6 +21,7 @@ class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dot
             style: {
                 _separator_visualizer_style: 'Visualizer style',
                 pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
+                bars: null
             },
             class_specific: {
                 duration: {type: 'number', value: 1, help: 'Defines visualization duration in seconds'},

@@ -2,6 +2,9 @@
 
 ## 1.9.2
 
+- bug fixes
+  - visualizer: remove `bars` option
+
 - widgets
   - image: add pre defined values for `size`, `position` and `repeat` properties
 
