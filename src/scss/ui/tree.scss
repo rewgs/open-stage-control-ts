@@ -41,6 +41,13 @@
             display: block;
         }
 
+        > i {
+            position: relative;
+            top: 1rem;
+            left: -2rem;
+            margin-right: 2rem;
+        }
+
         li:before {
             content: "";
             position: absolute;

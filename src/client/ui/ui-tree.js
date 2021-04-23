@@ -7,7 +7,27 @@ var UiWidget = require('./ui-widget'),
     raw = require('nanohtml/raw'),
     {icon} = require('./utils'),
     Root, Panel, Matrix, Keyboard, widgetManager,
+    {widgets, categories} = require('../widgets'),
     init = false
+
+var widgetIcons = {root: 'bookmark'}, categoryIcons = {
+    'Basics': 'toggle-on',
+    'Containers': 'th-large',
+    'Frames': 'images',
+    'Graphs': 'chart-area',
+    'Indicators': 'info-circle',
+    'Pads': 'crosshairs',
+    'Sliders': 'sliders-h',
+    'Scripts': 'code',
+}
+
+for (var type in widgets) {
+    for (var cat in categoryIcons) {
+        if (categories[cat].includes(type)) {
+            widgetIcons[type] = categoryIcons[cat]
+        }
+    }
+}
 
 class UiTree extends UiWidget {
 
@@ -195,7 +215,7 @@ class UiTree extends UiWidget {
             id = widget.getProp('id'),
             node = html`<li class="${selected ? 'editing' : ''} ${!widget.getProp('visible') ? 'invisible' : ''}"
                             data-widget="${widget.hash}">
-                        ${id}</li>`
+                        ${raw(icon(widgetIcons[widget.getProp('type')] || 'root'))}${id}</li>`
 
         if (widget instanceof Panel && !(widget instanceof Matrix || widget instanceof Keyboard)) {
             node.insertBefore(html`<span class="toggle no-widget-select"></span>`, node.childNodes[0])
