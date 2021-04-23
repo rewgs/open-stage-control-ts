@@ -12,7 +12,8 @@ class Vm {
                 env: deepCopy(ENV),
                 ip: IP,
                 url: document.location.host,
-                platform: navigator.platform
+                platform: navigator.platform,
+                clipboard: navigator.clipboard
             }
         }
 

@@ -73,7 +73,19 @@ To avoid unwanted script executions, touch state events will only be catched if 
 
 ## Available variables
 
-Besides the variables available in the [javascript property syntax ](./advanced-syntaxes.md#available-variables) and the ones listed above, the following variables and functions are accessible in this context.
+The following variables and functions are accessible in this context.
+
+
+- `console`: javascript console
+- `locals`: object for storing/reading arbitrary values. Changing its properties *does not* trigger any synchronisation even if the value is used somewhere else.
+- `globals`: same as `locals` but shared between all widgets, contains a few useful variables:
+    - `screen`: client screen dimensions (`{width, height}`)
+    - `env`: client options (ie: url query options),
+    - `ip`: client's ip address,
+    - `url`: server url,
+    - `platform`: operating system as seen by the client
+    - `clipboard`: instance of navigator [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
+
 
 ----
 

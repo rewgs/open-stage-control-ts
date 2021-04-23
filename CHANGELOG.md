@@ -11,6 +11,9 @@
 - widgets
   - menu/switch/dropdown: reset value to `undefined` when receiving a value that's not defined in `values`
 
+- scripting
+  - expose instance of navigator [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard) as `globals.clipboard`
+
 - midi
   - allow sending note off with velocity
   - add option for receiving note off with velocity
