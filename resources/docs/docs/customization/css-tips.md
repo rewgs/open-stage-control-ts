@@ -11,7 +11,7 @@ Hit ++f12++ to open the developers tools panel. The html/css inspector helps ret
 For simple use cases, the `css` property can be written as a HTML inline styles (without any CSS selector). CSS rules will apply to the widget element.
 
 ```css
-opacity: 0.5; /* make the widget's transparent */
+opacity: 0.5; /* make the widget transparent */
 font-size: 120%; /* increase font-size */
 ```
 
