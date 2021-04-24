@@ -10,7 +10,7 @@ var UiWidget = require('./ui-widget'),
     {widgets, categories} = require('../widgets'),
     init = false
 
-var widgetIcons = {root: 'bookmark'}, categoryIcons = {
+var widgetIcons = {root: 'bookmark', tab: 'window-maximize'}, categoryIcons = {
     'Basics': 'toggle-on',
     'Containers': 'th-large',
     'Frames': 'images',
@@ -28,6 +28,10 @@ for (var type in widgets) {
         }
     }
 }
+widgetIcons.modal = 'window-restore'
+widgetIcons.clone = widgetIcons.fragment ='clone'
+widgetIcons.fragment = 'cube'
+
 
 class UiTree extends UiWidget {
 
