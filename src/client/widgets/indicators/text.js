@@ -23,7 +23,7 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
                 wrap: {type: 'boolean', value: false, help: [
                     'Set to `true` to wrap long lines automatically.',
                 ]},
-                align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Css text-align property.'},
+                align: {type: 'string', value: 'center', choices: ['center', 'left', 'right', 'top', 'bottom', 'left top', 'left bottom', 'right top', 'right bottom'], help: 'Text alignment.'},
             },
             osc: {
                 typeTags: null,
@@ -41,8 +41,10 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
         this.text = this.widget.appendChild(html`<label></label>`)
 
         if (this.getProp('vertical')) this.text.classList.add('vertical')
-        if (this.getProp('align') === 'left') this.text.classList.add('left')
-        if (this.getProp('align') === 'right') this.text.classList.add('right')
+        if (this.getProp('align').includes('left')) this.text.classList.add('left')
+        if (this.getProp('align').includes('right')) this.text.classList.add('right')
+        if (this.getProp('align').includes('top')) this.text.classList.add('top')
+        if (this.getProp('align').includes('bottom')) this.text.classList.add('bottom')
         if (this.getProp('wrap')) this.text.classList.add('wrap')
 
 

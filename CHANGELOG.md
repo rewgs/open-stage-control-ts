@@ -9,6 +9,7 @@
 
 - widgets
   - image: add pre defined values for `size`, `position` and `repeat` properties
+  - text: add vertical alignment choices to `align`
 
 - editor
   - tree: activate tab when selecting it in the project tree

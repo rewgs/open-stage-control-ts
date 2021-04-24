@@ -65,7 +65,7 @@
         overflow: hidden;
         text-align: center;
         word-wrap: break-word;
-        padding: 0 var(--text-padding);
+        padding: var(--text-padding);
 
         &.right {
             text-align: right;
@@ -74,6 +74,12 @@
         &.left {
             text-align: left;
             justify-content: flex-start;
+        }
+        &.top {
+            align-items: flex-start;
+        }
+        &.bottom {
+            align-items: flex-end;
         }
         &.wrap {
             white-space: pre-wrap;
