@@ -55,6 +55,7 @@ var SessionManager = class SessionManager extends EventEmitter {
                     parent: widgetManager
                 })
                 editor.clearHistory()
+                editor.widgetTree.filter.value = ''
                 DOM.get(document, '#osc-greeting-header')[0].classList.add('hidden')
                 this.setSaveMode(this.session.isFragment ? 'fragment' : 'session')
 

@@ -4,6 +4,7 @@
 
 - bug fixes
   - visualizer: remove `bars` option
+  - project tree: clear filter input when loading a session 
 
 - widgets
   - image: add pre defined values for `size`, `position` and `repeat` properties
