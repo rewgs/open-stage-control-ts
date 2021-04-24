@@ -3,8 +3,9 @@
 ## 1.9.2
 
 - bug fixes
-  - visualizer: remove `bars` option
-  - project tree: clear filter input when loading a session 
+  - visualizer: remove `bars` and `dots` option
+  - plot: fix `bars` option
+  - project tree: clear filter input when loading a session
 
 - widgets
   - image: add pre defined values for `size`, `position` and `repeat` properties

@@ -24,7 +24,6 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
                 pips:{type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
             },
             class_specific: {
-                pips: {type: 'boolean', value: true, help: 'Set to false to hide the scale'},
                 rangeX: {type: 'object', value: {min: 0, max: 1}, help: 'Defines the min and max values for the x axis'},
                 rangeY: {type: 'object', value: {min: 0, max:1}, help: 'Defines the min and max values for the y axis'},
                 origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
@@ -202,21 +201,23 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
 
     draw_bars() {
 
-        var barWidth = Math.round(this.width / this.value.length),
+        var padding = this.cssVars.padding,
+            barWidth = Math.round((this.width - padding * 2) / this.value.length),
             offset = Math.round((this.width - barWidth * this.value.length) / 2)
 
-        var origin = mapToScale(this.getProp('origin') !== false ? this.getProp('origin') : this.rangeY.min, [this.rangeY.min,this.rangeY.max],[this.height,0],0,this.getProp('logScaleY'),true)
+
+        var origin = mapToScale(this.getProp('origin') !== false ? this.getProp('origin') : this.rangeY.min, [this.rangeY.min, this.rangeY.max],[this.height - padding, padding], 0, this.getProp('logScaleY'), true)
 
         this.ctx.beginPath()
 
         for (let i in this.value) {
-            var y = mapToScale(this.value[i].length ? this.value[i][1] : this.value[i],[this.rangeY.min,this.rangeY.max],[this.height-2*PXSCALE,2*PXSCALE],0,this.logScaleY,true)
+            var y = mapToScale(this.value[i].length ? this.value[i][1] : this.value[i], [this.rangeY.min, this.rangeY.max], [this.height - 2 * PXSCALE - padding, 2 * PXSCALE + padding], 0, this.logScaleY, true)
             this.ctx.rect(offset + i * barWidth, Math.min(y, origin), barWidth - PXSCALE, Math.abs(Math.min(y - origin)))
 
         }
 
         this.ctx.globalAlpha = 0.4
-        this.ctx.fillStyle = this.colors.custom
+        this.ctx.fillStyle = this.cssVars.colorWidget
         this.ctx.fill()
 
     }
