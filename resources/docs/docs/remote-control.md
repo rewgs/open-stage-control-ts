@@ -181,6 +181,13 @@ Save the state of all widgets in the temporary slot.
 
 Reload saved state from the temporary slot.
 
+
+----
+
+#### `/STATE/SEND`
+
+Make all widgets send their current value.
+
 ----
 
 #### `/STATE/OPEN path.state`

@@ -15,6 +15,9 @@
   - tree: add icons before widget ids depending on the category
   - tree: activate tab when selecting it in the project tree
 
+- remote control
+  - add `/STATE/SEND` command
+
 ## 1.9.1
 
 - bug fixes

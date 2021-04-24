@@ -223,6 +223,11 @@ var callbacks = {
         stateManager.quickLoad()
 
     },
+    '/STATE/SEND': function(args) {
+
+        stateManager.send()
+
+    },
     '/STATE/OPEN': function(args) {
 
         if (!Array.isArray(args)) args = [args]
