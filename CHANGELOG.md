@@ -12,6 +12,7 @@
   - text: add vertical alignment choices to `align`
 
 - editor
+  - tree: add icons before widget ids depending on the category
   - tree: activate tab when selecting it in the project tree
 
 ## 1.9.1
