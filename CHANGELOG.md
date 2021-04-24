@@ -10,6 +10,9 @@
 - widgets
   - image: add pre defined values for `size`, `position` and `repeat` properties
 
+- editor
+  - tree: activate tab when selecting it in the project tree
+
 ## 1.9.1
 
 - bug fixes

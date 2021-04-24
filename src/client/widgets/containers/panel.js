@@ -174,7 +174,7 @@ class Panel extends Container() {
             this.createNavigation()
 
             this.navigation.addEventListener('fast-click', (e)=>{
-                if (!e.target.hasAttribute('data-widget')) return
+                if (!e.target.hasAttribute('data-widget') || e.capturedByEditor) return
                 var index = DOM.index(e.target)
                 this.setValue(index, {sync: true, send:this.value != index})
             })

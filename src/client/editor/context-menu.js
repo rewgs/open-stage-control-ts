@@ -52,6 +52,10 @@ var handleClick = function(event) {
         }
 
         editor.select(targetWidget, {multi: event.detail[multiSelectKey]})
+
+        if (targetWidget.getProp('type') === 'tab') {
+            targetWidget.parent.setValue(targetWidget.parent.children.indexOf(targetWidget))
+        }
     }
 
     // right-click menu
