@@ -116,7 +116,7 @@ function httpRoute(req, res) {
                 // Resolution order: session path, theme path, absolute path
 
                 var id = urlparser.parse('?' + req.headers.cookie, true).query.client_id,
-                    resolvedPath = resolvePath(url.replace(/%20/g, ' '), id)
+                    resolvedPath = resolvePath(decodeURI(url), id)
 
                 if (resolvedPath) {
                     try {

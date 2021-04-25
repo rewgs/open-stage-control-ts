@@ -6,6 +6,7 @@
   - visualizer: remove `bars` and `dots` option
   - plot: fix `bars` option
   - project tree: clear filter input when loading a session
+  - server: fix serving files from paths containing accents 
 
 - widgets
   - image: add pre defined values for `size`, `position` and `repeat` properties
