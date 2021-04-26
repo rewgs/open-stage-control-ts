@@ -38,6 +38,10 @@ var handleClick = function(event) {
     if (event.type !== 'fast-right-click') {
         if (editor.inspector.focusedInput) editor.inspector.onChange()
 
+        if (targetWidget.getProp('type') === 'tab') {
+            targetWidget.parent.setValue(targetWidget.parent.children.indexOf(targetWidget))
+        }
+
         if (
             event.target.tagName === 'LI' && // Project tree
             event.detail.shiftKey &&
@@ -53,9 +57,6 @@ var handleClick = function(event) {
 
         editor.select(targetWidget, {multi: event.detail[multiSelectKey]})
 
-        if (targetWidget.getProp('type') === 'tab') {
-            targetWidget.parent.setValue(targetWidget.parent.children.indexOf(targetWidget))
-        }
     }
 
     // right-click menu
