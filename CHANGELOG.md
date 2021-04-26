@@ -6,7 +6,7 @@
   - visualizer: remove `bars` and `dots` option
   - plot: fix `bars` option
   - project tree: clear filter input when loading a session
-  - server: fix serving files from paths containing accents 
+  - server: fix serving files from paths containing accents
 
 - widgets
   - image: add pre defined values for `size`, `position` and `repeat` properties
@@ -15,6 +15,7 @@
 - editor
   - tree: add icons before widget ids depending on the category
   - tree: activate tab when selecting it in the project tree
+  - smarter shift+drag selection: allow selecting widgets in the area when the event started on the parent container
 
 - remote control
   - add `/STATE/SEND` command

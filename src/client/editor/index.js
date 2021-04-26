@@ -202,11 +202,15 @@ class Editor {
 
             if (e.ctrlKey) {
 
+                // only add siblings to current selection
+
                 for (var i in widgets) {
                     this.select(widgets[i], {multi:true, fromLasso:true, lassoEnd: i == widgets.length - 1})
                 }
 
             } else {
+
+                // select the largest group of siblings in area
 
                 var groups = {}
                 for (var w of widgets) {
@@ -215,12 +219,19 @@ class Editor {
                     if (!groups[g]) groups[g] = []
                     if (!groups[g].includes(w)) groups[g].push(w)
                 }
-                groups = Object.values(groups).filter(g=>!(g.length === 1 && g[0] === this.selectedWidgets[0]))
-                console.log(groups)
-                var lengths = groups.map(g=>g.length)
-                var winner = groups[lengths.indexOf(Math.max(...lengths))]
 
-                if (winner) this.select(winner)
+                groups = Object.values(groups)
+
+                // if the event started from a container widget (but not in the project tree)
+                // remove groups that are more than one level away from that container
+                if (e.target.tagName !== 'LI' && this.selectedWidgets[0].childrenType !== undefined) {
+                    groups = groups.filter(g=>g[0].parent === this.selectedWidgets[0] || g[0].parent === this.selectedWidgets[0].parent)
+                }
+
+                var lengths = groups.map(g=>g.length),
+                    selection = groups[lengths.lastIndexOf(Math.max(...lengths))]
+
+                if (selection) this.select(selection)
             }
 
 
