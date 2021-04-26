@@ -22,8 +22,9 @@ npm run build
 ```
 
 !!! tip "Raspberry systems"
-    Run this instead of `npm install` if the architecture is `armv7l`
+    Run one of these instead of `npm install` (you can get the system's `arch` by running `uname -m` in a terminal)
     ```
+    npm install --arch=arm64
     npm install --arch=armv7l
     ```
 

@@ -10,27 +10,41 @@ var UiWidget = require('./ui-widget'),
     {widgets, categories} = require('../widgets'),
     init = false
 
-var widgetIcons = {root: 'bookmark', tab: 'window-maximize'}, categoryIcons = {
+var widgetIcons = {
+    root: 'bookmark',
+    tab: 'window-maximize',
+    menu: 'list',
+    dropdown: 'list',
+    switch: 'list',
+    input: 'i-cursor',
+    file: 'folder-open',
+    modal: 'window-restore',
+    clone: 'cube',
+    fragment: 'cube',
+    patchbay: 'project-diagram',
+    frame: 'globe'
+
+}
+
+var categoryIcons = {
     'Basics': 'toggle-on',
     'Containers': 'th-large',
     'Frames': 'images',
     'Graphs': 'chart-area',
     'Indicators': 'info-circle',
     'Pads': 'crosshairs',
-    'Sliders': 'sliders-h',
+    'Sliders': 'sliders-h.rotate-90',
     'Scripts': 'code',
 }
 
 for (var type in widgets) {
+    if (widgetIcons[type]) continue
     for (var cat in categoryIcons) {
         if (categories[cat].includes(type)) {
             widgetIcons[type] = categoryIcons[cat]
         }
     }
 }
-widgetIcons.modal = 'window-restore'
-widgetIcons.clone = widgetIcons.fragment ='clone'
-widgetIcons.fragment = 'cube'
 
 
 class UiTree extends UiWidget {
