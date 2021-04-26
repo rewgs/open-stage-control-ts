@@ -45,7 +45,8 @@ var handleClick = function(event) {
         if (
             event.target.tagName === 'LI' && // Project tree
             event.detail.shiftKey &&
-            editor.selectedWidgets.length > 0
+            editor.selectedWidgets.length > 0 &&
+            targetWidget.parent === editor.selectedWidgets[0].parent
         ) {
             var siblings = targetWidget.parent.children,
                 from = siblings.indexOf(editor.selectedWidgets[0]),
