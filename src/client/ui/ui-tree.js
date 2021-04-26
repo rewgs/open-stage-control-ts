@@ -191,7 +191,7 @@ class UiTree extends UiWidget {
                 setData: (dataTransfer)=>{
                     dataTransfer.setDragImage(this.dragDummy, 0, 0)
                 },
-                onStart: function (event) {
+                onStart: (event)=>{
                     placeholder = event.from.insertBefore(event.clone.cloneNode(true), event.from.childNodes[event.oldIndex])
                     placeholder.style.display = 'block'
                 },
