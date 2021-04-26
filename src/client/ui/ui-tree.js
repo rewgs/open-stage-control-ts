@@ -175,16 +175,25 @@ class UiTree extends UiWidget {
 
         // sortable lists
         DOM.each(this.list, 'ol', (el)=>{
-
+            let placeholder = null
             this.sortables.push(new Sortable(el, {
                 group: {
                     name: 'group',
                     pull: (to, from)=>from.el.dataset.childrenType === to.el.dataset.childrenType || to.el.dataset.childrenType === '',
                     put: (to, from)=>from.el.dataset.childrenType === to.el.dataset.childrenType || to.el.dataset.childrenType === '',
                 },
-                onEnd: this.sortCallback,
+                onEnd: (e)=>{
+                    e.from.removeChild(placeholder)
+                    placeholder = null
+                    if (e.from === e.to && e.newIndex > e.oldIndex) e.newIndex--
+                    this.sortCallback(e)
+                },
                 setData: (dataTransfer)=>{
                     dataTransfer.setDragImage(this.dragDummy, 0, 0)
+                },
+                onStart: function (event) {
+                    placeholder = event.from.insertBefore(event.clone.cloneNode(true), event.from.childNodes[event.oldIndex])
+                    placeholder.style.display = 'block'
                 },
             }))
         })

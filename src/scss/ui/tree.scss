@@ -35,10 +35,32 @@
 
         position: relative;user-select: none;
         > ol {
-            display: none;
+            // display: none;
+            display: block;
+            height: 0rem;
+
+            > li {
+                display: none;
+            }
         }
         &.expanded > ol {
             display: block;
+            // min-height: 8rem;
+            opacity: 1;
+            height: auto;
+            > li {
+                display: list-item;
+            }
+
+        }
+
+        &.sortable-ghost {
+            height: 2rem;
+            margin-bottom: 6rem;
+            margin-top: 4rem;
+            color: transparent;
+            overflow: hidden;
+            display: list-item!important
         }
 
         > i {
