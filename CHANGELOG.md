@@ -15,6 +15,7 @@
 - editor
   - tree: add icons before widget ids depending on the category
   - tree: activate tab when selecting it in the project tree
+  - tree: allow dragging widgets from a container to another
   - smarter shift+drag selection: allow selecting widgets in the area when the event started on the parent container
 
 - remote control

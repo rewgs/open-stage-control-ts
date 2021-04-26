@@ -80,24 +80,39 @@ class Editor {
         this.widgetTree = new UiTree({selector: '#osc-tree', parent: leftUiSidePanel})
         this.widgetTree.on('sorted', (event)=>{
 
-            var {widget, oldIndex, newIndex} = event,
-                propName = widget.props.tabs && widget.props.tabs.length ? 'tabs' : 'widgets'
+            var {oldIndex, newIndex, from, to} = event,
+                propName = from.childrenType + 's'
 
-            if (widget.props[propName].length < 2) return
+            if (from === to) {
 
-            widget.props[propName].splice(newIndex, 0, widget.props[propName].splice(oldIndex, 1)[0])
+                if (to.props[propName].length < 2) return
 
-            var indices = [newIndex, oldIndex]
-            if (Math.abs(oldIndex - newIndex) > 1) {
-                for (var i = Math.min(newIndex, oldIndex) + 1; i < Math.max(newIndex, oldIndex); i++) {
-                    indices.push(i)
+                to.props[propName].splice(newIndex, 0, to.props[propName].splice(oldIndex, 1)[0])
+
+                var indices = [newIndex, oldIndex]
+                if (Math.abs(oldIndex - newIndex) > 1) {
+                    for (var i = Math.min(newIndex, oldIndex) + 1; i < Math.max(newIndex, oldIndex); i++) {
+                        indices.push(i)
+                    }
                 }
+
+                var container = updateWidget(to, {removedIndexes: indices, addedIndexes: indices, preventSelect: true})
+
+                this.pushHistory({removedIndexes: indices, addedIndexes: indices})
+                this.select(container.children[newIndex])
+
+            } else {
+
+                to.props[propName].splice(newIndex, 0, from.props[propName][oldIndex])
+                from.props[propName].splice(oldIndex, 1)
+
+                updateWidget(from, {removedIndexes: [oldIndex], preventSelect: true})
+                var container = updateWidget(to, {addedIndexes: [newIndex], preventSelect: true})
+
+                this.pushHistory()
+                this.select(container.children[newIndex])
+
             }
-
-            var container = updateWidget(widget, {removedIndexes: indices, addedIndexes: indices, preventSelect: true})
-
-            this.pushHistory({removedIndexes: indices, addedIndexes: indices})
-            this.select(container.children[newIndex])
 
         })
 

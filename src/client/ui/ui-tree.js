@@ -100,13 +100,19 @@ class UiTree extends UiWidget {
 
         this.sortables = []
         this.sortCallback = (event)=>{
-            var widget = widgetManager.widgets[event.to.parentNode.getAttribute('data-widget')]
-            if (!widget || event.oldIndex === event.newIndex) return
+
+            var from = widgetManager.widgets[event.from.getAttribute('data-hash')],
+                to = widgetManager.widgets[event.to.getAttribute('data-hash')]
+
+            if (!to || (from === to && event.oldIndex === event.newIndex)) return
+
             this.trigger('sorted', {
-                widget: widget,
                 oldIndex: event.oldIndex,
-                newIndex: event.newIndex
+                newIndex: event.newIndex,
+                from: from,
+                to: to
             })
+
         }
 
         this.filter.addEventListener('change', ()=>{
@@ -172,9 +178,9 @@ class UiTree extends UiWidget {
 
             this.sortables.push(new Sortable(el, {
                 group: {
-                    name: 'group-' + el.parentNode.getAttribute('data-widget'),
-                    pull: false,
-                    put: false
+                    name: 'group',
+                    pull: (to, from)=>from.el.dataset.childrenType === to.el.dataset.childrenType || to.el.dataset.childrenType === '',
+                    put: (to, from)=>from.el.dataset.childrenType === to.el.dataset.childrenType || to.el.dataset.childrenType === '',
                 },
                 onEnd: this.sortCallback,
                 setData: (dataTransfer)=>{
@@ -244,7 +250,7 @@ class UiTree extends UiWidget {
                 this.expanded[widget.hash] = true
                 init = true
             }
-            var sublist = node.appendChild(html`<ol style="--depth:${++depth};"></ol>`)
+            var sublist = node.appendChild(html`<ol data-hash="${widget.hash}" data-children-type="${widget.childrenType}" style="--depth:${++depth};"></ol>`)
             for (let child of widget.children) {
                 if (child) sublist.appendChild(this.parseWidgets(child, selectedWidgets, depth))
             }
