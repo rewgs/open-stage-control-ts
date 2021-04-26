@@ -24,7 +24,9 @@ var widgetIcons = {
     patchbay: 'project-diagram',
     frame: 'globe'
 
-}, categoryIcons = {
+}
+
+var categoryIcons = {
     'Basics': 'toggle-on',
     'Containers': 'th-large',
     'Frames': 'images',
