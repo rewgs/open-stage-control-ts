@@ -46,7 +46,7 @@ class UiSelectArea {
         this.down = false
 
         if (this.rectSize[0] > 0 && this.rectSize[1] > 0) {
-            this.callback(this.getElements())
+            this.callback(this.getElements(), e)
             this.rect.classList.add('hidden')
         }
 

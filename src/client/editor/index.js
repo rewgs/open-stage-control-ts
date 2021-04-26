@@ -196,13 +196,34 @@ class Editor {
 
         })
 
-        this.selectarea = new UiSelectArea('[data-widget]:not(.not-editable)', (elements)=>{
+        this.selectarea = new UiSelectArea('[data-widget]:not(.not-editable)', (elements, e)=>{
 
-            elements = elements.map(e => widgetManager.getWidgetByElement(e, ':not(.not-editable)')).filter(e => e)
+            var widgets = elements.map(e => widgetManager.getWidgetByElement(e, ':not(.not-editable)')).filter(e => e)
 
-            for (var i in elements) {
-                this.select(elements[i], {multi:true, fromLasso:true, lassoEnd: i == elements.length - 1})
+            if (e.ctrlKey) {
+
+                for (var i in widgets) {
+                    this.select(widgets[i], {multi:true, fromLasso:true, lassoEnd: i == widgets.length - 1})
+                }
+
+            } else {
+
+                var groups = {}
+                for (var w of widgets) {
+                    var g = w.parent.hash
+                    if (!g) continue
+                    if (!groups[g]) groups[g] = []
+                    if (!groups[g].includes(w)) groups[g].push(w)
+                }
+                groups = Object.values(groups).filter(g=>!(g.length === 1 && g[0] === this.selectedWidgets[0]))
+                console.log(groups)
+                var lengths = groups.map(g=>g.length)
+                var winner = groups[lengths.indexOf(Math.max(...lengths))]
+
+                if (winner) this.select(winner)
             }
+
+
 
         })
 
