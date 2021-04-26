@@ -81,7 +81,8 @@ class Editor {
         this.widgetTree.on('sorted', (event)=>{
 
             var {oldIndex, newIndex, from, to} = event,
-                propName = from.childrenType + 's'
+                propName = from.childrenType + 's',
+                container
 
             if (from === to) {
 
@@ -96,7 +97,7 @@ class Editor {
                     }
                 }
 
-                let container = updateWidget(to, {removedIndexes: indices, addedIndexes: indices, preventSelect: true})
+                container = updateWidget(to, {removedIndexes: indices, addedIndexes: indices, preventSelect: true})
 
                 this.pushHistory({removedIndexes: indices, addedIndexes: indices})
                 this.select(container.children[newIndex])
@@ -107,12 +108,15 @@ class Editor {
                 from.props[propName].splice(oldIndex, 1)
 
                 updateWidget(from, {removedIndexes: [oldIndex], preventSelect: true})
-                let container = updateWidget(to, {addedIndexes: [newIndex], preventSelect: true})
+                container = updateWidget(to, {addedIndexes: [newIndex], preventSelect: true})
 
                 this.pushHistory()
                 this.select(container.children[newIndex])
 
             }
+
+            this.widgetTree.showWidget(container.children[newIndex])
+
 
         })
 
