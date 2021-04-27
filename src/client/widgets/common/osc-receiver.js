@@ -1,5 +1,5 @@
 var osc = require('../../osc'),
-    {isJSONObject} = require('../../utils')
+    {isJSON, isJSONObject} = require('../../utils')
 
 module.exports = class OscReceiver {
 
@@ -7,7 +7,7 @@ module.exports = class OscReceiver {
 
         var {address, value, parent, propName, usePreArgs} = options
 
-        if (typeof value === 'string' && isJSONObject(value)) {
+        if (typeof value === 'string' && isJSON(value)) {
             try {
                 this.value = JSON.parseFlex(value)
             } catch (err) {
