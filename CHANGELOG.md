@@ -8,6 +8,7 @@
   - project tree: clear filter input when loading a session
   - server: fix serving files from paths containing accents
   - editor: keep editor open when loading a session
+  - menu: prevent clipping in container on iOS
 
 - widgets
   - image: add pre defined values for `size`, `position` and `repeat` properties

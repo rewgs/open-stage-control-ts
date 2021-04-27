@@ -193,6 +193,11 @@
         z-index: 9999999999999!important;
         contain: size;
         overflow: visible;
+
+        // modal-breakout
+        @supports not (contain: strict) {
+            transform: none!important; // cancel new stacking context
+        }
     }
 
 
