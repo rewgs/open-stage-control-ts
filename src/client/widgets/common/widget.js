@@ -59,11 +59,11 @@ class Widget extends EventEmitter {
             geometry: {
                 left: {type: 'number|string', value: 'auto', help: [
                     'When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).',
-                    'Otherwise, the widget will be absolutely positioned'
+                    'Otherwise, the widget will be positioned at absolute coordinates'
                 ]},
                 top: {type: 'number|percentage', value: 'auto', help: [
                     'When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).',
-                    'Otherwise, the widget will be absolutely positioned'
+                    'Otherwise, the widget will be positioned at absolute coordinates'
                 ]},
                 width: {type: 'number|percentage', value: 'auto', help: 'Widget width'},
                 height: {type: 'number|percentage', value: 'auto', help: 'Widget height'},
