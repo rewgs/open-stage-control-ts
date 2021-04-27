@@ -7,8 +7,7 @@ var UiWidget = require('./ui-widget'),
     raw = require('nanohtml/raw'),
     {icon} = require('./utils'),
     Root, Panel, Matrix, Keyboard, widgetManager,
-    {widgets, categories} = require('../widgets'),
-    init = false
+    {widgets, categories} = require('../widgets')
 
 var widgetIcons = {
     root: 'bookmark',
@@ -67,6 +66,7 @@ class UiTree extends UiWidget {
         this.deferredUpdateTimeout = null
 
         this.expanded = {}
+        this.init = false
 
         this.container.addEventListener('fast-click', (event)=>{
 
@@ -131,6 +131,7 @@ class UiTree extends UiWidget {
     clear() {
 
         this.list.innerHTML = ''
+        this.init = false
         this.mounted = false
         for (var s of this.sortables) {
             s.destroy()
@@ -254,10 +255,10 @@ class UiTree extends UiWidget {
             node.insertBefore(html`<span class="toggle no-widget-select"></span>`, node.childNodes[0])
             node.classList.add('container')
             if (this.expanded[widget.hash]) node.classList.add('expanded')
-            if (!init && widget instanceof Root) {
+            if (!this.init && widget instanceof Root) {
                 node.classList.add('expanded')
                 this.expanded[widget.hash] = true
-                init = true
+                this.init = true
             }
             var sublist = node.appendChild(html`<ol data-hash="${widget.hash}" data-children-type="${widget.childrenType}" style="--depth:${++depth};"></ol>`)
             for (let child of widget.children) {

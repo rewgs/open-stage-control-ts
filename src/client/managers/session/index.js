@@ -78,7 +78,10 @@ var SessionManager = class SessionManager extends EventEmitter {
                 }
             }
 
-            if (editor.enabled) editor.disable()
+            if (editor.enabled) {
+                editor.disable()
+                editor.enable()
+            }
 
             DOM.dispatchEvent(window, 'resize')
 
