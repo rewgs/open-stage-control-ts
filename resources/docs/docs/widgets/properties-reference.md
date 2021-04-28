@@ -23,8 +23,8 @@
 
     | property | type |default | description |
     | --- | --- | --- | --- |
-        | <h6 id="left">left<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#left" title="Permanent link">#</a></h6> | `number`&vert;<br/>`string` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be absolutely positioned |
-        | <h6 id="top">top<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#top" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be absolutely positioned |
+        | <h6 id="left">left<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#left" title="Permanent link">#</a></h6> | `number`&vert;<br/>`string` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be positioned at absolute coordinates |
+        | <h6 id="top">top<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#top" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | When both top and left are set to auto, the widget is positioned according to the normal flow of the page (from left to right, by order of creation).<br/><br/>Otherwise, the widget will be positioned at absolute coordinates |
         | <h6 id="width">width<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#width" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Widget width |
         | <h6 id="height">height<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#height" title="Permanent link">#</a></h6> | `number`&vert;<br/>`percentage` | <code>"auto"</code> | Widget height |
         | <h6 id="expand">expand<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#expand" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>"false"</code> | If parent's layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically. |
@@ -487,9 +487,9 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="image_size">size<a class="headerlink" href="#image_size" title="Permanent link">#</a></h6> | `string` | <code>"cover"</code> | CSS background-size |
-            | <h6 id="image_position">position<a class="headerlink" href="#image_position" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | CSS background-position |
-            | <h6 id="image_repeat">repeat<a class="headerlink" href="#image_repeat" title="Permanent link">#</a></h6> | `string` | <code>"no-repeat"</code> | CSS background-repeat |
+            | <h6 id="image_size">size<a class="headerlink" href="#image_size" title="Permanent link">#</a></h6> | `string` | <code>"cover"</code> | CSS background-size<br/><br/>Choices: `cover`, `contain`, `auto` |
+            | <h6 id="image_position">position<a class="headerlink" href="#image_position" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | CSS background-position<br/><br/>Choices: `center`, `left`, `right`, `top`, `bottom`, `left top`, `left bottom`, `right top`, `right bottom` |
+            | <h6 id="image_repeat">repeat<a class="headerlink" href="#image_repeat" title="Permanent link">#</a></h6> | `string` | <code>"no-repeat"</code> | CSS background-repeat<br/><br/>Choices: `no-repeat`, `repeat`, `repeat-x`, `repeat-y`, `space`, `round` |
 
     === "image"
 
@@ -519,7 +519,6 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="plot_pips">pips<a class="headerlink" href="#plot_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to hide the scale |
             | <h6 id="plot_rangeX">rangeX<a class="headerlink" href="#plot_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
             | <h6 id="plot_rangeY">rangeY<a class="headerlink" href="#plot_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
             | <h6 id="plot_origin">origin<a class="headerlink" href="#plot_origin" title="Permanent link">#</a></h6> | `number`&vert;<br/>`boolean` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
@@ -545,11 +544,11 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="eq_pips">pips<a class="headerlink" href="#eq_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to hide the scale |
             | <h6 id="eq_rangeX">rangeX<a class="headerlink" href="#eq_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 20,<br/>&nbsp;"max": 22000<br/>}</code> | Defines the min and max values for the x axis (in Hz, logarithmic scale) |
             | <h6 id="eq_rangeY">rangeY<a class="headerlink" href="#eq_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": -6,<br/>&nbsp;"max": 6<br/>}</code> | Defines the min and max values for the y axis (in dB) |
             | <h6 id="eq_origin">origin<a class="headerlink" href="#eq_origin" title="Permanent link">#</a></h6> | `number`&vert;<br/>`boolean` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
             | <h6 id="eq_filters">filters<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#eq_filters" title="Permanent link">#</a></h6> | `array` | <code>""</code> | Each item must be an object with the following properties<br/>- `type`: string ("highpass", "highshelf", "lowpass", "lowshelf", "peak", "bandpass" or "notch", default: "peak")<br/>- `freq`: number (filter's resonant frequency, default: 1000)<br/>- `q`: number (Q factor, default: 1)<br/>- `gain`: number (default: 0)<br/>- `on`: boolean (default: true)<br/><br/>See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode |
+            | <h6 id="eq_pips">pips<a class="headerlink" href="#eq_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to hide the scale |
 
     === "value"
 
@@ -564,15 +563,12 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="visualizer_dots">dots<a class="headerlink" href="#visualizer_dots" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Draw dots on the line |
-            | <h6 id="visualizer_bars">bars<a class="headerlink" href="#visualizer_bars" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to use draw bars instead (disables `logScaleX` and forces `x axis` even spacing) |
             | <h6 id="visualizer_pips">pips<a class="headerlink" href="#visualizer_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
 
     === "visualizer"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="visualizer_pips">pips<a class="headerlink" href="#visualizer_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to false to hide the scale |
             | <h6 id="visualizer_rangeX">rangeX<a class="headerlink" href="#visualizer_rangeX" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the x axis |
             | <h6 id="visualizer_rangeY">rangeY<a class="headerlink" href="#visualizer_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
             | <h6 id="visualizer_origin">origin<a class="headerlink" href="#visualizer_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the y axis origin. Set to `false` to disable it |
@@ -621,7 +617,7 @@
         | --- | --- | --- | --- |
             | <h6 id="text_vertical">vertical<a class="headerlink" href="#text_vertical" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the text vertically |
             | <h6 id="text_wrap">wrap<a class="headerlink" href="#text_wrap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically. |
-            | <h6 id="text_align">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Css text-align property.<br/><br/>Choices: `center`, `left`, `right` |
+            | <h6 id="text_align">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Text alignment.<br/><br/>Choices: `center`, `left`, `right`, `top`, `bottom`, `left top`, `left bottom`, `right top`, `right bottom` |
 ## Pads
 
 ??? api "<div id="xy">xy<a class="headerlink" href="#xy" title="Permanent link">#</a></div>"

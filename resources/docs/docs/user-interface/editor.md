@@ -74,7 +74,7 @@ Multiple widgets can be edited at once.
     | ++ctrl+i++ | Toggle inspector. |
     | ++"Click"++ | Widget selection. |
     | ++ctrl+"Click"++ | Multi-widget selection. Widgets can be toggled from selection by clicking on them individually.|
-    | ++shift+"Click"+"Drag"++ | Draw a selection rectangle and attempt to select widgets in it (starts by selecting the widget under the cursor). If ++ctrl++ is pressed too, current selection is kept and will be merged with the new one if possible. |
+    | ++shift+"Click"+"Drag"++ | Draw a selection rectangle and attempt to select widgets in it. If ++ctrl++ is pressed too, current selection is kept and will be merged with the new one if possible. |
     | ++ctrl+z++ | Undo |
     | ++ctrl+y++ <br/>++ctrl+shift+z++ | Redo |
     | ++delete++ | Delete selected widgets |
@@ -110,7 +110,7 @@ Multiple widgets can be edited at once.
     | ++cmd+i++ | Toggle inspector. |
     | ++"Click"++ | Widget selection. |
     | ++cmd+"Click"++ | Multi-widget selection. Widgets can be toggled from selection by clicking on them individually.|
-    | ++shift+"Click"+"Drag"++ | Draw a selection rectangle and attempt to select widgets in it (starts by selecting the widget under the cursor). If ++cmd++ is pressed too, current selection is kept and will be merged with the new one if possible. |
+    | ++shift+"Click"+"Drag"++ | Draw a selection rectangle and attempt to select widgets in it. If ++cmd++ is pressed too, current selection is kept and will be merged with the new one if possible. |
     | ++cmd+z++ | Undo |
     | ++cmd+y++ <br/>++cmd+shift+z++ | Redo |
     | ++backspace++ | Delete selected widgets |
