@@ -234,10 +234,11 @@ var handleClick = function(event) {
                         data[0].widgets.push(newData)
 
                         var indexes = {addedIndexes: [data[0].widgets.length -1]}
+
                         updateWidget(editor.selectedWidgets[0], indexes)
-
-
                         editor.pushHistory(indexes)
+                        editor.widgetTree.showWidget(editor.selectedWidgets[0].children[0])
+
 
                     }
                 })
@@ -271,8 +272,10 @@ var handleClick = function(event) {
                     data[0].tabs.push({})
 
                     var indexes = {addedIndexes: [data[0].tabs.length -1]}
+
                     updateWidget(editor.selectedWidgets[0], indexes)
                     editor.pushHistory(indexes)
+                    editor.widgetTree.showWidget(editor.selectedWidgets[0].children[0])
 
                 }
             })

@@ -726,6 +726,8 @@ class Editor {
 
         this.pushHistory(indexes)
 
+        this.widgetTree.showWidget(this.selectedWidgets[0].children[0])
+
     }
 
     pasteWidgetAsClone(x, y) {
@@ -765,7 +767,11 @@ class Editor {
         var indexes = {addedIndexes: [this.selectedWidgets[0].props.widgets.length -1]}
 
         updateWidget(this.selectedWidgets[0], indexes)
+
         this.pushHistory(indexes)
+
+        this.widgetTree.showWidget(this.selectedWidgets[0].children[0])
+
 
     }
 
