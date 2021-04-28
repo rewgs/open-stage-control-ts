@@ -248,7 +248,7 @@ class UiTree extends UiWidget {
         var selected = selectedWidgets.includes(widget),
             id = widget.getProp('id'),
             node = html`<li class="${selected ? 'editing' : ''} ${!widget.getProp('visible') ? 'invisible' : ''}"
-                            data-widget="${widget.hash}">
+                            data-widget="${widget.hash}" data-type="${widget.getProp('type')}">
                         ${raw(icon(widgetIcons[widget.getProp('type')] || 'root'))}${id}</li>`
 
         if (widget instanceof Panel && !(widget instanceof Matrix || widget instanceof Keyboard)) {
@@ -277,9 +277,12 @@ class UiTree extends UiWidget {
 
     applyFilter() {
 
-        var filter = this.filter.value
+        var filter = this.filter.value.replace(/type\:[^\s]+/, ''),
+            type = this.filter.value.match(/type\:([^\s]+)/)
 
-        if (!filter) {
+        if (type !== null) type = type[1]
+
+        if (!filter && !type) {
             this.list.classList.remove('filter-active')
         } else {
             this.list.classList.add('filter-active')
@@ -287,6 +290,7 @@ class UiTree extends UiWidget {
             var show = []
             DOM.each(this.list, 'li', (element)=>{
                 var match = element.innerText.includes(filter)
+                if (type && element.dataset.type !== type) match = false
                 element.classList.toggle('filter-hide', !match)
                 if (match) show.push(element)
             })

@@ -43,7 +43,9 @@ Selected widget's properties are displayed and can be modified in the inspector.
 
 ## Project tree
 
-The project tree displays the whole widget structure of the session. Widgets can be reordered within a container with drag-and-drop.
+The project tree displays the whole widget structure of the session. Widgets can be reordered or moved to another container with drag-and-drop.
+
+The "Filter" input allows filtering displayed widgets by their `id`. It's also possible to only display a single type of widget by typing `type:fader` for example.
 
 ## Widget resizing / dragging
 
