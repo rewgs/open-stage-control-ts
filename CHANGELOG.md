@@ -19,7 +19,9 @@
   - tree: activate tab when selecting it in the project tree
   - tree: allow dragging widgets from a container to another
   - tree: expand container when a new widget is created inside it
+  - tree: add support for filtering widgets by type (by typing `type:fader` for example)
   - smarter shift+drag selection: allow selecting widgets in the area when the event started on the parent container
+  - select newly created widgets/tab except when copy-pasting
 
 - remote control
   - add `/STATE/SEND` command

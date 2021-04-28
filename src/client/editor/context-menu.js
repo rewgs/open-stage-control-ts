@@ -237,7 +237,10 @@ var handleClick = function(event) {
 
                         updateWidget(editor.selectedWidgets[0], indexes)
                         editor.pushHistory(indexes)
-                        editor.widgetTree.showWidget(editor.selectedWidgets[0].children[0])
+
+                        var newWidget = editor.selectedWidgets[0].children[editor.selectedWidgets[0].children.length - 1]
+                        editor.select([newWidget])
+                        editor.widgetTree.showWidget(newWidget)
 
 
                     }
@@ -275,7 +278,13 @@ var handleClick = function(event) {
 
                     updateWidget(editor.selectedWidgets[0], indexes)
                     editor.pushHistory(indexes)
-                    editor.widgetTree.showWidget(editor.selectedWidgets[0].children[0])
+
+                    var newWidget = editor.selectedWidgets[0].children[editor.selectedWidgets[0].children.length - 1]
+                    
+                    editor.select([newWidget])
+                    editor.widgetTree.showWidget(newWidget)
+                    newWidget.parent.setValue(newWidget.parent.children.indexOf(newWidget))
+
 
                 }
             })
