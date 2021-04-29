@@ -5,6 +5,9 @@
 - bug fixes
   - scripting: set() not working from a slider to a pad
 
+- editor
+  - tree: allow specifying multiple type filters
+
 ## 1.9.2
 
 - bug fixes

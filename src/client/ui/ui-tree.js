@@ -277,12 +277,12 @@ class UiTree extends UiWidget {
 
     applyFilter() {
 
-        var filter = this.filter.value.replace(/type\:[^\s]+/, ''),
-            type = this.filter.value.match(/type\:([^\s]+)/)
+        var filter = this.filter.value.replace(/type\:[^\s]+/g, '').trim(),
+            types = this.filter.value.match(/type\:([^\s]+)/g)
 
-        if (type !== null) type = type[1]
+        if (types) types = types.map(x=>x.split(':')[1])
 
-        if (!filter && !type) {
+        if (!filter && !types) {
             this.list.classList.remove('filter-active')
         } else {
             this.list.classList.add('filter-active')
@@ -290,7 +290,7 @@ class UiTree extends UiWidget {
             var show = []
             DOM.each(this.list, 'li', (element)=>{
                 var match = element.innerText.includes(filter)
-                if (type && element.dataset.type !== type) match = false
+                if (types && !types.includes(element.dataset.type)) match = false
                 element.classList.toggle('filter-hide', !match)
                 if (match) show.push(element)
             })
