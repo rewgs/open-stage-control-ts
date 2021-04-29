@@ -177,8 +177,8 @@ var incrementWidget = function(data, root){
         return data
     }
 
-    var id = data.id,
-        address = data.address
+    var id = String(data.id),
+        address = String(data.address)
 
     if (id && address == '/' + id) {
 
