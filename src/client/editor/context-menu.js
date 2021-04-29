@@ -240,7 +240,7 @@ var handleClick = function(event) {
 
                         var newWidget = editor.selectedWidgets[0].children[editor.selectedWidgets[0].children.length - 1]
                         editor.select([newWidget])
-                        editor.widgetTree.showWidget(newWidget)
+                        if (!editor.widgetTree.parent.minimized) editor.widgetTree.showWidget(newWidget)
 
 
                     }
@@ -282,7 +282,7 @@ var handleClick = function(event) {
                     var newWidget = editor.selectedWidgets[0].children[editor.selectedWidgets[0].children.length - 1]
 
                     editor.select([newWidget])
-                    editor.widgetTree.showWidget(newWidget)
+                    if (!editor.widgetTree.parent.minimized) editor.widgetTree.showWidget(newWidget)
                     newWidget.parent.setValue(newWidget.parent.children.indexOf(newWidget))
 
 

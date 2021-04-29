@@ -726,7 +726,7 @@ class Editor {
 
         this.pushHistory(indexes)
 
-        this.widgetTree.showWidget(this.selectedWidgets[0].children[0])
+        if (!leftUiSidePanel.minimized) this.widgetTree.showWidget(this.selectedWidgets[0].children[0])
 
     }
 
@@ -770,7 +770,7 @@ class Editor {
 
         this.pushHistory(indexes)
 
-        this.widgetTree.showWidget(this.selectedWidgets[0].children[0])
+        if (!leftUiSidePanel.minimized) this.widgetTree.showWidget(this.selectedWidgets[0].children[0])
 
 
     }
