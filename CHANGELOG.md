@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.3
+
+- bug fixes
+  - scripting: set() not working from a slider to a pad
+
 ## 1.9.2
 
 - bug fixes

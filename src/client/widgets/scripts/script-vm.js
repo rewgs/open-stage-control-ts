@@ -63,6 +63,7 @@ class ScriptVm extends Vm {
 
             var options = deepCopy(this.getValueOptions())
             options.fromScript = true
+            if (options.dragged) options.dragged = false
 
             // if (id === options.id) options.sync = false // loop stop
             // if (this.getWidget() === options.widget) options.sync = false // loop stop
