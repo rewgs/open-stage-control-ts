@@ -2,7 +2,7 @@ var EventEmitter = require('../../events/event-emitter'),
     osc = require('../../osc'),
     {nanoid} = require('nanoid'),
     widgetManager = require('../../managers/widgets'),
-    {urlParser} = require('../utils'),
+    {urlParser, balancedReplace} = require('../utils'),
     Vm = require('../vm'),
     vm = new Vm(),
     scopeCss = require('scope-css'),
@@ -504,25 +504,17 @@ class Widget extends EventEmitter {
 
         if (typeof propValue == 'string') {
 
-            propValue = propValue.replace(/@\{[^{}]*((@\{[^{}]*\}|[^{}]*)*)\}/g, (m, nested)=>{
-                // pretty regexp:
-                // @\{
-                //     [^{}]*
-                //     ((
-                //         @\{
-                //             [^{}]*
-                //         \}
-                //         |
-                //         [^{}]*
-                //     )*)
-                //
-                // \}
+            propValue = balancedReplace('@{', '}', propValue, (content)=>{
 
-                if (nested) {
-                    m = m.replace(nested, this.resolveProp(propName, nested, storeLinks ? 'nested' : false, this))
+                if (content.indexOf('@{') >= 0) {
+
+                    content = balancedReplace('@{', '}', content, (subcontent)=>{
+                        return this.resolveProp(propName, '@{' + subcontent + '}', storeLinks ? 'nested' : false, this)
+                    })
+
                 }
 
-                let id = m.substr(2, m.length - 3).split('.'),
+                let id = content.split('.'),
                     k, subk
 
                 if (id.length > 1) {
@@ -625,9 +617,11 @@ class Widget extends EventEmitter {
 
                 }
 
+                return 'undefined'
+
             })
 
-            propValue = propValue.replace(/OSC\{([^}]+)\}/g, (m, args)=>{
+            propValue = balancedReplace('OSC{', '}', propValue, (args)=>{
 
                 let [address, value, usePreArgs] = args.split(',')
                         .map(x=>x.trim())
@@ -665,7 +659,7 @@ class Widget extends EventEmitter {
             })
 
             try {
-                propValue = propValue.replace(/JS\{\{([\s\S]*)\}\}/g, (m, code)=>{
+                propValue = balancedReplace('JS{{', '}}', propValue, (code)=>{
 
                     if (!this.parsers[code]) this.parsers[code] = vm.compile(code, defaultScope)
 
@@ -681,12 +675,8 @@ class Widget extends EventEmitter {
             }
 
             try {
-                propValue = propValue.replace(/#\{(?:[^{}]|\{[^{}]*\})*\}/g, (m)=>{
-                    // one bracket nesting allowed, if we need two: #\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}
-
-                    var code = m.substr(2, m.length - 3).trim()
-
-                    if (!this.parsers[code]) this.parsers[code] = vm.compile('return ' + code, defaultScope)
+                propValue = balancedReplace('#{', '}', propValue, (code)=>{
+                    if (!this.parsers[code]) this.parsers[code] = vm.compile('return ' + code.trim(), defaultScope)
 
                     let r = this.parsers[code](jsScope, this.parsersLocalScope)
 
@@ -696,6 +686,7 @@ class Widget extends EventEmitter {
 
                 })
             } catch (err) {
+
                 this.errorProp(propName, '#{}', err)
             }
 

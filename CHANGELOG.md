@@ -5,6 +5,7 @@
 - bug fixes
   - scripting: set() not working from a slider to a pad
   - tabs not sending messages / triggering scripts when clicked in editing mode
+  - prevent hang with some syntax errors in advanced syntaxes
 
 - editor
   - tree: allow specifying multiple type filters

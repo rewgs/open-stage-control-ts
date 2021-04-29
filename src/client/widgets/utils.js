@@ -1,3 +1,5 @@
+var balanced = require('balanced-match')
+
 module.exports = {
 
     clip: function(value,range) {
@@ -113,6 +115,28 @@ module.exports = {
             return parser
         }
 
-    })()
+    })(),
+
+    balancedReplace(open, close, string, replacement) {
+
+        var b
+
+        while (b = balanced(open, close, string)) {
+
+            if (typeof replacement === 'function') {
+
+                string = b.pre + replacement(b.body) + b.post
+
+            } else {
+
+                string = b.pre + replacement + b.post
+
+            }
+
+        }
+
+        return string
+
+    }
 
 }
