@@ -16,6 +16,7 @@
     "no-prototype-builtins": "off",
     "no-console": "off",
     "no-undef": "off",
+    "no-cond-assign": "off",
     "no-useless-escape": "off",
     "no-self-assign": "off",
     "no-fallthrough": "off",
