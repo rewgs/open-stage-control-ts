@@ -39,7 +39,7 @@ var handleClick = function(event) {
         if (editor.inspector.focusedInput) editor.inspector.onChange()
 
         if (targetWidget.getProp('type') === 'tab') {
-            targetWidget.parent.setValue(targetWidget.parent.children.indexOf(targetWidget))
+            targetWidget.parent.setValue(targetWidget.parent.children.indexOf(targetWidget), {sync: true, send: true})
         }
 
         if (
@@ -280,7 +280,7 @@ var handleClick = function(event) {
                     editor.pushHistory(indexes)
 
                     var newWidget = editor.selectedWidgets[0].children[editor.selectedWidgets[0].children.length - 1]
-                    
+
                     editor.select([newWidget])
                     editor.widgetTree.showWidget(newWidget)
                     newWidget.parent.setValue(newWidget.parent.children.indexOf(newWidget))
