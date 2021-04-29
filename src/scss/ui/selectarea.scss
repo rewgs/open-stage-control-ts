@@ -41,3 +41,20 @@
     box-shadow: none!important;
     opacity: 1!important;
 }
+
+
+
+.widget.editing.editor-blink:after,
+.modal-container.editing.editor-blink > .popup > .popup-wrapper:after {
+    display: block!important;
+    -webkit-mask-image: none;
+    mask-image: none;
+    background-color: var(--color-accent);
+    opacity: 0.5!important;
+    animation: editor-blink 0.51s steps(3) infinite;
+}
+
+@keyframes editor-blink {
+    from {--color-accent: var(--color-warning)}
+    to {--color-accent: transparent}
+}

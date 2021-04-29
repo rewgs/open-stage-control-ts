@@ -88,11 +88,34 @@ var handleClick = function(event) {
                 },
                 shortcut: 't'
             })
+
+        } else {
+
             actions.push({
-                separator: true
+                label: icon('eye') + ' ' + locales('editor_show_in_session'),
+                action: ()=>{
+                    for (let w of editor.selectedWidgets) {
+                        var parent = w
+                        while (parent !== widgetManager) {
+                            if (parent.getProp('type') === 'tab') parent.parent.setValue(parent.parent.children.indexOf(parent), {sync: true, send: true})
+                            else if (parent.getProp('type') === 'modal') parent.setValue(1, {sync: true, send: true})
+                            parent = parent.parent
+                        }
+                        w.container.classList.add('editor-blink')
+                        w.container.scrollIntoView({block: 'center'})
+                        setTimeout(()=>{
+                            w.container.classList.remove('editor-blink')
+                        }, 800)
+                    }
+
+                }
             })
 
         }
+
+        actions.push({
+            separator: true
+        })
 
         actions.push({
             label: icon('copy') + ' ' + locales('editor_copy'),

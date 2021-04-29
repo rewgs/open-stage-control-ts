@@ -11,6 +11,7 @@
 
 - editor
   - tree: allow specifying multiple type filters
+  - tree: add "Show in session" context menu action
 
 ## 1.9.2
 

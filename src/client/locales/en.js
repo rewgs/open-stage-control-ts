@@ -16,6 +16,7 @@ module.exports = {
 
     // editor context-menu
     editor_show_in_tree: 'Show in tree',
+    editor_show_in_session: 'Show in session',
     editor_front: 'Bring to front',
     editor_closer: 'Bring closer',
     editor_back: 'Send to back',

@@ -15,6 +15,7 @@ module.exports = {
 
     // editor context-menu
     editor_show_in_tree: 'Voir dans l\'arborescence',
+    editor_show_in_session: 'Voir dans la session',
     editor_front: 'Amener devant',
     editor_closer: 'Amener plus près',
     editor_back: 'Envoyer à l\'arrière',
