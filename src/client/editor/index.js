@@ -313,7 +313,7 @@ class Editor {
             case 'alt + down':
             case 'alt + right':
             case 'alt + left':
-                if (!this.selectedWidgets.length) return
+                if (!this.selectedWidgets.length || this.selectedWidgets[0].parent === widgetManager) return
 
                 if (this.selectedWidgets[0].props.height === undefined && e.key.match(/Arrow(Up|Down)/)) return
                 if (this.selectedWidgets[0].props.width === undefined && e.key.match(/Arrow(Left|Right)/)) return
@@ -817,16 +817,12 @@ class Editor {
         for (var i = 0; i < this.selectedWidgets.length; i++) {
 
             let w = this.selectedWidgets[i],
+                dW = deltaW * w.container.offsetWidth / this.widgetDragResize.initWidth,
+                dH = deltaH * w.container.offsetHeight / this.widgetDragResize.initHeight,
                 nW, nH
 
-            if (i === 0 && ui) {
-                nW = ui.originalSize.width + deltaW
-                nH = ui.originalSize.height + deltaH
-
-            } else {
-                nW = w.container.offsetWidth + deltaW
-                nH = w.container.offsetHeight + deltaH
-            }
+            nW = w.container.offsetWidth + dW
+            nH = w.container.offsetHeight + dH
 
             if (w.props.width !== undefined && w.parent.getProp('layout') !== 'vertical') {
                 var newWidth = Math.max(nW, GRIDWIDTH) / PXSCALE
@@ -852,7 +848,8 @@ class Editor {
 
         this.pushHistory()
 
-        if (newWidgets.length > 1) this.select(newWidgets, {preventSelect: this.selectedWidgets.length > 1})
+        // if (newWidgets.length > 1) this.select(newWidgets, {preventSelect: this.selectedWidgets.length > 1})
+        this.createSelectionBlock()
 
     }
 
@@ -883,7 +880,8 @@ class Editor {
 
         this.pushHistory()
 
-        if (newWidgets.length > 1) this.select(newWidgets)
+        // if (newWidgets.length > 1) this.select(newWidgets)
+        this.createSelectionBlock()
 
     }
 

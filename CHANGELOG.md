@@ -8,6 +8,7 @@
   - prevent hang with some syntax errors in advanced syntaxes
   - don't show project tree if minimized when creating a new widget (1.9.2 regression)
   - fix "ID + 1" paste for widgets with numeric ids
+  - dropdown: reset the underlying dropdown when the widget's value is undefined
 
 - editor
   - tree: allow specifying multiple type filters
