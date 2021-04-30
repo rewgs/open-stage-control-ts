@@ -6,7 +6,7 @@
   - scripting: set() not working from a slider to a pad
   - tabs not sending messages / triggering scripts when clicked in editing mode
   - prevent hang with some syntax errors in advanced syntaxes
-  - don't show project tree when creating a new widget (1.9.2 regression)
+  - don't show project tree if minimized when creating a new widget (1.9.2 regression)
   - fix "ID + 1" paste for widgets with numeric ids
 
 - editor
