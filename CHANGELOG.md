@@ -3,330 +3,330 @@
 ## 1.9.3
 
 - bug fixes
-  - scripting: set() not working from a slider to a pad
-  - tabs not sending messages / triggering scripts when clicked in editing mode
-  - prevent hang with some syntax errors in advanced syntaxes
-  - don't show project tree if minimized when creating a new widget (1.9.2 regression)
-  - fix "ID + 1" paste for widgets with numeric ids
-  - dropdown: reset the underlying dropdown when the widget's value is undefined
+    - scripting: set() not working from a slider to a pad
+    - tabs not sending messages / triggering scripts when clicked in editing mode
+    - prevent hang with some syntax errors in advanced syntaxes
+    - don't show project tree if minimized when creating a new widget (1.9.2 regression)
+    - fix "ID + 1" paste for widgets with numeric ids
+    - dropdown: reset the underlying dropdown when the widget's value is undefined
 
 - editor
-  - tree: allow specifying multiple type filters
-  - tree: add "Show in session" context menu action
+    - tree: allow specifying multiple type filters
+    - tree: add "Show in session" context menu action
 
 ## 1.9.2
 
 - bug fixes
-  - visualizer: remove `bars` and `dots` option
-  - plot: fix `bars` option
-  - project tree: clear filter input when loading a session
-  - server: fix serving files from paths containing accents
-  - editor: keep editor open when loading a session
-  - menu: prevent clipping in container on iOS
+    - visualizer: remove `bars` and `dots` option
+    - plot: fix `bars` option
+    - project tree: clear filter input when loading a session
+    - server: fix serving files from paths containing accents
+    - editor: keep editor open when loading a session
+    - menu: prevent clipping in container on iOS
 
 - widgets
-  - image: add pre defined values for `size`, `position` and `repeat` properties
-  - text: add vertical alignment choices to `align`
+    - image: add pre defined values for `size`, `position` and `repeat` properties
+    - text: add vertical alignment choices to `align`
 
 - editor
-  - tree: add icons before widget ids depending on the category
-  - tree: activate tab when selecting it in the project tree
-  - tree: allow dragging widgets from a container to another
-  - tree: expand container when a new widget is created inside it
-  - tree: add support for filtering widgets by type (by typing `type:fader` for example)
-  - smarter shift+drag selection: allow selecting widgets in the area when the event started on the parent container
-  - select newly created widgets/tab except when copy-pasting
+    - tree: add icons before widget ids depending on the category
+    - tree: activate tab when selecting it in the project tree
+    - tree: allow dragging widgets from a container to another
+    - tree: expand container when a new widget is created inside it
+    - tree: add support for filtering widgets by type (by typing `type:fader` for example)
+    - smarter shift+drag selection: allow selecting widgets in the area when the event started on the parent container
+    - select newly created widgets/tab except when copy-pasting
 
 - remote control
-  - add `/STATE/SEND` command
+    - add `/STATE/SEND` command
 
 ## 1.9.1
 
 - bug fixes
-  - button: allow writing strings like `"1.0"` in `label` without removing the decimals
-  - editor: use css variable `--grid-width` at startup and after disabling & enabling the grid
-  - launcher: regression preventing server halt when built-in client is closed manually beforehand
-  - scripting: prevent crash (built-in client only) when using the variable `navigator`
+    - button: allow writing strings like `"1.0"` in `label` without removing the decimals
+    - editor: use css variable `--grid-width` at startup and after disabling & enabling the grid
+    - launcher: regression preventing server halt when built-in client is closed manually beforehand
+    - scripting: prevent crash (built-in client only) when using the variable `navigator`
 
 - widgets
-  - menu/switch/dropdown: reset value to `undefined` when receiving a value that's not defined in `values`
+    - menu/switch/dropdown: reset value to `undefined` when receiving a value that's not defined in `values`
 
 - scripting
-  - expose instance of navigator [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard) as `globals.clipboard`
+    - expose instance of navigator [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard) as `globals.clipboard`
 
 - midi
-  - allow sending note off with velocity
-  - add option for receiving note off with velocity
+    - allow sending note off with velocity
+    - add option for receiving note off with velocity
 
 - misc
-  - v0->v1 session conversion: remove `JS{{}}` in script property
+    - v0->v1 session conversion: remove `JS{{}}` in script property
 
 ## 1.9.0
 
 **Warning** Sessions saved with this version will not open in older versions (sessions saved with older version will open in this version).  
 
 - bug fixes
-  - remote-root option not applied on resources loaded by the client app (css images, etc)
-  - input: display issue when resizing the window
-  - launcher: cancel stopping the server when there are unsaved changes in the built-in client
+    - remote-root option not applied on resources loaded by the client app (css images, etc)
+    - input: display issue when resizing the window
+    - launcher: cancel stopping the server when there are unsaved changes in the built-in client
 
 - editor
-  - context menu: add `export` action to export a widget as a fragment file
-  - show project tree if minimzed when clicking on "Show in tree"
+    - context menu: add `export` action to export a widget as a fragment file
+    - show project tree if minimzed when clicking on "Show in tree"
 
 - widget
-  - **new** `fragment` widgets (under `containers`): embedded session or fragment file with overridable properties.
-  - add `comments` property to all widgets
+    - **new** `fragment` widgets (under `containers`): embedded session or fragment file with overridable properties.
+    - add `comments` property to all widgets
 
 - launcher
-  - add `Always on top` menu toggle
+    - add `Always on top` menu toggle
 
 ## 1.8.15
 
 - bug fixes
-  - editor: error when duplicating widget while if the clipboard is empty
-  - ui: local zoom move issue when not in fullscreen
-  - custom module: `clearInterval()` not working
-  - regression breaking style attribute in html property
+    - editor: error when duplicating widget while if the clipboard is empty
+    - ui: local zoom move issue when not in fullscreen
+    - custom module: `clearInterval()` not working
+    - regression breaking style attribute in html property
 
 - misc
-  - faster local zoom  
+    - faster local zoom  
 
 ## 1.8.14
 
 - bug fixes
-  - `alt+shift+c` not working when pressed before dragging
-  - incremental pasting issue with address property
-  - generate scrollbars for panels on iOS 13+
-  - fix scrolling on chrome for iOS 13+
+    - `alt+shift+c` not working when pressed before dragging
+    - incremental pasting issue with address property
+    - generate scrollbars for panels on iOS 13+
+    - fix scrolling on chrome for iOS 13+
 
 - editor
-  - add `mod+d` and `mod+shift+d` for duplicating widgets
-  - use a temporary clipboard when duplicating widgets
+    - add `mod+d` and `mod+shift+d` for duplicating widgets
+    - use a temporary clipboard when duplicating widgets
 
 - misc
-  - inspector: move `script` property to `scripting` category
-  - ui: minor style tweaks
+    - inspector: move `script` property to `scripting` category
+    - ui: minor style tweaks
 
 
 ## 1.8.13
 
 - widgets
-  - file: show save icon when mode is set to save
-  - file: center icon when hidePath is set to true
-  - sliders/pads: apply `spring` property dynamically
+    - file: show save icon when mode is set to save
+    - file: center icon when hidePath is set to true
+    - sliders/pads: apply `spring` property dynamically
 
 - ui
-  - add `alt`+`wheel` for local zoom centered on cursor
+    - add `alt`+`wheel` for local zoom centered on cursor
 
 - editor
-  - add `alt+c+drag` and `alt+shift+c+drag` for duplicating dragged widgets
+    - add `alt+c+drag` and `alt+shift+c+drag` for duplicating dragged widgets
 
 ## 1.8.12
 
 - bug fixes:
-  - project tree: filter input position issue when scrolling
-  - sliders/pads: apply `spring` property dynamically
+    - project tree: filter input position issue when scrolling
+    - sliders/pads: apply `spring` property dynamically
 
 - project tree
-  - select range of contiguous widgets with shift + click
+    - select range of contiguous widgets with shift + click
 
 - misc
-  - plot: remove unused `filters` property; fix description for `rangeX` and `rangeY`
-  - console: focus input when the console opens
+    - plot: remove unused `filters` property; fix description for `rangeX` and `rangeY`
+    - console: focus input when the console opens
 
 ## 1.8.11
 
 - bug fixes
-  - switch: widget not reacting at first touch when traversing is enabled on parent
-  - sliders: disable mousewheel when `spring` is enabled
+    - switch: widget not reacting at first touch when traversing is enabled on parent
+    - sliders: disable mousewheel when `spring` is enabled
 
 - widgets
-  - script: add `once` event mode
-  - encoder: remove `spring` property
+    - script: add `once` event mode
+    - encoder: remove `spring` property
 
 - custom module
-  - expose `process` global
+    - expose `process` global
 
 - scripting
-  - add `openUrl` function
+    - add `openUrl` function
 
 ## 1.8.10
 
 - bug fixes
-  - modal: issues with children's visibility
-  - console: allow multiple arguments in console.log()
+    - modal: issues with children's visibility
+    - console: allow multiple arguments in console.log()
 
 - ui
-  - launcher: add many keyboard shortcuts
-  - client: add keyboard shortcuts for clearing the console
+    - launcher: add many keyboard shortcuts
+    - client: add keyboard shortcuts for clearing the console
 
 - scripting
-  - add `setFocus` function to focus an input widget programmatically
+    - add `setFocus` function to focus an input widget programmatically
 
 - misc
-  - add `usePercents` client option
+    - add `usePercents` client option
 
 ## 1.8.9
 
 - bug fixes
-  - script: issue when using the `options` argument in `set()` (options leaked to subsequent set() calls in the script)
-   - multixy: `decimals` property not applied
-   - multixy: spring behavior not working until all points are released  
-   - custom module: prevent require() from reading submodules files each time and instead return the object in memory
+    - script: issue when using the `options` argument in `set()` (options leaked to subsequent set() calls in the script)
+     - multixy: `decimals` property not applied
+     - multixy: spring behavior not working until all points are released  
+     - custom module: prevent require() from reading submodules files each time and instead return the object in memory
 
 ## 1.8.8
 
 - launcher
-  - add file browser button for the `theme` option and fix parsing path containing spaces if only one theme is set
+    - add file browser button for the `theme` option and fix parsing path containing spaces if only one theme is set
 
 - windows
-  - remove `ctrl+w` shortcut for closing a window (use `alt+f4` instead)
+    - remove `ctrl+w` shortcut for closing a window (use `alt+f4` instead)
 
 
 ## 1.8.7
 
 - midi
-  - add active sensing messages support (received as sysex)
+    - add active sensing messages support (received as sysex)
 
 - remote control
-  - restore `/TABS` command (for opening tabs by ids)
+    - restore `/TABS` command (for opening tabs by ids)
 
 - widgets
-  - encoder: expose rotation speed in script (as `locals.speed`)
+    - encoder: expose rotation speed in script (as `locals.speed`)
 
 ## 1.8.6
 
 - bug fixes
-  - range: per-fader touch event not emitted properly
-  - rgb: fix `spring` property
-  - rgb: touch event not emitted
+    - range: per-fader touch event not emitted properly
+    - rgb: fix `spring` property
+    - rgb: touch event not emitted
 
 ## 1.8.5
 
 - bug fixes
-  - midi: debug messages displayed as errors
-  - launcher: broken context menu
+    - midi: debug messages displayed as errors
+    - launcher: broken context menu
 
 ## 1.8.4
 
 - bug fixes
-  - input: prevent focus when selecting the widget for edition
-  - input: submit content when leaving focus, not only when hitting `enter` or `tab` (`esc` still cancels)
-  - midi: prevent midi bridge from stopping when an error occurs; provide meaningfull errors when connection fails
+    - input: prevent focus when selecting the widget for edition
+    - input: submit content when leaving focus, not only when hitting `enter` or `tab` (`esc` still cancels)
+    - midi: prevent midi bridge from stopping when an error occurs; provide meaningfull errors when connection fails
 
 - editor
-  - inspector: hitting ctrl+s while editing a property will submit the change before saving
+    - inspector: hitting ctrl+s while editing a property will submit the change before saving
 
 - ui
-  - hide the console toggle button when the bottom panel is minimized and the editor is disabled
+    - hide the console toggle button when the bottom panel is minimized and the editor is disabled
 
 - widgets
-  - file: add `mode` property, for choosing between `open` and `save` modes
-  - switch: add `flip` mode
+    - file: add `mode` property, for choosing between `open` and `save` modes
+    - switch: add `flip` mode
 
 ## 1.8.3
 
 - bug fixes
-  - keyboard: allow note numbers up to 127
-  - server: return http 404 error when a user-requested resource is not found instead of keeping a pending request
-  - modal: `visible` property not applied correctly
+    - keyboard: allow note numbers up to 127
+    - server: return http 404 error when a user-requested resource is not found instead of keeping a pending request
+    - modal: `visible` property not applied correctly
 
 
 - project tree
-  - add an input for filtering displayed widget by id
+    - add an input for filtering displayed widget by id
 
 ## 1.8.2
 
 - bug fixes
-  - menu: allow manual line breaks ("`\n`") in labels / values
-  - custom module: parsing issue when sending widget data using `receive()` (`type` attribute errouneously parsed as an osc typetag)
+    - menu: allow manual line breaks ("`\n`") in labels / values
+    - custom module: parsing issue when sending widget data using `receive()` (`type` attribute errouneously parsed as an osc typetag)
 
 - widgets
-  - html property: allow "href" attribute on "a" elements
+    - html property: allow "href" attribute on "a" elements
 
 
 ## 1.8.1
 
 - bug fixes
-  - script: stops triggering osc messages under some circumstances
+    - script: stops triggering osc messages under some circumstances
 
 ## 1.8.0
 
 - bug fixes
-  - project tree: layout issue with deeply nested widgets
-  - ios 10.3 regression
-  - file browser: layout issue with long paths
+    - project tree: layout issue with deeply nested widgets
+    - ios 10.3 regression
+    - file browser: layout issue with long paths
 
 - custom module
-  - add `nativeRequire` function (allows loading native node modules or locally installed moduled)
+    - add `nativeRequire` function (allows loading native node modules or locally installed moduled)
 
 ## 1.7.8
 
 - bug fixes
-  - canvas-based widgets not drawn when placed in a modal while having a conditional visibility set
-  - text: missing `decimals` property
-  - clone: fix usage of osc listener syntax (acts as if clone has an `address` property set to `auto`)
+    - canvas-based widgets not drawn when placed in a modal while having a conditional visibility set
+    - text: missing `decimals` property
+    - clone: fix usage of osc listener syntax (acts as if clone has an `address` property set to `auto`)
 
 - widgets
-  - clone: make `props` property dynamic (avoid full widget rebuild when possible)
+    - clone: make `props` property dynamic (avoid full widget rebuild when possible)
 
 - misc
-  - increase client console history size and allow changing it with client url options
+    - increase client console history size and allow changing it with client url options
 
 ## 1.7.7
 
 - bug fixes
-  - startup regression
+    - startup regression
 
 ## 1.7.6
 
 - bug fixes
-  - (harmless) error raised when starting the server from the launcher with `debug` set to `true`
+    - (harmless) error raised when starting the server from the launcher with `debug` set to `true`
 
 - editor
-  - display/save color picked values with css rgba notation instead of hexadecimal
+    - display/save color picked values with css rgba notation instead of hexadecimal
 
 - widgets
-  - modal: add `ignoreTabs` option (allows overflowing tab ancestors)
-  - menu: add `ignoreTabs` option
+    - modal: add `ignoreTabs` option (allows overflowing tab ancestors)
+    - menu: add `ignoreTabs` option
 
 ## 1.7.5
 
 - bug fixes
-  - ios: cloned menu not displayed correctly
-  - engine: downgrade to fix startup issue on windows
+    - ios: cloned menu not displayed correctly
+    - engine: downgrade to fix startup issue on windows
 
 ## 1.7.4
 
 - bug fixes
-  - editor: cloned `dropdown` and `input` widgets not opening when selected
-  - widgets: prevent value-stateless widgets (tap buttons, clone, scripts, html and svg) from sending a value for cross-client synchronization (leads to unexpected script execution) and exclude them from state saves
-  - input: apply `decimals` number before checking the value against the `validation` expression
-  - range: `steps` and `dashed` property not working; remove `origin` property
-  - config conflicts between launcher and server (affecting at least session history)
+    - editor: cloned `dropdown` and `input` widgets not opening when selected
+    - widgets: prevent value-stateless widgets (tap buttons, clone, scripts, html and svg) from sending a value for cross-client synchronization (leads to unexpected script execution) and exclude them from state saves
+    - input: apply `decimals` number before checking the value against the `validation` expression
+    - range: `steps` and `dashed` property not working; remove `origin` property
+    - config conflicts between launcher and server (affecting at least session history)
 
 ## 1.7.3
 
 - bug fixes
-  - custom module / theme: prevent reloading the module while the file is being written to
-  - server: if a theme is used, attempt to resolve image urls against the theme file's location
-  - modal/button: prevent error when `label` is updated
+    - custom module / theme: prevent reloading the module while the file is being written to
+    - server: if a theme is used, attempt to resolve image urls against the theme file's location
+    - modal/button: prevent error when `label` is updated
 
 - widgets
-  - encoder: add  `ticks` property back
+    - encoder: add  `ticks` property back
 
 ## 1.7.2
 
 - bug fixes
-  - midi: mtc parsing error
-  - custom module: hot reload cache issue on windows
+    - midi: mtc parsing error
+    - custom module: hot reload cache issue on windows
 
 
 ## 1.7.1
 
 - bug fixes
-  - regression causing server errors
+    - regression causing server errors
 
 ## 1.7.0
 
@@ -342,366 +342,366 @@ As of this version, packages except the `node` package are bundled with a midi b
 
 
 - bug fixes
-  - editor: missing context menu (copy, paste) in inspector inputs
-  - widgets: osc listeners not resolving "auto" address
-  - cli: `ELECTRON_RUN_AS_NODE` headless mode not working without `--no-gui` option
-  - ios: clone widget not laid out properly in horizontal panels
-  - ui: missing vertical scrollbar when root's height overflows the workspace
-  - server: provide readable error when a file requested by the client file is not found  
-  - tab: content not drawn when changing visible property
-  - matrix: addresses not generated property when matrix' address is `auto`
+    - editor: missing context menu (copy, paste) in inspector inputs
+    - widgets: osc listeners not resolving "auto" address
+    - cli: `ELECTRON_RUN_AS_NODE` headless mode not working without `--no-gui` option
+    - ios: clone widget not laid out properly in horizontal panels
+    - ui: missing vertical scrollbar when root's height overflows the workspace
+    - server: provide readable error when a file requested by the client file is not found  
+    - tab: content not drawn when changing visible property
+    - matrix: addresses not generated property when matrix' address is `auto`
 
 - ui
-  - add console bottom panel with a simple script interpreter
+    - add console bottom panel with a simple script interpreter
 
 - widgets
-  - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
-  - input: add `validation` property (allows defining a regular expression that the value must match)
-  - modal: add `relative` position property
+    - keyboard: add `velocity` property (allows mapping the touch coordinates between `off` (top) and `on` (bottom))
+    - input: add `validation` property (allows defining a regular expression that the value must match)
+    - modal: add `relative` position property
 
 - midi
-  - accept sending sysex strings without spaces between the bytes
-  - load prebuilt midi binary on 64bit linux/windows/osx
-  - add support for midi time code messages
+    - accept sending sysex strings without spaces between the bytes
+    - load prebuilt midi binary on 64bit linux/windows/osx
+    - add support for midi time code messages
 
 - misc
-  - sessions converted from v0 will use the widget's html property to display the former label property
+    - sessions converted from v0 will use the widget's html property to display the former label property
 
 ## 1.6.2
 
 - bug fixes
-  - matrix: issues when changing non-dynamic properties (content not properly removed)
-  - input: apply default value when receiving an empty value or no value at all
+    - matrix: issues when changing non-dynamic properties (content not properly removed)
+    - input: apply default value when receiving an empty value or no value at all
 
 ## 1.6.1
 
 - bug fixes
-  - keyboard: prevent `script` property from being copied to each key
+    - keyboard: prevent `script` property from being copied to each key
 
 - widgets
-  - keyboard: make `on` and `off` properties dynamic
-  - script: add `getIndex` function
-  - matrix/keyboard: `id` variable in script is now the `id` of the child widget that triggered the event
+    - keyboard: make `on` and `off` properties dynamic
+    - script: add `getIndex` function
+    - matrix/keyboard: `id` variable in script is now the `id` of the child widget that triggered the event
 
 ## 1.6.0
 
 - bug fixes
-  - range: error when setting `default` property
-  - range: fix `doubleTap` property
+    - range: error when setting `default` property
+    - range: fix `doubleTap` property
 
 - widgets
-  - all: add `html` property to allow inserting custom content in widgets (label, value, etc) and style it with the `css` property.
+    - all: add `html` property to allow inserting custom content in widgets (label, value, etc) and style it with the `css` property.
 
 - scripting:
-  - `send()`: ignore the widget's `bypass` property (allows bypassing default messages and define custom ones)
-  - `set()`: add supports for wildcards in the id parameter
-  - `set()`: add a 3rd optional parameter for preventing further script executions and/or osc messages from being sent
+    - `send()`: ignore the widget's `bypass` property (allows bypassing default messages and define custom ones)
+    - `set()`: add supports for wildcards in the id parameter
+    - `set()`: add a 3rd optional parameter for preventing further script executions and/or osc messages from being sent
 
 - custom module
-  - automatically reload custom module when the file is modified
-  - add support for loading submodules with `require()`
+    - automatically reload custom module when the file is modified
+    - add support for loading submodules with `require()`
 
 - theme
-  - automatically reload theme when the file is modified
+    - automatically reload theme when the file is modified
 
 ## 1.5.4
 
 - bug fixes
-  - ssl: generate unique certificates (with random serial numbers) to avoid reuse errors. Certificates generated with older versions of o-s-c will be updated automatically.
-  - `~/` path prefix not recognized when using remote control commands like `/SESSION/SAVE`
-  - `~/` path prefix not recognized in `remote-root` option
-  - editor: paste ID+1: midi-related addresses should not be incremented
+    - ssl: generate unique certificates (with random serial numbers) to avoid reuse errors. Certificates generated with older versions of o-s-c will be updated automatically.
+    - `~/` path prefix not recognized when using remote control commands like `/SESSION/SAVE`
+    - `~/` path prefix not recognized in `remote-root` option
+    - editor: paste ID+1: midi-related addresses should not be incremented
 
 - remote control
-  - add `/STATE/OPEN` and `/STATE/SAVE` commands
-  - ignore unsaved changes when loading a session with `/SESSION/OPEN`
-  - resolve relative file paths against `remote-root` setting  
+    - add `/STATE/OPEN` and `/STATE/SAVE` commands
+    - ignore unsaved changes when loading a session with `/SESSION/OPEN`
+    - resolve relative file paths against `remote-root` setting  
 
 ## 1.5.3
 
 - bug fixes
-  - editor: error when `preArgs` and `address` are modified at the same time (affects `/EDIT` command and matrix/clone widgets)
+    - editor: error when `preArgs` and `address` are modified at the same time (affects `/EDIT` command and matrix/clone widgets)
 
 ## 1.5.2
 
 - bug fixes
-  - launcher: midi device names containing multiple spaces not parsed correctly
-  - fullscreen: lack of support not detected on some ios devices
-  - multixy: labels not hidden when `ephemeral` is `true`
+    - launcher: midi device names containing multiple spaces not parsed correctly
+    - fullscreen: lack of support not detected on some ios devices
+    - multixy: labels not hidden when `ephemeral` is `true`
 
 - remote control
-  - add `/SESSION/OPEN` and `/SESSION/SAVE` commands
+    - add `/SESSION/OPEN` and `/SESSION/SAVE` commands
 
 ## 1.5.1
 
 - bug fixes
-  - widgets: touch state scripts not triggering some synchronization mechanism
+    - widgets: touch state scripts not triggering some synchronization mechanism
 
 - widgets
-  - encoder: remove `steps`, `ticks` and `origin` properties
-  - encoder: make `sensitivity` work with values below 1
+    - encoder: remove `steps`, `ticks` and `origin` properties
+    - encoder: make `sensitivity` work with values below 1
 
 ## 1.5.0
 
 - bug fixes
-  - image: broken value validation
-  - menu/dropdown: use correct z-index
-  - dropdown: prevent dropdown from opening when selecting the widget for edition
+    - image: broken value validation
+    - menu/dropdown: use correct z-index
+    - dropdown: prevent dropdown from opening when selecting the widget for edition
 
 - editor
-  - holding `alt` extends the north-west handle to the widget's size to ease dragging
-  - widget properties reordered (e.g. style-related properties, even widget-specific, are now under the "style" category)
+    - holding `alt` extends the north-west handle to the widget's size to ease dragging
+    - widget properties reordered (e.g. style-related properties, even widget-specific, are now under the "style" category)
 
 - widgets
-  - remove `colorBg` for all widgets except containers
-  - widgets background color is now transparent by default (can be overridden with css)
-  - keyboard: added `colorBlack` and `colorWhite` properties to customize key colors
-  - dropdown/menu: add `label` property (with support easy key/value display)
-  - dropdown/menu: add `icon` toggle property
-  - modal: add `popupPadding` property to control the button's and the container's padding independently
+    - remove `colorBg` for all widgets except containers
+    - widgets background color is now transparent by default (can be overridden with css)
+    - keyboard: added `colorBlack` and `colorWhite` properties to customize key colors
+    - dropdown/menu: add `label` property (with support easy key/value display)
+    - dropdown/menu: add `icon` toggle property
+    - modal: add `popupPadding` property to control the button's and the container's padding independently
 
 ## 1.4.1
 
 - bug fixes
-  - multixy/range: prevent some extra touch state events;`
+    - multixy/range: prevent some extra touch state events;`
 
 ## 1.4.0
 
 - bug fixes
-  - project tree: error when dropping a widget at its initial position
+    - project tree: error when dropping a widget at its initial position
 
 - editor
-  - validate property change when clicking on a widget
-  - cancel property change when hitting escape
-  - add menu and keyboard shortcuts to reorder widgets
-  - add keyboard shortcut to show widget in project tree
-  - selected widget is not showed on top of the others anymore
+    - validate property change when clicking on a widget
+    - cancel property change when hitting escape
+    - add menu and keyboard shortcuts to reorder widgets
+    - add keyboard shortcut to show widget in project tree
+    - selected widget is not showed on top of the others anymore
 
 - widgets
-  - expose widgets unique identifiers with property name "uuid"
-  - xy/multixy: add `ephemeral` property
-  - fader/knob/xy/range/multixy: remove `touchAddress` property
-  - fader/knob/xy/range/multixy: expose touch state in `script` property (`touchAddress` usages will be converted automatically)
+    - expose widgets unique identifiers with property name "uuid"
+    - xy/multixy: add `ephemeral` property
+    - fader/knob/xy/range/multixy: remove `touchAddress` property
+    - fader/knob/xy/range/multixy: expose touch state in `script` property (`touchAddress` usages will be converted automatically)
 
 ## 1.3.0
 
 - bug fixes
-  - editor: hide impossible actions from context-menu (eg adding widgets in tab containers)  
-  - editor: error when selecting a tab/root widget while a property field contains unsubmitted changes
-  - panel: layout issue with tabs & lineWidth property
-  - input: extend focusable area
+    - editor: hide impossible actions from context-menu (eg adding widgets in tab containers)  
+    - editor: error when selecting a tab/root widget while a property field contains unsubmitted changes
+    - panel: layout issue with tabs & lineWidth property
+    - input: extend focusable area
 
 - midi
-  - remove variable args in sysex messages (dynamic properties and scripting can be used to this effect)
-  - add support for sending sysex bytes as integers
-  - allow sending any system message (eg MIDI time code)
-  - add support for receiving MIDI time code messages (as raw sysex) (requires adding the `mtc` flag to the midi configuration)
+    - remove variable args in sysex messages (dynamic properties and scripting can be used to this effect)
+    - add support for sending sysex bytes as integers
+    - allow sending any system message (eg MIDI time code)
+    - add support for receiving MIDI time code messages (as raw sysex) (requires adding the `mtc` flag to the midi configuration)
 
 
 ## 1.2.1
 
 - scripting
-  - expose toolbar menu actions
+    - expose toolbar menu actions
 
 - remote control
-  - optimise small changes made with /EDIT
+    - optimise small changes made with /EDIT
 
 - widgets
-  - button: add `wrap` and `vertical` properties
-  - root: add `width` and `height` properties (helps building mobile layouts)
+    - button: add `wrap` and `vertical` properties
+    - root: add `width` and `height` properties (helps building mobile layouts)
 
 ## 1.2.0
 
 - bug fixes
-  - editor: id not incremented when pasting multiple widgets with id+1
+    - editor: id not incremented when pasting multiple widgets with id+1
 
 - main
-  - remove support for extra args in the `custom-module` option (fixes some path issues)
+    - remove support for extra args in the `custom-module` option (fixes some path issues)
 
 - widgets
-  - all: add `lineWidth` style property
-  - knob: add `solid` & `line` designs
-  - fader: add `knobSize` property
+    - all: add `lineWidth` style property
+    - knob: add `solid` & `line` designs
+    - fader: add `knobSize` property
 
 - editor
-  - preserve percentages in position/size
-  - add 'Relative units (%)' option to use percents automatically on new widgets
+    - preserve percentages in position/size
+    - add 'Relative units (%)' option to use percents automatically on new widgets
 
 ## 1.1.0
 
 - bug fixes
-  - iOS 14+ scrolling issue
+    - iOS 14+ scrolling issue
 
 - midi
-  - add support for channel pressure and key pressure messages
+    - add support for channel pressure and key pressure messages
 
 - widgets
-  - svg: remove support for non-standard `%x` and `%y` units; fixed layout update when resized;
-  - knob: add support for custom dash/gap size in `dashed` property
+    - svg: remove support for non-standard `%x` and `%y` units; fixed layout update when resized;
+    - knob: add support for custom dash/gap size in `dashed` property
 
 ## 1.0.4
 
 - bug fixes
-  - script: broken `storage.getItem` and `storage.removeItem`
-  - regression breaking `remote-root` option when starting with the launcher
+    - script: broken `storage.getItem` and `storage.removeItem`
+    - regression breaking `remote-root` option when starting with the launcher
 
 
 ## 1.0.3
 
 - bug fixes
-  - modal: layout issue on iOS
+    - modal: layout issue on iOS
 
 - widgets
-  - panels: added `contain` property to allow scrolling in vertical/horizontal layouts
+    - panels: added `contain` property to allow scrolling in vertical/horizontal layouts
 
 - midi
-  - add support for named ports in midi configuration
+    - add support for named ports in midi configuration
 
 
 ## 1.0.2
 
 - bug fixes
-  - broken scrolling on iPhone iOS 13
-  - window geometry issue  
+    - broken scrolling on iPhone iOS 13
+    - window geometry issue  
 
 ## 1.0.1
 
 - UI
-  - windows' dimensions and position are now saved upon closing and restored at startup
+    - windows' dimensions and position are now saved upon closing and restored at startup
 
 ## 1.0.0
 
 *This list is not exhaustive*
 
 - compatibility
-  - dropped support for iOS 9
-  - firefox (75+) support
+    - dropped support for iOS 9
+    - firefox (75+) support
 
 - UI
-  - overhaul design reworked
-  - foldable sidepanels
-  - removed lobby
-  - added toolbar menu
-  - dispay loading (spinner) in a notification instead of a modal
-  - mod + w to close window
-  - context-menu now use click event to trigger actions, not mousedown/touchstart
-  - no more uppercase text by default
+    - overhaul design reworked
+    - foldable sidepanels
+    - removed lobby
+    - added toolbar menu
+    - dispay loading (spinner) in a notification instead of a modal
+    - mod + w to close window
+    - context-menu now use click event to trigger actions, not mousedown/touchstart
+    - no more uppercase text by default
 
 - themes
-  - built-in themes removed except `orange`
+    - built-in themes removed except `orange`
 
 - translations
-  - incomplete russian translation removed
+    - incomplete russian translation removed
 
 - editor
-  - project tree
-  - dropdown for properties with multiple choices
-  - color picker
-  - preview numeric values for style-related properties set to auto
-  - context menu: added "show in tree" action
-  - context menu: removed "edit parent" action
-  - allow copying tabs (to tab containers only)
-  - shared clipboard accross all clients
-  - prevent interaction with widgets when `shift` or `ctrl` is held
-  - ensure @{} bindings are always updated upon edition
+    - project tree
+    - dropdown for properties with multiple choices
+    - color picker
+    - preview numeric values for style-related properties set to auto
+    - context menu: added "show in tree" action
+    - context menu: removed "edit parent" action
+    - allow copying tabs (to tab containers only)
+    - shared clipboard accross all clients
+    - prevent interaction with widgets when `shift` or `ctrl` is held
+    - ensure @{} bindings are always updated upon edition
 
 
 - widget changes
-  - all: removed `label` option except for buttons, tabs and modals (one should use `text` widgets if needed)
-  - all: removed support for `null` and `"self"` targets
-  - all: added `ignoreDefaults` property (allows ignoring the server's default targets)
-  - all: `precision` property to `decimals`, don't set osc integer typetag when 0
-  - all: added `typeTags` property
-  - all: multiple style properties to control visibility, colors, alphas and padding
-  - all: added `interaction` (=> css `pointer-events: none;`)
-  - all: added `expand` (=> css `flex: 1;`)
-  - all:  prevent html tags in label
-  - pads: removed `split` property -> use custom-module or script instead
-  - root: can contain widgets or tabs
-  - panels: added `layout`, `justify` and `gridTemplate` to help managing layouts (especially responsive ones)
-  - panels: added `verticalTabs` property
-  - panels: added `traversing` property, allow restricting `traversing` to a specific widget type
-  - fader: removed `input`
-  - fader: removed `meter`
-  - fader: added `gradient`
-  - fader: added `round` design style
-  - fader: support setting dash size and gap size in `dashed` property
-  - switch: added `layout` (including grid)
-  - switch: added `click` mode
-  - plot/eq: removed `smooth`
-  - plots/sliders/pads: reversed `logScale` behavior to match standard implementations; can be either `false` (disabled), `true` (logarithmic scale) or `number` (manual log scale, negative for exponential scale)
-  - visualizer: added `framerate` property
-  - visualizer: added `freeze` property
-  - menu: always centered menu
-  - modal: modals can't overflow parent tab boundaries
-  - input: removed `vertical`
-  - pads, range: when `touchAddress` is set, one message per touched point is sent, in addition to the former touch state message
-  - eq: removed `logScaleX` property, always draw logarithmic frequency response
-  - eq: logarithmic x-axis scale fixed
-  - eq: filters ared now defined with the `filters` property, leaving the `value` to its default purpose
-  - eq: added `rangeX`
-  - html: allow `class`, `title` and `style` attributes
-  - dropdown: close menu when receiving a value
-  - dropdown: removed empty 1st option
-  - switch: removed `showValues` (inconsistent with menu/dropdown, feature covered by `values` property)
-  - frame: allow loading non local urls
+    - all: removed `label` option except for buttons, tabs and modals (one should use `text` widgets if needed)
+    - all: removed support for `null` and `"self"` targets
+    - all: added `ignoreDefaults` property (allows ignoring the server's default targets)
+    - all: `precision` property to `decimals`, don't set osc integer typetag when 0
+    - all: added `typeTags` property
+    - all: multiple style properties to control visibility, colors, alphas and padding
+    - all: added `interaction` (=> css `pointer-events: none;`)
+    - all: added `expand` (=> css `flex: 1;`)
+    - all:  prevent html tags in label
+    - pads: removed `split` property -> use custom-module or script instead
+    - root: can contain widgets or tabs
+    - panels: added `layout`, `justify` and `gridTemplate` to help managing layouts (especially responsive ones)
+    - panels: added `verticalTabs` property
+    - panels: added `traversing` property, allow restricting `traversing` to a specific widget type
+    - fader: removed `input`
+    - fader: removed `meter`
+    - fader: added `gradient`
+    - fader: added `round` design style
+    - fader: support setting dash size and gap size in `dashed` property
+    - switch: added `layout` (including grid)
+    - switch: added `click` mode
+    - plot/eq: removed `smooth`
+    - plots/sliders/pads: reversed `logScale` behavior to match standard implementations; can be either `false` (disabled), `true` (logarithmic scale) or `number` (manual log scale, negative for exponential scale)
+    - visualizer: added `framerate` property
+    - visualizer: added `freeze` property
+    - menu: always centered menu
+    - modal: modals can't overflow parent tab boundaries
+    - input: removed `vertical`
+    - pads, range: when `touchAddress` is set, one message per touched point is sent, in addition to the former touch state message
+    - eq: removed `logScaleX` property, always draw logarithmic frequency response
+    - eq: logarithmic x-axis scale fixed
+    - eq: filters ared now defined with the `filters` property, leaving the `value` to its default purpose
+    - eq: added `rangeX`
+    - html: allow `class`, `title` and `style` attributes
+    - dropdown: close menu when receiving a value
+    - dropdown: removed empty 1st option
+    - switch: removed `showValues` (inconsistent with menu/dropdown, feature covered by `values` property)
+    - frame: allow loading non local urls
 
 - widget removals
-  - `push`, `toggle`: merged into `button`
-  - `strip`: features now covered by `panel`
-  - `meter`: duplicate of `fader` with `design` to `compact` and `interaction` to `false`
-  - `switcher`, `state`, `crossfader`: removed => state managment functions added to the `script` widget
-  - `keys`: merged with `script`
-  - `gyroscope`: not compatible since chrome 74 unless o-s-c goes HTTPS
+    - `push`, `toggle`: merged into `button`
+    - `strip`: features now covered by `panel`
+    - `meter`: duplicate of `fader` with `design` to `compact` and `interaction` to `false`
+    - `switcher`, `state`, `crossfader`: removed => state managment functions added to the `script` widget
+    - `keys`: merged with `script`
+    - `gyroscope`: not compatible since chrome 74 unless o-s-c goes HTTPS
 
 
 - remote control
-  - removed /TABS
-  - added /NOTIFY
+    - removed /TABS
+    - added /NOTIFY
 
 - scripting (general)
-  - removed MathJS language
-  - reuse #{} syntax as as shorthand for JS{{}} (one liner, implicit return)
-  - added `locals` variable, a variable store scoped to the widget
-  - renamed `global` to `globals`
-  - expose environment variables in `globals`: `url`, `env` (query parameters), `platform`, `screen` (width/height)
+    - removed MathJS language
+    - reuse #{} syntax as as shorthand for JS{{}} (one liner, implicit return)
+    - added `locals` variable, a variable store scoped to the widget
+    - renamed `global` to `globals`
+    - expose environment variables in `globals`: `url`, `env` (query parameters), `platform`, `screen` (width/height)
 
 - script widget
-  - always hidden except in project tree
-  - `script` property must not be wrapped in a JS{{}} block anymore
-  - added `stateGet` and `stateSet` functions
-  - added `storage` object, proxy to the document's localStorage object (allows storing data that persist after refresh/close (cleared with the browser's cache)
-  - added `setTimeout`, `clearTimeout`, `setInterval`, `clearInterval` function proxies with an extra `id` argument (they clear automatically when called multiple times and upon widget removal. `id` is scoped to the widget)
+    - always hidden except in project tree
+    - `script` property must not be wrapped in a JS{{}} block anymore
+    - added `stateGet` and `stateSet` functions
+    - added `storage` object, proxy to the document's localStorage object (allows storing data that persist after refresh/close (cleared with the browser's cache)
+    - added `setTimeout`, `clearTimeout`, `setInterval`, `clearInterval` function proxies with an extra `id` argument (they clear automatically when called multiple times and upon widget removal. `id` is scoped to the widget)
 
 
 - state
-  - quickstate (store/recall from menu) is now stored in the clients cache and persists after refresh/close (cleared with the browser's cache)
+    - quickstate (store/recall from menu) is now stored in the clients cache and persists after refresh/close (cleared with the browser's cache)
 
 - custom module
-  - `settings.read(name)`: `name` is now the long name of command-line options (not a camelCased one)
-  - `receive()`: optional last argument to pass extra options such as `clientId`
-  - client id persist upon page refresh and can be set manually with the client url option `id`
+    - `settings.read(name)`: `name` is now the long name of command-line options (not a camelCased one)
+    - `receive()`: optional last argument to pass extra options such as `clientId`
+    - client id persist upon page refresh and can be set manually with the client url option `id`
 
 
 - launcher
-  - config save/load
-  - allow starting/stopping server without rebooting
-  - syntax check on `--midi` option
+    - config save/load
+    - allow starting/stopping server without rebooting
+    - syntax check on `--midi` option
 
 - server
-  - renamed `--url-options` to `--client-options` and make them apply even in remote browsers (can be overridden with url queries)
-  - removed `--blank`, `--gui-only`, `--examples`
-  - hide `--disable-gpu` (cli-only)
-  - added cli-only `--cache-dir` and `--config-file`
-  - added `--authentication` option
-  - added `--use-ssl` option
+    - renamed `--url-options` to `--client-options` and make them apply even in remote browsers (can be overridden with url queries)
+    - removed `--blank`, `--gui-only`, `--examples`
+    - hide `--disable-gpu` (cli-only)
+    - added cli-only `--cache-dir` and `--config-file`
+    - added `--authentication` option
+    - added `--use-ssl` option
 
 
 - misc
-  - canvas: better visibility checks to avoid unnecessary draw calls
-  - visualizer: perf improvement (avoid data processing when not visible), all visualizers hook on the same loop to avoid concurrent timeouts
-  - button: in 'tap' mode (formerly push with `noRelease`), never send/sync `off` value, automatically reset to `off` when receiving `on`
-  - more detached DOM for lighter nested canvas widgets (ie multixy)
-  - unified (kind of) dom html structure for widgets, known css tricks will require adjustments.
-  - cache and config files are now stored in a folder named `open-stage-control` (located in the system's default location for config file). The `.open-stage-control` is no longer used.
-  - added support for icons rotate/flip transform suffixes (example: `^cog.spin`, `^play.rotate-horizontal`)
+    - canvas: better visibility checks to avoid unnecessary draw calls
+    - visualizer: perf improvement (avoid data processing when not visible), all visualizers hook on the same loop to avoid concurrent timeouts
+    - button: in 'tap' mode (formerly push with `noRelease`), never send/sync `off` value, automatically reset to `off` when receiving `on`
+    - more detached DOM for lighter nested canvas widgets (ie multixy)
+    - unified (kind of) dom html structure for widgets, known css tricks will require adjustments.
+    - cache and config files are now stored in a folder named `open-stage-control` (located in the system's default location for config file). The `.open-stage-control` is no longer used.
+    - added support for icons rotate/flip transform suffixes (example: `^cog.spin`, `^play.rotate-horizontal`)

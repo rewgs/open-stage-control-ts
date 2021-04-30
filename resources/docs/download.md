@@ -7,10 +7,6 @@
 
 <div id="osc-assets">Loading assets...</div>
 
-??? abstract "Changelog"
-    <div class="highlight"><pre><code id="osc-changelog">Loading changelog...</code></pre></div>
-
-
 <script>
 
 var oReq = new XMLHttpRequest();
@@ -46,9 +42,6 @@ function reqListener () {
     assets.innerHTML = ''
     assets.appendChild(list)
 
-    text('osc-changelog', data.body)
-
-
 
 }
 
@@ -77,6 +70,12 @@ html {
 </style>
 
 <div>
+<a
+  href="https://openstagecontrol.ammd.net/docs/changelog/"
+  class="md-button md-button-small"
+>
+  Read the Changelog
+</a>
 <a
   href="https://www.patreon.com/openstagecontrol?fan_landing=true"
   class="md-button md-button-small patreon-icon"

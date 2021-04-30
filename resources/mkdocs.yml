@@ -58,6 +58,7 @@ nav:
         - Client options: docs/client-options.md
         - Remote control: docs/remote-control.md
         - Credits: docs/credits.md
+        - Changelog: docs/changelog.md
 
     - Bug Tracker:
         - 'Bug Tracker': 'https://github.com/jean-emmanuel/open-stage-control/issues'
