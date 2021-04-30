@@ -84,7 +84,7 @@ class Dropdown extends MenuBase {
 
         this.value = this.values[i]
 
-        if (!options.fromLocal) this.select.selectedIndex = i
+        this.select.selectedIndex = i
         this.selected = i
 
         this.setLabel()
