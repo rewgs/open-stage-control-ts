@@ -623,11 +623,15 @@ class Widget extends EventEmitter {
 
             propValue = balancedReplace('OSC{', '}', propValue, (args)=>{
 
+                if (args === '') return 'undefined'
+
                 let [address, value, usePreArgs] = args.split(',')
                         .map(x=>x.trim())
                         .map(x=>x.replace(/VAR_[0-9]+/g, (m)=>{
                             return typeof variables[m] === 'string' ? variables[m] : JSON.stringify(variables[m])
                         }))
+
+                if (!address) return 'undefined'
 
                 if (!this.oscReceivers[args]) {
                     this.oscReceivers[args] = new OscReceiver({
