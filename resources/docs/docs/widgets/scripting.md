@@ -109,6 +109,23 @@ If the event that triggered the script's execution was initiated by a user inter
 
 ----
 
+#### `getVar(id, name)`
+- `id`: widget `id` as a string.
+- `name`: variable name as a string.
+
+Returns the value of a widget's custom variable.
+
+----
+
+#### `setVar(id, name, value)`
+- `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget. `id` may contains wildcards ('\*').
+- `name`: variable name as a string.
+- `value`: new value for the variable.
+
+Sets the value of a widget's custom variable. If `ìd` contains wildcards, affects all matching widgets.
+
+----
+
 #### `send(target, address, ...args)`
 - `target` (optional): `"ip:port"` or `"midi:device_name"` string. If omitted, the widget's target will be used.
 - `address`: osc address, must start with a `/`

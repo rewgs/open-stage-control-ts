@@ -430,7 +430,7 @@ class ScriptVm extends Vm {
 
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus', 'setScroll', 'getScroll', 'toolbar',
-            'openUrl']) {
+            'openUrl', 'getVar', 'setVar']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
 
