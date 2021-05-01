@@ -37,7 +37,8 @@ var Parser = class Parser {
             children,
             index,
             hash,
-            locals
+            locals,
+            variables
         } = options
 
         var props = data
@@ -81,6 +82,7 @@ var Parser = class Parser {
             children,
             hash,
             locals,
+            variables
         })
 
         widgetManager.addWidget(widget)

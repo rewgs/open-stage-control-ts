@@ -91,6 +91,40 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.setVar = (id, name, value)=>{
+
+            var options = deepCopy(this.getValueOptions())
+
+            var widgets
+            if (id.includes('*')) {
+                var widget = this.getWidget()
+                if (widget.builtIn) widget = widget.parent
+                widgets = this.resolveId(
+                    Object.keys(widgetManager.idRoute).filter(key => key.match(new RegExp('^' + id.replace(/\*/g, '.*') + '$')))
+                ).filter(w => w !== widget)
+            } else {
+                widgets = this.resolveId(id).slice(0, 1)
+            }
+
+
+            for (var i = widgets.length - 1; i >= 0; i--) {
+
+
+                if (widgets[i].variables[name]) {
+
+                    widgets[i].variables[name].value = value
+                    widgets[i].updateProps(widgets[i].variables[name].propNames)
+
+                } else {
+
+                    widgets[i].variables[name] = {value: value, propNames: []}
+                    
+                }
+
+            }
+
+        }
+
         this.sandbox.contentWindow.send = (target, address, ...args)=>{
 
             var options = this.getValueOptions()
@@ -130,6 +164,18 @@ class ScriptVm extends Vm {
                     if (v !== undefined) return v
 
                 }
+
+            }
+
+        }
+
+        this.sandbox.contentWindow.getVar = (id, name)=>{
+
+            var widgets = this.resolveId(id)
+
+            for (var i = widgets.length - 1; i >= 0; i--) {
+
+                if (widgets[i].variables[name]) return widgets[i].variables[name].value
 
             }
 

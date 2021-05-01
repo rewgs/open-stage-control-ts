@@ -193,6 +193,7 @@ class Widget extends EventEmitter {
 
         this.parsers = {}
         this.parsersLocalScope = options.locals || {}
+        this.variables = options.variables || {}
 
         this.createPropsCache()
 
@@ -619,6 +620,38 @@ class Widget extends EventEmitter {
 
                 return 'undefined'
 
+            })
+
+            propValue = balancedReplace('VAR{', '}', propValue, (args)=>{
+
+                if (args === '') return 'undefined'
+
+                let [name, value] = args.split(',')
+                        .map(x=>x.trim())
+                        .map(x=>x.replace(/VAR_[0-9]+/g, (m)=>{
+                            return typeof variables[m] === 'string' ? variables[m] : JSON.stringify(variables[m])
+                        }))
+
+                if (!this.variables[name]) {
+
+                    this.variables[name] = {value: value, propNames: [propName]}
+
+
+                } else if (!this.variables[name].propNames.includes(propName)) {
+
+                    this.variables[name].propNames.push(propName)
+
+                }
+
+                var r = this.variables[name].value
+
+                var varname = 'VAR_' + varnumber
+                varnumber--
+
+                variables[varname] = r
+                jsScope[varname] = r
+
+                return varname
             })
 
             propValue = balancedReplace('OSC{', '}', propValue, (args)=>{
