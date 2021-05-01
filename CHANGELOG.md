@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.4
+
+- bug fixes
+  - prevent error with empty `OSC{}` blocks
+
 ## 1.9.3
 
 - bug fixes
