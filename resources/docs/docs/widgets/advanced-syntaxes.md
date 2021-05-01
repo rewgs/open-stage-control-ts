@@ -56,10 +56,14 @@ Options can contain `@{}` blocks.
     }}
     ```
 
+## Custom variables: `VAR{variableName, default}`
+
+This syntax creates a custom variable in the widget that can be read and modified from any widget's `script` property (see [scripting](./scripting.md#getvarid-name)). Changes made to this variable will be applied automatically.
+
 
 ## Javascript: `JS{{ <code> }}`
 
-This syntax allows writing formulas in [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript). The code will be compiled as a function and executed in a restricted context.
+This syntax allows defining a property using [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript). The code will be compiled as a function and executed in a restricted context.
 
 - if no `return` statement is found, the formula will return an empty string
 - javascript [strict mode](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode) is always enabled
