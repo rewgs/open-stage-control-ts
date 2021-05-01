@@ -5,6 +5,12 @@
 - bug fixes
   - prevent error with empty `OSC{}` blocks
 
+- advanced syntaxes
+  - new syntax for using custom variables in properties: `VAR{name, default}`
+
+- scripting
+  - add `getVar()` and `setVar` for reading and modifying custom variables. This allows modifying properties directly from scripts.
+
 ## 1.9.3
 
 - bug fixes
