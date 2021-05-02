@@ -93,8 +93,6 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.setVar = (id, name, value)=>{
 
-            var options = deepCopy(this.getValueOptions())
-
             var widgets
             if (id.includes('*')) {
                 var widget = this.getWidget()
@@ -118,7 +116,7 @@ class ScriptVm extends Vm {
                 } else {
 
                     widgets[i].variables[name] = {value: value, propNames: []}
-                    
+
                 }
 
             }
