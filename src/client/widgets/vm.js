@@ -7,13 +7,18 @@ class Vm {
     constructor() {
 
         if (!globals) {
+            var sessionManager
             globals = {
                 screen: {width: screen.width, height: screen.height},
                 env: deepCopy(ENV),
                 ip: IP,
                 url: document.location.host,
                 platform: navigator.platform,
-                clipboard: navigator.clipboard
+                clipboard: navigator.clipboard,
+                get session() {
+                    sessionManager = sessionManager || require('../managers/session')
+                    return sessionManager.sessionPath
+                }
             }
         }
 

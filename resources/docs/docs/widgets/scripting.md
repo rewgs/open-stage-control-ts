@@ -84,6 +84,7 @@ The following variables and functions are accessible in this context.
     - `ip`: client's ip address,
     - `url`: server url,
     - `platform`: operating system as seen by the client
+    - `session`: session file path
     - `clipboard`: instance of navigator [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
 
 

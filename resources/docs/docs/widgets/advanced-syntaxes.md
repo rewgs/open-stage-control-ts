@@ -81,6 +81,7 @@ A property *cannot* contain multiple `JS{{}}` blocks
     - `ip`: client's ip address,
     - `url`: server url,
     - `platform`: operating system as seen by the client
+    - `session`: session file path
 
 In this context, `@{} / OSC{}` are seen as variables. When they change, the whole block will be evaluated again.
 

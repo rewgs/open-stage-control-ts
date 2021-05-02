@@ -10,6 +10,7 @@
 
 - scripting
     - add `getVar()` and `setVar` for reading and modifying custom variables. This allows modifying properties directly from scripts.
+    - expose session path as `globals.session`
 
 ## 1.9.3
 
