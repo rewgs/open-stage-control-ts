@@ -85,6 +85,13 @@ var handleClick = function(event) {
                 label: icon('project-diagram') + ' ' + locales('editor_show_in_tree'),
                 action: ()=>{
                     editor.widgetTree.showWidget(editor.selectedWidgets[0])
+                    DOM.each(editor.widgetTree.list, '.editing', (el)=>{
+                        el.classList.add('editor-blink')
+                        el.scrollIntoView({block: 'center'})
+                        setTimeout(()=>{
+                            el.classList.remove('editor-blink')
+                        }, 800)
+                    })
                 },
                 shortcut: 't'
             })

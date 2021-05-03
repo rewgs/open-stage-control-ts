@@ -129,6 +129,13 @@
             top: 0;
         }
 
+        &.editor-blink:after {
+            animation: tree-editor-blink 0.51s steps(3) infinite;
+        }
+        @keyframes tree-editor-blink {
+            from {--color-fill: var(--color-warning)}
+            to {--color-fill: inherit}
+        }
     }
 
     .contains-editing:not(.expanded):not(.editing) {

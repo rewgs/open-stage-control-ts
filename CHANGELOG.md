@@ -12,6 +12,9 @@
     - add `getVar()` and `setVar` for reading and modifying custom variables. This allows modifying properties directly from scripts.
     - expose session path as `globals.session`
 
+- editor
+    - make tree item blink when hitting "Show in tree"
+
 ## 1.9.3
 
 - bug fixes
