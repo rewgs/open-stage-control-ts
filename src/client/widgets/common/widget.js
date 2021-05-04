@@ -353,9 +353,9 @@ class Widget extends EventEmitter {
         Object.values(this.oscReceivers).forEach(r => linkedProps = linkedProps.concat(r.propNames))
 
         if (
-            // if prop/osc listeners have changed (@{} / OSC{})
+            // if prop/osc listeners/custom vars have changed (@{} / OSC{} / VAR{})
             // refresh the widget's props cache and update linked props bindings
-            propNames.map(x => this.props[x]).some(x => typeof x === 'string' && x.match(/OSC\{|@\{/))
+            propNames.map(x => this.props[x]).some(x => typeof x === 'string' && x.match(/OSC\{|@\{|VAR\{/))
         ||  propNames.some(n => linkedProps.includes(n))
         ) {
             this.createPropsCache()
@@ -369,6 +369,11 @@ class Widget extends EventEmitter {
         this.linkedProps = {}
         this.nestedLinkedProps = {}
         this.linkedPropsValue = {}
+
+        // reset VAR{} links
+        for (var name in this.variables) {
+            this.variables[name].propNames = []
+        }
 
         // OSC{/path} receivers
         if (this.oscReceivers) {
@@ -634,7 +639,7 @@ class Widget extends EventEmitter {
 
                 if (!this.variables[name]) {
 
-                    this.variables[name] = {value: value, propNames: [propName]}
+                    this.variables[name] = {default: value, value: value, propNames: [propName]}
 
 
                 } else if (!this.variables[name].propNames.includes(propName)) {
@@ -642,6 +647,9 @@ class Widget extends EventEmitter {
                     this.variables[name].propNames.push(propName)
 
                 }
+
+                if (value !== this.variables[name].default) this.variables[name].value = value
+
 
                 var r = this.variables[name].value
 
