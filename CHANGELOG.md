@@ -4,9 +4,11 @@
 
 - bug fixes
     - prevent error with empty `OSC{}` blocks
+    - regression breaking advanced syntax blocks containing nested brackets
 
 - advanced syntaxes
     - new syntax for using custom variables in properties: `VAR{name, default}`
+    - `JS{}` blocks don't require 2 brackets anymore (`JS{{}}` still works)
 
 - scripting
     - add `getVar()` and `setVar` for reading and modifying custom variables. This allows modifying properties directly from scripts.

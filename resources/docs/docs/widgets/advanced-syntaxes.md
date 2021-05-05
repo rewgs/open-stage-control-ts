@@ -48,12 +48,12 @@ Options can contain `@{}` blocks.
 
 ??? example "Array/Object default value"
     ```js
-    JS{{
+    JS{
         return OSC{address} || {
             "key a": 1,
             "key b", 2
         }
-    }}
+    }
     ```
 
 ## Custom variables: `VAR{variableName, default}`
@@ -61,7 +61,7 @@ Options can contain `@{}` blocks.
 This syntax creates a custom variable in the widget that can be read and modified from any widget's `script` property (see [scripting](./scripting.md#getvarid-name)). Changes made to this variable will be applied automatically.
 
 
-## Javascript: `JS{{ <code> }}`
+## Javascript: `JS{ <code> }`
 
 This syntax allows defining a property using [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript). The code will be compiled as a function and executed in a restricted context.
 
@@ -69,7 +69,7 @@ This syntax allows defining a property using [Javascript](https://developer.mozi
 - javascript [strict mode](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode) is always enabled
 - `setTimeout` and `setInterval` functions are not available
 
-A property *cannot* contain multiple `JS{{}}` blocks
+A property *cannot* contain multiple `JS{}` blocks
 
 #### Available variables
 
@@ -92,9 +92,9 @@ Parsing errors can be read in the console (++ctrl+k++).
 
 ## Javascript: `#{ <code> }`
 
-This is a shorthand for the `JS{{}}` syntax, the only difference being that `<code>` is automatically prepended with a `return` statement.
+This is a shorthand for the `JS{}` syntax, the only difference being that `<code>` is automatically prepended with a `return` statement.
 
 A property *can* contain multiple `#{}` blocks.
 
 !!! note "Compilation order"
-    `#{}` blocks are compiled after `JS{{}}` blocks
+    `#{}` blocks are compiled after `JS{}` blocks

@@ -510,11 +510,11 @@ class Widget extends EventEmitter {
 
         if (typeof propValue == 'string') {
 
-            propValue = balancedReplace('@{', '}', propValue, (content)=>{
+            propValue = balancedReplace('@', '{', '}', propValue, (content)=>{
 
                 if (content.indexOf('@{') >= 0) {
 
-                    content = balancedReplace('@{', '}', content, (subcontent)=>{
+                    content = balancedReplace('@', '{', '}', content, (subcontent)=>{
                         return this.resolveProp(propName, '@{' + subcontent + '}', storeLinks ? 'nested' : false, this)
                     })
 
@@ -627,7 +627,7 @@ class Widget extends EventEmitter {
 
             })
 
-            propValue = balancedReplace('VAR{', '}', propValue, (args)=>{
+            propValue = balancedReplace('VAR', '{', '}', propValue, (args)=>{
 
                 if (args === '') return 'undefined'
 
@@ -662,7 +662,7 @@ class Widget extends EventEmitter {
                 return varname
             })
 
-            propValue = balancedReplace('OSC{', '}', propValue, (args)=>{
+            propValue = balancedReplace('OSC', '{', '}', propValue, (args)=>{
 
                 if (args === '') return 'undefined'
 
@@ -704,7 +704,9 @@ class Widget extends EventEmitter {
             })
 
             try {
-                propValue = balancedReplace('JS{{', '}}', propValue, (code)=>{
+                propValue = balancedReplace('JS', '{', '}', propValue, (code)=>{
+
+                    if (code[0] === '{' && code[code.length - 1] === '}') code = code.slice(1, code.length - 1)
 
                     if (!this.parsers[code]) this.parsers[code] = vm.compile(code, defaultScope)
 
@@ -720,7 +722,8 @@ class Widget extends EventEmitter {
             }
 
             try {
-                propValue = balancedReplace('#{', '}', propValue, (code)=>{
+                propValue = balancedReplace('#', '{', '}', propValue, (code)=>{
+
                     if (!this.parsers[code]) this.parsers[code] = vm.compile('return ' + code.trim(), defaultScope)
 
                     let r = this.parsers[code](jsScope, this.parsersLocalScope)

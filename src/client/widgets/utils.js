@@ -117,21 +117,26 @@ module.exports = {
 
     })(),
 
-    balancedReplace(open, close, string, replacement) {
+    balancedReplace(tag, open, close, string, replacement) {
 
-        var b
+        var start
 
-        while (b = balanced(open, close, string)) {
+        while ((start = string.indexOf(tag + open)) >= 0) {
+
+            var substring = string.slice(start + tag.length),
+                b = balanced(open, close, substring)
 
             if (typeof replacement === 'function') {
 
-                string = b.pre + replacement(b.body) + b.post
+                substring = b.pre + replacement(b.body) + b.post
 
             } else {
 
-                string = b.pre + replacement + b.post
+                substring = b.pre + replacement + b.post
 
             }
+
+            string = string.slice(0, start) + substring
 
         }
 
