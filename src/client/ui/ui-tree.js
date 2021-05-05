@@ -303,6 +303,20 @@ class UiTree extends UiWidget {
 
     }
 
+    updateVisibility(widget) {
+
+        if (!this.parent.disabled) {
+
+            var w = DOM.get(this.list, '[data-widget="' + widget.hash + '"]')[0]
+
+            if (w) {
+                w.classList.toggle('invisible', !widget.getProp('visible'))
+            }
+
+        }
+
+    }
+
 }
 
 module.exports = UiTree

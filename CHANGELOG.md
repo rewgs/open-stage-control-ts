@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.5
+
+- editor
+  - tree: update widget visibility when it changes dynamically
+
 ## 1.9.4
 
 - bug fixes

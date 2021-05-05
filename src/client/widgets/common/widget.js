@@ -13,7 +13,7 @@ var EventEmitter = require('../../events/event-emitter'),
     morph = require('nanomorph'),
     sanitizeHtml = require('sanitize-html'),
     updateWidget = ()=>{},
-    Script, uiConsole
+    Script, uiConsole, uiTree
 
 
 var oscReceiverState = {}
@@ -36,6 +36,7 @@ DOM.ready(()=>{
 setTimeout(()=>{
     updateWidget = require('../../editor/data-workers').updateWidget
     uiConsole = require('../../ui/ui-console')
+    uiTree = require('../../editor').widgetTree
 })
 
 class Widget extends EventEmitter {
@@ -864,6 +865,7 @@ class Widget extends EventEmitter {
                 this.setVisibility()
                 let container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                 resize.check(container)
+                uiTree.updateVisibility(this)
                 return
             }
 
