@@ -12,11 +12,11 @@
     - regression breaking advanced syntax blocks containing nested brackets
 
 - advanced syntaxes
-    - new syntax for using custom variables in properties: `VAR{name, default}`
+    - new syntax for creating and using custom variables in properties: `VAR{name, default}`
     - `JS{}` blocks don't require 2 brackets anymore (`JS{{}}` still works)
 
 - scripting
-    - add `getVar()` and `setVar` for reading and modifying custom variables. This allows modifying properties directly from scripts.
+    - add `getVar()` and `setVar()` for reading and modifying custom variables. This allows modifying properties directly from scripts (if they contain `VAR{}` blocks).
     - expose session path as `globals.session`
 
 - editor
