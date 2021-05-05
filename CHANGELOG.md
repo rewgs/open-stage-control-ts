@@ -1,9 +1,9 @@
 # Changelog
 
-## 1.9.5
+## 1.9.5 (unreleased)
 
 - editor
-  - tree: update widget visibility when it changes dynamically
+    - tree: update widget visibility when it changes dynamically
 
 ## 1.9.4
 
@@ -23,7 +23,7 @@
     - make tree item blink when hitting "Show in tree"
 
 - remote control
-  - add `/SCRIPT` command to run scripts remotely
+    - add `/SCRIPT` command to run scripts remotely
 
 ## 1.9.3
 
