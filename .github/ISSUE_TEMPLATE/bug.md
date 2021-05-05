@@ -1,10 +1,12 @@
 ---
 name: Bug report
 about: Report a bug in Open Stage Control
-title: '[Bug] '
+title: '[Bug]'
 ---
 
 <!--
+
+/!\ Don't forget to add a title /!\
 
 Please provide as much contextual informations as possible:
 
