@@ -1,9 +1,10 @@
 # Changelog
 
-## 1.9.5 (unreleased)
+## 1.9.5
 
 - bug fixes
-  - advanced syntaxes: various isses and regressions 
+  - advanced syntaxes: various isses and regressions
+  - editor: preserve advanced syntaxes in `left` and `top` when pasting a widget
 
 - editor
     - tree: update widget visibility when it changes dynamically

@@ -688,17 +688,26 @@ class Editor {
 
             for (let i in pastedData) {
 
-                if (pastedData[i]._pleft) {
-                    pastedData[i].left = ((pastedData[i]._aleft - minLeft + x) * 100 / this.selectedWidgets[0].widget.offsetWidth).toFixed(2).replace(/\.?0+$/, '') + '%'
-                } else {
-                    pastedData[i].left += - minLeft + x
+                if (!String(pastedData[i].left).match(/\{/)) {
+
+                    if (pastedData[i]._pleft) {
+                        pastedData[i].left = ((pastedData[i]._aleft - minLeft + x) * 100 / this.selectedWidgets[0].widget.offsetWidth).toFixed(2).replace(/\.?0+$/, '') + '%'
+                    } else {
+                        pastedData[i].left += - minLeft + x
+                    }
+
                 }
 
-                if (pastedData[i]._ptop) {
-                    pastedData[i].top = ((pastedData[i]._atop - minTop + y) * 100 / this.selectedWidgets[0].widget.offsetHeight).toFixed(2).replace(/\.?0+$/, '') + '%'
-                } else {
-                    pastedData[i].top += - minTop + y
+                if (!String(pastedData[i].top).match(/\{/)) {
+
+                    if (pastedData[i]._ptop) {
+                        pastedData[i].top = ((pastedData[i]._atop - minTop + y) * 100 / this.selectedWidgets[0].widget.offsetHeight).toFixed(2).replace(/\.?0+$/, '') + '%'
+                    } else {
+                        pastedData[i].top += - minTop + y
+                    }
+
                 }
+
 
             }
 
