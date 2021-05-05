@@ -17,6 +17,9 @@
 - editor
     - make tree item blink when hitting "Show in tree"
 
+- remote control
+  - add `/SCRIPT` command to run scripts remotely
+
 ## 1.9.3
 
 - bug fixes

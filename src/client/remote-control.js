@@ -4,7 +4,8 @@ var {updateWidget} = require('./editor/data-workers'),
     stateManager = require('./managers/state'),
     sessionManager = require('./managers/session'),
     deepExtend = require('deep-extend'),
-    notifications = require('./ui/notifications')
+    notifications = require('./ui/notifications'),
+    uiConsole = require('./ui/ui-console')
 
 var callbacks = {
     '/EDIT': function(args) {
@@ -283,6 +284,13 @@ var callbacks = {
                 }
             }
         }
+    },
+    '/SCRIPT': function(args) {
+
+        if (!Array.isArray(args)) args = [args]
+
+        uiConsole.script.setValue(args[0], {sync: true, send: true})
+
     }
 }
 

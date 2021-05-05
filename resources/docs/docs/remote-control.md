@@ -217,3 +217,9 @@ Save current session to `path.json`. If `path.json` is omitted, current session'
 #### `/TABS tab_id1 tab_id2 ...`
 
 Open the tabs designated by the id parameters.
+
+----
+
+#### `/SCRIPT code`
+
+Run code as if it where executed by a script widget.
