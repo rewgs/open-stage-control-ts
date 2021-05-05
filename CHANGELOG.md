@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.6 (unrelease)
+
+- widgets
+  - input: add `numeric` property (allows numeric values only and displays numeric keyboard on mobile devices)
+
 ## 1.9.5
 
 - bug fixes
