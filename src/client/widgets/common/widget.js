@@ -649,9 +649,6 @@ class Widget extends EventEmitter {
 
                 }
 
-                if (value !== this.variables[name].default) this.variables[name].value = value
-
-
                 var r = this.variables[name].value
 
                 var varname = 'VAR_' + varnumber

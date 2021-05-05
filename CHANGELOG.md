@@ -2,6 +2,9 @@
 
 ## 1.9.5 (unreleased)
 
+- bug fixes
+  - advanced syntaxes: various isses and regressions 
+
 - editor
     - tree: update widget visibility when it changes dynamically
 
