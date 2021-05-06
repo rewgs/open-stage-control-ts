@@ -20,14 +20,15 @@ class Input extends Canvas {
             },
             class_specific: {
                 asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'},
+                numeric: {type: 'boolean', value: false, help: ['Set to `true` to allow numeric values only and display a numeric keyboard on mobile devices']},
                 validation: {type: 'string', value: '', help: [
                     'Regular expression: if the submitted value doesn\'t match the regular expression, it will be reset to the last valid value.',
                     'If leading and trailing slashes are omitted, they will be added automatically and the flag will be set to "gm"',
                     'Examples:',
                     '- `^[0-9]*$` accepts digits only, any number of them',
                     '- `/^[a-z\s]{0,10}$/i` accept between 0 and 10 alphabetic characters and spaces (case insensitive)',
-                ]}
-            }
+                ]},
+            },
         })
 
     }
@@ -58,6 +59,9 @@ class Input extends Canvas {
             this.input.addEventListener('blur', (e)=>{
                 this.blur(true)
             })
+
+            if (this.getProp('numeric')) this.input.type = 'number'
+
             var asYouType = this.getProp('asYouType')
 
             if (this.getProp('validation') !== '') {
@@ -93,7 +97,7 @@ class Input extends Canvas {
         this.input.value = this.stringValue
         this.widget.insertBefore(this.input, this.canvas)
         this.input.focus()
-        this.input.setSelectionRange(0, this.input.value.length)
+        if (!this.getProp('numeric')) this.input.setSelectionRange(0, this.input.value.length)
 
     }
 

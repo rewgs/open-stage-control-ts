@@ -1,11 +1,13 @@
 # Changelog
 
-## 1.9.6
+## 1.9.6 (unrelease)
 
 - bug fixes
     - advanced syntaxes: `VAR{}` not updating when the default value is edited
     - editor: fix "Bring to front" and "Send to back" context menu actions
 
+- widgets
+    - input: add `numeric` property (allows numeric values only and displays numeric keyboard on mobile devices)
 
 ## 1.9.5
 
