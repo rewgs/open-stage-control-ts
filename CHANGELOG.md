@@ -11,6 +11,8 @@
 
 - widgets
     - input: add `numeric` property (allows numeric values only and displays numeric keyboard on mobile devices)
+    - button: add `soft` mode for the `wrap` property
+    - switch: add `wrap` property
 
 ## 1.9.5
 
