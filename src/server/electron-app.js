@@ -29,7 +29,8 @@ var template = [{
         {type: 'separator'},
         {role: 'cut', accelerator: 'CmdOrCtrl+X'},
         {role: 'copy', accelerator: 'CmdOrCtrl+C'},
-        {role: 'paste', accelerator: 'CmdOrCtrl+V'}
+        {role: 'paste', accelerator: 'CmdOrCtrl+V'},
+        {role: 'selectall', accelerator: 'CmdOrCtrl+A'}
     ]
 }]
 
