@@ -657,6 +657,9 @@ class Widget extends EventEmitter {
                 ) {
                     this.variables[name].default = value
                     this.variables[name].value = value
+                    if (this.variables[name].propNames.length > 1) {
+                        this.updateProps(this.variables[name].propNames.filter(x=>x!==propName))
+                    }
                 }
 
                 var r = this.variables[name].value
