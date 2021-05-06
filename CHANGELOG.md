@@ -6,6 +6,9 @@
     - advanced syntaxes: `VAR{}` not updating when the default value is edited
     - editor: fix "Bring to front" and "Send to back" context menu actions
 
+- ui
+  - add keyboard shortcuts `mod + "+"` and `mod + "-"` to control zoom level
+
 - widgets
     - input: add `numeric` property (allows numeric values only and displays numeric keyboard on mobile devices)
 

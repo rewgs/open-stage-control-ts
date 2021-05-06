@@ -53,13 +53,23 @@ function applylocalZoom() {
 }
 
 document.addEventListener('keydown', function(event){
-    if (event[mod] && (event.keyCode == 96 || event.keyCode == 48)) {
-        PXSCALE = INITIALZOOM
-        document.documentElement.style.setProperty('font-size', PXSCALE + 'px')
+    if (event[mod]) {
+        console.log(event.keyCode)
+        var z = false
+        if (event.keyCode == 96 || event.keyCode == 48) {
+            PXSCALE = INITIALZOOM
+            document.documentElement.style.setProperty('font-size', PXSCALE + 'px')
+            localZoom = 1
+            applylocalZoom()
+            z = true
+        }
+        else if (event.keyCode == 107 || event.keyCode == 109) {
+            PXSCALE = (event.keyCode == 107 ? 0.1 : -0.1) + parseFloat(PXSCALE)
+            document.documentElement.style.setProperty('font-size', PXSCALE + 'px')
+        }
 
-        DOM.dispatchEvent(window, 'resize')
 
-        localZoom = 1
-        applylocalZoom()
+        if (z) DOM.dispatchEvent(window, 'resize')
+
     }
 }, {passive: true})
