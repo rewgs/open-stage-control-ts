@@ -111,7 +111,9 @@ class ScriptVm extends Vm {
                 if (widgets[i].variables[name]) {
 
                     widgets[i].variables[name].value = value
+                    widgets[i].variables[name].updated = 1
                     widgets[i].updateProps(widgets[i].variables[name].propNames)
+                    widgets[i].variables[name].updated = 0
 
                 } else {
 

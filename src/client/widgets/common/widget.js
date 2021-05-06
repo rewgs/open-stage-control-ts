@@ -649,6 +649,16 @@ class Widget extends EventEmitter {
 
                 }
 
+                // update value if default changed
+                if (
+                    value !== undefined &&
+                    !this.variables[name].updated && // only true on edit
+                    value !== this.variables[name].default
+                ) {
+                    this.variables[name].default = value
+                    this.variables[name].value = value
+                }
+
                 var r = this.variables[name].value
 
                 var varname = 'VAR_' + varnumber
