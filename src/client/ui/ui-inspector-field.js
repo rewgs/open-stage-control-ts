@@ -88,7 +88,9 @@ class UiInspectorField extends UiWidget {
 
             this.container.appendChild(wrapper)
 
-        } else if (this.default.type.includes('boolean')) {
+        }
+
+        if (this.default.type.includes('boolean')) {
 
             let toggle = html`
                <osc-inspector-checkbox name="${this.name}" class="${this.widget.getProp(this.name) ? 'on' : ''}">
@@ -98,7 +100,9 @@ class UiInspectorField extends UiWidget {
 
             this.container.appendChild(toggle)
 
-        } else if (this.name.includes('color')) {
+        }
+
+        if (this.name.includes('color')) {
 
             let style = window.getComputedStyle(this.widget.container),
                 colorData = this.widget.constructor.cssVariables.find(x=>x.js === this.name),

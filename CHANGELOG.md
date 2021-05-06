@@ -14,6 +14,9 @@
     - button: add `soft` mode for the `wrap` property
     - switch: add `wrap` property
 
+- editor
+    - display dropdown and checkbox for boolean properties with extra choices 
+
 ## 1.9.5
 
 - bug fixes
