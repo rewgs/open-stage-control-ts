@@ -19,6 +19,9 @@ class Switch extends MenuBase {
                 colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
                 layout: {type: 'string', value: 'vertical', choices: ['vertical', 'horizontal', 'grid'], help:'Defines how items should be laid out'},
                 gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns or a valid value for the css property "grid-template".'},
+                wrap: {type: 'boolean|string', value: false, choices: [false, true, 'soft'], help: [
+                    'Set to `true` to wrap long lines automatically. Set to `soft` to avoid breaking words.',
+                ]},
             },
             class_specific: {
                 values: {type: 'array|object', value: {'Value 1':1,'Value 2':2}, help: [
@@ -42,6 +45,8 @@ class Switch extends MenuBase {
         super({...options, html: html`<inner></inner>`})
 
         this.container.classList.add('layout-' + this.getProp('layout'))
+        if (this.getProp('wrap')) this.container.classList.add('wrap')
+        if (this.getProp('wrap') === 'soft') this.container.classList.add('wrap-soft')
 
         if (this.getProp('layout') === 'grid') {
             var template = this.getProp('gridTemplate') || 2

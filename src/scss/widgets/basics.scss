@@ -56,6 +56,9 @@
             white-space: pre-wrap;
             word-break: break-all;
         }
+        &.wrap-soft {
+            word-break: normal
+        }
         &.vertical {
             transform: rotate(180deg);
             text-overflow: ellipsis;
@@ -139,6 +142,12 @@
         justify-content: center;
         text-overflow: clip;
         overflow: hidden;
+
+        white-space: pre;
+        text-align: center;
+        word-wrap: break-word;
+
+
         @include pseudo-fill($z: -1);
         &:after {
             --line-width: 1rem;
@@ -151,6 +160,15 @@
             color: var(--color-text-on);
         }
 
+    }
+
+    &.wrap value {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+
+    &.wrap-soft value {
+        word-break: normal
     }
 
 }

@@ -24,8 +24,8 @@ class Button extends Widget {
                     '- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal`',
                 ]},
                 vertical: {type: 'boolean', value: false, help: 'Set to `true` to display the text vertically'},
-                wrap: {type: 'boolean', value: false, help: [
-                    'Set to `true` to wrap long lines automatically.',
+                wrap: {type: 'boolean|string', value: false, choices: [false, true, 'soft'], help: [
+                    'Set to `true` to wrap long lines automatically. Set to `soft` to avoid breaking words.',
                 ]},
             },
             class_specific: {
@@ -139,6 +139,7 @@ class Button extends Widget {
         this.label = html`<label></label>`
 
         if (this.getProp('wrap')) this.label.classList.add('wrap')
+        if (this.getProp('wrap') === 'soft') this.label.classList.add('wrap-soft')
         if (this.getProp('vertical')) this.label.classList.add('vertical')
 
         this.updateLabel()
