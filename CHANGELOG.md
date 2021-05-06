@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.9.6 (unrelease)
+## 1.9.6
 
 - bug fixes
     - advanced syntaxes: `VAR{}` not updating when the default value is edited
