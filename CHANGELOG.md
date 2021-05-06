@@ -5,6 +5,7 @@
 - bug fixes
     - advanced syntaxes: various isses and regressions
     - editor: preserve advanced syntaxes in `left` and `top` when pasting a widget
+    - editor: fix "Bring to front" and "Send to back" context menu actions
 
 - editor
     - tree: update widget visibility when it changes dynamically

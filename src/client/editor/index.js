@@ -115,7 +115,7 @@ class Editor {
 
             }
 
-            this.widgetTree.showWidget(container.children[newIndex])
+            if (!event.ignoreTree) this.widgetTree.showWidget(container.children[newIndex])
 
 
         })
@@ -434,9 +434,11 @@ class Editor {
 
                 if (index !== newIndex) {
                     this.widgetTree.trigger('sorted', {
-                        widget: curWidget2.parent,
+                        from: curWidget2.parent,
+                        to: curWidget2.parent,
                         oldIndex: index,
-                        newIndex: newIndex
+                        newIndex: newIndex,
+                        ignoreTree: true
                     })
                 }
                 break
