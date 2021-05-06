@@ -21,7 +21,7 @@ class Panel extends Container() {
         return super.defaults().extend({
             class_specific: {
                 variables: {type: '*', value: '@{parent.variables}', help: 'Defines one or more arbitrary variables that can be inherited by children widgets'},
-                traversing: {type: 'boolean', value: false, help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget'},
+                traversing: {type: 'boolean', value: false, choices: [false, true, 'smart'], help: 'Set to `true` to enable traversing gestures in this widget. Set to `smart` to limit affected widgets by the type of the first touched widget'},
             },
             style: {
                 _separator_panel_style: 'Panel style',
