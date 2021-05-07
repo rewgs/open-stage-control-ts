@@ -17,7 +17,6 @@ class Matrix extends Panel {
             class_specific: {
                 widgetType: {type: 'string', value: 'button', help: 'Defines the type of the widgets in the matrix'},
                 quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
-                start: {type: 'integer', value: 0, help: 'First widget\'s index'},
                 props: {type: 'object', value: {}, help: [
                     'Defines a set of property to override the widgets\' defaults.',
                     'JS{{}} and #{} blocks in this field are resolved with an extra variable representing each widget\'s index: `$` (e.g. `#{$}`)',
@@ -60,14 +59,12 @@ class Matrix extends Panel {
 
 
 
-        this.start = parseInt(this.getProp('start'))
-
         if (parser.widgets[this.getProp('widgetType')]) {
 
             for (let i = 0; i < this.getProp('quantity'); i++) {
 
-                var props = this.resolveProp('props', undefined, false, false, false, {'$':i + this.start})
-                var data = this.defaultProps(i + this.start)
+                var props = this.resolveProp('props', undefined, false, false, false, {'$':i})
+                var data = this.defaultProps(i)
 
                 if (typeof props === 'object' && props !== null) {
                     Object.assign(data, props)
@@ -126,7 +123,7 @@ class Matrix extends Panel {
 
                 for (let i = this.children.length - 1; i >= 0; i--) {
 
-                    let data = this.resolveProp('props', undefined, false, false, false, {'$': i + this.start})
+                    let data = this.resolveProp('props', undefined, false, false, false, {'$': i})
 
                     if (typeof data !== 'object' || data === null || Array.isArray(data)) {
                         data = {}
@@ -139,7 +136,7 @@ class Matrix extends Panel {
                         for (var k in oldPropValue) {
                             if (data[k] === undefined) {
                                 if (Matrix.overriddenDefaults.indexOf(k) !== -1) {
-                                    overriddenDefaults = overriddenDefaults || this.defaultProps(i + this.start)
+                                    overriddenDefaults = overriddenDefaults || this.defaultProps(i)
                                     data[k] = overriddenDefaults[k]
                                 } else {
                                     widgetDefaults = widgetDefaults || parser.defaults[data.type || this.getProp('widgetType')]

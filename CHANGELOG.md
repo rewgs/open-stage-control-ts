@@ -9,7 +9,8 @@
     - change keyboard shortcuts for moving widgets (now `mod + arrows`) and navigating in widgets (now `arrows`) to feel more natural with the project tree view.
 
 - widgets
-    - script: bypass keyboard shortcuts already used by the editor if it is enabled 
+    - script: bypass keyboard shortcuts already used by the editor if it is enabled
+    - matrix: removed ambiguous `start` property
 
 ## 1.9.6
 
