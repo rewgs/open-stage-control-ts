@@ -54,7 +54,7 @@ function applylocalZoom() {
 
 document.addEventListener('keydown', function(event){
     if (event[mod]) {
-        console.log(event.keyCode)
+
         var z = false
         if (event.keyCode == 96 || event.keyCode == 48) {
             PXSCALE = INITIALZOOM
