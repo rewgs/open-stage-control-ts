@@ -209,6 +209,7 @@ class Editor {
 
             for (let c of combos) {
                 keyboardJS.bind(c, (e)=>{
+                    e.catchedByEditor = true
                     this.handleKeyboard(c, e)
                 })
             }

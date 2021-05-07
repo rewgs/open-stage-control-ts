@@ -26,7 +26,10 @@ class Script extends Widget {
 
                 _separator: 'event: keyboard',
 
-                keyBinding: {type: 'string|array', value: '', help: 'Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation)'},
+                keyBinding: {type: 'string|array', value: '', help: [
+                    'Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation).',
+                    'If the editor is enabled, some keys / combos will not work.'
+                ]},
                 keyRepeat: {type: 'boolean', value: true, help: 'Set to `false` to prevent keydown repeats when holding the key combo pressed'},
                 keyType: {type: 'string', value: 'keydown', choices: ['keydown', 'keyup', 'both'], help: 'Determines which key event trigger the script\'s execution'},
 
@@ -144,6 +147,8 @@ class Script extends Widget {
     }
 
     keyboardCallback(e) {
+
+        if (e.catchedByEditor) return
 
         if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return
 
