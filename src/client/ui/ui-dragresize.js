@@ -147,6 +147,11 @@ class UiDragResize extends UiWidget {
 
         this.updateRectangle()
 
+        this.initLeft = this.left
+        this.initTop = this.top
+        this.initWidth = this.width
+        this.initHeight = this.height
+
         this.widgets[0].parentNode.appendChild(this.container)
         this.mounted = true
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.7
+
+- bug fixes
+    - issue when resizing widget using keyboard shortcuts
+
+
 ## 1.9.6
 
 - bug fixes
@@ -15,7 +21,7 @@
     - switch: add `wrap` property
 
 - editor
-    - display dropdown and checkbox for boolean properties with extra choices 
+    - display dropdown and checkbox for boolean properties with extra choices
 
 ## 1.9.5
 
