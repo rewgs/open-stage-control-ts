@@ -330,10 +330,10 @@ class Editor {
 
                 break
 
-            case 'up':
-            case 'down':
-            case 'right':
-            case 'left':
+            case 'mod + up':
+            case 'mod + down':
+            case 'mod + right':
+            case 'mod + left':
                 if (!this.selectedWidgets.length) return
 
                 if (this.selectedWidgets[0].props.top === undefined && e.key.match(/Arrow(Up|Down)/)) return
@@ -368,33 +368,24 @@ class Editor {
                 }
                 break
 
-            case 'mod + up':
-            case 'mod + down':
-            case 'mod + right':
-            case 'mod + left':
+            case 'up':
+            case 'down':
+            case 'right':
+            case 'left':
                 if (!this.selectedWidgets.length) return
 
                 var curWidget = this.selectedWidgets[0],
                     toSelect = null
 
-                if (e.key === 'ArrowUp' && curWidget.parent !== widgetManager) {
+                if (e.key === 'ArrowLeft' && curWidget.parent !== widgetManager) {
 
                     toSelect = curWidget.parent
 
-                } else if (e.key === 'ArrowDown') {
+                } else if (e.key === 'ArrowRight') {
 
-                    let toSelectList = [...curWidget.children]
+                    toSelect = curWidget.children[0]
 
-                    if (toSelectList && toSelectList.length) {
-                        toSelectList.sort((a,b) => a.container.offsetLeft>b.container.offsetLeft)
-                        toSelect = toSelectList[0]
-                        if (toSelect.container.classList.contains('not-editable')) {
-                            toSelect = null
-                        }
-                    }
-
-                }
-                else if((e.key == 'ArrowLeft') || (e.key == 'ArrowRight')){
+                } else if((e.key == 'ArrowUp') || (e.key == 'ArrowDown')){
 
                     if (curWidget.parent === widgetManager) return
 
@@ -404,7 +395,7 @@ class Editor {
                         toSelectList.sort((a,b) => a.container.offsetLeft > b.container.offsetLeft)
                         var idx = toSelectList.indexOf(curWidget)
                         if (idx >= 0) {
-                            var nextIdx = (idx + (e.key === 'ArrowLeft' ? -1 : 1 ) + toSelectList.length) % toSelectList.length
+                            var nextIdx = (idx + (e.key === 'ArrowUp' ? -1 : 1 ) + toSelectList.length) % toSelectList.length
                             toSelect = toSelectList[nextIdx]
                         }
                     }

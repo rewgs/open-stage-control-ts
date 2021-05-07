@@ -5,6 +5,9 @@
 - bug fixes
     - issue when resizing widget using keyboard shortcuts
 
+- editor
+    - change keyboard shortcuts for moving widgets (now `mod + arrows`) and navigating in widgets (now `arrows`) to feel more natural with the project tree view.
+
 
 ## 1.9.6
 
