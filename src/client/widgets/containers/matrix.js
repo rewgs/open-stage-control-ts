@@ -19,9 +19,10 @@ class Matrix extends Panel {
                 quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
                 props: {type: 'object', value: {}, help: [
                     'Defines a set of property to override the widgets\' defaults.',
-                    'JS{{}} and #{} blocks in this field are resolved with an extra variable representing each widget\'s index: `$` (e.g. `#{$}`)',
-                    'Advanced syntax blocks (@{}, OSC{}, JS{{}} and #{}) are resolved at the matrix\' scope (ie @{this.variables} returns the matrix\' variables property)',
-                    'Note: by default, the widgets inherit from the matrix\' `id` and osc properties (`id` and `address` are appended with `/$`)'
+                    'JS{} and #{} blocks in this field are resolved with an extra variable representing each widget\'s index: `$` (e.g. `#{$}`)',
+                    'Advanced syntax blocks (@{}, OSC{}, JS{}, VAR{} and #{}) are resolved at the matrix\' scope (ie @{this.variables} returns the matrix\' variables property)',
+                    'Advanced syntax blocks can be passed to children without being resolved at the matrix\' scope by adding an underscore before the opening bracket.',
+                    'Note: unless overridden, children inherit from the matrix\' `id` and osc properties (`id` and `address` are appended with `/$`)'
                 ]},
             },
             style: {
@@ -69,6 +70,8 @@ class Matrix extends Panel {
                 if (typeof props === 'object' && props !== null) {
                     Object.assign(data, props)
                 }
+
+                data = JSON.parse(JSON.stringify(data).replace(/(JS|#|OSC|@|VAR)_\{/g, '$1{'))
 
                 var widget = parser.parse({
                     data: data,
@@ -128,6 +131,8 @@ class Matrix extends Panel {
                     if (typeof data !== 'object' || data === null || Array.isArray(data)) {
                         data = {}
                     }
+
+                    data = JSON.parse(JSON.stringify(data).replace(/(JS|#|OSC|@|VAR)_\{/g, '$1{'))
 
                     if (typeof oldPropValue === 'object' && oldPropValue !== null) {
                         // if an overridden default props is removed, set it back to default
