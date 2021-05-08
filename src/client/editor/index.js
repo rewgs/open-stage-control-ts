@@ -820,12 +820,16 @@ class Editor {
         for (var i = 0; i < this.selectedWidgets.length; i++) {
 
             let w = this.selectedWidgets[i],
-                dW = deltaW * w.container.offsetWidth / this.widgetDragResize.initWidth,
-                dH = deltaH * w.container.offsetHeight / this.widgetDragResize.initHeight,
                 nW, nH
 
-            nW = w.container.offsetWidth + dW
-            nH = w.container.offsetHeight + dH
+            if (i === 0 && ui) {
+                nW = ui.originalSize.width + deltaW
+                nH = ui.originalSize.height + deltaH
+
+            } else {
+                nW = w.container.offsetWidth + deltaW
+                nH = w.container.offsetHeight + deltaH
+            }
 
             if (w.props.width !== undefined && w.parent.getProp('layout') !== 'vertical') {
                 var newWidth = Math.max(nW, GRIDWIDTH) / PXSCALE

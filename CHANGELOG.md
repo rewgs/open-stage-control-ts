@@ -15,7 +15,7 @@
     - matrix: removed ambiguous `start` property
     - matrix: advanced syntax blocks can be passed to children without being resolved at the matrix\' scope by adding an underscore before the opening bracket
     - text: add `soft` mode for the `wrap` property
-    - input: improve `numeric` mode on iOS 
+    - input: improve `numeric` mode on iOS
 
 ## 1.9.6
 

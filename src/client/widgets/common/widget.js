@@ -122,7 +122,7 @@ class Widget extends EventEmitter {
                     'Defines the osc argument types, one letter per argument (including preArgs)',
                     '- If empty, the types are infered automatically from the values (with numbers casted to floats by default)',
                     '- If there are more arguments than type letters, the last type is used for the extra arguments',
-                    'See <a href="http://opensoundcontrol.org/spec-1_0">http://opensoundcontrol.org/spec-1_0</a> for existing typetags'
+                    'See <a href="http://opensoundcontrol.org/">OSC 1.0 specification</a> for existing typetags'
                 ]},
                 decimals: {type: 'integer', value: 2, help: [
                     'Defines the number of decimals to send.',
