@@ -11,6 +11,7 @@
 - widgets
     - script: bypass keyboard shortcuts already used by the editor if it is enabled
     - matrix: removed ambiguous `start` property
+    - text: add `soft` mode for the `wrap` property
 
 ## 1.9.6
 
