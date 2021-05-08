@@ -638,6 +638,12 @@ class Widget extends EventEmitter {
                             return typeof variables[m] === 'string' ? variables[m] : JSON.stringify(variables[m])
                         }))
 
+                if (typeof value === 'string' && isJSON(value)) {
+                    try {
+                        value = JSON.parseFlex(value)
+                    } catch (err) {}
+                }
+
                 if (!this.variables[name]) {
 
                     this.variables[name] = {default: value, value: value, propNames: [propName]}

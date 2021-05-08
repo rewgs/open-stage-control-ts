@@ -4,6 +4,7 @@
 
 - bug fixes
     - issue when resizing widget using keyboard shortcuts
+    - advanced syntaxes (VAR{}): avoid storing default value as string if it can be parsed as a javascript primitive (boolean, number, etc) 
 
 - editor
     - change keyboard shortcuts for moving widgets (now `mod + arrows`) and navigating in widgets (now `arrows`) to feel more natural with the project tree view.
