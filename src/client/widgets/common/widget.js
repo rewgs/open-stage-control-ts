@@ -735,7 +735,7 @@ class Widget extends EventEmitter {
 
                 })
             } catch (err) {
-                this.errorProp(propName, 'JS{{}}', err)
+                this.errorProp(propName, 'JS{}', err)
             }
 
             try {
