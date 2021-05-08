@@ -60,7 +60,11 @@ class Input extends Canvas {
                 this.blur(true)
             })
 
-            if (this.getProp('numeric')) this.input.type = 'number'
+            if (this.getProp('numeric')) {
+                this.input.type = 'number'
+                this.input.pattern = '[0-9\.]*'
+                this.input.inputMode = 'decimal'
+            }
 
             var asYouType = this.getProp('asYouType')
 
