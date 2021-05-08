@@ -644,6 +644,12 @@ class Widget extends EventEmitter {
                     } catch (err) {}
                 }
 
+                if (
+                    // remove quotes
+                    (name[0] === '"' && name[name.length - 1] === '"') ||
+                    (name[0] === '\'' && name[name.length - 1] === '\'') ||
+                ) name = name.slice(1, name.length - 1)
+
                 if (!this.variables[name]) {
 
                     this.variables[name] = {default: value, value: value, propNames: [propName]}
