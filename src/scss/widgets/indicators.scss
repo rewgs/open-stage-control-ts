@@ -85,6 +85,9 @@
             white-space: pre-wrap;
             word-break: break-all;
         }
+        &.wrap-soft {
+            word-break: normal
+        }
         &.vertical {
             transform: rotate(180deg);
             text-overflow: ellipsis;

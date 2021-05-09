@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.9.7
+
+- bug fixes
+    - issue when resizing widget using keyboard shortcuts
+    - advanced syntaxes (VAR{}): avoid storing default value as string if it can be parsed as a javascript primitive (boolean, number, etc)
+    - advanced syntaxes (VAR{}): ignore quotes around variable name
+
+- editor
+    - change keyboard shortcuts for moving widgets (now `mod + arrows`) and navigating in widgets (now `arrows`) to feel more natural with the project tree view.
+
+- widgets
+    - script: bypass keyboard shortcuts already used by the editor if it is enabled
+    - matrix: removed ambiguous `start` property
+    - matrix: advanced syntax blocks can be passed to children without being resolved at the matrix\' scope by adding an underscore before the opening bracket
+    - text: add `soft` mode for the `wrap` property
+    - input: improve `numeric` mode on iOS
+
 ## 1.9.6
 
 - bug fixes
@@ -15,7 +32,7 @@
     - switch: add `wrap` property
 
 - editor
-    - display dropdown and checkbox for boolean properties with extra choices 
+    - display dropdown and checkbox for boolean properties with extra choices
 
 ## 1.9.5
 

@@ -62,7 +62,7 @@
     | --- | --- | --- | --- |
         | <h6 id="address">address<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#address" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | OSC address for sending / receiving messages, it must start with a slash (`/`)<br/><br/>By default ("auto"), the widget's id is used: `/widget_id` |
         | <h6 id="preArgs">preArgs<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#preArgs" title="Permanent link">#</a></h6> | `*`&vert;<br/>`array` | <code>""</code> | A value or array of values that will be prepended to the widget's value in the OSC messages it sends.<br/><br/>Incoming messages must match these to affect by the widget. |
-        | <h6 id="typeTags">typeTags<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#typeTags" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Defines the osc argument types, one letter per argument (including preArgs)<br/>- If empty, the types are infered automatically from the values (with numbers casted to floats by default)<br/>- If there are more arguments than type letters, the last type is used for the extra arguments<br/><br/>See <a href="http://opensoundcontrol.org/spec-1_0">http://opensoundcontrol.org/spec-1_0</a> for existing typetags |
+        | <h6 id="typeTags">typeTags<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#typeTags" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Defines the osc argument types, one letter per argument (including preArgs)<br/>- If empty, the types are infered automatically from the values (with numbers casted to floats by default)<br/>- If there are more arguments than type letters, the last type is used for the extra arguments<br/><br/>See <a href="http://opensoundcontrol.org/">OSC 1.0 specification</a> for existing typetags |
         | <h6 id="decimals">decimals<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#decimals" title="Permanent link">#</a></h6> | `integer` | <code>2</code> | Defines the number of decimals to send. |
         | <h6 id="target">target<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#target" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array`&vert;<br/>`null` | <code>""</code> | This defines the targets of the widget's OSC messages<br/>- A `string` or `array` of strings formatted as follow: `ip:port` or `["ip:portA", "ip:portB"]`<br/>- If midi is enabled, targets can be `midi:device_name`<br/>- If no target is set, messages can still be sent if the server has default targets |
         | <h6 id="ignoreDefaults">ignoreDefaults<a class="headerlink" href="#ignoreDefaults" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to ignore the server's default targets |
@@ -87,7 +87,7 @@
             | <h6 id="button_colorTextOn">colorTextOn<a class="headerlink" href="#button_colorTextOn" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Defines the widget's text color when active. |
             | <h6 id="button_label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#button_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/>- Insert icons using the prefix ^ followed by the icon's name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)<br/>- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal` |
             | <h6 id="button_vertical">vertical<a class="headerlink" href="#button_vertical" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the text vertically |
-            | <h6 id="button_wrap">wrap<a class="headerlink" href="#button_wrap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically. |
+            | <h6 id="button_wrap">wrap<a class="headerlink" href="#button_wrap" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`string` | <code>false</code> | Set to `true` to wrap long lines automatically. Set to `soft` to avoid breaking words.<br/><br/>Choices: `false`, `true`, `soft` |
 
     === "button"
 
@@ -109,6 +109,7 @@
             | <h6 id="switch_colorTextOn">colorTextOn<a class="headerlink" href="#switch_colorTextOn" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Defines the widget's text color when active. |
             | <h6 id="switch_layout">layout<a class="headerlink" href="#switch_layout" title="Permanent link">#</a></h6> | `string` | <code>"vertical"</code> | Defines how items should be laid out<br/><br/>Choices: `vertical`, `horizontal`, `grid` |
             | <h6 id="switch_gridTemplate">gridTemplate<a class="headerlink" href="#switch_gridTemplate" title="Permanent link">#</a></h6> | `string`&vert;<br/>`number` | <code>""</code> | If `layout` is `grid`, can be either a number of columns or a valid value for the css property "grid-template". |
+            | <h6 id="switch_wrap">wrap<a class="headerlink" href="#switch_wrap" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`string` | <code>false</code> | Set to `true` to wrap long lines automatically. Set to `soft` to avoid breaking words.<br/><br/>Choices: `false`, `true`, `soft` |
 
     === "switch"
 
@@ -224,7 +225,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="panel_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
-            | <h6 id="panel_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+            | <h6 id="panel_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` to limit affected widgets by the type of the first touched widget<br/><br/>Choices: `false`, `true`, `smart` |
 
     === "value"
 
@@ -273,7 +274,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="modal_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
-            | <h6 id="modal_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+            | <h6 id="modal_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` to limit affected widgets by the type of the first touched widget<br/><br/>Choices: `false`, `true`, `smart` |
             | <h6 id="modal_doubleTap">doubleTap<a class="headerlink" href="#modal_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the modal require a double tap to open instead of a single tap |
 
     === "value"
@@ -329,11 +330,10 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="matrix_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
-            | <h6 id="matrix_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+            | <h6 id="matrix_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` to limit affected widgets by the type of the first touched widget<br/><br/>Choices: `false`, `true`, `smart` |
             | <h6 id="matrix_widgetType">widgetType<a class="headerlink" href="#matrix_widgetType" title="Permanent link">#</a></h6> | `string` | <code>"button"</code> | Defines the type of the widgets in the matrix |
             | <h6 id="matrix_quantity">quantity<a class="headerlink" href="#matrix_quantity" title="Permanent link">#</a></h6> | `number` | <code>4</code> | Defines the number of widgets in the matrix |
-            | <h6 id="matrix_start">start<a class="headerlink" href="#matrix_start" title="Permanent link">#</a></h6> | `integer` | <code>0</code> | First widget's index |
-            | <h6 id="matrix_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>JS{{}} and #{} blocks in this field are resolved with an extra variable representing each widget's index: `$` (e.g. `#{$}`)<br/><br/>Advanced syntax blocks (@{}, OSC{}, JS{{}} and #{}) are resolved at the matrix' scope (ie @{this.variables} returns the matrix' variables property)<br/><br/>Note: by default, the widgets inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |
+            | <h6 id="matrix_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Defines a set of property to override the widgets' defaults.<br/><br/>JS{} and #{} blocks in this field are resolved with an extra variable representing each widget's index: `$` (e.g. `#{$}`)<br/><br/>Advanced syntax blocks (@{}, OSC{}, JS{}, VAR{} and #{}) are resolved at the matrix' scope (ie @{this.variables} returns the matrix' variables property)<br/><br/>Advanced syntax blocks can be passed to children without being resolved at the matrix' scope by adding an underscore before the opening bracket.<br/><br/>Note: unless overridden, children inherit from the matrix' `id` and osc properties (`id` and `address` are appended with `/$`) |
 
     === "value"
 
@@ -407,7 +407,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="root_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
-            | <h6 id="root_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+            | <h6 id="root_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` to limit affected widgets by the type of the first touched widget<br/><br/>Choices: `false`, `true`, `smart` |
 
     === "value"
 
@@ -444,7 +444,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="tab_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
-            | <h6 id="tab_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` or `auto` to limit affected widgets by the type of the first touched widget |
+            | <h6 id="tab_traversing">traversing<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_traversing" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to enable traversing gestures in this widget. Set to `smart` to limit affected widgets by the type of the first touched widget<br/><br/>Choices: `false`, `true`, `smart` |
 
     === "value"
 
@@ -617,7 +617,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="text_vertical">vertical<a class="headerlink" href="#text_vertical" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the text vertically |
-            | <h6 id="text_wrap">wrap<a class="headerlink" href="#text_wrap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to wrap long lines automatically. |
+            | <h6 id="text_wrap">wrap<a class="headerlink" href="#text_wrap" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`string` | <code>false</code> | Set to `true` to wrap long lines automatically. Set to `soft` to avoid breaking words.<br/><br/>Choices: `false`, `true`, `soft` |
             | <h6 id="text_align">align<a class="headerlink" href="#text_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Text alignment.<br/><br/>Choices: `center`, `left`, `right`, `top`, `bottom`, `left top`, `left bottom`, `right top`, `right bottom` |
 ## Pads
 
@@ -803,7 +803,7 @@
         | --- | --- | --- | --- |
             | <h6 id="script_script">script<a class="headerlink" href="#script_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="script_event">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Choices: `value`, `keyboard`, `once` |
-            | <h6 id="script_keyBinding">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation) |
+            | <h6 id="script_keyBinding">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation).<br/><br/>If the editor is enabled, some keys / combos will not work. |
             | <h6 id="script_keyRepeat">keyRepeat<a class="headerlink" href="#script_keyRepeat" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
             | <h6 id="script_keyType">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keydown"</code> | Determines which key event trigger the script's execution<br/><br/>Choices: `keydown`, `keyup`, `both` |
 

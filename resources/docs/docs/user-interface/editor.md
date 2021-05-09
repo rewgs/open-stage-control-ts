@@ -86,14 +86,14 @@ Multiple widgets can be edited at once.
     | ++ctrl+shift+d++ | Duplicate selected widget and increment id |
     | ++alt+c+"Drag"++ | Paste selection to position |
     | ++alt+c+shift+"Drag"++ | Paste selection to dragged position and increment id |
-    | ++up++ <br/>++down++ <br/>++left++ <br/>++right++ | Move selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
+    | ++ctrl+up++ <br/>++ctrl+down++ <br/>++ctrl+left++ <br/>++ctrl+right++ | Move selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
     | ++alt+up++ <br/>++alt+down++ <br/>++alt+left++ <br/>++alt+right++ | Resize selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
     | ++ctrl+a++ | Select current widget's siblings and itself |
     | ++ctrl+shift+a++ | Cancel current widget selection |
-    | ++ctrl+up++ | Select current widget's parent |
-    | ++ctrl+down++ | Select current widget's first child |
-    | ++ctrl+right++ | Select current widget's next sibling |
-    | ++ctrl+left++ | Select current widget's previous sibling |
+    | ++up++ | Select current widget's previous sibling |
+    | ++down++ | Select current widget's next sibling |
+    | ++left++ | Select current widget's parent |
+    | ++right++ | Select current widget's first child |
     | ++t++ | Show selected widget in the project tree |
     | ++"Home"++ | Send selected widget to back |
     | ++"Page Up"++ | Send selected widget farther |
@@ -122,14 +122,14 @@ Multiple widgets can be edited at once.
     | ++cmd+shift+d++ | Duplicate selected widget and increment id |
     | ++alt+c+"Drag"++ | Paste selection to position |
     | ++alt+c+shift+"Drag"++ | Paste selection to dragged position and increment id |
-    | ++up++ <br/>++down++ <br/>++left++ <br/>++right++ | Move selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
+    | ++cmd+up++ <br/>++cmd+down++ <br/>++cmd+left++ <br/>++cmd+right++ | Move selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
     | ++alt+up++ <br/>++alt+down++ <br/>++alt+left++ <br/>++alt+right++ | Resize selected widgets (1 grid unit, hold ++shift++ for 5 grid units) |
     | ++cmd+a++ | Select current widget's siblings and itself |
     | ++cmd+shift+a++ | Cancel current widget selection |
-    | ++cmd+up++ | Select current widget's parent |
-    | ++cmd+down++ | Select current widget's first child |
-    | ++cmd+right++ | Select current widget's next sibling |
-    | ++cmd+left++ | Select current widget's previous sibling |
+    | ++up++ | Select current widget's previous sibling |
+    | ++down++ | Select current widget's next sibling |
+    | ++left++ | Select current widget's parent |
+    | ++right++ | Select current widget's first child |
     | ++t++ | Show selected widget in the project tree |
     | ++"Home"++ | Send selected widget to back |
     | ++"Page Up"++ | Send selected widget farther |

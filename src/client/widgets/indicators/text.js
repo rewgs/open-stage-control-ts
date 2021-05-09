@@ -20,8 +20,8 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
             style: {
                 _separator_text_style: 'Text style',
                 vertical: {type: 'boolean', value: false, help: 'Set to `true` to display the text vertically'},
-                wrap: {type: 'boolean', value: false, help: [
-                    'Set to `true` to wrap long lines automatically.',
+                wrap: {type: 'boolean|string', value: false, choices: [false, true, 'soft'], help: [
+                    'Set to `true` to wrap long lines automatically. Set to `soft` to avoid breaking words.',
                 ]},
                 align: {type: 'string', value: 'center', choices: ['center', 'left', 'right', 'top', 'bottom', 'left top', 'left bottom', 'right top', 'right bottom'], help: 'Text alignment.'},
             },
@@ -46,7 +46,7 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
         if (this.getProp('align').includes('top')) this.text.classList.add('top')
         if (this.getProp('align').includes('bottom')) this.text.classList.add('bottom')
         if (this.getProp('wrap')) this.text.classList.add('wrap')
-
+        if (this.getProp('wrap') === 'soft') this.text.classList.add('wrap-soft')
 
         this.setValue(this.getProp('default'))
 

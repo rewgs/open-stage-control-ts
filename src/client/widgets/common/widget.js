@@ -122,7 +122,7 @@ class Widget extends EventEmitter {
                     'Defines the osc argument types, one letter per argument (including preArgs)',
                     '- If empty, the types are infered automatically from the values (with numbers casted to floats by default)',
                     '- If there are more arguments than type letters, the last type is used for the extra arguments',
-                    'See <a href="http://opensoundcontrol.org/spec-1_0">http://opensoundcontrol.org/spec-1_0</a> for existing typetags'
+                    'See <a href="http://opensoundcontrol.org/">OSC 1.0 specification</a> for existing typetags'
                 ]},
                 decimals: {type: 'integer', value: 2, help: [
                     'Defines the number of decimals to send.',
@@ -638,6 +638,18 @@ class Widget extends EventEmitter {
                             return typeof variables[m] === 'string' ? variables[m] : JSON.stringify(variables[m])
                         }))
 
+                if (typeof value === 'string' && isJSON(value)) {
+                    try {
+                        value = JSON.parseFlex(value)
+                    } catch (err) {}
+                }
+
+                if (
+                    // remove quotes
+                    (name[0] === '"' && name[name.length - 1] === '"') ||
+                    (name[0] === '\'' && name[name.length - 1] === '\'')
+                ) name = name.slice(1, name.length - 1)
+
                 if (!this.variables[name]) {
 
                     this.variables[name] = {default: value, value: value, propNames: [propName]}
@@ -729,7 +741,7 @@ class Widget extends EventEmitter {
 
                 })
             } catch (err) {
-                this.errorProp(propName, 'JS{{}}', err)
+                this.errorProp(propName, 'JS{}', err)
             }
 
             try {
