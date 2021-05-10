@@ -285,9 +285,11 @@ var handleClick = function(event) {
 
         }
 
-        if (actions.length) actions.push({
-            separator: true
-        })
+        if (data.length == 1 && widget.childrenType !== undefined) {
+            if (actions.length) actions.push({
+                separator: true
+            })
+        }
 
         if (data.length == 1 && widget.childrenType !== 'tab') {
             actions.push({
