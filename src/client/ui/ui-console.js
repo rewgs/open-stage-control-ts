@@ -51,6 +51,11 @@ class UiConsole extends UiSidePanel {
             console._error(...arguments)
         }
 
+        console._clear = console.clear
+        console.clear = function(){
+            _this.clear()
+            console._clear()
+        }
 
         this.script = new Script({props:{
             id: 'CONSOLE',

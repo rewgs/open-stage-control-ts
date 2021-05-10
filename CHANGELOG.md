@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+- scripting
+    - expose `console.clear()`
+
 ## 1.9.7
 
 - bug fixes
