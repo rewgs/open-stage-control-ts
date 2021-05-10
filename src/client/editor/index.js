@@ -412,7 +412,7 @@ class Editor {
             case 'pageup':
             case 'home':
             case 'end':
-                if (!this.selectedWidgets.length || this.selectedWidgets[0].parent.children.length <= 1) return
+                if (this.selectedWidgets.length !== 1 || this.selectedWidgets[0].parent.children.length <= 1) return
 
                 var curWidget2 = this.selectedWidgets[0],
                     index = curWidget2.parent.children.indexOf(curWidget2),

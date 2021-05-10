@@ -189,7 +189,7 @@ var handleClick = function(event) {
 
     }
 
-    if (parent !== widgetManager && editor.selectedWidgets[0].parent.children.length > 1) {
+    if (parent !== widgetManager && editor.selectedWidgets.length === 1 && editor.selectedWidgets[0].parent.children.length > 1) {
         actions.push({
             separator: true
         })
