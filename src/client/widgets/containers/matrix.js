@@ -1,6 +1,6 @@
 var Panel = require('./panel'),
     parser = require('../../parser'),
-    {deepCopy, deepEqual} = require('../../utils')
+    {deepCopy} = require('../../utils')
 
 
 class Matrix extends Panel {
