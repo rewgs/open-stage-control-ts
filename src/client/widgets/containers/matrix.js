@@ -170,6 +170,12 @@ class Matrix extends Panel {
 
         if (propName === 'props') {
 
+            propValue = propValue !== undefined ? propValue : deepCopy(this.props[propName])
+
+            if (typeof propValue === 'object' && propValue !== null) {
+                propValue = JSON.stringify(propValue)
+            }
+
             var data = []
             for (var i = 0; i < this.getProp('quantity'); i++) {
                 data[i] = super.resolveProp(propName, propValue, storeLinks, originalWidget, originalPropName, {$: i})

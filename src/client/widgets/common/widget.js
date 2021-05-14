@@ -509,11 +509,6 @@ class Widget extends EventEmitter {
             jsScope = context || {},
             varnumber = 999
 
-
-        if (typeof propValue === 'object' && propValue !== null) {
-            propValue = JSON.stringify(propValue)
-        }
-
         if (typeof propValue == 'string') {
 
             propValue = balancedReplace('@', '{', '}', propValue, (content)=>{
@@ -777,6 +772,10 @@ class Widget extends EventEmitter {
                 } catch (err) {}
             }
 
+        } else if (propValue != null && typeof propValue == 'object') {
+            for (let k in propValue) {
+                propValue[k] = this.resolveProp(propName, propValue[k], storeLinks, originalWidget, originalPropName, context)
+            }
         }
 
         return propValue
