@@ -235,6 +235,7 @@ class Widget extends EventEmitter {
             }
         }
 
+        this.style = null
         this.container = html`
             <div class="widget ${options.props.type}-container" id="${this.hash}" data-widget="${this.hash}"></div>
         `
@@ -1028,51 +1029,61 @@ class Widget extends EventEmitter {
 
 
             var prefix = '#' + this.hash,
-                scopedCss = scopeCss(css, prefix),
+                scopedCss = '',
                 unScopedCss = ''
 
+            if (css.includes('{')) {
 
-            try {
+                scopedCss = scopeCss(css, prefix)
+                try {
 
-                dummyDOM.style = css
-                unScopedCss = dummyDOM.getAttribute('style') || ''
+                    dummyDOM.style = css
+                    unScopedCss = dummyDOM.getAttribute('style') || ''
 
-            } catch(err) {
+                } catch(err) {
 
-                // fallback for browser that don't allow assigning "style" property
-                css
+                    // fallback for browser that don't allow assigning "style" property
+                    css
                     .replace(/\{[^}]*\}/g, '')
                     .replace(/^[^@#.]*:.*/gm, (m)=>{
                         unScopedCss += m[m.length - 1] === ';' ? m : m + ';'
                     })
 
+                }
+
+                if (scopedCss.indexOf('@keyframes') > -1) scopedCss = scopedCss.replace(new RegExp(prefix + '\\s+([0-9]+%|to|from)', 'g'), ' $1')
+                if (scopedCss.indexOf('&') > -1) scopedCss = scopedCss.replace(new RegExp(prefix + '\\s&', 'g'), prefix)
+
+            } else {
+
+                unScopedCss = css
+
             }
 
 
 
-            if (scopedCss.indexOf('@keyframes') > -1) scopedCss = scopedCss.replace(new RegExp(prefix + '\\s+([0-9]+%|to|from)', 'g'), ' $1')
-            if (scopedCss.indexOf('&') > -1) scopedCss = scopedCss.replace(new RegExp(prefix + '\\s&', 'g'), prefix)
 
-            var style = html`<style>${unScopedCss ? prefix + '{' + unScopedCss + '}\n' : ''}${scopedCss}</style>`,
-                oldStyle = DOM.get(this.container, '> style')[0]
+            var style = (unScopedCss ? prefix + '{' + unScopedCss + '}\n' : '') + scopedCss
 
-            if (oldStyle) {
-                this.container.replaceChild(style, oldStyle)
+            if (this.style) {
+                this.style.innerText = style
             } else if (scopedCss.length || unScopedCss.length){
-                this.container.insertBefore(style, this.container.childNodes[0] || null)
+                this.style = html`<style>${style}</style>`
+                this.container.insertBefore(this.style, this.container.childNodes[0] || null)
             }
 
 
             // apply extra css classes
+            if (!deepEqual(extraCssClasses, this.extraCssClasses)) {
+                if (this.extraCssClasses && this.extraCssClasses.length) {
+                    this.container.classList.remove(...this.extraCssClasses)
+                    this.extraCssClasses = []
+                }
 
-            if (this.extraCssClasses && this.extraCssClasses.length) {
-                this.container.classList.remove(...this.extraCssClasses)
-                this.extraCssClasses = []
-            }
-
-            if (extraCssClasses.length) {
-                this.container.classList.add(...extraCssClasses)
-                this.extraCssClasses = extraCssClasses
+                if (extraCssClasses.length) {
+                    this.container.classList.add(...extraCssClasses)
+                    this.extraCssClasses = extraCssClasses
+                }
             }
 
 
@@ -1089,9 +1100,6 @@ class Widget extends EventEmitter {
 
 
         }
-
-        return style
-
 
     }
 
