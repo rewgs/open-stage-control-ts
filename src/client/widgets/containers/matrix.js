@@ -64,7 +64,7 @@ class Matrix extends Panel {
 
             for (let i = 0; i < this.getProp('quantity'); i++) {
 
-                var props = this.resolveProp('props', undefined, false, false, false, {'$':i})
+                var props = deepCopy(this.getProp('props')[i])
                 var data = this.defaultProps(i)
 
                 if (typeof props === 'object' && props !== null) {
@@ -126,7 +126,7 @@ class Matrix extends Panel {
 
                 for (let i = this.children.length - 1; i >= 0; i--) {
 
-                    let data = this.resolveProp('props', undefined, false, false, false, {'$': i})
+                    let data = deepCopy(this.getProp('props')[i])
 
                     if (typeof data !== 'object' || data === null || Array.isArray(data)) {
                         data = {}
@@ -134,11 +134,11 @@ class Matrix extends Panel {
 
                     data = JSON.parse(JSON.stringify(data).replace(/(JS|#|OSC|@|VAR)_\{/g, '$1{'))
 
-                    if (typeof oldPropValue === 'object' && oldPropValue !== null) {
+                    if (typeof oldPropValue[i] === 'object' && oldPropValue[i] !== null) {
                         // if an overridden default props is removed, set it back to default
                         let overriddenDefaults,
                             widgetDefaults
-                        for (var k in oldPropValue) {
+                        for (var k in oldPropValue[i]) {
                             if (data[k] === undefined) {
                                 if (Matrix.overriddenDefaults.indexOf(k) !== -1) {
                                     overriddenDefaults = overriddenDefaults || this.defaultProps(i)
@@ -166,6 +166,30 @@ class Matrix extends Panel {
 
     }
 
+    resolveProp(propName, propValue, storeLinks, originalWidget, originalPropName, context) {
+
+        if (propName === 'props') {
+
+            propValue = propValue !== undefined ? propValue : deepCopy(this.props[propName])
+
+            if (typeof propValue === 'object' && propValue !== null) {
+                propValue = JSON.stringify(propValue)
+            }
+
+            var data = []
+            for (var i = 0; i < this.getProp('quantity'); i++) {
+                data[i] = super.resolveProp(propName, propValue, storeLinks, originalWidget, originalPropName, {$: i})
+            }
+
+            return data
+
+        } else {
+
+            return super.resolveProp(propName, propValue, storeLinks, originalWidget, originalPropName, context)
+
+        }
+
+    }
 }
 
 
