@@ -2,6 +2,10 @@
 
 ## next
 
+- bug fixes
+  - matrix: update children when `props` is modified even when the result for `$ = 0` doesn't change
+  - fragments: fragment widgets empty when reloading 
+
 - scripting
     - expose `console.clear()`
 
