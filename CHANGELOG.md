@@ -1,10 +1,11 @@
 # Changelog
 
-## next
+## 1.9.8
 
 - bug fixes
   - matrix: update children when `props` is modified even when the result for `$ = 0` doesn't change
-  - fragments: fragment widgets empty when reloading 
+  - fragments: fragment widgets empty when reloading
+  - panel: scrollbar issue on iOS 13+
 
 - scripting
     - expose `console.clear()`

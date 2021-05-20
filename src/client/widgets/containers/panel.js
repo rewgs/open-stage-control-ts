@@ -85,7 +85,7 @@ class Panel extends Container() {
 
             this.container.classList.add('contains-widgets')
 
-            if (iOS13) {
+            if (iOS13 && this.getProp('scroll')) {
 
                 faderDefaults = faderDefaults || Fader.defaults()._props()
 
@@ -291,7 +291,7 @@ class Panel extends Container() {
             case 'colorBg':
                 this.setCssVariables()
             case 'colorWidget':
-                if (iOS13) this.checkScrollBars()
+                if (iOS13  && this.getProp('scroll')) this.checkScrollBars()
             case 'colorText':
             case 'colorFill':
             case 'colorStroke':

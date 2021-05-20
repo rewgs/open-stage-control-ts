@@ -69,7 +69,7 @@ class Modal extends Panel {
         this.popupContent = DOM.get(this.popup, '.popup-content')[0]
 
 
-        if (iOS13) {
+        if (iOS13 && this.getProp('scroll')) {
             for (let dir in this.iosScrollbars) {
                 this.container.removeChild(this.iosScrollbars[dir].container)
                 this.popupContent.appendChild(this.iosScrollbars[dir].container)
