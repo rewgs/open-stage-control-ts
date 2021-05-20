@@ -123,7 +123,7 @@ Returns the value of a widget's custom variable.
 - `name`: variable name as a string.
 - `value`: new value for the variable.
 
-Sets the value of a widget's custom variable. If `ìd` contains wildcards, affects all matching widgets.
+Sets the value of a widget's custom variable (see [advanced syntaxes](./advanced-syntaxes.md##ustom-variables-varvariablename-default)). If `ìd` contains wildcards, affects all matching widgets.
 
 ----
 
