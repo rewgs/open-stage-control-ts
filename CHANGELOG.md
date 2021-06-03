@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.9
+
+- bug fixes
+    - matrix: regression from 1.9.8
+
 ## 1.9.8
 
 - bug fixes
