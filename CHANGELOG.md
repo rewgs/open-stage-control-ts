@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.10
+
+- bug fixes
+    - matrix: regression from 1.9.8 (broken nested @{} syntax in props property)
+
 ## 1.9.9
 
 - bug fixes
