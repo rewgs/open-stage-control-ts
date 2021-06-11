@@ -179,7 +179,7 @@ class Matrix extends Panel {
             var data = [],
                 quantity = this.resolveProp('quantity', undefined, false, false, false)
             for (var i = 0; i < quantity; i++) {
-                data[i] = super.resolveProp(propName, propValue, storeLinks, originalWidget, originalPropName, {$: i})
+                data[i] = super.resolveProp(propName, propValue, i === 0 ? storeLinks : false, originalWidget, originalPropName, {$: i})
             }
 
             return data
