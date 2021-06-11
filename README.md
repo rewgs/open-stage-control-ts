@@ -7,7 +7,7 @@ Open Stage Control
 
 - Website: https://openstagecontrol.ammd.net/
 - Forum: https://openstagecontrol.discourse.group/
-- IRC: Freenode #openstagecontrol
+- IRC: Libera.chat #openstagecontrol
 
 ----
 
