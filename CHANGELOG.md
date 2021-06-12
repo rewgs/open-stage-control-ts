@@ -5,6 +5,9 @@
 - bug fixes
     - matrix: regression from 1.9.8 (broken nested @{} syntax in props property)
 
+- misc
+    - midi: detect missing binary (eg when deleted by antivirus) and print a message
+
 ## 1.9.9
 
 - bug fixes
