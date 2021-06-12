@@ -5,7 +5,7 @@ Welcome to Open Stage Control documentation. Along these pages you'll learn how 
 
 ## Overview
 
-Open Stage Control consists in 3 modules: the server, the launcher and the client.
+Open Stage Control consists of 3 modules: the server, the launcher and the client.
 
 The **server** is the core of the software, it is responsible for sending and receiving all osc/midi messages, and act as a web server that serves the clients web application. It is written in Javascript and runs with Electron, a cross-platform framework based on Chromium. By default, the server always opens a client window when it starts but it can be run in *headless* mode, without any window.
 
