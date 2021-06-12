@@ -19,10 +19,10 @@ var midiBinaries = {
 }
 
 var expectMidiBinaries = false,
-    expectMidiBinariesError = false;
+    expectMidiBinariesError = false
 try {
-    expectMidiBinaries = eval('require("./osc-midi.json")');
-} catch(e) {}
+    expectMidiBinaries = eval('require("./osc-midi.json")')
+} catch(e) {}
 
 var pythonPathOverride
 if (process.arch === 'x64' && midiBinaries[process.platform]) {
@@ -30,7 +30,7 @@ if (process.arch === 'x64' && midiBinaries[process.platform]) {
     if (fs.existsSync(p)) {
         pythonPathOverride = p
     } else if (expectMidiBinaries) {
-        expectMidiBinariesError = true;
+        expectMidiBinariesError = true
     }
 }
 
@@ -153,7 +153,7 @@ class MidiConverter {
     static midiBinariesError() {
 
         console.error(`(ERROR, MIDI) Could not find midi binary file ${p}\nIt may have been deleted by your antivirus.`)
-        console.log(`(INFO, MIDI) Falling back to python implementation (see https://openstagecontrol.ammd.net/docs/midi/midi-configuration/).`)
+        console.log('(INFO, MIDI) Falling back to python implementation (see https://openstagecontrol.ammd.net/docs/midi/midi-configuration/).')
         expectMidiBinariesError = false
 
     }
