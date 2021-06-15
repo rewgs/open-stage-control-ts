@@ -196,7 +196,7 @@ class Range extends Fader {
         this.faders[0].rangeValsMax = v[1]
         this.faders[1].rangeValsMin = v[0]
 
-        if (!options.dragged) {
+        if (!options.dragged || options.fromScript) {
             var opt = {
                 ...options,
                 send: false,

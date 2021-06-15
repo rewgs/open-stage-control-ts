@@ -2,6 +2,9 @@
 
 ## next
 
+- bug fixes
+    - range: value not properly updated with set()
+
 - scripting
     - expose `console.clear()`
 
