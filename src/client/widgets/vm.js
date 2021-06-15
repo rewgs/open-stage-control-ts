@@ -40,7 +40,7 @@ class Vm {
         // init infinite loop guard
         loopProtect.alias = '__protect'
         loopProtect.hit = function(line){
-            throw 'Potential infinite loop found on line ' + line
+            throw 'Potential infinite loop found on line ' + line + '(script interrupted).\nAdd "// noprotect" to your code to disable loop protection.'
         }
         this.sandbox.contentWindow.__protect = loopProtect
 
