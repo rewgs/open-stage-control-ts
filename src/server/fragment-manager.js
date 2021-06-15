@@ -49,6 +49,10 @@ class FragmentManager {
                 this.deleteFragment(resolvedPath)
             })
 
+        } else {
+
+            ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath]}, clientId)
+
         }
 
     }

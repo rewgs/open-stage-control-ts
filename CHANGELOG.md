@@ -1,9 +1,30 @@
 # Changelog
 
-## next
+## 1.9.11
 
 - bug fixes
     - range: value not properly updated with set()
+
+
+## 1.9.10
+
+- bug fixes
+    - matrix: regression from 1.9.8 (broken nested @{} syntax in props property)
+
+- misc
+    - midi: detect missing binary (eg when deleted by antivirus) and print a message
+
+## 1.9.9
+
+- bug fixes
+    - matrix: regression from 1.9.8
+
+## 1.9.8
+
+- bug fixes
+    - matrix: update children when `props` is modified even when the result for `$ = 0` doesn't change
+    - fragments: fragment widgets empty when reloading
+    - panel: scrollbar issue on iOS 13+
 
 - scripting
     - expose `console.clear()`

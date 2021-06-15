@@ -223,6 +223,18 @@ class UiTree extends UiWidget {
 
     }
 
+    blinkSelected() {
+
+        DOM.each(this.list, '.editing', (el)=>{
+            el.classList.add('editor-blink')
+            el.scrollIntoView({block: 'center'})
+            setTimeout(()=>{
+                el.classList.remove('editor-blink')
+            }, 800)
+        })
+
+    }
+
     select() {
 
         // hint selection in folded containers

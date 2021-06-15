@@ -438,6 +438,8 @@ class Editor {
             case 't':
                 if (!this.selectedWidgets.length) return
                 this.widgetTree.showWidget(editor.selectedWidgets[0])
+                this.widgetTree.blinkSelected()
+
                 break
 
 

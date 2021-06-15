@@ -18,17 +18,27 @@ var midiBinaries = {
     win32: 'osc-midi-windows.exe'
 }
 
+var expectMidiBinaries = false,
+    expectMidiBinariesError = false
+try {
+    expectMidiBinaries = eval('require("./osc-midi.json")')
+} catch(e) {}
+
 var pythonPathOverride
 if (process.arch === 'x64' && midiBinaries[process.platform]) {
     var p = path.resolve(__dirname, midiBinaries[process.platform])
     if (fs.existsSync(p)) {
         pythonPathOverride = p
+    } else if (expectMidiBinaries) {
+        expectMidiBinariesError = true
     }
 }
 
 class MidiConverter {
 
     constructor() {
+
+        if (expectMidiBinariesError) MidiConverter.midiBinariesError()
 
         this.py = new PythonShell('python/midi.py', Object.assign({
             args: [
@@ -112,6 +122,8 @@ class MidiConverter {
 
     static list() {
 
+        if (expectMidiBinariesError) MidiConverter.midiBinariesError()
+
         PythonShell.run('python/midi.py', Object.assign({pythonPath: MidiConverter.getPythonPath(), args: ['--params', 'list-only']}, pythonOptions), function(e, results) {
             if (e) {
                 if (e.code === 'ENOENT') {
@@ -135,6 +147,14 @@ class MidiConverter {
         if (!pythonPath && pythonPathOverride) pythonPath = pythonPathOverride
 
         return pythonPath
+
+    }
+
+    static midiBinariesError() {
+
+        console.error(`(ERROR, MIDI) Could not find midi binary file ${p}\nIt may have been deleted by your antivirus.`)
+        console.log('(INFO, MIDI) Falling back to python implementation (see https://openstagecontrol.ammd.net/docs/midi/midi-configuration/).')
+        expectMidiBinariesError = false
 
     }
 
