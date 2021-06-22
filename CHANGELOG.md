@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.11
+
+- bug fixes
+    - range: value not properly updated with set()
+
+
 ## 1.9.10
 
 - bug fixes
