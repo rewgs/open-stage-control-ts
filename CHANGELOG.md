@@ -5,6 +5,9 @@
 - bug fixes
     - range: value not properly updated with set()
 
+- misc
+    - (built-in client only) add `nofocus` client option to prevent the client window from taking focus unless a text input or a dropdown is clicked.
+
 
 ## 1.9.10
 

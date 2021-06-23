@@ -13,6 +13,7 @@ Client options can be set either with the server's `--client-options` option, or
 | consoleLength | number | 300 | sets the maximum number of log messages in the client's console |
 | id | string | *random_id* | client's unique id (use with caution: two clients should never have the same id) |
 | usePercents | 1 / 0 | 0 | sets the editor's "relative units" option  |
+| nofocus | 1 / 0 | 0 | (built-in client only) prevent the client window from taking focus unless a text input or a dropdown is clicked |
 
 
 Example:

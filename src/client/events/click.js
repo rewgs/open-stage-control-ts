@@ -33,6 +33,10 @@ function mouseToFastClick(event) {
 
     DOM.dispatchEvent(e.target, name, e)
 
+    if (ENV.nofocus && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'  && e.target.tagName !== 'SELECT') {
+        console.debug('ELECTRON.BLUR()')
+    }
+
 }
 
 function touchToFastClick(event) {
@@ -58,6 +62,10 @@ function touchToFastClick(event) {
         clearLongTouchTimer()
 
     }, 600)
+
+    if (ENV.nofocus && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'  && e.target.tagName !== 'SELECT') {
+        console.debug('ELECTRON.BLUR()')
+    }
 
 }
 
