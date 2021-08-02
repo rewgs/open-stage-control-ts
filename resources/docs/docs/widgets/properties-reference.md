@@ -738,7 +738,7 @@
             | <h6 id="knob_origin">origin<a class="headerlink" href="#knob_origin" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Defines the starting point's value of the knob's gauge |
 
 ??? api "<div id="encoder">encoder<a class="headerlink" href="#encoder" title="Permanent link">#</a></div>"
-    A knob that sends a relative direction information instead of an absolute value.
+    A knob that sends a relative direction infomation instead of an absolute value.
 
     === "style"
 
