@@ -39,4 +39,4 @@ Discourse provides the community forum.
     <img src="/img/sponsors/browserstack.png" width="140px"/>
 </a>
 
-BrowserStack provides remote browsers for debbuging.
+BrowserStack provides remote browsers for debugging.

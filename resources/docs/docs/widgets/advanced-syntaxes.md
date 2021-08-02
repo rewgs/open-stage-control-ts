@@ -1,6 +1,6 @@
 # Advanced syntaxes
 
-Advanced syntaxes are special blocks of code that can be written in the widgets properties to customize the widgets and how they behave. These blocks end up replaced with the value they hold before the widgets' evualate the properties they're in.
+Advanced syntaxes are special blocks of code that can be written in the widgets properties to customize the widgets and how they behave. These blocks end up replaced with the value they hold before the widgets' evaluate the properties they're in.
 
 
 ## Inheritance: `@{id.property}`
@@ -11,8 +11,8 @@ The inheritance syntax returns either a widget's value or one of its properties.
 - `property`: target widget's property name. If ommitted (along with the dot), the widget's value will be returned (`@{widgetId}` is the same as `@{widgetId.value}`). `value` always resolves to the target widget's current value, not its `value` property.
 
 
-!!! note "Unique indentifier"
-    Each widget has a unique random identifier that can be retreived with the property name `uuid` (e.g. `@{this.uuid}`, `@{parent.uuid}`).
+!!! note "Unique identifier"
+    Each widget has a unique random identifier that can be retrieved with the property name `uuid` (e.g. `@{this.uuid}`, `@{parent.uuid}`).
 
 #### Dynamic properties
 
@@ -28,7 +28,7 @@ Some properties have much cheaper update routines and can be considered as `dyna
 
 #### Object properties
 
-If the retreived property is an object (`{}`), a subset can be retreived directly by appending a dot and a key (array index or object key) : `@{parent.variables.key}`
+If the retrieved property is an object (`{}`), a subset can be retrieved directly by appending a dot and a key (array index or object key) : `@{parent.variables.key}`
 
 
 #### Nesting

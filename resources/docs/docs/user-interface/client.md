@@ -19,7 +19,7 @@
     - Import: import a state file from the client's filesystem
     - Export: export a state file to the client's filesystem
 - Editor
-    - Enable: togggle editor's state
+    - Enable: toggle editor's state
     - Grid: toggle grid
     - Project tree: toggle project tree's visibility
     - Inspector: toggle inspector's visibility
@@ -40,7 +40,7 @@ It is the main component, it contains all the widgets and takes all the availabl
 
 ## 4. Notifications
 
-Notifications appear in the lower right corner, they are usually used to convey server status informations.
+Notifications appear in the lower right corner, they are usually used to convey server status information.
 
 ## 5. Modals
 
