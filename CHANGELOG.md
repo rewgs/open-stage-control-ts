@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.12
+
+- bug fixes
+    - client options: options ignored if not lowercased
+
 ## 1.9.11
 
 - bug fixes
