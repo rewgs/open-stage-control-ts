@@ -51,7 +51,7 @@ The `script` property allows widgets to run [Javascript](https://developer.mozil
 
 ## Touch state
 
-When some widgets are touched or released, a special event can be catched to trigger custom actions.
+When some widgets are touched or released, a special event can be caught to trigger custom actions.
 
 If the variable `touch` is not `undefined`, this means it holds the widget's current touch state:
 
@@ -69,7 +69,7 @@ if (touch !== undefined) {
 }
 ```
 
-To avoid unwanted script executions, touch state events will only be catched if the script contains the word `touch`.
+To avoid unwanted script executions, touch state events will only be caught if the script contains the word `touch`.
 
 ## Available variables
 

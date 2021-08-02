@@ -69,7 +69,7 @@
 ## 1.9.5
 
 - bug fixes
-    - advanced syntaxes: various isses and regressions
+    - advanced syntaxes: various issues and regressions
     - editor: preserve advanced syntaxes in `left` and `top` when pasting a widget
 
 - editor
@@ -167,7 +167,7 @@
 
 - editor
     - context menu: add `export` action to export a widget as a fragment file
-    - show project tree if minimzed when clicking on "Show in tree"
+    - show project tree if minimized when clicking on "Show in tree"
 
 - widget
     - **new** `fragment` widgets (under `containers`): embedded session or fragment file with overridable properties.
@@ -308,7 +308,7 @@
 - bug fixes
     - input: prevent focus when selecting the widget for edition
     - input: submit content when leaving focus, not only when hitting `enter` or `tab` (`esc` still cancels)
-    - midi: prevent midi bridge from stopping when an error occurs; provide meaningfull errors when connection fails
+    - midi: prevent midi bridge from stopping when an error occurs; provide meaningful errors when connection fails
 
 - editor
     - inspector: hitting ctrl+s while editing a property will submit the change before saving
@@ -335,7 +335,7 @@
 
 - bug fixes
     - menu: allow manual line breaks ("`\n`") in labels / values
-    - custom module: parsing issue when sending widget data using `receive()` (`type` attribute errouneously parsed as an osc typetag)
+    - custom module: parsing issue when sending widget data using `receive()` (`type` attribute erroneously parsed as an osc typetag)
 
 - widgets
     - html property: allow "href" attribute on "a" elements
@@ -354,7 +354,7 @@
     - file browser: layout issue with long paths
 
 - custom module
-    - add `nativeRequire` function (allows loading native node modules or locally installed moduled)
+    - add `nativeRequire` function (allows loading native node modules or locally installed modules)
 
 ## 1.7.8
 
@@ -677,7 +677,7 @@ As of this version, packages except the `node` package are bundled with a midi b
     - foldable sidepanels
     - removed lobby
     - added toolbar menu
-    - dispay loading (spinner) in a notification instead of a modal
+    - display loading (spinner) in a notification instead of a modal
     - mod + w to close window
     - context-menu now use click event to trigger actions, not mousedown/touchstart
     - no more uppercase text by default
@@ -696,7 +696,7 @@ As of this version, packages except the `node` package are bundled with a midi b
     - context menu: added "show in tree" action
     - context menu: removed "edit parent" action
     - allow copying tabs (to tab containers only)
-    - shared clipboard accross all clients
+    - shared clipboard across all clients
     - prevent interaction with widgets when `shift` or `ctrl` is held
     - ensure @{} bindings are always updated upon edition
 
@@ -733,7 +733,7 @@ As of this version, packages except the `node` package are bundled with a midi b
     - pads, range: when `touchAddress` is set, one message per touched point is sent, in addition to the former touch state message
     - eq: removed `logScaleX` property, always draw logarithmic frequency response
     - eq: logarithmic x-axis scale fixed
-    - eq: filters ared now defined with the `filters` property, leaving the `value` to its default purpose
+    - eq: filters are now defined with the `filters` property, leaving the `value` to its default purpose
     - eq: added `rangeX`
     - html: allow `class`, `title` and `style` attributes
     - dropdown: close menu when receiving a value
@@ -745,7 +745,7 @@ As of this version, packages except the `node` package are bundled with a midi b
     - `push`, `toggle`: merged into `button`
     - `strip`: features now covered by `panel`
     - `meter`: duplicate of `fader` with `design` to `compact` and `interaction` to `false`
-    - `switcher`, `state`, `crossfader`: removed => state managment functions added to the `script` widget
+    - `switcher`, `state`, `crossfader`: removed => state management functions added to the `script` widget
     - `keys`: merged with `script`
     - `gyroscope`: not compatible since chrome 74 unless o-s-c goes HTTPS
 

@@ -56,7 +56,7 @@
 The server's `midi` option accepts the following parameters, separated by spaces.
 
 !!! warning ""
-    If an option contains space characters, it must be enquoted.
+    If an option contains space characters, it must be quoted.
 
 **`list`**
 
@@ -64,7 +64,7 @@ Print the available MIDI ports to the console when the server starts. This actio
 
 **`device_name:input,output`**
 
-Create a virtual MIDI device that will translate OSC messsages to MIDI messages
+Create a virtual MIDI device that will translate OSC messages to MIDI messages
 
 - `device_name` is an arbitrary identifier that can be used as a target by widgets (see [Widget setup](#widget-setup)). It doesn't have to match any device's real name.
 - `input` / `output` can be port numbers or strings (as reported by the `list` action). If a string is specified, the first port whose name contains the string will be used (comparison is case-insensitive).
@@ -98,7 +98,7 @@ Enable receiving noteOff messages with a velocity and on a different address tha
 
 **`path=/path/to/python`**
 
-*Only use this if you know what you are doing. This option should not be set when using the officla Linux / Windows / OSX packages.*
+*Only use this if you know what you are doing. This option should not be set when using the official Linux / Windows / OSX packages.*
 
 Indicates where to find python binary in case open stage control doesn't (`Error: spawn python3 ENOENT`).
 
@@ -116,7 +116,7 @@ Its `address` and `preArgs` properties must be set according to Open Stage Contr
 
 ## Debug
 
-Enabling the server's `debug` options will print some extra informations (sent/received midi messages, midi setup informations, etc)
+Enabling the server's `debug` options will print some extra information (sent/received midi messages, midi setup information, etc)
 
 ## Example configuration
 

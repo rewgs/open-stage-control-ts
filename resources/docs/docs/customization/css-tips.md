@@ -3,7 +3,7 @@
 ## Browser inspector
 
 
-Hit ++f12++ to open the developers tools panel. The html/css inspector helps retreiving the class names needed to style specific parts of the widgets: hit ++ctrl+shift+c++ or click on the inspect icon (![x](/img/inspect.png)) and click on a element in the interface to reveal its html code.
+Hit ++f12++ to open the developers tools panel. The html/css inspector helps retrieving the class names needed to style specific parts of the widgets: hit ++ctrl+shift+c++ or click on the inspect icon (![x](/img/inspect.png)) and click on a element in the interface to reveal its html code.
 
 
 ## Inline syntax
@@ -87,6 +87,6 @@ Media queries can also be used:
 
 ## CSS variables
 
-[CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) declared in the  [default theme](https://github.com/jean-emmanuel/open-stage-control/blob/master/src/scss/themes/default.scss) can be overriden.
+[CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) declared in the  [default theme](https://github.com/jean-emmanuel/open-stage-control/blob/master/src/scss/themes/default.scss) can be overridden.
 
 Widgets also rely on CSS variables for the style properties (colors, padding, etc). These are documented in the widgets' `css` property description.

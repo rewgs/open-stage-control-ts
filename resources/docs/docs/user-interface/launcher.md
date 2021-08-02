@@ -5,12 +5,12 @@
 - Start: start the server (hidden when started)
 - Stop: stop the server (hidden when stopped)
 - New window: open a new client window (hidden when stopped)
-- Load: load server configration from file
+- Load: load server configuration from file
 - Save / Save as: save server configuration to file
 - List MIDI devices: list available MIDI devices in the console
 - Console:
     - Clear: clear console
-    - Autoscrell: enable/disable console autoscroll
+    - Autoscroll: enable/disable console autoscroll
     - Check for update at startup: enable/disable this feature
 - Always on top: pin the launcher window above other the windows
 
@@ -22,7 +22,7 @@ Each server option is displayed here. When clicking on an option's label, a shor
 
 ## 3. Console
 
-The console diplays various informations, runtime errors and server debug messages.
+The console displays various information, runtime errors and server debug messages.
 
 ## Keyboard shortcuts
 
