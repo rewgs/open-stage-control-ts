@@ -25,10 +25,13 @@ class Slider extends Canvas {
 
         for (var k in this.getProp('range')) {
             var key = k=='min'?0:k=='max'?100:parseInt(k),
-                val = typeof this.getProp('range')[k] == 'object'?
+                val = typeof this.getProp('range')[k] === 'object' && this.getProp('range')[k] !== null ?
                     this.getProp('range')[k][Object.keys(this.getProp('range')[k])[0]]:
-                    this.getProp('range')[k],
-                label = typeof this.getProp('range')[k] == 'object'?
+                    this.getProp('range')[k]
+            
+            if (isNaN(val) || val === null || val === undefined) val = 0
+
+            var label = typeof this.getProp('range')[k] === 'object' && this.getProp('range')[k] !== null ?
                     Object.keys(this.getProp('range')[k])[0]:
                     val
 

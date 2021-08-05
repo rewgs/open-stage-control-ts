@@ -4,6 +4,7 @@
 
 - bug fixes
     - client options: options ignored if not lowercased
+    - sliders: prevent errors for some edge-case `range` values
 
 ## 1.9.11
 
