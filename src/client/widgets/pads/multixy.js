@@ -22,7 +22,7 @@ module.exports = class MultiXy extends Pad {
             style: {
                 _separator_xy_style: 'Xy style',
                 pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size'},
-                ephemeral: {type: 'boolean', value: false, help: 'When set to `true`, the points will be drawn only chile touched.'},
+                ephemeral: {type: 'boolean', value: false, help: 'When set to `true`, the points will be drawn only while touched.'},
                 pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
             },
             class_specific: {
