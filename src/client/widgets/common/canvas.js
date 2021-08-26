@@ -72,6 +72,14 @@ class Canvas extends Widget {
 
     }
 
+    setVisibility(){
+        
+        var visible = this.visible
+        super.setVisibility()
+        if (!visible && this.visible) this.batchDraw()
+
+    }
+
     cacheCanvasStyle(style){
 
         style = style || window.getComputedStyle(this.canvas)
