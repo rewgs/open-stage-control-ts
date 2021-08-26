@@ -666,7 +666,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="multixy_pointSize">pointSize<a class="headerlink" href="#multixy_pointSize" title="Permanent link">#</a></h6> | `integer` | <code>20</code> | Defines the points' size |
-            | <h6 id="multixy_ephemeral">ephemeral<a class="headerlink" href="#multixy_ephemeral" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the points will be drawn only chile touched. |
+            | <h6 id="multixy_ephemeral">ephemeral<a class="headerlink" href="#multixy_ephemeral" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the points will be drawn only while touched. |
             | <h6 id="multixy_pips">pips<a class="headerlink" href="#multixy_pips" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the scale |
 
     === "multixy"

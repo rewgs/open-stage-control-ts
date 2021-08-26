@@ -1,6 +1,6 @@
 # Advanced syntaxes
 
-Advanced syntaxes are special blocks of code that can be written in the widgets properties to customize the widgets and how they behave. These blocks end up replaced with the value they hold before the widgets' evaluate the properties they're in.
+Advanced syntaxes are special blocks of code that can be written in the widgets properties to customize the widgets and how they behave. These blocks end up replaced with the value they hold before the widgets evaluate the properties they're in.
 
 
 ## Inheritance: `@{id.property}`
@@ -8,7 +8,7 @@ Advanced syntaxes are special blocks of code that can be written in the widgets 
 The inheritance syntax returns either a widget's value or one of its properties. When using this syntax, value or property changes will be applied automatically.
 
 - `id`: target widget's `id`. A widget can fetch its own properties or its direct parent's by using the keywords `this` or `parent` instead of `id`. When `this` or `parent` can be used, using the target widget's `id` instead won't work.
-- `property`: target widget's property name. If ommitted (along with the dot), the widget's value will be returned (`@{widgetId}` is the same as `@{widgetId.value}`). `value` always resolves to the target widget's current value, not its `value` property.
+- `property`: target widget's property name. If omitted (along with the dot), the widget's value will be returned (`@{widgetId}` is the same as `@{widgetId.value}`). `value` always resolves to the target widget's current value, not its `value` property.
 
 
 !!! note "Unique identifier"

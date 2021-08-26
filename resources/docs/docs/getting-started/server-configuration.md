@@ -66,7 +66,7 @@ The **server** can be configured with many options, either from a terminal or wi
 !!! quote ""
     #### `debug`
 
-    Print sent and receiced messages in the console. This may impact performances and should not be enabled in production.
+    Print sent and received messages in the console. This may impact performance and should not be enabled in production.
 
 
 
@@ -178,7 +178,7 @@ The following options can only be set from a terminal.
 !!! quote ""
     #### `docs`
 
-    Serve documentation website locally and open it with the system\'s default browser
+    Serve documentation website locally and open it with the system's default browser
 
 
 !!! quote ""
