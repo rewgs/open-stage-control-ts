@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.13
+
+- bug fixes
+    - nested property inheritance (eg. `@{id_@{id_x}}`) not updating properly
+
 ## 1.9.12
 
 - bug fixes

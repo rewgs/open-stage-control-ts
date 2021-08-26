@@ -517,7 +517,7 @@ class Widget extends EventEmitter {
                 if (content.indexOf('@{') >= 0) {
 
                     content = balancedReplace('@', '{', '}', content, (subcontent)=>{
-                        return this.resolveProp(content, '@{' + subcontent + '}', storeLinks ? 'nested' : false, this)
+                        return this.resolveProp(propName, '@{' + subcontent + '}', storeLinks ? 'nested' : false, this)
                     })
 
                 }
