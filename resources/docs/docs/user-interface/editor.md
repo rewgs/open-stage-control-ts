@@ -1,6 +1,6 @@
 ## Widget selection
 
-Clicking on a widget, on a tab label or on an item in the project tree selects the widgets for edition:
+Clicking on a widget, on a tab label or on an item in the project tree selects the widgets for editing:
 
 - All its editable properties are shown in the inspector panel
 - The corresponding item in the project tree is highlighted
@@ -37,7 +37,7 @@ Right clicking on a widget displays a menu with the following actions
 Selected widget's properties are displayed and can be modified in the inspector. The [properties reference](../widgets/properties-reference.md) lists the available properties for each widget type.
 
 - Property fields are all multiline (press `shift + enter` for new line).
-- Properties are written in JSON, with some flexibility brought by the [JSON5](https://github.com/json5/json5) format. For example, doubles quotes around object keys are not mandatory.
+- Properties are written in JSON, with some flexibility brought by the [JSON5](https://github.com/json5/json5) format. For example, double quotes around object keys are not mandatory.
 - Clicking on a property name spawns a help modal window
 
 
