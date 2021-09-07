@@ -39,6 +39,7 @@ class Modal extends Panel {
                 popupLabel: {type: 'string|boolean', value: 'auto', help: 'Alternative label for the modal popup'},
                 popupPadding: {type: 'number', value: 'auto', help: 'Modal\'s inner spacing.'},
                 verticalTabs: null,
+                html: null
             },
             children: {
                 tab: null
