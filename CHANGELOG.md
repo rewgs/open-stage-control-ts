@@ -4,6 +4,7 @@
 
 - bug fixes
     - modal: remove `html` property
+    - matrix: nested property inheritance (eg. `@{id_@{id_x}}`) not working in `props`
 
 ## 1.9.13
 

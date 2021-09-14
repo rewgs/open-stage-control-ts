@@ -517,7 +517,7 @@ class Widget extends EventEmitter {
                 if (content.indexOf('@{') >= 0) {
 
                     content = balancedReplace('@', '{', '}', content, (subcontent)=>{
-                        return this.resolveProp(propName, '@{' + subcontent + '}', storeLinks ? 'nested' : false, this)
+                        return this.resolveProp(propName + '-nested', '@{' + subcontent + '}', storeLinks ? 'nested' : false, this)
                     })
 
                 }
@@ -564,6 +564,8 @@ class Widget extends EventEmitter {
                 if (widgets[0] === this.parent && this.parent !== widgetManager && this.parent.getProp('type') === 'clone') widgets = [this.parent.parent]
 
                 if (storeLinks) {
+
+                    if (propName.indexOf('-nested') !== -1) propName = propName.replace('-nested', '')
 
                     if (k == 'value') {
 
