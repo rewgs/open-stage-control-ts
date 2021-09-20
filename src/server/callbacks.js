@@ -318,10 +318,11 @@ module.exports =  {
     syncOsc(shortdata, clientId) {
         // sync osc (or midi) message with other clients
 
+        // if widget hash is provided, look for cached data
         if (!(widgetHashTable[clientId] && widgetHashTable[clientId][shortdata.h])) return
 
         var value = shortdata.v,
-            data = widgetHashTable[clientId][shortdata.h]
+            data = shortdata.h ? widgetHashTable[clientId][shortdata.h] : {}
 
         data = deepCopy(data)
         for (var k in shortdata) {
@@ -340,11 +341,21 @@ module.exports =  {
 
     sendOsc(shortdata, clientId) {
         // send osc (or midi) message and sync with other clients
+        // shortdata
+        //     {
+        //         h: 'widget_uuid',
+        //         v: widget_value,
+        //         ... // target, preArgs, address, typeTags
+        //             // override cached data
+        //             // required if data.h is not provided
+        //     }
 
-        if (!(widgetHashTable[clientId] && widgetHashTable[clientId][shortdata.h])) return
+
+        // if widget hash is provided, look for cached data
+        if (shortdata.h && !(widgetHashTable[clientId] && widgetHashTable[clientId][shortdata.h])) return
 
         var value = shortdata.v,
-            data = widgetHashTable[clientId][shortdata.h]
+            data = shortdata.h ? widgetHashTable[clientId][shortdata.h] : {}
 
         data = deepCopy(data)
         for (var k in shortdata) {
@@ -388,6 +399,17 @@ module.exports =  {
 
     addWidget(data, clientId) {
         // cache widget osc data to reduce bandwidth usage
+        // data
+        //     {
+        //         hash: 'widget_uuid',
+        //         data: {
+        //             target: ['host:port', ...],
+        //             preArgs: [arg1, ...],
+        //             address: '/address',
+        //             typeTags: 'iif' // one letter per arg typetage
+        //         }
+        //     }
+        //     preArgs, target and typeTags can be empty strings
 
         if (!widgetHashTable[clientId][data.hash])  {
             widgetHashTable[clientId][data.hash] = {}
