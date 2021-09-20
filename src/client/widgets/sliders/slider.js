@@ -116,10 +116,24 @@ class Slider extends Canvas {
             increment = e.ctrlKey ? 0.25 : 1
 
         if (this.getProp('steps')) {
-            var i = this.steps.indexOf(this.value)
-            if (i > -1 && i < this.steps.length) {
-                this.setValue(this.steps[i + direction], {sync: true, send: true, fromLocal: true})
+            var i = this.steps.indexOf(this.value),
+                val
+            if (i === -1) {
+                val = this.steps.reduce((a, b) => {
+                    let aDiff = Math.abs(a - this.value),
+                        bDiff = Math.abs(b - this.value)
+
+                    if (aDiff == bDiff) {
+                        return (direction ? a > b : b > a) ? a : b
+                    } else {
+                        return bDiff < aDiff && ((b - this.value) > 0  != e.deltaY > 0)? b : a
+                    }
+                })
             }
+            else if (i < this.steps.length) {
+                val = this.steps[i + direction]
+            }
+            if (val !== undefined) this.setValue(val, {sync: true, send: true, fromLocal: true})
         } else {
             this.percent = clip(this.percent +  Math.max(increment,10/Math.pow(10,this.decimals + 1)) * direction, [0,100])
             this.setValue(this.percentToValue(this.percent), {sync: true, send: true, dragged: true})
