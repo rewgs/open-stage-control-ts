@@ -44,7 +44,7 @@ class Fader extends Slider {
                 sensitivity: {type: 'number', value: 1, help: 'Defines the fader\'s sensitivity when `snap` is `false` '},
                 steps: {type: 'string|number|array', value: '', help: [
                     'Restricts the widget\'s value:',
-                    '- `auto`: use values defined in `range`',
+                    '- `empty` or `0`: use values defined in `range`',
                     '- `number`: define a number of evenly spaced steps',
                     '- `array`: use arbitrary values',
                 ]},
