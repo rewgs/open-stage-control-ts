@@ -81,7 +81,7 @@ class Widget extends EventEmitter {
                 lineWidth: {type: 'number', value: 'auto', help: 'Stroke width.'},
                 padding: {type: 'number', value: 'auto', help: 'Inner spacing.'},
                 html: {type: 'string', value: '', help: [
-                    'Custom html content to be inserted in the widget (before the widget\'s content).',
+                    'Custom html content to be inserted in the widget (before the widget\'s content). Elements are all unstyled by default, `css` should be used to customize their appearance.',
                     'The code is automatically wrapped in &lt;div class="html">&lt;/div>',
                     'Allowed HTML tags:',
                     '&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,',
