@@ -30,7 +30,7 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
 
         super({...options, html: html`
             <inner>
-                <div class="frame"></div>
+                <div class="frame html"></div>
             </inner>
         `})
 
