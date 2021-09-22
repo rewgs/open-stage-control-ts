@@ -19,16 +19,21 @@ class Slider extends Canvas {
 
         this.gaugePadding = 0
 
-        this.rangeKeys = []
+        this.rangeKeys = Object.keys(this.getProp('range')).sort((a,b)=>{
+            if (a === 'min' || b === 'max') return -1
+            else if (a === 'max' || b === 'min') return 1
+            else return parseInt(a) - parseInt(b)
+        })
         this.rangeVals = []
         this.rangeLabels = []
 
-        for (var k in this.getProp('range')) {
-            var key = k=='min'?0:k=='max'?100:parseInt(k),
+        for (var i in this.rangeKeys) {
+            var k = this.rangeKeys[i],
+                key = k == 'min' ? 0 : k == 'max' ? 100 : parseInt(k),
                 val = typeof this.getProp('range')[k] === 'object' && this.getProp('range')[k] !== null ?
                     this.getProp('range')[k][Object.keys(this.getProp('range')[k])[0]]:
                     this.getProp('range')[k]
-            
+
             if (isNaN(val) || val === null || val === undefined) val = 0
 
             var label = typeof this.getProp('range')[k] === 'object' && this.getProp('range')[k] !== null ?
@@ -37,10 +42,11 @@ class Slider extends Canvas {
 
             if (Math.abs(label) >= 1000) label = Math.round(label / 1000) + 'k'
 
-            this.rangeKeys.push(key)
+            this.rangeKeys[i] = key
             this.rangeVals.push(val)
             this.rangeLabels.push(label)
         }
+
         this.rangeValsMax = Math.max(...this.rangeVals),
         this.rangeValsMin = Math.min(...this.rangeVals)
 
