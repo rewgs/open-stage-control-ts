@@ -46,7 +46,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         defaults.scripting.script.help.push(
             'Additionnal variables:',
-            '- `locals.speed`: encoder\'s speed (reduce `sensitivity` to increase averaging)'
+            '- `locals.speed`: encoder\'s speed (reduce `sensitivity` to increase averaging)',
             '- `locals.angle`: encoder\'s angle in degrees'
         )
 
