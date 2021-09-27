@@ -629,11 +629,47 @@
 
 }
 
+.textarea-container {
+
+    --alpha-fill-off: 0.05;
+    --widget-padding: 2rem;
+
+    inner {
+        position: relative;
+        @include pseudo-stroke();
+        @include pseudo-fill(0.05);
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        padding: var(--widget-padding);
+        text-align: center;
+        &.right {
+            text-align: right;
+        }
+        &.left {
+            text-align: left;
+        }
+        padding: var(--widget-padding);
+
+
+    }
+    textarea {
+        background: none;
+        width: 100%;
+        height: 100%;
+        resize: none;
+        padding: var(--widget-padding);
+    }
+}
+
 .editor-enabled {
+    .textarea-container textarea,
     .input-container inner {
         // prevent input focus when selecting
         pointer-events: none;
     }
+    .clone-container.editing .textarea-container textarea,
+    .textarea-container.editing textarea,
     .clone-container.editing .input-container inner,
     .input-container.editing inner {
         // prevent input focus when selecting

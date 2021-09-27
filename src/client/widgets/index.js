@@ -6,6 +6,7 @@ module.exports.widgets = {
     dropdown: require('./basics/dropdown'),
     menu: require('./basics/menu'),
     input: require('./basics/input'),
+    textarea: require('./basics/textarea'),
     file: require('./basics/file'),
 
     // containers
@@ -54,7 +55,7 @@ module.exports.widgets = {
 }
 
 module.exports.categories = {
-    'Basics':['button', 'switch', 'dropdown', 'menu', 'input', 'file'],
+    'Basics':['button', 'switch', 'dropdown', 'menu', 'input', 'textarea', 'file'],
     'Containers':['panel', 'modal', 'clone', 'fragment', 'matrix', 'keyboard', 'patchbay'],
     'Frames':['frame', 'svg', 'html', 'image'],
     'Graphs':['plot','eq','visualizer'],

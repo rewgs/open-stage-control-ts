@@ -7,6 +7,7 @@
 
 - widgets
     - encoder: expose angle in script (as `locals.angle`)
+    - new textarea widget (multi line input)
 
 ## 1.9.14
 

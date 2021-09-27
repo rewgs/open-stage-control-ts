@@ -1,0 +1,113 @@
+var Widget = require('../common/widget'),
+    {deepCopy} = require('../../utils'),
+    html = require('nanohtml')
+
+class TextArea extends Widget {
+
+    static description() {
+
+        return 'Text area (multi line input).'
+
+    }
+
+    static defaults() {
+
+        return super.defaults().extend({
+            style: {
+                // _separator_input_style: 'Textarea style',
+            },
+            class_specific: {
+
+            },
+        })
+
+    }
+
+    constructor(options) {
+
+        super({...options, html: html`
+            <inner>
+                <textarea></textarea>
+            </inner>
+        `})
+
+        this.value = ''
+        this.stringValue = ''
+        this.focused = false
+        this.validation = null
+        this.input = DOM.get(this.widget, 'textarea')[0]
+
+        if (this.getProp('align') === 'left') this.widget.classList.add('left')
+        if (this.getProp('align') === 'right') this.widget.classList.add('right')
+
+
+        if (this.getProp('interaction')) {
+
+            this.input.setAttribute('tabindex', 0)
+            this.input.addEventListener('focus', this.focus.bind(this))
+            this.input.addEventListener('blur', (e)=>{
+                this.blur(true)
+            })
+
+            this.input.addEventListener('keydown', (e)=>{
+                if (e.keyCode === 13 && !e.shiftKey) {
+                    // enter
+                    e.preventDefault()
+                    this.blur()
+                }
+                else if (e.keyCode === 27) {
+                    // esc
+                    this.blur(false)
+                    this.input.value = this.stringValue
+                }
+            })
+
+        }
+
+    }
+
+    focus() {
+
+        if (this.focused) return
+        this.focused = true
+
+    }
+
+    blur(change=true) {
+
+        if (!this.focused) return
+        this.focused = false
+
+        this.input.blur()
+
+        if (change) this.inputChange()
+
+    }
+
+    inputChange() {
+
+        this.setValue(this.input.value, {sync:true, send:true})
+
+    }
+
+
+    setValue(v, options={} ) {
+
+        this.value = String(v)
+
+        if (this.value === '' || this.value === null) this.value = this.getProp('default')
+
+        if (this.input.value !== this.value) this.input.value = this.value
+
+        if (options.send && !options.fromSync) this.sendValue()
+        if (options.sync) this.changed(options)
+
+    }
+
+}
+
+TextArea.dynamicProps = TextArea.prototype.constructor.dynamicProps
+    .filter(x=>x !== 'interaction')
+
+
+module.exports = TextArea
