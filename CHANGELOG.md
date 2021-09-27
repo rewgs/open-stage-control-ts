@@ -5,6 +5,9 @@
 - bug fixes
     - sliders: ignore key order in `range`
 
+- widgets
+    - encoder: expose angle in script (as `locals.angle`)
+
 ## 1.9.14
 
 - bug fixes

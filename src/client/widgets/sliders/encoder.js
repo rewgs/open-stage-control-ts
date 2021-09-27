@@ -46,7 +46,8 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         defaults.scripting.script.help.push(
             'Additionnal variables:',
-            '- `locals.speed`: encoder\'s speed (reduce `sensitivity to increase averaging`)'
+            '- `locals.speed`: encoder\'s speed (reduce `sensitivity` to increase averaging)'
+            '- `locals.angle`: encoder\'s angle in degrees'
         )
 
         return defaults
@@ -250,6 +251,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
         } else {
             this.parsersLocalScope.speed = 0
         }
+        this.parsersLocalScope.angle = Math.abs(this.percent % 100 / 100 * 360)
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
