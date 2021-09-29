@@ -111,7 +111,19 @@ class Canvas extends Widget {
         for (var data of this.constructor.cssVariables) {
 
             var val = style.getPropertyValue(data.css).trim()
+
+            if (typeof val === 'string' && val.includes('(')) {
+                // property not computed because of calc() or var() in user style
+                // -> attempt to force calculation
+                var dummy = html`<div style="position:absolute;width:var(${data.css})"></div>`
+                this.container.appendChild(dummy)
+                let s = window.getComputedStyle(dummy)
+                val = parseInt(s.getPropertyValue('width'))
+                this.container.removeChild(dummy)
+            }
+
             this.cssVars[data.js] = data.toJs ? data.toJs(val) : val
+
 
         }
 
