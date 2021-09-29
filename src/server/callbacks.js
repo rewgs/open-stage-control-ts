@@ -281,11 +281,24 @@ module.exports =  {
 
         if (!path.basename(data.path).match(/.*\.json$/)) return console.error('(ERROR) Sessions must be saved as .json files')
 
+        if (data.backup) {
+            var newpath, i = 0
+            while (true) {
+                newpath = data.path.replace(/\.json$/, '-backup' + String(i).padStart(3, 0) + '.json')
+                if (fs.existsSync(newpath)) i++
+                else {
+                    data.path = newpath
+                    break
+                }
+            }
+        }
+
+
         module.exports.fileSave(data, clientId, true, ()=>{
 
             console.log('(INFO) Session file saved in '+ data.path)
 
-            ipc.send('sessionSaved', clientId)
+            if (!data.backup) ipc.send('sessionSaved', clientId)
 
             // reload session in other clients
             for (var id in ipc.clients) {
@@ -294,7 +307,7 @@ module.exports =  {
                 }
             }
 
-            module.exports.sessionSetPath({path: data.path}, clientId)
+            if (!data.backup) module.exports.sessionSetPath({path: data.path}, clientId)
 
         })
 

@@ -8,6 +8,7 @@
     - Open recent: open a recent session on the server
     - Save / Save as: save session file on the server
     - Fragment mode: when enabled, the session will be saved as a fragment file (only the root's first child will be saved)
+    - Save backup: save a copy of current session with a incremented suffix appended to the file name
     - Import: import a session file from the client's filesystem
     - Export: export a session file to the client's filesystem
 - State

@@ -46,6 +46,7 @@ module.exports = {
     file_open_recent_wait: 'Liste non chargée, veuillez fermer puis ouvrir le menu à nouveau',
     file_save: 'Enregistrer',
     file_save_as: 'Enregistrer sous...',
+    file_backup: 'Enregistrer une sauvegarde',
     file_import: 'Importer',
     file_export: 'Exporter',
 

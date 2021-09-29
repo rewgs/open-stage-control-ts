@@ -13,6 +13,9 @@
     - new textarea widget (multi line input)
     - expose the computed dimensions of canvas-based widgets in `css` (as `--widget-width` and `--widget-height`) and `script` (as `locals.width` and `locals.height`)
 
+- client
+    - add `Save backup` menu action (saves a backup copy of current session with an incremented suffix appended to the file name)
+
 ## 1.9.14
 
 - bug fixes

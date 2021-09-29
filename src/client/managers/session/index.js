@@ -97,7 +97,7 @@ var SessionManager = class SessionManager extends EventEmitter {
 
     }
 
-    save(path) {
+    save(path, backup=false) {
 
         if (!this.session || READ_ONLY) return
 
@@ -113,7 +113,8 @@ var SessionManager = class SessionManager extends EventEmitter {
 
             ipc.send('sessionSave', {
                 session: this.session.toJSON(),
-                path: this.sessionPath
+                path: this.sessionPath,
+                backup: backup
             })
 
         } else {
@@ -127,11 +128,16 @@ var SessionManager = class SessionManager extends EventEmitter {
                     content: data,
                     version: PACKAGE.version
                 }, 'fragment'),
-                path: this.sessionPath
+                path: this.sessionPath,
+                backup: backup
             })
 
         }
 
+    }
+
+    saveBackup() {
+        this.save('', true)
     }
 
     saveAs() {

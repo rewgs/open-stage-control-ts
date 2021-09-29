@@ -59,6 +59,15 @@ var menuEntries = [
                 separator: true
             },
             {
+                label: locales('file_backup'),
+                action: sessionManager.saveBackup.bind(sessionManager),
+                shortcut: 'mod + b',
+                class: ()=>{return READ_ONLY || sessionManager.session === null || !sessionManager.sessionPath ? 'disabled' :''}
+            },
+            {
+                separator: true
+            },
+            {
                 label: locales('file_import'),
                 action: sessionManager.import.bind(sessionManager),
                 class: ()=>{return READ_ONLY ? 'disabled' :''}

@@ -46,6 +46,7 @@ module.exports = {
     file_open_recent_wait: 'List not loaded yet, please close and reopen the menu',
     file_save: 'Save',
     file_save_as: 'Save as...',
+    file_backup: 'Save backup',
     file_import: 'Import',
     file_export: 'Export',
 
