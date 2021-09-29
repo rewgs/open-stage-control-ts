@@ -124,9 +124,9 @@ class UiConsole extends UiSidePanel {
             this.log('output value', returnValue)
         }
 
-        if (this.input.value !== this.history[this.cursor] && this.input.value !== this.history[1]) {
+        if (this.input.value !== this.history[1]) {
             this.history.splice(1, 0, this.input.value)
-            if (this.history.length > 10) this.history.pop()
+            if (this.history.length > 50) this.history.pop()
         }
 
         this.input.value = ''
