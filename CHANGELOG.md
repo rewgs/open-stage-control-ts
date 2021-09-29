@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.9.15
+## 1.10.0
 
 - bug fixes
     - sliders: ignore key order in `range`
