@@ -283,7 +283,7 @@ module.exports =  {
 
         if (data.backup) {
             var newpath, i = 0
-            while (true) {
+            for (;;) {
                 newpath = data.path.replace(/\.json$/, '-backup' + String(i).padStart(3, 0) + '.json')
                 if (fs.existsSync(newpath)) i++
                 else {
