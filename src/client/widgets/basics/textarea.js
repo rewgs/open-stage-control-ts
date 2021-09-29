@@ -1,12 +1,11 @@
 var Widget = require('../common/widget'),
-    {deepCopy} = require('../../utils'),
     html = require('nanohtml')
 
 class TextArea extends Widget {
 
     static description() {
 
-        return 'Text area (multi line input).'
+        return 'Text area (multi line input). Tip: hit shift + enter for new lines.'
 
     }
 
