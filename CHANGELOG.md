@@ -5,6 +5,7 @@
 - bug fixes
     - sliders: ignore key order in `range`
     - sliders: handle mousewheel increment when starting from a value between two steps with `steps` property defined
+    - inspector: allow scrolling in the help modal
 
 - widgets
     - encoder: expose angle in script (as `locals.angle`)
