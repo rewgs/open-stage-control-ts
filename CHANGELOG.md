@@ -10,6 +10,7 @@
 - widgets
     - encoder: expose angle in script (as `locals.angle`)
     - new textarea widget (multi line input)
+    - expose the computed dimensions of canvas-based widgets in `css` (as `--widget-width` and `--widget-height`) and `script` (as `locals.width` and `locals.height`)
 
 ## 1.9.14
 

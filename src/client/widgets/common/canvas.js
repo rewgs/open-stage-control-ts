@@ -1,9 +1,27 @@
 var Widget = require('./widget'),
     resize = require('../../events/resize'),
-    canvasQueue = require('./queue')
+    canvasQueue = require('./queue'),
+    html = require('nanohtml')
 
 
 class Canvas extends Widget {
+
+    static defaults() {
+
+        var defaults = super.defaults(Canvas)
+        defaults.style.css.help.push(
+            'Canvas-based widget have their computed width and height available as css variables (read-only):',
+            '- `--widget-width`',
+            '- `--widget-height`',
+        )
+        defaults.scripting.script.help.push(
+            'Canvas-based widget have their computed width and height available as local variables:',
+            '- `locals.width`',
+            '- `locals.height`',
+        )
+        return defaults
+
+    }
 
     constructor(options) {
 
@@ -53,6 +71,11 @@ class Canvas extends Widget {
 
         this.canvas.setAttribute('width', width * ratio)
         this.canvas.setAttribute('height', height * ratio)
+
+        this.container.style.setProperty('--widget-height', this.height + 'rem')
+        this.container.style.setProperty('--widget-width', this.width + 'rem')
+        this.parsersLocalScope.height = this.height
+        this.parsersLocalScope.width = this.width
 
         this.clearRect = []
 
