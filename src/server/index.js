@@ -178,8 +178,11 @@ function startLauncher() {
         address = 'file://' + path.resolve(__dirname + '/../launcher/' + 'index.html'),
         {ipcMain} = require('electron')
 
+    require('@electron/remote/main').initialize()
+
     app.on('ready',function(){
         launcher = require('./electron-window')({address:address, shortcuts:dev, width:680, height:(40 + 200 + 20 + 24 * Object.keys(settings.options).filter(x=>settings.options[x].launcher !== false).length / 2), node:true, color:'#151a24', id: 'launcher'})
+        require("@electron/remote/main").enable(launcher.webContents)
         launcher.on('close', ()=>{
             process.stdout.write = stdoutWrite
             process.stderr.write = stderrWrite

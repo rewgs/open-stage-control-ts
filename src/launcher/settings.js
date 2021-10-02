@@ -1,4 +1,5 @@
-var {remote, ipcRenderer} = require('electron'),
+var {ipcRenderer} = require('electron'),
+    remote = require('@electron/remote'),
     {dialog} = remote.require('electron'),
     fs = remote.require('fs'),
     {settings} = remote.getGlobal('launcherSharedGlobals'),

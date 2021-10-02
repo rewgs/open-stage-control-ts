@@ -1,4 +1,5 @@
-var {remote, ipcRenderer} = require('electron'),
+var {ipcRenderer} = require('electron'),
+    remote = require('@electron/remote'),
     {Menu, MenuItem} = remote.require('electron'),
     menu = new Menu(),
     terminal = require('./terminal'),
