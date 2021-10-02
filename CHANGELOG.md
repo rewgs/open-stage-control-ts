@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.10.1
+
+- bug fixes
+    - certificate expiration issue
+
 ## 1.10.0
 
 - bug fixes
