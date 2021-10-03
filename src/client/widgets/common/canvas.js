@@ -112,7 +112,7 @@ class Canvas extends Widget {
 
             var val = style.getPropertyValue(data.css).trim()
 
-            if (typeof val === 'string' && val.includes('(')) {
+            if (typeof val === 'string' && val.match(/(var|calc)\(/)) {
                 // property not computed because of calc() or var() in user style
                 // -> attempt to force calculation
                 var dummy = html`<div style="position:absolute;width:var(${data.css})"></div>`

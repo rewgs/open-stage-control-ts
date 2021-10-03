@@ -1,9 +1,10 @@
 # Changelog
 
-## 1.10.1
+## 1.10.2
 
 - bug fixes
     - certificate expiration issue
+    - regression breaking colors in canvas-based widgets
 
 ## 1.10.0
 
