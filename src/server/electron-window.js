@@ -131,7 +131,7 @@ module.exports = function(options={}) {
         // save geometry
         var geometry = settings.read('geometry') || {}
         geometry[options.id] = window.getBounds()
-        settings.write('geometry', geometry)
+        settings.write('geometry', geometry, false, true)
     })
 
     var menu = new Menu()

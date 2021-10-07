@@ -142,7 +142,7 @@ module.exports = {
     read: function(key){
         return settings.options[key] !== undefined ? settings.options[key] : settings[key]
     },
-    write:function(key, value, tmp) {
+    write:function(key, value, tmp, sync) {
 
         settings[key] = value
 
@@ -154,9 +154,13 @@ module.exports = {
                 process.send(['settings.write', [key, value]])
             } else {
                 config[key] = value
-                fs.writeFile(configPath, JSON.stringify(config, null, 4), function(err, data) {
-                    if (err) throw err
-                })
+                if (sync) {
+                    fs.writeFileSync(configPath, JSON.stringify(config, null, 4))
+                } else {
+                    fs.writeFile(configPath, JSON.stringify(config, null, 4), function(err, data) {
+                        if (err) throw err
+                    })
+                }
 
             }
 
