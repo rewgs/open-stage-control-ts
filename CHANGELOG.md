@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.10.3
+
 - bug fixes
     - config not persistent on windows
 
