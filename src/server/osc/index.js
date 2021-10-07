@@ -224,7 +224,7 @@ module.exports = {
 
             for (var i = 0; i < args.length; i++) {
 
-                typeTag = typeTags[i] || typeTag
+                if (typeTags && typeTags[i]) typeTag = typeTags[i]
                 arg = oscServer.parseArg(args[i], typeTag)
 
                 if (arg !== null) message.push(arg)
