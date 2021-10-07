@@ -19,7 +19,6 @@ var menuEntries = [
             {
                 label: locales('session_new'),
                 action: sessionManager.create.bind(sessionManager),
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 separator: true
@@ -28,7 +27,6 @@ var menuEntries = [
                 label: locales('file_open'),
                 action: sessionManager.browse.bind(sessionManager),
                 shortcut: 'mod + o',
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_open_recent'),
@@ -42,13 +40,13 @@ var menuEntries = [
                 label: locales('file_save'),
                 action: sessionManager.save.bind(sessionManager),
                 shortcut: 'mod + s',
-                class: ()=>{return READ_ONLY || sessionManager.session === null ? 'disabled' :''}
+                class: ()=>{return sessionManager.session === null ? 'disabled' :''}
             },
             {
                 label: locales('file_save_as'),
                 action: sessionManager.saveAs.bind(sessionManager),
                 shortcut: 'mod + shift + s',
-                class: ()=>{return READ_ONLY || sessionManager.session === null ? 'disabled' :''}
+                class: ()=>{return sessionManager.session === null ? 'disabled' :''}
             },
             {
                 label: locales('fragment_mode'),
@@ -62,7 +60,7 @@ var menuEntries = [
                 label: locales('file_backup'),
                 action: sessionManager.saveBackup.bind(sessionManager),
                 shortcut: 'mod + b',
-                class: ()=>{return READ_ONLY || sessionManager.session === null || !sessionManager.sessionPath ? 'disabled' :''}
+                class: ()=>{return sessionManager.session === null || !sessionManager.sessionPath ? 'disabled' :''}
             },
             {
                 separator: true
@@ -70,12 +68,11 @@ var menuEntries = [
             {
                 label: locales('file_import'),
                 action: sessionManager.import.bind(sessionManager),
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_export'),
                 action: sessionManager.export.bind(sessionManager),
-                class: ()=>{return READ_ONLY || sessionManager.session === null ? 'disabled' :''}
+                class: ()=>{return sessionManager.session === null ? 'disabled' :''}
             },
 
         ]
@@ -109,17 +106,14 @@ var menuEntries = [
             {
                 label: locales('file_open'),
                 action: stateManager.browse.bind(stateManager),
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_save'),
                 action: stateManager.save.bind(stateManager),
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_save_as'),
                 action: stateManager.saveAs.bind(stateManager),
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 separator: true
@@ -127,18 +121,16 @@ var menuEntries = [
             {
                 label: locales('file_import'),
                 action: stateManager.import.bind(stateManager),
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
             {
                 label: locales('file_export'),
                 action: stateManager.export.bind(stateManager),
-                class: ()=>{return READ_ONLY ? 'disabled' :''}
             },
         ]
     },
     {
         label: locales('editor'),
-        class: ()=>{return sessionManager.session === null || READ_ONLY ? 'disabled' : ''},
+        class: ()=>{return sessionManager.session === null ? 'disabled' : ''},
         action: [
             {
                 label: locales('editor_enabled'),

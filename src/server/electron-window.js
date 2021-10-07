@@ -143,7 +143,7 @@ module.exports = function(options={}) {
         menu.popup({window: window, x: e.x, y: e.y })
     }, false)
 
-    if (options.shortcuts) {
+    if (options.shortcuts && !settings.read('read-only')) {
 
         shortcut.register(window,'CmdOrCtrl+R',function(){
             window.reload()

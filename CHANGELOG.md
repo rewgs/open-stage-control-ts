@@ -1,5 +1,11 @@
 # Changelog
 
+- bug fixes
+    - config not persistent on windows
+
+- misc
+    - read-only mode now hides and disables the main menu
+
 ## 1.10.2
 
 - bug fixes

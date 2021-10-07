@@ -12,19 +12,27 @@ class UiToolbar extends UiWidget {
         })
         this.opened = false
         this.entries = options.entries
-        this.menu.bindShortcuts(this.entries)
 
-        this.container.addEventListener('fast-click', (e)=>{
-            if (this.opened) this.close()
-            else this.open(e)
-        })
+        if (READ_ONLY) {
 
-        this.menu.on('close', ()=>{
-            setTimeout(()=>{
-                this.opened = false
-                this.toggleState()
+            this.container.style.display = 'none'
+
+        } else {
+
+            this.menu.bindShortcuts(this.entries)
+
+            this.container.addEventListener('fast-click', (e)=>{
+                if (this.opened) this.close()
+                else this.open(e)
             })
-        })
+
+            this.menu.on('close', ()=>{
+                setTimeout(()=>{
+                    this.opened = false
+                    this.toggleState()
+                })
+            })
+        }
 
     }
 
