@@ -155,11 +155,14 @@
         margin-left: #{-$padding * 2};
         width: calc(100% + #{$padding * 2});
         display: block;
-        background: linear-gradient(to right,var(--color-background), transparent);
+        background: linear-gradient(to right, var(--color-background), var(--color-ui-background));
         font-family: $font;
         line-height: $field-height - 4rem;
         padding: 4rem $padding;
         padding-left: #{$padding * 2};
+        position: sticky;
+        top: 0;
+        z-index: 2;
     }
 
     .filter-active .filter-hide {
