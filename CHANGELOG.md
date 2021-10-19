@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.11.0
+
+- widgets
+    - when a panel contains widgets and has `scroll` set to `true`, its value will be used to represent the scroll position for x-axis and y-axis between 0 and 1.
+
 ## 1.10.3
 
 - bug fixes

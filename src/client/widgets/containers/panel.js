@@ -35,9 +35,9 @@ class Panel extends Container() {
                 verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
             },
             value: {
-                value: {type: 'integer', value: '', help: [
-                    'Defines currently selected tab in the widget',
-                    'A tab can be opened only by setting its parent\'s value'
+                value: {type: 'integer|array', value: '', help: [
+                    'If the panel contains tabs, its value defines which tab is selected selected (by index, starting with 0).',
+                    'If the panel contains widgets and `scroll` is `true`, its value is an array that contains the scrolling state between 0 and 1 for the x and y axis. '
                 ]}
             },
             children: {
@@ -85,54 +85,72 @@ class Panel extends Container() {
 
             this.container.classList.add('contains-widgets')
 
-            if (iOS13 && this.getProp('scroll')) {
+            if (this.getProp('scroll')) {
 
-                faderDefaults = faderDefaults || Fader.defaults()._props()
+                if (iOS13) {
 
-                this.iosScrollbars = {}
-                for (let dir of ['vertical', 'horizontal']) {
-                    this.iosScrollbars[dir] = new Fader({props:{
-                        ...faderDefaults,
-                        design:'compact',
-                        horizontal: dir === 'horizontal',
-                        range: dir === 'horizontal' ? {min:0, max:1} : {min:1, max:0}
-                    }, parent: this})
-                    this.iosScrollbars[dir].container.classList.add('not-editable')
-                    this.iosScrollbars[dir].container.classList.add('ios-scrollbar')
-                    this.iosScrollbars[dir].container.classList.add(dir)
-                    this.iosScrollbars[dir]._scrollable = false
-                    this.container.appendChild(this.iosScrollbars[dir].container)
+                    faderDefaults = faderDefaults || Fader.defaults()._props()
+
+                    this.iosScrollbars = {}
+                    for (let dir of ['vertical', 'horizontal']) {
+                        this.iosScrollbars[dir] = new Fader({props:{
+                            ...faderDefaults,
+                            design:'compact',
+                            horizontal: dir === 'horizontal',
+                            range: dir === 'horizontal' ? {min:0, max:1} : {min:1, max:0}
+                        }, parent: this})
+                        this.iosScrollbars[dir].container.classList.add('not-editable')
+                        this.iosScrollbars[dir].container.classList.add('ios-scrollbar')
+                        this.iosScrollbars[dir].container.classList.add(dir)
+                        this.iosScrollbars[dir]._scrollable = false
+                        this.container.appendChild(this.iosScrollbars[dir].container)
+                    }
+                    this.iosScrollbars.horizontal.on('change', (e)=>{
+                        e.stopPropagation = true
+                        this.widget.scrollLeft = parseInt(e.widget.getValue() * (this.widget.scrollWidth - this.widget.clientWidth))
+                    })
+                    this.iosScrollbars.vertical.on('change', (e)=>{
+                        e.stopPropagation = true
+                        this.widget.scrollTop = parseInt(e.widget.getValue() * (this.widget.scrollHeight - this.widget.clientHeight))
+                    })
+
+                    this.checkScrollBars = ()=>{
+                        this.iosScrollbars.horizontal.container.style.setProperty('--knob-size', parseInt(this.widget.clientWidth * this.widget.clientWidth / this.widget.scrollWidth) + 'px')
+                        this.iosScrollbars.vertical.container.style.setProperty('--knob-size', parseInt(this.widget.clientHeight * this.widget.clientHeight / this.widget.scrollHeight) + 'px')
+                        this.iosScrollbars.horizontal._scrollable = this.container.classList.toggle('has-ios-scrollbar-h', this.widget.scrollWidth > this.widget.clientWidth)
+                        this.iosScrollbars.vertical._scrollable = this.container.classList.toggle('has-ios-scrollbar-v', this.widget.scrollHeight > this.widget.clientHeight)
+                        this.iosScrollbars.vertical.container.classList.toggle('double-scrollbar', this.iosScrollbars.horizontal._scrollable && this.iosScrollbars.vertical._scrollable)
+                        if (this.iosScrollbars.horizontal._scrollable) resize.check(this.iosScrollbars.horizontal.container, true)
+                        if (this.iosScrollbars.vertical._scrollable) resize.check(this.iosScrollbars.vertical.container, true)
+
+
+                        this.iosScrollbars.horizontal.batchDraw()
+                    }
+
+                    this.on('resize', (event)=>{
+                        this.checkScrollBars()
+                    }, {element: this.widget})
+
                 }
-                this.widget.addEventListener('scroll', ()=>{
-                    if (this.iosScrollbars.horizontal._scrollable) this.iosScrollbars.horizontal.setValue(this.widget.scrollLeft / (this.widget.scrollWidth - this.widget.clientWidth))
-                    if (this.iosScrollbars.vertical._scrollable) this.iosScrollbars.vertical.setValue(this.widget.scrollTop / (this.widget.scrollHeight - this.widget.clientHeight))
-                })
-                this.iosScrollbars.horizontal.on('change', (e)=>{
-                    e.stopPropagation = true
-                    this.widget.scrollLeft = parseInt(e.widget.getValue() * (this.widget.scrollWidth - this.widget.clientWidth))
-                })
-                this.iosScrollbars.vertical.on('change', (e)=>{
-                    e.stopPropagation = true
-                    this.widget.scrollTop = parseInt(e.widget.getValue() * (this.widget.scrollHeight - this.widget.clientHeight))
-                })
 
-                this.checkScrollBars = ()=>{
-                    this.iosScrollbars.horizontal.container.style.setProperty('--knob-size', parseInt(this.widget.clientWidth * this.widget.clientWidth / this.widget.scrollWidth) + 'px')
-                    this.iosScrollbars.vertical.container.style.setProperty('--knob-size', parseInt(this.widget.clientHeight * this.widget.clientHeight / this.widget.scrollHeight) + 'px')
-                    this.iosScrollbars.horizontal._scrollable = this.container.classList.toggle('has-ios-scrollbar-h', this.widget.scrollWidth > this.widget.clientWidth)
-                    this.iosScrollbars.vertical._scrollable = this.container.classList.toggle('has-ios-scrollbar-v', this.widget.scrollHeight > this.widget.clientHeight)
-                    this.iosScrollbars.vertical.container.classList.toggle('double-scrollbar', this.iosScrollbars.horizontal._scrollable && this.iosScrollbars.vertical._scrollable)
-                    if (this.iosScrollbars.horizontal._scrollable) resize.check(this.iosScrollbars.horizontal.container, true)
-                    if (this.iosScrollbars.vertical._scrollable) resize.check(this.iosScrollbars.vertical.container, true)
+                if (this.props.type !== 'modal') {
 
+                    this.scrollWidth = 1
+                    this.scrollHeight = 1
+                    this.scrollTimeout = null
+                    this.widget.addEventListener('scroll', ()=>{
+                        this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
+                        this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
+                        var x = this.widget.scrollLeft / this.scrollWidth,
+                        y = this.widget.scrollTop / this.scrollHeight
+                        if (iOS13) {
+                            if (this.iosScrollbars.horizontal._scrollable) this.iosScrollbars.horizontal.setValue(x)
+                            if (this.iosScrollbars.vertical._scrollable) this.iosScrollbars.vertical.setValue(y)
+                        }
+                        this.setValue([x, y], {sync: true, send:true})
+                    })
 
-                    this.iosScrollbars.horizontal.batchDraw()
                 }
-
-                this.on('resize', (event)=>{
-                    this.checkScrollBars()
-                }, {element: this.widget})
-
 
             }
 
@@ -250,7 +268,8 @@ class Panel extends Container() {
     }
 
     setValue(v, options={}) {
-        if (this.tabs.length && typeof v == 'number' && v >= 0 && v < this.tabs.length) {
+
+        if (this.childrenType === 'tab' && typeof v == 'number' && v >= 0 && v < this.tabs.length) {
 
             for (let i in this.tabs) {
                 if (i != v) this.tabs[i].hide()
@@ -264,6 +283,17 @@ class Panel extends Container() {
             if (options.send) this.sendValue()
             if (options.sync) this.changed(options)
 
+        } else if (this.childrenType === 'widget' && Array.isArray(v) && v.length === 2 && this.props.type !== 'modal') {
+
+            this.value = v
+            clearTimeout(this.scrollTimeout)
+            this.scrollTimeout = setTimeout(()=>{
+                this.widget.scrollLeft = v[0] * this.scrollWidth
+                this.widget.scrollTop = v[1] * this.scrollHeight
+            })
+
+            if (options.send) this.sendValue()
+            if (options.sync) this.changed(options)
         }
     }
 

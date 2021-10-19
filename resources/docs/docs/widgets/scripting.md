@@ -234,7 +234,11 @@ Gives focus to a widget (ie input widget).
 #### `getScroll(id)`
 - `id`: widget `id` as a string.
 
-Returns the scroll state of a container as a `[x, y]` array.
+Returns the scroll position of a container as a `[x, y]` array.
+
+**Deprecated**
+
+Scrollable panels expose their scroll position normalized between 0 and 1 with their value.
 
 ----
 
@@ -244,6 +248,10 @@ Returns the scroll state of a container as a `[x, y]` array.
 - `y`: vertical scroll, `undefined` to use current value
 
 Sets the scroll state of a container.
+
+**Deprecated**
+
+Scrollable panels expose their scroll position normalized between 0 and 1 with their value.
 
 ----
 
