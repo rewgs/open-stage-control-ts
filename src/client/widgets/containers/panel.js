@@ -142,7 +142,7 @@ class Panel extends Container() {
                         this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                         this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
                         var x = this.widget.scrollLeft / this.scrollWidth,
-                        y = this.widget.scrollTop / this.scrollHeight
+                            y = this.widget.scrollTop / this.scrollHeight
                         if (iOS13) {
                             if (this.iosScrollbars.horizontal._scrollable) this.iosScrollbars.horizontal.setValue(x)
                             if (this.iosScrollbars.vertical._scrollable) this.iosScrollbars.vertical.setValue(y)
