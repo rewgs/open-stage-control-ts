@@ -2,7 +2,8 @@ var MenuBase = require('./menu-base'),
     {iconify} = require('../../ui/utils'),
     doubletap = require('../mixins/double_tap'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw')
+    raw = require('nanohtml/raw'),
+    iOS = require('../../ui/ios')
 
 class Menu extends MenuBase {
 
@@ -96,7 +97,8 @@ class Menu extends MenuBase {
 
                 }
 
-            }, {element: this.widget})
+            // multitouch is only needed for iOS which fails otherwise
+            }, {element: this.widget, multitouch: iOS})
 
 
         } else {
@@ -114,7 +116,8 @@ class Menu extends MenuBase {
 
                 }
 
-            }, {element: this.widget})
+            }, {element: this.widget, multitouch: iOS})
+
 
         }
 
