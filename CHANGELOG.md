@@ -4,6 +4,7 @@
 
 - bug fixes
     - menu: interaction issue on iOS
+    - script: prevent script functions from being called in the wrong scope (ie when leaked using the `globals` object) and print and explicit error
 
 - widgets
     - when a panel contains widgets and has `scroll` set to `true`, its value will be used to represent the scroll position for x-axis and y-axis between 0 and 1.

@@ -55,11 +55,17 @@ class ScriptVm extends Vm {
 
     }
 
+    checkContext(name) {
+        if (this.widget.length === 0) throw name + '() cannot be called from outside the script property'
+    }
+
     registerGlobals() {
 
         super.registerGlobals()
 
         this.sandbox.contentWindow.set = (id, value, extraOptions = {send: true, sync: true})=>{
+
+            this.checkContext('set')
 
             var options = deepCopy(this.getValueOptions())
             options.fromScript = true
@@ -92,6 +98,8 @@ class ScriptVm extends Vm {
         }
 
         this.sandbox.contentWindow.setVar = (id, name, value)=>{
+
+            this.checkContext('setVar')
 
             var widgets
             if (id.includes('*')) {
@@ -127,6 +135,8 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.send = (target, address, ...args)=>{
 
+            this.checkContext('send')
+
             var options = this.getValueOptions()
 
             if (!options.send) return
@@ -154,6 +164,8 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.get = (id)=>{
 
+            this.checkContext('get')
+
             var widgets = this.resolveId(id)
 
             for (var i = widgets.length - 1; i >= 0; i--) {
@@ -171,6 +183,8 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.getVar = (id, name)=>{
 
+            this.checkContext('getVar')
+
             var widgets = this.resolveId(id)
 
             for (var i = widgets.length - 1; i >= 0; i--) {
@@ -182,6 +196,8 @@ class ScriptVm extends Vm {
         }
 
         this.sandbox.contentWindow.getProp = (id, prop)=>{
+
+            this.checkContext('getProp')
 
             var widgets = this.resolveId(id)
 
@@ -195,6 +211,8 @@ class ScriptVm extends Vm {
         }
 
         this.sandbox.contentWindow.updateProp = (id, prop)=>{
+
+            this.checkContext('updateProp')
 
             var widgets = this.resolveId(id),
                 widget = this.getWidget()
@@ -211,12 +229,16 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.getIndex = (id = 'this')=>{
 
+            this.checkContext('getIndex')
+
             var widget = this.resolveId(id).pop()
             if (widget) return widget.parent.children.indexOf(widget)
 
         }
 
         this.sandbox.contentWindow.getScroll = (id)=>{
+
+            this.checkContext('getScroll')
 
             var widgets = this.resolveId(id)
 
@@ -232,6 +254,8 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.setScroll = (id, x, y)=>{
 
+            this.checkContext('setScroll')
+
             var widgets = this.resolveId(id)
 
             for (var i = widgets.length - 1; i >= 0; i--) {
@@ -243,6 +267,8 @@ class ScriptVm extends Vm {
         }
 
         this.sandbox.contentWindow.httpGet = (url, callback)=>{
+
+            this.checkContext('httpGet')
 
             var parser = urlParser(url),
                 err = (e)=>{console.error(e)}
@@ -263,6 +289,8 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.stateGet = (filter)=>{
 
+            this.checkContext('stateGet')
+
             if (filter) {
 
                 filter = Array.isArray(filter) ? filter : [filter]
@@ -281,6 +309,8 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.stateSet = (state)=>{
 
+            this.checkContext('stateSet')
+
             var options = this.getValueOptions()
             stateManager.set(state, options.send)
 
@@ -289,14 +319,28 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.storage = {
 
-            setItem: (k, v)=>cache.set('script.' + k, v),
-            getItem: (k)=>cache.get('script.' + k),
-            removeItem: (k)=>cache.remove('script.' + k),
-            clear: ()=>cache.clear('script.')
+            setItem: (k, v)=>{
+                this.checkContext('storage.setItem')
+                cache.set('script.' + k, v)
+            },
+            getItem: (k)=>{
+                this.checkContext('storage.getItem')
+                cache.get('script.' + k)
+            },
+            removeItem: (k)=>{
+                this.checkContext('storage.removeItem')
+                cache.remove('script.' + k)
+            },
+            clear: ()=>{
+                this.checkContext('storage.clear')
+                cache.clear('script.')
+            }
 
         }
 
         this.sandbox.contentWindow.setTimeout = (id, callback, timeout)=>{
+
+            this.checkContext('setTimeout')
 
             if (typeof id === 'function') {
                 timeout = callback
@@ -328,6 +372,8 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.clearTimeout = (id)=>{
 
+            this.checkContext('clearTimeout')
+
             var widget = this.getWidget()
 
             clearTimeout(widget.timeouts[id])
@@ -336,6 +382,8 @@ class ScriptVm extends Vm {
         }
 
         this.sandbox.contentWindow.setInterval = (id, callback, timeout)=>{
+
+            this.checkContext('setInterval')
 
             if (typeof id === 'function') {
                 timeout = callback
@@ -366,6 +414,8 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.clearInterval = (id)=>{
 
+            this.checkContext('clearInterval')
+
             var widget = this.getWidget()
 
             clearInterval(widget.intervals[id])
@@ -375,6 +425,8 @@ class ScriptVm extends Vm {
 
 
         this.sandbox.contentWindow.setFocus = (id)=>{
+
+            this.checkContext('setFocus')
 
             if (id) {
                 var widgets = this.resolveId(id)
@@ -394,6 +446,8 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.unfocus = ()=>{
 
+            this.checkContext('unfocus')
+
             window.blur()
             // built-in client only: electron will call window.blur()
             console.debug('ELECTRON.BLUR()')
@@ -401,6 +455,8 @@ class ScriptVm extends Vm {
         }
 
         this.sandbox.contentWindow.toolbar = (...args)=>{
+
+            this.checkContext('toolbar')
 
             var options = this.getValueOptions()
 
@@ -421,6 +477,8 @@ class ScriptVm extends Vm {
         }
 
         this.sandbox.contentWindow.openUrl = (url)=>{
+
+            this.checkContext('openUrl')
 
             var options = this.getValueOptions()
 
