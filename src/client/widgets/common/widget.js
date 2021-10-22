@@ -974,6 +974,7 @@ class Widget extends EventEmitter {
         if (widget.parent !== widgetManager && widget.parent.getProp('type') === 'clone') widget = widget.parent
 
         console._error(`${id}.${name} ${type} error${line}: ${error}`)
+        console.debug(error)
         uiConsole.log('error', `<span class="edit-widget" data-widget="${widget.builtIn ? widget.parent.hash : widget.hash}">${id}</span>.${name} ${type} error${line}: ${error}`, true)
     }
 
