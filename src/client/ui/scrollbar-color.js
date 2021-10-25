@@ -18,8 +18,10 @@ module.exports = (container)=>{
         }
 
         if (color) {
-            container.style.setProperty('--color-scrollbar', chroma(color).alpha(alpha).css())
-            container.style.setProperty('--color-scrollbar-on', chroma(color).alpha(alphaOn).css())
+            try {
+                container.style.setProperty('--color-scrollbar', chroma(color).alpha(alpha).css())
+                container.style.setProperty('--color-scrollbar-on', chroma(color).alpha(alphaOn).css())
+            } catch(e) {}
         }
 
     })
