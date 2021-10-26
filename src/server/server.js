@@ -103,7 +103,14 @@ function httpRoute(req, res) {
         } else if (/^\/(assets|client)\//.test(url)){
 
             if (prod) res.setHeader('Cache-Control', 'public, max-age=2592000')
-            res.sendFile(path.resolve(__dirname + '/..' + url))
+            try {
+                res.sendFile(path.resolve(__dirname + '/..' + url))
+                return true
+            } catch(e) {}
+
+            console.error(`(ERROR, HTTP) File not found: ${url}`)
+            res.writeHead(404)
+            res.end()
 
         } else {
 
