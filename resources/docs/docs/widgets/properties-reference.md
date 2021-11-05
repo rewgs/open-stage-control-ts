@@ -241,7 +241,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="panel_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently selected tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+            | <h6 id="panel_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_value" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>""</code> | If the panel contains tabs, its value defines which tab is selected selected (by index, starting with 0).<br/><br/>If the panel contains widgets and `scroll` is `true`, its value is an array that contains the scrolling state between 0 and 1 for the x and y axis.  |
 
     === "children"
 
@@ -349,7 +349,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="matrix_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently selected tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+            | <h6 id="matrix_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_value" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>""</code> | If the panel contains tabs, its value defines which tab is selected selected (by index, starting with 0).<br/><br/>If the panel contains widgets and `scroll` is `true`, its value is an array that contains the scrolling state between 0 and 1 for the x and y axis.  |
 
     === "children"
 
@@ -429,7 +429,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="root_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently selected tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+            | <h6 id="root_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_value" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>""</code> | If the panel contains tabs, its value defines which tab is selected selected (by index, starting with 0).<br/><br/>If the panel contains widgets and `scroll` is `true`, its value is an array that contains the scrolling state between 0 and 1 for the x and y axis.  |
 
     === "children"
 
@@ -466,7 +466,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="tab_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines currently selected tab in the widget<br/><br/>A tab can be opened only by setting its parent's value |
+            | <h6 id="tab_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_value" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>""</code> | If the panel contains tabs, its value defines which tab is selected selected (by index, starting with 0).<br/><br/>If the panel contains widgets and `scroll` is `true`, its value is an array that contains the scrolling state between 0 and 1 for the x and y axis.  |
 
     === "children"
 
