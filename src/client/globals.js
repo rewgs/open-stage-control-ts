@@ -1,8 +1,11 @@
 window.IP = window.IP || ''
 window.ENV = window.ENV || {}
 location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, (s,k,v)=>{
-    ENV[k.toLowerCase()]=v
+    ENV[k]=v
 })
+for (var k in ENV) {
+    ENV[k.toLowerCase()] = ENV[k]
+}
 
 window.LANG = ENV.lang === 'debug' ? 'debug' : (ENV.lang || navigator.language || '').substr(0, 2).toLowerCase()
 

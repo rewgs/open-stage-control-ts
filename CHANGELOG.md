@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.11.1
+
+- bug fixes
+    - client options specified in server config not working unless lowercased
+
 ## 1.11.0
 
 - bug fixes
