@@ -5,6 +5,7 @@
 - bug fixes
     - client options specified in server config not working unless lowercased
     - make disconnection detection less aggressive (don't display notification if reconnection succeeds quickly)
+    - panel: initial scroll state issue
 
 ## 1.11.0
 
