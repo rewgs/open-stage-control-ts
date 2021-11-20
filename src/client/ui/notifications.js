@@ -18,7 +18,7 @@ class Toast {
         this.expires = Date.now() + (data.duration || DEFAULT_DURATION)
 
         var toast = html`
-            <div class="toast ${data.class || ''}">
+            <div class="toast ${data.class || ''}" data-id="${data.id}">
                 <i class="fa fa-fw fa-${data.icon || (data.class === 'error' ? 'exclamation' : 'bell')}"></i>
                 <div class="content"></div>
             </div>

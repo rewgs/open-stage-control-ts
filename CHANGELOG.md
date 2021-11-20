@@ -4,6 +4,7 @@
 
 - bug fixes
     - client options specified in server config not working unless lowercased
+    - make disconnection detection less aggressive (don't display notification if reconnection succeeds quickly)
 
 ## 1.11.0
 

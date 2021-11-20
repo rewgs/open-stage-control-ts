@@ -17,7 +17,7 @@ setTimeout(()=>{
     locales = require('../locales')
 })
 
-var reconnectTimeout = 2000,
+var reconnectTimeout = 250,
     hearbeatInterval = 5000,
     hearbeatTimeout = 3000,
     protocol = document.location.protocol === 'https:' ? 'wss://' : 'ws://'
@@ -33,7 +33,9 @@ class Ipc extends EventEmitter {
         this.queue = []
 
         this.disconnected = false
-        this.reconnect = undefined
+
+        this.reconnectTimeout = undefined
+        this.disconnectTimeout = undefined
 
         this.hearbeat = undefined
         this.hearbeatTimeout = undefined
@@ -93,6 +95,8 @@ class Ipc extends EventEmitter {
                 id: 'ipc_state'
             })
 
+            this.disconnected = false
+
             this.trigger('connect')
             this.flush()
 
@@ -115,18 +119,21 @@ class Ipc extends EventEmitter {
         clearInterval(this.hearbeat)
         clearTimeout(this.hearbeatTimeout)
 
-        notifications.add({
-            icon: 'wifi',
-            class: 'error',
-            message: locales('server_disconnected'),
-            id: 'ipc_state',
-            duration: Infinity
-        })
+        clearTimeout(this.disconnectTimeout)
+        this.disconnectTimeout = setTimeout(()=>{
+            if (notifications && this.disconnected) notifications.add({
+                icon: 'wifi',
+                class: 'error',
+                message: locales('server_disconnected'),
+                id: 'ipc_state',
+                duration: Infinity
+            })
+        }, reconnectTimeout * 2)
 
         this.disconnected = true
 
-        clearTimeout(this.reconnect)
-        this.reconnect = setTimeout(()=>{
+        clearTimeout(this.reconnectTimeout)
+        this.reconnectTimeout = setTimeout(()=>{
             this.open()
         }, reconnectTimeout)
 
