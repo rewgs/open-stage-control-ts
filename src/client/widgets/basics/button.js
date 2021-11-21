@@ -2,7 +2,8 @@ var Widget = require('../common/widget'),
     doubletab = require('../mixins/double_tap'),
     html = require('nanohtml'),
     {deepEqual, isJSON} = require('../../utils'),
-    {iconify} = require('../../ui/utils')
+    {iconify} = require('../../ui/utils'),
+    {mapToScale} = require('../utils')
 
 class Button extends Widget {
 
@@ -14,7 +15,7 @@ class Button extends Widget {
 
     static defaults() {
 
-        return super.defaults(Button).extend({
+        var defaults = super.defaults(Button).extend({
             style: {
                 _separator_button_style: 'Button style',
                 colorTextOn: {type: 'string', value: 'auto', help: 'Defines the widget\'s text color when active.'},
@@ -35,6 +36,10 @@ class Button extends Widget {
                 off: {type: '*', value: 0, help: [
                     'Set to `null` to send send no argument in the osc message. Must be different from `on`.',
                 ]},
+                velocity: {type: 'boolean', value: false, help: [
+                    'Set to `true` to map the touch coordinates between `off` (top) and `on` (bottom). Requires `on` and `off` to be numbers',
+                    'The result will be exposed in the script property as `locals.velocity`.'
+                ]},
                 mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'tap'], help: [
                     'Interraction mode:',
                     '- `toggle` (classic on/off switch)',
@@ -46,6 +51,13 @@ class Button extends Widget {
             }
         })
 
+        defaults.scripting.script.help.push(
+            'Additionnal variables:',
+            '- `locals.velocity`: `undefined` if `velocity` is false or if the event wasn\'t triggered by a user interaction.'
+        )
+
+        return defaults
+
     }
 
     constructor(options) {
@@ -55,6 +67,13 @@ class Button extends Widget {
         this.state = 0
         this.active = false
         this.pulse = null
+
+        this.buttonHeight = 100
+        if (this.getProp('velocity')) {
+            this.on('resize', (e)=>{
+                this.buttonHeight = e.height
+            }, {element: this.widget})
+        }
 
         var tap = this.getProp('mode') === 'tap',
             push = this.getProp('mode') === 'push' || tap
@@ -173,6 +192,16 @@ class Button extends Widget {
             this.state = newstate
             this.container.classList.toggle('on', this.state)
             this.value = this.getProp(this.state ? 'on' : 'off')
+
+            if (this.getProp('velocity') ) {
+                if (options.y !== undefined) {
+                    var vel = mapToScale(options.y, [0, this.buttonHeight * 0.9], [this.getProp('off'), this.getProp('on')], this.decimals)
+                    this.parsersLocalScope.velocity = vel
+                } else {
+                    this.parsersLocalScope.velocity = undefined
+                }
+
+            }
 
             if (options.send) this.sendValue()
             if (options.sync) this.changed(options)
