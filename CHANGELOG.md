@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.11.2
+
+- widgets
+    - button: expose normalized touch coordinates in scipts as `locals.touchCoords`
+    - print a warning in the console when using advanced syntaxes in the script property
+
 ## 1.11.1
 
 - bug fixes

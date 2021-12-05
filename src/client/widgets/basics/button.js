@@ -36,10 +36,6 @@ class Button extends Widget {
                 off: {type: '*', value: 0, help: [
                     'Set to `null` to send send no argument in the osc message. Must be different from `on`.',
                 ]},
-                velocity: {type: 'boolean', value: false, help: [
-                    'Set to `true` to map the touch coordinates between `off` (top) and `on` (bottom). Requires `on` and `off` to be numbers',
-                    'The result will be exposed in the script property as `locals.velocity`.'
-                ]},
                 mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'tap'], help: [
                     'Interraction mode:',
                     '- `toggle` (classic on/off switch)',
@@ -53,7 +49,7 @@ class Button extends Widget {
 
         defaults.scripting.script.help.push(
             'Additionnal variables:',
-            '- `locals.velocity`: `undefined` if `velocity` is false or if the event wasn\'t triggered by a user interaction.'
+            '- `locals.touchCoords`: `[x, y]` array representing the touch coordinates, normalized between 0 and 1.'
         )
 
         return defaults
@@ -68,10 +64,12 @@ class Button extends Widget {
         this.active = false
         this.pulse = null
 
-        this.buttonHeight = 100
-        if (this.getProp('velocity')) {
+        this.buttonSize = [100, 100]
+        thid.exposeTouchCoords = this.getProp('script').includes('touchCoords')
+        this.parsersLocalScope.touchCoords = [0.5, 0.5]
+        if (thid.exposeTouchCoords) {
             this.on('resize', (e)=>{
-                this.buttonHeight = e.height
+                this.buttonSize = [e.width, e.height]
             }, {element: this.widget})
         }
 
@@ -85,7 +83,7 @@ class Button extends Widget {
                 doubletab(this.container, (e)=>{
 
                     this.active = true
-                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY})
+                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
 
                     if (tap) this.container.classList.add('active')
 
@@ -98,7 +96,7 @@ class Button extends Widget {
                     if (this.active) return
 
                     this.active = true
-                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY})
+                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
 
                     if (tap) this.container.classList.add('active')
 
@@ -126,7 +124,7 @@ class Button extends Widget {
 
 
                     this.active = true
-                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY})
+                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
 
                 })
 
@@ -137,7 +135,7 @@ class Button extends Widget {
                     if (this.active) return
 
                     this.active = true
-                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY})
+                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
 
                 }, {element: this.container})
 
@@ -193,14 +191,10 @@ class Button extends Widget {
             this.container.classList.toggle('on', this.state)
             this.value = this.getProp(this.state ? 'on' : 'off')
 
-            if (this.getProp('velocity') ) {
+            if (thid.exposeTouchCoords) {
                 if (options.y !== undefined) {
-                    var vel = mapToScale(options.y, [0, this.buttonHeight * 0.9], [this.getProp('off'), this.getProp('on')], this.decimals)
-                    this.parsersLocalScope.velocity = vel
-                } else {
-                    this.parsersLocalScope.velocity = undefined
+                    this.parsersLocalScope.touchCoords = [options.x / this.buttonSize[0], options.y / this.buttonSize[1]]
                 }
-
             }
 
             if (options.send) this.sendValue()
