@@ -217,6 +217,9 @@ class Widget extends EventEmitter {
 
         Script = Script || require('../scripts/script')
         if (this.getProp('script') && !(this instanceof Script)) {
+            if (typeof this.props.script == 'string' && this.props.script.match(/OSC\{|@\{|VAR\{/)) {
+                this.errorProp('script', 'syntax', 'using advanced syntaxes in the script property is strongly discouraged and may result in unexpected behaviors.')
+            }
             this.script = new Script({props:{
                 id: this.getProp('id') + '/script',
                 script: this.getProp('script'),
