@@ -65,9 +65,9 @@ class Button extends Widget {
         this.pulse = null
 
         this.buttonSize = [100, 100]
-        thid.exposeTouchCoords = this.getProp('script').includes('touchCoords')
+        this.exposeTouchCoords = this.getProp('script').includes('touchCoords')
         this.parsersLocalScope.touchCoords = [0.5, 0.5]
-        if (thid.exposeTouchCoords) {
+        if (this.exposeTouchCoords) {
             this.on('resize', (e)=>{
                 this.buttonSize = [e.width, e.height]
             }, {element: this.widget})
@@ -191,7 +191,7 @@ class Button extends Widget {
             this.container.classList.toggle('on', this.state)
             this.value = this.getProp(this.state ? 'on' : 'off')
 
-            if (thid.exposeTouchCoords) {
+            if (this.exposeTouchCoords) {
                 if (options.y !== undefined) {
                     this.parsersLocalScope.touchCoords = [options.x / this.buttonSize[0], options.y / this.buttonSize[1]]
                 }
