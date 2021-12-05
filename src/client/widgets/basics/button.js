@@ -193,7 +193,7 @@ class Button extends Widget {
 
             if (this.exposeTouchCoords) {
                 if (options.y !== undefined) {
-                    this.parsersLocalScope.touchCoords = [options.x / this.buttonSize[0], options.y / this.buttonSize[1]]
+                    this.parsersLocalScope.touchCoords = [options.x / this.buttonSize[0], 1 - options.y / this.buttonSize[1]]
                 }
             }
 
