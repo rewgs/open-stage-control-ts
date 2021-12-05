@@ -2,8 +2,7 @@ var Widget = require('../common/widget'),
     doubletab = require('../mixins/double_tap'),
     html = require('nanohtml'),
     {deepEqual, isJSON} = require('../../utils'),
-    {iconify} = require('../../ui/utils'),
-    {mapToScale} = require('../utils')
+    {iconify} = require('../../ui/utils')
 
 class Button extends Widget {
 
