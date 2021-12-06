@@ -6,7 +6,22 @@ It has two special properties, `touch` and `draw`, that work like the `script` p
 
 This widget requires a good understanding of the javascript [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) and of the javascript programming language in general.
 
-## `touch`
+## Canvas properties
+
+### `valueLength`
+
+This property must be set to the number of values held by the widget : 1 for a simple slider, 2 for an XY pad, etc. Attempts to set the widget's value with a different number of values will be ignored.
+
+### `autoClear`
+
+This is a convenience option that clears the canvas context and calls [`beginPath`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/beginPath) before each drawing. When this property is set to `false`, the canvas must be cleared manually.
+
+### `continuous`
+
+If this property is enabled, the widget will be redrawn at a fixed rate even if not interacted with (see [`draw`](#draw)).
+
+
+### `touch`
 
 This script is executed when the widget is touched, when it is released, and during the movement of the pointer while the widget is touched.
 
@@ -24,9 +39,9 @@ This script has access to the same variables and functions as the `script` prope
     - `altKey`, `ctrlKey`, `shiftKey`: keyboard modifier states
 
 
-## `draw`
+### `draw`
 
-This script is executed when the widget should be redrawn, which is when it's touched and when it receives a value. If the `continuous` property is enabled, the widget will be redrawn at a fixed rate even if not interacted with.
+This script is executed when the widget should be redrawn, which is when it's touched and when it receives a value.
 
 This script has access to the same variables and functions as the `script` property (except the event-specific ones), plus the following:
 

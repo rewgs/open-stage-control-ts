@@ -98,6 +98,12 @@
             | <h6 id="button_mode">mode<a class="headerlink" href="#button_mode" title="Permanent link">#</a></h6> | `string` | <code>"toggle"</code> | Interraction mode:<br/>- `toggle` (classic on/off switch)<br/>- `push` (press & release)<br/>- `tap` (no release)<br/><br/>Choices: `toggle`, `push`, `tap` |
             | <h6 id="button_doubleTap">doubleTap<a class="headerlink" href="#button_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the button require a double tap to be pushed instead of a single tap |
 
+    === "scripting"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="button_script">script<a class="headerlink" href="#button_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Additionnal variables:<br/>- `locals.touchCoords`: `[x, y]` array representing the touch coordinates, normalized between 0 and 1. |
+
 ??? api "<div id="switch">switch<a class="headerlink" href="#switch" title="Permanent link">#</a></div>"
     Value selector button.
 
@@ -732,6 +738,31 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="multixy_script">script<a class="headerlink" href="#multixy_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+
+??? api "<div id="canvas">canvas<a class="headerlink" href="#canvas" title="Permanent link">#</a></div>"
+    Multitouch canvas widget with user-defined drawing functions and touch reactions.
+
+    === "style"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="canvas_css">css<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#canvas_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Some style-related properties can be set or read from css using css variables:<br/>- `--color-background`: `colorBg`<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--widget-padding`: `padding`<br/>- `--line-width`: `lineWidth`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--alpha-pips`: `alphaPips`<br/>- `--alpha-pips-text`: `alphaPipsText`<br/><br/>Canvas-based widget have their computed width and height available as css variables (read-only):<br/>- `--widget-width`<br/>- `--widget-height` |
+
+    === "canvas"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="canvas_valueLength">valueLength<a class="headerlink" href="#canvas_valueLength" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the number of values accepted by the widget (minimum 1). Incoming messages that don't comply will be ignored<br/><br/>When calling `set()` from a script, submitted value should be an array only if `valueLength` is greater than 1. |
+            | <h6 id="canvas_autoClear">autoClear<a class="headerlink" href="#canvas_autoClear" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If set to `false`, the canvas context won't be cleared automatically and `ctx.clear` will need to be called in `draw`. |
+            | <h6 id="canvas_continuous">continuous<a class="headerlink" href="#canvas_continuous" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | If set to `true`, `draw` will be called at each frame, otherwise it will be called only when the widget is touched and when it receives a value.<br/><br/>Can be a number between 1 and 60 to specify the framerate (default: 30 fps). |
+            | <h6 id="canvas_touch">touch<a class="headerlink" href="#canvas_touch" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
+            | <h6 id="canvas_draw">draw<a class="headerlink" href="#canvas_draw" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
+
+    === "scripting"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="canvas_script">script<a class="headerlink" href="#canvas_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 ## Sliders
 
 ??? api "<div id="fader">fader<a class="headerlink" href="#fader" title="Permanent link">#</a></div>"
