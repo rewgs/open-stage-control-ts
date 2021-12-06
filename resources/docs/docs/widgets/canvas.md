@@ -116,7 +116,7 @@ if (event.type == "start") {
 var n = parseInt(locals.x * value.length)
 n = Math.max(0, Math.min(n, value.length-1))
 
-// update widget at slider's index
+// update value at slider's index
 // 1 - locals.y because y axis is from top to bottom in js canvas
 value[n] = 1 - locals.y
 
@@ -146,6 +146,6 @@ for (var i in value) {
     value[i] = Math.max(0, Math.min(1, value[i]))
 }
 
-// re-update inner value without retriggering script or sending message
+// re-update widget value without retriggering script or sending message
 set("this", value, {sync: false, send: false})
 ```
