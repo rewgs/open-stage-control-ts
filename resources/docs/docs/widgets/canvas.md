@@ -20,7 +20,7 @@ This script has access to the same variables and functions as the `script` prope
     - `target`: id of the widget under the pointer, `"this"` if it's the canvas widget itself, `null` if no widget is under the pointer
     - `offsetX`, `offsetY`: touch coordinates in pixels, relative to `target`
     - `movementX`, `movementY`: movement of the pointer in pixels since the last event
-    - `pointerId`: unique identifier used to differenciates fingers in multitouch situation
+    - `pointerId`: unique identifier used to differenciate fingers in multitouch situation
     - `altKey`, `ctrlKey`, `shiftKey`: keyboard modifier states
 
 
@@ -38,9 +38,9 @@ This script has access to the same variables and functions as the `script` prope
 
 ## Example: XY pad
 
-Let's create a simple xy pad, with a value made of two numbers between 0 and 1. We set `valueLength` to `2` to make sure the widget only accents incoming messages with two values (x and y).
+Let's create a simple xy pad, with a value made of two numbers between 0 and 1. We set `valueLength` to `2` to make sure the widget only accepts incoming messages with two values (x and y).
 
-First, we use the `touch` property to store the touch coordinates in the `locals` object. We also call `set()` to store these in the widget's value?
+First, we use the `touch` property to store the touch coordinates in the `locals` object. We also call `set()` to store these in the widget's value (this way, the widget can send messages and sync with other widgets).
 
 ```js
 // touch property
@@ -66,7 +66,7 @@ Then, we use the `draw` property to draw a circle at the touch coordinates.
 ```js
 // draw property
 
-// draw cirtcle at touch coordinates
+// draw circle at touch coordinates
 ctx.arc(value[0] * width, value[1] * height, 6, 0, Math.PI * 2)
 // use colorFill property as stroke color
 ctx.strokeStyle = cssVars.colorFill
@@ -74,7 +74,7 @@ ctx.strokeStyle = cssVars.colorFill
 ctx.stroke()
 ```
 
-Finally, we use the `script` property to make apply limits to the values.
+Finally, we use the `script` property to apply limits to the values.
 
 ```js
 // script property
@@ -83,11 +83,13 @@ Finally, we use the `script` property to make apply limits to the values.
 var x = Math.max(0, Math.min(1, value[0])),
     y = Math.max(0, Math.min(1, value[1]))
 
-// re-update inner value without retriggering script or sending message
+// re-update widget value without retriggering script or sending message
 set("this", [x, y], {sync: false, send: false})
 
 // the widget will automatically send its value if
 // this script was triggered by a user interaction
+// no need to call send() here but we could, for example
+// if we want to split the value in to multiple messages
 ```
 
 ## Example: multi slider
@@ -114,7 +116,7 @@ if (event.type == "start") {
 var n = parseInt(locals.x * value.length)
 n = Math.max(0, Math.min(n, value.length-1))
 
-// update value at slider's index
+// update widget at slider's index
 // 1 - locals.y because y axis is from top to bottom in js canvas
 value[n] = 1 - locals.y
 
@@ -146,7 +148,4 @@ for (var i in value) {
 
 // re-update inner value without retriggering script or sending message
 set("this", value, {sync: false, send: false})
-
-// the widget will automatically send its value if
-// this script was triggered by a user interaction
 ```
