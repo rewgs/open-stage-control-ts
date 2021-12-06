@@ -128,7 +128,7 @@ set("this", value)
 // draw property
 
 ctx.fillStyle = cssVars.colorFill
-ctx.globalAlpha = cssVars.alphaFill
+ctx.globalAlpha = cssVars.alphaFillOn
 
 var sliderWidth = width / value.length - 1
 for (var i in value){
