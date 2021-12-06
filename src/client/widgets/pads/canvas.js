@@ -15,6 +15,10 @@ class CanvasWidget extends Canvas {
 
         return super.defaults().extend({
             class_specific: {
+                valueLength: {type: 'number', value: 1, help:[
+                    'Defines the number of values accepted by the widget (minimum 1). Incoming messages that don\'t comply will be ignored',
+                    'When calling `set()` from a script, submitted value should be an array only if `valueLength` is greater than 1.'
+                ]},
                 autoClear: {type: 'boolean', value: true, help: [
                     'If set to `false`, the canvas context won\'t be cleared automatically and `ctx.clear` will need to be called in `draw`.'
                 ]},
@@ -41,6 +45,8 @@ class CanvasWidget extends Canvas {
             </inner>
         `})
 
+        this.valueLength = Math.max(1, parseInt(this.getProp('valueLength')) || 1)
+        this.value = this.valueLength > 1 ? Array(this.valueLength).fill(0) : 0
 
         this.drawScript = new Script({props:{
             id: this.getProp('id') + '/drawScript',
@@ -108,13 +114,15 @@ class CanvasWidget extends Canvas {
 
     setValue(v, options={}) {
 
+        if (this.valueLength > 1 && Array.isArray(v) && v.length != this.valueLength) return
+
         this.value = v
 
         this.batchDraw()
 
         if (options.sync) this.changed(options)
         if (options.send) this.sendValue()
-        if (options.defaultInit) this.script.setValue(this.value, {id: this.getProp('id')})
+        if (options.defaultInit && this.script) this.script.setValue(this.value, {id: this.getProp('id')})
 
     }
 

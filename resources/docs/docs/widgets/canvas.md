@@ -8,10 +8,11 @@ This widget requires a good understanding of the javascript [Canvas API](https:/
 
 ## `touch`
 
-This script is executed when the wigdget is touched, when it is released, and during the movement of the pointer while the widget is touched.
+This script is executed when the widget is touched, when it is released, and during the movement of the pointer while the widget is touched.
 
 This script has access to the same variables and functions as the `script` property (except the event-specific ones), plus the following:
 
+- `value`: widget value
 - `width`: widget width in pixels
 - `height`: widget height in pixels
 - `event`: object containing the following:
@@ -29,14 +30,15 @@ This script is executed when the widget should be redrawn, which is when it's to
 
 This script has access to the same variables and functions as the `script` property (except the event-specific ones), plus the following:
 
+- `value`: widget value
 - `width`: widget width in pixels
 - `height`: widget height in pixels
 - `ctx`: [canvas rendering context](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) of the widget
 - `cssVars`: object containing the computed value of some of the widget's style properties such as `colorWidget`, `alphaFill`, `padding`, etc
 
-## Example
+## Example: XY pad
 
-Let's create a simple xy pad, with a value made of two numbers between 0 and 1.
+Let's create a simple xy pad, with a value made of two numbers between 0 and 1. We set `valueLength` to `2` to make sure the widget only accents incoming messages with two values (x and y).
 
 First, we use the `touch` property to store the touch coordinates in the `locals` object. We also call `set()` to store these in the widget's value?
 
@@ -64,7 +66,7 @@ Then, we use the `draw` property to draw a circle at the touch coordinates.
 ```js
 // draw property
 
-// draw an arc at touch coordinates
+// draw cirtcle at touch coordinates
 ctx.arc(value[0] * width, value[1] * height, 6, 0, Math.PI * 2)
 // use colorFill property as stroke color
 ctx.strokeStyle = cssVars.colorFill
@@ -72,29 +74,79 @@ ctx.strokeStyle = cssVars.colorFill
 ctx.stroke()
 ```
 
-Finally, we use the `script` property to make the widget send it's values, and to make sure it updates properly when reveiving.
+Finally, we use the `script` property to make apply limits to the values.
 
 ```js
 // script property
 
-var x, y
-if (value.length == 2) {
-    // if number of values is correct, use incomming value
-    x = value[0]
-    y = value[1]
-} else {
-    // else: use last valid coordinates
-    x = locals.x
-    y = locals.y
-}
-
 // apply limits
-x = Math.max(0, Math.min(1, value[0]))
-y = Math.max(0, Math.min(1, value[1]))
+var x = Math.max(0, Math.min(1, value[0])),
+    y = Math.max(0, Math.min(1, value[1]))
 
 // re-update inner value without retriggering script or sending message
 set("this", [x, y], {sync: false, send: false})
 
-// the widget will automatically send its value if 
+// the widget will automatically send its value if
+// this script was triggered by a user interaction
+```
+
+## Example: multi slider
+
+Let's build a row of 20-sliders with a single widget. We first set `valueLength` to... 20 !
+
+```js
+// touch property
+
+// store normalized coordinates
+if (event.type == "start") {
+    locals.x = event.offsetX / width
+    locals.y = event.offsetY / height
+} else {
+    // when the pointer is moving, increment coordinates
+    // because offsetX and offsetY may not be relevant
+    // if the pointer hovers a different widgets
+    locals.x += event.movementX / width
+    locals.y += event.movementY / height
+}
+
+
+// which slider are we touching ?
+var n = parseInt(locals.x * value.length)
+n = Math.max(0, Math.min(n, value.length-1))
+
+// update value at slider's index
+// 1 - locals.y because y axis is from top to bottom in js canvas
+value[n] = 1 - locals.y
+
+// update widget value and send
+set("this", value)
+```
+
+```js
+// draw property
+
+ctx.fillStyle = cssVars.colorFill
+ctx.globalAlpha = cssVars.alphaFill
+
+var sliderWidth = width / value.length - 1
+for (var i in value){
+    ctx.beginPath()
+    ctx.rect(i * width / value.length, height, sliderWidth, - value[i] * height)
+    ctx.fill()
+}
+```
+
+```js
+// script property
+
+// apply limits
+for (var i in value) {
+    value[i] = Math.max(0, Math.min(1, value[i]))
+}
+
+// re-update inner value without retriggering script or sending message
+set("this", value, {sync: false, send: false})
+
+// the widget will automatically send its value if
 // this script was triggered by a user interaction
 ```
