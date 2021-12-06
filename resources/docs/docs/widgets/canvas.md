@@ -94,4 +94,7 @@ y = Math.max(0, Math.min(1, value[1]))
 
 // re-update inner value without retriggering script or sending message
 set("this", [x, y], {sync: false, send: false})
+
+// the widget will automatically send its value if 
+// this script was triggered by a user interaction
 ```

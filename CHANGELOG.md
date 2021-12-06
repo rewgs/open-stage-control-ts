@@ -1,8 +1,9 @@
 # Changelog
 
-## 1.11.2
+## 1.12.0
 
 - widgets
+    - new **canvas** widget (under `pads`): allows creating custom widgets
     - button: expose normalized touch coordinates in scipts as `locals.touchCoords`
     - print a warning in the console when using advanced syntaxes in the script property
 
