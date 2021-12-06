@@ -17,7 +17,7 @@ setTimeout(()=>{
     locales = require('../locales')
 })
 
-var reconnectTimeout = 250,
+var reconnectTimeout = 500,
     hearbeatInterval = 5000,
     hearbeatTimeout = 3000,
     protocol = document.location.protocol === 'https:' ? 'wss://' : 'ws://'
