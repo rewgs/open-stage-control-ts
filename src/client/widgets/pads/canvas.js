@@ -27,10 +27,10 @@ class CanvasWidget extends Canvas {
                     'Can be a number between 1 and 60 to specify the framerate (default: 30 fps).'
                 ]},
                 touch: {type: 'string', value: '', help: [
-                    'Script executed when the widget is touched',
+                    'Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',
                 ]},
                 draw: {type: 'string', value: '', help: [
-                    'Script executed when the widget is redrawn.'
+                    'Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.'
                 ]},
             }
         })
@@ -114,7 +114,9 @@ class CanvasWidget extends Canvas {
 
     setValue(v, options={}) {
 
-        if (this.valueLength > 1 && Array.isArray(v) && v.length != this.valueLength) return
+        if (Array.isArray(v)) {
+            if (v.length !== this.valueLength) return
+        } else if (this.valueLength > 1) return
 
         this.value = v
 
