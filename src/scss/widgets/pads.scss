@@ -1,6 +1,7 @@
 .xy-container,
 .multixy-container,
-.rgb-container {
+.rgb-container,
+.canvas-container {
     width: 200rem;
     height: 200rem;
 }
@@ -123,5 +124,28 @@
         --alpha-fill-on: 0.25;
         --widget-padding: 0rem;
     }
+
+}
+
+
+.canvas-container {
+
+   --alpha-fill-off: 0.05;
+   --alpha-fill: var(--alpha-fill-off);
+   --widget-padding: 0rem;
+
+   inner {
+       position: relative;
+       flex: 1;
+       display: flex;
+
+       @include pseudo-fill($z: -1);
+       @include pseudo-stroke();
+   }
+
+   canvas {
+       width: 100%;
+       text-align: center;
+   }
 
 }

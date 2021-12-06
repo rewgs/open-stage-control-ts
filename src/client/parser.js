@@ -99,7 +99,7 @@ var Parser = class Parser {
 
         } else if (defaultValue !== '' && defaultValue !== undefined) {
 
-            widget.setValue(defaultValue)
+            widget.setValue(defaultValue, {defaultInit: true})
 
         }
 

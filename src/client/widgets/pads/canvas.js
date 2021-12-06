@@ -1,11 +1,13 @@
 var Canvas = require('../common/canvas'),
+    Script = require('../scripts/script'),
+    widgetManager = require('../../managers/widgets'),
     html = require('nanohtml')
 
 class CanvasWidget extends Canvas {
 
     static description() {
 
-        return 'KANVA !'
+        return 'Multitouch canvas widget with user-defined drawing functions and touch reactions.'
 
     }
 
@@ -13,8 +15,23 @@ class CanvasWidget extends Canvas {
 
         return super.defaults().extend({
             class_specific: {
-                onCreate: {type: 'string', value: '', help: ' '},
-                onTouch: {type: 'string', value: '', help: ' '},
+                // value: {type: 'number', value: 1, help: [
+                //
+                // ]},
+                autoClear: {type: 'boolean', value: true, help: [
+                    'If set to `false`, the canvas context won\'t be cleared automatically and `ctx.clear` will need to be called in `draw`.'
+                ]},
+                continuous: {type: 'boolean|number', value: false, help: [
+                    'If set to `true`, `draw` will be called at each frame, otherwise it will be called only when the widget is touched and when it receives a value.',
+                    'Can be a number between 1 and 60 to specify the framerate.'
+                ]},
+                touch: {type: 'string', value: '', help: [
+                    'Script executed when the widget is touched',
+                    'Exposed '
+                ]},
+                draw: {type: 'string', value: '', help: [
+                    'Script executed when the widget is redrawn.'
+                ]},
             }
         })
 
@@ -23,74 +40,113 @@ class CanvasWidget extends Canvas {
     constructor(options) {
 
         super({...options, html: html`
-            <div class="canvas">
+            <inner>
                 <canvas></canvas>
-            </div>
+            </inner>
         `})
 
 
+        this.drawScript = new Script({props:{
+            id: this.getProp('id') + '/drawScript',
+            script: this.getProp('draw'),
+            event: {
+                value: 0,
+                width: 100,
+                height: 100,
+                ctx: {},
+                cssVars: {}
+            }
+        }, builtIn: true, parent: this})
+
+        this.touchScript = new Script({props:{
+            id: this.getProp('id') + '/touchScript',
+            script: this.getProp('touch'),
+            event: {
+                value: 0,
+                width: 100,
+                height: 100,
+                event: {}
+            }
+        }, builtIn: true, parent: this})
+
+        var touchCb = (e, type)=>{
+
+            var event = {...e}
+            delete event.firstTarget
+            var w = widgetManager.getWidgetByElement(event.target)
+            if (w) event.target = w === this ? 'this' : w.getProp('id')
+            else event.target = null
+            event.type = type
+
+            this.touchScript.run({
+                value: this.value,
+                width: this.width,
+                height: this.height,
+                event: event,
+            }, {sync: true, send: true})
+
+            this.batchDraw()
+        }
+
         this.on('draginit',(e)=>{
-
-
+            touchCb(e, 'start')
         }, {element: this.widget, multitouch: true})
 
         this.on('drag',(e)=>{
-
-
+            touchCb(e, 'move')
         }, {element: this.widget, multitouch: true})
 
         this.on('dragend',(e)=>{
-
-
+            touchCb(e, 'stop')
         }, {element: this.widget, multitouch: true})
 
+        if (this.getProp('continuous')) {
+            var freq = parseInt(this.getProp('continuous')) || 30
+            freq = Math.max(Math.min(60, freq), 1)
+            this.drawInterval = setInterval(()=>{
+                this.batchDraw()
+            }, 1000/freq)
+        }
 
     }
 
     setValue(v, options={}) {
 
-        if (v === null || v === undefined || ((v.length || 1) !== this.getProp('valueLength'))) return
-
         this.value = v
-
-        if (!options.dragged) {
-            var coords = this.resolveProp('valueToCoords', undefined, false, false, false, {
-                coords: this.touchCoords,
-                value: this.value,
-                width: this.width,
-                height: this.height,
-                local: this.localContext
-            }) || this.touchCoords
-
-            this.touchCoords = coords === undefined ? this.touchCoords : coords
-        }
 
         this.batchDraw()
 
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
+        if (options.defaultInit) this.script.setValue(this.value, {id: this.getProp('id')})
 
     }
 
 
     draw() {
 
-        if (this.getProp('autoClear')) this.clear()
+        if (this.getProp('autoClear')) {
+            this.clear()
+            this.ctx.beginPath()
+        }
 
-        this.resolveProp('draw', undefined, false, false, false, {
-            ctx: this.ctx,
-            coords: this.touchCoords,
+        this.drawScript.run({
             value: this.value,
-            colors: this.colors,
+            ctx: this.ctx,
             width: this.width,
             height: this.height,
-        })
-
-
-        if (this.getProp('autoClear')) this.clearRect = [0, 0, this.width, this.height]
+            cssVars: this.cssVars
+        }, {sync: false, send: false})
+        this.batchDraw()
 
     }
 
+    onRemove() {
+
+        clearInterval(this.drawInterval)
+        super.onRemove()
+
+    }
 
 }
 

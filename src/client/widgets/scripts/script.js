@@ -88,6 +88,8 @@ class Script extends Widget {
             })
 
 
+        } else if (typeof this.getProp('event') === 'object'){
+            this.compile(this.getProp('event'))
         }
 
     }
