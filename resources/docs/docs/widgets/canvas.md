@@ -45,21 +45,15 @@ First, we use the `touch` property to store the touch coordinates in the `locals
 
 // store normalized coordinates
 if (event.type == "start") {
-    locals.dx = event.offsetX / width
-    locals.dy = event.offsetY / height
+    locals.x = event.offsetX / width
+    locals.y = event.offsetY / height
 } else {
     // when the pointer is moving, increment coordinates
     // because offsetX and offsetY may not be relevant
     // if the pointer hovers a different widgets
-    locals.dx += event.movementX / width
-    locals.dy += event.movementY / height
+    locals.x += event.movementX / width
+    locals.y += event.movementY / height
 }
-
-// locals.dx and locals.dy may be under 0 or above 1
-// but we want the widget's value and the drawing to
-// stay between these limits
-locals.x = Math.max(0, Math.min(1, locals.dx))
-locals.y = Math.max(0, Math.min(1, locals.dy))
 
 // update widget value and send
 set("this", [locals.x, locals.y])
@@ -71,7 +65,7 @@ Then, we use the `draw` property to draw a circle at the touch coordinates.
 // draw property
 
 // draw an arc at touch coordinates
-ctx.arc(locals.x * width, locals.y * height, 6, 0, Math.PI * 2)
+ctx.arc(value[0] * width, value[1] * height, 6, 0, Math.PI * 2)
 // use colorFill property as stroke color
 ctx.strokeStyle = cssVars.colorFill
 // draw stroke
@@ -83,10 +77,21 @@ Finally, we use the `script` property to make the widget send it's values, and t
 ```js
 // script property
 
-// update locals.x and locals.y
-// required if we want to update the drawing when receiving osc messages
+var x, y
 if (value.length == 2) {
-    locals.x = value[0]
-    locals.y = value[1]
+    // if number of values is correct, use incomming value
+    x = value[0]
+    y = value[1]
+} else {
+    // else: use last valid coordinates
+    x = locals.x
+    y = locals.y
 }
+
+// apply limits
+x = Math.max(0, Math.min(1, value[0]))
+y = Math.max(0, Math.min(1, value[1]))
+
+// re-update inner value without retriggering script or sending message
+set("this", [x, y], {sync: false, send: false})
 ```

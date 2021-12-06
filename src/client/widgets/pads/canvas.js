@@ -15,19 +15,15 @@ class CanvasWidget extends Canvas {
 
         return super.defaults().extend({
             class_specific: {
-                // value: {type: 'number', value: 1, help: [
-                //
-                // ]},
                 autoClear: {type: 'boolean', value: true, help: [
                     'If set to `false`, the canvas context won\'t be cleared automatically and `ctx.clear` will need to be called in `draw`.'
                 ]},
                 continuous: {type: 'boolean|number', value: false, help: [
                     'If set to `true`, `draw` will be called at each frame, otherwise it will be called only when the widget is touched and when it receives a value.',
-                    'Can be a number between 1 and 60 to specify the framerate.'
+                    'Can be a number between 1 and 60 to specify the framerate (default: 30 fps).'
                 ]},
                 touch: {type: 'string', value: '', help: [
                     'Script executed when the widget is touched',
-                    'Exposed '
                 ]},
                 draw: {type: 'string', value: '', help: [
                     'Script executed when the widget is redrawn.'
@@ -116,8 +112,8 @@ class CanvasWidget extends Canvas {
 
         this.batchDraw()
 
-        if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
+        if (options.send) this.sendValue()
         if (options.defaultInit) this.script.setValue(this.value, {id: this.getProp('id')})
 
     }
