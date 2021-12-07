@@ -67,7 +67,7 @@ class WidgetManager extends EventEmitter {
             let v = widget.getValue()
             for (let i in widgetsByLinkId) {
                 if (widgetsByLinkId[i] !== widget) {
-                    widgetsByLinkId[i].setValue(v,{send: options.send,sync: true, id})
+                    widgetsByLinkId[i].setValue(v,{send: options.send, sync: true, script:options.script, id})
                 }
             }
         }

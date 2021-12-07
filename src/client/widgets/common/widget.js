@@ -227,7 +227,7 @@ class Widget extends EventEmitter {
             }, builtIn: true, parent: this})
             this.script._not_editable = true
             this.on('change', (e)=>{
-                if (e.widget === this && this.mounted && !e.options.fromEdit) {
+                if (e.widget === this && this.mounted && !e.options.fromEdit && e.options.script !== false) {
                     this.script.setValue(e.options.widget ? e.options.widget.value : this.value, {...e.options, id: e.options.id || e.id})
                 }
             })

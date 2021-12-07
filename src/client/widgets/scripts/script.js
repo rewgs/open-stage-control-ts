@@ -134,7 +134,7 @@ class Script extends Widget {
 
     setValue(v, options={}) {
 
-        if (this.getProp('event') === 'value') {
+        if (this.getProp('event') === 'value' && options.script !== false) {
 
             var returnValue = this.run({
                 value: v,

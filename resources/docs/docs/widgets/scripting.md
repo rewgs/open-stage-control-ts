@@ -101,8 +101,9 @@ Returns the value of the first matching widget.
 - `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget. `id` may contains wildcards ('\*').
 - `value`: new value for the widget.
 - `options` (optional): `object`, accepts the following items:
-    - `sync: false` (prevents widgets from triggering synchronization and scripts)
-    - `send: false` (prevents widgets from sending osc messages)
+    - `sync: false`: prevents widgets from triggering synchronization and scripts
+    - `script: false`: prevents scripts but not synchronization
+    - `send: false`: prevents widgets from sending osc messages
 
 Sets the value of the first matching widget. If `ìd` contains wildcards, affects all matching widgets **except** the emitting widget.
 
