@@ -12,6 +12,11 @@ This widget requires a good understanding of the javascript [Canvas API](https:/
 
 This property must be set to the number of values held by the widget : 1 for a simple slider, 2 for an XY pad, etc. Attempts to set the widget's value with a different number of values will be ignored.
 
+```js
+set("this", 1) // works if valueLength == 1
+set("this", [1, 2]) // works if valueLength == 2
+```
+
 ### `autoClear`
 
 This is a convenience option that clears the canvas context and calls [`beginPath`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/beginPath) before each drawing. When this property is set to `false`, the canvas must be cleared manually.
