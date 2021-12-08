@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.12.1
+
+- scripting
+    - `set()`: add an option to prevent target widget's script  
+
 ## 1.12.0
 
 - widgets
