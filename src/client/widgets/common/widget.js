@@ -964,7 +964,7 @@ class Widget extends EventEmitter {
     errorProp(name, type, error) {
 
         let stackline = error.stack ? (error.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
-            line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - (type.includes('{}') ? 1 : 0)) : '',
+            line = stackline.length > 1 ? ' at line ' + (parseInt(stackline[1]) - (type.includes('{}') ? 1 : 2)) : '',
             id = this.getProp('id') || this.props.id,
             widget = this // used for edit link in console
 
