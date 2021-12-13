@@ -18,7 +18,11 @@ if (macOs) {
     })
 } else {
     document.body.addEventListener('contextmenu', (event)=>{
-        if (event.target && (!event.target.tagName.match(/INPUT|TEXTAREA|OSC-CONSOLE|OSC-CONSOLE-MESSAGE/))) event.preventDefault()
+        if (
+            event.target &&
+            !event.target.classList.contains('ace_content') &&
+            !event.target.tagName.match(/INPUT|TEXTAREA|OSC-CONSOLE|OSC-CONSOLE-MESSAGE/)
+        ) event.preventDefault()
     })
 }
 
