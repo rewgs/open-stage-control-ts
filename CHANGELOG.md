@@ -3,7 +3,7 @@
 ## 1.13.0
 
 - bug fixes
-    - scripting: `stateGet()` not returning anything
+    - scripting: `storage.getItem()` not returning anything
 
 - editor
     - new code editor for `script` property with syntax hilighting, line numbers, etc
