@@ -2,6 +2,12 @@
 
 ## 1.12.1
 
+- bug fixes
+    - scripting: `stateGet()` not returning anything
+
+- editor
+    - new code editor for `script` property with syntax hilighting, line numbers, etc
+
 - scripting
     - `set()`: add an option to prevent target widget's script  
 
