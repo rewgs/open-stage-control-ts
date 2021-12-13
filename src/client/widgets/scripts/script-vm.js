@@ -327,7 +327,7 @@ class ScriptVm extends Vm {
             },
             getItem: (k)=>{
                 this.checkContext('storage.getItem')
-                cache.get('script.' + k)
+                return cache.get('script.' + k)
             },
             removeItem: (k)=>{
                 this.checkContext('storage.removeItem')
