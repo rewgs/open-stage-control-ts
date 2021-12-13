@@ -6,7 +6,7 @@ var UiWidget = require('./ui-widget'),
     chroma = require('chroma-js'),
     ace = require('brace'),
     ScriptVm = require('../widgets/scripts/script-vm'),
-    vm = new ScriptVm(), scriptGlobals = ScriptVm.globals,
+    scriptGlobals = ScriptVm.globals,
     editors = {}
 
 require('brace/mode/html')
@@ -22,7 +22,7 @@ for (var name of ['script', 'draw', 'touch']) {
     editors[name].setOption('autoScrollEditorIntoView', true)
     editors[name].setOption('maxLines', 80)
     editors[name].setOption('blockScrolling', Infinity)
-    editors[name].commands.bindKeys({"ctrl-l":null, "ctrl-f": null,"cmd-l":null, "cmd-f": null})
+    editors[name].commands.bindKeys({'ctrl-l':null, 'ctrl-f': null,'cmd-l':null, 'cmd-f': null})
     editors[name].renderer.setScrollMargin(4, 4, 0, 4)
     editors[name].element = DOM.get('#editor-' + name)[0]
     editors[name].textarea = DOM.get('#editor-' + name + ' .ace_text-input')[0]
@@ -30,7 +30,7 @@ for (var name of ['script', 'draw', 'touch']) {
     editors[name].textarea._ace = true
     editors[name].setHighlightActiveLine(false)
     editors[name].setHighlightGutterLine(false)
-    editors[name].getSession().$worker.send("setOptions", [{
+    editors[name].getSession().$worker.send('setOptions', [{
         asi: true,          // no semicolon
         esversion: 6,
         strict: 'implied',
