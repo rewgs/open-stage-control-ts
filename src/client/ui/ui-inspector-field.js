@@ -208,7 +208,7 @@ class UiInspectorField extends UiWidget {
             globals.JS = true
             globals.this = false
 
-            editor.getSession().$worker.send("changeOptions", [{
+            editor.getSession().$worker.send('changeOptions', [{
                 globals: {...scriptGlobals, ...globals}
             }])
 
