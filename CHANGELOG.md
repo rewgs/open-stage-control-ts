@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.12.1
+## 1.13.0
 
 - bug fixes
     - scripting: `stateGet()` not returning anything
