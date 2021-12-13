@@ -64,7 +64,7 @@ class Button extends Widget {
         this.pulse = null
 
         this.buttonSize = [100, 100]
-        this.exposeTouchCoords = this.getProp('script').includes('touchCoords')
+        this.exposeTouchCoords = String(this.getProp('script')).includes('touchCoords')
         this.parsersLocalScope.touchCoords = [0.5, 0.5]
         if (this.exposeTouchCoords) {
             this.on('resize', (e)=>{
