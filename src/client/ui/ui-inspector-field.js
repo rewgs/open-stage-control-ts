@@ -18,7 +18,7 @@ for (var name of ['script', 'draw', 'touch']) {
     editors[name] = ace.edit('editor-' + name)
     editors[name].getSession().setMode('ace/mode/javascript')
     editors[name].setOption('autoScrollEditorIntoView', true)
-    editors[name].setOption('maxLines', 80)
+    editors[name].setOption('maxLines', 40)
     editors[name].setOption('blockScrolling', Infinity)
     editors[name].commands.bindKeys({'ctrl-l':null, 'ctrl-f': null,'cmd-l':null, 'cmd-f': null})
     editors[name].renderer.setScrollMargin(4, 4, 0, 4)
