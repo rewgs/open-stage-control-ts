@@ -9,22 +9,21 @@ var UiWidget = require('./ui-widget'),
     scriptGlobals = ScriptVm.globals,
     editors = {}
 
-require('brace/mode/html')
+// require('brace/mode/html')
 require('brace/mode/javascript')
-require('brace/theme/solarized_dark')
 // require('brace/ext/searchbox')
 // require('brace/ext/keybinding_menu')
 
 for (var name of ['script', 'draw', 'touch']) {
     editors[name] = ace.edit('editor-' + name)
     editors[name].getSession().setMode('ace/mode/javascript')
-    editors[name].setTheme('ace/theme/solarized_dark')
     editors[name].setOption('autoScrollEditorIntoView', true)
     editors[name].setOption('maxLines', 80)
     editors[name].setOption('blockScrolling', Infinity)
     editors[name].commands.bindKeys({'ctrl-l':null, 'ctrl-f': null,'cmd-l':null, 'cmd-f': null})
     editors[name].renderer.setScrollMargin(4, 4, 0, 4)
     editors[name].element = DOM.get('#editor-' + name)[0]
+    editors[name].element.classList.add('ace_dark')
     editors[name].textarea = DOM.get('#editor-' + name + ' .ace_text-input')[0]
     editors[name].textarea.name = name
     editors[name].textarea._ace = true
