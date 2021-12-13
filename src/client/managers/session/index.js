@@ -104,7 +104,7 @@ var SessionManager = class SessionManager extends EventEmitter {
         if (path) this.setSessionPath(path)
 
         if (editor.inspector.focusedInput) {
-            editor.inspector.focusedInput.blur()
+            editor.inspector.onChange()
         }
 
         if (!this.sessionPath) return this.saveAs()

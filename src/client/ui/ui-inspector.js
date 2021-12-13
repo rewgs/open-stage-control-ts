@@ -204,12 +204,17 @@ class UiInspector extends UiWidget {
 
         input.blur()
 
-        var str = input.value.replace(/[‟“”]/g, '"').replace(/[‘’]/g, '\'') // convert invalid quote characters
-        var v = str
+        if (document.activeElement === input._ace_input) input._ace_input.blur()
+
+        var value = input.value,
+            str = value.replace(/[‟“”]/g, '"').replace(/[‘’]/g, '\''), // convert invalid quote characters
+            v
 
         try {
             v = JSON.parseFlex(str)
-        } catch(err) {}
+        } catch(err) {
+            v = str
+        }
 
         this.trigger('update', {
             propName: input.name,
@@ -225,7 +230,10 @@ class UiInspector extends UiWidget {
 
         if (event.target.tagName === 'TEXTAREA') {
 
-            if (event.keyCode === 13 && !event.shiftKey) {
+            if (event.keyCode === 13 &&
+                ((!event.shiftKey && !event.target._ace) ||
+                (event.shiftKey && event.target._ace))
+            ) {
 
                 event.preventDefault()
                 DOM.dispatchEvent(event.target, 'change')
@@ -244,10 +252,11 @@ class UiInspector extends UiWidget {
 
     onInput(event) {
 
+        if (event.target._ace) return
+
         this.focusedInput = event.target
 
         // text autoheight
-
         this.focusedInput.setAttribute('rows',0)
         this.focusedInput.setAttribute('rows', this.focusedInput.value.split('\n').length)
 

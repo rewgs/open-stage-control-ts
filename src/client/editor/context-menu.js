@@ -36,7 +36,11 @@ var handleClick = function(event) {
 
 
     if (event.type !== 'fast-right-click') {
-        if (editor.inspector.focusedInput) editor.inspector.onChange()
+
+        if (editor.inspector.focusedInput) {
+            editor.inspector.onChange()
+            if (!document.body.contains(eventData.target)) return
+        }
 
         if (targetWidget.getProp('type') === 'tab') {
             targetWidget.parent.setValue(targetWidget.parent.children.indexOf(targetWidget), {sync: true, send: true})

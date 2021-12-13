@@ -4,7 +4,8 @@ var widgetManager = require('../../managers/widgets'),
     {deepCopy} = require('../../utils'),
     {urlParser} = require('../utils'),
     Vm = require('../vm'),
-    toolbar
+    toolbar,
+    scriptGlobals = {empty:true}
 
 
 class ScriptVm extends Vm {
@@ -491,6 +492,15 @@ class ScriptVm extends Vm {
             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus', 'setScroll', 'getScroll', 'toolbar',
             'openUrl', 'getVar', 'setVar']) {
             this.sanitize(this.sandbox.contentWindow[imports])
+        }
+
+        if (scriptGlobals.empty){
+            delete scriptGlobals.empty
+            for (var k in this.sandbox.contentWindow) {
+                if (window[k] === undefined) scriptGlobals[k] = true
+            }
+            ScriptVm.globals = scriptGlobals
+            console.log(Object.keys(scriptGlobals).length)
         }
 
     }
