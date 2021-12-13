@@ -214,6 +214,7 @@ class UiInspectorField extends UiWidget {
 
             this.container.appendChild(editor.element)
             setTimeout(()=>{
+                editor.getSession().getUndoManager().reset()
                 editor.resize()
             })
         }
