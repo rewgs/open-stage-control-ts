@@ -85,31 +85,47 @@ osc-inspector-field .ace_editor {
     font-size: inherit;
     background: var(--color-background);
     line-height: 1.3;
+    border: 1rem solid var(--color-background);
+
+    ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
+        border-color: var(--color-background)!important;
+    }
+    --scrollbar-size: 8rem;
 
     .ace_gutter {
         background: #282c34;
-        color: #6a6f7a
+        color: #6a6f7a;
+        border-right: 1rem solid var(--color-background);
+        z-index: 10;
     }
     .ace_print-margin {
         display: none;
     }
 
     .ace_cursor {
-        color: #528bff
+        color: var(--color-accent);
+        border-right-width: 2rem;
+    }
+    .ace_hidden-cursors .ace_cursor {
+        opacity: 0;
     }
     .ace_marker-layer .ace_selection {
         background: #3d4350
     }
     .ace_multiselect .ace_selection.ace_start {
-        box-shadow: 0 0 3px 0 #282c34;
-        border-radius: 2px
+        box-shadow: 0 0 3rem 0 #282c34;
+        border-radius: 2rem
     }
     .ace_marker-layer .ace_step {
         background: #c6dbae
     }
     .ace_marker-layer .ace_bracket {
-        margin: -1px 0 0 -1px;
-        border: 1px solid #747369
+        // margin: 0 0 0 -1rem;
+        border: none;
+        border-radius: 0;
+        margin-top: 1rem;
+        position: relative;
+        border-bottom: 1rem solid var(--color-accent)
     }
     .ace_marker-layer .ace_active-line {
         background: rgba(76, 87, 103, .19)
@@ -118,7 +134,7 @@ osc-inspector-field .ace_editor {
         background-color: rgba(76, 87, 103, .19)
     }
     .ace_marker-layer .ace_selected-word {
-        border: 1px solid #3d4350
+        border: 1rem solid #3d4350
     }
     .ace_fold {
         background-color: #61afef;
@@ -375,7 +391,7 @@ osc-inspector-select {
                 color: var(--color-text);
                 margin-left: -4rem;
                 font-weight: normal;
-                text-indent: -10px;
+                text-indent: -10rem;
                 margin: 0;
             }
         }
