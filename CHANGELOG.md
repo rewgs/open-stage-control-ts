@@ -6,10 +6,16 @@
     - scripting: `storage.getItem()` not returning anything
 
 - editor
-    - new code editor for `script` property with syntax hilighting, line numbers, etc
+    - new code editor for `script`, `touch` and `draw` properties with syntax hilighting, line numbers, etc
 
 - scripting
     - `set()`: add an option to prevent target widget's script  
+
+- widgets
+    - root: add `hideMenu` property
+
+- misc
+    - minor cosmetic changes 
 
 ## 1.12.0
 

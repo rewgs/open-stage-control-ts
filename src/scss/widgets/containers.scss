@@ -309,13 +309,6 @@
                 background: var(--color-fill);
                 z-index: 101;
             }
-            &:first-child:before {
-                margin-left: 1rem;
-            }
-            &:last-child:before {
-                margin-right: 1rem;
-            }
-
         }
     }
 
@@ -349,14 +342,6 @@
                 height: auto;
                 background: var(--color-fill);
                 z-index: 101;
-            }
-            &:first-child:before {
-                margin-top: 1rem;
-                margin-left: 0;
-            }
-            &:last-child:before {
-                margin-bottom: 1rem;
-                margin-right: 0;
             }
         }
     }
