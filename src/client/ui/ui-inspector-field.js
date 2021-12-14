@@ -179,14 +179,15 @@ class UiInspectorField extends UiWidget {
                 editor.setHighlightActiveLine(true)
                 editor.setHighlightGutterLine(true)
                 editor.removeAllListeners('blur')
+                editor.removeAllListeners('change')
+                editor.on('change', (e)=>{
+                    input.value = editor.getValue()
+                })
                 editor.on('blur', (e)=>{
-                    if (input.value !== editor.getValue()) {
-                        input.value = editor.getValue()
-                        this.parent.focusedInput = input
-                        this.parent.onChange()
-                    }
+                    this.parent.focusedInput = input
                     editor.setHighlightActiveLine(false)
                     editor.setHighlightGutterLine(false)
+                    this.parent.onChange()
 
                 })
             })
