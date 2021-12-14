@@ -148,13 +148,15 @@ class UiInspector extends UiWidget {
                     if (field) field.classList.add('last-child')
                     field = html`<div class="separator">${props[categoryName][propName]}</div>`
                 } else {
+                    var def = defaults[widget.props.type][categoryName][propName]
+                    if (field && def.editor) field.classList.add('last-child')
                     var first = !field || field.classList.contains('separator')
                     field = new UiInspectorField({
                         parent: this,
                         widget: widget,
                         name: propName,
                         value: widget.props[propName],
-                        default: defaults[widget.props.type][categoryName][propName],
+                        default: def,
                         tabIndex: tabIndex++
                     }).container
                     if (first) field.classList.add('first-child')
@@ -238,7 +240,7 @@ class UiInspector extends UiWidget {
 
             if (event.keyCode === 13 &&
                 ((!event.shiftKey && !event.target._ace) ||
-                (event.shiftKey && event.target._ace))
+                (event.ctrlKey && event.target._ace))
             ) {
 
                 event.preventDefault()

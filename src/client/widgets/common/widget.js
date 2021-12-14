@@ -137,7 +137,7 @@ class Widget extends EventEmitter {
                 bypass: {type: 'boolean', value: false, help: 'Set to `true` to prevent the widget from sending any osc message'}
             },
             scripting: {
-                script: {type: 'script', value: '', help: ['Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
+                script: {type: 'script', value: '', editor: 'javascript', help: ['Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
             }
         }
 

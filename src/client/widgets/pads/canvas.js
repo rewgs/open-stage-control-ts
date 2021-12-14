@@ -26,10 +26,10 @@ class CanvasWidget extends Canvas {
                     'If set to `true`, `draw` will be called at each frame, otherwise it will be called only when the widget is touched and when it receives a value.',
                     'Can be a number between 1 and 60 to specify the framerate (default: 30 fps).'
                 ]},
-                touch: {type: 'string', value: '', help: [
+                touch: {type: 'string', value: '', editor:'javascript', help: [
                     'Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',
                 ]},
-                draw: {type: 'string', value: '', help: [
+                draw: {type: 'string', value: '', editor:'javascript', help: [
                     'Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.'
                 ]},
             }

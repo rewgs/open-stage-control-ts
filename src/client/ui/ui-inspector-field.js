@@ -7,39 +7,39 @@ var UiWidget = require('./ui-widget'),
     ace = require('brace'),
     ScriptVm = require('../widgets/scripts/script-vm'),
     scriptGlobals = ScriptVm.globals,
-    editors = {}
+    editors = {}, editorModes = {
+        javascript: require('brace/mode/javascript')
+    }
 
-// require('brace/mode/html')
-require('brace/mode/javascript')
-// require('brace/ext/searchbox')
-// require('brace/ext/keybinding_menu')
-
-for (var name of ['script', 'draw', 'touch']) {
-    editors[name] = ace.edit('editor-' + name)
-    editors[name].getSession().setMode('ace/mode/javascript')
-    editors[name].setOption('autoScrollEditorIntoView', true)
-    editors[name].setOption('maxLines', 40)
-    editors[name].setOption('blockScrolling', Infinity)
-    editors[name].commands.bindKeys({'ctrl-l':null, 'ctrl-f': null,'cmd-l':null, 'cmd-f': null})
-    editors[name].renderer.setScrollMargin(4, 4, 0, 4)
-    editors[name].element = DOM.get('#editor-' + name)[0]
-    editors[name].element.classList.add('ace_dark')
-    editors[name].$mouseHandler.setOption('dragEnabled', false)
-    editors[name].textarea = DOM.get('#editor-' + name + ' .ace_text-input')[0]
-    editors[name].textarea.name = name
-    editors[name].textarea._ace = true
-    editors[name].setHighlightActiveLine(false)
-    editors[name].setHighlightGutterLine(false)
-    editors[name].getSession().$worker.send('setOptions', [{
-        asi: true,          // no semicolon
-        esversion: 6,
-        strict: 'implied',
-        node: false,
-        browser: true,
-        validthis: true,
-        undef: true,
-        globals: {}
-    }])
+function createEditor(name, language) {
+    var el = html`<div id="#editor${name}"></div>`
+    var editor = editors[name] = ace.edit(el)
+    if (editorModes[language]) editor.getSession().setMode('ace/mode/' + language)
+    editor.setOption('autoScrollEditorIntoView', true)
+    editor.setOption('maxLines', 40)
+    editor.setOption('blockScrolling', Infinity)
+    editor.commands.bindKeys({'ctrl-l':null, 'ctrl-f': null,'cmd-l':null, 'cmd-f': null})
+    editor.renderer.setScrollMargin(4, 4, 0, 4)
+    editor.element = el
+    editor.element.classList.add('ace_dark')
+    editor.$mouseHandler.setOption('dragEnabled', false)
+    editor.textarea = DOM.get(el, '.ace_text-input')[0]
+    editor.textarea.name = name
+    editor.textarea._ace = true
+    editor.setHighlightActiveLine(false)
+    editor.setHighlightGutterLine(false)
+    if (language === 'javascript') {
+        editor.getSession().$worker.send('setOptions', [{
+            asi: true,          // no semicolon
+            esversion: 6,
+            strict: 'implied',
+            node: false,
+            browser: true,
+            validthis: true,
+            undef: true,
+            globals: {}
+        }])
+    }
 }
 
 
@@ -166,7 +166,9 @@ class UiInspectorField extends UiWidget {
 
         }
 
-        if (['script', 'touch', 'draw'].includes(this.name)) {
+        if (this.default.editor) {
+            this.container.classList.add('has-editor')
+            if (!editors[this.name]) createEditor(this.name, this.default.editor)
             let editor = editors[this.name]
             input.style.display = 'none'
             input._ace_input = editor.textarea
@@ -193,26 +195,28 @@ class UiInspectorField extends UiWidget {
 
                 })
             })
-            let globals = {}
-            if (this.name === 'script') {
-                if (this.widget.type !== 'script' || this.widget.getProp('event') === 'value') {
-                    globals = {id: true, value: true, touch: true}
-                } else if (this.widget.getProp('event') === 'keyboard') {
-                    globals = {type: true, key: true, code: true, ctrl: true, shift: true, alt: true, meta: true}
+            if (this.default.editor === 'javascript') {
+                let globals = {}
+                if (this.name === 'script') {
+                    if (this.widget.type !== 'script' || this.widget.getProp('event') === 'value') {
+                        globals = {id: true, value: true, touch: true}
+                    } else if (this.widget.getProp('event') === 'keyboard') {
+                        globals = {type: true, key: true, code: true, ctrl: true, shift: true, alt: true, meta: true}
+                    }
+                } else if (this.name === 'draw') {
+                    globals = {value: true, height: true, width: true, ctx: true, cssVars: true}
+                } else if (this.name === 'touch') {
+                    globals = {value: true, height: true, width: true, event: true}
                 }
-            } else if (this.name === 'draw') {
-                globals = {value: true, height: true, width: true, ctx: true, cssVars: true}
-            } else if (this.name === 'touch') {
-                globals = {value: true, height: true, width: true, event: true}
-            }
-            globals.locals = true
-            globals.console = true
-            globals.JS = true
-            globals.this = false
+                globals.locals = true
+                globals.console = true
+                globals.JS = true
+                globals.this = false
 
-            editor.getSession().$worker.send('changeOptions', [{
-                globals: {...scriptGlobals, ...globals}
-            }])
+                editor.getSession().$worker.send('changeOptions', [{
+                    globals: {...scriptGlobals, ...globals}
+                }])
+            }
 
             this.container.appendChild(editor.element)
             setTimeout(()=>{

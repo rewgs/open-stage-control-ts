@@ -41,8 +41,18 @@ osc-inspector-field {
         border-right: none;
     }
 
+    &.has-editor {
+        flex-direction: column;height: auto;
+        > label {
+            border:1rem solid var(--color-background);
+            border-bottom   : none;
+            width: 100%;
+        }
+        &:after {
+            content:none;
+        }
+    }
     .ace_editor {
-        flex:1;
         min-height: $field-height;
     }
     > textarea, > input {
@@ -91,7 +101,7 @@ osc-inspector-field {
 }
 
 osc-inspector-field .ace_editor {
-    background-color: var(--color-background);
+
     color: var(--color-text);
     font-size: inherit;
     background: var(--color-background);
@@ -237,7 +247,7 @@ osc-inspector-field .ace_editor {
         border-right: 1rem solid rgba(white, 0.05)
     }
     .ace_tooltip {
-        left:$padding!important
+        left:$padding!important;
     }
     // .ace_search {
     //     position: fixed;
@@ -365,7 +375,6 @@ osc-inspector-category {
         }
     }
 }
-
 
 osc-inspector-checkbox {
 
