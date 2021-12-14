@@ -322,10 +322,10 @@ osc-panel-header {
         position: absolute;
         left: 0rem;
         right: 0rem;
-        bottom: 1rem;
-        opacity: var(--alpha-fill);
-        height: 2rem;
-        background: var(--color-fill);
+        bottom: 0rem;
+        // opacity: var(--alpha-fill);
+        height: 1rem;
+        background: var(--color-background);
         z-index: 101;
     }
 
@@ -370,7 +370,6 @@ osc-panel-content {
         }
     }
 
-    border-bottom:1rem solid var(--color-background);
     &:before {
         bottom: 0;
     }

@@ -246,11 +246,12 @@
 
     background-color: var(--color-ui-background);
 
-    height:calc(var(--nav-height) - 1rem);
+    height:var(--nav-height);
     flex-shrink:0;
     display: flex;
     // padding-bottom: 1rem;
     position: relative;
+    border-bottom: 1rem solid var(--color-background);
 
     &:before {
         content:"";
@@ -287,6 +288,8 @@
         white-space: pre-wrap;
         text-align: center;
 
+        border-right: 1rem solid var(--color-background);
+
         i {
             pointer-events: none;
             position: relative;
@@ -294,6 +297,7 @@
 
         &.on {
             z-index: 1;overflow: visible;
+            background: var(--color-ui-background-active);
             &:before {
                 content: "";
                 position: absolute;
@@ -319,12 +323,17 @@
         flex-direction: column;
         height: 100%;
         padding-bottom: 0;
+        border-bottom: none;
         // padding-right: 1rem;
+        border-right: 1rem solid var(--color-background);
 
         div {
             height: 100%;
             padding: 0 12rem;
             line-height: normal;
+            border-right: none;
+            border-bottom: 1rem solid var(--color-background);
+
             // justify-content: flex-start;
             // text-align: left;
 

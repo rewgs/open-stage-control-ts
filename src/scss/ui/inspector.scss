@@ -36,7 +36,7 @@ osc-inspector-field {
         line-height: $field-height;
         height: $field-height;
         cursor: help;
-        background: rgba(black, 0.05);
+        background: var(--color-ui-background-active);
         border:1rem solid var(--color-background);
         border-right: none;
     }
@@ -114,7 +114,7 @@ osc-inspector-field .ace_editor {
     --scrollbar-size: 8rem;
 
     .ace_gutter {
-        background: #282c34;
+        background: var(--color-ui-background-active);
         color: #6a6f7a;
         border-right: 1rem solid var(--color-background);
         z-index: 10;
@@ -347,9 +347,10 @@ osc-inspector-category {
             height: 100%;
             left:-($padding);
             right:-($padding);
-            background: rgba(black,0.1);
+            background: var(--color-ui-background-active);
             border-top:1rem solid var(--color-background);
             border-bottom:1rem solid var(--color-background);
+            z-index: -1;
         }
     }
 
