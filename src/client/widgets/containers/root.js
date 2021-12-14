@@ -1,5 +1,10 @@
 var Panel = require('./panel'),
-    StaticProperties = require('../mixins/static_properties')
+    StaticProperties = require('../mixins/static_properties'),
+    mainMenu
+
+setTimeout(()=>{
+    mainMenu= require('../../ui/main-menu')
+})
 
 class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'root'}) {
 
@@ -25,7 +30,10 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
                 colorStroke: null,
                 alphaStroke: null,
                 alphaFillOff: null,
-                lineWidth: null
+                lineWidth: null,
+                _separator_root_style: 'Root style',
+                hideMenu: {type: 'boolean', value: false, help: 'Set to `true` to hide the main menu button.'},
+
             }
         })
 
@@ -40,6 +48,7 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
 
         this.widget.classList.add('root')
 
+        this.checkMenuVisibility()
 
         DOM.each(this.widget, '> .navigation', (el)=>{
             el.classList.add('main')
@@ -47,9 +56,30 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
 
     }
 
+    checkMenuVisibility() {
+        if (this.getProp('hideMenu')) {
+            mainMenu.container.style.display = 'none'
+        } else {
+            mainMenu.container.style.display = ''
+        }
+    }
+
     isVisible() {
 
         return true
+
+    }
+
+    onPropChanged(propName, options, oldPropValue) {
+
+        if (super.onPropChanged(...arguments)) return true
+
+        switch (propName) {
+
+            case 'hideMenu':
+                this.checkMenuVisibility()
+                return
+        }
 
     }
 
@@ -64,6 +94,10 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
 
 
 }
+
+Root.dynamicProps = Root.prototype.constructor.dynamicProps.concat(
+    'hideMenu'
+)
 
 
 module.exports = Root
