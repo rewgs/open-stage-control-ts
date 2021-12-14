@@ -37,6 +37,7 @@ var handleClick = function(event) {
 
     if (editor.inspector.focusedInput) {
         editor.inspector.onChange()
+        editor.inspector.focusedInput = null
         if (!document.body.contains(eventData.target)) return
     }
 

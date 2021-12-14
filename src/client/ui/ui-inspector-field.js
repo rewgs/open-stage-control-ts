@@ -17,7 +17,7 @@ function createEditor(name, language) {
     if (editorModes[language]) editor.getSession().setMode('ace/mode/' + language)
     editor.setOption('autoScrollEditorIntoView', true)
     editor.setOption('maxLines', 40)
-    editor.setOption('blockScrolling', Infinity)
+    editor.$blockScrolling = Infinity
     editor.commands.bindKeys({'ctrl-l':null, 'ctrl-f': null,'cmd-l':null, 'cmd-f': null})
     editor.renderer.setScrollMargin(4, 4, 0, 4)
     editor.element = el
@@ -177,6 +177,7 @@ class UiInspectorField extends UiWidget {
             editor.selection.setRange({start:0,end:0})
             editor.gotoLine(0)
             editor.removeAllListeners('focus')
+            editor.dirty = false
             editor.on('focus', ()=>{
                 this.parent.focusedInput = input
                 editor.setHighlightActiveLine(true)
@@ -185,13 +186,18 @@ class UiInspectorField extends UiWidget {
                 editor.removeAllListeners('change')
                 editor.on('change', (e)=>{
                     input.value = editor.getValue()
+                    editor.dirty = true
                 })
                 editor.on('blur', (e)=>{
-                    input.value = editor.getValue()
-                    this.parent.focusedInput = input
                     editor.setHighlightActiveLine(false)
                     editor.setHighlightGutterLine(false)
-                    this.parent.onChange()
+                    editor.selection.setRange({start:0,end:0})
+                    if (editor.dirty) {
+                        editor.dirty = false
+                        input.value = editor.getValue()
+                        this.parent.focusedInput = input
+                        this.parent.onChange()
+                    }
 
                 })
             })
