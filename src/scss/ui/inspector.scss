@@ -248,6 +248,14 @@ osc-inspector-field .ace_editor {
     }
     .ace_tooltip {
         left:$padding!important;
+        max-width: 80%;
+        white-space: pre-wrap;
+        background: var(--color-context-menu);
+        color: var(--color-context-menu-text);
+        font-family: $font;
+        box-shadow: 0 0 0 0.5rem rgba(0, 0, 0, 0.15) inset;
+        border: none;
+        border-radius: 0;
     }
     // .ace_search {
     //     position: fixed;
