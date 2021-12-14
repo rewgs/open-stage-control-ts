@@ -24,6 +24,7 @@ for (var name of ['script', 'draw', 'touch']) {
     editors[name].renderer.setScrollMargin(4, 4, 0, 4)
     editors[name].element = DOM.get('#editor-' + name)[0]
     editors[name].element.classList.add('ace_dark')
+    editors[name].$mouseHandler.setOption('dragEnabled', false)
     editors[name].textarea = DOM.get('#editor-' + name + ' .ace_text-input')[0]
     editors[name].textarea.name = name
     editors[name].textarea._ace = true
@@ -184,6 +185,7 @@ class UiInspectorField extends UiWidget {
                     input.value = editor.getValue()
                 })
                 editor.on('blur', (e)=>{
+                    input.value = editor.getValue()
                     this.parent.focusedInput = input
                     editor.setHighlightActiveLine(false)
                     editor.setHighlightGutterLine(false)
