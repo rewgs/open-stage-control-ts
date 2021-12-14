@@ -118,7 +118,8 @@ osc-inspector-field .ace_editor {
         color: #6a6f7a;
         border-right: 1rem solid var(--color-background);
         z-index: 10;
-        padding-top: 1rem;
+        // padding-top: 1rem;
+        line-height: 1.5
     }
     .ace_print-margin {
         display: none;
@@ -256,6 +257,18 @@ osc-inspector-field .ace_editor {
         box-shadow: 0 0 0 0.5rem rgba(0, 0, 0, 0.15) inset;
         border: none;
         border-radius: 0;
+    }
+    .ace_info {
+        background: linear-gradient(rgba(black, 0.5), rgba(black, 0.5)), var(--color-text)!important;
+        color: var(--color-background);
+    }
+    .ace_warning {
+        background: linear-gradient(rgba(black, 0.5), rgba(black, 0.5)), var(--color-warning);
+        color: var(--color-background);
+    }
+    .ace_error {
+        background: linear-gradient(rgba(black, 0.4), rgba(black, 0.4)), var(--color-error);
+        color: var(--color-background);
     }
     // .ace_search {
     //     position: fixed;
