@@ -13,26 +13,37 @@ osc-inspector-field {
     display: flex;
     flex-direction: row;
     line-height: $field-height;
-    margin-top: 2rem;
+    margin-top: -1rem;
     position: relative;
+
+    &:after {
+        content:"";
+        position: absolute;
+        left:94rem;
+        top:0;
+        right: 0;
+        border-top:1rem solid var(--color-ui-background);
+        z-index: 1;
+    }
 
     --widget-padding: -1rem;
 
-
     > label {
-        width: 90rem;
-        // order: 35;
-        text-align: right;
+        width: 94rem;
         text-transform: none;
-        padding-right: 8rem;
-        line-height: $field-height + 1rem;
+        padding-left: 4rem;
+        padding-right: 4rem;
+        line-height: $field-height;
         height: $field-height;
         cursor: help;
-        // background: rgba(white, 0.1);
+        background: rgba(black, 0.05);
+        border:1rem solid var(--color-background);
+        border-right: none;
     }
 
     .ace_editor {
         flex:1;
+        min-height: $field-height;
     }
     > textarea, > input {
         font-family: $font-mono;
@@ -97,6 +108,7 @@ osc-inspector-field .ace_editor {
         color: #6a6f7a;
         border-right: 1rem solid var(--color-background);
         z-index: 10;
+        padding-top: 1rem;
     }
     .ace_print-margin {
         display: none;
@@ -251,8 +263,9 @@ osc-inspector-category {
         position: relative;
         cursor: pointer;
         height: $header-height;
-        line-height: $header-height;
+        line-height: $header-height - 1;
         // padding: 0 8rem;
+        font-weight: 500;
         @include pseudo-fill($z: -1);
 
         &:after {
@@ -270,26 +283,41 @@ osc-inspector-category {
             transform-origin: 2rem 3rem;
             width: 8rem;
             margin-right: 8rem;
+            top:1rem;
         }
 
     }
 
     .separator {
         height: $header-height;
-        line-height: $header-height + 1;
-        margin: 8rem 0;
-        --alpha-fill: 0.75;
+        line-height: $header-height - 1;
+        margin: $padding 0;
         position: relative;
-        @include pseudo-fill($z: -1);
-        padding: 0 16rem;
-        opacity: 0.75;
-        --color-fill: var(--color-background);
-
+        padding: 0 ($padding - 4);
+        // opacity: 0.75;
+        font-weight: 500;
+        &:before {
+            position: relative;
+            font-family: FontAwesome;
+            content: "\f078";
+            // color: var(--color-background);
+            width: $field-height;
+            text-align: left;
+            display: inline-block;
+            transform-origin: 2rem 3rem;
+            width: 8rem;
+            margin-right: 12rem;
+            top: 1rem;
+        }
         &:after {
-            left:-($padding - 1);
-            right:-($padding - 1);
-            background: linear-gradient(to right,var(--color-fill), transparent);
-
+            content: "";
+            position: absolute;
+            height: 100%;
+            left:-($padding);
+            right:-($padding);
+            background: rgba(black,0.1);
+            border-top:1rem solid var(--color-background);
+            border-bottom:1rem solid var(--color-background);
         }
     }
 
@@ -315,11 +343,26 @@ osc-inspector-category {
         }
     }
 
+    osc-inspector-field.first-child,
     .category-header + osc-inspector-field {
-        margin-top: 8rem;
+        margin-top: $padding + 1;
+        &:after {
+            content: none;
+        }
+        osc-inspector-checkbox {
+            border-top: 0;
+        }
+        osc-inspector-color:after {
+            top:0;
+        }
     }
+    osc-inspector-field.last-child,
     osc-inspector-field:last-child {
         margin-bottom: 8rem;
+
+        osc-inspector-checkbox {
+            border-bottom: none;
+        }
     }
 }
 
@@ -339,7 +382,9 @@ osc-inspector-checkbox {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1rem solid var(--color-background);
+    border-top: 1rem solid var(--color-background);
+    border-bottom: 1rem solid var(--color-background);
+
     i {
         // color: transparent;
         opacity: 0.5;
@@ -436,7 +481,9 @@ osc-inspector-color {
     --widget-padding: 1rem;
     @include pseudo-fill();
     &:after {
-        border: 1rem solid var(--color-ui-button)
+        border: 1rem solid var(--color-ui-button);
+        right: 0;
+        left: 0;
     }
 }
 

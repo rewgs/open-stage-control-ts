@@ -128,6 +128,7 @@ class UiInspector extends UiWidget {
             `)
 
             let notEmpty
+            let field
 
             for (let propName in props[categoryName]) {
 
@@ -143,9 +144,12 @@ class UiInspector extends UiWidget {
                     return !shared
                 })) continue
 
-                let field = propName.includes('_separator') ?
-                    html`<div class="separator">${props[categoryName][propName]}</div>` :
-                    new UiInspectorField({
+                if (propName.includes('_separator')) {
+                    if (field) field.classList.add('last-child')
+                    field = html`<div class="separator">${props[categoryName][propName]}</div>`
+                } else {
+                    var first = !field || field.classList.contains('separator')
+                    field = new UiInspectorField({
                         parent: this,
                         widget: widget,
                         name: propName,
@@ -153,6 +157,8 @@ class UiInspector extends UiWidget {
                         default: defaults[widget.props.type][categoryName][propName],
                         tabIndex: tabIndex++
                     }).container
+                    if (first) field.classList.add('first-child')
+                }
 
                 if (field)  {
                     category.appendChild(field)
