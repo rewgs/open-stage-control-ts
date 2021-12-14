@@ -151,10 +151,11 @@ osc-inspector-field .ace_editor {
         border-bottom: 1rem solid var(--color-accent)
     }
     .ace_marker-layer .ace_active-line {
-        background: rgba(76, 87, 103, .19)
+        background: rgba(white, 0.05);
     }
     .ace_gutter-active-line {
-        background-color: rgba(76, 87, 103, .19)
+        background-color: rgba(white, 0.05);
+        z-index: 99
     }
     .ace_marker-layer .ace_selected-word {
         border: none;
