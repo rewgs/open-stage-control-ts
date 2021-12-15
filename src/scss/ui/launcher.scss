@@ -99,7 +99,7 @@ osc-settings-field {
     label {
         width: 100rem;
         // text-align: right;
-        background: rgba(black, 0.05);
+        background: var(--color-ui-background-secondary);
         border:1rem solid var(--color-background);
         border-right: none;
         // margin-right: 8rem;

@@ -33,6 +33,8 @@ module.exports = {
     editor_fragment_export: 'Exporter',
     editor_fragment_import: 'Importer',
 
+    editor_ace_help: 'Aide',
+    editor_ace_help_title: 'Raccourcis claviers de l\'éditeur',
 
     // loadings
     loading_upload: 'Téléversement...',

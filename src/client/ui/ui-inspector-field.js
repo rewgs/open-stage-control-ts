@@ -1,5 +1,7 @@
 var UiWidget = require('./ui-widget'),
+    UiModal = require('./ui-modal'),
     {categories} = require('../widgets/'),
+    locales = require('../locales'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     {icon} = require('../ui/utils'),
@@ -18,7 +20,9 @@ function createEditor(name, language) {
     editor.setOption('autoScrollEditorIntoView', true)
     editor.setOption('maxLines', 40)
     editor.$blockScrolling = Infinity
-    editor.commands.bindKeys({'ctrl-l':null, 'ctrl-f': null,'cmd-l':null, 'cmd-f': null})
+    editor.commands.bindKeys({
+        'ctrl-l': null, 'ctrl-f': null, 'ctrl-h': null, 'ctrl-,': null,
+    })
     editor.renderer.setScrollMargin(4, 4, 0, 4)
     editor.element = el
     editor.element.classList.add('ace_dark')
@@ -229,10 +233,64 @@ class UiInspectorField extends UiWidget {
                 editor.getSession().getUndoManager().reset()
                 editor.resize()
             })
+
+            var help = this.container.appendChild(html`<div class="btn">${locales('editor_ace_help')}</div>`)
+            help.addEventListener('fast-click', (e)=>{
+                this.aceHelp(editor)
+            })
         }
 
 
     }
+
+    aceHelp(editor) {
+
+        var keybindings = [];
+        var commandMap = {};
+        editor.keyBinding.$handlers.forEach(function(handler) {
+            var ckb = handler.commandKeyBinding;
+            for (var i in ckb) {
+                var key = i.replace(/(^|-)\w/g, function(x) { return x.toUpperCase(); });
+                var commands = ckb[i];
+                if (!Array.isArray(commands))
+                    commands = [commands];
+                commands.forEach(function(command) {
+                    if (typeof command != "string")
+                        command  = command.name;
+                    if (commandMap[command]) {
+                        commandMap[command].key += "|" + key;
+                    } else {
+                        commandMap[command] = {key: key, command: command};
+                        keybindings.push(commandMap[command]);
+                    }
+                });
+            }
+        });
+
+        var modal = new UiModal({closable: true, title: html`<span class="editor-help-title">${locales('editor_ace_help_title')}</span>`, html: true, content: html`
+            <div class="inspector-help">
+                <table>
+                <thead>
+                    <tr>
+                        <th>Shortcut</th>
+                        <th>Command</th>
+                    </tr>
+                </thead>
+                ${
+                    keybindings.map(k=>html`<tr><td><span class="kbd">${k.key}</span></td><td>${k.command}</td></tr>`)
+                }
+                </table>
+            </div>
+        `})
+
+
+        this.parent.helpModalOpened = true
+        modal.on('close', ()=>{
+            this.parent.helpModalOpened = false
+        })
+
+    }
+
 
 }
 

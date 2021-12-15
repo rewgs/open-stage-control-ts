@@ -34,6 +34,9 @@ module.exports = {
     editor_fragment_export: 'Export',
     editor_fragment_import: 'Import',
 
+    editor_ace_help: 'Help',
+    editor_ace_help_title: 'Code editor keyboard shortcuts',
+
     // loadings
     loading_upload: 'Uploading file...',
     loading_newclient: 'New client connecting...',

@@ -297,7 +297,7 @@
 
         &.on {
             z-index: 1;overflow: visible;
-            background: var(--color-ui-background-active);
+            background: var(--color-ui-background-secondary);
             &:before {
                 content: "";
                 position: absolute;

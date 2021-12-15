@@ -36,7 +36,7 @@ osc-inspector-field {
         line-height: $field-height;
         height: $field-height;
         cursor: pointer;
-        background: var(--color-ui-background-active);
+        background: var(--color-ui-background-secondary);
         border:1rem solid var(--color-background);
         border-right: none;
     }
@@ -47,6 +47,15 @@ osc-inspector-field {
             border:1rem solid var(--color-background);
             border-bottom   : none;
             width: 100%;
+            position: relative;
+        }
+        .btn {
+            position: absolute;
+            right:3rem;
+            top:3rem;
+            background: var(--color-ui-button);
+            line-height: $field-height - 6;
+
         }
         &:after {
             content:none;
@@ -114,7 +123,7 @@ osc-inspector-field .ace_editor {
     --scrollbar-size: 8rem;
 
     .ace_gutter {
-        background: var(--color-ui-background-active);
+        background: var(--color-ui-background-secondary);
         color: #6a6f7a;
         border-right: 1rem solid var(--color-background);
         z-index: 10;
@@ -347,7 +356,7 @@ osc-inspector-category {
             height: 100%;
             left:-($padding);
             right:-($padding);
-            background: var(--color-ui-background-active);
+            background: var(--color-ui-background-secondary);
             border-top:1rem solid var(--color-background);
             border-bottom:1rem solid var(--color-background);
             z-index: -1;
@@ -401,7 +410,7 @@ osc-inspector-category {
 
 osc-inspector-checkbox {
 
-    --widget-padding: 0;
+    --widget-padding: 1rem;
     --color-fill: var(--color-ui-button);
     --alpha-fill: 1;
 
@@ -510,7 +519,7 @@ osc-inspector-color {
 
     --color-fill: var(--color-picker-value);
     --alpha-fill: 1;
-    --widget-padding: 1rem;
+    --widget-padding: 2rem;
     @include pseudo-fill();
     &:after {
         border: 1rem solid var(--color-ui-button);
@@ -613,5 +622,18 @@ osc-inspector-color {
         margin-top: 10rem;
         padding-top: 10rem;
 
+    }
+
+    .kbd {
+        background: var(--color-ui-button);
+        padding: 4rem;
+        display: inline-block;
+        margin-bottom: 2rem;
+    }
+
+    thead tr {
+        text-align: left;
+        font-weight: 500;
+        height: 30rem;
     }
 }
