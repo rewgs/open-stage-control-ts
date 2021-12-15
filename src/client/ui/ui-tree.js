@@ -59,11 +59,13 @@ class UiTree extends UiWidget {
         super(options)
 
         this.mounted = false
-        this.container.appendChild(html`<div class="fragment-mode-warning" title="${locales('fragment_mode_explanation')}">${raw(icon('exclamation-triangle'))} ${locales('fragment_mode_warning')}</div>`)
         this.filter = this.container.appendChild(html`<input class="filter" type="text" placeholder="${locales('tree_filter')}..."/>`)
-        this.list = this.container.appendChild(html`<ol style="--depth: 1"></ol`)
+        this.fragment = this.container.appendChild(html`<div class="fragment-mode-warning" title="${locales('fragment_mode_explanation')}">${raw(icon('exclamation-triangle'))} ${locales('fragment_mode_warning')}</div>`)
+        this.wrapper = this.container.appendChild(html`<div class="tree"></div>`)
+        this.list = this.wrapper.appendChild(html`<ol style="--depth: 1"></ol`)
         this.dragDummy = html`<span></span>`
         this.deferredUpdateTimeout = null
+
 
         this.expanded = {}
         this.init = false
@@ -217,6 +219,7 @@ class UiTree extends UiWidget {
                 parent = parent.parentNode
             }
             node[0].scrollIntoView({block: 'center'})
+            this.wrapper.scrollLeft = (node[0].depth - 1) * 20
         }
 
         if (this.parent.minimized) this.parent.restore()
@@ -228,6 +231,7 @@ class UiTree extends UiWidget {
         DOM.each(this.list, '.editing', (el)=>{
             el.classList.add('editor-blink')
             el.scrollIntoView({block: 'center'})
+            this.wrapper.scrollLeft = (el.depth - 1) * 20
             setTimeout(()=>{
                 el.classList.remove('editor-blink')
             }, 800)
@@ -262,6 +266,9 @@ class UiTree extends UiWidget {
             node = html`<li class="${selected ? 'editing' : ''} ${!widget.getProp('visible') ? 'invisible' : ''}"
                             data-widget="${widget.hash}" data-type="${widget.getProp('type')}">
                         ${raw(icon(widgetIcons[widget.getProp('type')] || 'root'))}${id}</li>`
+
+
+        node.depth = depth
 
         if (widget instanceof Panel && !(widget instanceof Matrix || widget instanceof Keyboard)) {
             node.insertBefore(html`<span class="toggle no-widget-select"></span>`, node.childNodes[0])

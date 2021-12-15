@@ -5,14 +5,28 @@
 
     $padding: 16rem;
     $line-height: 28rem;
-    padding: 0 $padding;
+    $field-height: 30rem;
     padding-right: 0;
 
     text-transform: none;
     line-height: $line-height;
 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .tree {
+        width: 100%;
+        flex: 1;
+        position: relative;
+        overflow: auto;
+        padding-left:$padding;
+        padding-right:$padding;
+
+    }
 
     ol {
+
         list-style: none;
         position: relative;
         padding-left: 16rem;
@@ -123,7 +137,7 @@
         @include pseudo-fill($z: -1);
         &:after {
             left: calc(-1 * var(--depth) * 16rem - #{$padding});
-            right: 1rem;
+            right: 1rem - $padding;
             bottom: auto;
             height: $line-height;
             top: 0;
@@ -143,7 +157,7 @@
         @include pseudo-fill($z: -1);
         &:after {
             left: calc(-1 * var(--depth) * 16rem - #{$padding});
-            right: 1rem;
+            right: 1rem - $padding;
             bottom: auto;
             height: $line-height;
             opacity: 0.1;
@@ -152,17 +166,14 @@
 
 
     .filter {
-        margin-left: #{-$padding * 2};
-        width: calc(100% + #{$padding * 2});
         display: block;
-        background: linear-gradient(to right, var(--color-background), var(--color-ui-background));
         font-family: $font;
-        line-height: $field-height - 4rem;
-        padding: 4rem $padding;
-        padding-left: #{$padding * 2};
-        position: sticky;
+        line-height: $field-height;
+        padding: 0 $padding;
         top: 0;
         z-index: 2;
+        background: var(--color-ui-background-active);
+        border-bottom: 1rem solid var(--color-background);
     }
 
     .filter-active .filter-hide {
@@ -170,12 +181,10 @@
     }
 
     .fragment-mode-warning {
-        margin-left: #{-$padding * 2};
-        width: calc(100% + #{$padding * 2});
         color: var(--color-warning);
-        padding: 8rem $padding;
-        padding-left: #{$padding * 2};
-        line-height: $field-height - 4rem;
+        padding: 0 $padding;
+        line-height: $field-height;
+        border-bottom: 1rem solid var(--color-background);
         display: none;
     }
 
