@@ -362,3 +362,45 @@ module.exports = {
 
 }
 ```
+
+## Custom module merger
+```js
+var submodules = [
+    require('./custom_modA.js'),
+    require('./custom_modB.js'),
+    // etc
+]
+
+
+module.exports = {
+    init: function(){
+        for (var m of submodules) {
+            if (m.init) m.init()
+        }
+    },
+    unload: function(){
+        for (var m of submodules) {
+            if (m.unload) m.unload()
+        }
+    },
+    oscInFilter: function(data){
+
+        for (var m of submodules) {
+            if (m.oscInFilter) data = m.oscInFilter(data)
+            if (!data) return
+        }
+
+        return data
+
+    },
+    oscOutFilter: function(data){
+
+        for (var m of submodules) {
+            if (m.oscOutFilter) data = m.oscOutFilter(data)
+            if (!data) return
+        }
+
+        return data
+    }
+}
+```
