@@ -245,27 +245,27 @@ class UiInspectorField extends UiWidget {
 
     aceHelp(editor) {
 
-        var keybindings = [];
-        var commandMap = {};
+        var keybindings = []
+        var commandMap = {}
         editor.keyBinding.$handlers.forEach(function(handler) {
-            var ckb = handler.commandKeyBinding;
+            var ckb = handler.commandKeyBinding
             for (var i in ckb) {
-                var key = i.replace(/(^|-)\w/g, function(x) { return x.toUpperCase(); });
-                var commands = ckb[i];
+                var key = i.replace(/(^|-)\w/g, function(x) { return x.toUpperCase() })
+                var commands = ckb[i]
                 if (!Array.isArray(commands))
-                    commands = [commands];
+                    commands = [commands]
                 commands.forEach(function(command) {
-                    if (typeof command != "string")
-                        command  = command.name;
+                    if (typeof command != 'string')
+                        command  = command.name
                     if (commandMap[command]) {
-                        commandMap[command].key += "|" + key;
+                        commandMap[command].key += '|' + key
                     } else {
-                        commandMap[command] = {key: key, command: command};
-                        keybindings.push(commandMap[command]);
+                        commandMap[command] = {key: key, command: command}
+                        keybindings.push(commandMap[command])
                     }
-                });
+                })
             }
-        });
+        })
 
         var modal = new UiModal({closable: true, title: html`<span class="editor-help-title">${locales('editor_ace_help_title')}</span>`, html: true, content: html`
             <div class="inspector-help">
@@ -276,9 +276,7 @@ class UiInspectorField extends UiWidget {
                         <th>Command</th>
                     </tr>
                 </thead>
-                ${
-                    keybindings.map(k=>html`<tr><td><span class="kbd">${k.key}</span></td><td>${k.command}</td></tr>`)
-                }
+                    ${keybindings.map(k=>html`<tr><td><span class="kbd">${k.key}</span></td><td>${k.command}</td></tr>`)}
                 </table>
             </div>
         `})
