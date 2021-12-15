@@ -59,8 +59,8 @@ class UiTree extends UiWidget {
         super(options)
 
         this.mounted = false
-        this.filter = this.container.appendChild(html`<input class="filter" type="text" placeholder="${locales('tree_filter')}..."/>`)
         this.fragment = this.container.appendChild(html`<div class="fragment-mode-warning" title="${locales('fragment_mode_explanation')}">${raw(icon('exclamation-triangle'))} ${locales('fragment_mode_warning')}</div>`)
+        this.filter = this.container.appendChild(html`<input class="filter" type="text" placeholder="${locales('tree_filter')}..."/>`)
         this.wrapper = this.container.appendChild(html`<div class="tree"></div>`)
         this.list = this.wrapper.appendChild(html`<ol style="--depth: 1"></ol`)
         this.dragDummy = html`<span></span>`

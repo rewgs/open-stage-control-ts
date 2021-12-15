@@ -35,7 +35,7 @@ osc-inspector-field {
         padding-right: 4rem;
         line-height: $field-height;
         height: $field-height;
-        cursor: help;
+        cursor: pointer;
         background: var(--color-ui-background-active);
         border:1rem solid var(--color-background);
         border-right: none;
