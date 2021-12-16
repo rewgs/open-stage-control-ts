@@ -244,7 +244,7 @@
 
 .navigation {
 
-    background-color: var(--color-ui-background);
+    background-color: var(--color-ui-foreground);
 
     height:var(--nav-height);
     flex-shrink:0;
@@ -297,7 +297,7 @@
 
         &.on {
             z-index: 1;overflow: visible;
-            background: var(--color-ui-background-secondary);
+            background: var(--color-ui-background);
             &:before {
                 content: "";
                 position: absolute;

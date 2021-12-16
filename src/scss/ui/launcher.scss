@@ -1,7 +1,7 @@
 #osc-launcher {
 
     osc-panel-header {
-        background-color:  var(--color-ui-background);
+        background-color:  var(--color-ui-foreground);
         --alpha-fill: .75;
         text-align: left;
         justify-content: center;
@@ -19,12 +19,12 @@
     flex-direction: column;
 
     osc-panel-container.main {
-        background-color:  var(--color-ui-background);
+        background-color:  var(--color-ui-foreground);
         min-height: 0;
         min-height: 40rem;
         osc-panel-content {
             padding: 8rem;
-            background-color:  var(--color-ui-background);
+            background-color:  var(--color-ui-foreground);
         }
     }
     osc-panel-content {
@@ -41,14 +41,14 @@
             padding: 0;
         }
 
-        border-top: 2rem solid var(--color-ui-background);
+        border-top: 2rem solid var(--color-ui-foreground);
         max-height: calc(100% - var(--nav-height));
         background-color:  var(--color-background);
         osc-panel-inner {
             background-color:  var(--color-background);
         }
 
-        // --color-background: --color-ui-background; // scrollbar
+        // --color-background: --color-ui-foreground; // scrollbar
     }
 
     osc-panel-inner {
@@ -76,7 +76,7 @@ osc-settings-field {
         left:100rem;
         top:0;
         right: 0;
-        border-top:1rem solid var(--color-ui-background);
+        border-top:1rem solid var(--color-ui-foreground);
         z-index: 11;
     }
     &:nth-child(2n) {
@@ -99,7 +99,7 @@ osc-settings-field {
     label {
         width: 100rem;
         // text-align: right;
-        background: var(--color-ui-background-secondary);
+        background: var(--color-ui-background);
         border:1rem solid var(--color-background);
         border-right: none;
         // margin-right: 8rem;

@@ -1,6 +1,6 @@
 osc-workspace {
 
-    background: var(--color-ui-background);
+    background: var(--color-ui-foreground);
 
     --color-fill: var(--color-widget);
     --color-stroke: var(--color-widget);
@@ -25,6 +25,8 @@ osc-workspace {
 }
 
 osc-panel-container {
+
+    background: var(--color-ui-background);
 
     position: relative;
     display:flex;
@@ -64,7 +66,7 @@ osc-panel-container {
         }
 
         ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
-            border-color: var(--color-ui-background)!important;
+            border-color: var(--color-ui-foreground)!important;
         }
 
     }
@@ -316,6 +318,7 @@ osc-panel-header {
     text-overflow: ellipsis;
     padding: 0 8rem;
     flex-shrink: 0;
+    background: var(--color-ui-foreground);
 
     &:before {
         content: "";
@@ -333,12 +336,13 @@ osc-panel-header {
 
 osc-panel-content {
 
+
     flex: 1;
     overflow-y: auto;
 
     &.left, &.right {
         &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
-            border-right: 1rem solid var(--color-ui-background);
+            border-right: 1rem solid var(--color-ui-foreground);
         }
     }
 

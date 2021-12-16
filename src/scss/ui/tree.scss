@@ -3,7 +3,8 @@
     --alpha-fill: 0.5;
     --widget-padding: -1rem;
 
-    $padding: 16rem;
+    $padding: 8rem;
+    $radius: 3rem;
     $line-height: 28rem;
     $field-height: 30rem;
     padding-right: 0;
@@ -20,7 +21,7 @@
         flex: 1;
         position: relative;
         overflow: auto;
-        padding-left:$padding;
+        padding-left:$padding + 4rem;
         padding-right:$padding;
 
     }
@@ -136,7 +137,7 @@
         z-index: 1;
         @include pseudo-fill($z: -1);
         &:after {
-            left: calc(-1 * var(--depth) * 16rem - #{$padding});
+            left: calc(-1 * var(--depth) * 20rem - #{$padding});
             right: 1rem - $padding;
             bottom: auto;
             height: $line-height;
@@ -156,7 +157,7 @@
         z-index: 1;
         @include pseudo-fill($z: -1);
         &:after {
-            left: calc(-1 * var(--depth) * 16rem - #{$padding});
+            left: calc(-1 * var(--depth) * 20rem - #{$padding});
             right: 1rem - $padding;
             bottom: auto;
             height: $line-height;
@@ -168,12 +169,14 @@
     .filter {
         display: block;
         font-family: $font;
-        line-height: $field-height;
+        // line-height: $field-height;
         padding: 0 $padding;
         top: 0;
         z-index: 2;
-        background: var(--color-ui-background-secondary);
-        border-bottom: 1rem solid var(--color-background);
+        background: var(--color-background);
+        border: 1rem solid var(--color-background);
+        margin: $padding;
+        border-radius: $radius;
     }
 
     .filter-active .filter-hide {

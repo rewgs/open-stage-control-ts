@@ -69,9 +69,9 @@ $padding: 8rem;
         height: 42rem + $padding * 2;
         line-height: 38rem;
         flex-shrink: 0;
-        // border: $padding solid var(--color-ui-background);
+        // border: $padding solid var(--color-ui-foreground);
         padding: $padding;
-        background: var(--color-ui-background);
+        background: var(--color-ui-foreground);
         .btn {
             margin: 1rem;
             margin-left: $padding;

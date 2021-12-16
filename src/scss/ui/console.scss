@@ -3,7 +3,7 @@ $padding: 8rem;
 #osc-console {
     background: var(--color-background);
     osc-panel-header {
-        background: var(--color-ui-background);
+        background: var(--color-ui-foreground);
         border-top: 1rem solid var(--color-background);
     }
     .toggle-button {
@@ -113,7 +113,7 @@ osc-console-message {
         padding: 2rem;
         border-radius: 2rem;
         &.editing {
-            background: var(--color-ui-background);
+            background: var(--color-ui-foreground);
         }
         &[data-widget="CONSOLE"] {
             cursor: default;

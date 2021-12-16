@@ -1,6 +1,7 @@
 $header-height: 28rem;
 $field-height: 24rem;
 $padding: 8rem;
+$radius: 3rem;
 
 #osc-inspector {
 
@@ -21,9 +22,10 @@ osc-inspector-field {
         position: absolute;
         left:94rem;
         top:0;
-        right: 0;
+        right: 1rem;
         border-top:1rem solid var(--color-ui-background);
         z-index: 1;
+        // opacity: 0.5;
     }
 
     --widget-padding: -1rem;
@@ -36,18 +38,28 @@ osc-inspector-field {
         line-height: $field-height;
         height: $field-height;
         cursor: pointer;
-        background: var(--color-ui-background-secondary);
+        background: var(--color-ui-foreground);
         border:1rem solid var(--color-background);
         border-right: none;
+        border-top-left-radius: inherit;
+        border-bottom-left-radius: inherit;
     }
 
     &.has-editor {
-        flex-direction: column;height: auto;
+
+        flex-direction: column;
+        height: auto;
+        border-radius: $radius;
+
         > label {
             border:1rem solid var(--color-background);
-            border-bottom   : none;
+            border-bottom: none;
             width: 100%;
             position: relative;
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
         }
         .btn {
             position: absolute;
@@ -55,7 +67,8 @@ osc-inspector-field {
             top:3rem;
             background: var(--color-ui-button);
             line-height: $field-height - 6;
-
+            border-top-right-radius: inherit;
+            box-shadow: 0 0 1rem 0 var(--color-background)
         }
         &:after {
             content:none;
@@ -63,6 +76,8 @@ osc-inspector-field {
     }
     .ace_editor {
         min-height: $field-height;
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
     }
     > textarea, > input {
         font-family: $font-mono;
@@ -77,6 +92,11 @@ osc-inspector-field {
         display: block;
         background: var(--color-background);
         cursor: text;
+
+        &:last-child{
+            border-top-right-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
 
         user-select: initial;
 
@@ -123,9 +143,9 @@ osc-inspector-field .ace_editor {
     --scrollbar-size: 8rem;
 
     .ace_gutter {
-        background: var(--color-ui-background-secondary);
+        background: var(--color-background);
         color: #6a6f7a;
-        border-right: 1rem solid var(--color-background);
+        border-right: 1rem solid var(--color-ui-background);
         z-index: 10;
         // padding-top: 1rem;
         line-height: 1.5
@@ -335,7 +355,6 @@ osc-inspector-category {
         margin: $padding 0;
         position: relative;
         padding: 0 ($padding - 4);
-        // opacity: 0.75;
         font-weight: 500;
         &:before {
             position: relative;
@@ -356,7 +375,7 @@ osc-inspector-category {
             height: 100%;
             left:-($padding);
             right:-($padding);
-            background: var(--color-ui-background-secondary);
+            background: var(--color-ui-foreground);
             border-top:1rem solid var(--color-background);
             border-bottom:1rem solid var(--color-background);
             z-index: -1;
@@ -397,6 +416,8 @@ osc-inspector-category {
         osc-inspector-color:after {
             top:0;
         }
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
     }
     osc-inspector-field.last-child,
     osc-inspector-field:last-child {
@@ -405,6 +426,9 @@ osc-inspector-category {
         osc-inspector-checkbox {
             border-bottom: none;
         }
+
+        border-bottom-left-radius: $radius;
+        border-bottom-right-radius: $radius;
     }
 }
 
@@ -425,6 +449,8 @@ osc-inspector-checkbox {
     justify-content: center;
     border-top: 1rem solid var(--color-background);
     border-bottom: 1rem solid var(--color-background);
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
 
     i {
         // color: transparent;
@@ -472,7 +498,7 @@ osc-inspector-select {
         width: 127rem;
         opacity: 0;
         optgroup {
-            background: var(--color-ui-background);
+            background: var(--color-ui-foreground);
             font-weight: bold;
             option {
                 background: var(--color-background);
@@ -512,6 +538,8 @@ osc-inspector-color {
     height: $field-height;
     width: $field-height;
     background: var(--color-background);
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
 
     cursor: pointer;
 
@@ -549,7 +577,7 @@ osc-inspector-color {
         height: 42rem + $padding * 2;
         line-height: 38rem;
         flex-shrink: 0;
-        background: var(--color-ui-background);
+        background: var(--color-ui-foreground);
         padding: $padding;
         .btn {
             flex: 1;
@@ -608,7 +636,7 @@ osc-inspector-color {
         user-select: text;
     }
     .description {
-        border-top: 2rem solid var(--color-ui-background);
+        border-top: 2rem solid var(--color-ui-foreground);
         margin-top: 10rem;
         padding-top: 10rem;
         white-space: normal;
@@ -618,7 +646,7 @@ osc-inspector-color {
     }
 
     .computed {
-        border-top: 2rem solid var(--color-ui-background);
+        border-top: 2rem solid var(--color-ui-foreground);
         margin-top: 10rem;
         padding-top: 10rem;
 

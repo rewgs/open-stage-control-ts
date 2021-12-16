@@ -46,7 +46,7 @@ $padding: 8rem;
         display: flex;
         padding:0 $padding * 2 - 1;
         align-items: center;
-        background: var(--color-ui-background);
+        background: var(--color-ui-foreground);
         .title {
             flex:1;
             overflow: hidden;
