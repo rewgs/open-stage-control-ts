@@ -186,7 +186,9 @@
     .fragment-mode-warning {
         color: var(--color-warning);
         padding: 0 $padding;
+        text-align: center;
         line-height: $field-height;
+        background: var(--color-ui-foreground);
         border-bottom: 1rem solid var(--color-background);
         display: none;
     }
