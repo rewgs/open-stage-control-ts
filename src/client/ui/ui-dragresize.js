@@ -111,14 +111,16 @@ class UiDragResize extends UiWidget {
 
         keyboardJS.withContext('editing', ()=>{
             keyboardJS.bind('alt', (e)=>{
-                this.handles[0].classList.add('full')
+                if (e.target.tagName !== 'TEXTAREA') this.handles[0].classList.add('full')
             }, (e)=>{
-                this.handles[0].classList.remove('full')
+                if (e.target.tagName !== 'TEXTAREA') this.handles[0].classList.remove('full')
             })
             keyboardJS.bind('alt+c', (e)=>{
+                if (e.target.tagName === 'TEXTAREA') return
                 this.copying = true
                 this.container.classList.add('copying')
             }, (e)=>{
+                if (e.target.tagName === 'TEXTAREA') return
                 this.copying = false
                 this.container.classList.remove('copying')
             })
