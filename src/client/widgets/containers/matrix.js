@@ -17,7 +17,7 @@ class Matrix extends Panel {
             class_specific: {
                 widgetType: {type: 'string', value: 'button', help: 'Defines the type of the widgets in the matrix'},
                 quantity: {type: 'number', value: 4, help: 'Defines the number of widgets in the matrix'},
-                props: {type: 'object', value: {}, help: [
+                props: {type: 'object', value: {}, editor: 'javascript', syntaxChecker: false, help: [
                     'Defines a set of property to override the widgets\' defaults.',
                     'JS{} and #{} blocks in this field are resolved with an extra variable representing each widget\'s index: `$` (e.g. `#{$}`)',
                     'Advanced syntax blocks (@{}, OSC{}, JS{}, VAR{} and #{}) are resolved at the matrix\' scope (ie @{this.variables} returns the matrix\' variables property)',

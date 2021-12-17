@@ -13,12 +13,19 @@ var UiWidget = require('./ui-widget'),
         javascript: require('brace/mode/javascript')
     }
 
-function createEditor(name, language) {
+function createEditor(name, language, syntaxChecker) {
     var el = html`<div id="#editor${name}"></div>`
     var editor = editors[name] = ace.edit(el)
     if (editorModes[language]) editor.getSession().setMode('ace/mode/' + language)
-    editor.setOption('autoScrollEditorIntoView', true)
-    editor.setOption('maxLines', 40)
+    editor.setOptions({
+        autoScrollEditorIntoView: true,
+        fixedWidthGutter: true,
+        tabSize: 2,
+        maxLines: 30,
+        dragEnabled: false,
+        useWorker: syntaxChecker !== false
+    })
+
     editor.$blockScrolling = Infinity
     editor.commands.bindKeys({
         'ctrl-l': null, 'ctrl-f': null, 'ctrl-h': null, 'ctrl-,': null,
@@ -26,13 +33,12 @@ function createEditor(name, language) {
     editor.renderer.setScrollMargin(4, 4, 0, 4)
     editor.element = el
     editor.element.classList.add('ace_dark')
-    editor.$mouseHandler.setOption('dragEnabled', false)
     editor.textarea = DOM.get(el, '.ace_text-input')[0]
     editor.textarea.name = name
     editor.textarea._ace = true
     editor.setHighlightActiveLine(false)
     editor.setHighlightGutterLine(false)
-    if (language === 'javascript') {
+    if (language === 'javascript' && syntaxChecker !== false) {
         editor.getSession().$worker.send('setOptions', [{
             asi: true,          // no semicolon
             esversion: 6,
@@ -172,7 +178,7 @@ class UiInspectorField extends UiWidget {
 
         if (this.default.editor) {
             this.container.classList.add('has-editor')
-            if (!editors[this.name]) createEditor(this.name, this.default.editor)
+            if (!editors[this.name]) createEditor(this.name, this.default.editor, this.default.syntaxChecker)
             let editor = editors[this.name]
             input.style.display = 'none'
             input._ace_input = editor.textarea
@@ -223,7 +229,7 @@ class UiInspectorField extends UiWidget {
                 globals.JS = true
                 globals.this = false
 
-                editor.getSession().$worker.send('changeOptions', [{
+                if (this.default.syntaxChecker !== false) editor.getSession().$worker.send('changeOptions', [{
                     globals: {...scriptGlobals, ...globals}
                 }])
             }

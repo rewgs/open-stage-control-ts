@@ -22,7 +22,7 @@ class Clone extends Container() {
 
             class_specific: {
                 widgetId: {type: 'string', value: '', help: '`id` of the widget to clone'},
-                props: {type: 'object', value: {}, help: 'Cloned widget\'s properties to override'},
+                props: {type: 'object', value: {}, editor: 'javascript', syntaxChecker: false, help: 'Cloned widget\'s properties to override'},
             },
             value: null,
             osc: null
