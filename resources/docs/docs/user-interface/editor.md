@@ -40,6 +40,8 @@ Selected widget's properties are displayed and can be modified in the inspector.
 - Properties are written in JSON, with some flexibility brought by the [JSON5](https://github.com/json5/json5) format. For example, double quotes around object keys are not mandatory.
 - Clicking on a property name spawns a help modal window
 
+Some properties (for example `script`) have a special code editor with syntax hilighting and many keyboard shortcuts (available by clicking on the "Help" button). In this properties, pressing `enter` will not submit pending changes and instead insert a new line at the cursor position (as you would expect in a regular editor). To submit pending changes, press `ctrl+enter` or click outside the editor.
+
 
 ## Project tree
 

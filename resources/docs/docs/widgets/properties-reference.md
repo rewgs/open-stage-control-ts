@@ -1,3 +1,4 @@
+25
 <!-- This file is generated automatically from the widget class declarations. See scripts/build-widget-reference.js -->
 
 ## Common
@@ -423,6 +424,7 @@
             | <h6 id="root_scroll">scroll<a class="headerlink" href="#root_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
             | <h6 id="root_innerPadding">innerPadding<a class="headerlink" href="#root_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
             | <h6 id="root_verticalTabs">verticalTabs<a class="headerlink" href="#root_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
+            | <h6 id="root_hideMenu">hideMenu<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_hideMenu" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to hide the main menu button. |
 
     === "root"
 
@@ -901,8 +903,8 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="script_script">script<a class="headerlink" href="#script_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="script_event">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Choices: `value`, `keyboard`, `once` |
+            | <h6 id="script_script">script<a class="headerlink" href="#script_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="script_keyBinding">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation).<br/><br/>If the editor is enabled, some keys / combos will not work. |
             | <h6 id="script_keyRepeat">keyRepeat<a class="headerlink" href="#script_keyRepeat" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
             | <h6 id="script_keyType">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keydown"</code> | Determines which key event trigger the script's execution<br/><br/>Choices: `keydown`, `keyup`, `both` |
