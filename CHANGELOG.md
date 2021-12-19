@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.13.1
+
+- bug fixes
+    - editor: data loss when leaving the editor's focus with no modifications  
+
 ## 1.13.0
 
 - bug fixes

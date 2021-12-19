@@ -202,10 +202,10 @@ class UiInspectorField extends UiWidget {
                     editor.setHighlightActiveLine(false)
                     editor.setHighlightGutterLine(false)
                     editor.selection.setRange({start:0,end:0})
+                    input.value = editor.getValue()
+                    this.parent.focusedInput = input
                     if (editor.dirty) {
                         editor.dirty = false
-                        input.value = editor.getValue()
-                        this.parent.focusedInput = input
                         this.parent.onChange()
                     }
 
