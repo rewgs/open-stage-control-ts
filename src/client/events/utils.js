@@ -28,7 +28,9 @@ module.exports = {
             traversing: e.traversing,
             traversingStack: e.traversingStack,
             multitouch: e.multitouch,
-            isTouch: e instanceof Touch
+            isTouch: e instanceof Touch,
+            force: e.webkitForce || e.force || 0
+
         }
     },
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.13.2
+
+- widgets
+    - canvas: expose touch pressure (as `event.force`) in the `touch` script.
+
 ## 1.13.1
 
 - bug fixes
