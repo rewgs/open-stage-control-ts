@@ -13,7 +13,7 @@ var EventEmitter = require('../../events/event-emitter'),
     morph = require('nanomorph'),
     sanitizeHtml = require('sanitize-html'),
     updateWidget = ()=>{},
-    Script, uiConsole, uiTree
+    Script, uiConsole, uiTree, uiDragResize
 
 
 var oscReceiverState = {}
@@ -37,6 +37,7 @@ setTimeout(()=>{
     updateWidget = require('../../editor/data-workers').updateWidget
     uiConsole = require('../../ui/ui-console')
     uiTree = require('../../editor').widgetTree
+    uiDragResize = require('../../editor').widgetDragResize
 })
 
 class Widget extends EventEmitter {
@@ -886,6 +887,7 @@ class Widget extends EventEmitter {
                 this.setContainerStyles(['geometry'])
                 let container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                 resize.check(container)
+                if (uiDragResize.mounted && uiDragResize.widgets.includes(this)) uiDragResize.updateRectangle()
                 return
             }
 
@@ -912,6 +914,7 @@ class Widget extends EventEmitter {
                 if (re.test(oldPropValue) || re.test(this.getProp('css'))) {
                     let container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                     resize.check(container)
+                    if (uiDragResize.mounted && uiDragResize.widgets.includes(this)) uiDragResize.updateRectangle()
                 }
                 return
             }
