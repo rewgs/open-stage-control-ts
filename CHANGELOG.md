@@ -2,6 +2,9 @@
 
 ## 1.13.2
 
+- bug fixes
+    - editor: keep relative sizes and positions when resizing multiple widgets at a time
+
 - widgets
     - canvas: expose touch pressure (as `event.force`) in the `touch` script.
 

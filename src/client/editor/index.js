@@ -813,45 +813,69 @@ class Editor {
 
     }
 
-    resizeWidget(deltaW, deltaH, ui) {
+    resizeWidget(deltaW, deltaH) {
 
         if (!this.selectedWidgets.length) return
 
-        var newWidgets = []
+        var newWidgets = [],
+            area = this.widgetDragResize,
+            changedProps = []
 
         for (var i = 0; i < this.selectedWidgets.length; i++) {
 
             let w = this.selectedWidgets[i],
-                nW, nH
+                nW, nH, nL, nT, offset
 
-            if (i === 0 && ui) {
-                nW = ui.originalSize.width + deltaW
-                nH = ui.originalSize.height + deltaH
+            nW = w.container.offsetWidth + deltaW * w.container.offsetWidth / area.initWidth
+            nH = w.container.offsetHeight + deltaH * w.container.offsetHeight / area.initHeight
 
-            } else {
-                nW = w.container.offsetWidth + deltaW
-                nH = w.container.offsetHeight + deltaH
+            if (this.selectedWidgets.length > 1) {
+                nL = w.container.offsetLeft + deltaW * (w.container.offsetLeft - area.initLeft) / area.initWidth
+                nT = w.container.offsetTop + deltaH * (w.container.offsetTop - area.initTop) / area.initHeight
             }
 
-            if (w.props.width !== undefined && w.parent.getProp('layout') !== 'vertical') {
+            if (deltaW !== 0 && w.props.width !== undefined && w.parent.getProp('layout') !== 'vertical') {
                 var newWidth = Math.max(nW, GRIDWIDTH) / PXSCALE
                 if (typeof w.props.width === 'string' && w.props.width.indexOf('%') > -1) {
                     w.props.width = (100 * PXSCALE * newWidth / w.container.parentNode.offsetWidth).toFixed(2).replace(/\.?0+$/, '') + '%'
                 } else {
                     w.props.width = newWidth
                 }
+                changedProps.push('width')
+
+                if (this.selectedWidgets.length > 1) {
+                    var newLeft = Math.max(nL, GRIDWIDTH) / PXSCALE
+                    if (typeof w.props.left === 'string' && w.props.left.indexOf('%') > -1) {
+                        w.props.left = (100 * PXSCALE * newLeft / w.container.parentNode.offsetWidth).toFixed(2).replace(/\.?0+$/, '') + '%'
+                    } else if (w.props.left !== 'auto'){
+                        w.props.left = newLeft
+                    }
+                    changedProps.push('left')
+                }
+
             }
 
-            if (w.props.height !== undefined && w.parent.getProp('layout') !== 'horizontal') {
+            if (deltaH !== 0 && w.props.height !== undefined && w.parent.getProp('layout') !== 'horizontal') {
                 var newHeight = Math.max(nH, GRIDWIDTH) / PXSCALE
                 if (typeof w.props.height === 'string' && w.props.height.indexOf('%') > -1) {
                     w.props.height = (100 * PXSCALE * newHeight / w.container.parentNode.offsetHeight).toFixed(2).replace(/\.?0+$/, '') + '%'
                 } else {
                     w.props.height = newHeight
                 }
+                changedProps.push('height')
+
+                if (this.selectedWidgets.length > 1) {
+                    var newTop = Math.max(nT, GRIDWIDTH) / PXSCALE
+                    if (typeof w.props.top === 'string' && w.props.top.indexOf('%') > -1) {
+                        w.props.top = (100 * PXSCALE * newTop / w.container.parentNode.offsetHeight).toFixed(2).replace(/\.?0+$/, '') + '%'
+                    } else if (w.props.top !== 'auto'){
+                        w.props.top = newTop
+                    }
+                    changedProps.push('top')
+                }
             }
 
-            if (w.props.width !== undefined || w.props.height !== undefined) newWidgets.push(updateWidget(w, {changedProps: ['width', 'height'], preventSelect: this.selectedWidgets.length > 1}))
+            if (w.props.width !== undefined || w.props.height !== undefined) newWidgets.push(updateWidget(w, {changedProps: changedProps, preventSelect: this.selectedWidgets.length > 1}))
 
         }
 
