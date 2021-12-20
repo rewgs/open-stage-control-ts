@@ -824,7 +824,7 @@ class Editor {
         for (var i = 0; i < this.selectedWidgets.length; i++) {
 
             let w = this.selectedWidgets[i],
-                nW, nH, nL, nT, offset
+                nW, nH, nL, nT
 
             nW = w.container.offsetWidth + deltaW * w.container.offsetWidth / area.initWidth
             nH = w.container.offsetHeight + deltaH * w.container.offsetHeight / area.initHeight
