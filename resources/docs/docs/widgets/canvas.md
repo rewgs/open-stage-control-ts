@@ -33,16 +33,22 @@ This script is executed when the widget is touched, when it is released, and dur
 This script has access to the same variables and functions as the `script` property (except the event-specific ones), plus the following:
 
 - `value`: widget value
-- `width`: widget width in pixels
-- `height`: widget height in pixels
+- `width`: canvas width in pixels
+- `height`: canvas height in pixels
 - `event`: object containing the following:
     - `type`: `"start"`, `"move"` or `"stop"`
     - `target`: id of the widget under the pointer, `"this"` if it's the canvas widget itself, `null` if no widget is under the pointer
-    - `offsetX`, `offsetY`: touch coordinates in pixels, relative to `target`
+    - `targetName`: name attribute of the html element under the pointer
+    - `targetTagName`: tag name of the html element under the pointer
+    - `offsetX`, `offsetY`: touch coordinates in pixels, relative to the html element under the pointer
     - `movementX`, `movementY`: movement of the pointer in pixels since the last event
     - `pointerId`: unique identifier used to differenciate fingers in multitouch situation
     - `altKey`, `ctrlKey`, `shiftKey`: keyboard modifier states
     - `force`: amount of pressure applied to the touch surface between `0` and `1` (see [Touch.force](https://developer.mozilla.org/en-US/docs/Web/API/Touch/force)). Equals `0` if the API is not supported or if no pressure information is found.
+
+
+!!! note "Extra html elements"
+    Elements added using the `html` property can be touched as well, `event.targetName` can be used to determine which element is touched. 
 
 
 ### `draw`
@@ -52,8 +58,8 @@ This script is executed when the widget should be redrawn, which is when it's to
 This script has access to the same variables and functions as the `script` property (except the event-specific ones), plus the following:
 
 - `value`: widget value
-- `width`: widget width in pixels
-- `height`: widget height in pixels
+- `width`: canvas width in pixels
+- `height`: canvas height in pixels
 - `ctx`: [canvas rendering context](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) of the widget
 - `cssVars`: object containing the computed value of some of the widget's style properties such as `colorWidget`, `alphaFill`, `padding`, etc
 

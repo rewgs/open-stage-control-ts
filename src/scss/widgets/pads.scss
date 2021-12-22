@@ -134,7 +134,10 @@
    --alpha-fill-on: 0.75;
    --alpha-fill: var(--alpha-fill-off);
    --widget-padding: 0rem;
-
+   .html {
+       pointer-events: auto;
+   }
+   
    inner {
        position: relative;
        flex: 1;

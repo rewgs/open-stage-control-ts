@@ -7,6 +7,7 @@
 
 - widgets
     - canvas: expose touch pressure (as `event.force`) in the `touch` script.
+    - canvas: expose touch events for extra elements added with the `html` propery
 
 ## 1.13.1
 

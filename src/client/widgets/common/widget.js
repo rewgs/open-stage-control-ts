@@ -89,7 +89,7 @@ class Widget extends EventEmitter {
                     '&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,',
                     '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre',
                     'Allowed attributes:',
-                    '&nbsp;&nbsp;&lt;*>: class, style, title',
+                    '&nbsp;&nbsp;&lt;*>: class, style, title, name',
                     '&nbsp;&nbsp;&lt;img>: src, width, height',
                 ]},
                 css: {type: 'string', value: '', help: [
@@ -1192,7 +1192,7 @@ class Widget extends EventEmitter {
 Widget.sanitizeHtmlOptions = {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe'),
     allowedAttributes: {
-        '*': [ 'title', 'class', 'style'],
+        '*': [ 'title', 'class', 'style', 'name'],
         'img': [ 'src' ,  'title', 'class', 'style', 'width', 'height'],
         'a': ['href', 'target']
     },

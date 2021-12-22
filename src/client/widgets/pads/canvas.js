@@ -75,6 +75,8 @@ class CanvasWidget extends Canvas {
 
             var event = {...e}
             delete event.firstTarget
+            event.targetName = event.target.getAttribute('name')
+            event.targetTagName = event.target.tagName
             var w = widgetManager.getWidgetByElement(event.target)
             if (w) event.target = w === this ? 'this' : w.getProp('id')
             else event.target = null
@@ -92,15 +94,15 @@ class CanvasWidget extends Canvas {
 
         this.on('draginit',(e)=>{
             touchCb(e, 'start')
-        }, {element: this.widget, multitouch: true})
+        }, {element: this.container, multitouch: true})
 
         this.on('drag',(e)=>{
             touchCb(e, 'move')
-        }, {element: this.widget, multitouch: true})
+        }, {element: this.container, multitouch: true})
 
         this.on('dragend',(e)=>{
             touchCb(e, 'stop')
-        }, {element: this.widget, multitouch: true})
+        }, {element: this.container, multitouch: true})
 
         if (this.getProp('continuous')) {
             var freq = parseInt(this.getProp('continuous')) || 30
@@ -131,6 +133,8 @@ class CanvasWidget extends Canvas {
 
     draw() {
 
+        if (!this.getProp('draw')) return
+
         if (this.getProp('autoClear')) {
             this.clear()
             this.ctx.beginPath()
@@ -143,6 +147,7 @@ class CanvasWidget extends Canvas {
             height: this.height,
             cssVars: this.cssVars
         }, {sync: false, send: false})
+
         this.batchDraw()
 
     }
