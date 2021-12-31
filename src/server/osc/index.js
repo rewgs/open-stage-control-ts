@@ -46,6 +46,8 @@ class OscServer {
 
         if (arg === null) return null
 
+        if (typeof arg === 'object' && arg.type && arg.type.length === 1) return arg
+
         if (type && type[0].match(/[bhtdscrmifTFNI]/)) {
 
             type = type[0]
@@ -75,8 +77,6 @@ class OscServer {
                 return {type: arg ? 'T' : 'F'}
             case 'string':
                 return {type: 's', value:arg}
-            case 'object':
-                if (arg.type && arg.type.length === 1) return arg
             default:
                 return {type: 's', value:JSON.stringify(arg)}
         }
