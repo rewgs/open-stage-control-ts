@@ -135,11 +135,13 @@ module.exports = function(options={}) {
     })
 
     var menu = new Menu()
+    menu.append(new MenuItem({role: 'cut'}))
     menu.append(new MenuItem({role: 'copy'}))
     menu.append(new MenuItem({role: 'paste'}))
     window.webContents.on('context-menu', (e, data) => {
-        menu.items[0].enabled = data.editFlags.canCopy
-        menu.items[1].enabled = data.editFlags.canPaste
+        menu.items[0].enabled = data.editFlags.canPaste
+        menu.items[1].enabled = data.editFlags.canCopy
+        menu.items[2].enabled = data.editFlags.canPaste
         menu.popup({window: window, x: e.x, y: e.y })
     }, false)
 
