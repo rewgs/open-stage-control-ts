@@ -1182,6 +1182,7 @@ class Widget extends EventEmitter {
         }
 
         this.removed = true
+        this.off('change')
         widgetManager.off(undefined, undefined, this)
         this.removeOscReceivers()
 
