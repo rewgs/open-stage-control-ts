@@ -370,6 +370,8 @@ class ScriptVm extends Vm {
                 this.setValueOptions()
             }, timeout)
 
+            return id
+
         }
 
         this.sandbox.contentWindow.clearTimeout = (id)=>{
@@ -411,6 +413,8 @@ class ScriptVm extends Vm {
                 this.setWidget()
                 this.setValueOptions()
             }, timeout)
+
+            return id
 
         }
 
