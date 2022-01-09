@@ -20,8 +20,9 @@ class Script extends Widget {
         delete defaults.geometry
         delete defaults.style
         defaults.scripting = {
-            event: {type: 'string', value: 'value', choices: ['value', 'keyboard', 'once'], help: 'Define which events trigger the script\'s execution.'},
-            script: {type: 'script', value: '', editor:'javascript', help: 'Script executed whenever the widget receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.'},
+            event: {type: 'string', value: 'value', choices: ['value', 'keyboard'], help: 'Define which events trigger the script\'s execution.'},
+            onCreate: {type: 'script', value: '', editor: 'javascript', help: ['Script executed when the widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
+            onEvent: {type: 'script', value: '', editor:'javascript', help: 'Script executed whenever the widget receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.'},
 
             _separator: 'event: keyboard',
 
@@ -44,13 +45,18 @@ class Script extends Widget {
         this.noValueState = true
 
         this.builtIn = options.builtIn
+        if (this.builtIn) this._not_editable = true
 
         this.scriptLock = false
 
         this.timeouts = {}
         this.intervals = {}
 
-        if (this.getProp('event') === 'value') {
+        if (!this.getProp('onEvent')) {
+
+            this.script = ()=>{}
+
+        } else if (this.getProp('event') === 'value') {
 
             this.compile({
                 id: '',
@@ -78,16 +84,11 @@ class Script extends Widget {
                 meta: false,
             })
 
-        } else if (this.getProp('event') === 'once') {
+        } else if (options.context) {
 
-            this.compile({})
-            setTimeout(()=>{
-                this.run({}, {send: true, sync: true})
-            })
+            // custom (internal/builtin) event
+            this.compile(options.context)
 
-
-        } else if (typeof this.getProp('event') === 'object'){
-            this.compile(this.getProp('event'))
         }
 
     }
@@ -96,11 +97,11 @@ class Script extends Widget {
 
         try {
 
-            this.script = scriptVm.compile(this.getProp('script'), context)
+            this.script = scriptVm.compile(this.getProp('onEvent'), context)
 
         } catch(err) {
 
-            this.errorProp('script', 'javascript', err)
+            this.errorProp(this.builtIn ? null : 'onEvent', 'javascript', err)
             this.script = ()=>{}
 
         }
@@ -119,7 +120,7 @@ class Script extends Widget {
         try {
             returnValue = this.script(context, this.builtIn ? this.parent.parsersLocalScope : this.parsersLocalScope)
         } catch(err) {
-            this.errorProp('script', 'javascript', err)
+            this.errorProp(this.builtIn ? null : 'onEvent', 'javascript', err)
         }
         this.scriptLock = false
 

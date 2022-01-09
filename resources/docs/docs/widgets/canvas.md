@@ -26,7 +26,7 @@ This is a convenience option that clears the canvas context and calls [`beginPat
 If this property is enabled, the widget will be redrawn at a fixed rate even if not interacted with (see [`draw`](#draw)).
 
 
-### `touch`
+### `onTouch`
 
 This script is executed when the widget is touched, when it is released, and during the movement of the pointer while the widget is touched.
 
@@ -48,10 +48,10 @@ This script has access to the same variables and functions as the `script` prope
 
 
 !!! note "Extra html elements"
-    Elements added using the `html` property can be touched as well, `event.targetName` can be used to determine which element is touched. 
+    Elements added using the `html` property can be touched as well, `event.targetName` can be used to determine which element is touched.
 
 
-### `draw`
+### `onDraw`
 
 This script is executed when the widget should be redrawn, which is when it's touched and when it receives a value.
 
@@ -70,7 +70,7 @@ Let's create a simple xy pad, with a value made of two numbers between 0 and 1. 
 First, we use the `touch` property to store the touch coordinates in the `locals` object. We also call `set()` to store these in the widget's value (this way, the widget can send messages and sync with other widgets).
 
 ```js
-// touch property
+// onTouch
 
 // store normalized coordinates
 if (event.type == "start") {
@@ -91,7 +91,7 @@ set("this", [locals.x, locals.y])
 Then, we use the `draw` property to draw a circle at the touch coordinates.
 
 ```js
-// draw property
+// onDraw
 
 // draw circle at touch coordinates
 ctx.arc(value[0] * width, value[1] * height, 6, 0, Math.PI * 2)
@@ -104,7 +104,7 @@ ctx.stroke()
 Finally, we use the `script` property to apply limits to the values.
 
 ```js
-// script property
+// onValue
 
 // apply limits
 var x = Math.max(0, Math.min(1, value[0])),
@@ -124,7 +124,7 @@ set("this", [x, y], {sync: false, send: false})
 Let's build a row of 20-sliders with a single widget. We first set `valueLength` to... 20 !
 
 ```js
-// touch property
+// onTouch
 
 // store normalized coordinates
 if (event.type == "start") {
@@ -152,7 +152,7 @@ set("this", value)
 ```
 
 ```js
-// draw property
+// onDraw
 
 ctx.fillStyle = cssVars.colorFill
 ctx.globalAlpha = cssVars.alphaFillOn
@@ -166,7 +166,7 @@ for (var i in value){
 ```
 
 ```js
-// script property
+// onValue
 
 // apply limits
 for (var i in value) {

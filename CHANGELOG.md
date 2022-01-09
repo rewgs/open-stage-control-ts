@@ -1,9 +1,13 @@
 # Changelog
 
-## 1.13.3
+## 1.14.0
 
 - bug fixes
     - misc: sending typed arguments (`{type, value}` objects) should override the widget's `typeTags` definition
+
+- widgets
+    - renamed `script` to `onValue`, `draw` to `onDraw`, `touch` to `onTouch`
+    - added `onCreate` script property to all widgets
 
 ## 1.13.2
 

@@ -4,7 +4,8 @@ var Container = require('../common/container'),
     parser = require('../../parser'),
     {deepCopy, deepEqual} = require('../../utils'),
     {diff, diffToWidget} = require('../../editor/diff'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    Session = require('../../managers/session/session')
 
 var excludedCloneClasses =  ['widget', 'absolute-position', 'not-editable', 'editing', 'flex-expand', 'no-interaction']
 
@@ -155,6 +156,8 @@ class Clone extends Container() {
 
         var data = {...deepCopy(this.cloneTarget.props), ...this.getProp('props')}
 
+        Session.converters['1.13.2'].widget(data)
+
         parser.parse({
             data: data,
             parentNode: this.widget,
@@ -218,6 +221,8 @@ class Clone extends Container() {
 
         var data = {...deepCopy(this.cloneTarget.props), ...this.getProp('props')},
             clone = this.children[0]
+
+        Session.converters['1.13.2'].widget(data)
 
         var delta = diff.diff(clone.props, data) || {},
             [widget, patch] = diffToWidget(clone, delta),

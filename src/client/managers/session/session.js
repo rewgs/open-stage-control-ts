@@ -2,7 +2,7 @@ var semver = require('semver'),
     UiModal = require('../../ui/ui-modal'),
     locales = require('../../locales')
 
-module.exports = class Session {
+class Session {
 
     constructor(data, type) {
 
@@ -18,7 +18,7 @@ module.exports = class Session {
             var version = data.version || '0.0.0',
                 warning = false
 
-            for (var converter of converters) {
+            for (var converter of Session.converters) {
 
                 if (semver.lte(version, converter.version)) {
 
@@ -102,7 +102,7 @@ module.exports = class Session {
 
 }
 
-var converters = [
+Session.converters = [
     {
         version: '0.49.12',
         warning: true,
@@ -286,5 +286,30 @@ var converters = [
             return data
 
         }
+    },
+    {
+        version: '1.13.2',
+        widget: (data)=>{
+
+            if (data.script !== undefined) {
+                if (data.type === 'script') {
+                    if (data.event === 'once') {
+                        data.onCreate = data.script
+                        data.event = 'value'
+                    }
+                    else data.onEvent = data.script
+                } else {
+                    data.onValue = data.script
+                }
+            }
+            if (data.type === 'canvas') {
+                data.onDraw = data.draw
+                data.onTouch = data.touch
+            }
+
+        }
     }
 ]
+
+
+module.exports = Session

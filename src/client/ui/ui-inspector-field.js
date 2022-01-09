@@ -213,15 +213,17 @@ class UiInspectorField extends UiWidget {
             })
             if (this.default.editor === 'javascript') {
                 let globals = {}
-                if (this.name === 'script') {
-                    if (this.widget.type !== 'script' || this.widget.getProp('event') === 'value') {
+                if (this.name === 'onEvent') {
+                    if (this.widget.getProp('event') === 'value') {
                         globals = {id: true, value: true, touch: true}
                     } else if (this.widget.getProp('event') === 'keyboard') {
                         globals = {type: true, key: true, code: true, ctrl: true, shift: true, alt: true, meta: true}
                     }
-                } else if (this.name === 'draw') {
+                } else if (this.name === 'onValue') {
+                    globals = {id: true, value: true, touch: true}
+                } else if (this.name === 'onDraw') {
                     globals = {value: true, height: true, width: true, ctx: true, cssVars: true}
-                } else if (this.name === 'touch') {
+                } else if (this.name === 'onTouch') {
                     globals = {value: true, height: true, width: true, event: true}
                 }
                 globals.locals = true

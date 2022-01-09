@@ -14,7 +14,7 @@ class Canvas extends Widget {
             '- `--widget-width`',
             '- `--widget-height`',
         )
-        defaults.scripting.script.help.push(
+        defaults.scripting.onValue.help.push(
             'Canvas-based widget have their computed width and height available as local variables:',
             '- `locals.width`',
             '- `locals.height`',
@@ -96,7 +96,7 @@ class Canvas extends Widget {
     }
 
     setVisibility(){
-        
+
         var visible = this.visible
         super.setVisibility()
         if (!visible && this.visible) this.batchDraw()

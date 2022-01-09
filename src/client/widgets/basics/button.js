@@ -46,7 +46,7 @@ class Button extends Widget {
             }
         })
 
-        defaults.scripting.script.help.push(
+        defaults.scripting.onValue.help.push(
             'Additionnal variables:',
             '- `locals.touchCoords`: `[x, y]` array representing the touch coordinates, normalized between 0 and 1.'
         )

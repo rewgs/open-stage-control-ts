@@ -58,7 +58,7 @@ Options can contain `@{}` blocks.
 
 ## Custom variables: `VAR{variableName, default}`
 
-This syntax creates a custom variable in the widget that can be read and modified from any widget's `script` property (see [scripting](./scripting.md#getvarid-name)). Changes made to this variable will be applied automatically.
+This syntax creates a custom variable in the widget that can be read and modified from any widget's script property (see [scripting](./scripting.md#getvarid-name)). Changes made to this variable will be applied automatically.
 
 
 ## Javascript: `JS{ <code> }`

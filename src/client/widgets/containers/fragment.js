@@ -5,7 +5,9 @@ var Container = require('../common/container'),
     {deepCopy, deepEqual} = require('../../utils'),
     {diff, diffToWidget} = require('../../editor/diff'),
     html = require('nanohtml'),
-    sessionManager
+    sessionManager,
+    Session = require('../../managers/session/session')
+
 
 var excludedfragmentClasses =  ['widget', 'absolute-position', 'not-editable', 'editing', 'flex-expand', 'no-interaction']
 
@@ -87,6 +89,8 @@ class Fragment extends Container() {
 
         var data = {...deepCopy(fragment.getRoot()), ...this.getProp('props')}
 
+        Session.converters['1.13.2'].widget(data)
+
         parser.parse({
             data: data,
             parentNode: this.widget,
@@ -140,6 +144,8 @@ class Fragment extends Container() {
 
         var data = {...deepCopy(fragment.getRoot()), ...this.getProp('props')},
             fragmentWidget = this.children[0]
+
+        Session.converters['1.13.2'].widget(data)
 
         var delta = diff.diff(fragmentWidget.props, data) || {},
             [widget, patch] = diffToWidget(fragmentWidget, delta),

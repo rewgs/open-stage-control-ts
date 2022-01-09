@@ -1,7 +1,7 @@
 var Panel = require('./panel'),
     parser = require('../../parser'),
-    {deepCopy} = require('../../utils')
-
+    {deepCopy} = require('../../utils'),
+    Session = require('../../managers/session/session')
 
 class Matrix extends Panel {
 
@@ -73,6 +73,8 @@ class Matrix extends Panel {
 
                 data = JSON.parse(JSON.stringify(data).replace(/(JS|#|OSC|@|VAR)_\{/g, '$1{'))
 
+                Session.converters['1.13.2'].widget(data)
+
                 var widget = parser.parse({
                     data: data,
                     parentNode: this.widget,
@@ -133,6 +135,8 @@ class Matrix extends Panel {
                     }
 
                     data = JSON.parse(JSON.stringify(data).replace(/(JS|#|OSC|@|VAR)_\{/g, '$1{'))
+
+                    Session.converters['1.13.2'].widget(data)
 
                     if (typeof oldPropValue[i] === 'object' && oldPropValue[i] !== null) {
                         // if an overridden default props is removed, set it back to default

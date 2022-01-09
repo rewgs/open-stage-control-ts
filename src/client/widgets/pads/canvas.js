@@ -13,7 +13,7 @@ class CanvasWidget extends Canvas {
 
     static defaults() {
 
-        return super.defaults().extend({
+        var defaults = super.defaults().extend({
             class_specific: {
                 valueLength: {type: 'number', value: 1, help:[
                     'Defines the number of values accepted by the widget (minimum 1). Incoming messages that don\'t comply will be ignored',
@@ -26,14 +26,15 @@ class CanvasWidget extends Canvas {
                     'If set to `true`, `draw` will be called at each frame, otherwise it will be called only when the widget is touched and when it receives a value.',
                     'Can be a number between 1 and 60 to specify the framerate (default: 30 fps).'
                 ]},
-                touch: {type: 'string', value: '', editor:'javascript', help: [
-                    'Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',
-                ]},
-                draw: {type: 'string', value: '', editor:'javascript', help: [
-                    'Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.'
-                ]},
             }
         })
+        defaults.scripting = {
+            onCreate: {type: 'script', value: '', editor: 'javascript', help: ['Script executed when the widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
+            onTouch: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
+            onDraw: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.']},
+            onValue: {type: 'script', value: '', editor: 'javascript', help: ['Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
+        }
+        return defaults
 
     }
 
@@ -48,28 +49,29 @@ class CanvasWidget extends Canvas {
         this.valueLength = Math.max(1, parseInt(this.getProp('valueLength')) || 1)
         this.value = this.valueLength > 1 ? Array(this.valueLength).fill(0) : 0
 
-        this.drawScript = new Script({props:{
-            id: this.getProp('id') + '/drawScript',
-            script: this.getProp('draw'),
-            event: {
-                value: 0,
-                width: 100,
-                height: 100,
-                ctx: {},
-                cssVars: {}
-            }
-        }, builtIn: true, parent: this})
+        this.scripts.onDraw = new Script({props:{
+            id: this.getProp('id') + '.onDraw',
+            onEvent: this.getProp('onDraw'),
+        }, builtIn: true, parent: this, context: {
+            value: 0,
+            width: 100,
+            height: 100,
+            ctx: {},
+            cssVars: {}
+        }})
+        this.scripts.onDraw._not_editable = true
 
-        this.touchScript = new Script({props:{
-            id: this.getProp('id') + '/touchScript',
-            script: this.getProp('touch'),
-            event: {
-                value: 0,
-                width: 100,
-                height: 100,
-                event: {}
-            }
-        }, builtIn: true, parent: this})
+
+        this.scripts.onTouch = new Script({props:{
+            id: this.getProp('id') + '.onTouch',
+            onEvent: this.getProp('onTouch'),
+        }, builtIn: true, parent: this, context: {
+            value: 0,
+            width: 100,
+            height: 100,
+            event: {}
+        }})
+        this.scripts.onTouch._not_editable = true
 
         var touchCb = (e, type)=>{
 
@@ -82,7 +84,7 @@ class CanvasWidget extends Canvas {
             else event.target = null
             event.type = type
 
-            this.touchScript.run({
+            this.scripts.onTouch.run({
                 value: this.value,
                 width: this.width,
                 height: this.height,
@@ -133,14 +135,14 @@ class CanvasWidget extends Canvas {
 
     draw() {
 
-        if (!this.getProp('draw')) return
+        if (!this.getProp('onDraw')) return
 
         if (this.getProp('autoClear')) {
             this.clear()
             this.ctx.beginPath()
         }
 
-        this.drawScript.run({
+        this.scripts.onDraw.run({
             value: this.value,
             ctx: this.ctx,
             width: this.width,

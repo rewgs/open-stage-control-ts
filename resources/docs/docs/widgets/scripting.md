@@ -1,33 +1,58 @@
 # Scripting
 
-The `script` property allows widgets to run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) upon specific events.
+Widgets can run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) scripts upon specific events. These scripts are written in special properties under the scripting category.
 
-!!! info "It's slightly different from the [javascript property syntax ](../advanced-syntaxes/#javascript-js-code)"
+Scripts should not contain any [advanced syntax](../advanced-syntaxes/) code (`JS{}`, `#{}, @{}` and `OSC{}`).
 
-    - no `JS{{}}` wrapper, just the code
-    - `@{}`, `OSC{}`, `JS{{}}` and `#{}` blocks are replaced with their literal value before the script's compilation, therefore **it is recommended to avoid these syntaxes** and use `getProp()` and `get()` instead.
+## Events
 
-## Event types
+### `onCreate`
 
-!!! note ""
-    The `value` event is the only one available for all widgets except the `script` widget.
+This script is called when the widget is created. If the widget has children, it will be executed after the children are created.
 
-=== "Event: value"
+### `onValue`
 
-    When set on this mode, the script is called when the widget receives a value.
+This script is called when the widget receives a value.
 
-    The following variables are available in this context:
+The following variables are available in this context:
 
-    - `id` (`string`): id of the widget that's reponsible for the value update
-    - `value`: widget's value
-    - `touch`: see [Touch state](#touch-state)
+- `id` (`string`): id of the widget that's reponsible for the value update
+- `value`: widget's value
+- `touch`: see [Touch state](#touch-state)
 
-    ??? infos "Keyboard & Matrix"
-        In keyboards and matrices, `id` is the id of the child widget that triggered the event, and `value` is an array containing the children's values.
-        The touched widget's value can be retrieved with:
-        ```javascript
-        value[getIndex(id)]
-        ```
+??? infos "Keyboard & Matrix"
+    In keyboards and matrices, `id` is the id of the child widget that triggered the event, and `value` is an array containing the children's values.
+    The touched widget's value can be retrieved with:
+    ```javascript
+    value[getIndex(id)]
+    ```
+
+??? infos "Touch state"
+
+    When some widgets are touched or released, a special value event can be caught to trigger custom actions.
+
+    If the variable `touch` is not `undefined`, this means it holds the widget's current touch state:
+
+    - `0/1` for the widget's touch state (`fader`, `knob` and `xy`, `range` and `multixy`)
+    - `[i, 0/1]` if the widget is multi touch (`range` and `multixy`). In this case `i` is the touched handle's index, starting with `0`.
+
+    ```js
+    if (touch !== undefined) {
+        // send multi touch state
+        if (touch.length) send('/touch_address', touch[0], touch[1])
+        // send global touch state
+        else send('/touch_address', touch)
+    } else {
+        // do something with the value ?
+    }
+    ```
+
+    To avoid unwanted script executions, touch state events will only be caught if the script contains the word `touch`.
+
+
+### `onEvent`
+
+This script is executed when the event specified in the `event` property occurs.
 
 === "Event: keyboard"
 
@@ -45,31 +70,15 @@ The `script` property allows widgets to run [Javascript](https://developer.mozil
     - `alt` (`boolean`): `true` if alt key is pressed
     - `meta` (`boolean`): `true` if meta key is pressed
 
-=== "Event: once"
+=== "Event: value"
 
-    When set on this mode, the script is called only once, when it is created.
+    See `onValue`.
 
-## Touch state
 
-When some widgets are touched or released, a special event can be caught to trigger custom actions.
+### `onTouch` / `onDraw`
 
-If the variable `touch` is not `undefined`, this means it holds the widget's current touch state:
+See [canvas](../canvas/).
 
-- `0/1` for the widget's touch state (`fader`, `knob` and `xy`, `range` and `multixy`)
-- `[i, 0/1]` if the widget is multi touch (`range` and `multixy`). In this case `i` is the touched handle's index, starting with `0`.
-
-```js
-if (touch !== undefined) {
-    // send multi touch state
-    if (touch.length) send('/touch_address', touch[0], touch[1])
-    // send global touch state
-    else send('/touch_address', touch)
-} else {
-    // do something with the value ?
-}
-```
-
-To avoid unwanted script executions, touch state events will only be caught if the script contains the word `touch`.
 
 ## Available variables
 

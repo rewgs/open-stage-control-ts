@@ -138,7 +138,8 @@ class Widget extends EventEmitter {
                 bypass: {type: 'boolean', value: false, help: 'Set to `true` to prevent the widget from sending any osc message'}
             },
             scripting: {
-                script: {type: 'script', value: '', editor: 'javascript', help: ['Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
+                onCreate: {type: 'script', value: '', editor: 'javascript', help: ['Script executed when the widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
+                onValue: {type: 'script', value: '', editor: 'javascript', help: ['Script executed when the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
             }
         }
 
@@ -216,25 +217,25 @@ class Widget extends EventEmitter {
             this.decimals = Math.min(20, Math.max(this.getProp('decimals'), 0))
         }
 
+        this.scripts = {}
         Script = Script || require('../scripts/script')
-        if (this.getProp('script') && !(this instanceof Script)) {
-            if (typeof this.props.script == 'string' && this.props.script.match(/OSC\{|@\{|VAR\{/)) {
-                this.errorProp('script', 'syntax', 'using advanced syntaxes in the script property is strongly discouraged and may result in unexpected behaviors.')
+        if (!(this instanceof Script)) {
+            if (this.getProp('onCreate')) {
+                this.scripts.onCreate = new Script({props: {
+                    id: this.getProp('id') + '.onCreate',
+                    onEvent: this.getProp('onCreate')
+                }, builtIn: true, parent: this, context: {}})
             }
-            this.script = new Script({props:{
-                id: this.getProp('id') + '/script',
-                script: this.getProp('script'),
-                event: 'value'
-            }, builtIn: true, parent: this})
-            this.script._not_editable = true
-            this.on('change', (e)=>{
-                if (e.widget === this && this.mounted && !e.options.fromEdit && e.options.script !== false) {
-                    this.script.setValue(e.options.widget ? e.options.widget.value : this.value, {...e.options, id: e.options.id || e.id})
-                }
-            })
-            if (String(this.getProp('script')).includes('touch')) {
-                this.on('touch', (e)=>{
-                    this.script.setValue(this.value, {id: this.getProp('id'), touch: e.touch, sync: true, send: true})
+            if (this.getProp('onValue')) {
+                this.scripts.onValue = new Script({props:{
+                    id: this.getProp('id') + '.onValue',
+                    onEvent: this.getProp('onValue'),
+                    event: 'value'
+                }, builtIn: true, parent: this})
+                this.on('change', (e)=>{
+                    if (e.widget === this && this.mounted && !e.options.fromEdit && e.options.script !== false) {
+                        this.scripts.onValue.setValue(e.options.widget ? e.options.widget.value : this.value, {...e.options, id: e.options.id || e.id})
+                    }
                 })
             }
         }
@@ -293,6 +294,8 @@ class Widget extends EventEmitter {
             options: this.reCreateOptions,
             index: index
         })
+
+        if (this.scripts.onCreate) this.scripts.onCreate.run({})
 
     }
 
@@ -979,9 +982,9 @@ class Widget extends EventEmitter {
         // ignore clone wrapper
         if (widget.parent !== widgetManager && widget.parent.getProp('type') === 'clone') widget = widget.parent
 
-        console._error(`${id}.${name} ${type} error${line}: ${error}`)
+        console._error(`${id}${name ? '.' + name : ''} ${type} error${line}: ${error}`)
         console.debug(error)
-        uiConsole.log('error', `<span class="edit-widget" data-widget="${widget.builtIn ? widget.parent.hash : widget.hash}">${id}</span>.${name} ${type} error${line}: ${error}`, true)
+        uiConsole.log('error', `<span class="edit-widget" data-widget="${widget.builtIn ? widget.parent.hash : widget.hash}">${id}</span>${name ? '.' + name : ''} ${type} error${line}: ${error}`, true)
     }
 
     setContainerStyles(styles = ['geometry', 'css', 'visibility']) {
@@ -1177,8 +1180,8 @@ class Widget extends EventEmitter {
 
     onRemove(){
 
-        if (this.getProp('script') && !(this instanceof Script)) {
-            this.script.onRemove()
+        for (var k in this.scripts) {
+            this.scripts[k].onRemove()
         }
 
         this.removed = true
