@@ -67,7 +67,7 @@ This script has access to the same variables and functions as the `script` prope
 
 Let's create a simple xy pad, with a value made of two numbers between 0 and 1. We set `valueLength` to `2` to make sure the widget only accepts incoming messages with two values (x and y).
 
-First, we use the `touch` property to store the touch coordinates in the `locals` object. We also call `set()` to store these in the widget's value (this way, the widget can send messages and sync with other widgets).
+First, we use the `onTouch` property to store the touch coordinates in the `locals` object. We also call `set()` to store these in the widget's value (this way, the widget can send messages and sync with other widgets).
 
 ```js
 // onTouch
@@ -88,7 +88,7 @@ if (event.type == "start") {
 set("this", [locals.x, locals.y])
 ```
 
-Then, we use the `draw` property to draw a circle at the touch coordinates.
+Then, we use the `onDraw` property to draw a circle at the touch coordinates.
 
 ```js
 // onDraw
@@ -101,7 +101,7 @@ ctx.strokeStyle = cssVars.colorFill
 ctx.stroke()
 ```
 
-Finally, we use the `script` property to apply limits to the values.
+Finally, we use the `onValue` property to apply limits to the values.
 
 ```js
 // onValue
