@@ -504,7 +504,6 @@ class ScriptVm extends Vm {
                 if (window[k] === undefined) scriptGlobals[k] = true
             }
             ScriptVm.globals = scriptGlobals
-            console.log(Object.keys(scriptGlobals).length)
         }
 
     }
