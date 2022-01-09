@@ -23,7 +23,7 @@ This is a convenience option that clears the canvas context and calls [`beginPat
 
 ### `continuous`
 
-If this property is enabled, the widget will be redrawn at a fixed rate even if not interacted with (see [`draw`](#draw)).
+If this property is enabled, the widget will be redrawn at a fixed rate even if not interacted with (see [`onDraw`](#onDraw)).
 
 
 ### `onTouch`
