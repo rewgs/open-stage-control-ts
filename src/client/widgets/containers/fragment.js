@@ -67,7 +67,7 @@ class Fragment extends Container() {
             if (path === this.getProp('file')) {
                 this.createFragment()
             }
-        })
+        }, {context: this})
 
         if (this.getProp('file')) {
             if (sessionManager.getFragment(this.getProp('file'))) {
