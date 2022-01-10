@@ -198,6 +198,7 @@ class Widget extends EventEmitter {
         this.parsers = {}
         this.parsersLocalScope = options.locals || {}
         this.variables = options.variables || {}
+        this.fragments = {}
 
         this.createPropsCache()
 
@@ -391,6 +392,9 @@ class Widget extends EventEmitter {
         }
         this.oscReceivers = {}
 
+        // IMPORT{} fragments
+        this.fragments = {}
+
         // Cache resolved props
         this.cachedProps = {}
         this.cachedProps.uuid = this.hash
@@ -443,6 +447,22 @@ class Widget extends EventEmitter {
 
             widgetManager.off('change', this.linkedValueChangedCallback)
             delete this.linkedValueChangedCallback
+
+        }
+
+        if (!this.linkedFragmentCallback && Object.keys(this.fragments).length) {
+
+            this.linkedFragmentCallback = (e)=>{
+                var {path} = e
+                if (this.fragments[path]) this.updateProps(this.fragments[path])
+            }
+
+            sessionManager.on('fragment-updated', this.linkedFragmentCallback, {context: this})
+
+        } else if (this.linkedFragmentCallback && !Object.keys(this.fragments).length) {
+
+            sessionManager.off('fragment-updated', this.linkedFragmentCallback)
+            delete this.linkedFragmentCallback
 
         }
 
@@ -696,19 +716,15 @@ class Widget extends EventEmitter {
                 return varname
             })
 
-            propValue = balancedReplace('IMPORT', '{', '}', propValue, (args)=>{
+            propValue = balancedReplace('IMPORT', '{', '}', propValue, (file)=>{
                 if (storeLinks) {
-                    sessionManager.on('fragment-updated', (e)=>{
-                        var {path} = e
-                        if (path === args) {
-                            this.updateProps([propName])
-                        }
-                    }, {context: this})
+                    if (!this.fragments[file]) this.fragments[file] = []
+                    if (!this.fragments[file].includes(propName)) this.fragments[file].push(propName)
                 }
-                if (sessionManager.getFragment(args)) {
-                    return sessionManager.getFragment(args)
+                if (sessionManager.getFragment(file)) {
+                    return sessionManager.getFragment(file)
                 } else {
-                    sessionManager.loadFragment(args)
+                    sessionManager.loadFragment(file)
                     return ''
                 }
             })
