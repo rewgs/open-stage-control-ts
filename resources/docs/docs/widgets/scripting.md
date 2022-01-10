@@ -201,7 +201,7 @@ Global [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/lo
 
 #### `setTimeout(id, callback, delay)` / `setInterval(id, callback, delay)`
 
-These work like their native equivalent, with an extra (optional) `id` argument.
+These work like almost their native equivalent, with an extra (optional) `id` argument.
 
 - `id` (optional): unique identifier. If a timeout with the same id is already running, it is cleared before the new one is created. If omitted, defaults to `undefined`. One can use `Math.random()` or `Date.now()` to force new id at each execution, though this might cause performance issues. `id`s are scoped to the widget's context: two timeouts with the same `id` in two different widgets can run concurrently
 - `callback`: function to be executed
@@ -211,6 +211,11 @@ Reference:
 
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval
+
+
+Usage note:
+
+If no concurrent timeout / interval is needed, calling `setTimeout`, `setInterval`, `clearTimeout` and `clearInterval` with no `ìd` argument will do.
 
 -----
 
