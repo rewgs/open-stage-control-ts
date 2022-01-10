@@ -12,9 +12,9 @@ class FragmentManager {
 
     }
 
-    read(path, clientId, then) {
+    read(path, raw, clientId, then) {
 
-        callbacks.fileRead({path: path}, clientId, true, (result)=>{
+        callbacks.fileRead({path: path, raw: raw}, clientId, true, (result)=>{
             this.fragments[path] = result
             then(result)
         }, (error)=>{
@@ -24,8 +24,9 @@ class FragmentManager {
 
     }
 
-    loadFragment(path, clientId) {
+    loadFragment(data, clientId) {
 
+        var path = data.path
         var resolvedPath = resolvePath(path, clientId)
 
         if (!resolvedPath) return ipc.send('errorLog', `Fragment file not found: ${path}`, clientId)
@@ -35,14 +36,14 @@ class FragmentManager {
 
         if (!this.fragments[resolvedPath]) {
 
-            this.fragments[resolvedPath] = this.read(resolvedPath, clientId, (result)=>{
-                ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath]}, clientId)
+            this.fragments[resolvedPath] = this.read(resolvedPath, data.raw, clientId, (result)=>{
+                ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath], raw: data.raw}, clientId)
             })
 
             this.watchers[resolvedPath] = chokidar.watch(resolvedPath, {awaitWriteFinish: {stabilityThreshold: 200}}).on('change', ()=>{
-                this.fragments[resolvedPath] = this.read(resolvedPath, clientId, (result)=>{
+                this.fragments[resolvedPath] = this.read(resolvedPath, data.raw, clientId, (result)=>{
                     for (let id of this.clients[resolvedPath]) {
-                        ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath]}, id)
+                        ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath], raw: data.raw}, id)
                     }
                 })
             }).on('unlink', ()=>{
@@ -51,7 +52,7 @@ class FragmentManager {
 
         } else {
 
-            ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath]}, clientId)
+            ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath], raw: data.raw}, clientId)
 
         }
 

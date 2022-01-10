@@ -724,7 +724,7 @@ class Widget extends EventEmitter {
                 if (sessionManager.getFragment(file)) {
                     return sessionManager.getFragment(file)
                 } else {
-                    sessionManager.loadFragment(file)
+                    sessionManager.loadFragment(file, true)
                     return ''
                 }
             })

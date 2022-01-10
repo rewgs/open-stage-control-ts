@@ -230,12 +230,12 @@ var SessionManager = class SessionManager extends EventEmitter {
 
     setFragment(data) {
 
-        var {path, fileContent} = data
+        var {path, fileContent, raw} = data
 
-        if (path.split('.').pop() == 'json') {
-            this.fragments[path] = new Session(fileContent, 'fragment')
-        } else {
+        if (raw) {
             this.fragments[path] = fileContent
+        } else {
+            this.fragments[path] = new Session(fileContent, 'fragment')
         }
 
         this.trigger('fragment-updated', {path: path})
@@ -264,9 +264,9 @@ var SessionManager = class SessionManager extends EventEmitter {
 
     }
 
-    loadFragment(path) {
+    loadFragment(path, raw=false) {
 
-        ipc.send('fragmentLoad', {path})
+        ipc.send('fragmentLoad', {path, raw})
 
     }
 

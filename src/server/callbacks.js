@@ -133,7 +133,7 @@ module.exports =  {
 
         fragmentManager = fragmentManager || require('./fragment-manager')
 
-        fragmentManager.loadFragment(data.path, clientId)
+        fragmentManager.loadFragment(data, clientId)
 
     },
 
@@ -182,7 +182,7 @@ module.exports =  {
                 error = err
             } else {
                 try {
-                    result = data.path.split('.').pop() === 'json' ? JSON.parse(result) : result
+                    result = data.raw ? result : JSON.parse(result)
                     callback(result)
                 } catch(err) {
                     error = err
