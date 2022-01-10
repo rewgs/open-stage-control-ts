@@ -232,7 +232,11 @@ var SessionManager = class SessionManager extends EventEmitter {
 
         var {path, fileContent} = data
 
-        this.fragments[path] = new Session(fileContent, 'fragment')
+        if (path.split('.').pop() == 'json') {
+            this.fragments[path] = new Session(fileContent, 'fragment')
+        } else {
+            this.fragments[path] = fileContent
+        }
 
         this.trigger('fragment-updated', {path: path})
 

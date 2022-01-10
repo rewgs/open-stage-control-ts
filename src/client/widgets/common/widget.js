@@ -13,7 +13,7 @@ var EventEmitter = require('../../events/event-emitter'),
     morph = require('nanomorph'),
     sanitizeHtml = require('sanitize-html'),
     updateWidget = ()=>{},
-    Script, uiConsole, uiTree, uiDragResize
+    Script, uiConsole, uiTree, uiDragResize, sessionManager
 
 
 var oscReceiverState = {}
@@ -38,6 +38,7 @@ setTimeout(()=>{
     uiConsole = require('../../ui/ui-console')
     uiTree = require('../../editor').widgetTree
     uiDragResize = require('../../editor').widgetDragResize
+    sessionManager = require('../../managers/session')
 })
 
 class Widget extends EventEmitter {
@@ -695,6 +696,23 @@ class Widget extends EventEmitter {
                 return varname
             })
 
+            propValue = balancedReplace('IMPORT', '{', '}', propValue, (args)=>{
+                if (storeLinks) {
+                    sessionManager.on('fragment-updated', (e)=>{
+                        var {path} = e
+                        if (path === args) {
+                            this.updateProps([propName])
+                        }
+                    }, {context: this})
+                }
+                if (sessionManager.getFragment(args)) {
+                    return sessionManager.getFragment(args)
+                } else {
+                    sessionManager.loadFragment(args)
+                    return ''
+                }
+            })
+
             propValue = balancedReplace('OSC', '{', '}', propValue, (args)=>{
 
                 if (args === '') return 'undefined'
@@ -1187,6 +1205,7 @@ class Widget extends EventEmitter {
         this.removed = true
         this.off('change')
         widgetManager.off(undefined, undefined, this)
+        sessionManager.off(undefined, undefined, this)
         this.removeOscReceivers()
 
     }

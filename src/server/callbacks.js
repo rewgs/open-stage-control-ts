@@ -182,7 +182,7 @@ module.exports =  {
                 error = err
             } else {
                 try {
-                    result = JSON.parse(result)
+                    result = data.path.split('.').pop() === 'json' ? JSON.parse(result) : result
                     callback(result)
                 } catch(err) {
                     error = err
