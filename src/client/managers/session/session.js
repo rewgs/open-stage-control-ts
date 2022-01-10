@@ -18,7 +18,7 @@ class Session {
             var version = data.version || '0.0.0',
                 warning = false
 
-            for (var converter of Session.converters) {
+            for (var converter of converters) {
 
                 if (semver.lte(version, converter.version)) {
 
@@ -102,7 +102,7 @@ class Session {
 
 }
 
-Session.converters = [
+var converters = [
     {
         version: '0.49.12',
         warning: true,
@@ -311,5 +311,9 @@ Session.converters = [
     }
 ]
 
+Session.converters = {}
+for (var i in converters) {
+    Session.converters[converters[i].version] = converters[i]
+}
 
 module.exports = Session
