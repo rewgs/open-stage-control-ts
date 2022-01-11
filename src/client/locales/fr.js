@@ -90,7 +90,7 @@ module.exports = {
     session_uploaderror: 'Échec à l\'envoi du fichier de session.',
     session_unsaved: 'Vos modifications seront perdues si vous fermez la session actuelle sans sauvegarder, continuer ?',
     session_oldversion_title: 'Attention',
-    session_oldversion: 'Cette session a été créée avec une ancienne version, une conversion automatique a été appliquée.',
+    session_oldversion: 'Cette session a été créée avec une ancienne version de ce logiciel, une conversion automatique a été appliquée. Une fois sauvegardée, cette session risque de ne plus charger correctement avec les anciennes versions, il est recommandé d\'en faire une copie de sauvegarde.',
 
     // state
     state: 'État',

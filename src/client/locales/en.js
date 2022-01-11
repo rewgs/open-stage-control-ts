@@ -91,7 +91,7 @@ module.exports = {
     session_uploaderror: 'Failed to upload session file.',
     session_unsaved: 'Your changes will be lost if you close this session without saving, continue ?',
     session_oldversion_title: 'Warning',
-    session_oldversion: 'This session was created with an older version, an automatic conversion has been done.',
+    session_oldversion: 'This session was created with an older version of this software, an automatic conversion has been done. Once saved, this session will probably not load correctly with older versions, it is recommended to make a backup copy of it.',
 
     // state
     state: 'State',

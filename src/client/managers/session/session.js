@@ -289,6 +289,7 @@ var converters = [
     },
     {
         version: '1.13.2',
+        warning: true,
         widget: (data)=>{
 
             if (data.script !== undefined) {
