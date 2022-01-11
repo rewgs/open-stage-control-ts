@@ -4,6 +4,7 @@
 
 - bug fixes
     - misc: sending typed arguments (`{type, value}` objects) should override the widget's `typeTags` definition
+    - multixy: errors when `ephemeral` is `true`
 
 - widgets
     - renamed `script` to `onValue`, `draw` to `onDraw`, `touch` to `onTouch`

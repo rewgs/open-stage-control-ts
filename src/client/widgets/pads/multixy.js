@@ -217,6 +217,7 @@ module.exports = class MultiXy extends Pad {
 
         this.clear()
 
+        this.clearRect = []
 
         for (var i=0;i<this.npoints;i++) {
 
@@ -232,7 +233,7 @@ module.exports = class MultiXy extends Pad {
             this.ctx.globalAlpha = this.cssVars.alphaPips
             this.ctx.fillText(t, x + 0.5 * PXSCALE, y + PXSCALE)
 
-            this.clearRect[i] = [x - length / 2, y - this.fontSize / 2, length, this.fontSize + 2 * PXSCALE]
+            this.clearRect.push([x - length / 2, y - this.fontSize / 2, length, this.fontSize + 2 * PXSCALE])
 
         }
 
