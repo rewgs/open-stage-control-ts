@@ -45,6 +45,9 @@ This script has access to the same variables and functions as the `script` prope
     - `pointerId`: unique identifier used to differenciate fingers in multitouch situation
     - `altKey`, `ctrlKey`, `shiftKey`: keyboard modifier states
     - `force`: amount of pressure applied to the touch surface between `0` and `1` (see [Touch.force](https://developer.mozilla.org/en-US/docs/Web/API/Touch/force)). Equals `0` if the API is not supported or if no pressure information is found.
+    - `radiusX`, `radiusY`, `rotationAngle`: see [Touch.rotationAngle](https://developer.mozilla.org/en-US/docs/Web/API/Touch/rotationAngle)
+    - (iOS only) `altitudeAngle`, `azimuthAngle`: see [Touch.altitudeAngle](https://w3c.github.io/touch-events/#dom-touch-altitudeangle)
+    - (iOS only) `touchType`: "direct" or "stylus"
 
 
 !!! note "Extra html elements"

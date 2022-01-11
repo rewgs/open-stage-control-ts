@@ -9,6 +9,8 @@
 - widgets
     - renamed `script` to `onValue`, `draw` to `onDraw`, `touch` to `onTouch`
     - added `onCreate` script property to all widgets
+    - canvas: expose additional touch event informations (`radiusX`, `radiusY`, `rotationAngle` and iOS-only  `altitudeAngle`, `azimuthAngle` and `touchType`)
+
 
 ## 1.13.2
 

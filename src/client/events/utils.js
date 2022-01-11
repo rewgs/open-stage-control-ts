@@ -29,8 +29,14 @@ module.exports = {
             traversingStack: e.traversingStack,
             multitouch: e.multitouch,
             isTouch: e instanceof Touch,
-            force: e.webkitForce || e.force || 0
-
+            force: e.webkitForce || e.force || 0,
+            radiusX: e.radiusX,
+            radiusY: e.radiusY,
+            rotationAngle: e.rotationAngle,
+            // iOS only
+            altitudeAngle: e.altitudeAngle,
+            azimuthAngle: e.azimuthAngle,
+            touchType: e.touchType
         }
     },
 
