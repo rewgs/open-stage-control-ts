@@ -1,4 +1,3 @@
-25
 <!-- This file is generated automatically from the widget class declarations. See scripts/build-widget-reference.js -->
 
 ## Common
@@ -74,7 +73,8 @@
 
     | property | type |default | description |
     | --- | --- | --- | --- |
-        | <h6 id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
+        | <h6 id="onCreate">onCreate<a class="headerlink" href="#onCreate" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
+        | <h6 id="onValue">onValue<a class="headerlink" href="#onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 ## Basics
 
 ??? api "<div id="button">button<a class="headerlink" href="#button" title="Permanent link">#</a></div>"
@@ -103,7 +103,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="button_script">script<a class="headerlink" href="#button_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Additionnal variables:<br/>- `locals.touchCoords`: `[x, y]` array representing the touch coordinates, normalized between 0 and 1. |
+            | <h6 id="button_onValue">onValue<a class="headerlink" href="#button_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Additionnal variables:<br/>- `locals.touchCoords`: `[x, y]` array representing the touch coordinates, normalized between 0 and 1. |
 
 ??? api "<div id="switch">switch<a class="headerlink" href="#switch" title="Permanent link">#</a></div>"
     Value selector button.
@@ -196,7 +196,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="input_script">script<a class="headerlink" href="#input_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="input_onValue">onValue<a class="headerlink" href="#input_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 
 ??? api "<div id="textarea">textarea<a class="headerlink" href="#textarea" title="Permanent link">#</a></div>"
     Text area (multi line input). Tip: hit shift + enter for new lines.
@@ -407,7 +407,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="patchbay_script">script<a class="headerlink" href="#patchbay_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="patchbay_onValue">onValue<a class="headerlink" href="#patchbay_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 
 ??? api "<div id="root">root<a class="headerlink" href="#root" title="Permanent link">#</a></div>"
     Main (unique) container
@@ -559,7 +559,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="plot_script">script<a class="headerlink" href="#plot_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="plot_onValue">onValue<a class="headerlink" href="#plot_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 
 ??? api "<div id="eq">eq<a class="headerlink" href="#eq" title="Permanent link">#</a></div>"
     Draws logarithmic frequency response from an array of filter objects.
@@ -593,7 +593,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="eq_script">script<a class="headerlink" href="#eq_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="eq_onValue">onValue<a class="headerlink" href="#eq_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 
 ??? api "<div id="visualizer">visualizer<a class="headerlink" href="#visualizer" title="Permanent link">#</a></div>"
     Display its value over time.
@@ -627,7 +627,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="visualizer_script">script<a class="headerlink" href="#visualizer_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="visualizer_onValue">onValue<a class="headerlink" href="#visualizer_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 ## Indicators
 
 ??? api "<div id="led">led<a class="headerlink" href="#led" title="Permanent link">#</a></div>"
@@ -695,7 +695,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="xy_script">script<a class="headerlink" href="#xy_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="xy_onValue">onValue<a class="headerlink" href="#xy_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 
 ??? api "<div id="rgb">rgb<a class="headerlink" href="#rgb" title="Permanent link">#</a></div>"
     Color picker with optional alpha slider.
@@ -739,7 +739,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="multixy_script">script<a class="headerlink" href="#multixy_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="multixy_onValue">onValue<a class="headerlink" href="#multixy_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 
 ??? api "<div id="canvas">canvas<a class="headerlink" href="#canvas" title="Permanent link">#</a></div>"
     Multitouch canvas widget with user-defined drawing functions and touch reactions.
@@ -757,14 +757,14 @@
             | <h6 id="canvas_valueLength">valueLength<a class="headerlink" href="#canvas_valueLength" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the number of values accepted by the widget (minimum 1). Incoming messages that don't comply will be ignored<br/><br/>When calling `set()` from a script, submitted value should be an array only if `valueLength` is greater than 1. |
             | <h6 id="canvas_autoClear">autoClear<a class="headerlink" href="#canvas_autoClear" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If set to `false`, the canvas context won't be cleared automatically and `ctx.clear` will need to be called in `draw`. |
             | <h6 id="canvas_continuous">continuous<a class="headerlink" href="#canvas_continuous" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | If set to `true`, `draw` will be called at each frame, otherwise it will be called only when the widget is touched and when it receives a value.<br/><br/>Can be a number between 1 and 60 to specify the framerate (default: 30 fps). |
-            | <h6 id="canvas_touch">touch<a class="headerlink" href="#canvas_touch" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
-            | <h6 id="canvas_draw">draw<a class="headerlink" href="#canvas_draw" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
 
     === "scripting"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="canvas_script">script<a class="headerlink" href="#canvas_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="canvas_onTouch">onTouch<a class="headerlink" href="#canvas_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
+            | <h6 id="canvas_onDraw">onDraw<a class="headerlink" href="#canvas_onDraw" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
+            | <h6 id="canvas_onValue">onValue<a class="headerlink" href="#canvas_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 ## Sliders
 
 ??? api "<div id="fader">fader<a class="headerlink" href="#fader" title="Permanent link">#</a></div>"
@@ -799,7 +799,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="fader_script">script<a class="headerlink" href="#fader_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="fader_onValue">onValue<a class="headerlink" href="#fader_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 
 ??? api "<div id="knob">knob<a class="headerlink" href="#knob" title="Permanent link">#</a></div>"
     Rotative knob slider.
@@ -831,7 +831,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="knob_script">script<a class="headerlink" href="#knob_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="knob_onValue">onValue<a class="headerlink" href="#knob_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 
 ??? api "<div id="encoder">encoder<a class="headerlink" href="#encoder" title="Permanent link">#</a></div>"
     A knob that sends a relative direction infomation instead of an absolute value.
@@ -860,7 +860,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="encoder_script">script<a class="headerlink" href="#encoder_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height`<br/><br/>Additionnal variables:<br/>- `locals.speed`: encoder's speed (reduce `sensitivity` to increase averaging)<br/>- `locals.angle`: encoder's angle in degrees |
+            | <h6 id="encoder_onValue">onValue<a class="headerlink" href="#encoder_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height`<br/><br/>Additionnal variables:<br/>- `locals.speed`: encoder's speed (reduce `sensitivity` to increase averaging)<br/>- `locals.angle`: encoder's angle in degrees |
 
 ??? api "<div id="range">range<a class="headerlink" href="#range" title="Permanent link">#</a></div>"
     A fader with two heads for setting a range.
@@ -893,7 +893,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="range_script">script<a class="headerlink" href="#range_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+            | <h6 id="range_onValue">onValue<a class="headerlink" href="#range_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
 ## Scripts
 
 ??? api "<div id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></div>"
@@ -903,8 +903,8 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="script_event">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Choices: `value`, `keyboard`, `once` |
-            | <h6 id="script_script">script<a class="headerlink" href="#script_script" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
+            | <h6 id="script_event">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Choices: `value`, `keyboard` |
+            | <h6 id="script_onEvent">onEvent<a class="headerlink" href="#script_onEvent" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="script_keyBinding">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation).<br/><br/>If the editor is enabled, some keys / combos will not work. |
             | <h6 id="script_keyRepeat">keyRepeat<a class="headerlink" href="#script_keyRepeat" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
             | <h6 id="script_keyType">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keydown"</code> | Determines which key event trigger the script's execution<br/><br/>Choices: `keydown`, `keyup`, `both` |
