@@ -30,9 +30,9 @@ class CanvasWidget extends Canvas {
         })
         defaults.scripting = {
             onCreate: {type: 'script', value: '', editor: 'javascript', help: ['Script executed when the widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
+            onValue: {type: 'script', value: '', editor: 'javascript', help: ['Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
             onTouch: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
             onDraw: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.']},
-            onValue: {type: 'script', value: '', editor: 'javascript', help: ['Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
         }
         return defaults
 
