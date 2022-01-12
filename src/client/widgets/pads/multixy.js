@@ -18,7 +18,7 @@ module.exports = class MultiXy extends Pad {
     static defaults() {
 
 
-        return super.defaults().extend({
+        var defaults = super.defaults().extend({
             style: {
                 _separator_xy_style: 'Xy style',
                 pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size'},
@@ -42,6 +42,10 @@ module.exports = class MultiXy extends Pad {
                 sensitivity: {type: 'number', value: 1, help: 'Defines the pad\'s sensitivity when `snap` is `false` '},
             }
         })
+
+        defaults.scripting.onTouch = {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]}
+
+        return defaults
 
     }
 

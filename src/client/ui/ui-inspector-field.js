@@ -224,7 +224,9 @@ class UiInspectorField extends UiWidget {
                 } else if (this.name === 'onDraw') {
                     globals = {value: true, height: true, width: true, ctx: true, cssVars: true}
                 } else if (this.name === 'onTouch') {
-                    globals = {value: true, height: true, width: true, event: true}
+                    globals = this.widget.getProp('type') === 'canvas' ?
+                        {value: true, height: true, width: true, event: true} :
+                        {value: true, event: true, handle: true}
                 }
                 globals.locals = true
                 globals.console = true

@@ -11,7 +11,7 @@ module.exports = class Knob extends Slider {
 
     static defaults() {
 
-        return super.defaults(Knob).extend({
+        var defaults = super.defaults(Knob).extend({
             style: {
                 _separator_knob_style: 'Knob style',
                 design: {type: 'string', value: 'default', choices: ['default', 'solid', 'line'], help: [
@@ -50,6 +50,10 @@ module.exports = class Knob extends Slider {
                 origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the knob\'s gauge'},
             }
         })
+
+        defaults.scripting.onTouch = {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]}
+
+        return defaults
 
     }
 

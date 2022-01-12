@@ -240,6 +240,32 @@ class Widget extends EventEmitter {
                     }
                 })
             }
+
+            if (this.getProp('onTouch')) {
+                this.scripts.onTouch = new Script({props:{
+                    id: this.getProp('id') + '.onTouch',
+                    onEvent: this.getProp('onTouch'),
+                }, builtIn: true, parent: this, context: {
+                    event: {},
+                    value: 0
+                }})
+                this.on('touch', (e)=>{
+                    var multi = Array.isArray(e.touch),
+                        state = multi ? e.touch[1] : e.touch
+                    this.scripts.onTouch.run({
+                        event: {type: state ? 'start' : 'stop', handle: multi ? e.touch[0] : undefined},
+                        value: this.value
+                    }, {sync: true, send: true})
+                })
+            }
+
+            // legacy touch state
+            if (String(this.getProp('onValue')).includes('touch') && !this.getProp('onTouch')) {
+                this.on('touch', (e)=>{
+                    this.scripts.onValue.setValue(this.value, {id: this.getProp('id'), touch: e.touch, sync: true, send: true})
+                })
+            }
+
         }
 
         this.style = null

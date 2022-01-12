@@ -49,62 +49,67 @@ class CanvasWidget extends Canvas {
         this.valueLength = Math.max(1, parseInt(this.getProp('valueLength')) || 1)
         this.value = this.valueLength > 1 ? Array(this.valueLength).fill(0) : 0
 
-        this.scripts.onDraw = new Script({props:{
-            id: this.getProp('id') + '.onDraw',
-            onEvent: this.getProp('onDraw'),
-        }, builtIn: true, parent: this, context: {
-            value: 0,
-            width: 100,
-            height: 100,
-            ctx: {},
-            cssVars: {}
-        }})
-        this.scripts.onDraw._not_editable = true
-
-
-        this.scripts.onTouch = new Script({props:{
-            id: this.getProp('id') + '.onTouch',
-            onEvent: this.getProp('onTouch'),
-        }, builtIn: true, parent: this, context: {
-            value: 0,
-            width: 100,
-            height: 100,
-            event: {}
-        }})
-        this.scripts.onTouch._not_editable = true
-
-        var touchCb = (e, type)=>{
-
-            var event = {...e}
-            delete event.firstTarget
-            event.targetName = event.target.getAttribute('name')
-            event.targetTagName = event.target.tagName
-            var w = widgetManager.getWidgetByElement(event.target)
-            if (w) event.target = w === this ? 'this' : w.getProp('id')
-            else event.target = null
-            event.type = type
-
-            this.scripts.onTouch.run({
-                value: this.value,
-                width: this.width,
-                height: this.height,
-                event: event,
-            }, {sync: true, send: true})
-
-            this.batchDraw()
+        if (this.getProp('onDraw')) {
+            this.scripts.onDraw = new Script({props:{
+                id: this.getProp('id') + '.onDraw',
+                onEvent: this.getProp('onDraw'),
+            }, builtIn: true, parent: this, context: {
+                value: 0,
+                width: 100,
+                height: 100,
+                ctx: {},
+                cssVars: {}
+            }})
+            this.scripts.onDraw._not_editable = true
         }
 
-        this.on('draginit',(e)=>{
-            touchCb(e, 'start')
-        }, {element: this.container, multitouch: true})
+        if (this.getProp('onTouch')) {
 
-        this.on('drag',(e)=>{
-            touchCb(e, 'move')
-        }, {element: this.container, multitouch: true})
+            this.scripts.onTouch = new Script({props:{
+                id: this.getProp('id') + '.onTouch',
+                onEvent: this.getProp('onTouch'),
+            }, builtIn: true, parent: this, context: {
+                value: 0,
+                width: 100,
+                height: 100,
+                event: {}
+            }})
+            this.scripts.onTouch._not_editable = true
 
-        this.on('dragend',(e)=>{
-            touchCb(e, 'stop')
-        }, {element: this.container, multitouch: true})
+            var touchCb = (e, type)=>{
+
+                var event = {...e}
+                delete event.firstTarget
+                event.targetName = event.target.getAttribute('name')
+                event.targetTagName = event.target.tagName
+                var w = widgetManager.getWidgetByElement(event.target)
+                if (w) event.target = w === this ? 'this' : w.getProp('id')
+                else event.target = null
+                event.type = type
+
+                this.scripts.onTouch.run({
+                    value: this.value,
+                    width: this.width,
+                    height: this.height,
+                    event: event,
+                }, {sync: true, send: true})
+
+                this.batchDraw()
+            }
+
+            this.on('draginit',(e)=>{
+                touchCb(e, 'start')
+            }, {element: this.container, multitouch: true})
+
+            this.on('drag',(e)=>{
+                touchCb(e, 'move')
+            }, {element: this.container, multitouch: true})
+
+            this.on('dragend',(e)=>{
+                touchCb(e, 'stop')
+            }, {element: this.container, multitouch: true})
+
+        }
 
         if (this.getProp('continuous')) {
             var freq = parseInt(this.getProp('continuous')) || 30

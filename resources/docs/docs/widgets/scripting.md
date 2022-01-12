@@ -27,7 +27,9 @@ The following variables are available in this context:
     value[getIndex(id)]
     ```
 
-??? infos "Touch state"
+??? infos "Touch state" (deprecated)
+
+    *This feature is deprecated, use `onTouch` instead*
 
     When some widgets are touched or released, a special value event can be caught to trigger custom actions.
 
@@ -47,10 +49,29 @@ The following variables are available in this context:
     }
     ```
 
-    To avoid unwanted script executions, touch state events will only be caught if the script contains the word `touch`.
+    To avoid unwanted script executions, touch state events will only be caught if the script contains the word `touch` and if `onTouch` is empty.
 
+
+### `onTouch`
+
+This script is executed when the widget is touched, and when it is released.
+
+This script has access to the same variables and functions as the `script` property (except the event-specific ones), plus the following:
+
+- `value`: widget value
+- `event`: object containing the following:
+    - `type`: `"start"` or `"stop"`
+    - `handle`: `undefined` if the event concerns the widget, `integer` if it concerns one of it's handles (`multixy` and `range` widgets only)
+
+Note: the [canvas](../canvas/) widgets exposes more informations in its `onTouch` script.
+
+### `onDraw`
+
+See [canvas](../canvas/).
 
 ### `onEvent`
+
+*Script widget only*
 
 This script is executed when the event specified in the `event` property occurs.
 
@@ -73,11 +94,6 @@ This script is executed when the event specified in the `event` property occurs.
 === "Event: value"
 
     See `onValue`.
-
-
-### `onTouch` / `onDraw`
-
-See [canvas](../canvas/).
 
 
 ## Available variables

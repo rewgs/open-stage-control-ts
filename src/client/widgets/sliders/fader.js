@@ -11,7 +11,7 @@ class Fader extends Slider {
 
     static defaults() {
 
-        return super.defaults(Fader).extend({
+        var defaults = super.defaults(Fader).extend({
             style: {
                 _separator_fader_style: 'Fader style',
                 design: {type: 'string', value: 'default', choices: ['default', 'round', 'compact'], help: 'Design style'},
@@ -51,6 +51,10 @@ class Fader extends Slider {
                 origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the fader\'s gauge'},
             }
         })
+
+        defaults.scripting.onTouch = {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]}
+
+        return defaults
 
     }
 

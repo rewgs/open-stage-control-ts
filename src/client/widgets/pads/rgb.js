@@ -19,7 +19,7 @@ module.exports = class Rgb extends Widget {
 
     static defaults() {
 
-        return super.defaults().extend({
+        var defaults = super.defaults().extend({
             class_specific: {
                 snap: {type: 'boolean', value: false, help: [
                     'By default, the points are dragged from their initial position.',
@@ -31,6 +31,10 @@ module.exports = class Rgb extends Widget {
                 rangeAlpha: {type: 'object', value: {min: 0, max: 1}, help: 'Defines the widget\'s output scale for the alpha channel.'},
             }
         })
+
+        defaults.scripting.onTouch = {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]}
+
+        return defaults
 
     }
 
