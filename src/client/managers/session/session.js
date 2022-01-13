@@ -25,7 +25,7 @@ class Session {
                     if (converter.global) data = converter.global(data)
                     if (converter.widget) this.applyConvert(data.session || data.content, converter.widget)
 
-                    if (converter.warning) warning = true
+                    if (converter.warning && type !== 'fragment') warning = true
 
                 }
 
