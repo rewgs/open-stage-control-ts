@@ -150,8 +150,11 @@ module.exports =  {
                     send = false
                 }
             }
+
+            var stateContent = fs.readFileSync(settings.read('state'), 'utf8')
+            if (stateContent[0] === '\ufeff') stateContent = stateContent.slice(1) // remove BOM
             var state = {
-                state: JSON.parse(fs.readFileSync(settings.read('state'), 'utf8')),
+                state: JSON.parse(stateContent),
                 send: send
             }
             ipc.send('stateLoad', state, clientId)
@@ -182,6 +185,7 @@ module.exports =  {
                 error = err
             } else {
                 try {
+                    if (result[0] === '\ufeff') result = result.slice(1) // remove BOM
                     result = data.raw ? result : JSON.parse(result)
                     callback(result)
                 } catch(err) {
