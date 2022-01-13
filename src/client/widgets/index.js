@@ -49,7 +49,7 @@ module.exports.widgets = {
     range: require('./sliders/range'),
 
     // scripts
-    script: require('./scripts/script'),
+    script: require('./scripts/script-widget'),
     variable: require('./scripts/variable'),
 
 }

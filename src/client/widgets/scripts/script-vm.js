@@ -48,7 +48,6 @@ class ScriptVm extends Vm {
     resolveId(id) {
 
         var widget = this.getWidget()
-        if (widget.builtIn) widget = widget.parent
 
         if (id === 'this') return [widget]
         else if (id === 'parent' && widget.parent !== widgetManager) return [widget.parent]
@@ -82,7 +81,6 @@ class ScriptVm extends Vm {
             var widgets
             if (id.includes('*')) {
                 var widget = this.getWidget()
-                if (widget.builtIn) widget = widget.parent
                 widgets = this.resolveId(
                     Object.keys(widgetManager.idRoute).filter(key => key.match(new RegExp('^' + id.replace(/\*/g, '.*') + '$')))
                 ).filter(w => w !== widget)
@@ -106,7 +104,6 @@ class ScriptVm extends Vm {
             var widgets
             if (id.includes('*')) {
                 var widget = this.getWidget()
-                if (widget.builtIn) widget = widget.parent
                 widgets = this.resolveId(
                     Object.keys(widgetManager.idRoute).filter(key => key.match(new RegExp('^' + id.replace(/\*/g, '.*') + '$')))
                 ).filter(w => w !== widget)
@@ -158,7 +155,6 @@ class ScriptVm extends Vm {
             if (target) overrides.target = Array.isArray(target) ? target : [target]
 
             var widget = this.getWidget()
-            if (widget.builtIn) widget = widget.parent
 
             widget.sendValue(overrides, {force: true})
 
@@ -218,8 +214,6 @@ class ScriptVm extends Vm {
 
             var widgets = this.resolveId(id),
                 widget = this.getWidget()
-
-            if (widget.builtIn) widget = widget.parent
 
             for (var i = widgets.length - 1; i >= 0; i--) {
 

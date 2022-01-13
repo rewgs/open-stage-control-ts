@@ -13,7 +13,8 @@ var EventEmitter = require('../../events/event-emitter'),
     morph = require('nanomorph'),
     sanitizeHtml = require('sanitize-html'),
     updateWidget = ()=>{},
-    Script, uiConsole, uiTree, uiDragResize, sessionManager
+    Script = require('../scripts/script'),
+    uiConsole, uiTree, uiDragResize, sessionManager
 
 
 var oscReceiverState = {}
@@ -197,6 +198,8 @@ class Widget extends EventEmitter {
 
         this.parsers = {}
         this.parsersLocalScope = options.locals || {}
+        this.timeouts = {}
+        this.intervals = {}
         this.variables = options.variables || {}
         this.fragments = {}
 
@@ -219,54 +222,64 @@ class Widget extends EventEmitter {
             this.decimals = Math.min(20, Math.max(this.getProp('decimals'), 0))
         }
 
+        // scripting
         this.scripts = {}
-        Script = Script || require('../scripts/script')
-        if (!(this instanceof Script)) {
-            if (this.getProp('onCreate')) {
-                this.scripts.onCreate = new Script({props: {
-                    id: this.getProp('id') + '.onCreate',
-                    onEvent: this.getProp('onCreate')
-                }, builtIn: true, parent: this, context: {}})
-            }
-            if (this.getProp('onValue')) {
-                this.scripts.onValue = new Script({props:{
-                    id: this.getProp('id') + '.onValue',
-                    onEvent: this.getProp('onValue'),
-                    event: 'value'
-                }, builtIn: true, parent: this})
-                this.on('change', (e)=>{
-                    if (e.widget === this && this.mounted && !e.options.fromEdit && e.options.script !== false) {
-                        this.scripts.onValue.setValue(e.options.widget ? e.options.widget.value : this.value, {...e.options, id: e.options.id || e.id})
-                    }
-                })
-            }
 
-            if (this.getProp('onTouch')) {
-                this.scripts.onTouch = new Script({props:{
-                    id: this.getProp('id') + '.onTouch',
-                    onEvent: this.getProp('onTouch'),
-                }, builtIn: true, parent: this, context: {
-                    event: {},
-                    value: 0
-                }})
-                this.on('touch', (e)=>{
-                    var multi = Array.isArray(e.touch),
-                        state = multi ? e.touch[1] : e.touch
-                    this.scripts.onTouch.run({
-                        event: {type: state ? 'start' : 'stop', handle: multi ? e.touch[0] : undefined},
-                        value: this.value
-                    }, {sync: true, send: true})
-                })
-            }
-
-            // legacy touch state
-            if (String(this.getProp('onValue')).includes('touch') && !this.getProp('onTouch')) {
-                this.on('touch', (e)=>{
-                    this.scripts.onValue.setValue(this.value, {id: this.getProp('id'), touch: e.touch, sync: true, send: true})
-                })
-            }
-
+        if (this.getProp('onCreate')) {
+            this.scripts.onCreate = new Script({
+                widget: this,
+                property: 'onCreate',
+                code: this.getProp('onCreate'),
+                context: {}
+            })
         }
+
+        if (this.getProp('onValue')) {
+            this.scripts.onValue = new Script({
+                widget: this,
+                property: 'onValue',
+                code: this.getProp('onValue'),
+                context: {value: 0, id: '', touch: 0}
+            })
+            this.on('change', (e)=>{
+                if (e.widget === this && this.mounted && !e.options.fromEdit && e.options.script !== false) {
+                    this.scripts.onValue.run({
+                        value: e.options.widget ? e.options.widget.value : this.value,
+                        id: e.options.id || e.id,
+                        touch: undefined
+                    }, e.options)
+                }
+            })
+        }
+
+        if (this.getProp('onTouch') && this.getProp('type') !== 'canvas') {
+            this.scripts.onTouch = new Script({
+                widget: this,
+                property: 'onTouch',
+                code: this.getProp('onTouch'),
+                context: {event: {}, value: 0}
+            })
+            this.on('touch', (e)=>{
+                var multi = Array.isArray(e.touch),
+                    state = multi ? e.touch[1] : e.touch
+                this.scripts.onTouch.run({
+                    event: {type: state ? 'start' : 'stop', handle: multi ? e.touch[0] : undefined},
+                    value: this.value
+                }, {sync: true, send: true})
+            })
+        }
+
+        // legacy touch state in onValue script
+        if (String(this.getProp('onValue')).includes('touch') && !this.getProp('onTouch')) {
+            this.on('touch', (e)=>{
+                this.scripts.onValue.run({
+                    value: this.value,
+                    id: this.getProp('id'),
+                    touch: e.touch
+                }, {sync: true, send: true})
+            })
+        }
+
 
         this.style = null
         this.container = html`
@@ -323,7 +336,7 @@ class Widget extends EventEmitter {
             index: index
         })
 
-        if (this.scripts.onCreate) this.scripts.onCreate.run({})
+        if (this.scripts.onCreate) this.scripts.onCreate.run({}, {sync: true, send: true})
 
     }
 
@@ -747,12 +760,21 @@ class Widget extends EventEmitter {
                     if (!this.fragments[file]) this.fragments[file] = []
                     if (!this.fragments[file].includes(propName)) this.fragments[file].push(propName)
                 }
+                var r
                 if (sessionManager.getFragment(file)) {
-                    return sessionManager.getFragment(file)
+                    r = sessionManager.getFragment(file)
                 } else {
                     sessionManager.loadFragment(file, true)
-                    return ''
+                    r = ''
                 }
+
+                var varname = 'VAR_' + varnumber
+                varnumber--
+
+                variables[varname] = r
+                jsScope[varname] = r
+
+                return varname
             })
 
             propValue = balancedReplace('OSC', '{', '}', propValue, (args)=>{

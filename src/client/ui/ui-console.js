@@ -3,7 +3,7 @@ var UiSidePanel = require('./ui-sidepanel'),
     raw = require('nanohtml/raw'),
     locales = require('../locales'),
     {icon} = require('./utils'),
-    Script = require('../widgets/scripts/script'),
+    ScriptWidget = require('../widgets/scripts/script-widget'),
     widgetManager = require('../managers/widgets')
 
 class UiConsole extends UiSidePanel {
@@ -57,7 +57,7 @@ class UiConsole extends UiSidePanel {
             console._clear()
         }
 
-        this.script = new Script({props:{
+        this.script = new ScriptWidget({props:{
             id: 'CONSOLE',
             // detached context++ reading global navigator == crash electron
             script: 'var navigator; return eval(value)',

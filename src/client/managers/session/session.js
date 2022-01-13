@@ -296,9 +296,11 @@ var converters = [
                 if (data.type === 'script') {
                     if (data.event === 'once') {
                         data.onCreate = data.script
-                        data.event = 'value'
+                    } else if (data.event === 'keyboard') {
+                        data.onKeyboard = data.script
+                    } else if (data.event === 'value') {
+                        data.onValue = data.script
                     }
-                    else data.onEvent = data.script
                 } else {
                     data.onValue = data.script
                 }

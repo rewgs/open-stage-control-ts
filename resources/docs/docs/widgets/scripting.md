@@ -69,31 +69,23 @@ Note: the [canvas](../canvas/) widgets exposes more informations in its `onTouch
 
 See [canvas](../canvas/).
 
-### `onEvent`
+### `onKeyboard`
 
 *Script widget only*
 
-This script is executed when the event specified in the `event` property occurs.
-
-=== "Event: keyboard"
-
-    When set on this mode, the script is called when the key(s) defined in the widget's `keyBinding` property are pressed.
+This script is executed when the key(s) defined in the widget's `keyBinding` property are pressed.
 
 
-    The following variables are available in this context:
+The following variables are available in this context:
 
 
-    - `type` (`string`): `keydown` or `keyup`
-    - `key` (`string`): key name,
-    - `code` (`number`): key code
-    - `ctrl` (`boolean)`: `true` if ctrl key is pressed
-    - `shift` (`boolean`): `true` if shift key is pressed
-    - `alt` (`boolean`): `true` if alt key is pressed
-    - `meta` (`boolean`): `true` if meta key is pressed
-
-=== "Event: value"
-
-    See `onValue`.
+- `type` (`string`): `keydown` or `keyup`
+- `key` (`string`): key name,
+- `code` (`number`): key code
+- `ctrl` (`boolean)`: `true` if ctrl key is pressed
+- `shift` (`boolean`): `true` if shift key is pressed
+- `alt` (`boolean`): `true` if alt key is pressed
+- `meta` (`boolean`): `true` if meta key is pressed
 
 
 ## Available variables

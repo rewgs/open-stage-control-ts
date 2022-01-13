@@ -50,31 +50,33 @@ class CanvasWidget extends Canvas {
         this.value = this.valueLength > 1 ? Array(this.valueLength).fill(0) : 0
 
         if (this.getProp('onDraw')) {
-            this.scripts.onDraw = new Script({props:{
-                id: this.getProp('id') + '.onDraw',
-                onEvent: this.getProp('onDraw'),
-            }, builtIn: true, parent: this, context: {
-                value: 0,
-                width: 100,
-                height: 100,
-                ctx: {},
-                cssVars: {}
-            }})
-            this.scripts.onDraw._not_editable = true
+            this.scripts.onDraw = new Script({
+                widget: this,
+                property: 'onDraw',
+                code: this.getProp('onDraw'),
+                context: {
+                    value: 0,
+                    width: 100,
+                    height: 100,
+                    ctx: {},
+                    cssVars: {}
+                }
+            })
         }
 
         if (this.getProp('onTouch')) {
 
-            this.scripts.onTouch = new Script({props:{
-                id: this.getProp('id') + '.onTouch',
-                onEvent: this.getProp('onTouch'),
-            }, builtIn: true, parent: this, context: {
-                value: 0,
-                width: 100,
-                height: 100,
-                event: {}
-            }})
-            this.scripts.onTouch._not_editable = true
+            this.scripts.onTouch = new Script({
+                widget: this,
+                property: 'onTouch',
+                code: this.getProp('onTouch'),
+                context: {
+                    value: 0,
+                    width: 100,
+                    height: 100,
+                    event: {}
+                }
+            })
 
             var touchCb = (e, type)=>{
 
