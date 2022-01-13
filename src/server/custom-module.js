@@ -28,7 +28,9 @@ class CustomModule {
                 if (url.split('.').pop() === 'json') {
                     try {
                         url = path.resolve(path.dirname(this.filename), url)
-                        return JSON.parse(fs.readFileSync(url, 'utf8'))
+                        var content = fs.readFileSync(url, 'utf8')
+                        if (content[0] === '\ufeff') content = content.slice(1) // remove BOM
+                        return JSON.parse(content)
                     } catch(e) {
                         console.error('(ERROR) could not load json file from ' + url)
                         console.error(e.message)
