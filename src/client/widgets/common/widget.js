@@ -239,14 +239,13 @@ class Widget extends EventEmitter {
                 widget: this,
                 property: 'onValue',
                 code: this.getProp('onValue'),
-                context: {value: 0, id: '', touch: 0}
+                context: {value: 0, id: '', touch: undefined}
             })
             this.on('change', (e)=>{
                 if (e.widget === this && this.mounted && !e.options.fromEdit && e.options.script !== false) {
                     this.scripts.onValue.run({
                         value: e.options.widget ? e.options.widget.value : this.value,
-                        id: e.options.id || e.id,
-                        touch: undefined
+                        id: e.options.id || e.id
                     }, e.options)
                 }
             })
