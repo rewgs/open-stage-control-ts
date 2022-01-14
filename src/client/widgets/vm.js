@@ -91,6 +91,8 @@ class Vm {
 
     compile(code, defaultContext) {
 
+        if (typeof code !== 'string') code = String(code)
+        
         // var contextInit = 'var locals = locals;',
         var contextInit = '',
             contextKeys = ['__VARS'],
