@@ -13,6 +13,10 @@
     - script: added `onKeyboard` property, removed `event` property
     - canvas: expose additional touch event informations (`radiusX`, `radiusY`, `rotationAngle` and iOS-only  `altitudeAngle`, `azimuthAngle` and `touchType`)
 
+- advanced syntaxes
+    - added `IMPORT{file}` syntax to allow loading external files in properties
+
+
 ## 1.13.2
 
 - bug fixes

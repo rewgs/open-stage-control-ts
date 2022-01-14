@@ -90,3 +90,11 @@ Media queries can also be used:
 [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) declared in the  [default theme](https://github.com/jean-emmanuel/open-stage-control/blob/master/src/scss/themes/default.scss) can be overridden.
 
 Widgets also rely on CSS variables for the style properties (colors, padding, etc). These are documented in the widgets' `css` property description.
+
+# Loading images
+
+Image urls are resolved in this order:
+- in the session's directory
+- in theme's directory
+- in the server's `remote-root` directory if the option is set
+- as absolute paths

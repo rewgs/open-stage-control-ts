@@ -770,9 +770,9 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
+            | <h6 id="canvas_onValue">onValue<a class="headerlink" href="#canvas_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="canvas_onTouch">onTouch<a class="headerlink" href="#canvas_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
             | <h6 id="canvas_onDraw">onDraw<a class="headerlink" href="#canvas_onDraw" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
-            | <h6 id="canvas_onValue">onValue<a class="headerlink" href="#canvas_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 ## Sliders
 
 ??? api "<div id="fader">fader<a class="headerlink" href="#fader" title="Permanent link">#</a></div>"
@@ -909,14 +909,13 @@
 ## Scripts
 
 ??? api "<div id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></div>"
-    Evaluates a script each time it receives a value.
+    Sscripting widget utility with keyboard bindings
 
     === "scripting"
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="script_event">event<a class="headerlink" href="#script_event" title="Permanent link">#</a></h6> | `string` | <code>"value"</code> | Define which events trigger the script's execution.<br/><br/>Choices: `value`, `keyboard` |
-            | <h6 id="script_onEvent">onEvent<a class="headerlink" href="#script_onEvent" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget receives the defined event. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
+            | <h6 id="script_onKeyboard">onKeyboard<a class="headerlink" href="#script_onKeyboard" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget receives a keyboard event if `keyBinding` is set). See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="script_keyBinding">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation).<br/><br/>If the editor is enabled, some keys / combos will not work. |
             | <h6 id="script_keyRepeat">keyRepeat<a class="headerlink" href="#script_keyRepeat" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
             | <h6 id="script_keyType">keyType<a class="headerlink" href="#script_keyType" title="Permanent link">#</a></h6> | `string` | <code>"keydown"</code> | Determines which key event trigger the script's execution<br/><br/>Choices: `keydown`, `keyup`, `both` |

@@ -60,6 +60,15 @@ Options can contain `@{}` blocks.
 
 This syntax creates a custom variable in the widget that can be read and modified from any widget's script property (see [scripting](./scripting.md#getvarid-name)). Changes made to this variable will be applied automatically.
 
+# File imports: `IMPORT{file_name}`
+
+This allows loading the content of an external file in a property. If used in a `JS{}` of `#{}` block, it will be seen as a string variable containing the raw content of the file. Changes made to the file be applied automatically.
+
+File paths are resolved in this order:
+- in the session's directory
+- in theme's directory
+- in the server's `remote-root` directory if the option is set
+- as absolute paths
 
 ## Javascript: `JS{ <code> }`
 
