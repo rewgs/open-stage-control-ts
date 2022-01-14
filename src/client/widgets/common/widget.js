@@ -404,7 +404,7 @@ class Widget extends EventEmitter {
         if (
             // if prop/osc listeners/custom vars have changed (@{} / OSC{} / VAR{})
             // refresh the widget's props cache and update linked props bindings
-            propNames.map(x => this.props[x]).some(x => typeof x === 'string' && x.match(/OSC\{|@\{|VAR\{/))
+            propNames.map(x => this.props[x]).some(x => typeof x === 'string' && x.match(/(OSC|@|VAR|IMPORT)\{/))
         ||  propNames.some(n => linkedProps.includes(n))
         ) {
             this.createPropsCache()
