@@ -2,7 +2,14 @@
 
 Widgets can run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) scripts upon specific events. These scripts are written in special properties under the scripting category.
 
-Scripts should not contain any [advanced syntax](../advanced-syntaxes/) code (`JS{}`, `#{}, @{}` and `OSC{}`).
+!!! warning "Advanced syntaxe"
+    Most [advanced syntaxes](../advanced-syntaxes/) should be avoided as much as possible in scripting properties:
+    - `@{}`: use `get()` and `getProp()` instead
+    - `OSC{}`: use `get()` instead (using another widget as receiver)
+    - `VAR{}`: use `getVar()`instead
+    - `JS{}` and `#{}` are useless (scripting properties are already interpreted as javascript code) unless you want to generate code procedurally
+
+    The editor will always fail to recognize these syntaxes as they don't comply with the javacript language specification, even if the resulting code is valid.
 
 ## Events
 
