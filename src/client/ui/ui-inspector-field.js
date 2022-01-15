@@ -187,6 +187,7 @@ class UiInspectorField extends UiWidget {
             editor.selection.setRange({start:0,end:0})
             editor.gotoLine(0)
             editor.removeAllListeners('focus')
+            editor.setOptions({maxLines: 30})
             editor.dirty = false
             editor.on('focus', ()=>{
                 this.parent.focusedInput = input
@@ -244,9 +245,37 @@ class UiInspectorField extends UiWidget {
                 editor.resize()
             })
 
-            var help = this.container.appendChild(html`<div class="btn">${locales('editor_ace_help')}</div>`)
+            var help = this.container.appendChild(html`<div class="btn help">${locales('editor_ace_help')}</div>`)
             help.addEventListener('fast-click', (e)=>{
                 this.aceHelp(editor)
+            })
+
+            var closeKey = (e)=>{
+                if (e.keyCode !== 27) return
+                this.container.classList.remove('fullscreen')
+                editor.setOptions({maxLines: 30})
+                document.removeEventListener('keydown', closeKey)
+                this.container.removeEventListener('fast-click', closeClick)
+            }
+            var closeClick = (e)=>{
+                if (e.target === this.container) {
+                    closeKey({keyCode: 27})
+                }
+            }
+            var fullscreen = this.container.appendChild(html`<div class="btn fullscreen">${raw(icon('expand'))}</div>`)
+            fullscreen.addEventListener('fast-click', (e)=>{
+                var fs = this.container.classList.toggle('fullscreen')
+                editor.setOptions({maxLines: fs ? 0 : 30})
+                window.dispatchEvent(new Event('resize'))
+                this.label.style.setProperty('--prefix', fs ? this.widget.getProp('id') + '.' : '')
+                if (fs) {
+                    editor.focus()
+                    document.addEventListener('keydown', closeKey)
+                    this.container.addEventListener('fast-click', closeClick)
+                } else {
+                    document.removeEventListener('keydown', closeKey)
+                    this.container.removeEventListener('fast-click', closeClick)
+                }
             })
         }
 
@@ -286,6 +315,7 @@ class UiInspectorField extends UiWidget {
                         <th>Command</th>
                     </tr>
                 </thead>
+                    <tr><td><span class="kbd">Ctrl-Enter</span></td><td>save</td></tr>
                     ${keybindings.map(k=>html`<tr><td><span class="kbd">${k.key}</span></td><td>${k.command}</td></tr>`)}
                 </table>
             </div>

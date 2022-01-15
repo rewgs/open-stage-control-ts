@@ -352,6 +352,7 @@ osc-panel-content {
 #main {
     flex: 1;
     min-height: 40rem;
+    contain: strict;
 }
 
 #osc-greeting-header {

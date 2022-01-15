@@ -16,6 +16,8 @@
 - advanced syntaxes
     - added `IMPORT{file}` syntax to allow loading external files in properties
 
+- editor
+    - add fullscreen mode for properties with code editor enabled
 
 ## 1.13.2
 

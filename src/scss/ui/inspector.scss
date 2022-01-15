@@ -3,6 +3,9 @@ $field-height: 24rem;
 $padding: 8rem;
 $radius: 3rem;
 
+osc-panel-container.right osc-panel-inner {
+    contain: initial
+}
 #osc-inspector {
 
     --widget-padding: -1rem;
@@ -63,15 +66,50 @@ osc-inspector-field {
         }
         .btn {
             position: absolute;
-            right:3rem;
             top:3rem;
             background: var(--color-ui-button);
             line-height: $field-height - 6;
-            border-top-right-radius: inherit;
             box-shadow: 0 0 1rem 0 var(--color-background)
+        }
+        .fullscreen {
+            right:3rem;
+            width: 24rem;
+            padding-left: 0;
+            padding-right: 0;
+            border-top-right-radius: inherit;
+        }
+        .help {
+            right:30rem;
         }
         &:after {
             content:none;
+        }
+
+        &.fullscreen {
+            position: fixed;
+            width:auto;
+            height: auto;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            padding: 50rem;
+            margin: 0;
+            z-index: 99;
+            background: rgba(black, 0.3);
+            > label:before {
+                content: var(--prefix);
+            }
+            .btn {
+                margin-top: 50rem;
+                margin-right: 50rem;
+                &.fullscreen {
+                    color: var(--color-accent);
+                }
+            }
+            .ace_editor {
+                height: 100%!important;
+            }
         }
     }
     .ace_editor {
