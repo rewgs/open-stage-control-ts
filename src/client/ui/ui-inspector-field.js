@@ -180,6 +180,7 @@ class UiInspectorField extends UiWidget {
             this.container.classList.add('has-editor')
             if (!editors[this.name]) createEditor(this.name, this.default.editor, this.default.syntaxChecker)
             let editor = editors[this.name]
+            editor.fullscreen = false
             input.style.display = 'none'
             input._ace_input = editor.textarea
             editor.setValue(input.value)
@@ -200,6 +201,10 @@ class UiInspectorField extends UiWidget {
                     editor.dirty = true
                 })
                 editor.on('blur', (e)=>{
+                    if (editor.fullscreen) {
+                        e.preventDefault()
+                        return
+                    }
                     editor.setHighlightActiveLine(false)
                     editor.setHighlightGutterLine(false)
                     editor.selection.setRange({start:0,end:0})
@@ -254,21 +259,23 @@ class UiInspectorField extends UiWidget {
                 if (e.keyCode !== 27) return
                 this.container.classList.remove('fullscreen')
                 editor.setOptions({maxLines: 30})
+                editor.fullscreen = false
                 document.removeEventListener('keydown', closeKey)
                 this.container.removeEventListener('fast-click', closeClick)
+                editor.blur()
             }
             var closeClick = (e)=>{
                 if (e.target === this.container) {
                     closeKey({keyCode: 27})
                 }
             }
-            var fullscreen = this.container.appendChild(html`<div class="btn fullscreen">${raw(icon('expand'))}</div>`)
-            fullscreen.addEventListener('fast-click', (e)=>{
-                var fs = this.container.classList.toggle('fullscreen')
-                editor.setOptions({maxLines: fs ? 0 : 30})
+            var fullscreenBtn = this.container.appendChild(html`<div class="btn fullscreen">${raw(icon('expand'))}</div>`)
+            fullscreenBtn.addEventListener('fast-click', (e)=>{
+                editor.fullscreen = this.container.classList.toggle('fullscreen')
+                editor.setOptions({maxLines: editor.fullscreen ? 0 : 30})
                 window.dispatchEvent(new Event('resize'))
-                this.label.style.setProperty('--prefix', fs ? this.widget.getProp('id') + '.' : '')
-                if (fs) {
+                this.label.style.setProperty('--prefix', editor.fullscreen ? this.widget.getProp('id') + '.' : '')
+                if (editor.fullscreen) {
                     editor.focus()
                     document.addEventListener('keydown', closeKey)
                     this.container.addEventListener('fast-click', closeClick)
