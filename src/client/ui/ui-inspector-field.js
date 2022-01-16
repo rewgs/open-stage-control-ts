@@ -201,13 +201,13 @@ class UiInspectorField extends UiWidget {
                     editor.dirty = true
                 })
                 editor.on('blur', (e)=>{
+                    editor.setHighlightActiveLine(false)
+                    editor.setHighlightGutterLine(false)
+                    editor.selection.setRange({start:0,end:0})
                     if (editor.fullscreen) {
                         e.preventDefault()
                         return
                     }
-                    editor.setHighlightActiveLine(false)
-                    editor.setHighlightGutterLine(false)
-                    editor.selection.setRange({start:0,end:0})
                     input.value = editor.getValue()
                     this.parent.focusedInput = input
                     if (editor.dirty) {
@@ -256,6 +256,8 @@ class UiInspectorField extends UiWidget {
             })
 
             var closeKey = (e)=>{
+                // this handler may remain dangling if closing with ctrl+enter
+                // we ignore this as it has no effect
                 if (e.keyCode !== 27) return
                 this.container.classList.remove('fullscreen')
                 editor.setOptions({maxLines: 30})
