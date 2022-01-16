@@ -5,7 +5,8 @@
 - bug fixes
     - misc: sending typed arguments (`{type, value}` objects) should override the widget's `typeTags` definition
     - multixy: errors when `ephemeral` is `true`
-
+    - scripting: `setVar` not affecting all widgets when mutliple widgets match provided id
+    
 - widgets
     - renamed `script` to `onValue`, `draw` to `onDraw`, `touch` to `onTouch`
     - added `onCreate` script property to all widgets
