@@ -400,6 +400,7 @@ class Widget extends EventEmitter {
         Object.values(this.linkedProps).forEach(l => linkedProps = linkedProps.concat(l))
         Object.values(this.linkedPropsValue).forEach(l => linkedProps = linkedProps.concat(l))
         Object.values(this.oscReceivers).forEach(r => linkedProps = linkedProps.concat(r.propNames))
+        Object.values(this.variables).forEach(r => linkedProps = linkedProps.concat(r.propNames))
         Object.values(this.fragments).forEach(l => linkedProps = linkedProps.concat(l))
 
         if (
