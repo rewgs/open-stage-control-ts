@@ -70,6 +70,9 @@ File paths are resolved in this order:
 - in the server's `remote-root` directory if the option is set
 - as absolute paths
 
+!!! warning
+    Fragments and session files already loaded with fragment widgets should not be imported using this syntax.
+
 ## Javascript: `JS{ <code> }`
 
 This syntax allows defining a property using [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript). The code will be compiled as a function and executed in a restricted context.
