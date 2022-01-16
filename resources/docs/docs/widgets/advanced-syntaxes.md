@@ -71,7 +71,7 @@ File paths are resolved in this order:
 - as absolute paths
 
 !!! warning
-    Fragments and session files already loaded with fragment widgets should not be imported using this syntax.
+    [Fragments](../fragments/) and session files already loaded with fragment widgets should not be imported using this syntax.
 
 ## Javascript: `JS{ <code> }`
 
