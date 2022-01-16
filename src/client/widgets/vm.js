@@ -136,7 +136,7 @@ class Vm {
 
             this.sanitize(__contextValues)
 
-            return compiledCode.apply(null, __contextValues)
+            return compiledCode.apply("this", __contextValues)
 
         }
 

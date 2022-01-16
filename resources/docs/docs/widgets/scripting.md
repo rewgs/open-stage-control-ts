@@ -111,6 +111,9 @@ The following variables and functions are accessible in this context.
     - `session`: session file path
     - `clipboard`: instance of navigator [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
 
+!!! note "this"
+    Unlike in most javascript contexts, the special keyword `this` doesn't point to an object but instead returns the string `"this"`. 
+
 
 ----
 

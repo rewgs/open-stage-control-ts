@@ -6,13 +6,16 @@
     - misc: sending typed arguments (`{type, value}` objects) should override the widget's `typeTags` definition
     - multixy: errors when `ephemeral` is `true`
     - scripting: `setVar` not affecting all widgets when mutliple widgets match provided id
-    
+
 - widgets
     - renamed `script` to `onValue`, `draw` to `onDraw`, `touch` to `onTouch`
     - added `onCreate` script property to all widgets
     - added `onTouch` script to widgets that supported the touch state variable in scripts (now deprecated)
     - script: added `onKeyboard` property, removed `event` property
     - canvas: expose additional touch event informations (`radiusX`, `radiusY`, `rotationAngle` and iOS-only  `altitudeAngle`, `azimuthAngle` and `touchType`)
+
+- scripting
+    - special keyword `this` now returns the string `"this"`
 
 - advanced syntaxes
     - added `IMPORT{file}` syntax to allow loading external files in properties
