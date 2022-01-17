@@ -240,8 +240,9 @@ var SessionManager = class SessionManager extends EventEmitter {
                 update = true
             }
         } else {
-            if (!deepEqual(this.fragments[path], new Session(fileContent, 'fragment'))) {
-                this.fragments[path] = new Session(fileContent, 'fragment')
+            var fragment = new Session(fileContent, 'fragment')
+            if (!deepEqual(this.fragments[path], fragment)) {
+                this.fragments[path] = fragment
                 update = true
             }
         }
