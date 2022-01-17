@@ -10,7 +10,8 @@ var ipc = require('../../ipc/'),
     widgetManager = require('../widgets'),
     locales = require('../../locales'),
     Session = require('./session'),
-    EventEmitter = require('../../events/event-emitter')
+    EventEmitter = require('../../events/event-emitter'),
+    {deepEqual} = require('../../utils')
 
 
 var SessionManager = class SessionManager extends EventEmitter {
@@ -230,15 +231,22 @@ var SessionManager = class SessionManager extends EventEmitter {
 
     setFragment(data) {
 
-        var {path, fileContent, raw} = data
+        var {path, fileContent, raw} = data,
+            update = false
 
         if (raw) {
-            this.fragments[path] = fileContent
+            if (this.fragments[path] !== fileContent) {
+                this.fragments[path] = fileContent
+                update = true
+            }
         } else {
-            this.fragments[path] = new Session(fileContent, 'fragment')
+            if (!deepEqual(this.fragments[path], new Session(fileContent, 'fragment'))) {
+                this.fragments[path] = new Session(fileContent, 'fragment')
+                update = true
+            }
         }
 
-        this.trigger('fragment-updated', {path: path})
+        if (update) this.trigger('fragment-updated', {path: path})
 
 
     }
