@@ -8,7 +8,7 @@
     - scripting: `setVar` not affecting all widgets when mutliple widgets match provided id
 
 - widgets
-    - renamed `script` to `onValue`, `draw` to `onDraw`, `touch` to `onTouch`
+    - renamed `script` property to `onValue`, `draw` to `onDraw`, `touch` to `onTouch`
     - added `onCreate` script property to all widgets
     - added `onTouch` script to widgets that supported the touch state variable in scripts (now deprecated)
     - script: added `onKeyboard` property, removed `event` property
