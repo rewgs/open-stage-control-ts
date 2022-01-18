@@ -36,12 +36,14 @@ class FragmentManager {
 
         if (!this.fragments[resolvedPath]) {
 
-            this.fragments[resolvedPath] = this.read(resolvedPath, data.raw, clientId, (result)=>{
+            this.fragments[resolvedPath] = 'LOADING'
+
+            this.read(resolvedPath, data.raw, clientId, (result)=>{
                 ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath], raw: data.raw}, clientId)
             })
 
             this.watchers[resolvedPath] = chokidar.watch(resolvedPath, {awaitWriteFinish: {stabilityThreshold: 200}}).on('change', ()=>{
-                this.fragments[resolvedPath] = this.read(resolvedPath, data.raw, clientId, (result)=>{
+                this.read(resolvedPath, data.raw, clientId, (result)=>{
                     for (let id of this.clients[resolvedPath]) {
                         ipc.send('fragmentLoad', {path: path, fileContent: this.fragments[resolvedPath], raw: data.raw}, id)
                     }
