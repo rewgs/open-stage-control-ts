@@ -1,5 +1,6 @@
 var ScriptVm = require('./script-vm'),
-    scriptVm = new ScriptVm()
+    scriptVm = new ScriptVm(),
+    noop = ()=>{}
 
 class Script {
 
@@ -13,11 +14,16 @@ class Script {
 
         if (!options.code) {
 
-            this.script = ()=>{}
+            this.script = noop
 
         } else {
 
-            this.script = scriptVm.compile(options.code, options.context)
+            try {
+                this.script = scriptVm.compile(options.code, options.context)
+            } catch(err) {
+                this.widget.errorProp(this.property, 'javascript', err)
+                this.script = noop
+            }
 
         }
 
