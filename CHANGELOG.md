@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.14.0
+## 1.14.0, 1.14.1
 
 - bug fixes
     - misc: sending typed arguments (`{type, value}` objects) should override the widget's `typeTags` definition
