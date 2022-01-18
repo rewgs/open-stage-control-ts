@@ -265,6 +265,7 @@ class UiInspectorField extends UiWidget {
                 document.removeEventListener('keydown', closeKey)
                 this.container.removeEventListener('fast-click', closeClick)
                 editor.blur()
+                this.parent.parentContainer.classList.remove('editor-breakout')
             }
             var closeClick = (e)=>{
                 if (e.target === this.container) {
@@ -276,12 +277,14 @@ class UiInspectorField extends UiWidget {
                 editor.fullscreen = this.container.classList.toggle('fullscreen')
                 editor.setOptions({maxLines: editor.fullscreen ? 0 : 30})
                 window.dispatchEvent(new Event('resize'))
-                this.label.style.setProperty('--prefix', editor.fullscreen ? this.widget.getProp('id') + '.' : '')
+                this.label.style.setProperty('--prefix', editor.fullscreen ? '"' + this.widget.getProp('id') + '."' : '')
                 if (editor.fullscreen) {
+                    this.parent.parentContainer.classList.add('editor-breakout')
                     editor.focus()
                     document.addEventListener('keydown', closeKey)
                     this.container.addEventListener('fast-click', closeClick)
                 } else {
+                    this.parent.parentContainer.classList.remove('editor-breakout')
                     document.removeEventListener('keydown', closeKey)
                     this.container.removeEventListener('fast-click', closeClick)
                 }

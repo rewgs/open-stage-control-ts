@@ -37,6 +37,7 @@ class UiInspector extends UiWidget {
             }
 
         })
+        this.parentContainer = DOM.get('osc-panel-container.right osc-panel-inner')[0]
 
         this.colorPicker = new UiColorPicker()
         this.colorPicker.on('change', ()=>{
@@ -245,6 +246,7 @@ class UiInspector extends UiWidget {
 
                 event.preventDefault()
                 DOM.dispatchEvent(event.target, 'change')
+                this.parentContainer.classList.remove('editor-breakout')
 
             } else if (event.keyCode === 27) {
 

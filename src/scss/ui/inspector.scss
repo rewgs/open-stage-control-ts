@@ -3,9 +3,10 @@ $field-height: 24rem;
 $padding: 8rem;
 $radius: 3rem;
 
-osc-panel-container.right osc-panel-inner {
+osc-panel-container.right osc-panel-inner.editor-breakout {
     contain: initial
 }
+
 #osc-inspector {
 
     --widget-padding: -1rem;
