@@ -4,6 +4,7 @@ Widgets can run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 
 !!! warning "Advanced syntaxe"
     Most [advanced syntaxes](../advanced-syntaxes/) should be avoided as much as possible in scripting properties:
+    
     - `@{}`: use `get()` and `getProp()` instead
     - `OSC{}`: use `get()` instead (using another widget as receiver)
     - `VAR{}`: use `getVar()`instead
