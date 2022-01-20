@@ -77,7 +77,7 @@ function updateWidget(widget, options={}) {
 
     // save state
     if (stateManager.queueCounter === 0) {
-        scrollState = {}
+        scrollState = {} // scrollbale modals don't store their scroll state in their value
     }
     stateManager.incrementQueue()
     for (let w of removedWidgets) {
@@ -89,8 +89,8 @@ function updateWidget(widget, options={}) {
             stateManager.pushValueState(id, value)
             if (valueProp !== '' && valueProp !== undefined) stateManager.pushValueOldProp(id, valueProp)
         }
-        if (widgetManager.scrollingWidgets.indexOf(w.hash) > -1 && w.scroll) {
-            var s = w.scroll()
+        if (w.getProp('scroll') && w.getProp('type') === 'modal') {
+            var s = w.getScroll()
             if (s[0] !== 0 || s[1] !== 0) {
                 scrollState[w.getProp('id')] = s
             }
@@ -142,7 +142,7 @@ function updateWidget(widget, options={}) {
     if (stateManager.queueCounter === 0) {
         for (let id in scrollState) {
             for (let w of widgetManager.getWidgetById(id)) {
-                if (w.scroll) w.scroll(scrollState[id])
+                if (w.getProp('scroll')) w.setScroll(scrollState[id])
             }
         }
     }

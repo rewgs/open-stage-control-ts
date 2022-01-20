@@ -1,7 +1,8 @@
 var Widget = require('./widget'),
     resize = require('../../events/resize'),
     canvasQueue = require('./queue'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    fastdom = require('fastdom')
 
 
 class Canvas extends Widget {
@@ -69,11 +70,12 @@ class Canvas extends Widget {
         this.height = height
         this.width = width
 
-        this.canvas.setAttribute('width', width * ratio)
-        this.canvas.setAttribute('height', height * ratio)
-
-        this.container.style.setProperty('--widget-height', this.height + 'rem')
-        this.container.style.setProperty('--widget-width', this.width + 'rem')
+        // fastdom.mutate(()=>{
+            this.canvas.setAttribute('width', width * ratio)
+            this.canvas.setAttribute('height', height * ratio)
+            this.container.style.setProperty('--widget-height', this.height + 'rem')
+            this.container.style.setProperty('--widget-width', this.width + 'rem')
+        // })
         this.parsersLocalScope.height = this.height
         this.parsersLocalScope.width = this.width
 

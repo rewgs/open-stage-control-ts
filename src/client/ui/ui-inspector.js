@@ -5,7 +5,8 @@ var UiWidget = require('./ui-widget'),
     morph = require('nanomorph'),
     {defaults} = require('../widgets/'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw')
+    raw = require('nanohtml/raw'),
+    fastdom = require('fastdom')
 
 
 
@@ -56,10 +57,16 @@ class UiInspector extends UiWidget {
 
                 var name = node.getAttribute('name')
 
+
                 var textarea = DOM.get(this.container, `textarea[name="${name}"]`)
                 if (textarea) {
-                    textarea[0].value = !node.classList.contains('on')
-                    DOM.dispatchEvent(textarea[0], 'change')
+                    fastdom.measure(()=>{
+                        var bool = !node.classList.contains('on')
+                        fastdom.mutate(()=>{
+                            textarea[0].value = bool
+                            DOM.dispatchEvent(textarea[0], 'change')
+                        })
+                    })
                 }
 
             } else if (node.tagName === 'OSC-INSPECTOR-COLOR') {

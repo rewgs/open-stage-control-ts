@@ -134,28 +134,30 @@ class Panel extends Container() {
                 }
 
                 if (this.props.type !== 'modal') {
-
                     this.value = [0, 0]
-                    this.scrollWidth = 1
-                    this.scrollHeight = 1
-                    setTimeout(()=>{
-                        this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
-                        this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
-                    })
                     this.scrollTimeout = null
-                    this.widget.addEventListener('scroll', ()=>{
-                        this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
-                        this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
-                        var x = this.widget.scrollLeft / this.scrollWidth || 0,
-                            y = this.widget.scrollTop / this.scrollHeight || 0
-                        if (iOS13) {
-                            if (this.iosScrollbars.horizontal._scrollable) this.iosScrollbars.horizontal.setValue(x)
-                            if (this.iosScrollbars.vertical._scrollable) this.iosScrollbars.vertical.setValue(y)
-                        }
-                        this.setValue([x, y], {sync: true, send:true})
-                    })
-
                 }
+                this.scroll = [0, 0]
+                this.scrollWidth = 1
+                this.scrollHeight = 1
+                setTimeout(()=>{
+                    this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
+                    this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
+                })
+                this.widget.addEventListener('scroll', ()=>{
+                    this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
+                    this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
+                    this.scroll = [this.widget.scrollLeft, this.widget.scrollTop]
+                    var x = this.widget.scrollLeft / this.scrollWidth || 0,
+                        y = this.widget.scrollTop / this.scrollHeight || 0
+                    if (iOS13) {
+                        if (this.iosScrollbars.horizontal._scrollable) this.iosScrollbars.horizontal.setValue(x)
+                        if (this.iosScrollbars.vertical._scrollable) this.iosScrollbars.vertical.setValue(y)
+                    }
+                    if (this.props.type !== 'modal') {
+                        this.setValue([x, y], {sync: true, send:true})
+                    }
+                })
 
             }
 
@@ -293,8 +295,7 @@ class Panel extends Container() {
             this.value = v
             clearTimeout(this.scrollTimeout)
             this.scrollTimeout = setTimeout(()=>{
-                this.widget.scrollLeft = v[0] * this.scrollWidth
-                this.widget.scrollTop = v[1] * this.scrollHeight
+                this.setScroll(v[0] * this.scrollWidth, v[1] * this.scrollHeight)
             })
 
             if (options.send) this.sendValue()
@@ -302,14 +303,16 @@ class Panel extends Container() {
         }
     }
 
-    scroll(s) {
+    getScroll() {
 
-        if (!s) {
-            return [this.widget.scrollLeft, this.widget.scrollTop]
-        } else {
-            if (s[0] !== undefined) this.widget.scrollLeft = s[0]
-            if (s[1] !== undefined) this.widget.scrollTop = s[1]
-        }
+        return this.scroll
+
+    }
+
+    setScroll(x, y) {
+
+        if (x !== undefined) this.widget.scrollLeft = this.scroll[0] = x
+        if (y !== undefined) this.widget.scrollTop = this.scroll[1] = y
 
     }
 

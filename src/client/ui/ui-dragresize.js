@@ -1,6 +1,7 @@
 var UiWidget = require('./ui-widget'),
     keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     html = require('nanohtml'),
+    fastdom = require('fastdom'),
     Tab, Root
 
 class UiDragResize extends UiWidget {
@@ -154,9 +155,10 @@ class UiDragResize extends UiWidget {
         this.initWidth = this.width
         this.initHeight = this.height
 
-        this.widgets[0].parentNode.appendChild(this.container)
-        this.mounted = true
-
+        fastdom.mutate(()=>{
+            this.widgets[0].parentNode.appendChild(this.container)
+            this.mounted = true
+        })
 
     }
 
@@ -172,24 +174,33 @@ class UiDragResize extends UiWidget {
         ]
         handlesVisibility.push(handlesVisibility[1] && handlesVisibility[2])           // se
 
-        for (var i in handlesVisibility) {
-            this.handles[i].style.display = handlesVisibility[i] ? '' : 'none'
-        }
+        fastdom.measure(()=>{
 
-        var lefts = widgets.map(w => w.container.offsetLeft),
-            tops = widgets.map(w => w.container.offsetTop),
-            rights = widgets.map(w => w.container.offsetLeft + w.container.offsetWidth),
-            bottoms = widgets.map(w => w.container.offsetTop + w.container.offsetHeight)
+            var lefts = widgets.map(w => w.container.offsetLeft),
+                tops = widgets.map(w => w.container.offsetTop),
+                rights = widgets.map(w => w.container.offsetLeft + w.container.offsetWidth),
+                bottoms = widgets.map(w => w.container.offsetTop + w.container.offsetHeight)
 
-        this.left = Math.min(...lefts) / PXSCALE
-        this.top = Math.min(...tops) / PXSCALE
-        this.width = (Math.max(...rights) - Math.min(...lefts)) / PXSCALE
-        this.height = (Math.max(...bottoms) - Math.min(...tops)) / PXSCALE
+            this.left = Math.min(...lefts) / PXSCALE
+            this.top = Math.min(...tops) / PXSCALE
+            this.width = (Math.max(...rights) - Math.min(...lefts)) / PXSCALE
+            this.height = (Math.max(...bottoms) - Math.min(...tops)) / PXSCALE
 
-        // this.cssTransform = widget.cssTransform || 'none'
-        // this.cssTransformOrigin = widget.cssTransformOrigin
+            fastdom.mutate(()=>{
 
-        this.updateCss()
+                for (var i in handlesVisibility) {
+                    this.handles[i].style.display = handlesVisibility[i] ? '' : 'none'
+                }
+
+                this.updateCss()
+
+                // this.cssTransform = widget.cssTransform || 'none'
+                // this.cssTransformOrigin = widget.cssTransformOrigin
+
+            })
+
+        })
+
 
     }
 
