@@ -240,7 +240,7 @@ class ScriptVm extends Vm {
 
             for (var i = widgets.length - 1; i >= 0; i--) {
 
-                if (widgets[i].scroll) return widgets[i].scroll()
+                if (widgets[i].getProp('scroll')) return widgets[i].getScroll()
 
             }
 
@@ -256,7 +256,7 @@ class ScriptVm extends Vm {
 
             for (var i = widgets.length - 1; i >= 0; i--) {
 
-                if (widgets[i].scroll) widgets[i].scroll([x, y])
+                if (widgets[i].getProp('scroll')) widgets[i].setScroll(x, y)
 
             }
 
