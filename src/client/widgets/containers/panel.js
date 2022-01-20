@@ -6,7 +6,8 @@ var Container = require('../common/container'),
     setScrollbarColor = require('../../ui/scrollbar-color'),
     iOS13 = require('../../ui/ios') === 13,
     Fader = require('../sliders/fader'), faderDefaults,
-    resize = require('../../events/resize')
+    resize = require('../../events/resize'),
+    fastdom = require('fastdom')
 
 class Panel extends Container() {
 
@@ -140,7 +141,7 @@ class Panel extends Container() {
                 this.scroll = [0, 0]
                 this.scrollWidth = 1
                 this.scrollHeight = 1
-                setTimeout(()=>{
+                fastdom.measure(()=>{
                     this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
                 })

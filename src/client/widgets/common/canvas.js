@@ -70,12 +70,6 @@ class Canvas extends Widget {
         this.height = height
         this.width = width
 
-        // fastdom.mutate(()=>{
-            this.canvas.setAttribute('width', width * ratio)
-            this.canvas.setAttribute('height', height * ratio)
-            this.container.style.setProperty('--widget-height', this.height + 'rem')
-            this.container.style.setProperty('--widget-width', this.width + 'rem')
-        // })
         this.parsersLocalScope.height = this.height
         this.parsersLocalScope.width = this.width
 
@@ -86,14 +80,24 @@ class Canvas extends Widget {
             this.ctx.scale(ratio, ratio)
         }
 
-        this.cacheCanvasStyle(style)
+        fastdom.measure(()=>{
+            this.cacheCanvasStyle(style)
+            fastdom.mutate(()=>{
 
-        if (!this.hasSize) {
-            this.hasSize = true
-            this.setVisibility()
-        }
+                this.canvas.setAttribute('width', width * ratio)
+                this.canvas.setAttribute('height', height * ratio)
+                this.container.style.setProperty('--widget-height', this.height + 'rem')
+                this.container.style.setProperty('--widget-width', this.width + 'rem')
 
-        this.batchDraw()
+                if (!this.hasSize) {
+                    this.hasSize = true
+                    this.setVisibility()
+                }
+
+                this.batchDraw()
+            })
+        })
+
 
     }
 
@@ -108,7 +112,6 @@ class Canvas extends Widget {
     cacheCanvasStyle(style){
 
         style = style || window.getComputedStyle(this.canvas)
-
 
         for (var data of this.constructor.cssVariables) {
 
@@ -137,6 +140,7 @@ class Canvas extends Widget {
         this.ctx.font = this.fontWeight + ' ' + this.fontSize + 'px ' + this.fontFamily
         this.ctx.textBaseline = 'middle'
         this.ctx.textAlign = this.textAlign
+
 
     }
 
@@ -184,19 +188,27 @@ class Canvas extends Widget {
             case 'alphaFillOff':
             case 'alphaFillOn':
             case 'colorBg':
-                setTimeout(()=>{
+                fastdom.measure(()=>{
                     this.cacheCanvasStyle()
-                    this.batchDraw()
-                },10)
+                    fastdom.mutate(()=>{
+                        this.batchDraw()
+                    })
+                })
+                // setTimeout(()=>{
+                //     this.cacheCanvasStyle()
+                //     this.batchDraw()
+                // },10)
                 return
             case 'css':
             case 'lineWidth':
             case 'padding':
                 resize.check(this.canvas, true)
-                setTimeout(()=>{
+                fastdom.measure(()=>{
                     this.cacheCanvasStyle()
-                    this.batchDraw()
-                },10)
+                    fastdom.mutate(()=>{
+                        this.batchDraw()
+                    })
+                })
                 return
         }
 

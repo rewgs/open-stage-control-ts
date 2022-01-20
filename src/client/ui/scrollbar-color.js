@@ -1,8 +1,9 @@
-var chroma = require('chroma-js')
+var chroma = require('chroma-js'),
+    fastdom = require('fastdom')
 
 module.exports = (container)=>{
 
-    setTimeout(()=>{
+    fastdom.measure(()=>{
 
         var computedStyle = window.getComputedStyle(container),
             alpha = parseFloat(computedStyle.getPropertyValue('--alpha-scrollbar')),
@@ -18,10 +19,12 @@ module.exports = (container)=>{
         }
 
         if (color) {
-            try {
-                container.style.setProperty('--color-scrollbar', chroma(color).alpha(alpha).css())
-                container.style.setProperty('--color-scrollbar-on', chroma(color).alpha(alphaOn).css())
-            } catch(e) {}
+            fastdom.mutate(()=>{
+                try {
+                    container.style.setProperty('--color-scrollbar', chroma(color).alpha(alpha).css())
+                    container.style.setProperty('--color-scrollbar-on', chroma(color).alpha(alphaOn).css())
+                } catch(e) {}
+            })
         }
 
     })
