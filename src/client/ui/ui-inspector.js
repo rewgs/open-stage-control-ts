@@ -60,12 +60,9 @@ class UiInspector extends UiWidget {
 
                 var textarea = DOM.get(this.container, `textarea[name="${name}"]`)
                 if (textarea) {
-                    fastdom.measure(()=>{
-                        var bool = !node.classList.contains('on')
-                        fastdom.mutate(()=>{
-                            textarea[0].value = bool
-                            DOM.dispatchEvent(textarea[0], 'change')
-                        })
+                    fastdom.mutate(()=>{
+                        textarea[0].value = !node.classList.contains('on')
+                        DOM.dispatchEvent(textarea[0], 'change')
                     })
                 }
 
