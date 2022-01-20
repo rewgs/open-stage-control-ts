@@ -17,8 +17,6 @@ class WidgetManager extends EventEmitter {
         this.linkIdLock = []
         this.linkIdLockDepth = 0
 
-        this.scrollingWidgets = []
-
         this.preArgsSeparator = '||||'
 
         this.on('change', this.onChange.bind(this))
@@ -102,9 +100,7 @@ class WidgetManager extends EventEmitter {
         var hash = widget.hash,
             address = this.createAddressRef(widget),
             id = widget.getProp('id'),
-            linkId = widget.getProp('linkId'),
-            scroll = widget.getProp('scroll')
-
+            linkId = widget.getProp('linkId')
 
         this.widgets[hash] = widget
 
@@ -125,10 +121,6 @@ class WidgetManager extends EventEmitter {
                     this.linkIdRoute[linkId[i]].push(hash)
                 }
             }
-        }
-
-        if (scroll) {
-            this.scrollingWidgets.push(hash)
         }
 
         this.registerWidget(widget)
@@ -165,8 +157,7 @@ class WidgetManager extends EventEmitter {
         var hash = widget.hash,
             address = this.createAddressRef(widget),
             linkId =  widget.getProp('linkId'),
-            id = widget.getProp('id'),
-            scroll = widget.getProp('scroll')
+            id = widget.getProp('id')
 
         if (this.widgets[hash]) {
             if (this.widgets[hash].onRemove) this.widgets[hash].onRemove()
@@ -182,7 +173,6 @@ class WidgetManager extends EventEmitter {
         }
         if (id && this.idRoute[id].indexOf(hash) != -1) this.idRoute[id].splice(this.idRoute[id].indexOf(hash), 1)
         if (address && this.addressRoute[address].indexOf(hash) != -1) this.addressRoute[address].splice(this.addressRoute[address].indexOf(hash), 1)
-        if (scroll && this.scrollingWidgets.indexOf(hash) != -1) this.scrollingWidgets.splice(this.scrollingWidgets.indexOf(hash), 1)
 
         if (!Array.isArray(linkId)) linkId = [linkId]
         linkId = linkId.map(x=>String(x))
@@ -222,12 +212,6 @@ class WidgetManager extends EventEmitter {
                         route[key].splice(i, 1)
                     }
                 }
-            }
-        }
-
-        for (let i in this.scrollingWidgets) {
-            if (!this.widgets[this.scrollingWidgets[i]]) {
-                this.scrollingWidgets.splice(i, 1)
             }
         }
 
