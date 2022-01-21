@@ -306,8 +306,8 @@ var converters = [
                 }
             }
             if (data.type === 'canvas') {
-                data.onDraw = data.draw
-                data.onTouch = data.touch
+                if (data.draw !== undefined) data.onDraw = data.draw
+                if (data.touch !== undefined) data.onTouch = data.touch
             }
 
         }

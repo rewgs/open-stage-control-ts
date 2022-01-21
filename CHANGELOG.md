@@ -4,6 +4,7 @@
 
 - bug fixes
     - context-menu: double click issue in submenus on small touch screens
+    - clone/fragment: broken onDraw / onTouch scripts if cloned widget is a canvas   
 
 ## 1.14.0, 1.14.1
 

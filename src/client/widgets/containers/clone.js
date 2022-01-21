@@ -31,6 +31,8 @@ class Clone extends Container() {
 
         defaults.style = {css: defaults.style.css}
 
+        delete defaults.scripting
+
         return defaults
 
     }
