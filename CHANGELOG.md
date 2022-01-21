@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.14.2
+
+- bug fixes
+    - context-menu: double click issue in submenus on small touch screens
+
 ## 1.14.0, 1.14.1
 
 - bug fixes
