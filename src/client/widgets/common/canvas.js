@@ -58,7 +58,9 @@ class Canvas extends Widget {
 
     resizeHandleProxy() {
 
-        this.resizeHandle(...arguments)
+        fastdom.measure(()=>{
+            this.resizeHandle(...arguments)
+        })
 
     }
 
@@ -75,33 +77,32 @@ class Canvas extends Widget {
 
         this.clearRect = []
 
-        if (ratio != 1) {
-            this.ctx.setTransform(1, 0, 0, 1, 0, 0)
-            this.ctx.scale(ratio, ratio)
-        }
+        this.cacheCanvasStyle(style)
 
-        fastdom.measure(()=>{
-            this.cacheCanvasStyle(style)
-            fastdom.mutate(()=>{
+        fastdom.mutate(()=>{
 
-                this.canvas.setAttribute('width', width * ratio)
-                this.canvas.setAttribute('height', height * ratio)
-                this.container.style.setProperty('--widget-height', this.height + 'rem')
-                this.container.style.setProperty('--widget-width', this.width + 'rem')
+            this.canvas.setAttribute('width', width * ratio)
+            this.canvas.setAttribute('height', height * ratio)
+            this.container.style.setProperty('--widget-height', this.height + 'rem')
+            this.container.style.setProperty('--widget-width', this.width + 'rem')
 
-                this.ctx.font = this.fontWeight + ' ' + this.fontSize + 'px ' + this.fontFamily
-                this.ctx.textBaseline = 'middle'
-                this.ctx.textAlign = this.textAlign
+            this.ctx.font = this.fontWeight + ' ' + this.fontSize + 'px ' + this.fontFamily
+            this.ctx.textBaseline = 'middle'
+            this.ctx.textAlign = this.textAlign
 
-                if (!this.hasSize) {
-                    this.hasSize = true
-                    this.setVisibility()
-                    this.batchDraw()
-                } else {
-                    this.draw()
-                }
+            if (ratio != 1) {
+                this.ctx.setTransform(1, 0, 0, 1, 0, 0)
+                this.ctx.scale(ratio, ratio)
+            }
 
-            })
+            if (!this.hasSize) {
+                this.hasSize = true
+                this.setVisibility()
+                this.batchDraw()
+            } else {
+                this.draw()
+            }
+
         })
 
 

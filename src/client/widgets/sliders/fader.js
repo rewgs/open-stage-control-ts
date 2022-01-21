@@ -1,5 +1,6 @@
 var {clip} = require('../utils'),
-    Slider = require('./slider')
+    Slider = require('./slider'),
+    fastdom = require('fastdom')
 
 class Fader extends Slider {
 
@@ -118,50 +119,55 @@ class Fader extends Slider {
 
         super.resizeHandle(event)
 
-        if (this.getProp('horizontal')){
-            this.ctx.setTransform(1, 0, 0, 1, 0, 0)
-            this.ctx.rotate(-Math.PI/2)
-            this.ctx.translate(-this.height * ratio, 0)
+        fastdom.mutate(()=>{
 
-            if (ratio != 1) this.ctx.scale(ratio, ratio)
-        }
+            if (this.getProp('horizontal')){
+                this.ctx.setTransform(1, 0, 0, 1, 0, 0)
+                this.ctx.rotate(-Math.PI/2)
+                this.ctx.translate(-this.height * ratio, 0)
 
-        if (this.getProp('gradient')) {
+                if (ratio != 1) this.ctx.scale(ratio, ratio)
+            }
 
-            var colors = this.getProp('gradient')
+            if (this.getProp('gradient')) {
 
-            if (
-                (Array.isArray(colors) && colors.length > 1) ||
-                (typeof colors === 'object' && Object.keys(colors).length > 1)
-            ) {
+                var colors = this.getProp('gradient')
 
-                var grad = this.ctx.createLinearGradient(0,  this.getProp('horizontal') ? 0 : this.height, 0, this.getProp('horizontal') ? this.width : 0)
+                if (
+                    (Array.isArray(colors) && colors.length > 1) ||
+                    (typeof colors === 'object' && Object.keys(colors).length > 1)
+                ) {
 
-                try {
-                    if (Array.isArray(colors)) {
+                    var grad = this.ctx.createLinearGradient(0,  this.getProp('horizontal') ? 0 : this.height, 0, this.getProp('horizontal') ? this.width : 0)
 
-                        for (var i in colors) {
-                            grad.addColorStop(i / (colors.length - 1), colors[i])
-                        }
-                        this.gaugeGradient = grad
+                    try {
+                        if (Array.isArray(colors)) {
 
-                    } else {
-
-                        for (var k in colors) {
-                            if (!isNaN(k)) {
-                                grad.addColorStop(clip(k, [0, 1]), colors[k])
+                            for (var i in colors) {
+                                grad.addColorStop(i / (colors.length - 1), colors[i])
                             }
-                        }
-                        this.gaugeGradient = grad
+                            this.gaugeGradient = grad
 
+                        } else {
+
+                            for (var k in colors) {
+                                if (!isNaN(k)) {
+                                    grad.addColorStop(clip(k, [0, 1]), colors[k])
+                                }
+                            }
+                            this.gaugeGradient = grad
+
+                        }
+                    } catch(err) {
+                        this.errorProp('gradient', '', err)
                     }
-                } catch(err) {
-                    this.errors.gradient = err
+
                 }
 
             }
 
-        }
+        })
+
 
 
     }
