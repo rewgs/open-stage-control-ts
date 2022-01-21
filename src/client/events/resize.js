@@ -26,16 +26,14 @@ function checkResizes(context, force){
                 cachedStyles.push(style)
             }
         }
-        fastdom.mutate(()=>{
-            for (let i = resizedElems.length - 1; i >= 0; i--)  {
-                resizedElems[i]._resize_widget.trigger('resize', {
-                    width: resizedElems[i].resizedataw,
-                    height: resizedElems[i].resizedatah,
-                    style:cachedStyles[i],
-                    stopPropagation: true
-                })
-            }
-        })
+        for (let i = resizedElems.length - 1; i >= 0; i--)  {
+            resizedElems[i]._resize_widget.trigger('resize', {
+                width: resizedElems[i].resizedataw,
+                height: resizedElems[i].resizedatah,
+                style:cachedStyles[i],
+                stopPropagation: true
+            })
+        }
     })
 
 }

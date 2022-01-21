@@ -89,12 +89,18 @@ class Canvas extends Widget {
                 this.container.style.setProperty('--widget-height', this.height + 'rem')
                 this.container.style.setProperty('--widget-width', this.width + 'rem')
 
+                this.ctx.font = this.fontWeight + ' ' + this.fontSize + 'px ' + this.fontFamily
+                this.ctx.textBaseline = 'middle'
+                this.ctx.textAlign = this.textAlign
+
                 if (!this.hasSize) {
                     this.hasSize = true
                     this.setVisibility()
+                    this.batchDraw()
+                } else {
+                    this.draw()
                 }
 
-                this.batchDraw()
             })
         })
 
@@ -136,11 +142,6 @@ class Canvas extends Widget {
         this.textAlign = style.getPropertyValue('text-align').trim()
         this.fontSize = parseFloat(style.getPropertyValue('font-size').trim())
         this.fontWeight = parseFloat(style.getPropertyValue('font-weight').trim())
-
-        this.ctx.font = this.fontWeight + ' ' + this.fontSize + 'px ' + this.fontFamily
-        this.ctx.textBaseline = 'middle'
-        this.ctx.textAlign = this.textAlign
-
 
     }
 

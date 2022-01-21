@@ -157,33 +157,33 @@ class UiInspectorField extends UiWidget {
                 colorData = this.widget.constructor.cssVariables.find(x=>x.js === this.name),
                 val = 'transparent'
 
-            fastdom.measure(()=>{
+            // fastdom.measure(()=>{
                 try {
                     val = chroma(style.getPropertyValue(colorData.css).trim()).hex('rgba')
                 } catch(e) {}
-                fastdom.mutate(()=>{
+                // fastdom.mutate(()=>{
                     this.container.appendChild(html`
                         <osc-inspector-color type="text" name="${this.name}" value="${val}" style="--color-picker-value: ${val}"></osc-inspector-color>
                     `)
-                })
+                // })
 
-            })
+            // })
 
         } else if (stringValue === 'auto' && this.widget.constructor.cssVariables.some(x=>x.js === this.name)) {
 
-            fastdom.measure(()=>{
+            // fastdom.measure(()=>{
                 let style = window.getComputedStyle(this.widget.container),
                     data = this.widget.constructor.cssVariables.find(x=>x.js === this.name),
                     val = style.getPropertyValue(data.css).trim()
 
                 if (data.toJs) val = data.toJs(val)
-                fastdom.mutate(()=>{
+                // fastdom.mutate(()=>{
                     this.container.appendChild(html`
                         <div class="computed-value">${val}</div>
                     `)
-                })
+                // })
 
-            })
+            // })
 
 
         }

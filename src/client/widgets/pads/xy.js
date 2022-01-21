@@ -1,7 +1,8 @@
 var Pad = require('./pad'),
     Fader = require('../sliders/fader'),
     doubletab = require('../mixins/double_tap'),
-    touchstate = require('../mixins/touch_state')
+    touchstate = require('../mixins/touch_state'),
+    fastdom = require('fastdom')
 
 var faderDefaults = Fader.defaults()._props()
 
@@ -156,12 +157,15 @@ module.exports = class Xy extends Pad {
 
         super.resizeHandle(event)
 
-        for (var k in this.faders) {
-            this.faders[k].width = this.width
-            this.faders[k].height = this.height
-            this.faders[k].gaugePadding = this.padPadding
-
-        }
+        fastdom.measure(()=>{
+            fastdom.mutate(()=>{
+                for (var k in this.faders) {
+                    this.faders[k].width = this.width
+                    this.faders[k].height = this.height
+                    this.faders[k].gaugePadding = this.padPadding
+                }
+            })
+        })
 
     }
 

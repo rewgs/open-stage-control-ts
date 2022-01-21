@@ -2,6 +2,7 @@ var widgetManager = require('../managers/widgets'),
     resize = require('../events/resize'),
     stateManager = require('../managers/state'),
     parser = require('../parser'),
+    fastdom = require('fastdom'),
     Panel, Matrix,
     editor,
     scrollState = {}
@@ -113,8 +114,9 @@ function updateWidget(widget, options={}) {
         index: index
     })
 
-
-    newWidget.container.parentNode.replaceChild(newWidget.container, widget.container)
+    // fastdom.mutate(()=>{
+        newWidget.container.parentNode.replaceChild(newWidget.container, widget.container)
+    // })
 
     if (newWidget.getProp('type') === 'tab') newWidget.parent.trigger('tab-created', {widget: widget})
 
