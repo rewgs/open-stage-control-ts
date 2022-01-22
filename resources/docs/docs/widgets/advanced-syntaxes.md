@@ -46,6 +46,9 @@ The OSC listener syntax returns the value received on specified address (or the 
 
 Options can contain `@{}` blocks.
 
+!!! note "Receiving MIDI"
+    Midi messages will be processed only if the receiver's widget includes the emitting MIDI device in its targets.  
+
 ??? example "Array/Object default value"
     ```js
     JS{
