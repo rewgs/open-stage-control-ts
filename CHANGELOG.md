@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.14.3
+
+- widgets
+    - clone/fragment: remove scripting properties as theyr are supposed to bo overriden in `props`
+
 ## 1.14.2
 
 - bug fixes

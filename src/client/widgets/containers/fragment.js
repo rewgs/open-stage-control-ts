@@ -28,7 +28,8 @@ class Fragment extends Container() {
                 props: {type: 'object', value: {}, editor: 'javascript', syntaxChecker: false, help: 'Fragment widget\'s properties to override'},
             },
             value: null,
-            osc: null
+            osc: null,
+            scripting: null
         })
 
         defaults.style = {css: defaults.style.css}
