@@ -4,6 +4,7 @@
 
 - bug fixes
     - osc receivers (`OSC{}` syntax) now apply the same rule as widgets regarding midi messages (only receive if the message's origin matches one of the host widget's midi targets)
+    - modal: rendering issue on iOS
 
 - widgets
     - clone/fragment: remove scripting properties as theyr are supposed to bo overriden in `props`

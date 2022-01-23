@@ -456,9 +456,11 @@
 
         > .toggle {
             --alpha-fill:var(--alpha-fill-on);
+            z-index: 1;
         }
         > label {
             color: var(--color-text-on);
+            z-index: 2;
         }
 
         z-index: 9999999999999!important;
