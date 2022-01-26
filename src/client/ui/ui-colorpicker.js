@@ -27,69 +27,74 @@ class ColorPicker extends UiWidget {
         }, parent: this})
         this.rgb.container.classList.add('not-editable')
 
-        this.modal = new UiModal({
-            width: 280,
-            height: 320,
-            closable: true,
-            title: '',
-            hide: true,
-            html: true,
-            content: html`
-                <div class="color-picker-modal">
-                    ${this.rgb.container}
-                    <div class="actions">
-                        <div class="btn color-apply">${locales('inspector_color_apply')}</div>
-                        <div class="btn color-confirm">${locales('inspector_color_confirm')}</div>
-                    </div>
-                 </div>
-            `,
-            enterKey: this.confirm.bind(this)
-        })
+        this.container = html`
+            <div class="color-picker">
+                ${this.rgb.container}
+                <div class="actions">
+                    <div class="btn color-confirm">${locales('inspector_color_confirm')}</div>
+                    <div class="btn color-cancel">${locales('inspector_color_cancel')}</div>
+                </div>
+             </div>
+        `
 
-        DOM.get(this.modal.container, '.color-confirm')[0].addEventListener('click', this.confirm.bind(this))
-        DOM.get(this.modal.container, '.color-apply')[0].addEventListener('click', this.apply.bind(this))
+        DOM.get(this.container, '.color-confirm')[0].addEventListener('click', this.confirm.bind(this))
+        DOM.get(this.container, '.color-cancel')[0].addEventListener('click', this.cancel.bind(this))
 
         this.rgb.on('change', (e)=>{
             e.stopPropagation = true
+                this.value = chroma(this.rgb.value).hex()
+                this.trigger('change', {preventHistory: true})
         })
-        // this.rgb.on('dragend', (e)=>{
-        //     this.value = chroma(this.rgb.value).hex()
-        //     this.trigger('change')
-        // })
-
         this.opened = 0
-        this.label = DOM.get(this.modal.container, '.title')[0]
+
+        this.cancelValue = '#00000000'
+
+        this.escKeyHandler = ((e)=>{
+            if (e.keyCode==27) this.cancel()
+        }).bind(this)
+
+        this.enterKeyHandler = ((e)=>{
+            if (e.keyCode == 13) this.confirm()
+        }).bind(this)
 
     }
 
     open() {
 
-        this.label.innerHTML = this.name
-        this.modal.open()
+        this.parentNode.appendChild(this.container)
         resize.check(this.rgb.container)
         this.opened = 1
 
+        document.addEventListener('keydown', this.escKeyHandler)
+        document.addEventListener('keydown', this.enterKeyHandler)
     }
 
     close() {
 
-        this.modal.close()
+        if (this.parentNode.contains(this.container)) {
+            this.parentNode.removeChild(this.container)
+        }
         this.setName()
         this.opened = 0
 
-    }
-
-    apply() {
-
-        this.value = chroma(this.rgb.getValue(true)).css('rgba')
-        this.trigger('change')
-
+        document.removeEventListener('keydown', this.escKeyHandler)
+        document.removeEventListener('keydown', this.enterKeyHandler)
     }
 
     confirm() {
 
         this.value = chroma(this.rgb.getValue(true)).css('rgba')
         this.trigger('change')
+        this.close()
+
+    }
+
+    cancel() {
+
+        if (this.value !== this.cancelValue) {
+            this.value = this.cancelValue
+            this.trigger('change', {preventHistory: true})
+        }
         this.close()
 
     }
@@ -111,6 +116,19 @@ class ColorPicker extends UiWidget {
         if (v === 'transparent') v = '#00000000'
 
         this.rgb.setValue(chroma(v).rgba())
+
+    }
+
+    setCancelValue(v) {
+
+        this.cancelValue = v
+
+    }
+
+    setParent(node) {
+
+        if (this.opened && node !== this.parentNode) this.close()
+        this.parentNode = node
 
     }
 

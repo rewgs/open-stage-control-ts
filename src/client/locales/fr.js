@@ -64,7 +64,7 @@ module.exports = {
 
     // inspector
     inspector_color_confirm: 'Confirmer',
-    inspector_color_apply: 'Appliquer',
+    inspector_color_cancel: 'Annuler',
     inspector_error: 'Une erreur vient de survenir, ouvrez la console pour en savoir plus.',
 
     // nosleep

@@ -1,5 +1,6 @@
 $header-height: 28rem;
 $field-height: 24rem;
+$label-width: 94rem;
 $padding: 8rem;
 $radius: 3rem;
 
@@ -24,7 +25,7 @@ osc-inspector-field {
     &:after {
         content:"";
         position: absolute;
-        left:94rem;
+        left:$label-width;
         top:0;
         right: 1rem;
         border-top:1rem solid var(--color-ui-background);
@@ -35,7 +36,7 @@ osc-inspector-field {
     --widget-padding: -1rem;
 
     > label {
-        width: 94rem;
+        width: $label-width;
         text-transform: none;
         padding-left: 4rem;
         padding-right: 4rem;
@@ -457,6 +458,9 @@ osc-inspector-category {
         }
         border-top-left-radius: $radius;
         border-top-right-radius: $radius;
+        .color-picker {
+            margin-top: 2rem;
+        }
     }
     osc-inspector-field.last-child,
     osc-inspector-field:last-child {
@@ -595,17 +599,43 @@ osc-inspector-color {
     }
 }
 
-.color-picker-modal {
-
-    flex: 1;
+.color-picker {
+    position: absolute;
+    z-index: 99;
+    height: 180rem;
+    top: 0;
+    right: 22rem;
+    left: $label-width;
+    margin: 3rem 2rem;
     display: flex;
     flex-direction: column;
+    $padding: 2rem;
+    border: 1rem solid var(--color-ui-button);
+    overflow: hidden;
 
     .widget {
-        background: var(--color-background);
+        background: var(--color-ui-background);
         flex: 1;
         width:  auto;
-        --widget-padding: #{$padding};
+        --widget-padding: 0rem;
+        inner {
+            padding: 1rem;
+        }
+        .hue {
+            margin-left: 1rem;
+            width: 16rem;
+            --knob-size: 1rem;
+        }
+        .alpha {
+            margin-top: 0.5rem;
+            left:0;
+            margin-left: 0;
+            border:0;
+        }
+        .hue:after {
+            left:0;
+            right:0;
+        }
     }
 
     .actions {
@@ -613,17 +643,17 @@ osc-inspector-color {
         flex-direction: row;
         align-items: flex-end;
         justify-content: stretch;
-        height: 42rem + $padding * 2;
-        line-height: 38rem;
+        // height: 24rem + $padding * 2;
+        line-height: $field-height;
         flex-shrink: 0;
         background: var(--color-ui-foreground);
-        padding: $padding;
+        // padding: $padding;
         .btn {
             flex: 1;
             text-overflow: clip;
             min-width: 0;
             background: var(--color-ui-button);
-            margin-right: $padding;
+            margin-right: 1rem;
             &:last-child {
                 margin: 0;
             }

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.14.4
+
+- inspector
+    - the color picker is no longer in a modal and now shows changes on the fly (the new color is not saved unless "confirm" is clicked)  
+
 ## 1.14.3
 
 - bug fixes
