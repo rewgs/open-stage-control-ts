@@ -26,10 +26,6 @@ class WidgetManager extends EventEmitter {
                 this.registerWidget(this.widgets[hash])
             }
         })
-        setInterval(()=>{
-
-            this.trigger('root-nav-changed')
-        }, 1000)
 
     }
 
