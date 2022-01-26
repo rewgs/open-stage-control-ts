@@ -177,14 +177,12 @@ module.exports = class MultiXy extends Pad {
 
         super.resizeHandle(event)
 
-        fastdom.measure(()=>{
-                for (var k in this.pads) {
-                    this.pads[k].width = this.width
-                    this.pads[k].height = this.height
-                    this.pads[k].padPadding = this.padPadding
-                }
-                this.updateHandlesPosition()
-        })
+        for (var k in this.pads) {
+            this.pads[k].width = this.width
+            this.pads[k].height = this.height
+            this.pads[k].padPadding = this.padPadding
+        }
+        this.updateHandlesPosition()
 
 
     }
