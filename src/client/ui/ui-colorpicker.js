@@ -67,7 +67,7 @@ class ColorPicker extends UiWidget {
 
     close() {
 
-        if (this.parentNode.contains(this.container)) {
+        if (this.parentNode && this.parentNode.contains(this.container)) {
             this.parentNode.removeChild(this.container)
         }
         this.setName()
