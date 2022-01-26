@@ -484,8 +484,6 @@ class Editor {
 
     disable() {
 
-        if (this.inspector.colorPicker.opened) this.inspector.colorPicker.cancel()
-
         this.unselect()
         this.selectedWidgets = []
 
