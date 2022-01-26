@@ -3,7 +3,8 @@ var UiSidePanel = require('./ui-sidepanel'),
     raw = require('nanohtml/raw'),
     locales = require('../locales'),
     {icon} = require('./utils'),
-    ScriptWidget = require('../widgets/scripts/script-widget'),
+    Script = require('../widgets/scripts/script'),
+    Widget = require('../widgets/common/widget'),
     widgetManager = require('../managers/widgets')
 
 class UiConsole extends UiSidePanel {
@@ -57,14 +58,15 @@ class UiConsole extends UiSidePanel {
             console._clear()
         }
 
-        this.script = new ScriptWidget({props:{
-            id: 'CONSOLE',
-            // detached context++ reading global navigator == crash electron
-            script: 'var navigator; return eval(value)',
-            event: 'value'
-        }, parent: widgetManager})
-        this.script._not_editable = true
-        this.script.hash = 'CONSOLE'
+        this.widget = new Widget({props: {id: 'CONSOLE'}, parent: widgetManager})
+        this.script = new Script({
+            widget: this.widget,
+            property: '',
+            code: 'var navigator; return eval(input_code)',
+            context: {input_code: ''}
+        })
+        this.widget._not_editable = true
+        this.widget.hash = 'CONSOLE'
 
         this.input.addEventListener('keydown', (event)=>{
             if (event.keyCode === 13 && !event.shiftKey) {
@@ -117,7 +119,8 @@ class UiConsole extends UiSidePanel {
         if (this.input.value == '') return
 
         this.log('input', `${this.input.value}`)
-        var returnValue = this.script.setValue(this.input.value, {sync: true, send: true})
+
+        var returnValue = this.script.run({input_code: this.input.value}, {sync: true, send: true})
         if (returnValue === undefined) {
             this.log('output undefined', 'undefined')
         } else {

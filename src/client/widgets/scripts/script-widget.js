@@ -6,7 +6,7 @@ class ScriptWidget extends Widget {
 
     static description() {
 
-        return 'Sscripting widget utility with keyboard bindings'
+        return 'Scripting widget utility with keyboard bindings'
 
     }
 
