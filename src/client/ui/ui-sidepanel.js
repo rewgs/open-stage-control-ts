@@ -107,6 +107,7 @@ class UiSidePanel extends UiWidget {
     updateWidth() {
 
         this.container.style[this.vertical ? 'height' : 'width'] = this.width + 'rem'
+        this.container.style.setProperty('--sidepanel-size', this.width + 'rem')
 
     }
 

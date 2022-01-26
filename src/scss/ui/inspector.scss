@@ -602,7 +602,9 @@ osc-inspector-color {
 .color-picker {
     position: absolute;
     z-index: 99;
-    height: 180rem;
+    height: calc(var(--sidepanel-size) - #{$label-width} - #{$field-height * 2});
+    min-height: 111rem;
+    max-height: 227rem;
     top: 0;
     right: 22rem;
     left: $label-width;
