@@ -239,7 +239,7 @@ class UiInspector extends UiWidget {
         this.trigger('update', {
             propName: input.name,
             value: v,
-            preventHistory: event.detail && event.detail.preventHistory
+            preventHistory: event && event.detail && event.detail.preventHistory
         })
 
         // this may not be reached if an error is thrown
