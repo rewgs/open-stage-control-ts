@@ -1,10 +1,8 @@
 var UiWidget = require('./ui-widget'),
     Rgb = require('../widgets/pads/rgb'),
-    UiModal = require('./ui-modal'),
     html = require('nanohtml'),
     chroma = require('chroma-js'),
-    resize = require('../events/resize'),
-    locales = require('../locales')
+    resize = require('../events/resize')
 
 
 class ColorPicker extends UiWidget {
@@ -35,8 +33,8 @@ class ColorPicker extends UiWidget {
 
         this.rgb.on('change', (e)=>{
             e.stopPropagation = true
-                this.value = chroma(this.rgb.value).hex()
-                this.trigger('change', {preventHistory: true})
+            this.value = chroma(this.rgb.value).hex()
+            this.trigger('change', {preventHistory: true})
         })
 
         this.rgb.on('dragend', (e)=>{

@@ -54,9 +54,9 @@ class UiInspector extends UiWidget {
 
             if (node.tagName === 'OSC-INSPECTOR-CHECKBOX') {
 
-                var name = node.getAttribute('name')
+                let name = node.getAttribute('name'),
+                    textarea = DOM.get(this.container, `textarea[name="${name}"]`)
 
-                var textarea = DOM.get(this.container, `textarea[name="${name}"]`)
                 if (textarea) {
                     textarea[0].value = !node.classList.contains('on')
                     DOM.dispatchEvent(textarea[0], 'change')
@@ -64,8 +64,7 @@ class UiInspector extends UiWidget {
 
             } else if (node.tagName === 'OSC-INSPECTOR-COLOR') {
 
-                var name = node.getAttribute('name'),
-                    textarea = DOM.get(this.container, `textarea[name="${name}"]`)
+                let name = node.getAttribute('name')
 
                 if (this.colorPicker.name === name) {
                     this.colorPicker.close()
