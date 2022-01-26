@@ -117,6 +117,8 @@ class Fader extends Slider {
 
         var ratio = CANVAS_SCALING * this.scaling
 
+        event.preventDraw = true
+
         super.resizeHandle(event)
 
         fastdom.mutate(()=>{
@@ -127,6 +129,7 @@ class Fader extends Slider {
                 this.ctx.translate(-this.height * ratio, 0)
 
                 if (ratio != 1) this.ctx.scale(ratio, ratio)
+
             }
 
             if (this.getProp('gradient')) {
@@ -166,8 +169,16 @@ class Fader extends Slider {
 
             }
 
-        })
 
+            if (!this.hasSize) {
+                this.hasSize = true
+                this.setVisibility()
+                this.batchDraw()
+            } else {
+                this.draw()
+            }
+            
+        })
 
 
     }

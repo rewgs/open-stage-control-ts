@@ -66,7 +66,7 @@ class Canvas extends Widget {
 
     resizeHandle(event){
 
-        var {width, height, style} = event,
+        var {width, height, style, preventDraw} = event,
             ratio = CANVAS_SCALING * this.scaling
 
         this.height = height
@@ -95,12 +95,14 @@ class Canvas extends Widget {
                 this.ctx.scale(ratio, ratio)
             }
 
-            if (!this.hasSize) {
-                this.hasSize = true
-                this.setVisibility()
-                this.batchDraw()
-            } else {
-                this.draw()
+            if (!preventDraw) {
+                if (!this.hasSize) {
+                    this.hasSize = true
+                    this.setVisibility()
+                    this.batchDraw()
+                } else {
+                    this.draw()
+                }
             }
 
         })
