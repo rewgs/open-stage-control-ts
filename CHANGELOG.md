@@ -5,6 +5,9 @@
 - bug fixes
     - broken console since v1.14.0
 
+- widgets
+    - button: add `momentary` mode for sending messages with no value; prevent button from getting stuck when `on` and `off` are equal in `momentary` and `tap` modes
+
 - inspector
     - color picker: inline picker widget (no longer in a modal); show color changes on the fly
 

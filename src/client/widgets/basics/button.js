@@ -30,16 +30,17 @@ class Button extends Widget {
             },
             class_specific: {
                 on: {type: '*', value: 1, help: [
-                    'Set to `null` to send send no argument in the osc message',
+                    'Set to `null` to send send no argument in the osc message. Ignored if `mode` is `momentary`.',
                 ]},
                 off: {type: '*', value: 0, help: [
-                    'Set to `null` to send send no argument in the osc message. Must be different from `on`.',
+                    'Set to `null` to send send no argument in the osc message. Must be different from `on`. Ignored if `mode` is `momentary` or `tap`.',
                 ]},
-                mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'tap'], help: [
+                mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'momentary', 'tap'], help: [
                     'Interraction mode:',
                     '- `toggle` (classic on/off switch)',
                     '- `push` (press & release)',
-                    '- `tap` (no release)'
+                    '- `momentary` (no release, no value sent)',
+                    '- `tap` (no release, sends `on` as value)'
                 ]},
                 doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
 
@@ -72,7 +73,7 @@ class Button extends Widget {
             }, {element: this.widget})
         }
 
-        var tap = this.getProp('mode') === 'tap',
+        var tap = this.getProp('mode').match(/momentary|tap/),
             push = this.getProp('mode') === 'push' || tap
 
         if (push) {
@@ -150,7 +151,11 @@ class Button extends Widget {
 
         if (tap) this.noValueState = true
 
-        this.value = this.getProp('off')
+        if (this.getProp('mode') === 'momentary') {
+            this.value = null
+        } else {
+            this.value = this.getProp('off')
+        }
 
         this.label = html`<label></label>`
 
@@ -168,7 +173,7 @@ class Button extends Widget {
 
         if (typeof v === 'string' && isJSON(v)) {
             try {
-                v = JSON.parse(v    )
+                v = JSON.parse(v)
             } catch (err) {}
         }
 
@@ -182,13 +187,21 @@ class Button extends Widget {
 
             newstate = 0
 
+        } else if (this.getProp('mode') === 'momentary' && v === null) {
+
+            newstate = 1
+
         }
 
         if (newstate !== undefined) {
 
             this.state = newstate
-            this.container.classList.toggle('on', this.state)
-            this.value = this.getProp(this.state ? 'on' : 'off')
+            if (this.getProp('mode').match(/toggle|push/)){
+                this.container.classList.toggle('on', this.state)
+            }
+            if (this.getProp('mode') !== 'momentary') {
+                this.value = this.getProp(this.state ? 'on' : 'off')
+            }
 
             if (this.exposeTouchCoords) {
                 if (options.y !== undefined) {
@@ -200,7 +213,7 @@ class Button extends Widget {
             if (options.sync) this.changed(options)
 
             // tap mode
-            if (newstate && this.getProp('mode') === 'tap' && !options.tapRelease) {
+            if (newstate && this.getProp('mode').match(/momentary|tap/) && !options.tapRelease) {
 
                 // reset value
                 this.setValue(this.getProp('off'), {sync: false, send: false, tapRelease: true})
