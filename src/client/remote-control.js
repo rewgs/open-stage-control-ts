@@ -289,7 +289,7 @@ var callbacks = {
 
         if (!Array.isArray(args)) args = [args]
 
-        uiConsole.script.setValue(args[0], {sync: true, send: true})
+        uiConsole.script.run({input_code: args[0]}, {sync: true, send: true})
 
     }
 }
