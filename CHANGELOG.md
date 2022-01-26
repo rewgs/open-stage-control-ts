@@ -2,8 +2,14 @@
 
 ## 1.14.4
 
+- bug fixes
+    - broken console since v1.14.0
+
 - inspector
     - color picker: inline picker widget (no longer in a modal); show color changes on the fly
+
+- misc
+    - some performance improvements
 
 ## 1.14.3
 
