@@ -30,27 +30,25 @@ class ColorPicker extends UiWidget {
         this.container = html`
             <div class="color-picker">
                 ${this.rgb.container}
-                <div class="actions">
-                    <div class="btn color-confirm">${locales('inspector_color_confirm')}</div>
-                    <div class="btn color-cancel">${locales('inspector_color_cancel')}</div>
-                </div>
              </div>
         `
-
-        DOM.get(this.container, '.color-confirm')[0].addEventListener('click', this.confirm.bind(this))
-        DOM.get(this.container, '.color-cancel')[0].addEventListener('click', this.cancel.bind(this))
 
         this.rgb.on('change', (e)=>{
             e.stopPropagation = true
                 this.value = chroma(this.rgb.value).hex()
                 this.trigger('change', {preventHistory: true})
         })
+
+        this.rgb.on('dragend', (e)=>{
+            this.value = chroma(this.rgb.value).hex()
+            this.trigger('change')
+        })
+
+
         this.opened = 0
 
-        this.cancelValue = '#00000000'
-
         this.escKeyHandler = ((e)=>{
-            if (e.keyCode==27) this.cancel()
+            if (e.keyCode==27) this.close()
         }).bind(this)
 
         this.enterKeyHandler = ((e)=>{
@@ -89,16 +87,6 @@ class ColorPicker extends UiWidget {
 
     }
 
-    cancel() {
-
-        if (this.value !== this.cancelValue) {
-            this.value = this.cancelValue
-            this.trigger('change', {preventHistory: true})
-        }
-        this.close()
-
-    }
-
     isVisible() {
 
         return true
@@ -116,12 +104,6 @@ class ColorPicker extends UiWidget {
         if (v === 'transparent') v = '#00000000'
 
         this.rgb.setValue(chroma(v).rgba())
-
-    }
-
-    setCancelValue(v) {
-
-        this.cancelValue = v
 
     }
 

@@ -68,13 +68,11 @@ class UiInspector extends UiWidget {
                     textarea = DOM.get(this.container, `textarea[name="${name}"]`)
 
                 if (this.colorPicker.name === name) {
-                    this.colorPicker.cancel()
+                    this.colorPicker.close()
                 } else {
-                    if (this.colorPicker.opened) this.colorPicker.cancel()
                     this.colorPicker.setParent(node.parentNode)
                     this.colorPicker.setName(name)
                     this.colorPicker.setValue(node.getAttribute('value'))
-                    this.colorPicker.setCancelValue(textarea[0].value)
                     this.colorPicker.open()
                 }
 

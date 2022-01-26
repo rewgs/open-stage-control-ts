@@ -638,28 +638,6 @@ osc-inspector-color {
         }
     }
 
-    .actions {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        justify-content: stretch;
-        // height: 24rem + $padding * 2;
-        line-height: $field-height;
-        flex-shrink: 0;
-        background: var(--color-ui-foreground);
-        // padding: $padding;
-        .btn {
-            flex: 1;
-            text-overflow: clip;
-            min-width: 0;
-            background: var(--color-ui-button);
-            margin-right: 1rem;
-            &:last-child {
-                margin: 0;
-            }
-        }
-    }
-
 }
 
 .inspector-help {

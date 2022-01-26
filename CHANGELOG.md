@@ -3,7 +3,7 @@
 ## 1.14.4
 
 - inspector
-    - the color picker is no longer in a modal and now shows changes on the fly (the new color is not saved unless "confirm" is clicked)  
+    - color picker: inline picker widget (no longer in a modal); show color changes on the fly
 
 ## 1.14.3
 
