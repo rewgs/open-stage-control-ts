@@ -41,11 +41,11 @@ class UiInspector extends UiWidget {
         this.parentContainer = DOM.get('osc-panel-container.right osc-panel-inner')[0]
 
         this.colorPicker = new UiColorPicker()
-        this.colorPicker.on('change', ()=>{
+        this.colorPicker.on('change', (event)=>{
             var textarea = DOM.get(this.container, `textarea[name="${this.colorPicker.name}"]`)
             if (textarea) {
                 textarea[0].value = this.colorPicker.value
-                DOM.dispatchEvent(textarea[0], 'change')
+                DOM.dispatchEvent(textarea[0], 'change', event)
             }
         })
 
@@ -55,10 +55,9 @@ class UiInspector extends UiWidget {
 
             if (node.tagName === 'OSC-INSPECTOR-CHECKBOX') {
 
-                var name = node.getAttribute('name')
+                let name = node.getAttribute('name'),
+                    textarea = DOM.get(this.container, `textarea[name="${name}"]`)
 
-
-                var textarea = DOM.get(this.container, `textarea[name="${name}"]`)
                 if (textarea) {
                     fastdom.mutate(()=>{
                         textarea[0].value = !node.classList.contains('on')
@@ -68,9 +67,16 @@ class UiInspector extends UiWidget {
 
             } else if (node.tagName === 'OSC-INSPECTOR-COLOR') {
 
-                this.colorPicker.setName(node.getAttribute('name'))
-                this.colorPicker.setValue(node.getAttribute('value'))
-                this.colorPicker.open()
+                let name = node.getAttribute('name')
+
+                if (this.colorPicker.name === name) {
+                    this.colorPicker.close()
+                } else {
+                    this.colorPicker.setParent(node.parentNode)
+                    this.colorPicker.setName(name)
+                    this.colorPicker.setValue(node.getAttribute('value'))
+                    this.colorPicker.open()
+                }
 
             } else if (node.tagName === 'LABEL') {
 
@@ -196,6 +202,7 @@ class UiInspector extends UiWidget {
             var picker = DOM.get(this.container, `osc-inspector-color[name="${this.colorPicker.name}"]`)
             if (picker && picker[0]) {
                 this.colorPicker.setValue(picker[0].getAttribute('value'))
+                this.colorPicker.open()
             } else {
                 this.colorPicker.close()
             }
@@ -231,7 +238,8 @@ class UiInspector extends UiWidget {
 
         this.trigger('update', {
             propName: input.name,
-            value: v
+            value: v,
+            preventHistory: event.detail && event.detail.preventHistory
         })
 
         // this may not be reached if an error is thrown

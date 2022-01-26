@@ -26,7 +26,8 @@ class Clone extends Container() {
                 props: {type: 'object', value: {}, editor: 'javascript', syntaxChecker: false, help: 'Cloned widget\'s properties to override'},
             },
             value: null,
-            osc: null
+            osc: null,
+            scripting: null
         })
 
         defaults.style = {css: defaults.style.css}

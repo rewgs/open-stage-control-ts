@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.14.4
+
+- inspector
+    - color picker: inline picker widget (no longer in a modal); show color changes on the fly
+
+## 1.14.3
+
+- bug fixes
+    - osc receivers (`OSC{}` syntax) now apply the same rule as widgets regarding midi messages (only receive if the message's origin matches one of the host widget's midi targets)
+    - modal: rendering issue on iOS
+    - button: `locals.touchCoords` not updated since v1.14.0
+
+- widgets
+    - clone/fragment: remove scripting properties as they are supposed to bo overriden in `props`
+
+## 1.14.2
+
+- bug fixes
+    - context-menu: double click issue in submenus on small touch screens
+    - clone/fragment: broken onDraw / onTouch scripts if cloned widget is a canvas   
+
 ## 1.14.0, 1.14.1
 
 - bug fixes

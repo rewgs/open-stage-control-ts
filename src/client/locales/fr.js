@@ -63,8 +63,6 @@ module.exports = {
     fragment_mode_explanation: 'La session sera enregistrée sous forme de fragment : seul le premier descendant de l\'élément root sera sauvegardé.',
 
     // inspector
-    inspector_color_confirm: 'Confirmer',
-    inspector_color_apply: 'Appliquer',
     inspector_error: 'Une erreur vient de survenir, ouvrez la console pour en savoir plus.',
 
     // nosleep

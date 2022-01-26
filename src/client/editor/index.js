@@ -29,7 +29,7 @@ class Editor {
         this.inspector = new UiInspector({selector: '#osc-inspector'})
         this.inspector.on('update', (event)=>{
 
-            var {propName, value} = event,
+            var {propName, value, preventHistory} = event,
                 newWidgets = [],
                 error = false
 
@@ -70,7 +70,7 @@ class Editor {
 
             if (error) return
 
-            this.pushHistory()
+            if (!preventHistory) this.pushHistory()
 
             if (newWidgets.length > 1) this.select(newWidgets)
 
@@ -483,7 +483,6 @@ class Editor {
     }
 
     disable() {
-
 
         this.unselect()
         this.selectedWidgets = []

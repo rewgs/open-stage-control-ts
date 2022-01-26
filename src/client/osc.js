@@ -39,6 +39,30 @@ var Osc = class Osc extends EventEmitter {
 
     }
 
+    match(widget, data) {
+
+        let widgetTarget = widget.getProp('target'),
+            match = true
+
+        if (data._rawTarget) {
+            // if the message target is provided (when message comes from another client connected to the same server)
+            // then we only update the widgets that have the exact same target
+            match = deepEqual(widgetTarget, data._rawTarget)
+
+        } else if (data.host === 'midi') {
+            // if the message comes from a midi port, only update widgets that send to that port
+            let widgetArrayTarget = Array.isArray(widgetTarget) ? widgetTarget : [widgetTarget],
+                strTarget = data.host + ':' + data.port
+
+            match = widgetArrayTarget.includes(strTarget) ||
+                    (!widgetArrayTarget.includes(null) && this.serverTargets.includes(strTarget))
+
+        }
+
+        return match
+
+    }
+
     receive(data){
 
         if (typeof this.remoteControl.exists === 'function' && this.remoteControl.exists(data.address)) this.remoteControl.exec(data.address, data.args)
@@ -47,30 +71,13 @@ var Osc = class Osc extends EventEmitter {
 
         for (let i in widgets) {
 
-            let widgetTarget = widgets[i].getProp('target'),
-                match = true
-
-            if (data._rawTarget) {
-                // if the message target is provided (when message comes from another client connected to the same server)
-                // then we only update the widgets that have the exact same target
-                match = deepEqual(widgetTarget, data._rawTarget)
-            } else if (data.host === 'midi') {
-                // if the message comes from a midi port, only update widgets that send to that port
-                let widgetArrayTarget = Array.isArray(widgetTarget) ? widgetTarget : [widgetTarget],
-                    strTarget = data.host + ':' + data.port
-
-                match = widgetArrayTarget.includes(strTarget) ||
-                        (!widgetArrayTarget.includes(null) && this.serverTargets.includes(strTarget))
-
-            }
-
-            if (match) {
+            if (this.match(widgets[i], data)) {
                 widgets[i].setValue(restArgs,{send:false,sync:true,fromExternal:!data.target})
             }
 
         }
 
-        this.trigger(data.address, data.args)
+        this.trigger(data.address, data)
 
     }
 

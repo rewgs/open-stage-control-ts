@@ -402,7 +402,7 @@ class ScriptVm extends Vm {
                 try {
                     callback()
                 } catch(e) {
-                    this.errorProp('script', 'setInterval', e)
+                    widget.errorProp('script', 'setInterval', e)
                 }
                 this.setWidget()
                 this.setValueOptions()

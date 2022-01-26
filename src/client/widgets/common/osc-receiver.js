@@ -56,7 +56,9 @@ module.exports = class OscReceiver {
 
     }
 
-    callback(args) {
+    callback(data) {
+
+        var {args} = data
 
         if (!Array.isArray(args)) args = [args]
         var preArgs = this.usePreArgs ? (this.parent.getProp('preArgs') || []) : []
@@ -65,6 +67,7 @@ module.exports = class OscReceiver {
             for (var i in preArgs) {
                 if (preArgs[i] !== args[i]) return
             }
+            if (!osc.match(this.parent, data)) return
             var value = args.slice(preArgs.length)
             if (value.length < 2) value = value[0]
             if (typeof value === 'string' && isJSONObject(value)) {

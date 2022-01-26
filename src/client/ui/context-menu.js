@@ -50,6 +50,7 @@ class ContextMenu extends UiWidget {
         })
 
         this.container.addEventListener('touchstart', (e)=>{
+            if (e.target.classList.contains('has-sub')) e.preventDefault()
             if (!e.target.classList.contains('focus')) {
                 DOM.each(e.target.parentNode, '.focus', (el)=>{
                     el.classList.remove('focus')

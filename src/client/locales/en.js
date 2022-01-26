@@ -64,8 +64,6 @@ module.exports = {
     fullscreen_addtohome: 'You must add this page to your home screen to launch it in fullscreen',
 
     // inspector
-    inspector_color_confirm: 'Confirm',
-    inspector_color_apply: 'Apply',
     inspector_error: 'An error just occured, open the console to read more.',
 
     // nosleep
