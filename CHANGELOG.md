@@ -3,7 +3,7 @@
 ## 1.14.4
 
 - bug fixes
-    - broken console since v1.14.0
+    - broken console interpreter since v1.14.0
 
 - widgets
     - button: add `momentary` mode for sending messages with no value; prevent button from getting stuck when `on` and `off` are equal in `momentary` and `tap` modes
