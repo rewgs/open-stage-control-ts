@@ -1268,6 +1268,10 @@ class Widget extends EventEmitter {
         }
 
         this.removed = true
+        for (var name in this._listeners) {
+            if (name !== 'widget-removed') this.off(name)
+        }
+
         widgetManager.off(undefined, undefined, this)
         sessionManager.off(undefined, undefined, this)
         this.removeOscReceivers()

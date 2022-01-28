@@ -158,7 +158,6 @@ class WidgetManager extends EventEmitter {
         if (this.widgets[hash]) {
             if (this.widgets[hash].onRemove) {
                 this.widgets[hash].onRemove()
-                this.widgets[hash].off()
             }
 
             delete this.widgets[hash]
@@ -168,6 +167,7 @@ class WidgetManager extends EventEmitter {
             })
 
             widget.trigger('widget-removed', {widget: widget})
+            widget.off('widget-removed')
 
         }
         if (id && this.idRoute[id].indexOf(hash) != -1) this.idRoute[id].splice(this.idRoute[id].indexOf(hash), 1)
