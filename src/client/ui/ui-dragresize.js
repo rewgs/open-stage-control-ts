@@ -156,8 +156,10 @@ class UiDragResize extends UiWidget {
         this.initHeight = this.height
 
         fastdom.mutate(()=>{
-            this.widgets[0].parentNode.appendChild(this.container)
-            this.mounted = true
+            if (this.widgets.length) {
+                this.widgets[0].parentNode.appendChild(this.container)
+                this.mounted = true
+            }
         })
 
     }
