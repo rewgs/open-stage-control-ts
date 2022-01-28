@@ -38,6 +38,8 @@ module.exports = class EventEmitter {
         }
 
         // Event bubbling
+        // DOM events won't buttle
+        // Virtual events will unless data.stopPropagation is set
         if (!data || !data.stopPropagation) {
             if (this.parent) this.parent.trigger(evt, data)
         }

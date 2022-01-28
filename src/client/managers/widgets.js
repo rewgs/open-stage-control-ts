@@ -19,7 +19,7 @@ class WidgetManager extends EventEmitter {
 
         this.preArgsSeparator = '||||'
 
-        this.on('change', this.onChange.bind(this))
+        this.on('value-changed', this.onChange.bind(this))
 
         ipc.on('connect', ()=>{
             for (var hash in this.widgets) {
@@ -222,7 +222,7 @@ class WidgetManager extends EventEmitter {
 
         this.off()
 
-        this.on('change', this.onChange.bind(this))
+        this.on('value-changed', this.onChange.bind(this))
 
     }
 
