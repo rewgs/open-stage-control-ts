@@ -2,6 +2,13 @@ var customEvents = {}
 setTimeout(()=>{
     customEvents['draginit'] = customEvents['drag'] = customEvents['dragend']  = require('./drag')
     customEvents['resize']  = require('./resize')
+    customEvents['wheel']  = require('./dom-event')('wheel')
+    customEvents['scroll']  = require('./dom-event')('scroll', {capture: true})
+    customEvents['click']  = require('./dom-event')('click')
+    customEvents['fast-click']  = require('./dom-event')('fast-click')
+    customEvents['focus']  = require('./dom-event')('focus', {capture: true})
+    customEvents['blur']  = require('./dom-event')('blur', {capture: true})
+    customEvents['change']  = require('./dom-event')('change')
 })
 
 // micro optimisation from eventemitter3

@@ -60,7 +60,7 @@ class Keyboard extends Panel {
         }, {element: this.widget})
 
 
-        this.on('change',(e)=>{
+        this.on('value-changed',(e)=>{
 
             var widget = e.widget
 

@@ -156,7 +156,10 @@ class WidgetManager extends EventEmitter {
             id = widget.getProp('id')
 
         if (this.widgets[hash]) {
-            if (this.widgets[hash].onRemove) this.widgets[hash].onRemove()
+            if (this.widgets[hash].onRemove) {
+                this.widgets[hash].onRemove()
+                this.widgets[hash].off()
+            }
 
             delete this.widgets[hash]
 

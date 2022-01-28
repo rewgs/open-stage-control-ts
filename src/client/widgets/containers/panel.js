@@ -106,11 +106,11 @@ class Panel extends Container() {
                         this.iosScrollbars[dir]._scrollable = false
                         this.container.appendChild(this.iosScrollbars[dir].container)
                     }
-                    this.iosScrollbars.horizontal.on('change', (e)=>{
+                    this.iosScrollbars.horizontal.on('value-changed', (e)=>{
                         e.stopPropagation = true
                         this.widget.scrollLeft = parseInt(e.widget.getValue() * (this.widget.scrollWidth - this.widget.clientWidth))
                     })
-                    this.iosScrollbars.vertical.on('change', (e)=>{
+                    this.iosScrollbars.vertical.on('value-changed', (e)=>{
                         e.stopPropagation = true
                         this.widget.scrollTop = parseInt(e.widget.getValue() * (this.widget.scrollHeight - this.widget.clientHeight))
                     })
@@ -145,7 +145,7 @@ class Panel extends Container() {
                     this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
                 })
-                this.widget.addEventListener('scroll', ()=>{
+                this.on('scroll', ()=>{
                     this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
                     this.scroll = [this.widget.scrollLeft, this.widget.scrollTop]
@@ -158,7 +158,7 @@ class Panel extends Container() {
                     if (this.props.type !== 'modal') {
                         this.setValue([x, y], {sync: true, send:true})
                     }
-                })
+                }, {element: this.widget})
 
             }
 
@@ -199,11 +199,11 @@ class Panel extends Container() {
 
             this.createNavigation()
 
-            this.navigation.addEventListener('fast-click', (e)=>{
+            this.on('fast-click', (e)=>{
                 if (!e.target.hasAttribute('data-widget') || e.capturedByEditor) return
                 var index = DOM.index(e.target)
                 this.setValue(index, {sync: true, send:this.value != index})
-            })
+            }, {element: this.navigation})
 
             this.on('tab-created', (e)=>{
                 this.createNavigation()

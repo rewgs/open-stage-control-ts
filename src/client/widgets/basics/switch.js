@@ -90,12 +90,12 @@ class Switch extends MenuBase {
                 if (this.getProp('mode') === 'slide' || e.traversing) dragCallback(e, true)
             } , {element: this.widget})
         } else if (this.getProp('mode') === 'click') {
-            this.widget.addEventListener('click', dragCallback)
+            this.on('click', dragCallback, {element: this.widget})
         } else if (this.getProp('mode') === 'flip') {
-            this.widget.addEventListener('click', ()=>{
+            this.on('click', ()=>{
                 var i = (this.getIndex(this.value) + 1) % this.values.length
                 this.setValue(this.values[i], {sync: true, send: true})
-            })
+            }, {element: this.widget})
         }
 
     }

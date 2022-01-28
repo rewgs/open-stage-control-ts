@@ -69,7 +69,7 @@ class Range extends Fader {
         ]
 
 
-        this.on('change',(e)=>{
+        this.on('value-changed',(e)=>{
 
             if (e.widget == this) return
 

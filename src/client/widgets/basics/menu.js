@@ -1,6 +1,6 @@
 var MenuBase = require('./menu-base'),
     {iconify} = require('../../ui/utils'),
-    doubletap = require('../mixins/double_tap'),
+    doubleTap = require('../mixins/double_tap'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     iOS = require('../../ui/ios')
@@ -83,10 +83,10 @@ class Menu extends MenuBase {
 
         if (this.getProp('doubleTap')) {
 
-            doubletap(this.widget, (e)=>{
+            doubleTap(this, (e)=>{
                 if (this.opened) return
                 this.open(e)
-            })
+            }, {element: this.widget})
 
             this.on('draginit',(e)=>{
 

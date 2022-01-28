@@ -241,7 +241,7 @@ class Widget extends EventEmitter {
                 code: this.getProp('onValue'),
                 context: {value: 0, id: '', touch: undefined}
             })
-            this.on('change', (e)=>{
+            this.on('value-changed', (e)=>{
                 if (e.widget === this && this.mounted && !e.options.fromEdit && e.options.script !== false) {
                     this.scripts.onValue.run({
                         value: e.options.widget ? e.options.widget.value : this.value,
@@ -341,7 +341,7 @@ class Widget extends EventEmitter {
 
     changed(options) {
 
-        this.trigger('change', {
+        this.trigger('value-changed', {
             widget: this,
             options: options,
             id: this.getProp('id'),
@@ -478,14 +478,14 @@ class Widget extends EventEmitter {
         if (!this.linkedValueChangedCallback && Object.keys(this.linkedPropsValue).length) {
 
             this.linkedValueChangedCallback = (e)=>{
-                this.onLinkedPropsChanged(e, 'change')
+                this.onLinkedPropsChanged(e, 'value-changed')
             }
 
-            widgetManager.on('change', this.linkedValueChangedCallback, {context: this})
+            widgetManager.on('value-changed', this.linkedValueChangedCallback, {context: this})
 
         } else if (this.linkedPropsValueCallback && !Object.keys(this.linkedPropsValue).length) {
 
-            widgetManager.off('change', this.linkedValueChangedCallback)
+            widgetManager.off('value-changed', this.linkedValueChangedCallback)
             delete this.linkedValueChangedCallback
 
         }
@@ -514,8 +514,8 @@ class Widget extends EventEmitter {
     onLinkedPropsChanged(e, type) {
 
         var {id, widget, options} = e,
-            changedProps = type === 'prop-changed' ? e.props : type === 'change' ? ['value'] : undefined,
-            linkedProps = type === 'change' ? this.linkedPropsValue : this.linkedProps
+            changedProps = type === 'prop-changed' ? e.props : type === 'value-changed' ? ['value'] : undefined,
+            linkedProps = type === 'value-changed' ? this.linkedPropsValue : this.linkedProps
 
         if (widget === this.parent) {
             if (type === 'widget-created') return
@@ -1268,11 +1268,11 @@ class Widget extends EventEmitter {
         }
 
         this.removed = true
-        this.off('change')
-        this.off('touch')
-        this.off('draginit')
-        this.off('drag')
-        this.off('dragend')
+        // this.off('value-changed')
+        // this.off('touch')
+        // this.off('draginit')
+        // this.off('drag')
+        // this.off('dragend')
         widgetManager.off(undefined, undefined, this)
         sessionManager.off(undefined, undefined, this)
         this.removeOscReceivers()

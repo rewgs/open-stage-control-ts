@@ -54,11 +54,11 @@ class Input extends Canvas {
         if (this.getProp('interaction')) {
 
             this.widget.setAttribute('tabindex', 0)
-            this.widget.addEventListener('focus', this.focus.bind(this))
+            this.on('focus', this.focus.bind(this), {element: this.widget})
             this.input = html`<input class="no-keybinding"></input>`
-            this.input.addEventListener('blur', (e)=>{
+            this.on('blur', (e)=>{
                 this.blur(true)
-            })
+            }, {element: this.input})
 
             if (this.getProp('numeric')) {
                 this.input.type = 'number'

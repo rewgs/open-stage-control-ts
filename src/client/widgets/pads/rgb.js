@@ -60,7 +60,7 @@ module.exports = class Rgb extends Widget {
         this.pad.sendValue = ()=>{}
         this.pad.container.classList.add('not-editable', 'pad')
         this.widget.appendChild(this.pad.container)
-        this.pad.on('change',(e)=>{
+        this.pad.on('value-changed',(e)=>{
             e.stopPropagation = true
             this.dragHandle()
         })
@@ -78,7 +78,7 @@ module.exports = class Rgb extends Widget {
         }, parent: this})
         this.hue.container.classList.add('not-editable', 'hue')
         this.widget.appendChild(this.hue.container)
-        this.hue.on('change',(e)=>{
+        this.hue.on('value-changed',(e)=>{
             e.stopPropagation = true
             this.dragHandle(true)
         })
@@ -99,7 +99,7 @@ module.exports = class Rgb extends Widget {
             }, parent: this})
             this.alpha.container.classList.add('not-editable', 'alpha')
             this.widget.appendChild(this.alpha.container)
-            this.alpha.on('change',(e)=>{
+            this.alpha.on('value-changed',(e)=>{
                 e.stopPropagation = true
                 this.dragAlphaHandle()
             })

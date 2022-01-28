@@ -41,7 +41,7 @@ class Matrix extends Panel {
 
         this.value = []
 
-        this.on('change',(e)=>{
+        this.on('value-changed',(e)=>{
 
             if (e.widget === this) return
 

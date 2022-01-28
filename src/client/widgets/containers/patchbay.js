@@ -169,10 +169,10 @@ class PatchBay extends Container(Canvas) {
 
         this.connecting = []
 
-        this.widget.addEventListener('fast-click', (e)=>{
+        this.on('fast-click', (e)=>{
             this.toggleConnection(e.target)
             e.stopPropagation()
-        })
+        }, {element: this.widget})
 
 
         this.mousePosition = []
@@ -221,9 +221,9 @@ class PatchBay extends Container(Canvas) {
         if (this.connecting.length) {
             var cb = (e)=>{
                 this.toggleConnection()
-                document.removeEventListener('fast-click', cb)
+                this.off('fast-click', cb)
             }
-            document.addEventListener('fast-click', cb)
+            this.on('fast-click',cb, {element: this.widget})
         }
 
     }

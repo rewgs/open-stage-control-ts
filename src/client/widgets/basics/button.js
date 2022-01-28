@@ -1,5 +1,5 @@
 var Widget = require('../common/widget'),
-    doubletab = require('../mixins/double_tap'),
+    doubleTap = require('../mixins/double_tap'),
     html = require('nanohtml'),
     {deepEqual, isJSON} = require('../../utils'),
     {iconify} = require('../../ui/utils')
@@ -80,14 +80,14 @@ class Button extends Widget {
 
             if (this.getProp('doubleTap')) {
 
-                doubletab(this.container, (e)=>{
+                doubleTap(this, (e)=>{
 
                     this.active = true
                     this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
 
                     if (tap) this.container.classList.add('active')
 
-                })
+                }, {element: this.container})
 
             } else {
 
@@ -120,13 +120,13 @@ class Button extends Widget {
 
             if (this.getProp('doubleTap')) {
 
-                doubletab(this.container, (e)=>{
+                doubleTap(this, (e)=>{
 
 
                     this.active = true
                     this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
 
-                })
+                }, {element: this.container})
 
             } else {
 

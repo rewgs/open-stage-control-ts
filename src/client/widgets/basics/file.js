@@ -43,7 +43,7 @@ module.exports = class File extends Widget {
         if (this.getProp('hidePath')) this.widget.classList.add('hide-path')
 
         this.text = DOM.get(this.widget, '.text')[0]
-        this.widget.addEventListener('fast-click', (e)=>{
+        this.on('fast-click', (e)=>{
 
             if (e.capturedByEditor === true) return
 
@@ -60,7 +60,7 @@ module.exports = class File extends Widget {
                 })
 
             })
-        })
+        }, {element: this.widget})
 
     }
 

@@ -1,10 +1,10 @@
-module.exports = (element, callback, options={})=>{
+module.exports = (self, callback, options={})=>{
 
     var lastTapTime = 0,
         lastTapX,
         lastTapY
 
-    element.addEventListener(options.click ? 'click' : 'fast-click', (event)=>{
+    self.on(options.click ? 'click' : 'fast-click', (event)=>{
 
         if (event.capturedByEditor) return
 
@@ -38,6 +38,6 @@ module.exports = (element, callback, options={})=>{
 
         }
 
-    })
+    }, {element: options.element})
 
 }

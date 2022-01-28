@@ -8,7 +8,7 @@ function pointerDownHandler(event) {
 
     if (event.capturedByEditor || event.touchPunch) return
 
-    if (!event.multitouch) {
+    if (!event.target._drag_multitouch) {
         for (var i in targets) {
             if (targets[i] == event.target) return
         }
@@ -18,9 +18,11 @@ function pointerDownHandler(event) {
 
     if (event.traversingStack) {
 
-        event.target = event.target.closest('.drag-event')
+        event.target = closestDragContainer(event.target)
 
-        var widget = event.target.closest('.drag-event')._drag_widget,
+        if (!event.target) return
+
+        var widget = closestDragContainer(event.target)._drag_widget,
             local = event.traversingStack.stack[event.traversingStack.stack.length - 1]
 
         if (widget.getProp) event.traversingStack.firstType = widget.getProp('type')
@@ -53,7 +55,7 @@ function pointerMoveHandler(event) {
                 document.elementFromPoint(event.clientX, event.clientY)
                 : event.target
 
-        if (target) target = target.closest('.drag-event')
+        if (target) target = closestDragContainer(target)
 
         var local = null
         if (target && event.traversingStack) {
@@ -66,7 +68,7 @@ function pointerMoveHandler(event) {
             if (!local) {
                 target = null
             } else if (local.mode === TRAVERSING_SAMEWIDGET && local.type) {
-                var widget = target.closest('.drag-event')._drag_widget
+                var widget = closestDragContainer(target)._drag_widget
                 if (widget.getProp && local.type !== widget.getProp('type')) target = null
             }
         }
@@ -131,14 +133,14 @@ function pointerUpFilter(event) {
 
 // Mouse events wrappers
 
-function mouseMultiWrapper(event) {
-    mouseDownCapture(event, true)
-}
+// function mouseMultiWrapper(event) {
+//     mouseDownCapture(event, true)
+// }
 
 function mouseDownCapture(event, multitouch) {
     if (event.pointerType === 'touch') return
     // event.pointerId = 'mouse'
-    event.multitouch = multitouch
+    // event.multitouch = multitouch
     pointerDownHandler(event)
 }
 
@@ -158,9 +160,9 @@ function mouseUpCapture(event){
 
 // Touch events wrappers
 
-function touchMultiWrapper(event) {
-    touchDownCapture(event, true)
-}
+// function touchMultiWrapper(event) {
+//     touchDownCapture(event, true)
+// }
 
 function touchDownCapture(event, multitouch) {
 
@@ -174,7 +176,7 @@ function touchDownCapture(event, multitouch) {
         }
 
         touchEvent.pointerId = touchEvent.identifier
-        touchEvent.multitouch = multitouch
+        // touchEvent.multitouch = multitouch
 
         pointerDownHandler(touchEvent)
     }
@@ -210,14 +212,24 @@ function touchUpCapture(event) {
     }
 }
 
+
+function closestDragContainer(target) {
+    var container = target
+    while (container !== null) {
+        if (container._drag_widget) {
+            return container
+        } else {
+            container = container.parentNode
+        }
+    }
+    return null
+}
+
 // Callback trigger
 
 function triggerWidgetEvent(target, name, event) {
-    if (target !== null && target._drag_widget) {
-        target._drag_widget.trigger(name, event)
-    } else if (target !== null) {
-        triggerWidgetEvent(target.closest('.drag-event'), name, event)
-    }
+    var container = closestDragContainer(target)
+    if (container) container._drag_widget.trigger(name, event)
 }
 
 // init
@@ -227,6 +239,9 @@ DOM.ready(()=>{
     if (!iOS) document.addEventListener('pointerup', mouseUpCapture, true)
     document.addEventListener('touchmove', touchMoveCapture, true)
     DOM.addEventListener(document, 'touchend touchcancel', touchUpCapture, true)
+
+    document.addEventListener('touchstart', touchDownCapture, false)
+    if (!iOS) document.addEventListener('pointerdown', mouseDownCapture)
 
 })
 
@@ -246,16 +261,8 @@ module.exports = {
         var {element, multitouch} = options
 
         element._drag_widget = this
+        element._drag_multitouch = multitouch
         element.style.touchAction = 'none'
-        element.classList.add('drag-event')
-
-        if (multitouch) {
-            element.addEventListener('touchstart', touchMultiWrapper, false)
-            if (!iOS) element.addEventListener('pointerdown', mouseMultiWrapper)
-        } else {
-            element.addEventListener('touchstart', touchDownCapture, false)
-            if (!iOS) element.addEventListener('pointerdown', mouseDownCapture)
-        }
 
     },
 
@@ -273,16 +280,8 @@ module.exports = {
         var {element, multitouch} = options
 
         delete element._drag_widget
+        delete element._drag_multitouch
         element.style.touchAction = ''
-        element.classList.remove('drag-event')
-
-        if (multitouch) {
-            element.removeEventListener('touchstart', touchMultiWrapper, false)
-            if (!iOS) element.removeEventListener('pointerdown', mouseMultiWrapper)
-        } else {
-            element.removeEventListener('touchstart', touchDownCapture, false)
-            if (!iOS) element.removeEventListener('pointerdown', mouseDownCapture)
-        }
 
     },
 

@@ -1,6 +1,6 @@
 var Pad = require('./pad'),
     Fader = require('../sliders/fader'),
-    doubletab = require('../mixins/double_tap'),
+    doubleTap = require('../mixins/double_tap'),
     touchstate = require('../mixins/touch_state'),
     fastdom = require('fastdom')
 
@@ -80,7 +80,7 @@ module.exports = class Xy extends Pad {
             }, parent: this}),
         }
 
-        this.on('change',(e)=>{
+        this.on('value-changed',(e)=>{
             if (e.widget == this) return
             e.stopPropagation = true
         })
@@ -119,17 +119,17 @@ module.exports = class Xy extends Pad {
 
             if (typeof this.getProp('doubleTap') === 'string' && this.getProp('doubleTap')[0] === '/') {
 
-                doubletab(this.widget, ()=>{
+                doubleTap(this, ()=>{
                     this.sendValue({v:null, address: this.getProp('doubleTap')})
-                })
+                }, {element: this.widget})
 
             } else {
 
-                doubletab(this.widget, ()=>{
+                doubleTap(this, ()=>{
                     this.faders.x.setValue(this.faders.x.getSpringValue(), {sync: false, send:false, dragged:true})
                     this.faders.y.setValue(this.faders.y.getSpringValue(), {sync: false, send:false, dragged:true})
                     this.setValue([this.faders.x.getSpringValue(),this.faders.y.getSpringValue()],{sync:true, send:true, spring:true})
-                })
+                }, {element: this.widget})
 
             }
 

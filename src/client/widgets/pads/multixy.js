@@ -157,7 +157,7 @@ module.exports = class MultiXy extends Pad {
 
         }, {element: this.widget, multitouch: true})
 
-        this.on('change',(e)=>{
+        this.on('value-changed',(e)=>{
             if (e.widget == this) return
             e.stopPropagation = true
             if (e.options.spring) e.options.dragged = true

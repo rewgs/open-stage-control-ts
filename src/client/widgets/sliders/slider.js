@@ -1,7 +1,7 @@
 var {clip, mapToScale} = require('../utils'),
     Canvas = require('../common/canvas'),
     touchstate = require('../mixins/touch_state'),
-    doubletab = require('../mixins/double_tap'),
+    doubleTap = require('../mixins/double_tap'),
     html = require('nanohtml')
 
 class Slider extends Canvas {
@@ -58,28 +58,27 @@ class Slider extends Canvas {
 
             if (typeof this.getProp('doubleTap') === 'string' && this.getProp('doubleTap')[0] === '/') {
 
-                doubletab(this.widget, ()=>{
+                doubleTap(this, ()=>{
                     this.sendValue({v:null, address: this.getProp('doubleTap')})
-                })
+                }, {element: this.widget})
 
             } else {
 
-                doubletab(this.widget, ()=>{
-                    this.setValue(this.getSpringValue(),{sync:true, send:true, fromLocal:true, doubleTab:true})
-                })
+                doubleTap(this, ()=>{
+                    this.setValue(this.getSpringValue(),{sync:true, send:true, fromLocal:true, doubleTap:true})
+                }, {element: this.widget})
 
             }
 
         }
 
 
-        this.widget.addEventListener('wheel',this.mousewheelHandleProxy.bind(this))
-
         touchstate(this, {element: this.widget, multitouch: options.multitouch})
 
         this.on('draginit', this.draginitHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
         this.on('drag', this.dragHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
         this.on('dragend', this.dragendHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
+        this.on('wheel',this.mousewheelHandleProxy.bind(this), {element: this.widget})
 
         this.setSteps()
 
@@ -207,7 +206,7 @@ class Slider extends Canvas {
     setValue(v,options={}) {
 
         if (typeof v != 'number') return
-        if (this.touched && !options.dragged && !options.doubleTab) return this.setValueTouchedQueue = [v, options]
+        if (this.touched && !options.dragged && !options.doubleTap) return this.setValueTouchedQueue = [v, options]
 
         var value = clip(v,[this.rangeValsMin,this.rangeValsMax])
 

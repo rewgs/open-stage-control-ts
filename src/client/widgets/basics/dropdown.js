@@ -53,9 +53,9 @@ class Dropdown extends MenuBase {
 
         this.parseValues()
 
-        this.select.addEventListener('change', ()=>{
+        this.on('change', (e)=>{
             this.setValue(this.values[this.select.selectedIndex], {sync:true, send:true, fromLocal:true})
-        })
+        }, {element: this.select})
 
         this.select.selectedIndex = -1
         this.selected = -1

@@ -43,10 +43,10 @@ class TextArea extends Widget {
         if (this.getProp('interaction')) {
 
             this.input.setAttribute('tabindex', 0)
-            this.input.addEventListener('focus', this.focus.bind(this))
-            this.input.addEventListener('blur', (e)=>{
+            this.on('focus', this.focus.bind(this), {element: this.input})
+            this.on('blur', (e)=>{
                 this.blur(true)
-            })
+            }, {element: this.input})
 
             this.input.addEventListener('keydown', (e)=>{
                 if (e.keyCode === 13 && !e.shiftKey) {

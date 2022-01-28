@@ -1,7 +1,7 @@
 var Panel = require('./panel'),
     {icon, iconify} = require('../../ui/utils'),
     resize = require('../../events/resize'),
-    doubletab = require('../mixins/double_tap'),
+    doubleTap = require('../mixins/double_tap'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     iOS13 = require('../../ui/ios') === 13
@@ -99,24 +99,28 @@ class Modal extends Panel {
         this.toggle = this.container.appendChild(html`<div class="toggle"></div>`)
 
         if (this.getProp('doubleTap')) {
-            doubletab(this.toggle, ()=>{
+            doubleTap(this, ()=>{
                 this.setValue(1, {sync:true, send:true})
-            })
+            }, {element: this.toggle})
         } else {
-            this.toggle.addEventListener('fast-click',(e)=>{
+            this.on('fast-click',(e)=>{
                 if (e.capturedByEditor === true) return
                 e.detail.preventOriginalEvent = true
-                this.setValue(1, {sync:true, send:true})
-            })
+                if (e.target === this.toggle) {
+                    this.setValue(1, {sync:true, send:true})
+                }
+            }, {element: this.container})
         }
 
         var closer = DOM.get(this.popup, '.closer')[0]
-        this.popup.addEventListener('fast-click',(e)=>{
+
+        this.on('fast-click',(e)=>{
             if ((e.target === this.popup || e.target === closer) && this.value == 1) {
                 e.detail.preventOriginalEvent = true
                 this.setValue(0, {sync:true, send:true})
             }
-        })
+        }, {element: this.container})
+
 
         this.escapeKeyHandler = ((e)=>{
             if (e.keyCode==27) this.setValue(0, {sync:true, send:true})
