@@ -21,7 +21,6 @@ module.exports = function(eventName, options={}){
 
     DOM.ready(()=>{
 
-        var element = options.element || document
         document.addEventListener(eventName, (event)=>{
             triggerWidgetEvent(event.target, event)
         }, {passive: !!options.passive, capture: !!options.capture})

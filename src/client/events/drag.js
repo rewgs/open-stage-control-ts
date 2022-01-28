@@ -133,14 +133,9 @@ function pointerUpFilter(event) {
 
 // Mouse events wrappers
 
-// function mouseMultiWrapper(event) {
-//     mouseDownCapture(event, true)
-// }
-
-function mouseDownCapture(event, multitouch) {
+function mouseDownCapture(event) {
     if (event.pointerType === 'touch') return
     // event.pointerId = 'mouse'
-    // event.multitouch = multitouch
     pointerDownHandler(event)
 }
 
@@ -160,11 +155,7 @@ function mouseUpCapture(event){
 
 // Touch events wrappers
 
-// function touchMultiWrapper(event) {
-//     touchDownCapture(event, true)
-// }
-
-function touchDownCapture(event, multitouch) {
+function touchDownCapture(event) {
 
     event.preventDefault()
     for (var i in event.changedTouches) {
@@ -176,7 +167,6 @@ function touchDownCapture(event, multitouch) {
         }
 
         touchEvent.pointerId = touchEvent.identifier
-        // touchEvent.multitouch = multitouch
 
         pointerDownHandler(touchEvent)
     }
@@ -262,7 +252,6 @@ module.exports = {
 
         element._drag_widget = this
         element._drag_multitouch = multitouch
-        element.style.touchAction = 'none'
 
     },
 
@@ -277,11 +266,10 @@ module.exports = {
             return
         }
 
-        var {element, multitouch} = options
+        var {element} = options
 
         delete element._drag_widget
         delete element._drag_multitouch
-        element.style.touchAction = ''
 
     },
 
