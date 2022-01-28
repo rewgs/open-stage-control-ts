@@ -1268,11 +1268,6 @@ class Widget extends EventEmitter {
         }
 
         this.removed = true
-        // this.off('value-changed')
-        // this.off('touch')
-        // this.off('draginit')
-        // this.off('drag')
-        // this.off('dragend')
         widgetManager.off(undefined, undefined, this)
         sessionManager.off(undefined, undefined, this)
         this.removeOscReceivers()
