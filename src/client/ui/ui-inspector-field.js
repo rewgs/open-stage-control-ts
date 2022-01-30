@@ -277,6 +277,11 @@ class UiInspectorField extends UiWidget {
             }
             var fullscreenBtn = this.container.appendChild(html`<div class="btn fullscreen">${raw(icon('expand'))}</div>`)
             fullscreenBtn.addEventListener('fast-click', (e)=>{
+
+                // update dom reference because we might break them with morph in ui-inspector.js 
+                this.container = e.target.closest('osc-inspector-field')
+                this.label = DOM.get(this.container, 'label')[0]
+
                 editor.fullscreen = this.container.classList.toggle('fullscreen')
                 editor.setOptions({maxLines: editor.fullscreen ? 0 : 30})
                 window.dispatchEvent(new Event('resize'))
