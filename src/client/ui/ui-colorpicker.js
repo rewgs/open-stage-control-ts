@@ -31,7 +31,7 @@ class ColorPicker extends UiWidget {
              </div>
         `
 
-        this.rgb.on('change', (e)=>{
+        this.rgb.on('value-changed', (e)=>{
             e.stopPropagation = true
             this.value = chroma(this.rgb.value).hex()
             this.trigger('change', {preventHistory: true})
