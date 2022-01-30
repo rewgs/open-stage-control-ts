@@ -16,26 +16,29 @@ function pointerDownHandler(event) {
 
     event = normalizeDragEvent(event)
 
+    var target = closestDragContainer(event.target)
+
+    if (!target) return
+
     if (event.traversingStack) {
 
-        event.target = closestDragContainer(event.target)
-
-        if (!event.target) return
-
-        var widget = closestDragContainer(event.target)._drag_widget,
+        var widget = target._drag_widget,
             local = event.traversingStack.stack[event.traversingStack.stack.length - 1]
 
         if (widget.getProp) event.traversingStack.firstType = widget.getProp('type')
 
-        if (local.mode === TRAVERSING_SAMEWIDGET && local.type && local.type !== event.traversingStack.firstType) {
-            event.traversing = false
+        if (local.mode === TRAVERSING_SAMEWIDGET) {
+            if (local.type === '') {
+                local.type = event.traversingStack.firstType
+            }
+            event.traversing = local.type === event.traversingStack.firstType
         } else {
             event.traversing = true
         }
 
     }
 
-    targets[event.pointerId] = event.target
+    targets[event.pointerId] = target
     previousPointers[event.pointerId] = event
 
     triggerWidgetEvent(targets[event.pointerId], 'draginit', event)
@@ -68,7 +71,7 @@ function pointerMoveHandler(event) {
             if (!local) {
                 target = null
             } else if (local.mode === TRAVERSING_SAMEWIDGET && local.type) {
-                var widget = closestDragContainer(target)._drag_widget
+                var widget = target._drag_widget
                 if (widget.getProp && local.type !== widget.getProp('type')) target = null
             }
         }
@@ -250,6 +253,7 @@ module.exports = {
 
         var {element, multitouch} = options
 
+        element.style.touchAction = 'none'
         element._drag_widget = this
         element._drag_multitouch = multitouch
 
@@ -268,6 +272,7 @@ module.exports = {
 
         var {element} = options
 
+        element.style.touchAction = ''
         delete element._drag_widget
         delete element._drag_multitouch
 
@@ -278,7 +283,7 @@ module.exports = {
         if (element._traversing) return
 
         var traversing = options.type ? TRAVERSING_SAMEWIDGET : true,
-            traversingType = options.type === 'auto' ? '' : options.type
+            traversingType = options.type === 'smart' || options.type === 'auto' ? '' : options.type
 
         element._traversing = traversing
 
