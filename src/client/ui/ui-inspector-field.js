@@ -191,9 +191,19 @@ class UiInspectorField extends UiWidget {
             editor.selection.setRange({start:0,end:0})
             editor.gotoLine(0)
             editor.removeAllListeners('focus')
+            editor.removeAllListeners('mousedown')
+            editor.removeAllListeners('mouseup')
             editor.setOptions({maxLines: 30})
             editor.dirty = false
-            editor.on('focus', ()=>{
+            editor.middledown = false
+            editor.on("mousedown", function (e) {
+                  if (e.domEvent.button === 1) editor.middledown = true
+            })
+            editor.on("mouseup", function (e) {
+                  if (e.domEvent.button === 1) editor.middledown = false
+            })
+            editor.on('focus', (e)=>{
+                if (editor.middledown) return
                 this.parent.focusedInput = input
                 editor.setHighlightActiveLine(true)
                 editor.setHighlightGutterLine(true)
@@ -278,7 +288,7 @@ class UiInspectorField extends UiWidget {
             var fullscreenBtn = this.container.appendChild(html`<div class="btn fullscreen">${raw(icon('expand'))}</div>`)
             fullscreenBtn.addEventListener('fast-click', (e)=>{
 
-                // update dom reference because we might break them with morph in ui-inspector.js 
+                // update dom reference because we might break them with morph in ui-inspector.js
                 this.container = e.target.closest('osc-inspector-field')
                 this.label = DOM.get(this.container, 'label')[0]
 
