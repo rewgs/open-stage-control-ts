@@ -6,9 +6,8 @@ var UiWidget = require('./ui-widget'),
     {defaults} = require('../widgets/'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
-    fastdom = require('fastdom')
-
-
+    fastdom = require('fastdom'),
+    getCodeEditor = require('./ui-code-editor')
 
 
 class UiInspector extends UiWidget {
@@ -38,7 +37,7 @@ class UiInspector extends UiWidget {
             }
 
         })
-        this.parentContainer = DOM.get('osc-panel-container.right osc-panel-inner')[0]
+        this.parentContainer = DOM.get('osc-panel-container.right')[0]
 
         this.colorPicker = new UiColorPicker()
         this.colorPicker.on('change', (event)=>{
@@ -106,6 +105,7 @@ class UiInspector extends UiWidget {
             this.mounted = false
             this.clearTimeout = null
             this.colorPicker.close()
+            this.parentContainer.classList.remove('editor-breakout')
         })
 
     }
@@ -121,7 +121,8 @@ class UiInspector extends UiWidget {
 
         var widget = widgets[0],
             props = defaults[widget.props.type],
-            tabIndex = 1000
+            tabIndex = 1000,
+            codeEditorFields = []
 
         this.widget = widget
 
@@ -171,6 +172,11 @@ class UiInspector extends UiWidget {
                         tabIndex: tabIndex++
                     }).container
                     if (first) field.classList.add('first-child')
+
+                    if (def.editor) {
+                        codeEditorFields.push([propName, def.editor, def.syntaxChecker, widget])
+                        field.classList.add('has-editor')
+                    }
                 }
 
                 if (field)  {
@@ -192,6 +198,15 @@ class UiInspector extends UiWidget {
             morph(this.container.firstChild, content)
         } else {
             this.container.appendChild(content)
+        }
+
+        if (codeEditorFields.length) {
+            let fields = DOM.get(this.container, '.has-editor')
+            for (var i in codeEditorFields) {
+                let [propName, language, syntax, widget] = codeEditorFields[i]
+                let codeEditor = getCodeEditor(this, propName, language, syntax)
+                codeEditor.bind(widget, fields[i])
+            }
         }
 
         this.mounted = true
@@ -258,7 +273,6 @@ class UiInspector extends UiWidget {
 
                 event.preventDefault()
                 DOM.dispatchEvent(event.target, 'change')
-                this.parentContainer.classList.remove('editor-breakout')
 
             } else if (event.keyCode === 27) {
 

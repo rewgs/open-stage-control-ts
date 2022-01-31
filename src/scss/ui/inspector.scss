@@ -4,8 +4,13 @@ $label-width: 94rem;
 $padding: 8rem;
 $radius: 3rem;
 
-osc-panel-container.right osc-panel-inner.editor-breakout {
-    contain: initial
+osc-panel-container.right.editor-breakout {
+    osc-panel-inner {
+        contain: initial;
+    }
+    .resize-handle {
+        display: none;
+    }
 }
 
 #osc-inspector {

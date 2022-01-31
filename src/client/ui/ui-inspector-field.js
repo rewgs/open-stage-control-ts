@@ -1,58 +1,9 @@
 var UiWidget = require('./ui-widget'),
-    UiModal = require('./ui-modal'),
     {categories} = require('../widgets/'),
-    locales = require('../locales'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     {icon} = require('../ui/utils'),
-    chroma = require('chroma-js'),
-    ace = require('brace'),
-    ScriptVm = require('../widgets/scripts/script-vm'),
-    scriptGlobals = ScriptVm.globals,
-    editors = {}, editorModes = {
-        javascript: require('brace/mode/javascript')
-    }
-
-function createEditor(name, language, syntaxChecker) {
-    var el = html`<div id="#editor${name}"></div>`
-    var editor = editors[name] = ace.edit(el)
-    if (editorModes[language]) editor.getSession().setMode('ace/mode/' + language)
-    editor.setOptions({
-        autoScrollEditorIntoView: true,
-        fixedWidthGutter: true,
-        tabSize: 2,
-        maxLines: 30,
-        dragEnabled: false,
-        useWorker: syntaxChecker !== false
-    })
-
-    editor.$blockScrolling = Infinity
-    editor.commands.bindKeys({
-        'ctrl-l': null, 'ctrl-f': null, 'ctrl-h': null, 'ctrl-,': null,
-    })
-    editor.renderer.setScrollMargin(4, 4, 0, 4)
-    editor.element = el
-    editor.element.classList.add('ace_dark')
-    editor.textarea = DOM.get(el, '.ace_text-input')[0]
-    editor.textarea.name = name
-    editor.textarea._ace = true
-    editor.setHighlightActiveLine(false)
-    editor.setHighlightGutterLine(false)
-    if (language === 'javascript' && syntaxChecker !== false) {
-        editor.getSession().$worker.send('setOptions', [{
-            asi: true,          // no semicolon
-            esversion: 6,
-            strict: 'implied',
-            node: false,
-            browser: true,
-            validthis: true,
-            undef: true,
-            globals: {}
-        }])
-    }
-}
-
-
+    chroma = require('chroma-js')
 
 class UiInspectorField extends UiWidget {
 
@@ -180,182 +131,54 @@ class UiInspectorField extends UiWidget {
         }
 
         if (this.default.editor) {
-            this.container.classList.add('has-editor')
-            if (!editors[this.name]) createEditor(this.name, this.default.editor, this.default.syntaxChecker)
-            let editor = editors[this.name]
-            editor.fullscreen = false
-            input.style.display = 'none'
-            input._ace_input = editor.textarea
-            editor.setValue(input.value)
-            editor.textarea.osc_input = input
-            editor.selection.setRange({start:0,end:0})
-            editor.gotoLine(0)
-            editor.removeAllListeners('focus')
-            editor.removeAllListeners('mousedown')
-            editor.removeAllListeners('mouseup')
-            editor.setOptions({maxLines: 30})
-            editor.dirty = false
-            editor.middledown = false
-            editor.on("mousedown", function (e) {
-                  if (e.domEvent.button === 1) editor.middledown = true
-            })
-            editor.on("mouseup", function (e) {
-                  if (e.domEvent.button === 1) editor.middledown = false
-            })
-            editor.on('focus', (e)=>{
-                if (editor.middledown) return
-                this.parent.focusedInput = input
-                editor.setHighlightActiveLine(true)
-                editor.setHighlightGutterLine(true)
-                editor.removeAllListeners('blur')
-                editor.removeAllListeners('change')
-                editor.on('change', (e)=>{
-                    input.value = editor.getValue()
-                    editor.dirty = true
-                })
-                editor.on('blur', (e)=>{
-                    editor.setHighlightActiveLine(false)
-                    editor.setHighlightGutterLine(false)
-                    editor.selection.setRange({start:0,end:0})
-                    if (editor.fullscreen) {
-                        e.preventDefault()
-                        return
-                    }
-                    input.value = editor.getValue()
-                    this.parent.focusedInput = input
-                    if (editor.dirty) {
-                        editor.dirty = false
-                        this.parent.onChange()
-                    }
 
-                })
-            })
-            if (this.default.editor === 'javascript') {
-                let globals = {}
-                if (this.name === 'onEvent') {
-                    if (this.widget.getProp('event') === 'value') {
-                        globals = {id: true, value: true, touch: true}
-                    } else if (this.widget.getProp('event') === 'keyboard') {
-                        globals = {type: true, key: true, code: true, ctrl: true, shift: true, alt: true, meta: true}
-                    }
-                } else if (this.name === 'onValue') {
-                    globals = {id: true, value: true, touch: true}
-                } else if (this.name === 'onDraw') {
-                    globals = {value: true, height: true, width: true, ctx: true, cssVars: true}
-                } else if (this.name === 'onTouch') {
-                    globals = this.widget.getProp('type') === 'canvas' ?
-                        {value: true, height: true, width: true, event: true} :
-                        {value: true, event: true, handle: true}
-                }
-                globals.locals = true
-                globals.console = true
-                globals.JS = true
-                globals.this = false
 
-                if (this.default.syntaxChecker !== false) editor.getSession().$worker.send('changeOptions', [{
-                    globals: {...scriptGlobals, ...globals}
-                }])
-            }
-
-            this.container.appendChild(editor.element)
-            setTimeout(()=>{
-                editor.getSession().getUndoManager().reset()
-                editor.resize()
-            })
-
-            var help = this.container.appendChild(html`<div class="btn help">${locales('editor_ace_help')}</div>`)
-            help.addEventListener('fast-click', (e)=>{
-                this.aceHelp(editor)
-            })
-
-            var closeKey = (e)=>{
-                // this handler may remain dangling if closing with ctrl+enter
-                // we ignore this as it has no effect
-                if (e.keyCode !== 27) return
-                this.container.classList.remove('fullscreen')
-                editor.setOptions({maxLines: 30})
-                editor.fullscreen = false
-                document.removeEventListener('keydown', closeKey)
-                this.container.removeEventListener('fast-click', closeClick)
-                editor.blur()
-                this.parent.parentContainer.classList.remove('editor-breakout')
-            }
-            var closeClick = (e)=>{
-                if (e.target === this.container) {
-                    closeKey({keyCode: 27})
-                }
-            }
-            var fullscreenBtn = this.container.appendChild(html`<div class="btn fullscreen">${raw(icon('expand'))}</div>`)
-            fullscreenBtn.addEventListener('fast-click', (e)=>{
-
-                // update dom reference because we might break them with morph in ui-inspector.js
-                this.container = e.target.closest('osc-inspector-field')
-                this.label = DOM.get(this.container, 'label')[0]
-
-                editor.fullscreen = this.container.classList.toggle('fullscreen')
-                editor.setOptions({maxLines: editor.fullscreen ? 0 : 30})
-                window.dispatchEvent(new Event('resize'))
-                this.label.style.setProperty('--prefix', editor.fullscreen ? '"' + this.widget.getProp('id') + '."' : '')
-                if (editor.fullscreen) {
-                    this.parent.parentContainer.classList.add('editor-breakout')
-                    editor.focus()
-                    document.addEventListener('keydown', closeKey)
-                    this.container.addEventListener('fast-click', closeClick)
-                } else {
-                    this.parent.parentContainer.classList.remove('editor-breakout')
-                    document.removeEventListener('keydown', closeKey)
-                    this.container.removeEventListener('fast-click', closeClick)
-                }
-            })
+            // var help = this.container.appendChild(html`<div class="btn help">${locales('editor_ace_help')}</div>`)
+            // help.addEventListener('fast-click', (e)=>{
+            //     this.aceHelp(editor)
+            // })
+            //
+            // var closeKey = (e)=>{
+            //     // this handler may remain dangling if closing with ctrl+enter
+            //     // we ignore this as it has no effect
+            //     if (e.keyCode !== 27) return
+            //     this.container.classList.remove('fullscreen')
+            //     editor.setOptions({maxLines: 30})
+            //     editor.fullscreen = false
+            //     document.removeEventListener('keydown', closeKey)
+            //     this.container.removeEventListener('fast-click', closeClick)
+            //     editor.blur()
+            //     this.parent.parentContainer.classList.remove('editor-breakout')
+            // }
+            // var closeClick = (e)=>{
+            //     if (e.target === this.container) {
+            //         closeKey({keyCode: 27})
+            //     }
+            // }
+            // var fullscreenBtn = this.container.appendChild(html`<div class="btn fullscreen">${raw(icon('expand'))}</div>`)
+            // fullscreenBtn.addEventListener('fast-click', (e)=>{
+            //
+            //     // update dom reference because we might break them with morph in ui-inspector.js
+            //     this.container = e.target.closest('osc-inspector-field')
+            //     this.label = DOM.get(this.container, 'label')[0]
+            //
+            //     editor.fullscreen = this.container.classList.toggle('fullscreen')
+            //     editor.setOptions({maxLines: editor.fullscreen ? 0 : 30})
+            //     window.dispatchEvent(new Event('resize'))
+            //     this.label.style.setProperty('--prefix', editor.fullscreen ? '"' + this.widget.getProp('id') + '."' : '')
+            //     if (editor.fullscreen) {
+            //         this.parent.parentContainer.classList.add('editor-breakout')
+            //         editor.focus()
+            //         document.addEventListener('keydown', closeKey)
+            //         this.container.addEventListener('fast-click', closeClick)
+            //     } else {
+            //         this.parent.parentContainer.classList.remove('editor-breakout')
+            //         document.removeEventListener('keydown', closeKey)
+            //         this.container.removeEventListener('fast-click', closeClick)
+            //     }
+            // })
         }
 
-
-    }
-
-    aceHelp(editor) {
-
-        var keybindings = []
-        var commandMap = {}
-        editor.keyBinding.$handlers.forEach(function(handler) {
-            var ckb = handler.commandKeyBinding
-            for (var i in ckb) {
-                var key = i.replace(/(^|-)\w/g, function(x) { return x.toUpperCase() })
-                var commands = ckb[i]
-                if (!Array.isArray(commands))
-                    commands = [commands]
-                commands.forEach(function(command) {
-                    if (typeof command != 'string')
-                        command  = command.name
-                    if (commandMap[command]) {
-                        commandMap[command].key += '|' + key
-                    } else {
-                        commandMap[command] = {key: key, command: command}
-                        keybindings.push(commandMap[command])
-                    }
-                })
-            }
-        })
-
-        var modal = new UiModal({closable: true, title: html`<span class="editor-help-title">${locales('editor_ace_help_title')}</span>`, html: true, content: html`
-            <div class="inspector-help">
-                <table>
-                <thead>
-                    <tr>
-                        <th>Shortcut</th>
-                        <th>Command</th>
-                    </tr>
-                </thead>
-                    <tr><td><span class="kbd">Ctrl-Enter</span></td><td>save</td></tr>
-                    ${keybindings.map(k=>html`<tr><td><span class="kbd">${k.key}</span></td><td>${k.command}</td></tr>`)}
-                </table>
-            </div>
-        `})
-
-
-        this.parent.helpModalOpened = true
-        modal.on('close', ()=>{
-            this.parent.helpModalOpened = false
-        })
 
     }
 
