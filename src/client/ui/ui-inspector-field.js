@@ -130,56 +130,6 @@ class UiInspectorField extends UiWidget {
 
         }
 
-        if (this.default.editor) {
-
-
-            // var help = this.container.appendChild(html`<div class="btn help">${locales('editor_ace_help')}</div>`)
-            // help.addEventListener('fast-click', (e)=>{
-            //     this.aceHelp(editor)
-            // })
-            //
-            // var closeKey = (e)=>{
-            //     // this handler may remain dangling if closing with ctrl+enter
-            //     // we ignore this as it has no effect
-            //     if (e.keyCode !== 27) return
-            //     this.container.classList.remove('fullscreen')
-            //     editor.setOptions({maxLines: 30})
-            //     editor.fullscreen = false
-            //     document.removeEventListener('keydown', closeKey)
-            //     this.container.removeEventListener('fast-click', closeClick)
-            //     editor.blur()
-            //     this.parent.parentContainer.classList.remove('editor-breakout')
-            // }
-            // var closeClick = (e)=>{
-            //     if (e.target === this.container) {
-            //         closeKey({keyCode: 27})
-            //     }
-            // }
-            // var fullscreenBtn = this.container.appendChild(html`<div class="btn fullscreen">${raw(icon('expand'))}</div>`)
-            // fullscreenBtn.addEventListener('fast-click', (e)=>{
-            //
-            //     // update dom reference because we might break them with morph in ui-inspector.js
-            //     this.container = e.target.closest('osc-inspector-field')
-            //     this.label = DOM.get(this.container, 'label')[0]
-            //
-            //     editor.fullscreen = this.container.classList.toggle('fullscreen')
-            //     editor.setOptions({maxLines: editor.fullscreen ? 0 : 30})
-            //     window.dispatchEvent(new Event('resize'))
-            //     this.label.style.setProperty('--prefix', editor.fullscreen ? '"' + this.widget.getProp('id') + '."' : '')
-            //     if (editor.fullscreen) {
-            //         this.parent.parentContainer.classList.add('editor-breakout')
-            //         editor.focus()
-            //         document.addEventListener('keydown', closeKey)
-            //         this.container.addEventListener('fast-click', closeClick)
-            //     } else {
-            //         this.parent.parentContainer.classList.remove('editor-breakout')
-            //         document.removeEventListener('keydown', closeKey)
-            //         this.container.removeEventListener('fast-click', closeClick)
-            //     }
-            // })
-        }
-
-
     }
 
 
