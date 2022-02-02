@@ -156,8 +156,10 @@ class Keyboard extends Panel {
         if (!Array.isArray(v) || v.length !== 2) return
         if (v[1] !== this.getProp('on') && v[1] !== this.getProp('off')) return
 
-        var start = parseInt(this.getProp('start'))
-        this.children[v[0] - start].setValue(v[1] === this.getProp('on') ? 1 : 0, options)
+        var index = v[0] - parseInt(this.getProp('start'))
+        if (this.children[index]) {
+            this.children[index].setValue(v[1] === this.getProp('on') ? 1 : 0, options)
+        }
 
     }
 
