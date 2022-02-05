@@ -11,6 +11,10 @@
 - inspector
     - color picker: inline picker widget (no longer in a modal); show color changes on the fly
 
+- scripting
+    - `screen.height` and `screen.width` always returns the current screen dimensions
+    - added `screen.orientation` global variable
+
 - misc
     - some performance improvements
 

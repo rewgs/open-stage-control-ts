@@ -9,7 +9,13 @@ class Vm {
         if (!globals) {
             var sessionManager
             globals = {
-                screen: {width: screen.width, height: screen.height},
+                screen: {
+                    get width() {return screen.width},
+                    get height() {return screen.height},
+                    get orientation() {
+                        return (screen.orientation || {}).type || window.orientation
+                    }
+                },
                 env: deepCopy(ENV),
                 ip: IP,
                 url: document.location.host,
@@ -92,7 +98,7 @@ class Vm {
     compile(code, defaultContext) {
 
         if (typeof code !== 'string') code = String(code)
-        
+
         // var contextInit = 'var locals = locals;',
         var contextInit = '',
             contextKeys = ['__VARS'],

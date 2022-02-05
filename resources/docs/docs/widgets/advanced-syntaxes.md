@@ -91,12 +91,13 @@ A property *cannot* contain multiple `JS{}` blocks
 - `console`: javascript console
 - `locals`: object for storing/reading arbitrary values. Changing its properties *does not* trigger any synchronisation even if the value is used somewhere else.
 - `globals`: same as `locals` but shared between all widgets, contains a few useful variables:
-    - `screen`: client screen dimensions (`{width, height}`)
+    - `screen`: client screen informations (`{width, height, orientation}`)
     - `env`: client options (ie: url query options),
     - `ip`: client's ip address,
     - `url`: server url,
     - `platform`: operating system as seen by the client
     - `session`: session file path
+    - `clipboard`: instance of navigator [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
 
 In this context, `@{} / OSC{}` are seen as variables. When they change, the whole block will be evaluated again.
 

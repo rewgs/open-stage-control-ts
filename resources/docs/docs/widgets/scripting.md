@@ -4,7 +4,7 @@ Widgets can run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 
 !!! warning "Advanced syntaxe"
     Most [advanced syntaxes](../advanced-syntaxes/) should be avoided as much as possible in scripting properties:
-    
+
     - `@{}`: use `get()` and `getProp()` instead
     - `OSC{}`: use `get()` instead (using another widget as receiver)
     - `VAR{}`: use `getVar()`instead
@@ -104,7 +104,7 @@ The following variables and functions are accessible in this context.
 - `console`: javascript console
 - `locals`: object for storing/reading arbitrary values. Changing its properties *does not* trigger any synchronisation even if the value is used somewhere else.
 - `globals`: same as `locals` but shared between all widgets, contains a few useful variables:
-    - `screen`: client screen dimensions (`{width, height}`)
+    - `screen`: client screen informations (`{width, height, orientation}`)
     - `env`: client options (ie: url query options),
     - `ip`: client's ip address,
     - `url`: server url,
