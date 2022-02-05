@@ -7,8 +7,8 @@ var UiWidget = require('./ui-widget'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     fastdom = require('fastdom'),
-    getCodeEditor = require('./ui-code-editor')
-
+    getCodeEditor = require('./ui-code-editor'),
+    codeEditorModKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
 
 class UiInspector extends UiWidget {
 
@@ -268,7 +268,7 @@ class UiInspector extends UiWidget {
 
             if (event.keyCode === 13 &&
                 ((!event.shiftKey && !event.target._ace) ||
-                (event.ctrlKey && event.target._ace))
+                (event[codeEditorModKey] && event.target._ace))
             ) {
 
                 event.preventDefault()

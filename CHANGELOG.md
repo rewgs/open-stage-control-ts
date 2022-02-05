@@ -10,6 +10,7 @@
 
 - inspector
     - color picker: inline picker widget (no longer in a modal); show color changes on the fly
+    - code editor: validate input with `cmd+enter` instead of `ctrl+enter` on Mac
 
 - scripting
     - `screen.height` and `screen.width` always returns the current screen dimensions

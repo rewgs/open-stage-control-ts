@@ -8,7 +8,8 @@ var UiModal = require('./ui-modal'),
     scriptGlobals = ScriptVm.globals,
     editors = {}, editorModes = {
         javascript: require('brace/mode/javascript')
-    }
+    },
+    codeEditorModKey = (navigator.platform || '').match('Mac') ? 'Cmd' : 'Ctrl'
 
 class CodeEditor {
 
@@ -252,7 +253,7 @@ class CodeEditor {
                         <th>Command</th>
                     </tr>
                 </thead>
-                    <tr><td><span class="kbd">Ctrl-Enter</span></td><td>save</td></tr>
+                    <tr><td><span class="kbd">${codeEditorModKey}-Enter</span></td><td>save</td></tr>
                     ${keybindings.map(k=>html`<tr><td><span class="kbd">${k.key}</span></td><td>${k.command}</td></tr>`)}
                 </table>
             </div>
