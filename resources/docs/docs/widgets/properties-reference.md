@@ -94,9 +94,9 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="button_on">on<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#button_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message |
-            | <h6 id="button_off">off<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#button_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message. Must be different from `on`. |
-            | <h6 id="button_mode">mode<a class="headerlink" href="#button_mode" title="Permanent link">#</a></h6> | `string` | <code>"toggle"</code> | Interraction mode:<br/>- `toggle` (classic on/off switch)<br/>- `push` (press & release)<br/>- `tap` (no release)<br/><br/>Choices: `toggle`, `push`, `tap` |
+            | <h6 id="button_on">on<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#button_on" title="Permanent link">#</a></h6> | `*` | <code>1</code> | Set to `null` to send send no argument in the osc message. Ignored if `mode` is `momentary`. |
+            | <h6 id="button_off">off<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#button_off" title="Permanent link">#</a></h6> | `*` | <code>0</code> | Set to `null` to send send no argument in the osc message. Must be different from `on`. Ignored if `mode` is `momentary` or `tap`. |
+            | <h6 id="button_mode">mode<a class="headerlink" href="#button_mode" title="Permanent link">#</a></h6> | `string` | <code>"toggle"</code> | Interraction mode:<br/>- `toggle` (classic on/off switch)<br/>- `push` (press & release)<br/>- `momentary` (no release, no value sent)<br/>- `tap` (no release, sends `on` as value)<br/><br/>Choices: `toggle`, `push`, `momentary`, `tap` |
             | <h6 id="button_doubleTap">doubleTap<a class="headerlink" href="#button_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the button require a double tap to be pushed instead of a single tap |
 
     === "scripting"
@@ -909,7 +909,7 @@
 ## Scripts
 
 ??? api "<div id="script">script<a class="headerlink" href="#script" title="Permanent link">#</a></div>"
-    Sscripting widget utility with keyboard bindings
+    Scripting widget utility with keyboard bindings
 
     === "scripting"
 
