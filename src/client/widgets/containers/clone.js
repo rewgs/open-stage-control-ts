@@ -53,6 +53,15 @@ class Clone extends Container() {
 
         this.container.classList.add('empty')
 
+        var parent = this.parent
+        while (parent !== widgetManager) {
+            if (parent.getProp('id') === this.getProp('widgetId')) {
+                this.errorProp('widgetId', 'circular reference', 'cannot create clone: target widget is a parent of this clone.')
+                return
+            }
+            parent = parent.parent
+        }
+
         this.bindTarget(this.getCloneTarget())
         if (this.cloneTarget) this.createClone(true)
 

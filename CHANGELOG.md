@@ -4,6 +4,7 @@
 
 - bug fixes
     - inspector: script editor: cursor alignment issue in indented lines  
+    - clone: prevent freeze and print an error when attempting to create a circular clone
 
 ## 1.14.5
 
