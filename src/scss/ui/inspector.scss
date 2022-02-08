@@ -320,7 +320,8 @@ osc-inspector-field .ace_editor {
     }
     .ace_indent-guide {
         background: none;
-        border-right: 1rem solid rgba(white, 0.05)
+        border-right: 1rem solid rgba(white, 0.05);
+        margin-left: -1rem;
     }
     .ace_tooltip {
         left:$padding!important;

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.15.6
+
+- bug fixes
+    - inspector: script editor: cursor alignment issue in indented lines  
+
 ## 1.14.5
 
 - bug fixes
