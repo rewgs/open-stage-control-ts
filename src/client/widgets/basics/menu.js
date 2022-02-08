@@ -278,7 +278,7 @@ class Menu extends MenuBase {
             scrollY = 0,
             stop = this.getProp('ignoreTabs') ? /root/ : /root|tab/
 
-        while (parent && parent.props && !parent.getProp('type').match(stop)) {
+        while (parent && parent.props && !String(parent.getProp('type')).match(stop)) {
 
             parent.modalBreakout += (this.opened ? 1 : -1)
             if (parent.modalBreakout > 0) parent.container.classList.add('modal-breakout')

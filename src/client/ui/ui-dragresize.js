@@ -167,12 +167,13 @@ class UiDragResize extends UiWidget {
     updateRectangle() {
 
         var widgets = this.widgets,
-            widget = widgets[0]
+            widget = widgets[0],
+            layout = String(widget.parent.getProp('layout'))
 
         var handlesVisibility = [
-            widget.parent.getProp('layout') === 'default', // nw
-            widget.parent.getProp('layout').match(/horizontal|default/),                            // e
-            widget.parent.getProp('layout').match(/vertical|default/),                          // s
+            layout === 'default', // nw
+            layout.match(/horizontal|default/),                            // e
+            layout.match(/vertical|default/),                          // s
         ]
         handlesVisibility.push(handlesVisibility[1] && handlesVisibility[2])           // se
 
