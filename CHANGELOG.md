@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.14.5
+
+- bug fixes
+    - session loading error with some malformed property cases
+
 ## 1.14.4
 
 - bug fixes
