@@ -73,8 +73,9 @@ class Button extends Widget {
             }, {element: this.widget})
         }
 
-        var tap = this.getProp('mode').match(/momentary|tap/),
-            push = this.getProp('mode') === 'push' || tap
+        var mode = this.getProp('mode'),
+            tap = mode ===  'momentary' || mode === 'tap',
+            push = mode === 'push' || tap
 
         if (push) {
 
@@ -151,7 +152,7 @@ class Button extends Widget {
 
         if (tap) this.noValueState = true
 
-        if (this.getProp('mode') === 'momentary') {
+        if (mode === 'momentary') {
             this.value = null
         } else {
             this.value = this.getProp('off')
@@ -177,7 +178,8 @@ class Button extends Widget {
             } catch (err) {}
         }
 
-        var newstate
+        var newstate,
+            mode = this.getProp('mode')
 
         if (deepEqual(v, this.getProp('on'))) {
 
@@ -187,7 +189,7 @@ class Button extends Widget {
 
             newstate = 0
 
-        } else if (this.getProp('mode') === 'momentary' && v === null) {
+        } else if (mode === 'momentary' && v === null) {
 
             newstate = 1
 
@@ -196,10 +198,10 @@ class Button extends Widget {
         if (newstate !== undefined) {
 
             this.state = newstate
-            if (this.getProp('mode').match(/toggle|push/)){
+            if (mode === 'toggle' || mode === 'push') {
                 this.container.classList.toggle('on', this.state)
             }
-            if (this.getProp('mode') !== 'momentary') {
+            if (mode !== 'momentary') {
                 this.value = this.getProp(this.state ? 'on' : 'off')
             }
 
@@ -213,7 +215,7 @@ class Button extends Widget {
             if (options.sync) this.changed(options)
 
             // tap mode
-            if (newstate && this.getProp('mode').match(/momentary|tap/) && !options.tapRelease) {
+            if (newstate && (mode ===  'momentary' || mode === 'tap') && !options.tapRelease) {
 
                 // reset value
                 this.setValue(this.getProp('off'), {sync: false, send: false, tapRelease: true})
