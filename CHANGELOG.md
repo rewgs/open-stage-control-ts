@@ -5,6 +5,7 @@
 - bug fixes
     - inspector: script editor: cursor alignment issue in indented lines  
     - clone: prevent freeze and print an error when attempting to create a circular clone
+    - modal: regression on android that prevents focusing input widgets in modals 
 
 ## 1.14.5
 

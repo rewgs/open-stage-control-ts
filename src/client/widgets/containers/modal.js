@@ -105,8 +105,8 @@ class Modal extends Panel {
         } else {
             this.on('fast-click',(e)=>{
                 if (e.capturedByEditor === true) return
-                e.detail.preventOriginalEvent = true
                 if (e.target === this.toggle) {
+                    e.detail.preventOriginalEvent = true
                     this.setValue(1, {sync:true, send:true})
                 }
             }, {element: this.container})
