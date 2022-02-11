@@ -384,7 +384,9 @@ class Editor {
 
                 } else if (e.key === 'ArrowRight') {
 
-                    toSelect = curWidget.children[0]
+                    if (!curWidget.children[0]._not_editable) {
+                        toSelect = curWidget.children[0]
+                    }
 
                 } else if((e.key == 'ArrowUp') || (e.key == 'ArrowDown')){
 

@@ -1,11 +1,16 @@
 # Changelog
 
-## 1.15.6
+## 1.14.7
+
+- bug fixes
+    - editor: prevent accessing non-editable widgets with right arrow
+
+## 1.14.6
 
 - bug fixes
     - inspector: script editor: cursor alignment issue in indented lines  
     - clone: prevent freeze and print an error when attempting to create a circular clone
-    - modal: regression on android that prevents focusing input widgets in modals 
+    - modal: regression on android that prevents focusing input widgets in modals
 
 ## 1.14.5
 
