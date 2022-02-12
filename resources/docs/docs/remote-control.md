@@ -11,7 +11,7 @@ When osc messages are received, the default behavior is to update the value of a
 #### `/EDIT id properties options`
 
 
-Apply a set of options to an existing widget by replacing the old ones with the new ones.
+Apply a set of options to an existing widget by replacing the old ones with the new ones. This ignores the widget's `lock` property.
 
 
 - `id`: `string`, widget's `id`

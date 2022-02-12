@@ -5,6 +5,9 @@
 - bug fixes
     - editor: prevent accessing non-editable widgets with right arrow
 
+- widgets
+    - add `lock` property to all widgets
+
 ## 1.14.6
 
 - bug fixes

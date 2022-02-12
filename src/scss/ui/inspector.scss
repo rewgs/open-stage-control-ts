@@ -17,6 +17,19 @@ osc-panel-container.right.editor-breakout {
 
     --widget-padding: -1rem;
 
+    .lock {
+        osc-inspector-field {
+            filter: saturate(0);
+            pointer-events: none;
+            opacity: 0.65;
+        }
+        osc-inspector-field[name=lock] {
+            filter: none;
+            pointer-events: auto;
+            opacity: 1.0;
+        }
+    }
+
 }
 
 osc-inspector-field {

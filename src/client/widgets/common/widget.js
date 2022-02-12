@@ -54,6 +54,7 @@ class Widget extends EventEmitter {
 
         var defaults = {
             widget: {
+                lock: {type: 'boolean', value: false, help: 'Set to `true` to prevent modifying this widget with the editor. This will not prevent deleting the widget or moving it from a container to another.'},
                 type: {type: 'string', value: 'auto', help: 'Widget type'},
                 id: {type: 'string', value: 'auto', help: 'Widgets sharing the same `id` will act as clones and update each other\'s value(s) without sending extra osc messages.' },
                 visible: {type: 'boolean', value: true, help: 'Set to `false` to hide the widget.'},

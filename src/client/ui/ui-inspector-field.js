@@ -17,7 +17,7 @@ class UiInspectorField extends UiWidget {
         this.default = options.default
         this.tabIndex = options.tabIndex
 
-        this.container = html`<osc-inspector-field></osc-inspector-field>`
+        this.container = html`<osc-inspector-field name="${this.name}"></osc-inspector-field>`
         this.label = this.container.appendChild(html`<label>${this.name}</label>`)
 
         if (this.name === 'type' || this.name === 'widgetType') this.createTypeSelect()

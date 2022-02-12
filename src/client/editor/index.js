@@ -33,6 +33,11 @@ class Editor {
                 newWidgets = [],
                 error = false
 
+            if (this.selectedWidgets.some(w=>w.getProp('lock')) && propName !== 'lock') {
+                this.select(this.selectedWidgets)
+                return
+            }
+
             for (var w of this.selectedWidgets) {
 
                 let previousValue = w.props[propName]
@@ -557,6 +562,16 @@ class Editor {
 
         }
 
+        var parent = this.selectedWidgets[0].parent,
+            parentLock = false
+        while (parent !== widgetManager) {
+            if (parent.getProp('lock')) {
+                this.selectedWidgets = [parent]
+                parentLock = true
+            }
+            parent = parent.parent
+        }
+
         if (options.fromLasso && !options.lassoEnd) return
 
         this.unselect()
@@ -818,6 +833,11 @@ class Editor {
 
         if (!this.selectedWidgets.length) return
 
+        if (this.selectedWidgets.some(w=>w.getProp('lock'))) {
+            this.createSelectionBlock()
+            return
+        }
+
         var newWidgets = [],
             area = this.widgetDragResize,
             changedProps = []
@@ -890,6 +910,11 @@ class Editor {
     moveWidget(deltaX, deltaY) {
 
         if (!this.selectedWidgets.length) return
+
+        if (this.selectedWidgets.some(w=>w.getProp('lock'))) {
+            this.createSelectionBlock()
+            return
+        }
 
         var newWidgets = []
 

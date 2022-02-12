@@ -265,7 +265,7 @@ class UiTree extends UiWidget {
             id = widget.getProp('id'),
             node = html`<li class="${selected ? 'editing' : ''} ${!widget.getProp('visible') ? 'invisible' : ''}"
                             data-widget="${widget.hash}" data-type="${widget.getProp('type')}">
-                        ${raw(icon(widgetIcons[widget.getProp('type')] || 'root'))}${id}</li>`
+                        ${raw(icon(widgetIcons[widget.getProp('type')] || 'root'))}${id}${widget.getProp('lock')? raw(icon('lock')) :''}</li>`
 
 
         node.depth = depth

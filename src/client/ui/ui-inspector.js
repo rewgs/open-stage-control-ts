@@ -117,14 +117,16 @@ class UiInspector extends UiWidget {
             this.clearTimeout = null
         }
 
-        var content = html`<div></div>`
 
         var widget = widgets[0],
+            lock = widgets.some(w=>w.getProp('lock')),
             props = defaults[widget.props.type],
             tabIndex = 1000,
             codeEditorFields = []
 
         this.widget = widget
+
+        var content = html`<div class="${lock ? 'lock' : ''}"></div>`
 
         for (let categoryName in props) {
 
