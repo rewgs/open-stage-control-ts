@@ -562,12 +562,10 @@ class Editor {
 
         }
 
-        var parent = this.selectedWidgets[0].parent,
-            parentLock = false
+        var parent = this.selectedWidgets[0].parent
         while (parent !== widgetManager) {
             if (parent.getProp('lock')) {
                 this.selectedWidgets = [parent]
-                parentLock = true
             }
             parent = parent.parent
         }
