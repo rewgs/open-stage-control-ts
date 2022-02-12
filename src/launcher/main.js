@@ -1,7 +1,8 @@
 var terminal = require('./terminal'),
     settings = require('./settings'),
     html = require('nanohtml'),
-    semver = require('semver')
+    semver = require('semver'),
+    {ipcRenderer} = require('electron')    
 
 require('./toolbar')
 
@@ -32,7 +33,14 @@ if (settings.remote.read('checkForUpdates') && navigator.onLine) {
 }
 
 if (settings.remote.read('alwaysOnTop')) {
-    
+
     remote.getCurrentWindow().setAlwaysOnTop(true)
+
+}
+
+
+if (settings.remote.read('autoStart')) {
+
+    ipcRenderer.send('start')
 
 }

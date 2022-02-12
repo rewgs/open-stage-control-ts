@@ -100,6 +100,15 @@ menu.append(new MenuItem({
     type: 'separator'
 }))
 menu.append(new MenuItem({
+    label: 'Autostart',
+    type: 'checkbox',
+    checked: settings.remote.read('autoStart'),
+    click: (e)=>{
+        settings.remote.write('autoStart', e.checked)
+        remote.getCurrentWindow().setAlwaysOnTop(e.checked)
+    }
+}))
+menu.append(new MenuItem({
     label: 'Always on top',
     type: 'checkbox',
     checked: settings.remote.read('alwaysOnTop'),

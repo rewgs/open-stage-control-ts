@@ -12,6 +12,7 @@
     - Clear: clear console
     - Autoscroll: enable/disable console autoscroll
     - Check for update at startup: enable/disable this feature
+- Autostart: start the server automatically when launcher is started
 - Always on top: pin the launcher window above other the windows
 
 The "play/stop" icon can be used to start and stop the server without opening the menu.

@@ -8,6 +8,9 @@
 - widgets
     - add `lock` property to all widgets
 
+- launcher
+    - add `Autostart` menu option
+
 ## 1.14.6
 
 - bug fixes
