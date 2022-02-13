@@ -12,6 +12,7 @@
 
     | property | type |default | description |
     | --- | --- | --- | --- |
+        | <h6 id="lock">lock<a class="headerlink" href="#lock" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to prevent modifying this widget with the editor. This will not prevent deleting the widget or moving it from a container to another. |
         | <h6 id="type">type<a class="headerlink" href="#type" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widget type |
         | <h6 id="id">id<a class="headerlink" href="#id" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widgets sharing the same `id` will act as clones and update each other's value(s) without sending extra osc messages. |
         | <h6 id="visible">visible<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visible" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the widget. |
