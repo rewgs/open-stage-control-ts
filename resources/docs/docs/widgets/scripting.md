@@ -154,6 +154,10 @@ Returns the value of a widget's custom variable.
 
 Sets the value of a widget's custom variable (see [advanced syntaxes](./advanced-syntaxes.md##ustom-variables-varvariablename-default)). If `ìd` contains wildcards, affects all matching widgets.
 
+!!! warning ""
+    Setting a variable on a parent container that's used to defined a non-dynamic property is not possible.
+
+
 ----
 
 #### `send(target, address, ...args)`
