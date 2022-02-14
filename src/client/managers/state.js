@@ -224,6 +224,7 @@ var StateManager = class StateManager {
         for (let id in this.valueStateQueue) {
             if (this.valueStateQueue[id] !== undefined) {
                 for (let w of widgetManager.getWidgetById(id)) {
+                    if (w.noValueState) continue
                     w.setValue(this.valueStateQueue[id], {sync: true, fromState:true, fromEdit: true})
                 }
             }
@@ -232,6 +233,7 @@ var StateManager = class StateManager {
         for (let id in this.valueNewPropQueue) {
             if (this.valueNewPropQueue[id] != this.valueOldPropQueue[id]) {
                 for (let w of widgetManager.getWidgetById(id)) {
+                    if (w.noValueState) continue
                     w.setValue(w.getProp('value'), {sync: true, fromState:true})
                 }
             }
