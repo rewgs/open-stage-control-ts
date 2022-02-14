@@ -18,6 +18,9 @@ Widgets can run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 
 This script is called when the widget is created. If the widget has children, it will be executed after the children are created.
 
+!!! warning "Modifying parent container"
+    Modifying a non-dynamic property on a parent container from this script (for example by calling **will not work**.
+
 ### `onValue`
 
 This script is called when the widget receives a value.
@@ -153,9 +156,6 @@ Returns the value of a widget's custom variable.
 - `value`: new value for the variable.
 
 Sets the value of a widget's custom variable (see [advanced syntaxes](./advanced-syntaxes.md##ustom-variables-varvariablename-default)). If `ìd` contains wildcards, affects all matching widgets.
-
-!!! warning ""
-    Setting a variable on a parent container that's used to defined a non-dynamic property is not possible.
 
 
 ----
