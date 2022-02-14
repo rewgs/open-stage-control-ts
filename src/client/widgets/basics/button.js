@@ -218,7 +218,7 @@ class Button extends Widget {
             if (newstate && (mode ===  'momentary' || mode === 'tap') && !options.tapRelease) {
 
                 // reset value
-                this.setValue(this.getProp('off'), {sync: false, send: false, tapRelease: true})
+                if (mode === 'tap') this.setValue(this.getProp('off'), {sync: false, send: false, tapRelease: true})
 
                 // pulse
                 clearTimeout(this.pulse)
