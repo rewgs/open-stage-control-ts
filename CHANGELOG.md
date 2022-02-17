@@ -11,6 +11,9 @@
 - launcher
     - add `Autostart` menu option
 
+- misc
+    - update FontAwesome icon font to version 6 
+
 ## 1.14.6
 
 - bug fixes
