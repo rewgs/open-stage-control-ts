@@ -19,7 +19,7 @@ Widgets can run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 This script is called when the widget is created. If the widget has children, it will be executed after the children are created.
 
 !!! warning "Modifying parent container"
-    Modifying a non-dynamic property on a parent container from this script (for example by calling **will not work**.
+    Modifying a non-dynamic property on a parent container from this script **will not work**.
 
 ### `onValue`
 
