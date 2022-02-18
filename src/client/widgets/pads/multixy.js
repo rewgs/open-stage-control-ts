@@ -134,6 +134,8 @@ module.exports = class MultiXy extends Pad {
 
             if (!i) return
 
+            e.inertia = 1 // cancel mutlifinger inertia
+
             this.pads[i].trigger('drag', e)
 
         }, {element: this.widget, multitouch: true})

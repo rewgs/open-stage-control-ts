@@ -1,9 +1,10 @@
 # Changelog
 
-## 1.14.7
+## 1.15.0
 
 - bug fixes
     - editor: prevent accessing non-editable widgets with right arrow
+    - multixy: regression causing interaction issue
 
 - widgets
     - add `lock` property to all widgets
@@ -12,7 +13,7 @@
     - add `Autostart` menu option
 
 - misc
-    - update FontAwesome icon font to version 6 
+    - update FontAwesome icon font to version 6
 
 ## 1.14.6
 
