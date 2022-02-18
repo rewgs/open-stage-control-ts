@@ -190,7 +190,6 @@ class Button extends Widget {
             newstate = 0
 
         } else if (mode === 'momentary' && (v === null || v === undefined)) {
-
             newstate = 1
 
         }

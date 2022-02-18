@@ -305,6 +305,7 @@ Triggers toolbar action at specified index.
 
     Actions will only be triggered if initiated with a user interaction. Fullscreen cannot be toggled with a simulated interaction (i.e. using `/SET`)
 
+----
 
 #### `openUrl(url)`
 - `url`: http(s) url
@@ -313,3 +314,11 @@ Triggers toolbar action at specified index.
 *External client only*: opens url in a new tab
 
 If the event that triggered the script's execution was not initiated by a user interaction, this function will have no effect.
+
+----
+
+#### `runAs(id, callback)`
+- `id`: widget `id` as a string.
+- `callback`: function to be executed
+
+Run `callback` function as if executed by another that widget matches specified id. This will not change the value of any local variable but `"this"` and `"parent"` arguments (accepted by functions such as `set()`) will be interpreted differently. Timeouts and intervals will be created and cleared in the target widget's scope.

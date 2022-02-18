@@ -486,9 +486,29 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.runAs = (id, callback)=>{
+
+            this.checkContext('runAs')
+
+            var widgets = this.resolveId(id)
+
+            if (widgets.length) {
+
+                this.setWidget(widgets[0])
+                try {
+                    callback()
+                } catch(e) {
+                    widget.errorProp('script', 'runAs', e)
+                }
+                this.setWidget()
+
+            }
+
+        }
+
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus', 'setScroll', 'getScroll', 'toolbar',
-            'openUrl', 'getVar', 'setVar']) {
+            'openUrl', 'getVar', 'setVar', 'runAs']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
 
