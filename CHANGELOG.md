@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.15.1
+
+- bug fixes
+    - prevent flickering on canvas based widgets when they are recreated
+
 ## 1.15.0
 
 - bug fixes

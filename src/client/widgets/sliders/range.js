@@ -92,9 +92,9 @@ class Range extends Fader {
 
     }
 
-    resizeHandle(event){
+    extraResizeHandle(event){
 
-        super.resizeHandle(event)
+        super.extraResizeHandle(event)
 
         for (var f of this.faders) {
             f.width = this.width

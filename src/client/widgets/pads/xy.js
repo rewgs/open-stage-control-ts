@@ -153,19 +153,15 @@ module.exports = class Xy extends Pad {
 
     }
 
-    resizeHandle(event){
+    extraResizeHandle(event){
 
-        super.resizeHandle(event)
+        super.extraResizeHandle(event)
 
-        fastdom.measure(()=>{
-            fastdom.mutate(()=>{
-                for (var k in this.faders) {
-                    this.faders[k].width = this.width
-                    this.faders[k].height = this.height
-                    this.faders[k].gaugePadding = this.padPadding
-                }
-            })
-        })
+        for (var k in this.faders) {
+            this.faders[k].width = this.width
+            this.faders[k].height = this.height
+            this.faders[k].gaugePadding = this.padPadding
+        }
 
     }
 

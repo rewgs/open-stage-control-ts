@@ -160,9 +160,9 @@ module.exports = class Knob extends Slider {
 
     }
 
-    resizeHandle() {
+    extraResizeHandle() {
 
-        super.resizeHandle(...arguments)
+        super.extraResizeHandle(event)
 
         this.minDimension = Math.min(this.width, this.height)
 

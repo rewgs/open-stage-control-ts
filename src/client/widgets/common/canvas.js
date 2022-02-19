@@ -95,18 +95,22 @@ class Canvas extends Widget {
                 this.ctx.scale(ratio, ratio)
             }
 
-            if (!preventDraw) {
-                if (!this.hasSize) {
-                    this.hasSize = true
-                    this.setVisibility()
-                    this.batchDraw()
-                } else {
-                    this.draw()
-                }
+            this.extraResizeHandle(event)
+
+            if (!this.hasSize) {
+                this.hasSize = true
+                this.setVisibility()
             }
+            this.draw()
 
         })
 
+    }
+
+    extraResizeHandle(event) {
+
+        // to be overridden if subclass needs additional actions
+        // before redraw
 
     }
 

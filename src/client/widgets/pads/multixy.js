@@ -175,15 +175,16 @@ module.exports = class MultiXy extends Pad {
 
     }
 
-    resizeHandle(event){
+    extraResizeHandle(event){
 
-        super.resizeHandle(event)
+        super.extraResizeHandle(event)
 
         for (var k in this.pads) {
             this.pads[k].width = this.width
             this.pads[k].height = this.height
             this.pads[k].padPadding = this.padPadding
         }
+        
         this.updateHandlesPosition()
 
 
