@@ -1,6 +1,5 @@
 var {clip} = require('../utils'),
-    Slider = require('./slider'),
-    fastdom = require('fastdom')
+    Slider = require('./slider')
 
 class Fader extends Slider {
 

@@ -66,7 +66,7 @@ class Canvas extends Widget {
 
     resizeHandle(event){
 
-        var {width, height, style, preventDraw} = event,
+        var {width, height, style} = event,
             ratio = CANVAS_SCALING * this.scaling
 
         this.height = height

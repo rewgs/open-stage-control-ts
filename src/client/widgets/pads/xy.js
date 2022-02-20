@@ -1,8 +1,7 @@
 var Pad = require('./pad'),
     Fader = require('../sliders/fader'),
     doubleTap = require('../mixins/double_tap'),
-    touchstate = require('../mixins/touch_state'),
-    fastdom = require('fastdom')
+    touchstate = require('../mixins/touch_state')
 
 var faderDefaults = Fader.defaults()._props()
 
