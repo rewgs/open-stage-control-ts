@@ -84,7 +84,7 @@ class Widget extends EventEmitter {
                 alphaFillOn: {type: 'number', value: 'auto', help: 'Fill color opacity (on).'},
                 lineWidth: {type: 'number', value: 'auto', help: 'Stroke width.'},
                 padding: {type: 'number', value: 'auto', help: 'Inner spacing.'},
-                html: {type: 'string', value: '', help: [
+                html: {type: 'string', value: '', editor: 'html', syntaxChecker: false, help: [
                     'Custom html content to be inserted in the widget (before the widget\'s content). Elements are all unstyled by default, `css` should be used to customize their appearance.',
                     'The code is automatically wrapped in &lt;div class="html">&lt;/div>',
                     'Allowed HTML tags:',
@@ -95,7 +95,7 @@ class Widget extends EventEmitter {
                     '&nbsp;&nbsp;&lt;*>: class, style, title, name',
                     '&nbsp;&nbsp;&lt;img>: src, width, height',
                 ]},
-                css: {type: 'string', value: '', help: [
+                css: {type: 'string', value: '', editor: 'css', syntaxChecker: false, help: [
                     'CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.',
                     'Some style-related properties can be set or read from css using css variables:',
                     ...Class.cssVariables.map(x=>'- `' + x.css + '`: `' + x.js + '`')

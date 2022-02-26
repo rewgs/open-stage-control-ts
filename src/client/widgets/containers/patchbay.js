@@ -73,13 +73,7 @@ class PatchBay extends Container(Canvas) {
 
     static defaults() {
 
-        return super.defaults().extend({
-            style: {
-                css: {type: 'string', value: '', help: [
-                    'The inputs/ouputs width can be adjusted by using the  `.nodes` selector:',
-                    '`.nodes { width: 25% }`',
-                ]}
-            },
+        var defaults = super.defaults().extend({
             class_specific: {
                 inputs: {type: 'array|object', value: ['input_1', 'input_2'], help: [
                     '- `Array` of input names : `[\'input_1\', \'input_2\']`',
@@ -94,6 +88,12 @@ class PatchBay extends Container(Canvas) {
             }
         })
 
+        defaults.style.css.help.concat(
+            'The inputs/ouputs width can be adjusted by using the  `.nodes` selector:',
+            '`.nodes { width: 25% }`',
+        )
+
+        return defaults
     }
 
     static normalizeArrayObject(obj) {

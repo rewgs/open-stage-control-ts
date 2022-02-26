@@ -5,6 +5,9 @@
 - bug fixes
     - prevent flickering on canvas based widgets when they are recreated
 
+- editor
+    - added code editor for `html` and `css` properties
+
 ## 1.15.0
 
 - bug fixes

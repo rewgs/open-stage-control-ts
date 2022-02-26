@@ -7,7 +7,9 @@ var UiModal = require('./ui-modal'),
     ScriptVm = require('../widgets/scripts/script-vm'),
     scriptGlobals = ScriptVm.globals,
     editors = {}, editorModes = {
-        javascript: require('brace/mode/javascript')
+        javascript: require('brace/mode/javascript'),
+        css: require('brace/mode/css'),
+        html: require('brace/mode/html'),
     },
     codeEditorModKey = (navigator.platform || '').match('Mac') ? 'Cmd' : 'Ctrl'
 
