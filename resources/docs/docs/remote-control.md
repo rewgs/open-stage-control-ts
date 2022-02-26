@@ -223,3 +223,10 @@ Open the tabs designated by the id parameters.
 #### `/SCRIPT code`
 
 Run code as if it where executed by a script widget.
+
+
+----
+
+#### `/RELOAD`
+
+Reload page in the browser.

@@ -291,6 +291,11 @@ var callbacks = {
 
         uiConsole.script.run({input_code: args[0]}, {sync: true, send: true})
 
+    },
+    '/RELOAD': function(args) {
+
+        window.location.href = window.location.href
+
     }
 }
 
