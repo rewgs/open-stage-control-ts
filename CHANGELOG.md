@@ -8,6 +8,9 @@
 - editor
     - added code editor for `html` and `css` properties
 
+- remote control
+    - add `/RELOAD` command
+
 ## 1.15.0
 
 - bug fixes
