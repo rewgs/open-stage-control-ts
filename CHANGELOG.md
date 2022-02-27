@@ -4,7 +4,8 @@
 
 - bug fixes
     - modal: scroll state not restored when the modal container is recreated
-
+    - server: allow spaces and accentuated characters in client id
+    
 ## 1.15.1
 
 - bug fixes

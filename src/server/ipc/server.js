@@ -31,6 +31,8 @@ class Ipc extends EventEmitter {
 
             if (!id) return
 
+            id = decodeURI(id)
+
             if (!this.clients[id]) {
 
                 var client = new Client(socket, id, req.connection.remoteAddress)
