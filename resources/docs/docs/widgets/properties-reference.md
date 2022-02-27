@@ -395,7 +395,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="patchbay_css">css<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#patchbay_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | The inputs/ouputs width can be adjusted by using the  `.nodes` selector:<br/><br/>`.nodes { width: 25% }` |
+            | <h6 id="patchbay_css">css<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#patchbay_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Some style-related properties can be set or read from css using css variables:<br/>- `--color-background`: `colorBg`<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--widget-padding`: `padding`<br/>- `--line-width`: `lineWidth`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--alpha-pips`: `alphaPips`<br/>- `--alpha-pips-text`: `alphaPipsText`<br/><br/>Canvas-based widget have their computed width and height available as css variables (read-only):<br/>- `--widget-width`<br/>- `--widget-height` |
 
     === "patchbay"
 
