@@ -268,7 +268,12 @@ class Modal extends Panel {
 
     }
 
+    setScroll(x, y) {
 
+        if (x !== undefined) this.popupContent.firstChild.scrollLeft = this.scroll[0] = x
+        if (y !== undefined) this.popupContent.firstChild.scrollTop = this.scroll[1] = y
+
+    }
 
 }
 

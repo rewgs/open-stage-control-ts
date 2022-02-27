@@ -141,7 +141,7 @@ function updateWidget(widget, options={}) {
     if (stateManager.queueCounter === 0) {
         for (let id in scrollState) {
             for (let w of widgetManager.getWidgetById(id)) {
-                if (w.getProp('scroll')) w.setScroll(scrollState[id])
+                if (w.getProp('scroll')) w.setScroll(scrollState[id][0], scrollState[id][1])
             }
         }
     }
