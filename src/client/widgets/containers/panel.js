@@ -296,7 +296,7 @@ class Panel extends Container() {
             this.value = v
             clearTimeout(this.scrollTimeout)
             this.scrollTimeout = setTimeout(()=>{
-                this.setScroll(v[0] * this.scrollWidth, v[1] * this.scrollHeight)
+                if (this.scroll) this.setScroll(v[0] * this.scrollWidth, v[1] * this.scrollHeight)
             })
 
             if (options.send) this.sendValue()
