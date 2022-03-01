@@ -4,6 +4,8 @@
 
 - bug fixes
     - interaction issue ("deadzone") on touch screens
+    - main menu not hidden when `read-only` is set
+    - osc messages containing unicode characters not encoded correctly
 
 ## 1.15.2
 
