@@ -1,11 +1,16 @@
 # Changelog
 
+## 1.15.3
+
+- bug fixes
+    - interaction issue ("deadzone") on touch screens
+
 ## 1.15.2
 
 - bug fixes
     - modal: scroll state not restored when the modal container is recreated
     - server: allow spaces and accentuated characters in client id
-    
+
 ## 1.15.1
 
 - bug fixes

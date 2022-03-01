@@ -233,7 +233,6 @@ DOM.ready(()=>{
     document.addEventListener('touchmove', touchMoveCapture, true)
     DOM.addEventListener(document, 'touchend touchcancel', touchUpCapture, true)
 
-    document.addEventListener('touchstart', touchDownCapture, false)
     if (!iOS) document.addEventListener('pointerdown', mouseDownCapture)
 
 })
@@ -254,6 +253,7 @@ module.exports = {
         var {element, multitouch} = options
 
         element.style.touchAction = 'none'
+        element.addEventListener('touchstart', touchDownCapture, false)
         element._drag_widget = this
         element._drag_multitouch = multitouch
 
@@ -273,6 +273,7 @@ module.exports = {
         var {element} = options
 
         element.style.touchAction = ''
+        element.removeEventListener('touchstart', touchDownCapture, false)
         delete element._drag_widget
         delete element._drag_multitouch
 
