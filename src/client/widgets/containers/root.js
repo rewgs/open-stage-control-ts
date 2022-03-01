@@ -2,10 +2,6 @@ var Panel = require('./panel'),
     StaticProperties = require('../mixins/static_properties'),
     mainMenu
 
-setTimeout(()=>{
-    mainMenu= require('../../ui/main-menu')
-})
-
 class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'root'}) {
 
     static description() {
@@ -60,12 +56,14 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
 
         if (READ_ONLY) return
 
+        mainMenu = mainMenu || require('../../ui/main-menu')
+        
         if (this.getProp('hideMenu')) {
             mainMenu.container.style.display = 'none'
         } else {
             mainMenu.container.style.display = ''
         }
-        
+
     }
 
     isVisible() {
