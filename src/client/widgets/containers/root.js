@@ -57,11 +57,15 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
     }
 
     checkMenuVisibility() {
+
+        if (READ_ONLY) return
+
         if (this.getProp('hideMenu')) {
             mainMenu.container.style.display = 'none'
         } else {
             mainMenu.container.style.display = ''
         }
+        
     }
 
     isVisible() {
