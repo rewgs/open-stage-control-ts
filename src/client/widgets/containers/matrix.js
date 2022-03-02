@@ -41,6 +41,8 @@ class Matrix extends Panel {
 
         this.value = []
 
+        this.resolveLock = false
+
         this.on('value-changed',(e)=>{
 
             if (e.widget === this) return
@@ -172,19 +174,19 @@ class Matrix extends Panel {
 
     resolveProp(propName, propValue, storeLinks, originalWidget, originalPropName, context) {
 
-        if (propName === 'props') {
+        if (propName === 'props' && !this.resolveLock) {
+
+            this.resolveLock = true
 
             propValue = propValue !== undefined ? propValue : deepCopy(this.props[propName])
-
-            if (typeof propValue === 'object' && propValue !== null) {
-                propValue = JSON.stringify(propValue)
-            }
 
             var data = [],
                 quantity = this.resolveProp('quantity', undefined, false, false, false)
             for (var i = 0; i < quantity; i++) {
                 data[i] = super.resolveProp(propName, propValue, i === 0 ? storeLinks : false, originalWidget, originalPropName, {$: i})
             }
+
+            this.resolveLock = false
 
             return data
 

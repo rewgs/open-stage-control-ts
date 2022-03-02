@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.15.4
+
+- bug fixes
+    - matrix: avanced property issue in`props` property 
+
 ## 1.15.3
 
 - bug fixes
