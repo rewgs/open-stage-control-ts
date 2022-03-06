@@ -71,6 +71,7 @@ class CodeEditor {
         this.editor.$blockScrolling = Infinity
         this.editor.commands.bindKeys({
             'ctrl-l': null, 'ctrl-f': null, 'ctrl-h': null, 'ctrl-,': null,
+            'cmd-l': null, 'cmd-f': null, 'cmd-h': null, 'cmd-,': null,
         })
         this.editor.renderer.setScrollMargin(4, 4, 0, 4)
         this.editor.element = this.container
