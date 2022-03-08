@@ -1,9 +1,14 @@
 # Changelog
 
+## 1.15.5
+
+- editor
+    - inspector: add solo mode with `alt+click` for category panels
+
 ## 1.15.4
 
 - bug fixes
-    - matrix: avanced property issue in`props` property 
+    - matrix: avanced property issue in`props` property
 
 ## 1.15.3
 

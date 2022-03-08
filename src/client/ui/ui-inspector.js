@@ -25,8 +25,19 @@ class UiInspector extends UiWidget {
         this.container.addEventListener('fast-click', (e)=>{
 
             if (e.target.classList.contains('category-header')) {
-                var name = e.target.getAttribute('data-name'),
-                    expandedIndex = this.expandedCategories.indexOf(name)
+                var name = e.target.getAttribute('data-name')
+
+                if (e.detail.altKey) {
+                    DOM.each(this.container, 'osc-inspector-category.expanded', (item)=>{
+                        let iname = item.firstChild.getAttribute('data-name'),
+                            index = this.expandedCategories.indexOf(iname)
+                        if (iname !== name) {
+                            if (index > -1) this.expandedCategories.splice(index, 1)
+                            item.classList.remove('expanded')
+                        }
+                    })
+                }
+                var expandedIndex = this.expandedCategories.indexOf(name)
                 e.target.parentNode.classList.toggle('expanded', expandedIndex < 0)
                 if (expandedIndex > -1) {
                     this.expandedCategories.splice(expandedIndex, 1)
