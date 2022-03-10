@@ -185,7 +185,7 @@ class Matrix extends Panel {
 
             if (typeof propValue === 'object' && propValue !== null && !Array.isArray(propValue)) {
 
-                for (var i = 0; i < quantity; i++) {
+                for (let i = 0; i < quantity; i++) {
                     data[i] = {}
                     for (var k in propValue) {
                         data[i][k] = super.resolveProp(propName, propValue[k], i === 0 ? storeLinks : false, originalWidget, originalPropName, {$: i})
@@ -194,7 +194,7 @@ class Matrix extends Panel {
 
             } else {
 
-                for (var i = 0; i < quantity; i++) {
+                for (let i = 0; i < quantity; i++) {
                     data[i] = super.resolveProp(propName, propValue, i === 0 ? storeLinks : false, originalWidget, originalPropName, {$: i})
                 }
 
