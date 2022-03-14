@@ -45,6 +45,10 @@ npm start [ -- options]
 !!! info ""
     A double hyphen (`--`) is used here to tell npm that the options are to be passed to the app.
 
+
+!!! warning "MIDI support"
+    When running from sources, MIDI support won't be enabled unless the [MIDI configuration procedure](../midi/midi-configuration/) for "other systems" is followed.
+
 ## Build documentation
 
 In order to make the local documentation available through the server's `--docs` option and the launcher's `Documentation` menu action, an extra step is needed.
