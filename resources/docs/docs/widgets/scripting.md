@@ -2,7 +2,7 @@
 
 Widgets can run [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) scripts upon specific events. These scripts are written in special properties under the scripting category.
 
-!!! warning "Advanced syntaxe"
+!!! warning "Advanced syntaxes"
     Most [advanced syntaxes](../advanced-syntaxes/) should be avoided as much as possible in scripting properties:
 
     - `@{}`: use `get()` and `getProp()` instead
@@ -23,7 +23,7 @@ This script is called when the widget is created. If the widget has children, it
 
 ### `onValue`
 
-This script is called when the widget receives a value.
+This script is called when the widget's value updates and when it receives a value.
 
 The following variables are available in this context:
 
