@@ -33,4 +33,4 @@ Theme files are reloaded automatically when they are modified.
 
 ## SCSS
 
-If you want to use the [SCSS](https://sass-lang.com/documentation/syntax) syntax to write your theme, follow the [Running from sources](../../getting-started/running-from-sources) instructions, create a `.scss` file in `src/browser/scss/themes/` and run `npm run watch-css`. The theme will be watched and compiled automatically to a css file located in `app/browser/themes/` (css files in this directory can be selected from the theme option by their name, without .css suffix).
+If you want to use the [SCSS](https://sass-lang.com/documentation/syntax) syntax to write your theme, follow the [Running from sources](../../getting-started/running-from-sources) instructions, create a `.scss` file in `src/scss/themes/` and run `npm run watch-css`. The theme will be watched and compiled automatically to a css file located in `app/assets/themes/` (css files in this directory can be selected from the theme option by their name, without .css suffix).
