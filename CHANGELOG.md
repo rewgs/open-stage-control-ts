@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.15.6
+
+- bug fixes
+    - ios: prevent server error related to the use of cookies
+
 ## 1.15.5
 
 - bug fixes

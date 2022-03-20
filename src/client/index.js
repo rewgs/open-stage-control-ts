@@ -10,27 +10,37 @@ document.addEventListener('DOMContentLoaded', function(event) {
     var uiLoading = require('./ui/ui-loading')
     uiLoading(locales('loading_server'))
 
-    setTimeout(()=>{
+    function init() {
 
-        var ipc = require('./ipc/'),
-            backup = require('./backup')
+        setTimeout(()=>{
 
-        ipc.init()
+            var ipc = require('./ipc/'),
+                backup = require('./backup')
 
-
-        require('./ui/init')
-
-        document.title = TITLE
-
-        ipc.send('open', {hotReload: backup.exists})
-
-        window.onunload = ()=>{
-            ipc.send('close')
-        }
-
-        backup.load()
+            ipc.init()
 
 
-    }, 100)
+            require('./ui/init')
+
+            document.title = TITLE
+
+            ipc.send('open', {hotReload: backup.exists})
+
+            window.onunload = ()=>{
+                ipc.send('close')
+            }
+
+            backup.load()
+
+
+        }, 100)
+
+    }
+
+    if (document.requestStorageAccess) {
+        document.requestStorageAccess().then(init, init)
+    } else {
+        init()
+    }
 
 })
