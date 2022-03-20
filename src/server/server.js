@@ -45,19 +45,16 @@ resolveDirs.push(settings.read('remote-root') || '') // remote-root / absolute
 
 function resolvePath(url, clientId) {
 
-    if (clientId === undefined) {
+    var sessionPath
+
+    if (clientId === undefined || !ipc.clients[clientId]) {
         // safari seems to be picky with cookies
-        console.error(`(ERROR, HTTP) Could not resolve requested url ${url} (client id not found in http cookies)`)
-        return false
-    }
-
-    if (!ipc.clients[clientId]) {
+        if (clientId === undefined) console.error(`(W, HTTP) Could not resolve requested url ${url} (client id not found in http cookies)`)
         // this should never happen, but just in case...
-        console.error(`(ERROR, HTTP) Could not resolve requested url ${url} (unregistered client id ${clientId})`)
-        return false
+        else console.error(`(ERROR, HTTP) Could not resolve requested url ${url} (unregistered client id ${clientId})`)
+    } else {
+        sessionPath = path.dirname(ipc.clients[clientId].sessionPath)
     }
-
-    var sessionPath = path.dirname(ipc.clients[clientId].sessionPath)
 
     url = resolveHomeDir(url)
 
