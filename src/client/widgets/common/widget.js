@@ -746,7 +746,7 @@ class Widget extends EventEmitter {
                     }
                 }
 
-                var r = this.variables[name].value
+                var r = deepCopy(this.variables[name].value)
 
                 var varname = 'VAR_' + varnumber
                 varnumber--

@@ -187,7 +187,7 @@ class ScriptVm extends Vm {
 
             for (var i = widgets.length - 1; i >= 0; i--) {
 
-                if (widgets[i].variables[name]) return widgets[i].variables[name].value
+                if (widgets[i].variables[name]) return deepCopy(widgets[i].variables[name].value)
 
             }
 
