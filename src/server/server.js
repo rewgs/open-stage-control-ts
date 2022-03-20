@@ -47,7 +47,7 @@ function resolvePath(url, clientId) {
 
     var sessionPath
 
-    if (clientId === undefined || !ipc.clients[clientId]) {
+    if (!ipc.clients[clientId]) {
         // safari seems to be picky with cookies
         if (clientId === undefined) console.error(`(ERROR, HTTP) Could not resolve requested url ${url} (client id not found in http cookies)`)
         // this should never happen, but just in case...
