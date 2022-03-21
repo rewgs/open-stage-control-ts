@@ -4,6 +4,7 @@
 
 - bug fixes
     - ios: prevent server error related to the use of cookies
+    - scripting: `getVar()` now returns a copy of the variable to prevent mutations on saved object
 
 ## 1.15.5
 
