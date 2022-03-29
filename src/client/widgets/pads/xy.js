@@ -168,11 +168,11 @@ module.exports = class Xy extends Pad {
     setValue(v, options={}) {
 
         if (!v || !v.length || v.length!=2) return
-        if (this.touched && !options.dragged) return this.setValueTouchedQueue = [v, options]
+        if (this.touched && !options.dragged && !options.doubleTap) return this.setValueTouchedQueue = [v, options]
 
         if (!options.dragged) {
-            this.faders.x.setValue(v[0], {sync: false, send:false, dragged:false})
-            this.faders.y.setValue(v[1], {sync: false, send:false, dragged:false})
+            this.faders.x.setValue(v[0], {sync: false, send:false, dragged:false, doubleTap: options.doubleTap})
+            this.faders.y.setValue(v[1], {sync: false, send:false, dragged:false, doubleTap: options.doubleTap})
         }
 
         this.value = [
