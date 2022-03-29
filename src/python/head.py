@@ -8,6 +8,8 @@ def ipc_send(name, data):
     print(JSON.dumps([name, data]))
     stdout.flush()
 
+prebuilt_bin = 'osc-midi' in argv[0]
+
 try:
     import rtmidi
     from rtmidi.midiconstants import *
@@ -22,9 +24,11 @@ try:
     in_dev = rtmidi.MidiIn(API, 'MIDI->OSC probe')
     out_dev = rtmidi.MidiOut(API, 'OSC->MIDI probe')
 
-except:
-    ipc_send('log', '(ERROR, MIDI) python-rtmidi not found (or wrong version) (running with python %s)' % ".".join(map(str, version_info[:3])))
-    ipc_send('log', '(INFO, MIDI) Get python-rtmidi at https://spotlightkid.github.io/python-rtmidi/')
+except Exception as e:
+    if prebuilt_bin:
+        ipc_send('log', '(ERROR, MIDI) error while loading MIDI brigde program:\n              %s' % (e.message if hasattr(e, 'message') else e))
+    else:
+        ipc_send('log', '(ERROR, MIDI) error while loading python-rtmidi library (running with python %s):\n              %s' % (".".join(map(str, version_info[:3])), e.message if hasattr(e, 'message') else e))
     exit()
 
 if version_info.major == 3:
