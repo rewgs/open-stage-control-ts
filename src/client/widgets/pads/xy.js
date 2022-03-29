@@ -125,9 +125,7 @@ module.exports = class Xy extends Pad {
             } else {
 
                 doubleTap(this, ()=>{
-                    this.faders.x.setValue(this.faders.x.getSpringValue(), {sync: false, send:false, dragged:true})
-                    this.faders.y.setValue(this.faders.y.getSpringValue(), {sync: false, send:false, dragged:true})
-                    this.setValue([this.faders.x.getSpringValue(),this.faders.y.getSpringValue()],{sync:true, send:true, spring:true})
+                    this.setValue([this.faders.x.getSpringValue(),this.faders.y.getSpringValue()],{sync:true, send:true, spring:true, doubleTap:true})
                 }, {element: this.widget})
 
             }
