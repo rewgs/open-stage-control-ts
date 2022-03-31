@@ -152,7 +152,7 @@ class Range extends Fader {
 
         e.stopPropagation = true
         this.faders[id].trigger('draginit', e)
-        this.faders[i].touched = 1
+        this.faders[id].touched = 1
 
     }
 

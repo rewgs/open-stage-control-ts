@@ -1,11 +1,16 @@
 # Changelog
 
+## 1.15.8
+
+- bug fixes
+    - range: value update issue (internal touch state not updated properly)
+
 ## 1.15.7
 
 - bug fixes
     - matrix: property resolution issue with object/array items in `props`
     - bypass client option `nofocus=1` when the editor is enabled
-    - menu/dropdown: display label when value is undefined 
+    - menu/dropdown: display label when value is undefined
 
 - misc
     - updated midi bridge: provide more information when loading fails; may fix some compatibility issue on windows
