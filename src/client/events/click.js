@@ -1,4 +1,5 @@
 const iOS = require('../ui/ios')
+const editor = require('../editor')
 const macOs = (navigator.platform || '').match('Mac')
 
 var longTouchTimer = false,
@@ -37,7 +38,7 @@ function mouseToFastClick(event) {
 
     DOM.dispatchEvent(e.target, name, e)
 
-    if (ENV.nofocus && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'  && e.target.tagName !== 'SELECT') {
+    if (ENV.nofocus && !editor.enabled && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'  && e.target.tagName !== 'SELECT') {
         console.debug('ELECTRON.BLUR()')
     }
 
@@ -67,7 +68,7 @@ function touchToFastClick(event) {
 
     }, 600)
 
-    if (ENV.nofocus && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'  && e.target.tagName !== 'SELECT') {
+    if (ENV.nofocus && !editor.enabled && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'  && e.target.tagName !== 'SELECT') {
         console.debug('ELECTRON.BLUR()')
     }
 
