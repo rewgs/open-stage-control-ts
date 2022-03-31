@@ -178,24 +178,23 @@ class Matrix extends Panel {
 
             this.resolveLock = true
 
-            propValue = propValue !== undefined ? propValue : deepCopy(this.props[propName])
+            propValue = propValue !== undefined ? propValue : this.props[propName]
 
             var data = [],
                 quantity = this.resolveProp('quantity', undefined, false, false, false)
 
             if (typeof propValue === 'object' && propValue !== null && !Array.isArray(propValue)) {
-
                 for (let i = 0; i < quantity; i++) {
                     data[i] = {}
                     for (var k in propValue) {
-                        data[i][k] = super.resolveProp(propName, propValue[k], i === 0 ? storeLinks : false, originalWidget, originalPropName, {$: i})
+                        data[i][k] = super.resolveProp(propName, deepCopy(propValue[k]), i === 0 ? storeLinks : false, originalWidget, originalPropName, {$: i})
                     }
                 }
 
             } else {
 
                 for (let i = 0; i < quantity; i++) {
-                    data[i] = super.resolveProp(propName, propValue, i === 0 ? storeLinks : false, originalWidget, originalPropName, {$: i})
+                    data[i] = super.resolveProp(propName, deepCopy(propValue), i === 0 ? storeLinks : false, originalWidget, originalPropName, {$: i})
                 }
 
             }
