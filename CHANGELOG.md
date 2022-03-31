@@ -5,6 +5,9 @@
 - bug fixes
     - matrix: property resolution issue with object/array items in `props`
 
+- misc
+    - updated midi bridge: provide more information when loading fails; may fix some compatibility issue on windows
+
 ## 1.15.6
 
 - bug fixes
