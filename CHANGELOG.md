@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.15.7
+
+- bug fixes
+    - matrix: property resolution issue with object/array items in `props`
+
 ## 1.15.6
 
 - bug fixes
