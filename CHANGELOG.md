@@ -4,7 +4,8 @@
 
 - bug fixes
     - matrix: property resolution issue with object/array items in `props`
-    - bypass client option `nofocus=1` when the editor is enabled 
+    - bypass client option `nofocus=1` when the editor is enabled
+    - menu/dropdown: display label when value is undefined 
 
 - misc
     - updated midi bridge: provide more information when loading fails; may fix some compatibility issue on windows

@@ -53,7 +53,7 @@ class MenuBase extends Widget {
         if (i > -1 && string) {
             this.text.innerHTML = iconify(String(string).replace(/%value/g, typeof this.value === 'string' ? this.value : JSON.stringify(this.value)).replace(/%key/g, this.keys[i]))
         } else {
-            this.text.innerHTML = ''
+            this.text.innerHTML = iconify(String(string).replace(/%value/g, '').replace(/%key/g, ''))
         }
 
     }
