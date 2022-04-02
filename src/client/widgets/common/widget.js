@@ -364,7 +364,7 @@ class Widget extends EventEmitter {
             v: this.getValue(true),
         }
 
-        if (this.getProp('ignoreDefaults')) data.i = 1
+        if (this.getProp('ignoreDefaults') && !options.force) data.i = 1
 
         if (overrides) {
             for (var k in overrides) {

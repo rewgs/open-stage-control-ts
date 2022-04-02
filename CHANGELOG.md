@@ -4,6 +4,7 @@
 
 - bug fixes
     - range: value update issue (internal touch state not updated properly)
+    - scripting: send(): ignore `ignoreDefaults` property 
 
 ## 1.15.7
 

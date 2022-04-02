@@ -161,7 +161,7 @@ Sets the value of a widget's custom variable (see [advanced syntaxes](./advanced
 ----
 
 #### `send(target, address, ...args)`
-- `target` (optional): `"ip:port"` or `"midi:device_name"` string. If omitted, the widget's target will be used.
+- `target` (optional): `"ip:port"` or `"midi:device_name"` string. If omitted, the widget's target (or the server's defaults) will be used.
 - `address`: osc address, must start with a `/`
 - `args`: values or `{type: "OSC_TYPE_LETTER", value: VALUE}` objects
 
@@ -169,7 +169,7 @@ Sends an osc message.
 
 If the event that triggered the script's execution was not initiated by a user interaction, this function will have no effect.
 
-This function ignores the widget's `bypass` property.
+This function ignores the widget's `bypass` and `ignoreDefaults` properties.
 
 ??? infos "Examples"
     ```javascript
