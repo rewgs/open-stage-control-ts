@@ -166,12 +166,8 @@ class CodeEditor {
 
         if (this.language === 'javascript') {
             let globals = {}
-            if (this.name === 'onEvent') {
-                if (this.widget.getProp('event') === 'value') {
-                    globals = {id: true, value: true, touch: true}
-                } else if (this.widget.getProp('event') === 'keyboard') {
-                    globals = {type: true, key: true, code: true, ctrl: true, shift: true, alt: true, meta: true}
-                }
+            if (this.name === 'onKeyboard') {
+                globals = {type: true, key: true, code: true, ctrl: true, shift: true, alt: true, meta: true}
             } else if (this.name === 'onValue') {
                 globals = {id: true, value: true, touch: true}
             } else if (this.name === 'onDraw') {
