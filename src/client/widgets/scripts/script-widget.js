@@ -26,7 +26,8 @@ class ScriptWidget extends Widget {
 
             keyBinding: {type: 'string|array', value: '', help: [
                 'Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation).',
-                'If the editor is enabled, some keys / combos will not work.'
+                'If the editor is enabled, some keys / combos will not work.',
+                'To process all keystroke events, write `[\'\']`'
             ]},
             keyRepeat: {type: 'boolean', value: true, help: 'Set to `false` to prevent keydown repeats when holding the key combo pressed'},
             keyType: {type: 'string', value: 'keydown', choices: ['keydown', 'keyup', 'both'], help: 'Determines which key event trigger the script\'s execution'},
@@ -107,7 +108,7 @@ class ScriptWidget extends Widget {
     onRemove() {
 
 
-        if (this.getProp('event') === 'keyboard' && this.getProp('keyBinding')) {
+        if (this.getProp('onKeyboard') && this.getProp('keyBinding')) {
 
             keyboardJS.withContext('global', ()=>{
 
