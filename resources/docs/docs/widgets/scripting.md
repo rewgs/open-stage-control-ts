@@ -235,7 +235,7 @@ Global [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/lo
 
 These work like almost their native equivalent, with an extra (optional) `id` argument.
 
-- `id` (optional): unique identifier. If a timeout with the same id is already running, it is cleared before the new one is created. If omitted, defaults to `undefined`. One can use `Math.random()` or `Date.now()` to force new id at each execution, though this might cause performance issues. `id`s are scoped to the widget's context: two timeouts with the same `id` in two different widgets can run concurrently
+- `id` (optional): unique identifier, if omitted, defaults to `undefined`. If a timeout with the same id is already running, it is cleared before the new one is created (even if `undefined`). `id`s are scoped to the widget's context: two timeouts with the same `id` in two different widgets can run concurrently
 - `callback`: function to be executed
 - `delay`: delay before execution is ms
 
