@@ -4,7 +4,9 @@
 
 - bug fixes
     - range: value update issue (internal touch state not updated properly)
-    - scripting: send(): ignore `ignoreDefaults` property 
+    - scripting: send(): ignore `ignoreDefaults` property
+    - script: onKeyboard script not cleaned upon edition / removal
+    - editor: some variables not appearing as defined in `onKeyboard`
 
 ## 1.15.7
 
