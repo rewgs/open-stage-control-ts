@@ -668,7 +668,7 @@ class Widget extends EventEmitter {
                         var r
                         switch (k) {
                             case 'value':
-                                r = widgets[i].getValue(true)
+                                r = widgets[i].value
                                 break
                             case 'uuid':
                                 r = widgets[i].hash
@@ -746,7 +746,7 @@ class Widget extends EventEmitter {
                     }
                 }
 
-                var r = deepCopy(this.variables[name].value)
+                var r = this.variables[name].value
 
                 var varname = 'VAR_' + varnumber
                 varnumber--

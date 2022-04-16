@@ -61,7 +61,7 @@ Options can contain `@{}` blocks.
 
 ## Custom variables: `VAR{variableName, default}`
 
-This syntax creates a custom variable in the widget that can be read and modified from any widget's script property (see [scripting](./scripting.md#getvarid-name)). Changes made to this variable will be applied automatically.
+This syntax creates a custom variable in the widget that can be read and modified from any widget's script property (see [scripting](./scripting.md#getvarid-name)). Changes made to this variable using `setVar()` in scripts will be applied automatically where `VAR{}` is used.`
 
 ## File imports: `IMPORT{file_name}`
 
@@ -99,12 +99,19 @@ A property *cannot* contain multiple `JS{}` blocks
     - `session`: session file path
     - `clipboard`: instance of navigator [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
 
-In this context, `@{} / OSC{}` are seen as variables. When they change, the whole block will be evaluated again.
-
 Parsing errors can be read in the console (++ctrl+k++).
 
 !!! warning
     Modifying values in `locals` or `globals` **does not** trigger anything if they are used somewhere else.
+
+#### Using in advanced syntaxes
+
+In this context, `@{}`, `VAR{}` and `OSC{}` syntaxes are seen as variables. When they change, the whole block will be evaluated again.
+
+!!! danger "Do not mutate"
+    When these syntaxes return objects or arrays, mutating said objects will affect the underlying variables in memory and may lead to unexpected behavior.
+
+    The `@{}` syntax, when used for anything else than the widget's value, will always return a copy of the property and is not affected by this.
 
 ## Javascript: `#{ <code> }`
 

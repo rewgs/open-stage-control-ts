@@ -124,7 +124,7 @@ The following variables and functions are accessible in this context.
 #### `get(id)`
 - `id`: widget `id` as a string.
 
-Returns the value of the first matching widget.
+Returns the value of the first matching widget. If the returned value is an object, a copy is returned to allow safe mutation.
 
 ----
 
@@ -146,7 +146,7 @@ If the event that triggered the script's execution was initiated by a user inter
 - `id`: widget `id` as a string.
 - `name`: variable name as a string.
 
-Returns the value of a widget's custom variable.
+Returns the value of a widget's custom variable. If the returned value is an object, a copy is returned to allow safe mutation.
 
 ----
 
@@ -186,7 +186,7 @@ This function ignores the widget's `bypass` and `ignoreDefaults` properties.
 - `id`: widget `id` as a string. Can be `"this"` to target the host widget, or `"parent"` to target the parent widget.
 - `name`: property name.
 
-Returns the property called `"name"` of the first matching widget.
+Returns the property called `"name"` of the first matching widget. If the returned value is an object, a copy is returned to allow safe mutation.
 
 ----
 
