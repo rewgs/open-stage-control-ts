@@ -1311,6 +1311,7 @@ Widget.cssVariables = [
 Widget.dynamicProps = [
     'visible',
     'interaction',
+    'comments',
 
     'top',
     'left',
