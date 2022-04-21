@@ -211,7 +211,7 @@ var converters = [
                     }
                     break
                 case 'eq':
-                    data.filter = data.value
+                    data.filters = data.value
                     data.value = ''
                     break
 

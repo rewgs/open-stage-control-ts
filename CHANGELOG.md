@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.16.1
+
+- bug fixes
+     - eq widgets not properly converted when importing v0 sessions
+
 ## 1.16.0
 
 - advanced syntaxes
