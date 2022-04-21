@@ -1,6 +1,7 @@
 var Pad = require('./pad'),
     Xy = require('./xy'),
     {clip} = require('../utils'),
+    doubleTap = require('../mixins/double_tap'),
     touchstate = require('../mixins/touch_state')
 
 
@@ -39,6 +40,10 @@ module.exports = class MultiXy extends Pad {
                 rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
                 logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale.'},
                 logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
+                doubleTap: {type: 'boolean|string', value: false, help: [
+                    'Set to `true` to make the fader reset to its default value when receiving a double tap.',
+                    'Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>`'
+                ]},
                 sensitivity: {type: 'number', value: 1, help: 'Defines the pad\'s sensitivity when `snap` is `false` '},
             }
         })
@@ -166,6 +171,35 @@ module.exports = class MultiXy extends Pad {
             this.setValue(this.getValue(), e.options)
         })
 
+        if (this.getProp('doubleTap')) {
+
+            if (typeof this.getProp('doubleTap') === 'string' && this.getProp('doubleTap')[0] === '/') {
+
+                doubleTap(this, ()=>{
+                    this.sendValue({v:null, address: this.getProp('doubleTap')})
+                }, {element: this.widget})
+
+            } else {
+
+                doubleTap(this, (e) => {
+                    var id, ndiff, diff = Infinity
+
+                    for (var i in this.pads) {
+                        ndiff = Math.abs(e.offsetX - this.padsCoords[i][0]) + Math.abs(e.offsetY - (this.padsCoords[i][1] + this.height))
+                        if (ndiff < diff) {
+                            id = i
+                            diff = ndiff
+                        }
+                    }
+
+                    var pad = this.pads[id]
+                    pad.setValue([pad.faders.x.getSpringValue(), pad.faders.y.getSpringValue()], { sync: true, send: true, spring: true, doubleTap: true })
+                }, { element: this.widget})
+
+            }
+
+        }
+
         var v = []
         for (let i = 0; i < this.npoints * 2; i = i + 2) {
             [v[i],v[i+1]]  = this.pads[i/2].getValue()
@@ -259,11 +293,11 @@ module.exports = class MultiXy extends Pad {
     setValue(v, options={}) {
 
         if (!v || !v.length || v.length!=this.npoints * 2) return
-        if (this.touched && !options.dragged) return this.setValueTouchedQueue = [v, options]
+        if (this.touched && !options.dragged && !options.doubleTap) return this.setValueTouchedQueue = [v, options]
 
         for (let i=0;i<this.npoints;i++) {
             if (!options.dragged) {
-                this.pads[i].setValue([v[i*2],v[i*2+1]])
+                this.pads[i].setValue([v[i*2], v[i*2+1]], { doubleTap: options.doubleTap })
             }
         }
 
