@@ -8,7 +8,7 @@
 ## 1.16.0
 
 - advanced syntaxes
-    - `@{}` and `VAR{}` do not return a copy of their value anymore as it may introduce a significant overhead when used extensively. Mutating these objects in `#{}` and `JS{}` scripts will now affect the actual values and should be avoided at all cost.
+    - `@{}` and `VAR{}` that return objects / arrays do not return a copy of their value anymore as it may introduce a significant overhead when used extensively. Mutating these objects in `#{}` and `JS{}` scripts will now affect the actual values and should be avoided at all cost.
 - widgets
     - `comments` property flagged as dynamic
     - multixy: add `doubleTap` property
