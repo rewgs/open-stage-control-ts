@@ -57,6 +57,7 @@ function resolvePath(url, clientId) {
     }
 
     url = resolveHomeDir(url)
+    url = url.split('?')[0]
 
     for (var i = sessionPath ? -1 : 0; i < resolveDirs.length; i++) {
         var p = i === -1 ? sessionPath : resolveDirs[i]
