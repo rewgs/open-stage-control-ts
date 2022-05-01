@@ -668,7 +668,7 @@ class Widget extends EventEmitter {
                         var r
                         switch (k) {
                             case 'value':
-                                r = typeof widgets[i].value === 'object' ? widgets[i].value widgets[i].getValue(true)
+                                r = typeof widgets[i].value === 'object' ? widgets[i].value : widgets[i].getValue(true)
                                 break
                             case 'uuid':
                                 r = widgets[i].hash
