@@ -59,6 +59,7 @@ class Tab extends Panel {
     hide() {
         if (this.detached) return
         this.container.classList.remove('show')
+        this.container.removeChild(this.widget)
         this.detached = true
         this.setVisibility()
     }
@@ -66,6 +67,7 @@ class Tab extends Panel {
     show() {
         if (!this.detached) return
         this.container.classList.add('show')
+        this.container.appendChild(this.widget)
         this.detached = false
         this.setVisibility()
         resize.check(this.widget, true)

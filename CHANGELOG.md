@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.16.2
+
+- widgets
+    - tabs: detach hidden tabs from the DOM (reduces lag caused by heavy tabs)
+
 ## 1.16.1
 
 - bug fixes
