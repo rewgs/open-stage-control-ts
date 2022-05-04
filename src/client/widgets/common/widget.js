@@ -1051,6 +1051,19 @@ class Widget extends EventEmitter {
 
     }
 
+
+    log(message) {
+
+        if (!uiConsole) return
+
+        var widget = this,
+            id = widget.getProp('id')
+
+        console._log(`${id}${name ? '.' + name : ''}: ${message}`)
+        uiConsole.log('log', `<span class="edit-widget" data-widget="${widget.builtIn ? widget.parent.hash : widget.hash}">${id}</span>: ${message}`, true)
+
+    }
+
     errorProp(name, type, error) {
 
         let stackline = error.stack ? (error.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
