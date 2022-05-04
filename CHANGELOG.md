@@ -2,6 +2,9 @@
 
 ## 1.16.2
 
+- bug fixes
+    - widget visibility not updated properly when set as a non-boolean value
+
 - widgets
     - tabs: detach hidden tabs from the DOM (reduces lag caused by heavy tabs)
 
