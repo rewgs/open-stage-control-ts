@@ -52,6 +52,7 @@ function resolvePath(url, clientId) {
         // safari seems to be picky with cookies
         if (clientId === undefined) console.error(`(ERROR, HTTP) Could not resolve requested url ${url} (client id not found in http cookies)`)
         // this should never happen, but just in case...
+        // it happens when importing css file from theme
         else if (debug) console.log(`(DEBUG, HTTP) Requested url ${url} not resolved against session path (unregistered client id ${clientId})`)
     } else {
         sessionPath = path.dirname(ipc.clients[clientId].sessionPath)
