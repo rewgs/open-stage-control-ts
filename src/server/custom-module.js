@@ -3,26 +3,35 @@ var settings = require('./settings'),
     vm = require('vm'),
     chokidar = require('chokidar'),
     path = require('path'),
-    modulePathExtended = false
+    modulePathExtended = false,
+    loadedModules = {}
 
 class CustomModule {
 
-    constructor(file, context, parent=null) {
+    constructor(file, context, parent=null, mainModule=null) {
 
-        this.exports = null
+        this.module = {exports: null}
         this.init = null
         this.oscInFilter = null
         this.oscOutFilter = null
 
+        this.mainModule = mainModule
+
         this.parent = parent
         this.submodule = !!parent
-        this.filename = this.submodule && !path.isAbsolute(file) ? path.resolve(path.dirname(parent.filename), file) : file
+
+        this.filename = this.submodule ? file : path.resolve(file)
+        console.log(this.filename, this.submodule)
 
         this.timeouts = []
         this.intervals = []
         this.submodules = {}
 
-        this.context = this.submodule ? context : {
+
+        this.context = this.submodule ? {
+            ...context,
+            require: this.require.bind(this),
+        } : {
             ...context,
             loadJSON: (url)=>{
                 if (url.split('.').pop() === 'json') {
@@ -79,7 +88,7 @@ class CustomModule {
         this.watcher = chokidar.watch(this.filename, {awaitWriteFinish: {stabilityThreshold: 200}}).on('change', ()=>{
             if (this.submodule) {
                 console.log('(INFO) Submodule changed: ' + this.filename)
-                this.parent.reload()
+                this.mainModule.reload()
             } else {
                 console.log('(INFO) Custom module changed: ' + this.filename)
                 this.reload()
@@ -90,8 +99,8 @@ class CustomModule {
 
     load() {
 
-        if (this.submodule && path.resolve(this.filename) === path.resolve(this.parent.filename)){
-            this.exports = this.parent.exports
+        if (loadedModules[this.filename]) {
+            this.module.exports = loadedModules[this.filename].module.exports
             return true
         }
 
@@ -108,23 +117,25 @@ class CustomModule {
             ...this.context,
             __dirname: path.resolve(path.dirname(this.filename)),
             __filename: path.resolve(this.filename),
-            module: {exports: {}}
+            module: this.module
         })
 
+
         try {
+            loadedModules[this.filename] = this
             vm.runInContext(code, context, {
                 filename: this.filename
             })
         } catch(err) {
+            loadedModules[this.filename] = null
             console.error('(ERROR) Custom module loading error')
             console.error(err)
             return false
         }
 
-        this.init = context.module.exports.init || null
-        this.oscInFilter = context.module.exports.oscInFilter || null
-        this.oscOutFilter = context.module.exports.oscOutFilter || null
-        this.exports = context.module.exports
+        this.init = this.module.exports.init || null
+        this.oscInFilter = this.module.exports.oscInFilter || null
+        this.oscOutFilter = this.module.exports.oscOutFilter || null
 
         return true
 
@@ -132,16 +143,19 @@ class CustomModule {
 
     unload() {
 
-        if (this.exports && this.exports.unload) {
+        if (!loadedModules[this.filename]) return
+        loadedModules[this.filename] = null
+
+        if (this.module.exports && this.module.exports.unload) {
             try {
-                this.exports.unload()
+                this.module.exports.unload()
             } catch(e) {
                 console.error('(ERROR) Error while unloading custom module')
                 console.error(e)
             }
         }
 
-        this.exports = null
+        this.module = {exports: null}
         this.init = null
         this.oscInFilter = null
         this.oscOutFilter = null
@@ -212,13 +226,13 @@ class CustomModule {
 
     require(filename) {
 
-        if (!this.submodules[filename]) {
-
-            this.submodules[filename] = new CustomModule(filename, this.context, this.parent || this)
-
+        if (!path.isAbsolute(filename)) {
+            filename = path.resolve(path.dirname(this.filename), filename)
         }
 
-        return this.submodules[filename].exports
+        this.submodules[filename] = loadedModules[filename] || new CustomModule(filename, this.context, this, this.parent || this)
+
+        return this.submodules[filename].module.exports
 
     }
 

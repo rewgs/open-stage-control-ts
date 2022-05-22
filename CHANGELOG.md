@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.16.3
+
+- bug fixes
+    - custom module's submodules not loading their own submodule with relative paths properly
+
 ## 1.16.2
 
 - bug fixes
