@@ -104,7 +104,7 @@
     "test": "eslint src && npm run build && node tests/test.js"
   },
   "engines": {
-    "node": ">=12"
+    "node": "16"
   },
   "devDependencies": {
     "watchify": "4.0.0"

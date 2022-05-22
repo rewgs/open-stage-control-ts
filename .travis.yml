@@ -2,7 +2,7 @@ anHsudo: required
 dist: focal
 language: node_js
 node_js:
-  - "12"
+  - "16"
 before_install:
   - sudo dpkg --add-architecture i386
   - sudo apt-get update -qq
