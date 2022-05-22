@@ -25,6 +25,7 @@ var urlparser   = require('url'),
     zeroconf    = require('./zeroconf'),
     {resolveHomeDir} = require('./utils'),
     prod = !process.argv[0].includes('node_modules'),
+    debug = setting.read('debug'),
     osc = {},
     clients = {},
     httpCheckTimeout
@@ -51,7 +52,7 @@ function resolvePath(url, clientId) {
         // safari seems to be picky with cookies
         if (clientId === undefined) console.error(`(ERROR, HTTP) Could not resolve requested url ${url} (client id not found in http cookies)`)
         // this should never happen, but just in case...
-        else console.error(`(ERROR, HTTP) Could not resolve requested url ${url} (unregistered client id ${clientId})`)
+        else if (debug) console.log(`(DEBUG, HTTP) Requested url ${url} not resolved against session path (unregistered client id ${clientId})`)
     } else {
         sessionPath = path.dirname(ipc.clients[clientId].sessionPath)
     }

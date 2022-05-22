@@ -3,7 +3,8 @@
 ## 1.16.3
 
 - bug fixes
-    - custom module's submodules not loading their own submodule with relative paths properly
+    - custom module's submodules not loading their own submodules with relative paths properly
+    - harmless error message when importing css files from the main theme file
 
 ## 1.16.2
 
