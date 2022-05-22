@@ -21,7 +21,6 @@ class CustomModule {
         this.submodule = !!parent
 
         this.filename = this.submodule ? file : path.resolve(file)
-        console.log(this.filename, this.submodule)
 
         this.timeouts = []
         this.intervals = []
