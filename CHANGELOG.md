@@ -1,9 +1,19 @@
 # Changelog
 
+## 1.16.2
+
+- bug fixes
+    - widget visibility not updated properly when set as a non-boolean value
+
+- widgets
+    - tabs: detach hidden tabs from the DOM (reduces lag caused by heavy tabs)
+
 ## 1.16.1
 
 - bug fixes
      - eq widgets not properly converted when importing v0 sessions
+     - image paths with url queries not loaded properly
+     - @{} syntax not returning truncated value according to the widget's precision property (fixed for primitive values only, object values are still returned as is)
 
 ## 1.16.0
 

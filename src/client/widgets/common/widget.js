@@ -668,7 +668,7 @@ class Widget extends EventEmitter {
                         var r
                         switch (k) {
                             case 'value':
-                                r = widgets[i].value
+                                r = typeof widgets[i].value === 'object' ? widgets[i].value : widgets[i].getValue(true)
                                 break
                             case 'uuid':
                                 r = widgets[i].hash
@@ -1051,6 +1051,19 @@ class Widget extends EventEmitter {
 
     }
 
+
+    log(message) {
+
+        if (!uiConsole) return
+
+        var widget = this,
+            id = widget.getProp('id')
+
+        console._log(`${id}${name ? '.' + name : ''}: ${message}`)
+        uiConsole.log('log', `<span class="edit-widget" data-widget="${widget.builtIn ? widget.parent.hash : widget.hash}">${id}</span>: ${message}`, true)
+
+    }
+
     errorProp(name, type, error) {
 
         let stackline = error.stack ? (error.stack.match(/>:([0-9]+):[0-9]+/) || '') : '',
@@ -1242,10 +1255,10 @@ class Widget extends EventEmitter {
 
     setVisibility() {
 
-
         var visible = this.isVisible()
+
         if (visible !== this.visible) {
-            this.visible = visible
+            this.visible = !!visible
             this.container.style.display = this.getProp('visible') ? '' : 'none'
 
             for (var c of this.children) {

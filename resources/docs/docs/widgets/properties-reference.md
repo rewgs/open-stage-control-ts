@@ -17,7 +17,7 @@
         | <h6 id="id">id<a class="headerlink" href="#id" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widgets sharing the same `id` will act as clones and update each other's value(s) without sending extra osc messages. |
         | <h6 id="visible">visible<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visible" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the widget. |
         | <h6 id="interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#interaction" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable pointer interactions. |
-        | <h6 id="comments">comments<a class="headerlink" href="#comments" title="Permanent link">#</a></h6> | `string` | <code>""</code> | User comments. |
+        | <h6 id="comments">comments<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#comments" title="Permanent link">#</a></h6> | `string` | <code>""</code> | User comments. |
 
 
 === "geometry"
@@ -741,6 +741,7 @@
             | <h6 id="multixy_rangeY">rangeY<a class="headerlink" href="#multixy_rangeY" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the min and max values for the y axis |
             | <h6 id="multixy_logScaleX">logScaleX<a class="headerlink" href="#multixy_logScaleX" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale. |
             | <h6 id="multixy_logScaleY">logScaleY<a class="headerlink" href="#multixy_logScaleY" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale. |
+            | <h6 id="multixy_doubleTap">doubleTap<a class="headerlink" href="#multixy_doubleTap" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`string` | <code>false</code> | Set to `true` to make the fader reset to its default value when receiving a double tap.<br/><br/>Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>` |
             | <h6 id="multixy_sensitivity">sensitivity<a class="headerlink" href="#multixy_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the pad's sensitivity when `snap` is `false`  |
 
     === "scripting"
