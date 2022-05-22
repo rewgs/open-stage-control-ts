@@ -20,8 +20,6 @@ function openDocs() {
 
 }
 
-if (settings.read('docs')) return openDocs()
-
 function nodeMode() {
 
     if (!settings.read('no-gui')) {
@@ -153,7 +151,7 @@ function stopServerProcess() {
         closed = 0
 
     if (toClose.length === 0) serverProcess.kill()
-        
+
     for (var w of toClose) {
         w.on('closed', ()=>{
             closed++
@@ -232,7 +230,11 @@ function startLauncher() {
 }
 
 
-if (node || (settings.cli && settings.read('no-gui'))) {
+if (settings.read('docs')) {
+
+    openDocs()
+
+} else if (node || (settings.cli && settings.read('no-gui'))) {
 
     // node mode: minimal server startup
 
