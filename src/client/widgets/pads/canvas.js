@@ -33,6 +33,7 @@ class CanvasWidget extends Canvas {
             onValue: {type: 'script', value: '', editor: 'javascript', help: ['Script executed whenever the widget\'s value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
             onTouch: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
             onDraw: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.']},
+            onResize: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the widget is resized. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.']},
         }
         return defaults
 
@@ -48,6 +49,20 @@ class CanvasWidget extends Canvas {
 
         this.valueLength = Math.max(1, parseInt(this.getProp('valueLength')) || 1)
         this.value = this.valueLength > 1 ? Array(this.valueLength).fill(0) : 0
+
+        if (this.getProp('onResize')) {
+            this.scripts.onResize = new Script({
+                widget: this,
+                property: 'onResize',
+                code: this.getProp('onResize'),
+                context: {
+                    value: 0,
+                    width: 100,
+                    height: 100,
+                    cssVars: {}
+                }
+            })
+        }
 
         if (this.getProp('onDraw')) {
             this.scripts.onDraw = new Script({
@@ -158,6 +173,19 @@ class CanvasWidget extends Canvas {
         }, {sync: false, send: false})
 
         this.batchDraw()
+
+    }
+
+    extraResizeHandle(event) {
+
+        if (!this.getProp('onResize')) return
+
+        this.scripts.onDraw.run({
+            value: this.value,
+            width: this.width,
+            height: this.height,
+            cssVars: this.cssVars
+        }, {sync: false, send: false})
 
     }
 

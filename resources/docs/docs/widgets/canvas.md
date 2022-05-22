@@ -66,6 +66,17 @@ This script has access to the same variables and functions as the `script` prope
 - `ctx`: [canvas rendering context](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) of the widget
 - `cssVars`: object containing the computed value of some of the widget's style properties such as `colorWidget`, `alphaFill`, `padding`, etc
 
+### `onResize`
+
+This script is executed when the widget has resized, before it is redrawn.
+
+This script has access to the same variables and functions as the `script` property (except the event-specific ones), plus the following:
+
+- `value`: widget value
+- `width`: canvas width in pixels
+- `height`: canvas height in pixels
+- `cssVars`: object containing the computed value of some of the widget's style properties such as `colorWidget`, `alphaFill`, `padding`, etc
+
 ## Example: XY pad
 
 Let's create a simple xy pad, with a value made of two numbers between 0 and 1. We set `valueLength` to `2` to make sure the widget only accepts incoming messages with two values (x and y).

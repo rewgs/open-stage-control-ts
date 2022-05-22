@@ -6,7 +6,10 @@
     - custom module: submodules not loading their own submodules with relative paths properly
     - custom module: issue with circular submodule requires
     - server: harmless error message when importing css files from the main theme file
-    - server: allow using folder names "client" and "assets" for user files (eg for images used in a session) 
+    - server: allow using folder names "client" and "assets" for user files (eg for images used in a session)
+
+- widgets
+    - canvas: add `onResize` script property
 
 ## 1.16.2
 

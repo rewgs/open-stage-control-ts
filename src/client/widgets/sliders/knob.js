@@ -160,7 +160,7 @@ module.exports = class Knob extends Slider {
 
     }
 
-    extraResizeHandle() {
+    extraResizeHandle(event) {
 
         super.extraResizeHandle(event)
 
