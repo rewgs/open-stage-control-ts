@@ -4,13 +4,13 @@ var build = require('./build'),
     nanohtml = require('nanohtml'),
     watch = process.argv.includes('--watch'),
     through = require('through'),
-    minimatch = require('minimatch').Minimatch
+    minimatch = require('minimatch')
 
 
 var ignores = ['**/*.min.js', '**/jquery.ui.js', 'gyronorm.complete.min.js'],
     transformWrapper = function(transform){
         return function(file, opts){
-             if (ignores.some(pattern => minimatch(pattern).match(file))) {
+             if (ignores.some(pattern => minimatch(file, pattern))) {
                 return through()
             } else {
                 return transform(file, opts)

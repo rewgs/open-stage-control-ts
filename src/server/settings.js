@@ -33,12 +33,6 @@ var argv = yargs(process.argv.slice(firstArgIndex))
     .strict()
     .version(infos.version).alias('v','version')
 
-// litle hack to align long-only-options correctly
-var h = argv.getUsageInstance().help
-argv.getUsageInstance().help = ()=>{
-    return h().replace(/^\s{2}--([^\s]*)\s{4}(\s*)/gm, '      --$1$2')
-}
-
 argv = argv.argv
 delete argv._
 delete argv.$0

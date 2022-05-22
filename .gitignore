@@ -11,5 +11,4 @@ app/docs/*
 !app/docs/.htaccess
 !app/server/.keep
 app/package.json
-package-lock.json
 *.pyc

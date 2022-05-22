@@ -4,6 +4,8 @@ var {app, Menu, shell, BrowserWindow} = require('electron'),
 
 app.setPath('userData', settings.configPath)
 
+app.commandLine.appendSwitch('--ignore-certificate-errors')
+
 app.commandLine.appendSwitch('--touch-events')
 
 if (settings.read('disable-vsync')) {
