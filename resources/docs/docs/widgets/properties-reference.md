@@ -775,6 +775,7 @@
             | <h6 id="canvas_onValue">onValue<a class="headerlink" href="#canvas_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="canvas_onTouch">onTouch<a class="headerlink" href="#canvas_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
             | <h6 id="canvas_onDraw">onDraw<a class="headerlink" href="#canvas_onDraw" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
+            | <h6 id="canvas_onResize">onResize<a class="headerlink" href="#canvas_onResize" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is resized. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
 ## Sliders
 
 ??? api "<div id="fader">fader<a class="headerlink" href="#fader" title="Permanent link">#</a></div>"

@@ -56,6 +56,7 @@ window = {
     screen: {width: 800, height: 600},
     addEventListener: ()=>{},
     location: {},
+    Image: Function,
     document: document,
     navigator: {
         platform:'',
