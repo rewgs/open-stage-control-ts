@@ -25,7 +25,7 @@ var urlparser   = require('url'),
     zeroconf    = require('./zeroconf'),
     {resolveHomeDir} = require('./utils'),
     prod = !process.argv[0].includes('node_modules'),
-    debug = setting.read('debug'),
+    debug = settings.read('debug'),
     osc = {},
     clients = {},
     httpCheckTimeout
