@@ -180,7 +180,7 @@ class CanvasWidget extends Canvas {
 
         if (!this.getProp('onResize')) return
 
-        this.scripts.onDraw.run({
+        this.scripts.onResize.run({
             value: this.value,
             width: this.width,
             height: this.height,

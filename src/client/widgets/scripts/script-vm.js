@@ -506,9 +506,11 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.Image = Image
+
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus', 'setScroll', 'getScroll', 'toolbar',
-            'openUrl', 'getVar', 'setVar', 'runAs']) {
+            'openUrl', 'getVar', 'setVar', 'runAs', 'Image']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
 

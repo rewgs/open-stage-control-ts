@@ -10,6 +10,7 @@
 
 - widgets
     - canvas: add `onResize` script property
+    - scripting: expose javascript's `Image` constructor
 
 ## 1.16.2
 
