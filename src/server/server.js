@@ -100,7 +100,7 @@ function httpRoute(req, res) {
 
     } else {
 
-        if (url.indexOf('theme.css') != -1) {
+        if (url.indexOf('__APP__/theme.css') != -1) {
 
             res.setHeader('Content-Type', 'text/css')
             if (settings.read('theme')) {
@@ -112,11 +112,11 @@ function httpRoute(req, res) {
             }
             res.end()
 
-        } else if (/^\/(assets|client)\//.test(url)){
+        } else if (/^\/__APP__\//.test(url)){
 
             if (prod) res.setHeader('Cache-Control', 'public, max-age=2592000')
             try {
-                res.sendFile(path.resolve(__dirname + '/..' + url))
+                res.sendFile(path.resolve(__dirname + '/..' + url.replace('__APP__', '')))
                 return true
             } catch(e) {}
 
