@@ -8,6 +8,8 @@ var path = require('path'),
 // This prevents argv parsing to be breaked when the app is packaged (executed without 'electron' prefix)
 var firstArgIndex = path.basename(process.argv[0]).match(/electron|node/) ? 2 : 1
 
+if (process.env.OSC_SERVER_PROCESS) firstArgIndex++
+
 // on windows, electron stops parsing after the first argument containing a colon
 // https://github.com/electron/electron/pull/13039
 // windows cli users need to add a double dash (--) before their options to avoid that

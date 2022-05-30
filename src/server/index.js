@@ -94,7 +94,7 @@ function startServerProcess() {
 
     var {fork} = require('child_process')
 
-    serverProcess = fork(app.getAppPath(), args, {stdio: 'pipe', env: process.env})
+    serverProcess = fork(app.getAppPath(), args, {stdio: 'pipe', env: {...process.env, OSC_SERVER_PROCESS: 1}})
 
     if (!settings.read('no-gui')) {
         var cb = (data)=>{
