@@ -4,6 +4,7 @@ var path = require('path'),
     osc = require('./osc'),
     {ipc} = require('./server'),
     {deepCopy, resolveHomeDir} = require('./utils'),
+    child_process = require('child_process'),
     fragmentManager
 
 var widgetHashTable = {},
@@ -496,6 +497,32 @@ module.exports =  {
             root = resolveHomeDir(settings.read('remote-root'))
 
         if (root && !path.normalize(p).includes(path.normalize(root))) p = root
+
+
+        if (process.platform === 'win32' && !root) {
+            // Drive list hack on windows
+            if (data.path.length === 2 && data.path[1] === '..' && (data.path[0].match(/^[A-Z]:\\$/) || data.path[0] === '\\')) {
+
+                child_process.exec('wmic logicaldisk get name', (error, stdout) => {
+
+                    if (error) {
+
+                        ipc.send('notify', {class: 'error', message: 'Failed to list available drives.'}, clientId)
+
+                    } else {
+
+                        ipc.send('listDir', {
+                            path: '\\',
+                            files: stdout.split('\r\r\n')
+                                .filter(value => /[A-Za-z]:/.test(value))
+                                .map(value => {return {name: value.trim(), folder: true}})
+                        }, clientId)
+
+                    }
+                })
+                return
+            }
+        }
 
         fs.readdir(p, (err, files)=>{
             if (err) {

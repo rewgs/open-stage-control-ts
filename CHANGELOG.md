@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.16.4
+
+- misc
+    - windows: allow accessing other drives than the default one (list drives when the file browser reaches the filesystem's root)
+
 ## 1.16.3
 
 - bug fixes
