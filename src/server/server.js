@@ -110,7 +110,7 @@ function httpRoute(req, res) {
                 res.setHeader('Content-Type', 'text/css')
                 if (settings.read('theme')) {
                     var str = theme.get(),
-                    buf = Buffer.from && Buffer.from !== Uint8Array.from ? Buffer.from(str) : new Buffer(str)
+                        buf = Buffer.from && Buffer.from !== Uint8Array.from ? Buffer.from(str) : new Buffer(str)
                     res.write(buf)
                 } else {
                     res.write('')
