@@ -22,7 +22,7 @@ function openDocs() {
 
 function nodeMode() {
 
-    if (!settings.read('no-gui')) {
+    if (!settings.read('no-gui') && !process.env.OSC_SERVER_PROCESS) {
         settings.write('no-gui', true, true)
         console.warn('(INFO) Headless mode (--no-gui) enabled automatically (running with node)')
     }
