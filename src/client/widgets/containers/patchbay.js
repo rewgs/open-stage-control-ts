@@ -133,6 +133,7 @@ class PatchBay extends Container(Canvas) {
         this.inputNodes = []
         this.outputNodes = []
 
+        this.value = {}
 
         for (let k in this.inputs) {
             let w = parser.parse({
@@ -144,7 +145,6 @@ class PatchBay extends Container(Canvas) {
                     preArgs: this.inputs[k],
                     bypass: '@{parent.bypass}',
                     label: k
-
                 },
                 parentNode: DOM.get(this.widget, '.inputs')[0],
                 parent: this
@@ -153,6 +153,7 @@ class PatchBay extends Container(Canvas) {
             w._not_editable = true
             this.inputsWidgets.push(w)
             this.inputNodes.push(w.container)
+            this.value[k] = []
         }
 
         var outputs = DOM.get(this.widget, '.outputs')[0]
@@ -195,6 +196,17 @@ class PatchBay extends Container(Canvas) {
             }
         }, {element: this.widget})
 
+
+        this.on('value-changed',(e)=>{
+
+            if (e.widget === this || e.widget.parent !== this) return
+
+            var k  = e.widget.getProp('label')
+            this.value[k] = e.widget.getValue()
+
+            this.changed(e.options)
+
+        })
 
     }
 

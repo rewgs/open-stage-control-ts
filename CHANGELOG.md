@@ -5,6 +5,9 @@
 - bug fixes
     - modal: display issue when a modal receives the same value mutliple times
 
+- widgets
+    - patchbay: trigger `onValue` script when a connection changes
+
 - misc
     - windows: allow accessing other drives than the default one (list drives when the file browser reaches the filesystem's root)
 
