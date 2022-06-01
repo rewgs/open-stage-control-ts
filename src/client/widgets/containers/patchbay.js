@@ -32,7 +32,7 @@ class PatchBayNode extends Widget {
 
         this.value = Array.isArray(v) ? v : v ? [v] : []
 
-        var allowed = this.parent.getProp('outputs')
+        var allowed = this.parent.outputsValues
         for (var i = this.value.length -1; i > -1; i--) {
             if (allowed.indexOf(this.value[i]) === -1) {
                 this.value.splice(i, 1)
@@ -77,7 +77,7 @@ class PatchBay extends Container(Canvas) {
             class_specific: {
                 inputs: {type: 'array|object', value: ['input_1', 'input_2'], help: [
                     '- `Array` of input names : `[\'input_1\', \'input_2\']`',
-                    '- `Object` of `"label_1": "input_1"` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
+                    '- `Object` of `"label_1": "input_1"` pairs (example: `{"label a": "value 1", "label b": "value 2"}`). Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
                     '',
                     'Patchbay inputs can be connected to one or more outputs and will send messages of the following form when they are connected/disconnected: ',
                     '`/patchbay_address input_x output_x output_y etc`',
