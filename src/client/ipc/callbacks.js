@@ -90,7 +90,7 @@ module.exports = {
     },
 
     reloadCss: function(){
-        var queryString = '?reload=' + Date.now()
+        var queryString = '?__OSC_ASSET__=1&reload=' + Date.now()
         DOM.each(document, 'link[rel="stylesheet"][hot-reload]', (el)=>{
             el.href = el.href.replace(/\?.*|$/, queryString)
         })

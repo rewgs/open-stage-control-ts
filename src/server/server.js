@@ -48,13 +48,7 @@ function resolvePath(url, clientId) {
 
     var sessionPath
 
-    if (!ipc.clients[clientId]) {
-        // safari seems to be picky with cookies
-        if (clientId === undefined) console.error(`(ERROR, HTTP) Could not resolve requested url ${url} (client id not found in http cookies)`)
-        // this should never happen, but just in case...
-        // it happens when importing css file from theme
-        else if (debug) console.log(`(DEBUG, HTTP) Requested url ${url} not resolved against session path (unregistered client id ${clientId})`)
-    } else {
+    if (ipc.clients[clientId]) {
         sessionPath = path.dirname(ipc.clients[clientId].sessionPath)
     }
 
@@ -66,6 +60,14 @@ function resolvePath(url, clientId) {
         p = path.resolve(path.join(p, url))
 
         if (fs.existsSync(p)) return p
+    }
+
+    if (debug && !ipc.clients[clientId]) {
+        // safari seems to be picky with cookies
+        if (clientId === undefined) console.log(`(DEBUG, HTTP) Could not resolve requested url ${url} (client id not found in http cookies)`)
+        // this should never happen, but just in case...
+        // it happens when importing css file from theme
+        else console.log(`(DEBUG, HTTP) Requested url ${url} not resolved against session path (unregistered client id ${clientId})`)
     }
 
     return false
@@ -97,34 +99,41 @@ function httpRoute(req, res) {
 
         // res.sendFile(path.resolve(__dirname + '/../client/index.html'))
 
-
     } else {
 
-        if (url.indexOf('__APP__/theme.css') != -1) {
+        if (url.indexOf('__OSC_ASSET__=1') != -1) {
 
-            res.setHeader('Content-Type', 'text/css')
-            if (settings.read('theme')) {
-                var str = theme.get(),
+            // osc asset files
+
+            if (url.indexOf('theme.css') != -1) {
+
+                res.setHeader('Content-Type', 'text/css')
+                if (settings.read('theme')) {
+                    var str = theme.get(),
                     buf = Buffer.from && Buffer.from !== Uint8Array.from ? Buffer.from(str) : new Buffer(str)
-                res.write(buf)
+                    res.write(buf)
+                } else {
+                    res.write('')
+                }
+                res.end()
+
             } else {
-                res.write('')
+
+                if (prod) res.setHeader('Cache-Control', 'public, max-age=2592000')
+                try {
+                    res.sendFile(path.resolve(__dirname + '/../' + url))
+                    return true
+                } catch(e) {}
+
+                console.error(`(ERROR, HTTP) File not found: ${url}`)
+                res.writeHead(404)
+                res.end()
+
             }
-            res.end()
-
-        } else if (/^\/__APP__\//.test(url)){
-
-            if (prod) res.setHeader('Cache-Control', 'public, max-age=2592000')
-            try {
-                res.sendFile(path.resolve(__dirname + '/..' + url.replace('__APP__', '')))
-                return true
-            } catch(e) {}
-
-            console.error(`(ERROR, HTTP) File not found: ${url}`)
-            res.writeHead(404)
-            res.end()
 
         } else {
+
+            // user files
 
             // windows absolute path fix
             url = url.replace('_:_', ':') // escaped drive colon

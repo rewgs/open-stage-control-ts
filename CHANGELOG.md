@@ -5,6 +5,7 @@
 - bug fixes
     - modal: display issue when a modal receives the same value mutliple times
     - patchbay: `outputs` property not handling object value properly
+    - server: resolution conflict between app files and user files
 
 - widgets
     - patchbay: trigger `onValue` script when a connection changes
