@@ -144,7 +144,11 @@ class Modal extends Panel {
 
         if (this.init === undefined) return
 
-        this.value = v ? 1 : 0
+        var val = v ? 1 : 0
+
+        if (val === this.value) return
+
+        this.value = val
 
         if (!this.init && this.value) {
             this.popupContent.appendChild(this.widget)

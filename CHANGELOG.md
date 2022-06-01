@@ -2,6 +2,9 @@
 
 ## 1.16.4
 
+- bug fixes
+    - modal: display issue when a modal receives the same value mutliple times
+
 - misc
     - windows: allow accessing other drives than the default one (list drives when the file browser reaches the filesystem's root)
 
