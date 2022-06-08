@@ -1,5 +1,11 @@
 # Changelog
 
+
+## 1.16.6
+
+- bug fixes
+    - visibility property update issues
+
 ## 1.16.4
 
 - bug fixes
