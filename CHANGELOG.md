@@ -6,8 +6,8 @@
     - editor: error when ctrl+clicking on a root's child
 
 - widget
-    - knob: `sensitivity` and ctrl+drag preserve `circular` mode behavior
-    - knob: `snap` mode now works like `circular` mode except for the touch start event (value can't jump from start to end anymore)
+    - knob / encoder: `sensitivity` and ctrl+drag gesture preserve `circular` mode behavior
+    - knob / encoder: `snap` mode now works like `circular` mode except for the touch start event (value can't jump from start to end anymore)
 
 ## 1.16.6
 

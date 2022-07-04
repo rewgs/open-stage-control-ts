@@ -112,25 +112,19 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         // knob.js without clipping + extra case for snap
 
-        if ((this.getProp('mode') === 'vertical' && !e.traversing) || e.ctrlKey) {
+        if ((this.getProp('mode') === 'vertical' && !e.traversing)) {
             // vertical
-            this.setPercent(-100 * e.movementY / this.height + this.percent)
+            this.setPercent(this.percent + (-100 * e.movementY / this.height) * this.getProp('sensitivity') / e.inertia)
 
         } else {
             // snap or circular
             var offsetX = this.lastOffsetX + e.movementX,
                 offsetY = this.lastOffsetY + e.movementY
 
-            if (e.traversing || this.getProp('mode') === 'circular') {
-                // circular
-                var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
-                if (Math.abs(diff) < 50 && diff !== 0) this.setPercent(this.percent + diff)
-
-            } else {
-
-                // snap
-                this.setPercent(this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true))
-
+            var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
+            if (Math.abs(diff) < 50 && diff !== 0) {
+                diff = diff * this.getProp('sensitivity') / e.inertia
+                this.setPercent(this.percent + diff)
             }
 
             this.lastOffsetX = offsetX
