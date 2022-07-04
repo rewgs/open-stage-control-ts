@@ -25,7 +25,7 @@ class UiSelectArea {
     }
 
     mousedown(e) {
-        if (!e.shiftKey || event.altKey || event.button === 2) return
+        if (!e.shiftKey || event.altKey || event.button === 2 || (event.shiftKey && event.metaKey)) return
         this.startX = this.curX = e.clientX
         this.startY = this.curY = e.clientY
         this.down = true

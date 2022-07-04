@@ -14,7 +14,11 @@ var multiSelectKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrl
 
 var handleClick = function(event) {
 
-    if (!editor.enabled) return
+    if (
+        !editor.enabled ||
+        event.detail.button === 1 ||
+        (event.detail.metaKey && event.detail.shiftKey)
+    ) return
 
     if (!event.detail[multiSelectKey] && event.type !== 'fast-right-click' && (
         event.target.classList.contains('no-widget-select') ||

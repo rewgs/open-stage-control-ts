@@ -9,6 +9,7 @@ Clicking on a widget, on a tab label or on an item in the project tree selects t
 
 ![](../../img/screenshots/editor.png)
 
+To interact with a widget directly without selecting it, either use the middle mouse button or hold ++shift+win++ (++shift+cmd++ on Mac).
 
 ## Menu
 
@@ -39,7 +40,7 @@ Selected widget's properties are displayed and can be modified in the inspector.
 - Property fields are all multiline (press `shift + enter` for new line).
 - Properties are written in JSON, with some flexibility brought by the [JSON5](https://github.com/json5/json5) format. For example, double quotes around object keys are not mandatory.
 - Clicking on a property name spawns a help modal window
-- Properties are divided into multiple categories that can be toggled with a click. ++alt+"Click"++ on a category closes the other categories before toggling selected category. 
+- Properties are divided into multiple categories that can be toggled with a click. ++alt+"Click"++ on a category closes the other categories before toggling selected category.
 
 Some properties (for example `onValue`) have a special code editor with syntax hilighting and many keyboard shortcuts (available by clicking on the "Help" button). In this properties, pressing `enter` will not submit pending changes and instead insert a new line at the cursor position (as you would expect in a regular editor). To submit pending changes, press ++ctrl+enter++ (or ++cmd+enter== on Mac) or click outside the editor.
 
