@@ -1,2 +1,2 @@
-python-rtmidi == 1.4.2
+python-rtmidi == 1.4.9
 pyinstaller
