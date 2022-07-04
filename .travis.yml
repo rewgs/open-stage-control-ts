@@ -5,7 +5,7 @@ node_js:
 before_install:
   - sudo dpkg --add-architecture i386
   - sudo apt-get update -qq
-  - sudo apt-get install -qq wine-stable fakeroot xvfb python3 python3-pip python3-setuptools
+  - sudo apt-get install -qq wine fakeroot xvfb python3 python3-pip python3-setuptools
   - sudo python3 -m pip install mkdocs-material
 install: npm install
 before_deploy:
