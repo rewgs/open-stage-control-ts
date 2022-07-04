@@ -4,6 +4,7 @@
 
 - bug fixes
     - editor: error when ctrl+clicking on a root's child
+    - range: multitouch interaction issue
 
 - widget
     - knob / encoder: `sensitivity` and ctrl+drag gesture preserve `circular` mode behavior
