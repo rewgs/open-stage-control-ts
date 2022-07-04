@@ -39,6 +39,10 @@ class PatchBayNode extends Widget {
             }
         }
 
+        if (this.parent.getProp('exclusive') && this.value.length > 1) {
+            this.value = [this.value.pop()]
+        }
+
         this.parent.batchDraw()
 
         if (options.send) this.sendValue()
@@ -85,6 +89,7 @@ class PatchBay extends Container(Canvas) {
                     'The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1`'
                 ]},
                 outputs: {type: 'array|object', value: ['output_1', 'output_2'], help: 'List of output values the inputs can connect to (see `inputs`).'},
+                exclusive: {type: 'boolean', value: false, help: 'If set to `true`, each input will be allowed to have only one connection at a time.'},
             }
         })
 
@@ -228,14 +233,6 @@ class PatchBay extends Container(Canvas) {
             this.connecting = []
         } else {
             this.batchDraw()
-        }
-
-        if (this.connecting.length) {
-            var cb = (e)=>{
-                this.toggleConnection()
-                this.off('fast-click', cb)
-            }
-            this.on('fast-click',cb, {element: this.widget})
         }
 
     }

@@ -9,6 +9,7 @@
 - widget
     - knob / encoder: `sensitivity` and ctrl+drag gesture preserve `circular` mode behavior
     - knob / encoder: `snap` mode now works like `circular` mode except for the touch start event (value can't jump from start to end anymore)
+    - patchbay: add `exclusive` option
 
 - editor
     - allow interacting with a widget without selecting it by using the middle mouse button or by holding shift+win (shift+cmd on mac).
