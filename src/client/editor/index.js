@@ -562,12 +562,14 @@ class Editor {
 
         }
 
-        var parent = this.selectedWidgets[0].parent
-        while (parent !== widgetManager) {
-            if (parent.getProp('lock')) {
-                this.selectedWidgets = [parent]
+        if (this.selectedWidgets.length) {
+            var parent = this.selectedWidgets[0].parent
+            while (parent !== widgetManager) {
+                if (parent.getProp('lock')) {
+                    this.selectedWidgets = [parent]
+                }
+                parent = parent.parent
             }
-            parent = parent.parent
         }
 
         if (options.fromLasso && !options.lassoEnd) return

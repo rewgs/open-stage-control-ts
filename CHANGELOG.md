@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.16.7
+
+- bug fixes
+    - editor: error when ctrl+clicking on a root's child
 
 ## 1.16.6
 
