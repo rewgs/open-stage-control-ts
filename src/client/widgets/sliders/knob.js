@@ -99,7 +99,7 @@ module.exports = class Knob extends Slider {
 
     dragHandle(e) {
 
-        if ((this.getProp('mode') === 'vertical' && !e.traversing) || e.ctrlKey) {
+        if ((this.getProp('mode') === 'vertical' && !e.traversing)) {
             // vertical
             this.percent = -100 * (e.movementY / e.inertia * this.getProp('sensitivity')) / this.minDimension + this.percent
 
@@ -108,17 +108,8 @@ module.exports = class Knob extends Slider {
             var offsetX = this.lastOffsetX + e.movementX,
                 offsetY = this.lastOffsetY + e.movementY
 
-            if (e.traversing || this.getProp('mode') === 'circular') {
-                // circular
-                var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
-                if (Math.abs(diff) < 50 && diff !== 0) this.percent += diff * 360 / this.maxAngle
-
-            } else {
-
-                // snap
-                this.percent = this.angleToPercent(this.coordsToAngle(offsetX, offsetY))
-
-            }
+            var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
+            if (Math.abs(diff) < 50 && diff !== 0) this.percent += (diff * 360 / this.maxAngle) * this.getProp('sensitivity') / e.inertia
 
             this.lastOffsetX = offsetX
             this.lastOffsetY = offsetY
