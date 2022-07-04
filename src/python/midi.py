@@ -3,7 +3,7 @@ from list import *
 from utils import *
 from mtc import *
 
-ipc_send('version', '1.15.7')
+ipc_send('version', '1.16.7')
 
 argv = argv[argv.index('--params') + 1:]
 
