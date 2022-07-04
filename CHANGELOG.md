@@ -1,10 +1,11 @@
 # Changelog
 
-## 1.16.7
+## 1.17.0
 
 - bug fixes
     - editor: error when ctrl+clicking on a root's child
     - range: multitouch interaction issue
+    - midi: compatibility issue with osx 10.11 (midi binary updated for all platforms)
 
 - widget
     - knob / encoder: `sensitivity` and ctrl+drag gesture preserve `circular` mode behavior
