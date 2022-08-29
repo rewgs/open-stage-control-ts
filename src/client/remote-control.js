@@ -247,8 +247,14 @@ var callbacks = {
 
         if (!Array.isArray(args)) args = [args]
 
+        var icon
+        if (args.length > 1 && typeof args[0] === 'string' && args[0].indexOf(' ') === -1) {
+            icon = args.shift()
+        }
+
         notifications.add({
-            message: args.join('\n') || ' '
+            message: args.join('\n') || ' ',
+            icon: icon
         })
 
     },

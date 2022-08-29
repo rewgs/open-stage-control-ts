@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.18.0
+
+- remote control
+    - `/NOTIFY`: if multiple arguments are provided, interpret the first one as the icon's name for the client notification
+
+
 ## 1.17.0
 
 - bug fixes

@@ -117,9 +117,13 @@ Same as `/GET` but uses the widget's address instead of `/GET` to reply.
 
 ----
 
-#### `/NOTIFY message`
+#### `/NOTIFY icon message`
 
 Sends a notification message to the client.
+
+- `icon`: icon for the notification, for example : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)
+- `message`: message content
+
 
 ----
 
