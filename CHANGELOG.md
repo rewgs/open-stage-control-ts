@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.18.0
+## 1.17.1
 
 - scripting
     - add `updateCanvas()` function (forces a canvas widget to redraw)
