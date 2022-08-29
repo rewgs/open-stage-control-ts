@@ -2,6 +2,9 @@
 
 ## 1.18.0
 
+- scripting
+    - add `updateCanvas()` function (forces a canvas widget to redraw)
+
 - remote control
     - `/NOTIFY`: if multiple arguments are provided, interpret the first one as the icon's name for the client notification
 

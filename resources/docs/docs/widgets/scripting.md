@@ -207,6 +207,13 @@ Forces a widget to check if one of its properties has changed and update itself 
 
 ----
 
+#### `updateCanvas(id)`
+- `id`: widget `id` as a string. Can be `"this"` to target the host widget.
+
+Forces a canvas widget redraw.
+
+----
+
 #### `httpGet(url, callback)`
 
 - `url`: url of the resource to fetch (local url only)

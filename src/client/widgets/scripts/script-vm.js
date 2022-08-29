@@ -223,6 +223,19 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.updateCanvas = (id)=>{
+
+            this.checkContext('updateCanvas')
+
+            var widgets = this.resolveId(id)
+            for (var i = widgets.length - 1; i >= 0; i--) {
+
+                if (widgets[i].batchDraw) widgets[i].draw()
+
+            }
+
+        }
+
         this.sandbox.contentWindow.getIndex = (id = 'this')=>{
 
             this.checkContext('getIndex')
@@ -510,7 +523,7 @@ class ScriptVm extends Vm {
 
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus', 'setScroll', 'getScroll', 'toolbar',
-            'openUrl', 'getVar', 'setVar', 'runAs', 'Image']) {
+            'openUrl', 'getVar', 'setVar', 'runAs', 'Image', 'updateCanvas']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }
 
