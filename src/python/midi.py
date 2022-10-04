@@ -3,7 +3,7 @@ from list import *
 from utils import *
 from mtc import *
 
-ipc_send('version', '1.16.7')
+ipc_send('version', '1.17.1')
 
 argv = argv[argv.index('--params') + 1:]
 
@@ -35,8 +35,14 @@ for arg in argv:
         if ports == 'virtual':
 
             try:
-                inputs[name].open_virtual_port('midi_in')
-                outputs[name].open_virtual_port('midi_out')
+
+                if platform == 'darwin':
+                    inputs[name].open_virtual_port('%s-in' % name)
+                    outputs[name].open_virtual_port('%s-out' % name)
+                else:
+                    inputs[name].open_virtual_port('midi_in')
+                    outputs[name].open_virtual_port('midi_out')
+
                 if debug:
                     ipc_send('debug','virtual ports opened for device "%s"' % name)
             except:

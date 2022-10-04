@@ -7,7 +7,9 @@
 
 - remote control
     - `/NOTIFY`: if multiple arguments are provided, interpret the first one as the icon's name for the client notification
-
+    
+- midi
+    - on Mac, name virtual ports after the device name to avoid confusion
 
 ## 1.17.0
 

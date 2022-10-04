@@ -1,4 +1,4 @@
-from sys import argv, stdin, stdout, version_info, version, exit
+from sys import argv, stdin, stdout, version_info, version, exit, platform
 from binascii import hexlify, unhexlify
 import traceback
 import json as JSON
