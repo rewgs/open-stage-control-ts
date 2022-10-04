@@ -2,12 +2,15 @@
 
 ## 1.17.1
 
+- widgets
+    - button: add `decoupled` property (restrict visual feedback to values received from osc/midi messages)
+
 - scripting
     - add `updateCanvas()` function (forces a canvas widget to redraw)
 
 - remote control
     - `/NOTIFY`: if multiple arguments are provided, interpret the first one as the icon's name for the client notification
-    
+
 - midi
     - on Mac, name virtual ports after the device name to avoid confusion
 

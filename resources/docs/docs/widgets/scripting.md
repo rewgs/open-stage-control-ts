@@ -137,6 +137,7 @@ Returns the value of the first matching widget. If the returned value is an obje
     - `sync: false`: prevents widgets from triggering synchronization and scripts
     - `script: false`: prevents scripts but not synchronization
     - `send: false`: prevents widgets from sending osc messages
+    - `external: true`: simulates a value coming from an osc/midi message
 
 Sets the value of the first matching widget. If `ìd` contains wildcards, affects all matching widgets **except** the emitting widget.
 

@@ -39,8 +39,13 @@ class Button extends Widget {
                     'Interraction mode:',
                     '- `toggle` (classic on/off switch)',
                     '- `push` (press & release)',
-                    '- `momentary` (no release, no value sent)',
+                    '- `momentary` (no release, no value sent with the address)',
                     '- `tap` (no release, sends `on` as value)'
+                ]},
+                decoupled: {type: 'boolean', value: false, help: [
+                    'If `true`, the button\'s visual state will not change unless it receives a value that matches `on` or `off` coming from an osc/midi message.',
+                    'From a script property this kind of message can be simulated with:',
+                    `set('widget_id', value, {external: true})`
                 ]},
                 doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
 
@@ -197,9 +202,15 @@ class Button extends Widget {
         if (newstate !== undefined) {
 
             this.state = newstate
-            if (mode === 'toggle' || mode === 'push') {
+            if (this.getProp('decoupled')) {
+                if (options.fromExternal) {
+                    this.container.classList.toggle('on', this.state)
+                }
+            }
+            else if (mode === 'toggle' || mode === 'push') {
                 this.container.classList.toggle('on', this.state)
             }
+
             if (mode !== 'momentary') {
                 this.value = this.getProp(this.state ? 'on' : 'off')
             }
@@ -220,6 +231,8 @@ class Button extends Widget {
                 if (mode === 'tap') this.setValue(this.getProp('off'), {sync: false, send: false, tapRelease: true})
 
                 // pulse
+                if (this.getProp('decoupled') && options.fromExternal) return
+
                 clearTimeout(this.pulse)
                 this.container.classList.remove('pulse')
                 setTimeout(()=>{
