@@ -45,7 +45,7 @@ class Button extends Widget {
                 decoupled: {type: 'boolean', value: false, help: [
                     'If `true`, the button\'s visual state will not change unless it receives a value that matches `on` or `off` coming from an osc/midi message.',
                     'From a script property this kind of message can be simulated with:',
-                    `set('widget_id', value, {external: true})`
+                    '`set("widget_id", value, {external: true})`'
                 ]},
                 doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
 
