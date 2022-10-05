@@ -389,7 +389,7 @@ class Editor {
 
                 } else if (e.key === 'ArrowRight') {
 
-                    if (!curWidget.children[0]._not_editable) {
+                    if (curWidget.children[0] && !curWidget.children[0]._not_editable) {
                         toSelect = curWidget.children[0]
                     }
 
