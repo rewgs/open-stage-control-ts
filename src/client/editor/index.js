@@ -64,7 +64,7 @@ class Editor {
                     })
                     console.error(
                         `Error while setting ${propName} to: ${JSON.stringify(value)}.\n` +
-                        'It\'s probably a bug, please open a new bug ticket with the followigin informations at' +
+                        'It\'s probably a bug, please open a new bug ticket with the following informations at' +
                         'https://github.com/jean-emmanuel/open-stage-control/issues'
                     )
                     throw e

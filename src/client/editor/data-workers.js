@@ -77,7 +77,7 @@ function updateWidget(widget, options={}) {
 
     // save state
     if (stateManager.queueCounter === 0) {
-        scrollState = {} // scrollbale modals don't store their scroll state in their value
+        scrollState = {} // scrollable modals don't store their scroll state in their value
     }
     stateManager.incrementQueue()
     for (let w of removedWidgets) {

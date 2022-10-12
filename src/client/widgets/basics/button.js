@@ -36,7 +36,7 @@ class Button extends Widget {
                     'Set to `null` to send send no argument in the osc message. Must be different from `on`. Ignored if `mode` is `momentary` or `tap`.',
                 ]},
                 mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'momentary', 'tap'], help: [
-                    'Interraction mode:',
+                    'Interaction mode:',
                     '- `toggle` (classic on/off switch)',
                     '- `push` (press & release)',
                     '- `momentary` (no release, no value sent with the address)',
@@ -53,7 +53,7 @@ class Button extends Widget {
         })
 
         defaults.scripting.onValue.help.push(
-            'Additionnal variables:',
+            'Additional variables:',
             '- `locals.touchCoords`: `[x, y]` array representing the touch coordinates, normalized between 0 and 1.'
         )
 

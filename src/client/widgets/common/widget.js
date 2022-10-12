@@ -124,7 +124,7 @@ class Widget extends EventEmitter {
                 ]},
                 typeTags: {type: 'string', value: '', help: [
                     'Defines the osc argument types, one letter per argument (including preArgs)',
-                    '- If empty, the types are infered automatically from the values (with numbers casted to floats by default)',
+                    '- If empty, the types are inferred automatically from the values (with numbers casted to floats by default)',
                     '- If there are more arguments than type letters, the last type is used for the extra arguments',
                     'See <a href="http://opensoundcontrol.org/">OSC 1.0 specification</a> for existing typetags'
                 ]},
@@ -1128,7 +1128,7 @@ class Widget extends EventEmitter {
             })
 
 
-            // escpape windows absolute file paths
+            // escape windows absolute file paths
             css = css.replace(/url\(([^)]*)\)/g, (m, url)=>{
                 var parser = urlParser(url)
                 if (!parser.protocol.match(/http|data/)) m = m.replace(':', '_:_')

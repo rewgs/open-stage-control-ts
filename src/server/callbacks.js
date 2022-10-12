@@ -424,7 +424,7 @@ module.exports =  {
         //             target: ['host:port', ...],
         //             preArgs: [arg1, ...],
         //             address: '/address',
-        //             typeTags: 'iif' // one letter per arg typetage
+        //             typeTags: 'iif' // one letter per arg typetag
         //         }
         //     }
         //     preArgs, target and typeTags can be empty strings

@@ -64,7 +64,7 @@ module.exports = {
     fullscreen_addtohome: 'You must add this page to your home screen to launch it in fullscreen',
 
     // inspector
-    inspector_error: 'An error just occured, open the console to read more.',
+    inspector_error: 'An error just occurred, open the console to read more.',
 
     // nosleep
     nosleep: 'Prevent sleep',

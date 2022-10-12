@@ -87,7 +87,7 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
         var url = this.value,
             parser = urlParser(url)
 
-        // escpape windows absolute file paths
+        // escape windows absolute file paths
         if (!parser.protocol.match(/http|data/)) url = url.replace(':', '_:_')
         url = url.replace(/\\/g, '\\\\')
 

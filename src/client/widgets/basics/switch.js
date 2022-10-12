@@ -29,7 +29,7 @@ class Switch extends MenuBase {
                     '`Object` of `"label":value` pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
                 ]},
                 mode: {type: 'string', value: 'tap', choices: ['tap', 'slide', 'click', 'flip'], help: [
-                    'Interraction mode:',
+                    'Interaction mode:',
                     '- `tap`: activates when the pointer is down but prevents further scrolling',
                     '- `slide`: same as `tap` but allows sliding between values',
                     '- `click`: activates upon click only and allows further scrolling',

@@ -36,7 +36,7 @@ module.exports = function(options={}) {
 
     window.setBounds({x, y, width, height})
 
-    // retreive last geometry
+    // retrieve last geometry
     if (settings.read('geometry') && settings.read('geometry')[options.id]) {
         var geometry = settings.read('geometry')[options.id],
             mScreen = screen.getDisplayMatching(geometry)

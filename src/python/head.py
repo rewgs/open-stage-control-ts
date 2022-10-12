@@ -26,7 +26,7 @@ try:
 
 except Exception as e:
     if prebuilt_bin:
-        ipc_send('log', '(ERROR, MIDI) error while loading MIDI brigde program:\n              %s' % (e.message if hasattr(e, 'message') else e))
+        ipc_send('log', '(ERROR, MIDI) error while loading MIDI bridge program:\n              %s' % (e.message if hasattr(e, 'message') else e))
     else:
         ipc_send('log', '(ERROR, MIDI) error while loading python-rtmidi library (running with python %s):\n              %s' % (".".join(map(str, version_info[:3])), e.message if hasattr(e, 'message') else e))
     exit()
