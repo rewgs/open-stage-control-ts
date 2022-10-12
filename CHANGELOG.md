@@ -36,7 +36,7 @@
 ## 1.16.4
 
 - bug fixes
-    - modal: display issue when a modal receives the same value mutliple times
+    - modal: display issue when a modal receives the same value multiple times
     - patchbay: `outputs` property not handling object value properly
     - server: resolution conflict between app files and user files
 
@@ -108,7 +108,7 @@
 ## 1.15.5
 
 - bug fixes
-    - matrix: avanced property issue in`props` property (bis)
+    - matrix: advanced property issue in `props` property (bis)
 
 - editor
     - inspector: add solo mode with `alt+click` for category panels
@@ -116,7 +116,7 @@
 ## 1.15.4
 
 - bug fixes
-    - matrix: avanced property issue in`props` property
+    - matrix: advanced property issue in `props` property
 
 ## 1.15.3
 
@@ -196,7 +196,7 @@
     - button: `locals.touchCoords` not updated since v1.14.0
 
 - widgets
-    - clone/fragment: remove scripting properties as they are supposed to bo overriden in `props`
+    - clone/fragment: remove scripting properties as they are supposed to be overridden in `props`
 
 ## 1.14.2
 
@@ -209,7 +209,7 @@
 - bug fixes
     - misc: sending typed arguments (`{type, value}` objects) should override the widget's `typeTags` definition
     - multixy: errors when `ephemeral` is `true`
-    - scripting: `setVar` not affecting all widgets when mutliple widgets match provided id
+    - scripting: `setVar` not affecting all widgets when multiple widgets match provided id
 
 - widgets
     - renamed `script` property to `onValue`, `draw` to `onDraw`, `touch` to `onTouch`
@@ -234,7 +234,7 @@
 
 - widgets
     - canvas: expose touch pressure (as `event.force`) in the `touch` script.
-    - canvas: expose touch events for extra elements added with the `html` propery
+    - canvas: expose touch events for extra elements added with the `html` property
 
 ## 1.13.1
 
@@ -247,7 +247,7 @@
     - scripting: `storage.getItem()` not returning anything
 
 - editor
-    - new code editor for `script`, `touch`, `draw` and `props` properties with syntax hilighting, line numbers, etc
+    - new code editor for `script`, `touch`, `draw` and `props` properties with syntax highlighting, line numbers, etc
 
 - scripting
     - `set()`: add an option to prevent target widget's script  
@@ -262,7 +262,7 @@
 
 - widgets
     - new **canvas** widget (under `pads`): allows creating custom widgets
-    - button: expose normalized touch coordinates in scipts as `locals.touchCoords`
+    - button: expose normalized touch coordinates in scripts as `locals.touchCoords`
     - print a warning in the console when using advanced syntaxes in the script property
 
 ## 1.11.1
