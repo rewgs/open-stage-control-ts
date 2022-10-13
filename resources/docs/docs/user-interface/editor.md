@@ -42,7 +42,7 @@ Selected widget's properties are displayed and can be modified in the inspector.
 - Clicking on a property name spawns a help modal window
 - Properties are divided into multiple categories that can be toggled with a click. ++alt+"Click"++ on a category closes the other categories before toggling selected category.
 
-Some properties (for example `onValue`) have a special code editor with syntax hilighting and many keyboard shortcuts (available by clicking on the "Help" button). In this properties, pressing `enter` will not submit pending changes and instead insert a new line at the cursor position (as you would expect in a regular editor). To submit pending changes, press ++ctrl+enter++ (or ++cmd+enter== on Mac) or click outside the editor.
+Some properties (for example `onValue`) have a special code editor with syntax highlighting and many keyboard shortcuts (available by clicking on the "Help" button). In these properties, pressing `enter` will not submit pending changes but instead insert a new line at the cursor position (as you would expect in a regular editor). To submit pending changes, press ++ctrl+enter++ (or ++cmd+enter== on Mac) or click outside the editor.
 
 Widgets can be locked for edition by enabling their `lock` property. When locked, a widget can't be modified by the editor but it remains possible to delete it or to move it from a container to another in the project tree.
 
