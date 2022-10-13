@@ -120,7 +120,7 @@ module.exports = function(options={}) {
         // already bound to alt+f4 on windows
         window.webContents.on('before-input-event', (e, input)=>{
             // using before-input-event because electron-localshortcut
-            // gets azerty keyboards wrong (ctrl + z would also be catched)
+            // gets azerty keyboards wrong (ctrl + z would also be caught)
             if ((input.key === 'w' || input.key === 'W') && input.control && input.type === 'keyDown') {
                 window.close()
             }

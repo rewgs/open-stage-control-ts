@@ -120,7 +120,7 @@ class Clone extends Container() {
 
     getCloneTarget() {
 
-        // attempt to acquire a cloneTarget if 'widget-created' event has not been catched
+        // attempt to acquire a cloneTarget if 'widget-created' event has not been caught
         // (the target might have been created before the clone itself)
 
         var widgets = widgetManager.getWidgetById(this.getProp('widgetId'))
@@ -197,7 +197,7 @@ class Clone extends Container() {
         this.cloneTarget = target
 
         // listen for cloneTarget's deletion
-        // if it is just edited, its recreation will be catched by the global 'widget-created' event handler
+        // if it is just edited, its recreation will be caught by the global 'widget-created' event handler
         this.cloneTarget.on('widget-removed', (e)=>{
             if (this.cloneTarget === e.widget) {
                 this.unbindTarget()
