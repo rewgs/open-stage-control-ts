@@ -27,7 +27,7 @@ This script is called when the widget's value updates and when it receives a val
 
 The following variables are available in this context:
 
-- `id` (`string`): id of the widget that's reponsible for the value update
+- `id` (`string`): id of the widget that's responsible for the value update
 - `value`: widget's value
 - `touch`: see [Touch state](#touch-state)
 
@@ -114,7 +114,7 @@ The following variables and functions are accessible in this context.
     - `platform`: operating system as seen by the client
     - `session`: session file path
     - `clipboard`: instance of navigator [Clipboard](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
-- `Image`: javavscript's [Image](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image) constructor
+- `Image`: javascript's [Image](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image) constructor
 
 
 !!! note "this"

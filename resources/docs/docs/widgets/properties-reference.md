@@ -848,7 +848,7 @@
             | <h6 id="knob_onTouch">onTouch<a class="headerlink" href="#knob_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is touched and released. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 
 ??? api "<div id="encoder">encoder<a class="headerlink" href="#encoder" title="Permanent link">#</a></div>"
-    A knob that sends a relative direction infomation instead of an absolute value.
+    A knob that sends relative direction information instead of an absolute value.
 
     === "style"
 
