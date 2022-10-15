@@ -1,7 +1,8 @@
 var Canvas = require('../common/canvas'),
     Script = require('../scripts/script'),
     widgetManager = require('../../managers/widgets'),
-    html = require('nanohtml')
+    html = require('nanohtml'),
+    iOS = require('../../ui/ios')
 
 class CanvasWidget extends Canvas {
 
@@ -114,16 +115,49 @@ class CanvasWidget extends Canvas {
                 this.batchDraw()
             }
 
+            if (iOS) {
+                this.iosTouchCache = {}
+                this.iosTouchPolls = {}
+            }
+
             this.on('draginit',(e)=>{
                 touchCb(e, 'start')
+
+                if (iOS) {
+                    // start polling extra touch inforamtions
+                    this.iosTouchPolls[e.pointerId] = setInterval(()=>{
+                        for (var p of ['altitudeAngle', 'azimuthAngle', 'force']) {
+                            // if polled value has changed, retrig last move event
+                            if (e[p] !== this.iosTouchCache[e.pointerId][p]) {
+                                // reset movement data since this is only relevant when
+                                // the pointer doesn't move and but force does
+                                this.iosTouchCache[e.pointerId].movementX = 0
+                                this.iosTouchCache[e.pointerId].movementY = 0
+                                // don't manually update polled data, its accessed
+                                // with a getter that pulls it from the original event
+                                this.trigger('drag', e)
+                            }
+                        }
+                    }, 1000 / CANVAS_FRAMERATE)
+                }
             }, {element: this.container, multitouch: true})
 
             this.on('drag',(e)=>{
                 touchCb(e, 'move')
+                if (iOS) {
+                    // cache touch inforamtions
+                    this.iosTouchCache[e.pointerId] === e
+                }
             }, {element: this.container, multitouch: true})
 
             this.on('dragend',(e)=>{
                 touchCb(e, 'stop')
+                if (iOS) {
+                    // stop polling extra touch inforamtions
+                    clearInterval(this.iosTouchPolls[e.pointerId])
+                    delete this.iosTouchPolls[e.ointerId]
+                    delete this.iosTouchCache[e.ointerId]
+                }
             }, {element: this.container, multitouch: true})
 
         }
@@ -192,6 +226,13 @@ class CanvasWidget extends Canvas {
     onRemove() {
 
         clearInterval(this.drawInterval)
+
+        if (iOS) {
+            for (var k in this.iosTouchPolls) {
+                clearInterval(this.iosTouchPolls[k])
+            }
+        }
+
         super.onRemove()
 
     }
