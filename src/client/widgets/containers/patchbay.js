@@ -94,7 +94,7 @@ class PatchBay extends Container(Canvas) {
         })
 
         defaults.style.css.help.concat(
-            'The inputs/ouputs width can be adjusted by using the  `.nodes` selector:',
+            'The inputs/outputs width can be adjusted by using the  `.nodes` selector:',
             '`.nodes { width: 25% }`',
         )
 

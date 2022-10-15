@@ -37,7 +37,7 @@ class Keyboard extends Panel {
                     'Set to `true` to map the touch coordinates between `off` (top) and `on` (bottom). Requires `on` and `off` to be numbers',
                 ]},
                 mode: {type: 'string', value: 'push', choices: ['push', 'toggle', 'tap'], help: [
-                    'Interraction mode:',
+                    'Interaction mode:',
                     '- `push` (press & release)',
                     '- `toggle` (on/off switches)',
                     '- `tap` (no release)'

@@ -42,7 +42,7 @@ module.exports = {
                 true : 'Port must be an integer >= 1024'
         }
     },
-    'tcp-targets': {type: 'array', describe: 'tcp servers to connect to (ip: port pairs), does not susbtitute for --send',
+    'tcp-targets': {type: 'array', describe: 'tcp servers to connect to (ip: port pairs), does not substitute for --send',
         check: (s, argv)=>{
             if (!argv['tcp-port']) return '--tcp-port must be set'
             return s.some(item=>!item.match(/^[^:]*:[0-9]{4,5}$/)) ?
@@ -85,7 +85,7 @@ module.exports = {
             return a.match(/[^:]*:[^:]+/) ? true : 'Auth must be a user:password pair.'
         }
     },
-    'instance-name': {type: 'string', describe: 'used to differenciate multiple instances in a zeroconf network'},
+    'instance-name': {type: 'string', describe: 'used to differentiate multiple instances in a zeroconf network'},
     'use-ssl': {type: 'boolean', describe: 'set to true to use HTTPS protocol instead of HTTP (a self-signed certificate will be created)'},
 
     // cli only

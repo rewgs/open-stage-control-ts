@@ -100,7 +100,7 @@ module.exports = {
 
 
         // if (!event.traversing) {
-        //     // css transfom fix (doesn't work well with traversing gestures)
+        //     // css transform fix (doesn't work well with traversing gestures)
         //     var transformedCoords  = cssTransformCoords(event.firstTarget, event.movementX, event.movementY)
         //     event.movementX = transformedCoords.x
         //     event.movementY = transformedCoords.y
@@ -118,7 +118,7 @@ module.exports = {
         event.offsetY = event.pageY - off.top
 
         // if (!event.traversing) {
-        //     // css transfom fix (doesn't work well with traversing gestures)
+        //     // css transform fix (doesn't work well with traversing gestures)
         //     var transformedCoords  = cssTransformCoords(event.firstTarget, event.offsetX, event.offsetY)
         //     event.offsetX = transformedCoords.x
         //     event.offsetY = transformedCoords.y

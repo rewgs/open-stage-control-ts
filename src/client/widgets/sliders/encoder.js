@@ -5,7 +5,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
     static description() {
 
-        return 'A knob that sends a relative direction infomation instead of an absolute value.'
+        return 'A knob that sends a relative direction information instead of an absolute value.'
 
     }
 
@@ -45,7 +45,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
         })
 
         defaults.scripting.onValue.help.push(
-            'Additionnal variables:',
+            'Additional variables:',
             '- `locals.speed`: encoder\'s speed (reduce `sensitivity` to increase averaging)',
             '- `locals.angle`: encoder\'s angle in degrees'
         )
@@ -218,7 +218,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
         ) return
 
 
-        // sensitivity = ingore value updates
+        // sensitivity = ignore value updates
         var sensitivityIgnore = false
         if (this.getProp('sensitivity') < 1) {
             if (v != this.getProp('release')) {
