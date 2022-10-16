@@ -48,7 +48,7 @@ module.exports = {
             for (var p of ['altitudeAngle', 'azimuthAngle', 'force']) {
                 Object.defineProperty(ev, p, {
                     enumerable: true,
-                    value: ()=>e[p]
+                    get: ()=>e[p]
                 })
             }
         }
