@@ -23,10 +23,11 @@ module.exports = class Knob extends Slider {
                 angle: {type: 'number', value: 270, help: 'Defines the angle\'s width of the knob, in degrees'},
             },
             class_specific: {
-                mode: {type: 'string', value: 'vertical', choices: ['vertical', 'circular', 'snap'], help: [
-                    '- `circular`: relative move in circular motion',
-                    '- `snap`: snap to touch position and move in vertical motion',
+                mode: {type: 'string', value: 'vertical', choices: ['vertical', 'circular', 'snap', 'snap-alt'], help: [
                     '- `vertical`: relative move in vertical motion',
+                    '- `circular`: relative move in circular motion',
+                    '- `snap`: snap to touch position',
+                    '- `snap-alt`: alternative snap mode that allow jumping from `range.min` to `range.max`. `sensitivity` is ignored with this mode.',
                 ]},
                 spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
                 doubleTap: {type: 'boolean', value: false, help: [
@@ -86,7 +87,7 @@ module.exports = class Knob extends Slider {
         this.lastOffsetX = e.offsetX
         this.lastOffsetY = e.offsetY
 
-        if (this.getProp('mode') === 'snap') {
+        if (this.getProp('mode') === 'snap' || this.getProp('mode') === 'snap-alt') {
 
             this.percent = this.angleToPercent(this.coordsToAngle(e.offsetX, e.offsetY))
 
@@ -108,8 +109,12 @@ module.exports = class Knob extends Slider {
             var offsetX = this.lastOffsetX + e.movementX,
                 offsetY = this.lastOffsetY + e.movementY
 
-            var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
-            if (Math.abs(diff) < 50 && diff !== 0) this.percent += (diff * 360 / this.maxAngle) * this.getProp('sensitivity') / e.inertia
+            if (this.getProp('mode') === 'snap-alt'){
+                this.percent = this.angleToPercent(this.coordsToAngle(offsetX, offsetY))
+            } else {
+                var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
+                if (Math.abs(diff) < 50 && diff !== 0) this.percent += (diff * 360 / this.maxAngle) * this.getProp('sensitivity') / e.inertia
+            }
 
             this.lastOffsetX = offsetX
             this.lastOffsetY = offsetY

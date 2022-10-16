@@ -5,6 +5,7 @@
 - widgets
     - button: add `decoupled` property (restrict visual feedback to values received from osc/midi messages)
     - canvas: iOS: trigger `onTouch` when `event.force`, `event.altitudeAngle` or `event.azimuthAngle` updates
+    - knob: add `snap-alt` mode (snap mode that allows jumping between range.min and range.max)
 
 - scripting
     - add `updateCanvas()` function (forces a canvas widget to redraw)
