@@ -14,6 +14,7 @@ Client options can be set either with the server's `--client-options` option, or
 | id | string | *random_id* | client's unique id (use with caution: two clients should never have the same id) |
 | usePercents | 1 / 0 | 0 | sets the editor's "relative units" option  |
 | noFocus | 1 / 0 | 0 | (built-in client only) prevent the client window from taking focus unless a text input or a dropdown is clicked |
+| clientSync | 1 / 0 | 1 | set to 0 to prevent the client from syncing with other clients |
 
 
 Example:

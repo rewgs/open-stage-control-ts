@@ -7,7 +7,7 @@
     - canvas: iOS: trigger `onTouch` when `event.force`, `event.altitudeAngle` or `event.azimuthAngle` updates
     - knob: add `snap-alt` mode (snap mode that allows jumping between range.min and range.max)
     - all: add `borderRadius` property
-    
+
 - scripting
     - add `updateCanvas()` function (forces a canvas widget to redraw)
 
@@ -16,6 +16,9 @@
 
 - midi
     - on Mac, name virtual ports after the device name to avoid confusion
+
+- server
+    - client-options: add `client-sync` option to allow disabling client synchronization
 
 ## 1.17.0
 

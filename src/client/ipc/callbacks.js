@@ -58,6 +58,9 @@ module.exports = {
     },
 
     stateSend:function(){
+
+        if (CLIENT_SYNC === 0) return
+
         notifications.add({
             icon: 'wifi',
             message: locales('loading_newclient')
