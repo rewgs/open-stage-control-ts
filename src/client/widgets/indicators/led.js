@@ -17,10 +17,6 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true, inter
             widget: {
                 interaction: null
             },
-            style: {
-                _separator_led_style: 'Led style',
-                borderRadius: {type: 'string', value: '', help: 'Css border-radius property.'},
-            },
             class_specific: {
                 mode: {type: 'string', value: 'intensity', choices: ['intensity', 'color'], help: 'Defines how value is interpreted (see `value`)'},
                 range: {type: 'object', value: {min:0, max:1}, help: 'Value range'},
@@ -52,10 +48,6 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true, inter
         super({...options, html: html`<inner></inner>`})
 
         this.setValueIntensity(this.getProp('mode') === 'intensity' ? this.getProp('range').min : this.getProp('range').max)
-
-        var bR = this.getProp('borderRadius')
-        if (parseInt(bR) == bR) bR += 'rem'
-        this.container.style.setProperty('--border-radius', bR)
 
     }
 

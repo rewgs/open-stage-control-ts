@@ -37,6 +37,9 @@
 
     --alpha-pips: 0.5;
     --alpha-pips-text: 0.7;
+    --border-radius: 0;
+
+    border-radius: var(--border-radius);
 
 
     color: var(--color-text);

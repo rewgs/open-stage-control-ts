@@ -83,6 +83,7 @@ class Widget extends EventEmitter {
                 alphaFillOff: {type: 'number', value: 'auto', help: 'Fill color opacity (off).'},
                 alphaFillOn: {type: 'number', value: 'auto', help: 'Fill color opacity (on).'},
                 lineWidth: {type: 'number', value: 'auto', help: 'Stroke width.'},
+                borderRadius: {type: 'number|string', value: 'auto', help: 'Border radius expressed as a number or a css string. This property may not work for all widgets.'},
                 padding: {type: 'number', value: 'auto', help: 'Inner spacing.'},
                 html: {type: 'string', value: '', editor: 'html', syntaxChecker: false, help: [
                     'Custom html content to be inserted in the widget (before the widget\'s content). Elements are all unstyled by default, `css` should be used to customize their appearance.',
@@ -1316,6 +1317,7 @@ Widget.cssVariables = [
     {js: 'colorText', css: '--color-text'},
     {js: 'padding', css: '--widget-padding', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE},
     {js: 'lineWidth', css: '--line-width', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE},
+    {js: 'borderRadius', css: '--border-radius', toCss: x=>parseFloat(x) == x ? x  + 'rem' : x},
     {js: 'alphaFillOn', css: '--alpha-fill-on', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)},
     {js: 'alphaFillOff', css: '--alpha-fill-off', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)},
     {js: 'alphaStroke', css: '--alpha-stroke', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)},
