@@ -58,3 +58,5 @@ From a client to another, widgets are automatically synchronized if they share t
 - `address`
 - `preArgs`
 - `targets`
+
+Client synchronization can be disabled with the `clientSync` [client option](../client-options.md).
