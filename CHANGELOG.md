@@ -26,7 +26,7 @@
     - client-options: add `altTraversing` option
 
 - editor
-    - add `F2` keyboard shortcut to bring label property input into viewif selected widget has one
+    - add `F2` keyboard shortcut to bring label property input into view if selected widget has one
 
 ## 1.17.0
 
