@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.17.1
+## 1.18.0
 
 - bug fixes
     - client script source map not loading (helps providing useful error messages)
