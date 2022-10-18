@@ -2,6 +2,9 @@
 
 ## 1.17.1
 
+- bug fixes
+    - client script source map not loading (helps providing useful error messages)
+
 - widgets
     - button: add `decoupled` property (restrict visual feedback to values received from osc/midi messages)
     - button: add client option `altTraversing` to allow one-way response to traversing gestures
