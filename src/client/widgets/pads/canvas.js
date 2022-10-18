@@ -2,7 +2,8 @@ var Canvas = require('../common/canvas'),
     Script = require('../scripts/script'),
     widgetManager = require('../../managers/widgets'),
     html = require('nanohtml'),
-    iOS = require('../../ui/ios')
+    iOS = require('../../ui/ios'),
+    iosEvents = ['altitudeAngle', 'azimuthAngle', 'force']
 
 class CanvasWidget extends Canvas {
 
@@ -116,17 +117,21 @@ class CanvasWidget extends Canvas {
             }
 
             if (iOS) {
-                this.iosTouchCache = {}
-                this.iosTouchPolls = {}
+                var code = String(this.getProp('onTouch'))
+                if (iosEvents.some(x=>code.includes(x))) {
+                    this.iosTouchCache = {}
+                    this.iosTouchPolls = {}
+                    IOS_TOUCH_POLLING = true
+                }
             }
 
             this.on('draginit',(e)=>{
                 touchCb(e, 'start')
 
-                if (iOS) {
+                if (iOS && IOS_TOUCH_POLLING) {
                     // start polling extra touch inforamtions
                     this.iosTouchPolls[e.pointerId] = setInterval(()=>{
-                        for (var p of ['altitudeAngle', 'azimuthAngle', 'force']) {
+                        for (var p of iosEvents) {
                             // if polled value has changed, retrig last move event
                             if (e[p] !== this.iosTouchCache[e.pointerId][p]) {
                                 // reset movement data since this is only relevant when
@@ -144,7 +149,7 @@ class CanvasWidget extends Canvas {
 
             this.on('drag',(e)=>{
                 touchCb(e, 'move')
-                if (iOS) {
+                if (iOS && IOS_TOUCH_POLLING) {
                     // cache touch inforamtions
                     this.iosTouchCache[e.pointerId] === e
                 }
@@ -152,7 +157,7 @@ class CanvasWidget extends Canvas {
 
             this.on('dragend',(e)=>{
                 touchCb(e, 'stop')
-                if (iOS) {
+                if (iOS && IOS_TOUCH_POLLING) {
                     // stop polling extra touch inforamtions
                     clearInterval(this.iosTouchPolls[e.pointerId])
                     delete this.iosTouchPolls[e.ointerId]

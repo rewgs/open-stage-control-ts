@@ -41,7 +41,7 @@ module.exports = {
             touchType: e.touchType
         }
 
-        if (iOS) {
+        if (iOS && IOS_TOUCH_POLLING) {
             // iOS-specific event properties
             ev.touchType = e.touchType
             // iOS-pollable event properties
