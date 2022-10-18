@@ -4,6 +4,7 @@
 
 - widgets
     - button: add `decoupled` property (restrict visual feedback to values received from osc/midi messages)
+    - button: add client option `altTraversing` to allow one-way response to traversing gestures
     - canvas: iOS: trigger `onTouch` when `event.force`, `event.altitudeAngle` or `event.azimuthAngle` updates
     - knob: add `snap-alt` mode (snap mode that allows jumping between range.min and range.max)
     - all: add `borderRadius` property
@@ -18,7 +19,8 @@
     - on Mac, name virtual ports after the device name to avoid confusion
 
 - server
-    - client-options: add `client-sync` option to allow disabling client synchronization
+    - client-options: add `clientSync` option to allow disabling client synchronization
+    - client-options: add `altTraversing` option
 
 ## 1.17.0
 

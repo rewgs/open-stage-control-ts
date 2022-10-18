@@ -140,6 +140,14 @@ class Button extends Widget {
 
                     if (this.active) return
 
+                    if (e.traversingStack && TOGGLE_ALT_TRAVERSING) {
+                        if (e.traversingStack.firstButtonValue === undefined) {
+                            e.traversingStack.firstButtonValue = this.state
+                        } else if (e.traversingStack.firstButtonValue !== this.state) {
+                            return
+                        }
+                    }
+
                     this.active = true
                     this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
 
