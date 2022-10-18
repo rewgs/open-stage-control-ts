@@ -28,7 +28,7 @@ document.documentElement.style.setProperty('font-size', PXSCALE + 'px')
 
 window.DOUBLE_TAP_TIME = ENV.doubletap ? parseInt(ENV.doubletap) : 375
 
-window.CLIENT_SYNC = parseInt(ENV.clientSync) === 0 ? 0 : 1
+window.CLIENT_SYNC = parseInt(ENV.clientSync) !== 0
 
 window.IOS_TOUCH_POLLING = false
 

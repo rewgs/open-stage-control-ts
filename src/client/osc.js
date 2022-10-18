@@ -27,7 +27,7 @@ var Osc = class Osc extends EventEmitter {
 
         } else {
 
-            if (CLIENT_SYNC === 0) data.noSync = 1
+            if (!CLIENT_SYNC) data.noSync = 1
 
             ipc.send('sendOsc', data)
 
@@ -67,7 +67,7 @@ var Osc = class Osc extends EventEmitter {
 
     receive(data){
 
-        if (data._rawTarget && CLIENT_SYNC === 0) return
+        if (data._rawTarget && !CLIENT_SYNC) return
 
         if (typeof this.remoteControl.exists === 'function' && this.remoteControl.exists(data.address)) this.remoteControl.exec(data.address, data.args)
 

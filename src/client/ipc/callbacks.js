@@ -59,7 +59,7 @@ module.exports = {
 
     stateSend:function(){
 
-        if (CLIENT_SYNC === 0) return
+        if (!CLIENT_SYNC) return
 
         notifications.add({
             icon: 'wifi',
