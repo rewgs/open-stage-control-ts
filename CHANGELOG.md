@@ -22,6 +22,9 @@
     - client-options: add `clientSync` option to allow disabling client synchronization
     - client-options: add `altTraversing` option
 
+- editor
+    - add `F2` keyboard shortcut to bring label property input into viewif selected widget has one
+
 ## 1.17.0
 
 - bug fixes

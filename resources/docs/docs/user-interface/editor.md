@@ -106,6 +106,7 @@ Multiple widgets can be edited at once.
     | ++"Page Up"++ | Send selected widget farther |
     | ++"Page Down"++ | Bring selected widget closer |
     | ++"End"++ | Bring selected widget to front |
+    | ++"F2"++ | Bring "label" property input into view if selected widget has one |
 
 
 === "Mac"
@@ -142,3 +143,4 @@ Multiple widgets can be edited at once.
     | ++"Page Up"++ | Send selected widget farther |
     | ++"Page Down"++ | Bring selected widget closer |
     | ++"End"++ | Bring selected widget to front |
+    | ++"F2"++ | Bring "label" property input into view if selected widget has one |

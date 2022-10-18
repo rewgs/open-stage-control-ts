@@ -209,7 +209,8 @@ class Editor {
                 'pagedown',
                 'home',
                 'end',
-                't'
+                't',
+                'f2'
             ]
 
             for (let c of combos) {
@@ -447,6 +448,21 @@ class Editor {
                 this.widgetTree.showWidget(editor.selectedWidgets[0])
                 this.widgetTree.blinkSelected()
 
+                break
+            case 'f2':
+                if (!this.selectedWidgets.length) return
+                if (!this.inspector.expandedCategories.includes('style')) {
+                    var header = DOM.get(this.inspector.container, '.category-header[data-name="style"]')[0]
+                    if (header) {
+                        header.parentNode.classList.add('expanded')
+                        this.inspector.expandedCategories.push('style')
+                    }
+                }
+                var input = DOM.get(this.inspector.container, 'textarea[name="label"]')[0]
+                if (input) {
+                    input.focus()
+                    input.scrollIntoView({block: 'center'})
+                }
                 break
 
 
