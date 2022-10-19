@@ -165,12 +165,6 @@ class Button extends Widget {
 
         if (tap) this.noValueState = true
 
-        if (mode === 'momentary') {
-            this.value = null
-        } else {
-            this.value = this.getProp('off')
-        }
-
         this.label = html`<label></label>`
 
         if (this.getProp('wrap')) this.label.classList.add('wrap')
@@ -179,8 +173,27 @@ class Button extends Widget {
 
         this.updateLabel()
 
+
     }
 
+    get value() {
+
+        switch (this.getProp('mode')) {
+            case 'toggle':
+                if (this.getProp('decoupled')) {
+                    return this.getProp(this.state ? 'off' : 'on')
+                } else {
+                    return this.getProp(this.state ? 'on' : 'off')
+                }
+            case 'push':
+                return this.getProp(this.active ? 'on' : 'off')
+            case 'tap':
+                return this.getProp('on')
+            case 'momentary':
+                return null
+        }
+
+    }
 
 
     setValue(v, options={}) {
@@ -209,18 +222,17 @@ class Button extends Widget {
 
         if (newstate !== undefined) {
 
-            this.state = newstate
             if (this.getProp('decoupled')) {
                 if (options.fromExternal) {
+                    this.state = newstate
                     this.container.classList.toggle('on', this.state)
                 }
             }
             else if (mode === 'toggle' || mode === 'push') {
+                this.state = newstate
                 this.container.classList.toggle('on', this.state)
-            }
-
-            if (mode !== 'momentary') {
-                this.value = this.getProp(this.state ? 'on' : 'off')
+            } else {
+                this.state = newstate
             }
 
             if (this.exposeTouchCoords) {
