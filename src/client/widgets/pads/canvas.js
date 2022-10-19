@@ -145,7 +145,7 @@ class CanvasWidget extends Canvas {
                                 this.trigger('drag', e)
                             }
                         }
-                    }, 1000 / CANVAS_FRAMERATE)
+                    }, 1000 / 30)
                 }
             }, {element: this.container, multitouch: true})
 
