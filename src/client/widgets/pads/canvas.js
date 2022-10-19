@@ -119,16 +119,18 @@ class CanvasWidget extends Canvas {
             if (iOS) {
                 var code = String(this.getProp('onTouch'))
                 if (iosEvents.some(x=>code.includes(x))) {
+                    this.iosTouch = true
                     this.iosTouchCache = {}
                     this.iosTouchPolls = {}
                     IOS_TOUCH_POLLING = true
+                    // enable data getters in ../../events/utils.js
                 }
             }
 
             this.on('draginit',(e)=>{
                 touchCb(e, 'start')
 
-                if (iOS && IOS_TOUCH_POLLING) {
+                if (iOS && this.iosTouch) {
                     // cache touch inforamtions
                     this.iosTouchCache[e.pointerId] = e
                     // start polling extra touch inforamtions
@@ -155,7 +157,7 @@ class CanvasWidget extends Canvas {
 
             this.on('drag',(e)=>{
                 touchCb(e, 'move')
-                if (iOS && IOS_TOUCH_POLLING) {
+                if (iOS && this.iosTouch) {
                     // cache touch inforamtions
                     this.iosTouchCache[e.pointerId] = e
                 }
@@ -163,7 +165,7 @@ class CanvasWidget extends Canvas {
 
             this.on('dragend',(e)=>{
                 touchCb(e, 'stop')
-                if (iOS && IOS_TOUCH_POLLING) {
+                if (iOS && this.iosTouch) {
                     // stop polling extra touch inforamtions
                     clearInterval(this.iosTouchPolls[e.pointerId])
                     delete this.iosTouchPolls[e.pointerId]
