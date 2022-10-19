@@ -2,7 +2,8 @@ var Widget = require('../common/widget'),
     doubleTap = require('../mixins/double_tap'),
     html = require('nanohtml'),
     {deepEqual, isJSON} = require('../../utils'),
-    {iconify} = require('../../ui/utils')
+    {iconify} = require('../../ui/utils'),
+    parser = require('../../parser')
 
 class Button extends Widget {
 
@@ -35,16 +36,15 @@ class Button extends Widget {
                 off: {type: '*', value: 0, help: [
                     'Set to `null` to send send no argument in the osc message. Must be different from `on`. Ignored if `mode` is `momentary` or `tap`.',
                 ]},
-                mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'momentary', 'tap'], help: [
+                mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'momentary', 'tap','decoupled'], help: [
                     'Interaction mode:',
                     '- `toggle` (classic on/off switch)',
                     '- `push` (press & release)',
                     '- `momentary` (no release, no value sent with the address)',
-                    '- `tap` (no release, sends `on` as value)'
-                ]},
-                decoupled: {type: 'boolean', value: false, help: [
-                    'If `true`, the button\'s visual state will not change unless it receives a value that matches `on` or `off` coming from an osc/midi message.',
-                    'From a script property this kind of message can be simulated with:',
+                    '- `tap` (no release, sends `on` as value)',
+                    '- `decoupled (toggle mode that only updates its state when it receives a value from an osc/midi message*)`',
+                    'When `decoupled`, the button\'s value is ambiguous: when clicked, it will send the value that\'s requested, otherwise it will return the value received from the feedback message.'
+                    'From a script property, feedback messages can be simulated with:',
                     '`set("widget_id", value, {external: true})`'
                 ]},
                 doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
@@ -120,6 +120,7 @@ class Button extends Widget {
                 if (!tap) this.setValue(this.getProp('off'), {sync: true, send: true})
                 if (tap) this.container.classList.remove('active')
 
+
             }, {element: this.container})
 
         } else {
@@ -165,12 +166,6 @@ class Button extends Widget {
 
         if (tap) this.noValueState = true
 
-        if (mode === 'momentary') {
-            this.value = null
-        } else {
-            this.value = this.getProp('off')
-        }
-
         this.label = html`<label></label>`
 
         if (this.getProp('wrap')) this.label.classList.add('wrap')
@@ -179,9 +174,51 @@ class Button extends Widget {
 
         this.updateLabel()
 
+        if (this.getProp('mode') === 'decoupled') {
+
+            this.decoupledValue = parser.parse({
+                data: {
+                    type: 'variable',
+                    id: this.getProp('id') + '/decoupledValue',
+                    ignoreDefaults: true,
+                },
+                parentNode: this.widget,
+                parent: this
+            })
+            this.decoupledValue.on('value-changed', (e)=>{
+                this.container.classList.toggle('on', this.decoupledValue.value)
+                if (e.options.send) this.decoupledValue.sendValue()
+            })
+
+        }
+
     }
 
 
+    get value() {
+
+        switch (this.getProp('mode')) {
+            case 'toggle':
+                return this.getProp(this.state ? 'on' : 'off')
+            case 'push':
+                return this.getProp(this.active ? 'on' : 'off')
+            case 'tap':
+                return this.getProp('on')
+            case 'momentary':
+                return null
+            case 'decoupled':
+                if (this.active) {
+                    // return requested value
+                    return this.getProp(this.decoupledValue.value ? 'off' : 'on')
+                } else {
+                    // return feedback value
+                    return this.getProp(this.decoupledValue.value ? 'on' : 'off')
+                }
+            default:
+                return null
+        }
+
+    }
 
     setValue(v, options={}) {
 
@@ -209,19 +246,23 @@ class Button extends Widget {
 
         if (newstate !== undefined) {
 
-            this.state = newstate
-            if (this.getProp('decoupled')) {
+            if (this.getProp('mode') === 'decoupled') {
+
                 if (options.fromExternal) {
+                    this.state = newstate
+                    this.decoupledValue.setValue(newstate, {sync: true})
+                }
+
+            } else {
+
+                this.state = newstate
+
+                if (mode === 'toggle' || mode === 'push') {
                     this.container.classList.toggle('on', this.state)
                 }
-            }
-            else if (mode === 'toggle' || mode === 'push') {
-                this.container.classList.toggle('on', this.state)
+
             }
 
-            if (mode !== 'momentary') {
-                this.value = this.getProp(this.state ? 'on' : 'off')
-            }
 
             if (this.exposeTouchCoords) {
                 if (options.y !== undefined) {

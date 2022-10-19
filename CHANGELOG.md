@@ -6,7 +6,7 @@
     - client script source map not loading (helps providing useful error messages)
 
 - widgets
-    - button: add `decoupled` property (restrict visual feedback to values received from osc/midi messages)
+    - button: add `decoupled` mode (toggle mode that only updates its state when it receives a value from osc/midi messages)
     - button: add client option `altTraversing` to allow one-way response to traversing gestures for toggle buttons
     - canvas: iOS: trigger `onTouch` when `event.force`, `event.altitudeAngle` or `event.azimuthAngle` updates
     - knob: add `snap-alt` mode (snap mode that allows jumping between range.min and range.max)
