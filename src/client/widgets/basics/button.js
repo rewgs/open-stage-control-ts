@@ -54,7 +54,8 @@ class Button extends Widget {
 
         defaults.scripting.onValue.help.push(
             'Additional variables:',
-            '- `locals.touchCoords`: `[x, y]` array representing the touch coordinates, normalized between 0 and 1.'
+            '- `locals.touchCoords`: `[x, y]` array representing the touch coordinates, normalized between 0 and 1.',
+            '- `locals.external`: `true` if value was received from an osc/midi message, `false otherwise`.'
         )
 
         return defaults
@@ -71,6 +72,7 @@ class Button extends Widget {
 
         this.buttonSize = [100, 100]
         this.exposeTouchCoords = String(this.getProp('onValue')).includes('touchCoords')
+        this.parsersLocalScope.external = false
         this.parsersLocalScope.touchCoords = [0.5, 0.5]
         if (this.exposeTouchCoords) {
             this.on('resize', (e)=>{
@@ -245,6 +247,8 @@ class Button extends Widget {
         }
 
         if (newstate !== undefined) {
+
+            this.parsersLocalScope.external = !!options.fromExternal
 
             if (this.getProp('mode') === 'decoupled') {
 
