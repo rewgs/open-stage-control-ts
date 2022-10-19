@@ -129,22 +129,26 @@ class CanvasWidget extends Canvas {
                 touchCb(e, 'start')
 
                 if (iOS && IOS_TOUCH_POLLING) {
-                    this.iosTouchCache[e.pointerId] === e
+                    // cache touch inforamtions
+                    this.iosTouchCache[e.pointerId] = e
                     // start polling extra touch inforamtions
                     this.iosTouchPolls[e.pointerId] = setInterval(()=>{
                         if (!this.iosTouchCache[e.pointerId]) return
+                        var update = false
                         for (var p of iosEvents) {
+                            var newval = e['get_' + p]()
                             // if polled value has changed, retrig last move event
-                            if (e[p] !== this.iosTouchCache[e.pointerId][p]) {
+                            if (newval !== this.iosTouchCache[e.pointerId][p]) {
                                 // reset movement data since this is only relevant when
-                                // the pointer doesn't move and but force does
+                                // the pointer doesn't move
                                 this.iosTouchCache[e.pointerId].movementX = 0
                                 this.iosTouchCache[e.pointerId].movementY = 0
-                                // don't manually update polled data, its accessed
-                                // with a getter that pulls it from the original event
-                                this.trigger('drag', e)
+                                // polled data
+                                this.iosTouchCache[e.pointerId][p] = newval
+                                update = true
                             }
                         }
+                        if (update) touchCb(this.iosTouchCache[e.pointerId], 'move')
                     }, 1000 / 30)
                 }
             }, {element: this.container, multitouch: true})
@@ -153,7 +157,7 @@ class CanvasWidget extends Canvas {
                 touchCb(e, 'move')
                 if (iOS && IOS_TOUCH_POLLING) {
                     // cache touch inforamtions
-                    this.iosTouchCache[e.pointerId] === e
+                    this.iosTouchCache[e.pointerId] = e
                 }
             }, {element: this.container, multitouch: true})
 

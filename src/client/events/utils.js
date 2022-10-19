@@ -46,9 +46,9 @@ module.exports = {
             ev.touchType = e.touchType
             // iOS-pollable event properties
             for (var p of ['altitudeAngle', 'azimuthAngle', 'force']) {
-                Object.defineProperty(ev, p, {
+                Object.defineProperty(ev, 'get_' + p, {
                     enumerable: true,
-                    get: ()=>e[p]
+                    value: ()=>e[p]
                 })
             }
         }
