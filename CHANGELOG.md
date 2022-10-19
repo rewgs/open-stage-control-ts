@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.18.1
+
+- widgets
+    - button: add `decoupled` property, compatible with all button modes
+    - button: remove `decoupled` mode
+
 ## 1.18.0
 
 - bug fixes

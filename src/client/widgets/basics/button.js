@@ -36,19 +36,21 @@ class Button extends Widget {
                 off: {type: '*', value: 0, help: [
                     'Set to `null` to send send no argument in the osc message. Must be different from `on`. Ignored if `mode` is `momentary` or `tap`.',
                 ]},
-                mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'momentary', 'tap','decoupled'], help: [
+                mode: {type: 'string', value: 'toggle', choices: ['toggle', 'push', 'momentary', 'tap'], help: [
                     'Interaction mode:',
                     '- `toggle` (classic on/off switch)',
                     '- `push` (press & release)',
                     '- `momentary` (no release, no value sent with the address)',
                     '- `tap` (no release, sends `on` as value)',
+                ]},
+                doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
+                decoupled: {type: 'boolean', value: false, help: [
+                    'Set to `true` make the local feedback update only when it receives a value from an osc/midi message that matches the `on` or `off` property.',
+                    'When `decoupled`, the button\'s value is ambiguous: when intercated with, it will send the value that\'s requested (`on` or `off` for `toggle` and `push` modes, `on` for `tap` mode, `null` for `momentary`), otherwise it will return the value received from the feedback message (`on` or `off` property).',
                     '- `decoupled (toggle mode that only updates its state when it receives a value from an osc/midi message*)`',
-                    'When `decoupled`, the button\'s value is ambiguous: when clicked, it will send the value that\'s requested, otherwise it will return the value received from the feedback message.',
                     'From a script property, feedback messages can be simulated with:',
                     '`set("widget_id", value, {external: true})`'
                 ]},
-                doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the button require a double tap to be pushed instead of a single tap'},
-
             }
         })
 
@@ -67,7 +69,8 @@ class Button extends Widget {
         super({...options, html: html`<inner></inner>`})
 
         this.state = 0
-        this.active = false
+        this.touchActive = false
+        this.localSet = false
         this.pulse = null
 
         this.buttonSize = [100, 100]
@@ -90,8 +93,8 @@ class Button extends Widget {
 
                 doubleTap(this, (e)=>{
 
-                    this.active = true
-                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
+                    this.touchActive = true
+                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX, local:true})
 
                     if (tap) this.container.classList.add('active')
 
@@ -101,10 +104,10 @@ class Button extends Widget {
 
                 this.on('draginit',(e)=>{
 
-                    if (this.active) return
+                    if (this.touchActive) return
 
-                    this.active = true
-                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
+                    this.touchActive = true
+                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX, local:true})
 
                     if (tap) this.container.classList.add('active')
 
@@ -115,11 +118,11 @@ class Button extends Widget {
 
             this.on('dragend',()=>{
 
-                if (!this.active) return
+                if (!this.touchActive) return
 
-                this.active = false
+                this.touchActive = false
 
-                if (!tap) this.setValue(this.getProp('off'), {sync: true, send: true})
+                if (!tap) this.setValue(this.getProp('off'), {sync: true, send: true, local:true})
                 if (tap) this.container.classList.remove('active')
 
 
@@ -132,8 +135,8 @@ class Button extends Widget {
                 doubleTap(this, (e)=>{
 
 
-                    this.active = true
-                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
+                    this.touchActive = true
+                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX, local:true})
 
                 }, {element: this.container})
 
@@ -141,7 +144,7 @@ class Button extends Widget {
 
                 this.on('draginit',(e)=>{
 
-                    if (this.active) return
+                    if (this.touchActive) return
 
                     if (e.traversingStack && TOGGLE_ALT_TRAVERSING) {
                         if (e.traversingStack.firstButtonValue === undefined) {
@@ -151,14 +154,14 @@ class Button extends Widget {
                         }
                     }
 
-                    this.active = true
-                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX})
+                    this.touchActive = true
+                    this.setValue(this.state ? this.getProp('off') : this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX, local:true})
 
                 }, {element: this.container})
 
                 this.on('dragend',()=>{
 
-                    this.active = false
+                    this.touchActive = false
 
                 }, {element: this.container})
 
@@ -176,7 +179,7 @@ class Button extends Widget {
 
         this.updateLabel()
 
-        if (this.getProp('mode') === 'decoupled') {
+        if (this.getProp('decoupled')) {
 
             this.decoupledValue = parser.parse({
                 data: {
@@ -201,19 +204,39 @@ class Button extends Widget {
 
         switch (this.getProp('mode')) {
             case 'toggle':
-                return this.getProp(this.state ? 'on' : 'off')
-            case 'push':
-                return this.getProp(this.active ? 'on' : 'off')
-            case 'tap':
-                return this.getProp('on')
-            case 'momentary':
-                return null
-            case 'decoupled':
-                if (this.active) {
-                    // return requested value
-                    return this.getProp(this.decoupledValue.value ? 'off' : 'on')
+                if (this.getProp('decoupled')) {
+                    if (this.localSet) {
+                        // return requested value
+                        return this.getProp(this.decoupledValue.value ? 'off' : 'on')
+                    } else {
+                        // return feedback value
+                        return this.getProp(this.decoupledValue.value ? 'on' : 'off')
+                    }
                 } else {
-                    // return feedback value
+                    return this.getProp(this.state ? 'on' : 'off')
+                }
+            case 'push':
+                if (this.getProp('decoupled')) {
+                    if (this.localSet) {
+                        // return requested value
+                        return this.getProp(this.touchActive ? 'on' : 'off')
+                    } else {
+                        // return feedback value
+                        return this.getProp(this.decoupledValue.value ? 'on' : 'off')
+                    }
+                } else {
+                    return this.getProp(this.touchActive ? 'on' : 'off')
+                }
+            case 'tap':
+                if (this.localSet || !this.getProp('decoupled')) {
+                    return this.getProp('on')
+                } else {
+                    return this.getProp(this.decoupledValue.value ? 'on' : 'off')
+                }
+            case 'momentary':
+                if (this.localSet || !this.getProp('decoupled')) {
+                    return null
+                } else {
                     return this.getProp(this.decoupledValue.value ? 'on' : 'off')
                 }
             default:
@@ -250,7 +273,7 @@ class Button extends Widget {
 
             this.parsersLocalScope.external = !!options.fromExternal
 
-            if (this.getProp('mode') === 'decoupled') {
+            if (this.getProp('decoupled')) {
 
                 if (options.fromExternal) {
                     this.state = newstate
@@ -274,8 +297,12 @@ class Button extends Widget {
                 }
             }
 
+            if (options.local || !options.fromExternal) this.localSet = true
+
             if (options.send) this.sendValue()
             if (options.sync) this.changed(options)
+
+            if (options.local || !options.fromExternal) this.localSet = false
 
             // tap mode
             if (newstate && (mode ===  'momentary' || mode === 'tap') && !options.tapRelease) {
@@ -284,7 +311,10 @@ class Button extends Widget {
                 if (mode === 'tap') this.setValue(this.getProp('off'), {sync: false, send: false, tapRelease: true})
 
                 // pulse
-                if (this.getProp('decoupled') && options.fromExternal) return
+                if (this.getProp('decoupled') && options.fromExternal) {
+                    this.container.classList.remove('pulse')
+                    return
+                }
 
                 clearTimeout(this.pulse)
                 this.container.classList.remove('pulse')
@@ -337,7 +367,7 @@ class Button extends Widget {
 
     onRemove() {
 
-        if (this.active && this.getProp('mode') === 'push') this.setValue(this.getProp('off'), {sync: true, send: true})
+        if (this.touchActive && this.getProp('mode') === 'push') this.setValue(this.getProp('off'), {sync: true, send: true})
         super.onRemove()
 
     }
