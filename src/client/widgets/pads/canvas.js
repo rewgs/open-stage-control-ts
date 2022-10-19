@@ -129,8 +129,10 @@ class CanvasWidget extends Canvas {
                 touchCb(e, 'start')
 
                 if (iOS && IOS_TOUCH_POLLING) {
+                    this.iosTouchCache[e.pointerId] === e
                     // start polling extra touch inforamtions
                     this.iosTouchPolls[e.pointerId] = setInterval(()=>{
+                        if (!this.iosTouchCache[e.pointerId]) return
                         for (var p of iosEvents) {
                             // if polled value has changed, retrig last move event
                             if (e[p] !== this.iosTouchCache[e.pointerId][p]) {
@@ -160,8 +162,8 @@ class CanvasWidget extends Canvas {
                 if (iOS && IOS_TOUCH_POLLING) {
                     // stop polling extra touch inforamtions
                     clearInterval(this.iosTouchPolls[e.pointerId])
-                    delete this.iosTouchPolls[e.ointerId]
-                    delete this.iosTouchCache[e.ointerId]
+                    delete this.iosTouchPolls[e.pointerId]
+                    delete this.iosTouchCache[e.pointerId]
                 }
             }, {element: this.container, multitouch: true})
 
