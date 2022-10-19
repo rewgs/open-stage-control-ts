@@ -32,7 +32,7 @@ window.CLIENT_SYNC = parseInt(ENV.clientSync) !== 0
 
 window.IOS_TOUCH_POLLING = false
 
-window.TOGGLE_ALT_TRAVERSING = ENV.altTraversing ? true : false
+window.TOGGLE_ALT_TRAVERSING = !!ENV.altTraversing
 
 
 window.JSON.parseFlex = require('json5').parse
