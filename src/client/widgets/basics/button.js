@@ -43,7 +43,7 @@ class Button extends Widget {
                     '- `momentary` (no release, no value sent with the address)',
                     '- `tap` (no release, sends `on` as value)',
                     '- `decoupled (toggle mode that only updates its state when it receives a value from an osc/midi message*)`',
-                    'When `decoupled`, the button\'s value is ambiguous: when clicked, it will send the value that\'s requested, otherwise it will return the value received from the feedback message.'
+                    'When `decoupled`, the button\'s value is ambiguous: when clicked, it will send the value that\'s requested, otherwise it will return the value received from the feedback message.',
                     'From a script property, feedback messages can be simulated with:',
                     '`set("widget_id", value, {external: true})`'
                 ]},
