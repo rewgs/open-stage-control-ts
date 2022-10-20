@@ -45,10 +45,14 @@ module.exports = {
             // iOS-specific event properties
             ev.touchType = e.touchType
             // iOS-pollable event properties
-            for (var p of ['altitudeAngle', 'azimuthAngle', 'force']) {
-                Object.defineProperty(ev, 'get_' + p, {
-                    enumerable: true,
-                    value: ()=>e[p]
+            for (let p of ['altitudeAngle', 'azimuthAngle', 'force']) {
+                Object.defineProperty(ev, 'update_' + p, {
+                    enumerable: false,
+                    value: function(){
+                        var changed = this[p] !== e[p]
+                        if (changed) this[p] = e[p]
+                        return changed
+                    }
                 })
             }
         }

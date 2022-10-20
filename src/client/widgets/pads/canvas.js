@@ -130,34 +130,33 @@ class CanvasWidget extends Canvas {
             this.on('draginit',(e)=>{
                 touchCb(e, 'start')
 
-                if (iOS && this.iosTouch) {
+                if (this.iosTouch) {
                     // cache touch inforamtions
                     this.iosTouchCache[e.pointerId] = e
                     // start polling extra touch inforamtions
                     this.iosTouchPolls[e.pointerId] = setInterval(()=>{
                         if (!this.iosTouchCache[e.pointerId]) return
-                        var update = false
+                        var changed = false
                         for (var p of iosEvents) {
-                            var newval = e['get_' + p]()
-                            // if polled value has changed, retrig last move event
-                            if (newval !== this.iosTouchCache[e.pointerId][p]) {
-                                // reset movement data since this is only relevant when
-                                // the pointer doesn't move
-                                this.iosTouchCache[e.pointerId].movementX = 0
-                                this.iosTouchCache[e.pointerId].movementY = 0
-                                // polled data
-                                this.iosTouchCache[e.pointerId][p] = newval
-                                update = true
-                            }
+                            // update event data
+                            if (this.iosTouchCache[e.pointerId]['update_' + p]()) changed = true
                         }
-                        if (update) touchCb(this.iosTouchCache[e.pointerId], 'move')
+                        if (changed) {
+                            // if polled value has changed, retrig last move event
+                            // reset movement data since this is only relevant when
+                            // the pointer doesn't move
+                            this.iosTouchCache[e.pointerId].movementX = 0
+                            this.iosTouchCache[e.pointerId].movementY = 0
+                            // call touch move callback
+                            touchCb(this.iosTouchCache[e.pointerId], 'move')
+                        }
                     }, 1000 / 30)
                 }
             }, {element: this.container, multitouch: true})
 
             this.on('drag',(e)=>{
                 touchCb(e, 'move')
-                if (iOS && this.iosTouch) {
+                if (this.iosTouch) {
                     // cache touch inforamtions
                     this.iosTouchCache[e.pointerId] = e
                 }
@@ -165,7 +164,7 @@ class CanvasWidget extends Canvas {
 
             this.on('dragend',(e)=>{
                 touchCb(e, 'stop')
-                if (iOS && this.iosTouch) {
+                if (this.iosTouch) {
                     // stop polling extra touch inforamtions
                     clearInterval(this.iosTouchPolls[e.pointerId])
                     delete this.iosTouchPolls[e.pointerId]
@@ -240,7 +239,7 @@ class CanvasWidget extends Canvas {
 
         clearInterval(this.drawInterval)
 
-        if (iOS) {
+        if (this.iosTouch) {
             for (var k in this.iosTouchPolls) {
                 clearInterval(this.iosTouchPolls[k])
             }
