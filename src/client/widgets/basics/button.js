@@ -71,7 +71,8 @@ class Button extends Widget {
         this.state = 0
         this.touchActive = false
         this.localSet = false
-        this.pulse = null
+        this.pulseIn = null
+        this.pulseOut = null
 
         this.buttonSize = [100, 100]
         this.exposeTouchCoords = String(this.getProp('onValue')).includes('touchCoords')
@@ -311,16 +312,16 @@ class Button extends Widget {
                 if (mode === 'tap') this.setValue(this.getProp('off'), {sync: false, send: false, tapRelease: true})
 
                 // pulse
-                if (this.getProp('decoupled') && options.fromExternal) {
-                    this.container.classList.remove('pulse')
-                    return
-                }
+                clearTimeout(this.pulseIn)
+                clearTimeout(this.pulseOut)
 
-                clearTimeout(this.pulse)
                 this.container.classList.remove('pulse')
-                setTimeout(()=>{
+
+                if (this.getProp('decoupled') && options.fromExternal) return
+
+                this.pulseIn = setTimeout(()=>{
                     this.container.classList.add('pulse')
-                    this.pulse = setTimeout(()=>{
+                    this.pulseOut = setTimeout(()=>{
                         this.container.classList.remove('pulse')
                     }, 150)
                 }, 16)
