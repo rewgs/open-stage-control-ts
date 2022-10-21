@@ -762,8 +762,8 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="canvas_valueLength">valueLength<a class="headerlink" href="#canvas_valueLength" title="Permanent link">#</a></h6> | `number` | <code>1</code> | Defines the number of values accepted by the widget (minimum 1). Incoming messages that don't comply will be ignored<br/><br/>When calling `set()` from a script, submitted value should be an array only if `valueLength` is greater than 1. |
-            | <h6 id="canvas_autoClear">autoClear<a class="headerlink" href="#canvas_autoClear" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If set to `false`, the canvas context won't be cleared automatically and `ctx.clear` will need to be called in `draw`. |
-            | <h6 id="canvas_continuous">continuous<a class="headerlink" href="#canvas_continuous" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | If set to `true`, `draw` will be called at each frame, otherwise it will be called only when the widget is touched and when it receives a value.<br/><br/>Can be a number between 1 and 60 to specify the framerate (default: 30 fps). |
+            | <h6 id="canvas_autoClear">autoClear<a class="headerlink" href="#canvas_autoClear" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If set to `false`, the canvas context won't be cleared automatically and `ctx.clear()` will need to be called in `onDraw`. |
+            | <h6 id="canvas_continuous">continuous<a class="headerlink" href="#canvas_continuous" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | If set to `true`, `onDraw` will be called at each frame, otherwise it will be called only when the widget is touched and when it receives a value.<br/><br/>Can be a number between 1 and 60 to specify the framerate (default: 30 fps). |
 
     === "scripting"
 
