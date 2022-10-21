@@ -1,5 +1,4 @@
 const Touch = window.Touch || class Touch {}
-const iOS = require('../ui/ios')
 
 // const cssTransformCoords = require('./transform-coords')
 
@@ -8,7 +7,7 @@ module.exports = {
 
     fix: function(e) {
 
-        var ev = {
+        return {
 
             target: e.target,
             firstTarget: null,
@@ -41,23 +40,6 @@ module.exports = {
             touchType: e.touchType
         }
 
-        if (iOS && IOS_TOUCH_POLLING) {
-            // iOS-specific event properties
-            ev.touchType = e.touchType
-            // iOS-pollable event properties
-            for (let p of ['altitudeAngle', 'azimuthAngle', 'force']) {
-                Object.defineProperty(ev, 'update_' + p, {
-                    enumerable: false,
-                    value: function(){
-                        var changed = this[p] !== e[p]
-                        if (changed) this[p] = e[p]
-                        return changed
-                    }
-                })
-            }
-        }
-
-        return ev
     },
 
     normalizeDragEvent: function(event, previousEvent) {

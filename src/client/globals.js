@@ -30,8 +30,6 @@ window.DOUBLE_TAP_TIME = ENV.doubletap ? parseInt(ENV.doubletap) : 375
 
 window.CLIENT_SYNC = parseInt(ENV.clientSync) !== 0
 
-window.IOS_TOUCH_POLLING = false
-
 window.TOGGLE_ALT_TRAVERSING = !!ENV.altTraversing
 
 

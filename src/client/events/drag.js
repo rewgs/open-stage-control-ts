@@ -228,9 +228,17 @@ function triggerWidgetEvent(target, name, event) {
 // init
 
 DOM.ready(()=>{
-    if (!iOS) document.addEventListener('pointermove', mouseMoveCapture, true)
+    
+    if (!iOS) {
+        document.addEventListener('pointermove', mouseMoveCapture, true)
+        if ('onwebkitmouseforcechanged' in document) document.addEventListener('webkitmouseforcechanged', mouseMoveCapture, true)
+    }
     if (!iOS) document.addEventListener('pointerup', mouseUpCapture, true)
+
     document.addEventListener('touchmove', touchMoveCapture, true)
+
+    if ('ontouchforcechange' in document) document.addEventListener('touchforcechange', touchMoveCapture, true)
+
     DOM.addEventListener(document, 'touchend touchcancel', touchUpCapture, true)
 
     if (!iOS) document.addEventListener('pointerdown', mouseDownCapture)
