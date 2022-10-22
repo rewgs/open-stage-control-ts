@@ -77,7 +77,7 @@ class Theme {
         var css = this.get()
 
         if (css.includes('--color-background:')) {
-            this.backgroundColor = css.match(/--color-background:([^;]*);/)[1].trim()
+            this.backgroundColor = css.match(/--color-background:([^;\n]*)/)[1].trim()
         } else {
             this.backgroundColor = this.defaultColor
         }
