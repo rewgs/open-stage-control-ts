@@ -159,7 +159,9 @@
 
             color: var(--color-text-on);
         }
-
+        * {
+            pointer-events: none;
+        }
     }
 
     &.wrap value {

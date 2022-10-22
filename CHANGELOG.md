@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.18.2
+
+- bug fixes
+    - canvas: `onTouch` not triggered on iOS when when `event.force`, `event.altitudeAngle` or `event.azimuthAngle` changes
+    - switch: interaction issue when value labels contain icons
+
 ## 1.18.1
 
 - widgets
