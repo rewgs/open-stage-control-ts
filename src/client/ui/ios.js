@@ -41,6 +41,22 @@ if (iOS && !iOS13) {
 
 }
 
+if (iOS) {
+    // when waking from sleep, iOS may have trouble rendering the session properly
+    // this attempts to force a full redraw by shortly resizing the main container
+    document.onvisibilitychange = ()=>{
+        if (document.visibilityState === 'visible') {
+            var main = DOM.get('osc-panel-container#main')[0]
+            main.style.marginBottom = '1px'
+            main.style.marginRight = '1px'
+            setTimeout(()=>{
+                main.style.marginBottom = ''
+                main.style.marginRight = ''
+            })
+        }
+    }
+}
+
 if (iOS13) document.body.classList.add('iOS13')
 
 module.exports = iOS

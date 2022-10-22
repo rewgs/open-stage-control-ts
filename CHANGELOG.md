@@ -5,6 +5,7 @@
 - bug fixes
     - canvas: `onTouch` not triggered on iOS when when `event.force`, `event.altitudeAngle` or `event.azimuthAngle` changes
     - switch: interaction issue when value labels contain icons
+    - ios: attempt to fix rendering glitch when waking up after sleep 
 
 ## 1.18.1
 
