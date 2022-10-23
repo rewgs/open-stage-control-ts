@@ -4,6 +4,7 @@
 
 - bug fixes
     - button: regression in push mode (`on` value not passed to `onValue` script when triggered from another widget)
+    - button: decoupled push mode returning wrong value when activated from a widget script
 
 ## 1.18.2
 
