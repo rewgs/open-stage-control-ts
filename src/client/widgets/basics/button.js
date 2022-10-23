@@ -226,7 +226,7 @@ class Button extends Widget {
                         return this.getProp(this.decoupledValue.value ? 'on' : 'off')
                     }
                 } else {
-                    return this.getProp(this.touchActive ? 'on' : 'off')
+                    return this.getProp(this.state ? 'on' : 'off')
                 }
             case 'tap':
                 if (this.localSet || !this.getProp('decoupled')) {
