@@ -28,6 +28,7 @@ class Input extends Canvas {
                     '- `^[0-9]*$` accepts digits only, any number of them',
                     '- `/^[a-z\s]{0,10}$/i` accept between 0 and 10 alphabetic characters and spaces (case insensitive)',
                 ]},
+                maxLength: {type: 'number', value: '', help: ['Maximum number of characters allowed']}
             },
         })
 
@@ -64,6 +65,13 @@ class Input extends Canvas {
                 this.input.type = 'number'
                 this.input.pattern = '[0-9\.]*'
                 this.input.inputMode = 'decimal'
+            }
+
+            if (this.getProp('maxLength') !== '') {
+                this.maxLength = parseInt(this.getProp('maxLength'))
+                this.input.maxLength = this.maxLength
+            } else {
+                this.maxLength = -1
             }
 
             var asYouType = this.getProp('asYouType')
@@ -154,6 +162,11 @@ class Input extends Canvas {
         if (this.validation && !this.getStringValue(v).match(this.validation)) {
             this.input.value = this.value
             return
+        }
+
+        if (this.maxLength !== -1 && this.getStringValue(v).length > this.maxLength) {
+            v = this.getStringValue(v).substr(0, this.maxLength)
+            this.input.value = v
         }
 
         try {

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.18.4
+
+- widgets
+    - input: add `maxLength` property
+
 ## 1.18.3
 
 - bug fixes
