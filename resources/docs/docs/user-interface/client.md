@@ -28,6 +28,7 @@
 - Console
     - Enable: toggle console's state
     - Clear console: remove logged messages from the console
+- Virtual keyboard: (desktop only) toggle virtual keyboard (displayed only when a text input is in focus)
 - Fullscreen: toggle fullscreen
 - Prevent sleep (mobile only): attempt to prevent device from going to sleep when idle
 

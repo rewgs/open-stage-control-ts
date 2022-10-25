@@ -32,6 +32,8 @@ window.CLIENT_SYNC = parseInt(ENV.clientSync) !== 0
 
 window.TOGGLE_ALT_TRAVERSING = !!ENV.altTraversing
 
+window.VIRTUAL_KEYBOARD = !!ENV.virtualKeyboard && !navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)
+
 
 window.JSON.parseFlex = require('json5').parse
 

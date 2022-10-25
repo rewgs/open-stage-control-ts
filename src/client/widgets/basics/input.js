@@ -178,6 +178,7 @@ class Input extends Canvas {
         if (this.value === '' || this.value === null) this.value = this.getProp('default')
 
         this.stringValue = this.getStringValue(this.value)
+
         this.batchDraw()
 
         if (options.send && !options.fromSync) this.sendValue()

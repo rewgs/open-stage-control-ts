@@ -1,7 +1,10 @@
 var locales = {
-    debug: {/* empty */},
     en: require('./en'),
-    fr: require('./fr')
+    fr: require('./fr'),
+    debug: {
+        /* empty */
+        keyboard_layout: require('./en').keyboard_layout
+    }
 }
 
 var lang = locales[LANG] ? LANG : 'en'

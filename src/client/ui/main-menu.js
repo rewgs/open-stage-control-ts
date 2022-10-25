@@ -231,6 +231,16 @@ if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
         }
     })
 
+} else {
+
+    menuEntries.push({
+        label: locales('keyboard'),
+        class: ()=>{return 'toggle ' + (VIRTUAL_KEYBOARD ? 'on' : 'off')},
+        action: ()=>{
+            VIRTUAL_KEYBOARD = !VIRTUAL_KEYBOARD
+        }
+    })
+
 }
 
 

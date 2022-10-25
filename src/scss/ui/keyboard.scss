@@ -1,0 +1,81 @@
+@import '../../../node_modules/simple-keyboard/build/css/index';
+
+osc-keyboard {
+    --spacing: 4rem;
+    height:33%;
+    z-index: 100;
+    position: relative;
+    display: none;
+    flex-direction: column;
+    padding: calc(var(--spacing) / 2);
+
+    background: var(--color-ui-foreground);
+    border-top: 1rem solid var(--color-ui-background);
+
+    .row {
+        flex-direction: row;
+        display: flex;
+        flex: 1;
+    }
+    .key {
+        background: var(--color-ui-button);
+        border-color: var(--color-ui-background);
+        border-radius: 4rem;
+        border-bottom: 1rem solid var(--color-ui-background);
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: calc(var(--spacing) / 2);
+        span {
+            pointer-events: none;
+            align-items: center;
+            justify-content: center;
+            &.display-default {
+                display: flex;
+            }
+            &.display-shift {
+                display: none;
+            }
+        }
+
+        &.active {
+            background: var(--color-ui-background);
+        }
+    }
+
+
+    .tab, .shift {
+        flex: 1.5;
+    }
+
+    .enter, .right-shift, .lock, .bksp {
+        flex: 2;
+    }
+
+    .sep {
+        width:0;
+        visibility: hidden;
+        flex-shrink: 0;
+        flex-grow: 0;
+        margin-right: var(--spacing);
+        margin-left: var(--spacing);
+    }
+    .sep ~ .key {
+        flex-shrink: 0;
+        flex-grow: 0;
+        min-width: 5%;
+    }
+
+    &.shift {
+        .key {
+            .display-shift {
+                display: flex;
+            }
+            .display-default {
+                display: none;
+            }
+        }
+    }
+
+}
