@@ -30,15 +30,15 @@ document.addEventListener('wheel', function(event) {
     }
 }, {passive: false})
 
-document.addEventListener('mousemove', function(event) {
-    mousePos = [
-        event.pageX / window.innerWidth * 100,
-        event.pageY / window.innerHeight * 100
-    ]
-    if (localZoom !== 1) {
-        applylocalZoom()
-    }
-}, {passive: false})
+// document.addEventListener('mousemove', function(event) {
+//     mousePos = [
+//         event.pageX / window.innerWidth * 100,
+//         event.pageY / window.innerHeight * 100
+//     ]
+//     if (localZoom !== 1) {
+//         applylocalZoom()
+//     }
+// }, {passive: false})
 
 
 var container = DOM.get('#osc-container')[0]
