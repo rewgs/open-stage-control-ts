@@ -2,6 +2,9 @@
 
 ## 1.18.4
 
+- editor
+    - add keyboard shortcut "h" to hide selection and widget drag / resize handles while pressed 
+
 - widgets
     - input: add `maxLength` property
 

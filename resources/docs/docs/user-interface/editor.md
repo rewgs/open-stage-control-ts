@@ -107,6 +107,7 @@ Multiple widgets can be edited at once.
     | ++"Page Down"++ | Bring selected widget closer |
     | ++"End"++ | Bring selected widget to front |
     | ++"F2"++ | Bring "label" property input into view if selected widget has one |
+    | ++h++ | Hide selection area and widget resize / drag handles while pressed |
 
 
 === "Mac"
@@ -144,3 +145,4 @@ Multiple widgets can be edited at once.
     | ++"Page Down"++ | Bring selected widget closer |
     | ++"End"++ | Bring selected widget to front |
     | ++"F2"++ | Bring "label" property input into view if selected widget has one |
+    | ++h++ | Hide selection area and widget resize / drag handles while pressed |

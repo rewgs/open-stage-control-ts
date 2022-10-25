@@ -210,13 +210,17 @@ class Editor {
                 'home',
                 'end',
                 't',
-                'f2'
+                'f2',
+                'h'
             ]
 
             for (let c of combos) {
                 keyboardJS.bind(c, (e)=>{
                     e.catchedByEditor = true
-                    this.handleKeyboard(c, e)
+                    this.handleKeydown(c, e)
+                }, (e)=>{
+                    e.catchedByEditor = true
+                    this.handleKeyup(c, e)
                 })
             }
 
@@ -267,7 +271,7 @@ class Editor {
 
     }
 
-    handleKeyboard(combo, e){
+    handleKeydown(combo, e){
 
         if (
             this.inspector.helpModalOpened ||
@@ -464,11 +468,31 @@ class Editor {
                     input.scrollIntoView({block: 'center'})
                 }
                 break
-
+            case 'h':
+                document.body.classList.add('editor-hide-selection')
+                break
 
         }
 
 
+    }
+
+    handleKeyup(combo, e){
+
+        if (
+            this.inspector.helpModalOpened ||
+            e && e.target && e.target.tagName.match(/INPUT|TEXTAREA|SELECT/)
+        ) return
+
+        if (e) e.preventDefault()
+
+        switch (combo) {
+
+            case 'h':
+                document.body.classList.remove('editor-hide-selection')
+                break
+
+        }
     }
 
     toggleGrid() {

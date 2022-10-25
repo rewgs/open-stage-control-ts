@@ -58,3 +58,15 @@
     from {--color-accent: var(--color-warning)}
     to {--color-accent: transparent}
 }
+
+
+.editor-hide-selection {
+    #drag-resize {
+        display: none;
+    }
+    .widget.editing:after,
+    .tablink.editing:after,
+    .modal-container.editing > .popup > .popup-wrapper:after {
+        display: none;
+    }
+}
