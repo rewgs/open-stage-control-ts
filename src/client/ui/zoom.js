@@ -2,8 +2,8 @@
 
 var mod = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
 
-var localZoom = 1,
-    mousePos = [0, 0]
+var localZoom = 1//,
+//    mousePos = [0, 0]
 
 document.addEventListener('wheel', function(event) {
     if (event.ctrlKey) event.preventDefault()
