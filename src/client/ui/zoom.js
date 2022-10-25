@@ -40,14 +40,19 @@ document.addEventListener('mousemove', function(event) {
     }
 }, {passive: false})
 
+
+var container = DOM.get('#osc-container')[0]
 function applylocalZoom() {
     if (localZoom === 1) {
-        document.body.style.transformOrigin = ''
-        document.body.style.transform = ''
+        container.style.transformOrigin = ''
+        container.parentNode.style.overflow = ''
+        container.style.transform = ''
     } else {
-        document.body.style.transformOrigin = `${mousePos[0]}% ${mousePos[1]}%`
+        // container.style.transformOrigin = `${mousePos[0]}% ${mousePos[1]}%`
+        container.parentNode.style.overflow = 'auto'
+        container.style.transformOrigin = '0 0'
         requestAnimationFrame(()=>{
-            document.body.style.transform = `scale(${localZoom})`
+            container.style.transform = `scale(${localZoom})`
         })
     }
 }

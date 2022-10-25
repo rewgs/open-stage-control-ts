@@ -1,7 +1,7 @@
 @import '../../../node_modules/simple-keyboard/build/css/index';
 
 osc-keyboard {
-    --spacing: 4rem;
+    --spacing: 1rem;
     height:33%;
     z-index: 100;
     position: relative;
@@ -9,8 +9,8 @@ osc-keyboard {
     flex-direction: column;
     padding: calc(var(--spacing) / 2);
 
-    background: var(--color-ui-foreground);
-    border-top: 1rem solid var(--color-ui-background);
+    background: var(--color-ui-background);
+    // border-top: 1rem solid var(--color-ui-background);
 
     .row {
         flex-direction: row;
@@ -20,8 +20,6 @@ osc-keyboard {
     .key {
         background: var(--color-ui-button);
         border-color: var(--color-ui-background);
-        border-radius: 4rem;
-        border-bottom: 1rem solid var(--color-ui-background);
         flex: 1;
         display: inline-flex;
         align-items: center;
@@ -54,17 +52,13 @@ osc-keyboard {
     }
 
     .sep {
-        width:0;
-        visibility: hidden;
-        flex-shrink: 0;
-        flex-grow: 0;
-        margin-right: var(--spacing);
-        margin-left: var(--spacing);
+        display: none;
     }
     .sep ~ .key {
         flex-shrink: 0;
         flex-grow: 0;
         min-width: 5%;
+        opacity: 0.9;
     }
 
     &.shift {

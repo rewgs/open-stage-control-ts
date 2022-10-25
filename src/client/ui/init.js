@@ -5,4 +5,7 @@ require('./notifications')
 require('./ui-workspace')
 require('./main-menu')
 require('./ui-console')
-require('./ui-keyboard')
+
+if (!navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
+    require('./ui-keyboard')
+}

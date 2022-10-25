@@ -236,7 +236,4 @@ class OscKeybard extends UiWidget {
     }
 }
 
-const k = new OscKeybard({element: DOM.get('osc-keyboard')[0]})
-
-
-module.exports = k
+module.exports = new OscKeybard({element: DOM.get('osc-keyboard')[0]})
