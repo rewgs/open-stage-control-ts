@@ -6,6 +6,7 @@
     - add keyboard shortcut "h" to hide selection and widget drag / resize handles while pressed
 
 - widgets
+    - add folder widget (flat container that doesn't affect layout)
     - input: add `maxLength` property
 
 - ui
