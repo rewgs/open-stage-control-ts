@@ -6,10 +6,10 @@ var UiWidget = require('./ui-widget'),
     raw = require('nanohtml/raw')
 
 const numericLayout = [
-    '{sep} 7 8 9',
-    '{sep} 6 7 8',
-    '{sep} 1 2 3',
-    '{sep} 0 . {enter}'
+    '{sep} + 7 8 9',
+    '{sep} - 4 5 6',
+    '{sep} * 1 2 3',
+    '{sep} / 0 . {enter}'
 ]
 const keysDisplay = {
     '{esc}':  locales('keyboard_escape'),

@@ -40,6 +40,13 @@ osc-keyboard {
         }
     }
 
+    .enter {
+        position: relative;
+        --alpha-fill: 0.1;
+        --color-fill: var(--color-accent);
+        @include pseudo-fill($z: 1);
+
+    }
 
     .tab, .shift {
         flex: 1.5;
@@ -68,6 +75,10 @@ osc-keyboard {
                 display: none;
             }
         }
+    }
+
+    @media screen and (max-width: 800px) {
+        font-size: 80%
     }
 
 }
