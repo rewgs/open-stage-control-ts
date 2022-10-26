@@ -11,6 +11,7 @@
 
 - ui
     - add a virtual onscreen keyboard for desktop clients
+    - change local zoom (alt+scroll) behavior so that it only affect widgets and add scrollbars to navigate while zooming instead of following the mouse 
 
 ## 1.18.3
 

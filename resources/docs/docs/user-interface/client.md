@@ -56,8 +56,9 @@ Modals are virtual popup windows that may contain various content: file browser,
 
     | Shortcut | Description |
     |---|---|
-    | ++ctrl+"Mousewheel"++ | change zoom (dpi scaling) |
-    | ++alt+"Mousewheel"++ | change zoom (local zoom centered on the cursor) |
+    | ++ctrl+"Mousewheel"++ | change global zoom (pixel scaling) |
+    | ++alt+"Mousewheel"++ | change local zoom (only affect widgets) |
+    | ++ctrl+0++ | reset global zoom and local zoom |
     | ++ctrl+e++ | enable/disable editor |
     | ++ctrl+k++ | show/hide console |
     | ++ctrl+l++ | clear console |
@@ -70,8 +71,9 @@ Modals are virtual popup windows that may contain various content: file browser,
 
     | Shortcut | Description |
     |---|---|
-    | ++ctrl+"Mousewheel"++ | change zoom (global pixel scaling) |
-    | ++alt+"Mousewheel"++ | change zoom (local zoom centered on the cursor
+    | ++ctrl+"Mousewheel"++ | change global zoom (pixel scaling) |
+    | ++alt+"Mousewheel"++ | change local zoom (only affect widgets) |
+    | ++ctrl+0++ | reset global zoom and local zoom |
     | ++ctrl+e++ | enable/disable editor |
     | ++ctrl+k++ | show/hide console |
     | ++ctrl+l++ | clear console |
@@ -84,8 +86,9 @@ Modals are virtual popup windows that may contain various content: file browser,
 
     | Shortcut | Description |
     |---|---|
-    | ++cmd+"Mousewheel"++ | change zoom (global pixel scaling) |
-    | ++alt+"Mousewheel"++ | change zoom (local zoom centered on the cursor
+    | ++cmd+"Mousewheel"++ | change global zoom (pixel scaling) |
+    | ++alt+"Mousewheel"++ | change local zoom (only affect widgets) |
+    | ++cmd+0++ | reset global zoom and local zoom |
     | ++cmd+e++ | enable/disable editor |
     | ++cmd+k++ | show/hide console |
     | ++cmd+l++ | clear console |
