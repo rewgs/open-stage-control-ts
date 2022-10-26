@@ -1,5 +1,4 @@
-var Panel = require('./panel'),
-    StaticProperties = require('../mixins/static_properties')
+var Panel = require('./panel')
 
 class Folder extends Panel {
 

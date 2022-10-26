@@ -10,8 +10,11 @@
     - input: add `maxLength` property
 
 - ui
-    - add a virtual onscreen keyboard for desktop clients
-    - change local zoom (alt+scroll) behavior so that it only affect widgets and add scrollbars to navigate while zooming instead of following the mouse 
+    - add a virtual onscreen keyboard for desktop clients (can be enabled from the clients main menu)
+    - change local zoom (alt+scroll) behavior so that it only affect widgets and add scrollbars to navigate while zooming instead of following the mouse
+
+- server
+    - client-options: add `virtualKeyboard` option to enable virtual keyboard by default (desktop clients only)
 
 ## 1.18.3
 
