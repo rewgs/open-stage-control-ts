@@ -73,7 +73,8 @@
             max-width: 100%;
         }
 
-        &.layout-vertical > inner {
+        &.layout-vertical > inner,
+        &.layout-vertical .folder-container > inner {
             display: flex;
             flex-direction: column;
             align-items: stretch;
@@ -94,7 +95,8 @@
             max-height: 100%;
         }
 
-        &.layout-grid > inner {
+        &.layout-grid > inner,
+        &.layout-grid .folder-container > inner {
             display: grid;
             > .widget {
                 top:auto!important;
@@ -199,6 +201,22 @@
     }
 
 
+}
+
+.folder-container {
+    display: contents;
+    overflow: visible;
+    contain: unset;
+    min-width: 0;
+    width: 0;
+    min-height: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    > inner {
+        display: contents!important;
+        padding: 0;
+    }
 }
 
 .root-container {

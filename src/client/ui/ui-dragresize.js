@@ -2,7 +2,7 @@ var UiWidget = require('./ui-widget'),
     keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     html = require('nanohtml'),
     fastdom = require('fastdom'),
-    Tab, Root
+    Tab, Root, Folder
 
 class UiDragResize extends UiWidget {
 
@@ -10,6 +10,7 @@ class UiDragResize extends UiWidget {
 
         Tab = require('../widgets/containers/tab')
         Root = require('../widgets/containers/root')
+        Folder = require('../widgets/containers/folder')
 
         super(options)
 
@@ -144,7 +145,12 @@ class UiDragResize extends UiWidget {
 
         this.clear()
 
-        this.widgets = widgets.slice().filter(w=>w.getProp('visible') && !(w instanceof Tab) && !(w instanceof Root))
+        this.widgets = widgets.slice().filter(
+            w=>w.getProp('visible') &&
+            !(w instanceof Tab) &&
+            !(w instanceof Root) &&
+            !(w instanceof Folder)
+        )
 
         if (!this.widgets.length) return
 

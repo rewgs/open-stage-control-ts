@@ -12,11 +12,12 @@ var UiWidget = require('./ui-widget'),
 var widgetIcons = {
     root: 'bookmark',
     tab: 'window-maximize',
+    folder: 'folder',
     menu: 'list',
     dropdown: 'list',
     switch: 'list',
     input: 'i-cursor',
-    file: 'folder-open',
+    file: 'file-import',
     modal: 'window-restore',
     clone: 'cube',
     fragment: 'cube',
@@ -27,7 +28,7 @@ var widgetIcons = {
 
 var categoryIcons = {
     'Basics': 'toggle-on',
-    'Containers': 'th-large',
+    'Containers': 'table-list',
     'Frames': 'images',
     'Graphs': 'chart-area',
     'Indicators': 'info-circle',
