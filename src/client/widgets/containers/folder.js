@@ -5,7 +5,7 @@ class Folder extends Panel {
 
     static description() {
 
-        return 'Generic matrix for creating rows/columns of widgets.'
+        return 'Flat container that doesn\'t affect layout. Mostly useful for grouping widgets in the tree.'
 
     }
 
