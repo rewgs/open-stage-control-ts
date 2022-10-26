@@ -69,8 +69,8 @@ module.exports = class File extends Widget {
 
         this.value = v
 
-        var sep = v[0] === '/' ? '/' : '\\'
-        if (this.getProp('hidePath')) {
+        if (this.getProp('hidePath') && typeof v === 'string') {
+            var sep = v[0] === '/' ? '/' : '\\'
             if (v[v.length - 1] === sep) {
                 this.text.textContent = v.substr(0, v.length - 1).split(sep).pop() + sep
             } else {
