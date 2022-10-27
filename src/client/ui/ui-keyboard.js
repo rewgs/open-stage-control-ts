@@ -9,7 +9,8 @@ const numericLayout = [
     '{sep} + 7 8 9',
     '{sep} - 4 5 6',
     '{sep} * 1 2 3',
-    '{sep} / 0 . {enter}'
+    '{sep} / {up} 0 .',
+    '{sep} {left} {down} {right} {enter}'
 ]
 const keysDisplay = {
     '{esc}':  locales('keyboard_escape'),
@@ -19,6 +20,11 @@ const keysDisplay = {
     '{shift}': icon('arrow-up'),
     '{tab}': icon('arrow-right-arrow-left'),
     '{space}': ' ',
+    '{left}': icon('arrow-left'),
+    '{right}': icon('arrow-right'),
+    '{up}': icon('arrow-up'),
+    '{down}': icon('arrow-down'),
+
 }
 
 class OscKeybard extends UiWidget {
@@ -33,6 +39,10 @@ class OscKeybard extends UiWidget {
         this.shift = false
         this.input = null
         this.value = null
+        this.visible = false
+
+        this.display = html`<textarea></textarea>`
+        this.container.appendChild(html`<div class="row">${this.display}</div>`)
 
 
         for (var k in layout) {
@@ -128,6 +138,7 @@ class OscKeybard extends UiWidget {
                 this.input = e.target
                 this.value = this.input.value
                 this.input.scrollIntoView()
+                this.updateDisplay()
             }
         }, {capture: true})
 
@@ -138,9 +149,26 @@ class OscKeybard extends UiWidget {
                 this.hide()
                 this.input = null
                 this.value = null
+                this.updateDisplay()
 
             }
         }, {capture: true})
+
+        document.addEventListener('input', (e)=>{
+            // hide keyboard when leaving input focus
+            if (e.target === this.input) {
+                setTimeout(()=>{ // deffered for code editor
+                    this.updateDisplay()
+                })
+            }
+        }, {capture: true})
+
+        document.addEventListener('change', (e)=>{
+            // hide keyboard when leaving input focus
+            if (e.target === this.input) {
+                this.updateDisplay()
+            }
+        })
 
     }
 
@@ -223,14 +251,23 @@ class OscKeybard extends UiWidget {
 
     }
 
+    updateDisplay() {
+        if (this.input) {
+            this.display.value = this.input.osc_input ? this.input.osc_input.value :this.input.value
+
+        } else {
+            this.display.value = ''
+        }
+    }
+
     show(){
+        this.visible = true
         this.container.style.display = 'flex'
-        DOM.dispatchEvent(window, 'resize')
     }
 
     hide(){
+        this.visible = false
         this.container.style.display = 'none'
-        DOM.dispatchEvent(window, 'resize')
     }
 }
 

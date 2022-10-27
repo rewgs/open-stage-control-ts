@@ -1,28 +1,71 @@
 osc-keyboard {
-    --spacing: 1rem;
-    height:33%;
+    --spacing: 2rem;
+    --max-height: 300rem;
+    --max-width: 1200rem;
+
+    height:calc(33% + 40rem);
     z-index: 100;
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    right: 0;
+    backdrop-filter: blur(12px);
     display: none;
     flex-direction: column;
-    padding: calc(var(--spacing) / 2);
+    padding: var(--spacing);
+    align-items: center;
+    background: rgba(black, 0.25);
+    max-height: var(--max-height);
+    border-top: 1rem solid var(--color-background);
 
-    background: var(--color-ui-background);
-    // border-top: 1rem solid var(--color-ui-background);
+    @keyframes keyboard-in {
+        from {opacity: 0}
+        to {opacity: 1}
+    }
+    animation: keyboard-in 0.25s forwards;
+
+    textarea {
+        height: auto;
+        width: 100%;
+        background: transparent;
+        padding: 14rem 20rem 4rem;
+        resize: none;
+        text-align: center;
+        vertical-align: middle;
+        font: inherit;
+        margin-top:var(---spacing);
+    }
 
     .row {
         flex-direction: row;
         display: flex;
         flex: 1;
+        max-width: var(--max-width);
+        width: 100%;
+        &:last-child .key {
+            margin-bottom: 0;
+        }
+        &:first-child {
+            height: 40rem;
+        }
     }
     .key {
-        background: var(--color-ui-button);
+        background: rgba(white, 0.05);
         border-color: var(--color-ui-background);
         flex: 1;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        margin: calc(var(--spacing) / 2);
+        position: relative;
+        --alpha-fill: 0.1;
+        --color-fill: var(--color-accent);
+        --widget-padding: -1rem;
+        @include pseudo-fill($z: 1);
+        margin-right: var(--spacing);
+        margin-bottom: var(--spacing);
+        &:last-child{
+            margin-right: 0;
+        }
         span {
             pointer-events: none;
             align-items: center;
@@ -36,16 +79,12 @@ osc-keyboard {
         }
 
         &.active {
-            background: var(--color-ui-background);
+            --alpha-fill: 0.3;
         }
     }
 
     .enter {
-        position: relative;
-        --alpha-fill: 0.1;
-        --color-fill: var(--color-accent);
-        @include pseudo-fill($z: 1);
-
+        --alpha-fill: 0.15;
     }
 
     .tab, .shift {
@@ -63,7 +102,8 @@ osc-keyboard {
         flex-shrink: 0;
         flex-grow: 0;
         min-width: 5%;
-        opacity: 0.9;
+        --alpha-fill: 0.15;
+
     }
 
     &.shift {
@@ -76,9 +116,10 @@ osc-keyboard {
             }
         }
     }
-
     @media screen and (max-width: 800px) {
-        font-size: 80%
+        .key {
+            font-size: 80%
+        }
     }
 
 }
