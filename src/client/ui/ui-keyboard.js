@@ -83,7 +83,7 @@ class OscKeybard extends UiWidget {
         this.container.addEventListener('mousedown', (e)=>{
             // prevent keyboard from stealing focus from input
             e.preventDefault()
-        },{capture:true})
+        }, {capture: true})
 
 
         this.on('draginit', (e)=>{
@@ -106,8 +106,6 @@ class OscKeybard extends UiWidget {
 
             this.checkShift()
 
-            this.keyDown(key.getAttribute(this.shift !== this.lock ? 'data-shift' : 'data-key'))
-
             this.repeatKeys[e.pointerId] = [
                 setTimeout(()=>{
                     this.repeatKeys[e.pointerId][1] = setInterval(()=>{
@@ -115,6 +113,8 @@ class OscKeybard extends UiWidget {
                     }, 50)
                 },800)
             ]
+
+            this.keyDown(key.getAttribute(this.shift !== this.lock ? 'data-shift' : 'data-key'))
 
         }, {element: this.container, multitouch: true})
 
@@ -133,7 +133,6 @@ class OscKeybard extends UiWidget {
 
             clearTimeout(this.repeatKeys[e.pointerId][0])
             clearInterval(this.repeatKeys[e.pointerId][1])
-            delete this.repeatKeys[e.pointerId]
 
             this.checkShift()
 
@@ -311,19 +310,24 @@ class OscKeybard extends UiWidget {
     }
 
     show(){
+
         this.visible = true
         this.container.style.display = 'flex'
+
     }
 
     hide(){
+
         this.visible = false
         this.container.style.display = 'none'
-        for (var k in this.repeatKeys) {
+
+        for (let k in this.repeatKeys) {
             clearTimeout(this.repeatKeys[k][0])
             clearInterval(this.repeatKeys[k][1])
-            delete this.repeatKeys[k]
         }
-        for (var k in this.pressedKeys) {
+
+        for (let k in this.pressedKeys) {
+            this.pressedKeys[k].classList.remove('active')
             delete this.pressedKeys[k]
         }
     }
