@@ -67,8 +67,11 @@ class ScriptVm extends Vm {
 
             this.checkContext('set')
 
+            var widget = this.getWidget()
             var options = deepCopy(this.getValueOptions())
-            options.fromScript = true
+
+            options.fromScript = widget
+
             if (options.dragged) options.dragged = false
 
             // if (id === options.id) options.sync = false // loop stop
@@ -81,7 +84,6 @@ class ScriptVm extends Vm {
 
             var widgets
             if (id.includes('*')) {
-                var widget = this.getWidget()
                 widgets = this.resolveId(
                     Object.keys(widgetManager.idRoute).filter(key => key.match(new RegExp('^' + id.replace(/\*/g, '.*') + '$')))
                 ).filter(w => w !== widget)

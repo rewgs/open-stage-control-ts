@@ -293,7 +293,12 @@ module.exports = class MultiXy extends Pad {
     setValue(v, options={}) {
 
         if (!v || !v.length || v.length!=this.npoints * 2) return
-        if (this.touched && !options.dragged && !options.doubleTap) return this.setValueTouchedQueue = [v, options]
+        if (
+            this.touched &&
+            !options.dragged &&
+            !options.doubleTap &&
+            options.fromScript !== this
+        ) return this.setValueTouchedQueue = [v, options]
 
         for (let i=0;i<this.npoints;i++) {
             if (!options.dragged) {

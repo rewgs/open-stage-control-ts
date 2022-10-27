@@ -8,6 +8,7 @@
 - widgets
     - add folder widget (flat container that doesn't affect layout)
     - input: add `maxLength` property
+    - multixy: allow setting its own value from onValue script while touched
 
 - ui
     - add a virtual onscreen keyboard for desktop clients (can be enabled from the clients main menu)
