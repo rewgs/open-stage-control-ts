@@ -79,7 +79,7 @@ osc-keyboard {
         }
 
         &.active {
-            --alpha-fill: 0.3;
+            --alpha-fill: 0.3!important;
         }
     }
 

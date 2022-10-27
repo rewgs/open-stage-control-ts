@@ -210,6 +210,43 @@ class OscKeybard extends UiWidget {
             case '{space}':
                 str = ' '
                 break
+            case '{left}':
+                this.input.selectionStart = this.input.selectionEnd = this.input.selectionStart - 1
+                return
+            case '{right}':
+                this.input.selectionStart = this.input.selectionEnd = this.input.selectionStart + 1
+                return
+            case '{up}':
+            case '{down}':
+                if (this.display.value.includes('\n')) {
+                    var chars = this.display.value.split('\n').map(x=>x.length + 1),
+                        line = 0,
+                        charCount = 0,
+                        newPos = 0,
+                        posAtLine
+
+                    for (let i = 0; i < chars.length; i++) {
+                        charCount += chars[i]
+                        if (charCount > this.input.selectionStart) {
+                            posAtLine = chars[i] - (charCount - this.input.selectionStart)
+                            break
+                        }
+                        line++
+                    }
+                    line = key === '{up}' ? line - 1 : line + 1
+                    for (let i = 0; i < line; i++) {
+                        newPos += chars[i]
+                    }
+                    if (posAtLine > chars[line] - 1) posAtLine = chars[line] - 1
+
+                    this.input.selectionStart =
+                    this.input.selectionEnd = newPos + posAtLine
+                    return
+                } else {
+                    this.input.selectionStart =
+                    this.input.selectionEnd = key === '{up}' ? 0 : this.display.value.length
+                }
+                return
             default:
                 str = key
                 break
