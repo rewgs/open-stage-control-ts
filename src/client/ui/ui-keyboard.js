@@ -35,6 +35,7 @@ class OscKeybard extends UiWidget {
 
         this.keys = {}
         this.pressedKeys = {}
+        this.repeatKeys = {}
         this.lock = false
         this.shift = false
         this.input = null
@@ -107,6 +108,14 @@ class OscKeybard extends UiWidget {
 
             this.keyDown(key.getAttribute(this.shift !== this.lock ? 'data-shift' : 'data-key'))
 
+            this.repeatKeys[e.pointerId] = [
+                setTimeout(()=>{
+                    this.repeatKeys[e.pointerId][1] = setInterval(()=>{
+                        this.keyDown(key.getAttribute(this.shift !== this.lock ? 'data-shift' : 'data-key'))
+                    }, 50)
+                },800)
+            ]
+
         }, {element: this.container, multitouch: true})
 
         this.on('dragend', (e)=>{
@@ -121,6 +130,10 @@ class OscKeybard extends UiWidget {
             if (keyData === '{lock}') return
 
             delete this.pressedKeys[e.pointerId]
+
+            clearTimeout(this.repeatKeys[e.pointerId][0])
+            clearInterval(this.repeatKeys[e.pointerId][1])
+            delete this.repeatKeys[e.pointerId]
 
             this.checkShift()
 
@@ -305,6 +318,14 @@ class OscKeybard extends UiWidget {
     hide(){
         this.visible = false
         this.container.style.display = 'none'
+        for (var k in this.repeatKeys) {
+            clearTimeout(this.repeatKeys[k][0])
+            clearInterval(this.repeatKeys[k][1])
+            delete this.repeatKeys[k]
+        }
+        for (var k in this.pressedKeys) {
+            delete this.pressedKeys[k]
+        }
     }
 }
 
