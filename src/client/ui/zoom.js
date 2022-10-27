@@ -24,7 +24,7 @@ document.addEventListener('wheel', function(event) {
         event.preventDefault()
         let d = - event.deltaY / (10 * Math.abs(event.deltaY)) * 2
         if (!isNaN(d)) {
-            localZoom = Math.max(parseFloat(d) + parseFloat(localZoom), 1)
+            localZoom = Math.max(parseFloat(d) + parseFloat(localZoom), 0.25)
             applylocalZoom()
         }
     }
