@@ -149,7 +149,6 @@ class OscKeybard extends UiWidget {
                 this.show()
                 this.input = e.target
                 this.value = this.input.value
-                this.input.scrollIntoView()
                 this.updateDisplay()
             }
         }, {capture: true})
