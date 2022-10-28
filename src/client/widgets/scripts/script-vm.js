@@ -70,7 +70,7 @@ class ScriptVm extends Vm {
             var widget = this.getWidget()
             var options = deepCopy(this.getValueOptions())
 
-            options.fromScript = widget
+            options.fromScript = widget.hash
 
             if (options.dragged) options.dragged = false
 

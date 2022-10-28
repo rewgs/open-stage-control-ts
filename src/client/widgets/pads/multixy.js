@@ -218,7 +218,7 @@ module.exports = class MultiXy extends Pad {
             this.pads[k].height = this.height
             this.pads[k].padPadding = this.padPadding
         }
-        
+
         this.updateHandlesPosition()
 
 
@@ -297,7 +297,7 @@ module.exports = class MultiXy extends Pad {
             this.touched &&
             !options.dragged &&
             !options.doubleTap &&
-            options.fromScript !== this
+            options.fromScript !== this.hash
         ) return this.setValueTouchedQueue = [v, options]
 
         for (let i=0;i<this.npoints;i++) {
