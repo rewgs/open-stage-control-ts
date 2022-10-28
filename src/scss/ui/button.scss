@@ -1,5 +1,6 @@
 .btn {
-    background: var(--color-background);
+    background: var(--color-ui-button);
+    border: 1rem solid var(--color-background);
     display: block;
     padding: 0 15rem;
     position: relative;
@@ -12,5 +13,8 @@
     &.disabled {
         pointer-events: none;
         opacity: 0.5;
+    }
+    &.active {
+        color: var(--color-accent)
     }
 }

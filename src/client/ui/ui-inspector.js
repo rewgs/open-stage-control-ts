@@ -7,8 +7,11 @@ var UiWidget = require('./ui-widget'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     fastdom = require('fastdom'),
+    {icon} = require('./utils'),
+    zoom = require('./zoom'),
     getCodeEditor = require('./ui-code-editor'),
-    codeEditorModKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
+    codeEditorModKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey',
+    editor
 
 class UiInspector extends UiWidget {
 
@@ -21,6 +24,24 @@ class UiInspector extends UiWidget {
         this.expandedCategories = ['widget']
 
         this.widget = null
+
+        this.toolbar = this.container.appendChild(html`
+            <div class="toolbar">
+                <div class="btn toolbar-btn" data-action="zoom-out">${raw(icon('magnifying-glass-minus'))}</div>
+                <div class="btn toolbar-btn" data-action="zoom-reset">${raw(icon('magnifying-glass'))}</div>
+                <div class="btn toolbar-btn" data-action="zoom-in">${raw(icon('magnifying-glass-plus'))}</div>
+                <div class="btn toolbar-btn" data-action="toggle-grid">${raw(icon('table-cells'))}</div>
+            </div>
+        `)
+        this.toolbarBtns = {}
+        DOM.each(this.toolbar, '.btn', (item)=>{this.toolbarBtns[item.getAttribute('data-action')] = item})
+        zoom.on('local-zoom-changed',()=>{
+            this.toolbarBtns['zoom-out'].classList.toggle('active', zoom.localZoom < 1)
+            this.toolbarBtns['zoom-in'].classList.toggle('active', zoom.localZoom > 1)
+        })
+
+
+        this.content = this.container.appendChild(html`<div class="content"></div>`)
 
         this.container.addEventListener('fast-click', (e)=>{
 
@@ -43,6 +64,23 @@ class UiInspector extends UiWidget {
                     this.expandedCategories.splice(expandedIndex, 1)
                 } else {
                     this.expandedCategories.push(name)
+                }
+
+            } else if (e.target.classList.contains('toolbar-btn')) {
+
+                switch (e.target.getAttribute('data-action')) {
+                    case 'zoom-out':
+                        zoom.setLocalZoom(zoom.localZoom - 0.1)
+                        break
+                    case 'zoom-reset':
+                        zoom.setLocalZoom(1)
+                        break
+                    case 'zoom-in':
+                        zoom.setLocalZoom(zoom.localZoom + 0.1)
+                        break
+                    case 'toggle-grid':
+                        editor = editor || require('../editor')
+                        editor.toggleGrid()
                 }
 
             }
@@ -112,7 +150,7 @@ class UiInspector extends UiWidget {
 
         this.clearTimeout = setTimeout(()=>{
             this.widget = null
-            this.container.innerHTML = ''
+            this.content.innerHTML = ''
             this.mounted = false
             this.clearTimeout = null
             this.colorPicker.close()
@@ -137,7 +175,7 @@ class UiInspector extends UiWidget {
 
         this.widget = widget
 
-        var content = html`<div class="${lock ? 'lock' : ''}"></div>`
+        var content = html`<div class="content ${lock ? 'lock' : ''}"></div>`
 
         for (let categoryName in props) {
 
@@ -207,11 +245,7 @@ class UiInspector extends UiWidget {
 
         this.lock = true
 
-        if (this.mounted) {
-            morph(this.container.firstChild, content)
-        } else {
-            this.container.appendChild(content)
-        }
+        morph(this.content, content)
 
         if (codeEditorFields.length) {
             let fields = DOM.get(this.container, '.has-editor')

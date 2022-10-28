@@ -23,6 +23,11 @@
         overflow: auto;
         padding-left:$padding + 4rem;
         padding-right:$padding;
+        border-top:1rem solid var(--color-background);
+
+        &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
+            border-color: var(--color-background)!important;
+        }
 
     }
 

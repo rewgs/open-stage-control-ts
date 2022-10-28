@@ -30,7 +30,52 @@ osc-panel-container.right.editor-breakout {
         }
     }
 
+    .toolbar {
+        display: flex;
+        flex-direction: row;
+        padding: $padding / 2;
+        height: 46rem;
+        position: relative;
+        top:0;
+        z-index: 21;
+        background: var(--color-ui-background);
+        border-bottom:1rem solid var(--color-background);
+        .btn {
+            margin: $padding / 2;
+            padding: 0 8rem 1rem;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            &:last-child {
+                margin-left: auto;
+            }
+            i {
+                pointer-events: none;
+            }
+            &[data-action="toggle-grid"] {
+                color: var(--color-accent)
+            }
+        }
+    }
+
+    overflow: hidden;
+    > .content {
+        overflow: auto;
+        flex:1;
+        height: 100%;
+        &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
+            border-color: var(--color-background)!important;
+            border-top:0;
+        }
+    }
+
 }
+
+body.no-grid #osc-inspector .toolbar .btn[data-action="toggle-grid"] {
+    color: inherit;
+}
+
+
 
 osc-inspector-field {
 
@@ -385,9 +430,11 @@ osc-inspector-category {
         height: $header-height;
         line-height: $header-height - 1;
         // padding: 0 8rem;
+        // position: sticky;
+        // top:46rem;z-index: 20;
+        // background: var(--color-ui-background);
         font-weight: 500;
         @include pseudo-fill($z: -1);
-
         &:after {
             left:-($padding - 1);
             right:-($padding - 1);
