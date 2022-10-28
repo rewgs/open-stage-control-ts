@@ -733,3 +733,15 @@ osc-inspector-color {
         height: 30rem;
     }
 }
+
+
+.editor-enabled {
+    osc-panel-container.center {
+        overflow: auto;
+        background: var(--color-background);
+    }
+    #osc-container {
+        transform-origin: 0 0;
+        transform: scale(var(--local-zoom));
+    }
+}

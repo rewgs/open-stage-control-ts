@@ -30,31 +30,11 @@ document.addEventListener('wheel', function(event) {
     }
 }, {passive: false})
 
-// document.addEventListener('mousemove', function(event) {
-//     mousePos = [
-//         event.pageX / window.innerWidth * 100,
-//         event.pageY / window.innerHeight * 100
-//     ]
-//     if (localZoom !== 1) {
-//         applylocalZoom()
-//     }
-// }, {passive: false})
-
-
 var container = DOM.get('#osc-container')[0]
 function applylocalZoom() {
-    if (localZoom === 1) {
-        container.style.transformOrigin = ''
-        container.parentNode.style.overflow = ''
-        container.style.transform = ''
-    } else {
-        // container.style.transformOrigin = `${mousePos[0]}% ${mousePos[1]}%`
-        container.parentNode.style.overflow = 'auto'
-        container.style.transformOrigin = '0 0'
-        requestAnimationFrame(()=>{
-            container.style.transform = `scale(${localZoom})`
-        })
-    }
+    requestAnimationFrame(()=>{
+        container.style.setProperty('--local-zoom', localZoom)
+    })
 }
 
 document.addEventListener('keydown', function(event){
