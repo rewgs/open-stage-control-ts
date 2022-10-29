@@ -160,6 +160,7 @@ class OscKeybard extends UiWidget {
             if (!VIRTUAL_KEYBOARD) return
             // show keyboard when entering input focus
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                if (e.target.osc_input) return
                 this.show()
                 this.input = e.target
                 this.value = this.input.value
@@ -233,6 +234,7 @@ class OscKeybard extends UiWidget {
                 } else {
                     this.input.dispatchEvent(new KeyboardEvent('keydown', {keyCode: 13}))
                     if (this.input) DOM.dispatchEvent(this.input, 'change')
+                    if (this.input) this.input.blur()
                     return
                 }
             case '{bksp}':
@@ -329,10 +331,10 @@ class OscKeybard extends UiWidget {
     }
 
     updateDisplay() {
+
         var value = ''
-        if (this.input) {
-            value = this.input.osc_input ? this.input.osc_input.value :this.input.value
-        }
+
+        if (this.input) this.input.value
 
         var content = html`<pre class="textarea"></pre>`
         for (var i in value) {
