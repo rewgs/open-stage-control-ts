@@ -1,4 +1,5 @@
 const Touch = window.Touch || class Touch {}
+const zoom = require('../ui/zoom')
 
 // const cssTransformCoords = require('./transform-coords')
 
@@ -17,8 +18,8 @@ module.exports = {
             pageY: e.pageY,
             clientX: e.clientX,
             clientY: e.clientY,
-            movementX: e.movementX,
-            movementY: e.movementY,
+            movementX: e.movementX / zoom.localZoom,
+            movementY: e.movementY / zoom.localZoom,
             pointerId: e.pointerId,
             pointerType: e.pointerType,
             button: e.button,

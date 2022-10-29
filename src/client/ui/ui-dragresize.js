@@ -2,7 +2,6 @@ var UiWidget = require('./ui-widget'),
     keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     html = require('nanohtml'),
     fastdom = require('fastdom'),
-    zoom = require('./zoom'),
     Tab, Root, Folder
 
 class UiDragResize extends UiWidget {
@@ -71,11 +70,11 @@ class UiDragResize extends UiWidget {
                 switch (k) {
                     case 'left':
                     case 'width':
-                        this[k] += event.movementX / PXSCALE / zoom.localZoom
+                        this[k] += event.movementX / PXSCALE
                         break
                     case 'top':
                     case 'height':
-                        this[k] += event.movementY / PXSCALE / zoom.localZoom
+                        this[k] += event.movementY / PXSCALE
                         break
 
                 }
