@@ -62,7 +62,7 @@ osc-panel-container.right.editor-breakout {
     > .content {
         overflow: auto;
         flex:1;
-        height: 100%;
+        height: calc(100% - 46rem);
         &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
             border-color: var(--color-background)!important;
             border-top:0;

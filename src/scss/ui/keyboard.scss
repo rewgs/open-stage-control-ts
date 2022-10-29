@@ -10,6 +10,9 @@ osc-keyboard {
     left:0;
     right: 0;
     backdrop-filter: blur(12px);
+    @supports not (backdrop-filter: blur(12px)) {
+        background: var(--color-ui-background);
+    }
     display: none;
     flex-direction: column;
     padding: var(--spacing);
