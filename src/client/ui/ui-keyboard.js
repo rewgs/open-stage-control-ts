@@ -334,7 +334,7 @@ class OscKeybard extends UiWidget {
 
         var value = ''
 
-        if (this.input) this.input.value
+        if (this.input) value = this.input.value
 
         var content = html`<pre class="textarea"></pre>`
         for (var i in value) {
