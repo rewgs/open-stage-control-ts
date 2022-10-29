@@ -4,7 +4,8 @@ var UiWidget = require('./ui-widget'),
     layout = locales('keyboard_layout'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
-    morph = require('nanomorph')
+    morph = require('nanomorph'),
+    doubleClick = require('../events/double-click')
 
 const numericLayout = [
     '{sep} + 7 8 9',
@@ -42,10 +43,10 @@ class OscKeybard extends UiWidget {
         this.input = null
         this.value = null
         this.visible = false
+        this.selectionInit = 0
 
         this.display = html`<pre class="textarea"></pre>`
         this.container.appendChild(html`<div class="row">${this.display}</div>`)
-        this.cursor = html`<span class="cursor">|</span>`
 
         for (var k in layout) {
             layout[k] = layout[k].map((r, i)=>(r + ' ' + (numericLayout[i]||'')).trim().split(' '))
@@ -61,10 +62,10 @@ class OscKeybard extends UiWidget {
                 var keyData = rowData[j],
                     shiftData = layout.shift[i][j],
                     key = html`
-                    <div class="key">
+                    <key>
                         <span class="display-default">${raw(keysDisplay[keyData] || keyData)}</span>
                         <span class="display-shift">${raw(keysDisplay[shiftData] || shiftData)}</span>
-                    </div>`
+                    </key>`
 
                 keyId++
                 this.keys[keyId] = key
@@ -84,19 +85,7 @@ class OscKeybard extends UiWidget {
         this.container.addEventListener('mousedown', (e)=>{
             // prevent keyboard from stealing focus from input
             e.preventDefault()
-            // move cursor
-            if (this.display.contains(e.target) && e.target !== this.display) {
-                var pos = DOM.index(e.target)
-                // adjust cursor depening on where we clicked on the letter
-                if (e.offsetX - DOM.offset(e.target).left >= e.target.offsetWidth / 2)
-                    pos += 1
 
-                this.input.selectionStart = pos
-                if (!e.shiftKey) {
-                    this.input.selectionEnd = pos
-                }
-                this.updateCursor()
-            }
         }, {capture: true})
 
 
@@ -104,31 +93,83 @@ class OscKeybard extends UiWidget {
 
             if (this.pressedKeys[e.pointerId]) return
 
-            var keyId = e.target.getAttribute('data-id')
+            if (e.target.tagName === 'KEY') {
 
-            if (keyId === null) return
+                var keyId = e.target.getAttribute('data-id')
 
-            var key = this.keys[keyId]
+                if (keyId === null) return
 
-            if (key.getAttribute('data-key') === '{lock}') {
-                this.lock = !this.lock
-                key.classList.toggle('active', this.lock)
-            } else {
-                key.classList.add('active')
-                this.pressedKeys[e.pointerId] = key
+                var key = this.keys[keyId]
+
+                if (key.getAttribute('data-key') === '{lock}') {
+                    this.lock = !this.lock
+                    key.classList.toggle('active', this.lock)
+                } else {
+                    key.classList.add('active')
+                    this.pressedKeys[e.pointerId] = key
+                }
+
+                this.checkShift()
+
+                this.repeatKeys[e.pointerId] = [
+                    setTimeout(()=>{
+                        this.repeatKeys[e.pointerId][1] = setInterval(()=>{
+                            this.keyDown(key.getAttribute(this.shift !== this.lock ? 'data-shift' : 'data-key'))
+                        }, 50)
+                    },800)
+                ]
+
+                this.keyDown(key.getAttribute(this.shift !== this.lock ? 'data-shift' : 'data-key'))
+
+            } else if (e.target.tagName === 'CHAR') {
+
+                // move cursor
+                if (this.display.contains(e.target) && e.target !== this.display) {
+                    var pos = DOM.index(e.target)
+                    // adjust cursor depening on where we clicked on the letter
+                    if (e.offsetX - DOM.offset(e.target).left >= e.target.offsetWidth / 2)
+                        pos += 1
+
+                    this.input.selectionStart = pos
+                    this.selectionInit = pos
+                    if (!e.shiftKey) {
+                        this.input.selectionEnd = pos
+                    }
+                    this.updateCursor()
+                }
+
             }
 
-            this.checkShift()
 
-            this.repeatKeys[e.pointerId] = [
-                setTimeout(()=>{
-                    this.repeatKeys[e.pointerId][1] = setInterval(()=>{
-                        this.keyDown(key.getAttribute(this.shift !== this.lock ? 'data-shift' : 'data-key'))
-                    }, 50)
-                },800)
-            ]
+        }, {element: this.container, multitouch: true})
 
-            this.keyDown(key.getAttribute(this.shift !== this.lock ? 'data-shift' : 'data-key'))
+        doubleClick(this.display, ()=>{
+            this.input.selectionStart = 0
+            this.input.selectionEnd = this.input.value.length
+            this.updateCursor()
+        })
+
+        this.on('drag', (e)=>{
+
+            if (e.target.tagName === 'CHAR') {
+
+                // move cursor
+                if (this.display.contains(e.target) && e.target !== this.display) {
+                    var pos = DOM.index(e.target)
+                    // adjust cursor depening on where we clicked on the letter
+                    if (e.offsetX - DOM.offset(e.target).left >= e.target.offsetWidth / 2)
+                        pos += 1
+
+                    if (pos < this.selectionInit) {
+                        this.input.selectionStart = pos
+                    } else {
+                        this.input.selectionEnd = pos
+                    }
+
+                    this.updateCursor()
+                }
+
+            }
 
         }, {element: this.container, multitouch: true})
 
@@ -172,6 +213,7 @@ class OscKeybard extends UiWidget {
 
 
         document.addEventListener('blur', (e)=>{
+            if (!VIRTUAL_KEYBOARD) return
             // hide keyboard when leaving input focus
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
                 this.hide()
@@ -182,16 +224,16 @@ class OscKeybard extends UiWidget {
         }, {capture: true})
 
         document.addEventListener('input', (e)=>{
-            // hide keyboard when leaving input focus
+            if (!VIRTUAL_KEYBOARD) return
             if (e.target === this.input) {
-                setTimeout(()=>{ // deffered for code editor
+                setTimeout(()=>{
                     this.updateDisplay()
                 })
             }
         }, {capture: true})
 
         document.addEventListener('change', (e)=>{
-            // hide keyboard when leaving input focus
+            if (!VIRTUAL_KEYBOARD) return
             if (e.target === this.input) {
                 setTimeout(()=>{
                     this.updateDisplay()
@@ -200,7 +242,16 @@ class OscKeybard extends UiWidget {
         })
 
         document.addEventListener('keydown', (e)=>{
-            // hide keyboard when leaving input focus
+            if (!VIRTUAL_KEYBOARD) return
+            if (e.target === this.input) {
+                setTimeout(()=>{
+                    this.updateCursor()
+                })
+            }
+        })
+
+        document.addEventListener('select', (e)=>{
+            if (!VIRTUAL_KEYBOARD) return
             if (e.target === this.input) {
                 setTimeout(()=>{
                     this.updateCursor()
@@ -352,7 +403,7 @@ class OscKeybard extends UiWidget {
                     break
             }
             content.appendChild(html`
-                <span class="${nl ? 'newline' : ''}">${c}</span>
+                <char class="${nl ? 'newline' : ''}">${c}</char>
             `)
         }
 
@@ -364,16 +415,30 @@ class OscKeybard extends UiWidget {
 
         if (!this.input) return
 
-        var pos = this.input.selectionStart
+        var start = this.input.selectionStart,
+            end = this.input.selectionEnd
+
+
         this.display.classList.remove('first-char-caret')
-        DOM.get(this.display, '.caret').map(x=>x.classList.remove('caret'))
-        var caretChar = DOM.get(this.display, 'span:nth-child(' + pos + ')')[0]
+        DOM.each(this.display, 'char', (el)=>{
+            el.classList.remove('caret')
+            el.classList.remove('select')
+        })
+
+        if (start === null || end === null) return
+
+        var caretChar = DOM.get(this.display, 'char:nth-child(' + start + ')')[0]
 
         if (caretChar) {
             caretChar.classList.add('caret')
             caretChar.scrollIntoView()
         }
         else this.display.classList.add('first-char-caret')
+        if (start !== end) {
+            DOM.each(this.display, 'char:nth-child(n+' + (start + 1) + '):nth-child(-n+' + (end ) +')', (el)=>{
+                el.classList.add('select')
+            })
+        }
 
         // if (this.display.contains(this.cursor)) this.display.removeChild(this.cursor)
         // if (pos === 0) this.display.insertBefore(this.cursor)
