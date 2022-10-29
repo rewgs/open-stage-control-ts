@@ -3,7 +3,8 @@ var UiWidget = require('./ui-widget'),
     locales = require('../locales'),
     layout = locales('keyboard_layout'),
     html = require('nanohtml'),
-    raw = require('nanohtml/raw')
+    raw = require('nanohtml/raw'),
+    morph = require('nanomorph')
 
 const numericLayout = [
     '{sep} + 7 8 9',
@@ -42,9 +43,9 @@ class OscKeybard extends UiWidget {
         this.value = null
         this.visible = false
 
-        this.display = html`<textarea></textarea>`
+        this.display = html`<div class="textarea"></div>`
         this.container.appendChild(html`<div class="row">${this.display}</div>`)
-
+        this.cursor = html`<span class="cursor">|</span>`
 
         for (var k in layout) {
             layout[k] = layout[k].map((r, i)=>(r + ' ' + (numericLayout[i]||'')).trim().split(' '))
@@ -160,7 +161,6 @@ class OscKeybard extends UiWidget {
                 this.hide()
                 this.input = null
                 this.value = null
-                this.updateDisplay()
 
             }
         }, {capture: true})
@@ -177,7 +177,18 @@ class OscKeybard extends UiWidget {
         document.addEventListener('change', (e)=>{
             // hide keyboard when leaving input focus
             if (e.target === this.input) {
-                this.updateDisplay()
+                setTimeout(()=>{
+                    this.updateDisplay()
+                })
+            }
+        })
+
+        document.addEventListener('keydown', (e)=>{
+            // hide keyboard when leaving input focus
+            if (e.target === this.input) {
+                setTimeout(()=>{
+                    this.updateCursor()
+                })
             }
         })
 
@@ -211,6 +222,7 @@ class OscKeybard extends UiWidget {
                 }
             case '{bksp}':
                 this.input.dispatchEvent(new KeyboardEvent('keydown', {keyCode: 8}))
+                if (startPos === endPos && startPos === 0) break
                 this.input.value = this.input.value.substring(0, startPos - 1)
                     + this.input.value.substring(endPos, this.input.value.length)
                 editLength = -1
@@ -222,15 +234,17 @@ class OscKeybard extends UiWidget {
                 str = ' '
                 break
             case '{left}':
-                this.input.selectionStart = this.input.selectionEnd = this.input.selectionStart - 1
+                this.input.selectionStart = this.input.selectionEnd = Math.max(this.input.selectionStart - 1, 0)
+                this.updateCursor()
                 return
             case '{right}':
                 this.input.selectionStart = this.input.selectionEnd = this.input.selectionStart + 1
+                this.updateCursor()
                 return
             case '{up}':
             case '{down}':
-                if (this.display.value.includes('\n')) {
-                    var chars = this.display.value.split('\n').map(x=>x.length + 1),
+                if (this.input.value.includes('\n')) {
+                    var chars = this.input.value.split('\n').map(x=>x.length + 1),
                         line = 0,
                         charCount = 0,
                         newPos = 0,
@@ -252,11 +266,11 @@ class OscKeybard extends UiWidget {
 
                     this.input.selectionStart =
                     this.input.selectionEnd = newPos + posAtLine
-                    return
                 } else {
                     this.input.selectionStart =
-                    this.input.selectionEnd = key === '{up}' ? 0 : this.display.value.length
+                    this.input.selectionEnd = key === '{up}' ? 0 : this.input.value.length
                 }
+                this.updateCursor()
                 return
             default:
                 str = key
@@ -300,12 +314,44 @@ class OscKeybard extends UiWidget {
     }
 
     updateDisplay() {
+        var value = ''
         if (this.input) {
-            this.display.value = this.input.osc_input ? this.input.osc_input.value :this.input.value
-
-        } else {
-            this.display.value = ''
+            value = this.input.osc_input ? this.input.osc_input.value :this.input.value
         }
+
+        var content = html`<div class="textarea"></div>`
+        for (var i in value) {
+            content.appendChild(html`
+                <span class="${value[i] === '\n' ? 'newline' : ''}">${value[i]}</span>
+            `)
+        }
+
+        morph(this.display, content)
+        this.updateCursor()
+    }
+
+    updateCursor() {
+
+        if (!this.input) return
+
+        var pos = this.input.selectionStart
+        this.display.classList.remove('first-char-caret')
+        DOM.get(this.display, '.caret').map(x=>x.classList.remove('caret'))
+        var caretChar = DOM.get(this.display, 'span:nth-child(' + pos + ')')[0]
+
+        if (caretChar) {
+            caretChar.classList.add('caret')
+            caretChar.scrollIntoView()
+        }
+        else this.display.classList.add('first-char-caret')
+
+        // if (this.display.contains(this.cursor)) this.display.removeChild(this.cursor)
+        // if (pos === 0) this.display.insertBefore(this.cursor)
+        // this.display.insert
+        // this.display.childr
+        // if (this.input) {
+        //     this.display.style.setProperty('--cursor', )
+        // }
     }
 
     show(){

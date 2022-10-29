@@ -25,10 +25,15 @@ osc-keyboard {
         from {opacity: 0}
         to {opacity: 1}
     }
+    @keyframes caret-blink {
+        to {visibility: hidden}
+    }
+
     animation: keyboard-in 0.25s forwards;
 
-    textarea {
+    .textarea {
         height: auto;
+        overflow: auto;
         width: 100%;
         background: transparent;
         padding: 14rem 20rem 4rem;
@@ -37,6 +42,35 @@ osc-keyboard {
         vertical-align: middle;
         font: inherit;
         margin-top:var(---spacing);
+        position: relative;
+        pointer-events: auto;
+        min-height: 100%;
+        span {
+            margin: 0 0.25rem;
+        }
+        .caret {
+            position: relative;
+            &:after {
+                content: "";
+                height: 10rem;
+                box-shadow: 0 0 0 1rem var(--color-accent);
+                position: absolute;
+                animation: caret-blink 1.2s steps(2, start) infinite;
+            }
+
+        }
+        &.first-char-caret {
+            &:before {
+                content: "";
+                height: 10rem;
+                position: absolute;
+                box-shadow: 0 0 0 1rem var(--color-accent);
+                animation: caret-blink 1.2s steps(2, start) infinite;
+            }
+        }
+        .newline {
+            display: block;
+        }
     }
 
     .row {
