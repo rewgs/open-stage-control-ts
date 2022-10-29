@@ -43,7 +43,7 @@ class OscKeybard extends UiWidget {
         this.value = null
         this.visible = false
 
-        this.display = html`<div class="textarea"></div>`
+        this.display = html`<pre class="textarea"></pre>`
         this.container.appendChild(html`<div class="row">${this.display}</div>`)
         this.cursor = html`<span class="cursor">|</span>`
 
@@ -84,6 +84,19 @@ class OscKeybard extends UiWidget {
         this.container.addEventListener('mousedown', (e)=>{
             // prevent keyboard from stealing focus from input
             e.preventDefault()
+            // move cursor
+            if (this.display.contains(e.target) && e.target !== this.display) {
+                var pos = DOM.index(e.target)
+                // adjust cursor depening on where we clicked on the letter
+                if (e.offsetX - DOM.offset(e.target).left >= e.target.offsetWidth / 2)
+                    pos += 1
+
+                this.input.selectionStart = pos
+                if (!e.shiftKey) {
+                    this.input.selectionEnd = pos
+                }
+                this.updateCursor()
+            }
         }, {capture: true})
 
 
@@ -150,7 +163,9 @@ class OscKeybard extends UiWidget {
                 this.show()
                 this.input = e.target
                 this.value = this.input.value
-                this.updateDisplay()
+                setTimeout(()=>{
+                    this.updateDisplay()
+                })
             }
         }, {capture: true})
 
@@ -319,10 +334,23 @@ class OscKeybard extends UiWidget {
             value = this.input.osc_input ? this.input.osc_input.value :this.input.value
         }
 
-        var content = html`<div class="textarea"></div>`
+        var content = html`<pre class="textarea"></pre>`
         for (var i in value) {
+            let c, nl
+            switch (value[i]) {
+                case '\n':
+                    c = raw('</br>')
+                    nl = true
+                    break
+                case ' ':
+                    c = raw('&nbsp;')
+                    break
+                default:
+                    c = value[i]
+                    break
+            }
             content.appendChild(html`
-                <span class="${value[i] === '\n' ? 'newline' : ''}">${value[i]}</span>
+                <span class="${nl ? 'newline' : ''}">${c}</span>
             `)
         }
 

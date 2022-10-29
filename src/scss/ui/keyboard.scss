@@ -33,8 +33,9 @@ osc-keyboard {
 
     .textarea {
         height: auto;
-        overflow: auto;
+        overflow-y: auto;
         width: 100%;
+        height: 40rem;
         background: transparent;
         padding: 14rem 20rem 4rem;
         resize: none;
@@ -44,9 +45,26 @@ osc-keyboard {
         margin-top:var(---spacing);
         position: relative;
         pointer-events: auto;
-        min-height: 100%;
+        appearance:textarea;
+        cursor: text;
         span {
             margin: 0 0.25rem;
+            position: relative;
+        }
+        .newline + span:before, span:first-child:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            left: -100rem;
+            width: 100rem;
+        }
+        .newline:before, span:last-child:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top:  0;
+            right: -100rem;
+            width: 100rem;
         }
         .caret {
             position: relative;
@@ -56,6 +74,7 @@ osc-keyboard {
                 box-shadow: 0 0 0 1rem var(--color-accent);
                 position: absolute;
                 animation: caret-blink 1.2s steps(2, start) infinite;
+                pointer-events: none;
             }
 
         }
@@ -67,9 +86,6 @@ osc-keyboard {
                 box-shadow: 0 0 0 1rem var(--color-accent);
                 animation: caret-blink 1.2s steps(2, start) infinite;
             }
-        }
-        .newline {
-            display: block;
         }
     }
 
