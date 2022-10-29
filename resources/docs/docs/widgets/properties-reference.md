@@ -194,6 +194,7 @@
             | <h6 id="input_asYouType">asYouType<a class="headerlink" href="#input_asYouType" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the input send its value at each keystroke |
             | <h6 id="input_numeric">numeric<a class="headerlink" href="#input_numeric" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to allow numeric values only and display a numeric keyboard on mobile devices |
             | <h6 id="input_validation">validation<a class="headerlink" href="#input_validation" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Regular expression: if the submitted value doesn't match the regular expression, it will be reset to the last valid value.<br/><br/>If leading and trailing slashes are omitted, they will be added automatically and the flag will be set to "gm"<br/><br/>Examples:<br/>- `^[0-9]*$` accepts digits only, any number of them<br/>- `/^[a-zs]{0,10}$/i` accept between 0 and 10 alphabetic characters and spaces (case insensitive) |
+            | <h6 id="input_maxLength">maxLength<a class="headerlink" href="#input_maxLength" title="Permanent link">#</a></h6> | `number` | <code>""</code> | Maximum number of characters allowed |
 
     === "scripting"
 
@@ -412,6 +413,22 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="patchbay_onValue">onValue<a class="headerlink" href="#patchbay_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.<br/><br/>Canvas-based widget have their computed width and height available as local variables:<br/>- `locals.width`<br/>- `locals.height` |
+
+??? api "<div id="folder">folder<a class="headerlink" href="#folder" title="Permanent link">#</a></div>"
+    Flat container that doesn't affect layout. Mostly useful for grouping widgets in the tree.
+
+    === "folder"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="folder_variables">variables<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#folder_variables" title="Permanent link">#</a></h6> | `*` | <code>"@\{parent.variables}"</code> | Defines one or more arbitrary variables that can be inherited by children widgets |
+
+    === "children"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="folder_widgets">widgets<a class="headerlink" href="#folder_widgets" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously. |
+            | <h6 id="folder_tabs">tabs<a class="headerlink" href="#folder_tabs" title="Permanent link">#</a></h6> | `array` | <code>[]</code> | Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously |
 
 ??? api "<div id="root">root<a class="headerlink" href="#root" title="Permanent link">#</a></div>"
     Main (unique) container
