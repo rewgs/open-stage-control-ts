@@ -52,7 +52,7 @@ osc-panel-container.right.editor-breakout {
             &[data-action="toggle-grid"] {
                 color: var(--color-accent)
             }
-            &[data-action="reset-selection"]:after {
+            &[data-action="reset-selection"] i:after {
                 content: "";
                 position: absolute;
                 border-left: 1.5rem solid;
