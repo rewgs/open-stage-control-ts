@@ -66,12 +66,11 @@ osc-keyboard {
             width: 100rem;
         }
         .caret {
-            position: relative;
             &:after {
                 content: "";
                 height: 10rem;
                 box-shadow: 0 0 0 1rem var(--color-accent);
-                position: absolute;
+                position: relative;
                 animation: caret-blink 1.2s steps(2, start) infinite;
                 pointer-events: none;
             }
@@ -104,6 +103,8 @@ osc-keyboard {
         }
         &:first-child {
             height: 40rem;
+            min-height: 40rem;
+            flex-shrink: 0;
             overflow: hidden;
             margin-bottom: var(--spacing);
         }

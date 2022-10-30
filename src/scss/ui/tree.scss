@@ -24,6 +24,8 @@
         padding-left:$padding + 4rem;
         padding-right:$padding;
         border-top:1rem solid var(--color-background);
+        box-shadow: 0 1rem 0 0 inset rgba(white, 0.025);
+        padding-top:1rem;
 
         &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
             border-color: var(--color-background)!important;

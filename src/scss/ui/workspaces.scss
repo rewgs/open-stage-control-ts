@@ -43,6 +43,7 @@ osc-panel-container {
         flex: 1;
         z-index: 1;
         min-width: 100rem;
+        background: rgba(black, 0.35)!important
     }
 
     &.left, &.right {
@@ -371,7 +372,7 @@ osc-panel-content {
             left:0;
             right:0;
             bottom:0;
-            background: rgba(black, 0.5);
+            background: rgba(black, 0.35);
         }
     }
 

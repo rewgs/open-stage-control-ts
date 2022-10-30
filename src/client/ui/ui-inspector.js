@@ -30,6 +30,8 @@ class UiInspector extends UiWidget {
                 <div class="btn toolbar-btn" data-action="zoom-out">${raw(icon('magnifying-glass-minus'))}</div>
                 <div class="btn toolbar-btn" data-action="zoom-reset">${raw(icon('magnifying-glass'))}</div>
                 <div class="btn toolbar-btn" data-action="zoom-in">${raw(icon('magnifying-glass-plus'))}</div>
+                <div class="spacer"></div>
+                <div class="btn toolbar-btn" data-action="reset-selection">${raw(icon('border-none'))}</div>
                 <div class="btn toolbar-btn" data-action="toggle-grid">${raw(icon('table-cells'))}</div>
             </div>
         `)
@@ -78,9 +80,14 @@ class UiInspector extends UiWidget {
                     case 'zoom-in':
                         zoom.setLocalZoom(zoom.localZoom + 0.1)
                         break
+                    case 'reset-selection':
+                        editor = editor || require('../editor')
+                        editor.unselect()
+                        break
                     case 'toggle-grid':
                         editor = editor || require('../editor')
                         editor.toggleGrid()
+                        break
                 }
 
             }

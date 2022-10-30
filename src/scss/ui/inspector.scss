@@ -46,15 +46,26 @@ osc-panel-container.right.editor-breakout {
             align-items: center;
             justify-content: center;
             display: flex;
-            &:last-child {
-                margin-left: auto;
-            }
             i {
                 pointer-events: none;
             }
             &[data-action="toggle-grid"] {
                 color: var(--color-accent)
             }
+            &[data-action="reset-selection"]:after {
+                content: "";
+                position: absolute;
+                border-left: 1.5rem solid;
+                left: 50%;
+                top: 50%;
+                margin-top: -8rem;
+                margin-left: -1rem;
+                height: 16rem;
+                transform: rotate(45deg);
+            }
+        }
+        .spacer {
+            flex: 1
         }
     }
 
@@ -63,6 +74,9 @@ osc-panel-container.right.editor-breakout {
         overflow: auto;
         flex:1;
         height: calc(100% - 46rem);
+        box-shadow: 0 1rem 0 0 inset rgba(white, 0.025);
+
+
         &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
             border-color: var(--color-background)!important;
             border-top:0;

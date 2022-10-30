@@ -135,7 +135,7 @@ class OscKeybard extends UiWidget {
                     if (!e.shiftKey) {
                         this.input.selectionEnd = pos
                     }
-                    this.updateCursor()
+                    this.clickHandler()
                 }
 
             }
@@ -146,7 +146,7 @@ class OscKeybard extends UiWidget {
         doubleClick(this.display, ()=>{
             this.input.selectionStart = 0
             this.input.selectionEnd = this.input.value.length
-            this.updateCursor()
+            this.clickHandler()
         })
 
         this.on('drag', (e)=>{
@@ -166,7 +166,7 @@ class OscKeybard extends UiWidget {
                         this.input.selectionEnd = pos
                     }
 
-                    this.updateCursor()
+                    this.clickHandler()
                 }
 
             }
@@ -191,9 +191,6 @@ class OscKeybard extends UiWidget {
 
             this.checkShift()
 
-            this.keyUp(key.getAttribute(this.shift != this.lock ? 'data-shift' : 'data-key'))
-
-
         }, {element: this.container, multitouch: true})
 
 
@@ -201,63 +198,19 @@ class OscKeybard extends UiWidget {
             if (!VIRTUAL_KEYBOARD) return
             // show keyboard when entering input focus
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-                if (e.target.osc_input) return
-                this.show()
-                this.input = e.target
-                this.value = this.input.value
                 setTimeout(()=>{
-                    this.updateDisplay()
+                    this.show(e.target)
                 })
             }
         }, {capture: true})
 
 
-        document.addEventListener('blur', (e)=>{
-            if (!VIRTUAL_KEYBOARD) return
-            // hide keyboard when leaving input focus
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-                this.hide()
-                this.input = null
-                this.value = null
-
-            }
-        }, {capture: true})
-
-        document.addEventListener('input', (e)=>{
-            if (!VIRTUAL_KEYBOARD) return
-            if (e.target === this.input) {
-                setTimeout(()=>{
-                    this.updateDisplay()
-                })
-            }
-        }, {capture: true})
-
-        document.addEventListener('change', (e)=>{
-            if (!VIRTUAL_KEYBOARD) return
-            if (e.target === this.input) {
-                setTimeout(()=>{
-                    this.updateDisplay()
-                })
-            }
-        })
-
-        document.addEventListener('keydown', (e)=>{
-            if (!VIRTUAL_KEYBOARD) return
-            if (e.target === this.input) {
-                setTimeout(()=>{
-                    this.updateCursor()
-                })
-            }
-        })
-
-        document.addEventListener('select', (e)=>{
-            if (!VIRTUAL_KEYBOARD) return
-            if (e.target === this.input) {
-                setTimeout(()=>{
-                    this.updateCursor()
-                })
-            }
-        })
+        this.boundSelectHandler = this.selectHandler.bind(this)
+        this.boundBlurHandler = this.blurHandler.bind(this)
+        this.boundKeydownHandler = this.keydownHandler.bind(this)
+        this.boundChangeHandler = this.changeHandler.bind(this)
+        this.boundInputHandler = this.inputHandler.bind(this)
+        this.boundClickHandler = this.clickHandler.bind(this)
 
     }
 
@@ -283,13 +236,10 @@ class OscKeybard extends UiWidget {
                     editLength = 1
                     break
                 } else {
-                    this.input.dispatchEvent(new KeyboardEvent('keydown', {keyCode: 13}))
-                    if (this.input) DOM.dispatchEvent(this.input, 'change')
-                    if (this.input) this.input.blur()
+                    DOM.dispatchEvent(this.input, 'change')
                     return
                 }
             case '{bksp}':
-                this.input.dispatchEvent(new KeyboardEvent('keydown', {keyCode: 8}))
                 if (startPos === endPos && startPos === 0) break
                 this.input.value = this.input.value.substring(0, startPos - 1)
                     + this.input.value.substring(endPos, this.input.value.length)
@@ -303,11 +253,11 @@ class OscKeybard extends UiWidget {
                 break
             case '{left}':
                 this.input.selectionStart = this.input.selectionEnd = Math.max(this.input.selectionStart - 1, 0)
-                this.updateCursor()
+                this.keydownHandler()
                 return
             case '{right}':
                 this.input.selectionStart = this.input.selectionEnd = this.input.selectionStart + 1
-                this.updateCursor()
+                this.keydownHandler()
                 return
             case '{up}':
             case '{down}':
@@ -338,7 +288,7 @@ class OscKeybard extends UiWidget {
                     this.input.selectionStart =
                     this.input.selectionEnd = key === '{up}' ? 0 : this.input.value.length
                 }
-                this.updateCursor()
+                this.keydownHandler()
                 return
             default:
                 str = key
@@ -357,13 +307,8 @@ class OscKeybard extends UiWidget {
 
         this.input.selectionStart = startPos + editLength
         this.input.selectionEnd = startPos + editLength
-        DOM.dispatchEvent(this.input, 'input')
-        DOM.dispatchEvent(this.input, 'keydown')
-        // this.input.dispatchEvent(new KeyboardEvent('keydown'))
 
-    }
-
-    keyUp(key) {
+        this.inputHandler()
 
     }
 
@@ -408,7 +353,10 @@ class OscKeybard extends UiWidget {
         }
 
         morph(this.display, content)
-        this.updateCursor()
+
+        setTimeout(()=>{
+            this.updateCursor()
+        })
     }
 
     updateCursor() {
@@ -440,26 +388,49 @@ class OscKeybard extends UiWidget {
             })
         }
 
-        // if (this.display.contains(this.cursor)) this.display.removeChild(this.cursor)
-        // if (pos === 0) this.display.insertBefore(this.cursor)
-        // this.display.insert
-        // this.display.childr
-        // if (this.input) {
-        //     this.display.style.setProperty('--cursor', )
-        // }
     }
 
-    show(){
+    show(input){
+
+        if (input.osc_input) return // not compatible with code editor
+        if (this.visible) return
+
+        this.input = input
+        this.value = this.input.value
+
+        this.input.addEventListener('blur', this.boundBlurHandler)
+        this.input.addEventListener('input', this.boundInputHandler)
+        this.input.addEventListener('change', this.boundChangeHandler)
+        this.input.addEventListener('keydown', this.boundKeydownHandler)
+        this.input.addEventListener('select', this.boundSelectHandler)
+        this.input.addEventListener('click', this.boundClickHandler)
+
+        this.updateDisplay()
+
+        this.container.style.display = 'flex'
 
         this.visible = true
-        this.container.style.display = 'flex'
 
     }
 
     hide(){
 
-        this.visible = false
+        if (!this.visible) return
+
+        this.input.removeEventListener('blur', this.boundBlurHandler)
+        this.input.removeEventListener('input', this.boundInputHandler)
+        this.input.removeEventListener('change', this.boundChangeHandler)
+        this.input.removeEventListener('keydown', this.boundKeydownHandler)
+        this.input.removeEventListener('select', this.boundSelectHandler)
+        this.input.removeEventListener('click', this.boundClickHandler)
+
+        this.input = null
+        this.value = null
+
+
         this.container.style.display = 'none'
+
+        this.visible = false
 
         for (let k in this.repeatKeys) {
             clearTimeout(this.repeatKeys[k][0])
@@ -470,6 +441,38 @@ class OscKeybard extends UiWidget {
             this.pressedKeys[k].classList.remove('active')
             delete this.pressedKeys[k]
         }
+    }
+
+
+    blurHandler(e) {
+        setTimeout(()=>{
+            this.hide()
+        })
+    }
+    inputHandler(e) {
+        setTimeout(()=>{
+            this.updateDisplay()
+        })
+    }
+    changeHandler(e) {
+        setTimeout(()=>{
+            this.hide()
+        })
+    }
+    keydownHandler(e) {
+        setTimeout(()=>{
+            this.updateCursor()
+        })
+    }
+    selectHandler(e) {
+        setTimeout(()=>{
+            this.updateCursor()
+        })
+    }
+    clickHandler(e) {
+        setTimeout(()=>{
+            this.updateCursor()
+        })
     }
 }
 
