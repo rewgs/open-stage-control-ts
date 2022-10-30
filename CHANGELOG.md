@@ -4,6 +4,7 @@
 
 - editor
     - add keyboard shortcut "h" to hide selection and widget drag / resize handles while pressed
+    - inspector: add some shortcut buttons in the header 
 
 - widgets
     - add folder widget (flat container that doesn't affect layout)
