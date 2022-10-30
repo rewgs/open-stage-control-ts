@@ -1,10 +1,15 @@
 # Changelog
 
+## 1.19.1
+
+- bug fixes
+    - editor zoom: adjust root widget size when zooming out
+
 ## 1.19.0
 
 - editor
     - add keyboard shortcut "h" to hide selection and widget drag / resize handles while pressed
-    - inspector: add some shortcut buttons in the header 
+    - inspector: add some shortcut buttons in the header
 
 - widgets
     - add folder widget (flat container that doesn't affect layout)

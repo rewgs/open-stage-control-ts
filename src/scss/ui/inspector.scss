@@ -796,13 +796,16 @@ osc-inspector-color {
 }
 
 
-.editor-enabled {
-    osc-panel-container.center {
-        overflow: auto;
-        background: var(--color-background);
-    }
-    #osc-container {
-        transform-origin: 0 0;
-        transform: scale(var(--local-zoom));
-    }
+.editor-enabled.local-zoom-in .root-container {
+    transform-origin: top left;
+    transform: scale(var(--local-zoom));
+    min-width: calc(100% / var(--local-zoom));
+    min-height: calc(100% / var(--local-zoom));
+}
+
+.editor-enabled.local-zoom-out .root-container {
+    transform-origin: center left;
+    transform: scale(var(--local-zoom));
+    min-width: calc(100% / var(--local-zoom));
+    min-height: calc(100% / var(--local-zoom));
 }

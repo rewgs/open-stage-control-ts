@@ -51,6 +51,8 @@ class Zoom extends EventEmitter {
             requestAnimationFrame(()=>{
                 this.localZoom = zoom
                 document.documentElement.style.setProperty('--local-zoom', this.localZoom)
+                document.body.classList.toggle('local-zoom-in', this.localZoom > 1)
+                document.body.classList.toggle('local-zoom-out', this.localZoom < 1)
                 this.trigger('local-zoom-changed')
             })
         }
