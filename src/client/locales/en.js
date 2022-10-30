@@ -85,6 +85,11 @@ module.exports = {
 
     // inspector
     inspector_error: 'An error just occurred, open the console to read more.',
+    inspector_zoom_in: 'Zoom in',
+    inspector_zoom_reset: 'Reset zoom',
+    inspector_zoom_ou: 'Zoom out',
+    inspector_reset_selection: 'Unselect widget(s)',
+    inspector_toggle_grid: 'Afficher / masquer la grille',
 
     // nosleep
     nosleep: 'Prevent sleep',

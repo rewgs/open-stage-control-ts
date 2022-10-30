@@ -84,6 +84,12 @@ module.exports = {
 
     // inspector
     inspector_error: 'Une erreur vient de survenir, ouvrez la console pour en savoir plus.',
+    inspector_zoom_in: 'Zoom avant',
+    inspector_zoom_reset: 'Zoom initial',
+    inspector_zoom_out: 'Zoom arrière',
+    inspector_reset_selection: 'Déséléctionner',
+    inspector_toggle_grid: 'Afficher / masquer la grille',
+
 
     // nosleep
     nosleep: 'Empêcher la veille',

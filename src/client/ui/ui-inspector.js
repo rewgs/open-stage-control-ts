@@ -9,6 +9,7 @@ var UiWidget = require('./ui-widget'),
     fastdom = require('fastdom'),
     {icon} = require('./utils'),
     zoom = require('./zoom'),
+    locales = require('../locales'),
     getCodeEditor = require('./ui-code-editor'),
     codeEditorModKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey',
     editor
@@ -36,7 +37,11 @@ class UiInspector extends UiWidget {
             </div>
         `)
         this.toolbarBtns = {}
-        DOM.each(this.toolbar, '.btn', (item)=>{this.toolbarBtns[item.getAttribute('data-action')] = item})
+        DOM.each(this.toolbar, '.btn', (item)=>{
+            var action = item.getAttribute('data-action')
+            item.setAttribute('title',  locales('inspector_' + action.replace('-', '_')))
+            this.toolbarBtns[action] = item
+        })
         zoom.on('local-zoom-changed',()=>{
             this.toolbarBtns['zoom-out'].classList.toggle('active', zoom.localZoom < 1)
             this.toolbarBtns['zoom-in'].classList.toggle('active', zoom.localZoom > 1)

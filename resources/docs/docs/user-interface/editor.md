@@ -108,6 +108,8 @@ Multiple widgets can be edited at once.
     | ++"End"++ | Bring selected widget to front |
     | ++"F2"++ | Bring "label" property input into view if selected widget has one |
     | ++h++ | Hide selection area and widget resize / drag handles while pressed |
+    | ++alt+"Mousewheel"++ | change editor zoom |
+    | ++ctrl+0++ | reset zoom |
 
 
 === "Mac"
@@ -146,3 +148,5 @@ Multiple widgets can be edited at once.
     | ++"End"++ | Bring selected widget to front |
     | ++"F2"++ | Bring "label" property input into view if selected widget has one |
     | ++h++ | Hide selection area and widget resize / drag handles while pressed |
+    | ++alt+"Mousewheel"++ | change editor zoom |
+    | ++cmd+0++ | reset zoom |
