@@ -3,7 +3,7 @@
 ## 1.19.2
 
 - bug fixes
-    - regression breaking touch move events
+    - regression breaking touch move events on desktop touchscreens
 
 ## 1.19.1
 
