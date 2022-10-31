@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.19.2
+
+- bug fixes
+    - regression breaking touch move events
+
 ## 1.19.1
 
 - bug fixes

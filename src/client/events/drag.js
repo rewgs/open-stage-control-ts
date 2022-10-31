@@ -228,7 +228,7 @@ function triggerWidgetEvent(target, name, event) {
 // init
 
 DOM.ready(()=>{
-    
+
     if (!iOS) {
         document.addEventListener('pointermove', mouseMoveCapture, true)
         if ('onwebkitmouseforcechanged' in document) document.addEventListener('webkitmouseforcechanged', mouseMoveCapture, true)
