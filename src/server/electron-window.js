@@ -25,6 +25,7 @@ module.exports = function(options={}) {
     })
 
 
+
     // default geometry
     var currentScreen = screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),
         screenSize = currentScreen.size,
@@ -102,6 +103,14 @@ module.exports = function(options={}) {
 
         if (level === 0 && message === 'ELECTRON.BLUR()') window.blur()
         if (level === 0 && message === 'ELECTRON.FOCUS()') window.focus()
+        if (level === 0 && message === 'ELECTRON.SETFOCUSABLE(1)') {
+            window.setFocusable(true)
+            window.focus()
+        }
+        if (level === 0 && message === 'ELECTRON.SETFOCUSABLE(0)') {
+            window.setFocusable(false)
+            window.blur()
+        }
 
     })
 
@@ -160,6 +169,9 @@ module.exports = function(options={}) {
             return false
         })
     }
+
+    window.setFocusable(!options.noFocus)
+
 
     return window
 

@@ -34,6 +34,9 @@ window.TOGGLE_ALT_TRAVERSING = !!ENV.altTraversing
 
 window.VIRTUAL_KEYBOARD = !!ENV.virtualKeyboard
 
+window.FOCUSABLE = !ENV.noFocus
+if (!FOCUSABLE) console.debug('ELECTRON.SETFOCUSABLE(0)')
+else console.debug('ELECTRON.SETFOCUSABLE(1)')
 
 window.JSON.parseFlex = require('json5').parse
 

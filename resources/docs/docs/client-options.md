@@ -13,7 +13,7 @@ Client options can be set either with the server's `--client-options` option, or
 | consoleLength | number | 300 | sets the maximum number of log messages in the client's console |
 | id | string | *random_id* | client's unique id (use with caution: two clients should never have the same id) |
 | usePercents | 1 / 0 | 0 | sets the editor's "relative units" option  |
-| noFocus | 1 / 0 | 0 | (built-in client only) prevent the client window from taking focus unless a text input or a dropdown is clicked |
+| noFocus | 1 / 0 | 0 | (built-in client only) prevent the client window from taking focus |
 | clientSync | 1 / 0 | 1 | set to 0 to prevent the client from syncing with other clients |
 | altTraversing | 1 / 0 | 0 | set to 1 to enable an alternative traversing behavior for toggle buttons (traversing gestures on toggle buttons will change their values in only one way depending on the first touched button's state) |
 | virtualKeyboard | 1 / 0 | 0 | (desktop only) set to 1 to enable the virtual keyboard by default |

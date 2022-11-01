@@ -470,6 +470,14 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.setFocusable = (focusable)=>{
+
+            this.checkContext('setFocusable')
+            FOCUSABLE = !!focusable
+            console.debug('ELECTRON.SETFOCUSABLE('+(focusable ? 1 : 0)+')')
+
+        }
+
         this.sandbox.contentWindow.toolbar = (...args)=>{
 
             this.checkContext('toolbar')
@@ -525,7 +533,7 @@ class ScriptVm extends Vm {
         this.sandbox.contentWindow.Image = Image
 
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
-            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus', 'setScroll', 'getScroll', 'toolbar',
+            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus' , 'setFocusable', 'setScroll', 'getScroll', 'toolbar',
             'openUrl', 'getVar', 'setVar', 'runAs', 'Image', 'updateCanvas']) {
             this.sanitize(this.sandbox.contentWindow[imports])
         }

@@ -38,7 +38,7 @@ function mouseToFastClick(event) {
 
     DOM.dispatchEvent(e.target, name, e)
 
-    if (ENV.nofocus && !editor.enabled && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'  && e.target.tagName !== 'SELECT') {
+    if (!FOCUSABLE && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'SELECT') {
         console.debug('ELECTRON.BLUR()')
     }
 

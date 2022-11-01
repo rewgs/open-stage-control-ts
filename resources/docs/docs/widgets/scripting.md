@@ -288,6 +288,14 @@ Gives focus to a widget (ie input widget).
 
 ----
 
+#### `setFocusable(focusable)`
+
+- `focusable`: `0` or `1`
+
+*Built-in client only*: define whether the client window can be focused or not. Text inputs cannot be interacted with when the window is not focusable.
+
+----
+
 #### `getScroll(id)`
 - `id`: widget `id` as a string.
 
