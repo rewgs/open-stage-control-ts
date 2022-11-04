@@ -2,6 +2,9 @@
 
 ## 1.19.3
 
+- bug fixes
+    - scripting: prevent some functions to be marked as undefined
+
 - misc
     - change noFocus client option behavior: the defalt client window now doesn't take the focus at all, even when a text input is clicked.
 

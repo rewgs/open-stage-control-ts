@@ -1,5 +1,4 @@
-var ScriptVm = require('./script-vm'),
-    scriptVm = new ScriptVm(),
+var scriptVm = require('./script-vm'),
     noop = ()=>{}
 
 class Script {
