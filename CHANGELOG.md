@@ -9,7 +9,7 @@
     - change noFocus client option behavior: the defalt client window now doesn't take the focus at all, even when a text input is clicked.
 
 - scripting
-    - add `setFocusable()` function to change the focusability of the window on the fly (allows renabling focus temporarely to interact with a text widget using a dedicated toggle buttonfor example)
+    - add `setFocusable()` function to change the focusability of the window on the fly (allows reenabling focus temporarely to interact with a text widget using a dedicated toggle button for example)
 
 
 ## 1.19.2
