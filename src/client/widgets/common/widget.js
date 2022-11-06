@@ -759,6 +759,12 @@ class Widget extends EventEmitter {
             })
 
             propValue = balancedReplace('IMPORT', '{', '}', propValue, (file)=>{
+                if (
+                    // remove quotes
+                    (file[0] === '"' && file[file.length - 1] === '"') ||
+                    (file[0] === '\'' && file[file.length - 1] === '\'')
+                ) file = file.slice(1, file.length - 1)
+
                 if (storeLinks) {
                     if (!this.fragments[file]) this.fragments[file] = []
                     if (!this.fragments[file].includes(propName)) this.fragments[file].push(propName)

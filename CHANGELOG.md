@@ -4,6 +4,7 @@
 
 - bug fixes
     - scripting: prevent some functions to be marked as undefined
+    - advanced syntaxes: ignores quotes around file path in `IMPORT{}`
 
 - misc
     - change noFocus client option behavior: the defalt client window now doesn't take the focus at all, even when a text input is clicked.
