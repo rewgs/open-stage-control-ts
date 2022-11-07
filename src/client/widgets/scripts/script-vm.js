@@ -540,7 +540,7 @@ class ScriptVm extends Vm {
                 var widget = this.getWidget()
                 widget.errorProp('onCreate', '', 'reload() cannot be called from onCreate')
             } else if (options.send){
-                if (keepState) ipd.trigger('reload')
+                if (keepState) ipc.trigger('reload')
                 else window.location.href = window.location.href
             }
 
