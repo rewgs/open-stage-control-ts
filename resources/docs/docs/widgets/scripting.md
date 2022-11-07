@@ -349,3 +349,11 @@ If the event that triggered the script's execution was not initiated by a user i
 - `callback`: function to be executed
 
 Run `callback` function as if executed by another that widget matches specified id. This will not change the value of any local variable but `"this"` and `"parent"` arguments (accepted by functions such as `set()`) will be interpreted differently. Timeouts and intervals will be created and cleared in the target widget's scope.
+
+----
+
+#### `reload()`
+
+Reload the client application (retains session and state). Cannot be called from the `onCreate` property.
+
+If the event that triggered the script's execution was not initiated by a user interaction, this function will have no effect.

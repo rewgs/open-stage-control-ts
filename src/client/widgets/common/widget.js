@@ -337,7 +337,7 @@ class Widget extends EventEmitter {
             index: index
         })
 
-        if (this.scripts.onCreate) this.scripts.onCreate.run({}, {sync: true, send: true})
+        if (this.scripts.onCreate) this.scripts.onCreate.run({}, {sync: true, send: true, onCreate: true})
 
     }
 

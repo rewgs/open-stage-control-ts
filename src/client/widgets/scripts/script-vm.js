@@ -4,6 +4,7 @@ var widgetManager = require('../../managers/widgets'),
     {deepCopy} = require('../../utils'),
     {urlParser} = require('../utils'),
     Vm = require('../vm'),
+    ipc = require('../../ipc'),
     toolbar
 
 
@@ -529,13 +530,29 @@ class ScriptVm extends Vm {
 
         }
 
+        this.sandbox.contentWindow.reload = ()=>{
+
+            this.checkContext('reload')
+
+            var options = this.getValueOptions()
+
+            if (options.onCreate) {
+                var widget = this.getWidget()
+                widget.errorProp('onCreate', '', 'reload() cannot be called from onCreate')
+            } else if (options.send){
+                ipc.trigger('reload')
+            }
+
+
+        }
+
         this.sandbox.contentWindow.Image = Image
 
         this.globals = {}
 
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
             'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus' , 'setFocusable', 'setScroll', 'getScroll', 'toolbar',
-            'openUrl', 'getVar', 'setVar', 'runAs', 'Image', 'updateCanvas']) {
+            'openUrl', 'getVar', 'setVar', 'runAs', 'reload', 'Image', 'updateCanvas']) {
             this.sanitize(this.sandbox.contentWindow[imports])
             this.globals[imports] = true
         }
