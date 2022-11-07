@@ -530,7 +530,7 @@ class ScriptVm extends Vm {
 
         }
 
-        this.sandbox.contentWindow.reload = ()=>{
+        this.sandbox.contentWindow.reload = (keepState = true)=>{
 
             this.checkContext('reload')
 
@@ -540,7 +540,8 @@ class ScriptVm extends Vm {
                 var widget = this.getWidget()
                 widget.errorProp('onCreate', '', 'reload() cannot be called from onCreate')
             } else if (options.send){
-                ipc.trigger('reload')
+                if (keepState) ipd.trigger('reload')
+                else window.location.href = window.location.href
             }
 
 

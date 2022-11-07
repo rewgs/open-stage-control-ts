@@ -352,8 +352,9 @@ Run `callback` function as if executed by another that widget matches specified 
 
 ----
 
-#### `reload()`
+#### `reload(keepState)`
+- `keepState` (optional): `true` by default, set to false to discard the client's state. 
 
-Reload the client application (retains session and state). Cannot be called from the `onCreate` property.
+Reload the client application. Cannot be called from the `onCreate` property.
 
 If the event that triggered the script's execution was not initiated by a user interaction, this function will have no effect.
