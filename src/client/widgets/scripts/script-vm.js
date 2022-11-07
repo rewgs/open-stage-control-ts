@@ -549,11 +549,17 @@ class ScriptVm extends Vm {
 
         this.sandbox.contentWindow.Image = Image
 
+        this.sandbox.contentWindow.getNavigator = ()=>{
+            this.checkContext('getNavigator')
+            return navigator
+
+        }
+
         this.globals = {}
 
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
-            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus' , 'setFocusable', 'setScroll', 'getScroll', 'toolbar',
-            'openUrl', 'getVar', 'setVar', 'runAs', 'reload', 'Image', 'updateCanvas']) {
+            'setInterval', 'clearInterval', 'setTimeout', 'cthislearTimeout', 'setFocus', 'unfocus' , 'setFocusable', 'setScroll', 'getScroll', 'toolbar',
+            'openUrl', 'getVar', 'setVar', 'runAs', 'reload', 'Image', 'updateCanvas', 'getNavigator']) {
             this.sanitize(this.sandbox.contentWindow[imports])
             this.globals[imports] = true
         }

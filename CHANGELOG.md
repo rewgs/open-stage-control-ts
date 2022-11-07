@@ -12,6 +12,7 @@
 - scripting
     - add `setFocusable()` function to change the focusability of the window on the fly (allows reenabling focus temporarely to interact with a text widget using a dedicated toggle button for example)
     - add `reload()` function
+    - expose Navigator object with `getNavigator()`
 
 
 ## 1.19.2
