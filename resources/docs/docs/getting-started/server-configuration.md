@@ -170,6 +170,20 @@ The following options can only be set from a terminal.
     Override default config file location (contains session history and launcher config). Defaults to `cache-dir/config.json`.
 
 
+
+!!! quote ""
+    #### `client-position`
+
+    Define the built-in client window position, must be a pair of integers separated by a comma (`x,y`).
+
+
+
+!!! quote ""
+    #### `client-size`
+
+    Define the built-in client window size, must be a pair of integers separated by a comma (`width,height`).
+
+
 !!! quote ""
     #### `help`
 

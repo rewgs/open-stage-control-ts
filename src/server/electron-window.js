@@ -33,19 +33,32 @@ module.exports = function(options={}) {
         height = options.height || screenSize.height,
         bounds = currentScreen.bounds,
         x = Math.ceil(bounds.x + ((bounds.width - width) / 2)),
-        y = Math.ceil(bounds.y + ((bounds.height - height) / 2))
-
-    window.setBounds({x, y, width, height})
+        y = Math.ceil(bounds.y + ((bounds.height - height) / 2)),
+        geometry = {x, y, width, height}
 
     // retrieve last geometry
     if (settings.read('geometry') && settings.read('geometry')[options.id]) {
-        var geometry = settings.read('geometry')[options.id],
+        var last_geometry = settings.read('geometry')[options.id],
             mScreen = screen.getDisplayMatching(geometry)
         if (intersectionArea(geometry, mScreen.bounds) > 20000) {
             // don't load geometry if the window is not visible enough
-            window.setBounds(geometry)
+            Object.assign(geometry, last_geometry)
         }
     }
+
+    if (options.id === 'client') {
+        if (settings.read('client-position')) {
+            [x, y] =  settings.read('client-position').split(',').map(x=>parseInt(x))
+            Object.assign(geometry, {x, y})
+        }
+
+        if (settings.read('client-size')) {
+            [width, height] =  settings.read('client-size').split(',').map(x=>parseInt(x))
+            Object.assign(geometry, {width, height})
+        }
+    }
+
+    window.setBounds(geometry)
 
     window.once('ready-to-show', ()=>{
         window.show()
