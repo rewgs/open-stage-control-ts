@@ -78,10 +78,10 @@ class Fragment extends Container() {
                     if (this.getFragment()) this.createFragment()
                     else sessionManager.loadFragment(this.getProp('fallback'))
                 } else {
-                    this.log(`fragment file not found`)
+                    this.log('fragment file not found')
                 }
             } else if (path === this.getProp('fallback') && !this.getFragment()) {
-                this.log(`fallback fragment file not found`)
+                this.log('fallback fragment file not found')
             }
         }, {context: this})
 
