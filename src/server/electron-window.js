@@ -62,6 +62,9 @@ module.exports = function(options={}) {
 
     window.once('ready-to-show', ()=>{
         window.show()
+        if (options.id === 'launcher' && settings.read('startMinimized')) {
+            window.minimize()
+        }
     })
 
     window.webContents.once('page-title-updated', ()=>{

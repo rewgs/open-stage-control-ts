@@ -96,27 +96,34 @@ menu.append(new MenuItem({type: 'submenu' , label: 'Console', submenu: [
         }
     })
 ]}))
-menu.append(new MenuItem({
-    type: 'separator'
-}))
-menu.append(new MenuItem({
-    label: 'Autostart',
-    type: 'checkbox',
-    checked: settings.remote.read('autoStart'),
-    click: (e)=>{
-        settings.remote.write('autoStart', e.checked)
-        remote.getCurrentWindow().setAlwaysOnTop(e.checked)
-    }
-}))
-menu.append(new MenuItem({
-    label: 'Always on top',
-    type: 'checkbox',
-    checked: settings.remote.read('alwaysOnTop'),
-    click: (e)=>{
-        settings.remote.write('alwaysOnTop', e.checked)
-        remote.getCurrentWindow().setAlwaysOnTop(e.checked)
-    }
-}))
+menu.append(new MenuItem({type: 'submenu' , label: 'Launcher', submenu: [
+    new MenuItem({
+        label: 'Autostart',
+        type: 'checkbox',
+        checked: settings.remote.read('autoStart'),
+        click: (e)=>{
+            settings.remote.write('autoStart', e.checked)
+            remote.getCurrentWindow().setAlwaysOnTop(e.checked)
+        }
+    }),
+    new MenuItem({
+        label: 'Start minimized',
+        type: 'checkbox',
+        checked: settings.remote.read('startMinimized'),
+        click: (e)=>{
+            settings.remote.write('startMinimized', e.checked)
+        }
+    }),
+    new MenuItem({
+        label: 'Always on top',
+        type: 'checkbox',
+        checked: settings.remote.read('alwaysOnTop'),
+        click: (e)=>{
+            settings.remote.write('alwaysOnTop', e.checked)
+            remote.getCurrentWindow().setAlwaysOnTop(e.checked)
+        }
+    })
+]}))
 menu.append(new MenuItem({
     type: 'separator'
 }))
