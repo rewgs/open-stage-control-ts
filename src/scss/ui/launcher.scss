@@ -171,7 +171,7 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
     cursor: auto;
 
     > div {
-        margin: 0 12rem 4rem;
+        margin: 0 12rem;
     }
 
 
@@ -180,7 +180,9 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
         cursor: auto;
         white-space: pre-wrap;
     }
-
+    .log span {
+        background: transparent!important
+    }
     .help {
         font-style: italic;
         color: var(--color-accent);

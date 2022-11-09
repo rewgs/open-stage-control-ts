@@ -109,7 +109,13 @@ class MidiConverter {
                 console.log(data)
             }
         } else if (name == 'debug') {
-            console.log('(DEBUG, MIDI) ' + data)
+            if (data.indexOf('in:') === 0) {
+                console.log('\x1b[36m(DEBUG, MIDI)', data, '\x1b[0m')
+            } else if (data.indexOf('out:') === 0) {
+                console.log('\x1b[35m(DEBUG, MIDI)', data, '\x1b[0m')
+            } else {
+                console.log('(DEBUG, MIDI) ' + data)
+            }
         } else if (name ==  'osc') {
             instance.receiveOsc(data)
         } else if (name == 'error') {

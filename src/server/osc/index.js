@@ -118,7 +118,7 @@ class OscServer {
 
             }
 
-            if (debug) console.log('(DEBUG, OSC) Out: ',{address:data.address, args: data.args}, 'To: ' + data.host + ':' + data.port)
+            if (debug) console.log('\x1b[35m(DEBUG, OSC) Out: ',{address:data.address, args: data.args}, 'To: ' + data.host + ':' + data.port, '\x1b[0m')
 
         }
 
@@ -137,7 +137,7 @@ class OscServer {
 
         ipc.send('receiveOsc', data, clientId)
 
-        if (debug) console.log('(DEBUG, OSC) In: ', {address:data.address, args: data.args}, 'From: ' + data.host + ':' + data.port)
+        if (debug) console.log('\x1b[36m(DEBUG, OSC) In: ', {address:data.address, args: data.args}, 'From: ' + data.host + ':' + data.port, '\x1b[0m')
 
     }
 

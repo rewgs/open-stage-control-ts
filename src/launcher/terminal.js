@@ -2,6 +2,11 @@ var {ipcRenderer} = require('electron'),
     ansiHTML = require('ansi-html'),
     html = require('nanohtml')
 
+ansiHTML.setColors({
+    magenta: 'B48EAD',
+    cyan: '81A1C1',
+})
+
 class Terminal {
 
     constructor(options) {
