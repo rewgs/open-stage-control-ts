@@ -231,8 +231,13 @@ var SessionManager = class SessionManager extends EventEmitter {
 
     setFragment(data) {
 
-        var {path, fileContent, raw} = data,
+        var {path, fileContent, raw, notFound} = data,
             update = false
+
+        if (notFound) {
+            this.trigger('fragment-not-found', {path: path})
+            return
+        }
 
         if (raw) {
             if (this.fragments[path] !== fileContent) {

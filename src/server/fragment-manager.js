@@ -19,6 +19,7 @@ class FragmentManager {
             then(result)
         }, (error)=>{
             ipc.send('errorLog', `Could not open fragment file:\n ${error}`, clientId)
+            ipc.send('fragmentLoad', {path: path, notFound: true})
             this.deleteFragment(path)
         })
 
@@ -29,7 +30,10 @@ class FragmentManager {
         var path = data.path
         var resolvedPath = resolvePath(path, clientId)
 
-        if (!resolvedPath) return ipc.send('errorLog', `Fragment file not found: ${path}`, clientId)
+        if (!resolvedPath) {
+            ipc.send('fragmentLoad', {path: path, notFound: true})
+            return
+        }
 
         if (!this.clients[resolvedPath]) this.clients[resolvedPath] = []
         if (!this.clients[resolvedPath].includes(clientId)) this.clients[resolvedPath].push(clientId)

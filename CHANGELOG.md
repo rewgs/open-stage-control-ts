@@ -18,6 +18,8 @@
     - add `reload()` function
     - expose Navigator object with `getNavigator()`
 
+- widgets
+    - fragment: add `fallback` property
 
 ## 1.19.2
 

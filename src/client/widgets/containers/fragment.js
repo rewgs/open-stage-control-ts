@@ -25,6 +25,7 @@ class Fragment extends Container() {
 
             class_specific: {
                 file: {type: 'string', value: '', help: 'Fragment file path (relative to the session or theme file location by default, falling back to absolute path)'},
+                fallback: {type: 'string', value: '', help: 'Fallack fragment file path, loaded if `file` can\'t be opened'},
                 props: {type: 'object', value: {}, editor: 'javascript', syntaxChecker: false, help: 'Fragment widget\'s properties to override'},
             },
             value: null,
@@ -65,8 +66,22 @@ class Fragment extends Container() {
 
         sessionManager.on('fragment-updated', (e)=>{
             var {path} = e
-            if (path === this.getProp('file')) {
+            if (path === this.getProp('file') || path === this.getProp('fallback')) {
                 this.createFragment()
+            }
+        }, {context: this})
+
+        sessionManager.on('fragment-not-found', (e)=>{
+            var {path} = e
+            if (path === this.getProp('file')) {
+                if (this.getProp('fallback')) {
+                    if (this.getFragment()) this.createFragment()
+                    else sessionManager.loadFragment(this.getProp('fallback'))
+                } else {
+                    this.log(`fragment file not found`)
+                }
+            } else if (path === this.getProp('fallback') && !this.getFragment()) {
+                this.log(`fallback fragment file not found`)
             }
         }, {context: this})
 
@@ -81,9 +96,21 @@ class Fragment extends Container() {
 
     }
 
-    createFragment(init) {
+    getFragment() {
 
         var fragment = sessionManager.getFragment(this.getProp('file'))
+
+        if (!fragment && this.getProp('fallback')) {
+            fragment = sessionManager.getFragment(this.getProp('fallback'))
+        }
+
+        return fragment
+
+    }
+
+    createFragment(init) {
+
+        var fragment = this.getFragment()
 
         if (!fragment) return
 
@@ -139,7 +166,7 @@ class Fragment extends Container() {
     updateFragment() {
 
 
-        var fragment = sessionManager.getFragment(this.getProp('file'))
+        var fragment = this.getFragment()
 
         if (!fragment) return
 
