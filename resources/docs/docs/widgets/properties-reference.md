@@ -329,6 +329,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="fragment_file">file<a class="headerlink" href="#fragment_file" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Fragment file path (relative to the session or theme file location by default, falling back to absolute path) |
+            | <h6 id="fragment_fallback">fallback<a class="headerlink" href="#fragment_fallback" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Fallack fragment file path, loaded if `file` can't be opened |
             | <h6 id="fragment_props">props<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#fragment_props" title="Permanent link">#</a></h6> | `object` | <code>\{}</code> | Fragment widget's properties to override |
 
 ??? api "<div id="matrix">matrix<a class="headerlink" href="#matrix" title="Permanent link">#</a></div>"
