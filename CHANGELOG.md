@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.19.3
+## 1.20.0
 
 - bug fixes
     - scripting: prevent some functions to be marked as undefined
