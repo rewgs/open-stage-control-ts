@@ -1,5 +1,7 @@
 var settings = require('./settings'),
-    http = require('http')
+    http = require('http'),
+    QRCode = require('qrcode')
+
 
 function createServer(route) {
     if (settings.read('use-ssl')) {
@@ -191,6 +193,11 @@ function httpCheck(ok, error){
     httpCheckTimeout = null
     if (ok) {
         console.log('(INFO) Server started, app available at \n    ' + settings.appAddresses().join('\n    '))
+        var ipAddress = settings.appAddresses().at(settings.appAddresses.length - 1)
+        QRCode.toString(ipAddress,{type:'svg',width:230}, function (err, url) {
+            console.log('\n'+url)
+          })
+
     } else {
         if (error) {
             console.error('(ERROR, HTTP) Server setup error: ' + error.message)
