@@ -192,12 +192,14 @@ function httpCheck(ok, error){
     clearTimeout(httpCheckTimeout)
     httpCheckTimeout = null
     if (ok) {
-        console.log('(INFO) Server started, app available at \n    ' + settings.appAddresses().join('\n    '))
-        var ipAddress = settings.appAddresses().at(settings.appAddresses.length - 1)
-        QRCode.toString(ipAddress,{type:'svg',width:230}, function (err, url) {
-            console.log('\n'+url)
-          })
-
+        console.log('(INFO) Server started, app available at')
+        for (let i = 0; i < settings.appAddresses().length; i++) {
+            const ipAddress = settings.appAddresses()[i];
+            console.log('\n'+ipAddress+' : ')
+            QRCode.toString(ipAddress,{type:'svg',width:230}, function (err, url) {
+                console.log(url)
+              })
+        }
     } else {
         if (error) {
             console.error('(ERROR, HTTP) Server setup error: ' + error.message)
