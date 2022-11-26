@@ -1,6 +1,7 @@
 var settings = require('./settings'),
     http = require('http'),
-    QRCode = require('qrcode')
+    EventEmitter = require('events').EventEmitter,
+    eventEmitter = new EventEmitter()
 
 
 function createServer(route) {
@@ -192,14 +193,8 @@ function httpCheck(ok, error){
     clearTimeout(httpCheckTimeout)
     httpCheckTimeout = null
     if (ok) {
-        console.log('(INFO) Server started, app available at')
-        for (let i = 0; i < settings.appAddresses().length; i++) {
-            const ipAddress = settings.appAddresses()[i];
-            console.log('\n'+ipAddress+' : ')
-            QRCode.toString(ipAddress,{type:'svg',width:230,color:{dark:'#6db5fd',light:'#21252b'}}, function (err, url) {
-                console.log(url)
-              })
-        }
+        console.log('(INFO) Server started, app available at \n    ' + settings.appAddresses().join('\n    '))
+        eventEmitter.emit('serverStarted')
     } else {
         if (error) {
             console.error('(ERROR, HTTP) Server setup error: ' + error.message)
@@ -241,7 +236,8 @@ module.exports =  {
     ipc:ipc,
     bindCallbacks:bindCallbacks,
     clients:clients,
-    resolvePath:resolvePath
+    resolvePath:resolvePath,
+    eventEmitter:eventEmitter
 }
 
 osc = require('./osc').server

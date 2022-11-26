@@ -84,6 +84,22 @@ function openClient() {
 
 }
 
+function showQRCode(){
+
+    var QRCode = require('qrcode')
+
+    if (launcher) {
+        launcher.webContents.send('server-started')
+        QRCode.toString(settings.appAddresses().pop(),{type:'svg', small: true, margin: 1}, (err, qr)=>{
+            launcher.webContents.send('stdout', '<div class="qrcode">' + qr + '</div>')
+        })
+    } else {
+        QRCode.toString(settings.appAddresses().pop(),{type:'terminal', small: true}, (err, qr)=>{
+            console.log('\n' + qr.replace(/^/gm, '    '))
+        })
+    }
+}
+
 function startServerProcess() {
 
     var args = [ '--no-gui']
@@ -102,15 +118,16 @@ function startServerProcess() {
 
     serverProcess = fork(app.getAppPath(), args, {stdio: 'pipe', env: {...process.env, OSC_SERVER_PROCESS: 1}})
 
-    if (!settings.read('no-gui')) {
-        var cb = (data)=>{
-            if (data.indexOf('Server started') > -1) {
-                openClient()
-                serverProcess.stdout.off('data', cb)
-            }
+    var cb = (data)=>{
+        if (data.indexOf('(INFO) Server started') > -1) {
+            if (!settings.read('no-gui')) openClient()
+            setTimeout(()=>{
+                showQRCode()
+            })
+            serverProcess.stdout.off('data', cb)
         }
-        serverProcess.stdout.on('data', cb)
     }
+    serverProcess.stdout.on('data', cb)
 
     serverProcess.stdout.on('data', (data) => {
         console.log(String(data).trim())
@@ -257,6 +274,9 @@ if (settings.read('docs')) {
         zeroconf.unpublishAll()
     })
 
+    if (!process.env.OSC_SERVER_PROCESS) server.eventEmitter.on('serverStarted', ()=>{
+        showQRCode()
+    })
 
 } else {
 

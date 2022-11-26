@@ -220,6 +220,18 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
         user-select: none;
     }
 
+    .qrcode svg {
+        width: 120rem;
+        margin-top: 5rem;
+        margin-left: 15rem;
+        path[fill="#ffffff"] {
+            fill: var(--color-text)!important;
+        }
+        path[stroke="#000000"] {
+            stroke: var(--color-background)!important;
+        }
+    }
+
     a {
         text-decoration: underline;
         cursor: pointer;
