@@ -196,7 +196,7 @@ function httpCheck(ok, error){
         for (let i = 0; i < settings.appAddresses().length; i++) {
             const ipAddress = settings.appAddresses()[i];
             console.log('\n'+ipAddress+' : ')
-            QRCode.toString(ipAddress,{type:'svg',width:230}, function (err, url) {
+            QRCode.toString(ipAddress,{type:'svg',width:230,color:{dark:'#6db5fd',light:'#21252b'}}, function (err, url) {
                 console.log(url)
               })
         }
