@@ -141,7 +141,7 @@ function startServerProcess() {
         serverProcess.on('close', (code) => {
             if (!launcher.isDestroyed()) launcher.webContents.send('server-stopped')
         })
-        launcher.webContents.send('server-started')
+        launcher.webContents.send('server-starting')
     }
 
 }

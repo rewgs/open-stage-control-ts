@@ -6,13 +6,13 @@ var {ipcRenderer} = require('electron'),
     settings = require('./settings'),
     keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     {midilist, openDocs} = remote.getGlobal('launcherSharedGlobals'),
-    serverStarted = false,
+    serverStarting = false,
     serverStart = ()=>{
-        if (serverStarted) return
+        if (serverStarting) return
         ipcRenderer.send('start')
     },
     serverStop = ()=>{
-        if (!serverStarted) return
+        if (!serverStarting) return
         ipcRenderer.send('stop')
     }
 
@@ -176,9 +176,9 @@ class Toolbar {
 
         this.container.addEventListener('click', (e)=>{
             this.container.classList.add('on')
-            start.visible = !serverStarted
-            stop.visible = !!serverStarted
-            newWindow.visible = !!serverStarted
+            start.visible = !serverStarting
+            stop.visible = !!serverStarting
+            newWindow.visible = !!serverStarting
             menu.popup({window: remote.getCurrentWindow(), x: parseInt(PXSCALE), y: parseInt(40 * PXSCALE)})
         })
 
@@ -187,16 +187,16 @@ class Toolbar {
         })
 
         this.startButton.addEventListener('click', (e)=>{
-            if (!serverStarted) serverStart()
+            if (!serverStarting) serverStart()
             else serverStop()
         })
 
-        ipcRenderer.on('server-started', ()=>{
-            serverStarted = true
+        ipcRenderer.on('server-starting', ()=>{
+            serverStarting = true
             this.startButton.classList.add('started')
         })
         ipcRenderer.on('server-stopped', ()=>{
-            serverStarted = false
+            serverStarting = false
             this.startButton.classList.remove('started')
         })
 

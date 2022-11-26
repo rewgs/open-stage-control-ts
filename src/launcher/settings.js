@@ -25,7 +25,7 @@ class Settings {
         this.create()
         this.write(true)
 
-        ipcRenderer.on('server-started', ()=>{
+        ipcRenderer.on('server-starting', ()=>{
             this.disable()
         })
         ipcRenderer.on('server-stopped', ()=>{
