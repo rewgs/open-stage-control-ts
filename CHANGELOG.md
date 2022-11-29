@@ -11,6 +11,9 @@
 - widgets
     - switch/menu/dropdown: add a syntax that supports duplicate labels in `values` property
 
+- custom module
+    - expose `global` object that persists accross module reloads.
+
 ## 1.20.0
 
 - bug fixes

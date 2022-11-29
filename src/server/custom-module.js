@@ -4,7 +4,8 @@ var settings = require('./settings'),
     chokidar = require('chokidar'),
     path = require('path'),
     modulePathExtended = false,
-    loadedModules = {}
+    loadedModules = {},
+    globalObject = {}
 
 class CustomModule {
 
@@ -71,7 +72,8 @@ class CustomModule {
             clearInterval: this.clearInterval.bind(this),
             require: this.require.bind(this),
             nativeRequire: require,
-            process: process
+            process: process,
+            global: globalObject
         }
 
         if (!this.submodule && !modulePathExtended) {

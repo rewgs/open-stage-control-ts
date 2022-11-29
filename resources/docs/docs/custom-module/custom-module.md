@@ -137,6 +137,7 @@ This function can be used to load native node modules or locally installed modul
 - `__dirname`
 - `__filename`
 - `process`
+- `global`
 
 ----
 
@@ -144,6 +145,8 @@ This function can be used to load native node modules or locally installed modul
 ## Autoreload
 
 Custom modules (including submodules loaded with `require()`) are reloaded automatically when they are modified. Upon reload, timers (`setTimeout` and `setInterval`) and event listeners (added to the  `app` object) are reset.
+
+The `global` object persists accross reloads.
 
 ??? "Reloading native modules"
 
