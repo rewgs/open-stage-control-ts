@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.20.1
+
+- launcher
+    - print a qrcode when the server starts to help connecting mobile devices
+
 ## 1.20.0
 
 - bug fixes
