@@ -22,12 +22,25 @@ class MenuBase extends Widget {
 
         var values = this.getProp('values') || []
 
-        if (!Array.isArray(values) && !(typeof values === 'object' && values !== null)) {
-            values = values !== '' ? [values] : []
+        if (
+            typeof values === 'object' && values !== null &&
+            Array.isArray(values.labels) && Array.isArray(values.values) &&
+            Object.keys(values).length === 2 && values.labels.length === values.values.length
+        ) {
+
+            this.values = values.values
+            this.keys = values.labels
+
+        } else {
+
+            if (!Array.isArray(values) && !(typeof values === 'object' && values !== null)) {
+                values = values !== '' ? [values] : []
+            }
+
+            this.values = !Array.isArray(values) ? Object.values(values) : values
+            this.keys = !Array.isArray(values) ? Object.keys(values) : this.values
         }
 
-        this.values = !Array.isArray(values) ? Object.values(values) : values
-        this.keys = !Array.isArray(values) ? Object.keys(values) : this.values
         this.objectInValues = this.values.some(x=>typeof x === 'object')
 
     }

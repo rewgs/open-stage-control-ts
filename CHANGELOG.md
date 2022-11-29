@@ -8,6 +8,9 @@
 - editor
     - horizontal scrolling issues with maximized code editor
 
+- widgets
+    - switch/menu/dropdown: add a syntax that supports duplicate labels in `values` property
+
 ## 1.20.0
 
 - bug fixes

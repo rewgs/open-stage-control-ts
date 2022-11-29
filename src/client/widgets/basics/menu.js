@@ -43,6 +43,7 @@ class Menu extends MenuBase {
                 values: {type: 'array|object', value: [1, 2, 3], help: [
                     '`Array` of possible values to switch between : `[1,2,3]`',
                     '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
+                    '`{"labels": [], "values": []}` `object` where `labels` and `values` arrays must be of the same length. This syntax allows using the same label for different values.',
                 ]},
                 weights: {type: 'array', value: '', help: [
                     '`Array` of `number` defining the weights of each value in `values`',
