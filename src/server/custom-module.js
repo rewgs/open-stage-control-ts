@@ -233,7 +233,7 @@ class CustomModule {
             filename = path.resolve(path.dirname(this.filename), filename)
         }
 
-        this.submodules[filename] = loadedModules[filename] || new CustomModule(filename, this.context, this, this.parent || this)
+        this.submodules[filename] = loadedModules[filename] || new CustomModule(filename, this.context, this, this.mainModule || this)
 
         return this.submodules[filename].module.exports
 
