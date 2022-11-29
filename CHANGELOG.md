@@ -5,6 +5,9 @@
 - launcher
     - print a qrcode when the server starts to help connecting mobile devices
 
+- editor
+    - horizontal scrolling issues with maximized code editor
+
 ## 1.20.0
 
 - bug fixes

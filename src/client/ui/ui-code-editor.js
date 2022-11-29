@@ -202,8 +202,10 @@ class CodeEditor {
 
         this.editor.fullscreen = this.field.classList.toggle('fullscreen')
         this.editor.setOptions({maxLines: this.editor.fullscreen ? 0 : 30})
-        window.dispatchEvent(new Event('resize'))
         this.field.style.setProperty('--prefix', this.editor.fullscreen ? '"' + this.widget.getProp('id') + '."' : '')
+        setTimeout(()=>{
+            window.dispatchEvent(new Event('resize'))
+        })
 
         if (this.editor.fullscreen) {
             this.parent.parentContainer.classList.add('editor-breakout')
