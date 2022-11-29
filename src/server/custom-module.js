@@ -132,9 +132,11 @@ class CustomModule {
             return false
         }
 
-        this.init = this.module.exports.init || null
-        this.oscInFilter = this.module.exports.oscInFilter || null
-        this.oscOutFilter = this.module.exports.oscOutFilter || null
+        if (typeof this.module.exports === 'object' && this.module.exports !== null) {
+            this.init = this.module.exports.init || null
+            this.oscInFilter = this.module.exports.oscInFilter || null
+            this.oscOutFilter = this.module.exports.oscOutFilter || null
+        }
 
         return true
 
