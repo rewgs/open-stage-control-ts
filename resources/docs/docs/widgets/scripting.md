@@ -21,6 +21,10 @@ This script is called when the widget is created. If the widget has children, it
 !!! warning "Modifying parent container"
     Modifying a non-dynamic property on a parent container from this script **will not work**.
 
+The following variables are available in this context:
+
+- `value`: widget's value    
+
 ### `onValue`
 
 This script is called when the widget's value updates and when it receives a value.

@@ -167,6 +167,8 @@ class CodeEditor {
             let globals = {}
             if (this.name === 'onKeyboard') {
                 globals = {type: true, key: true, code: true, ctrl: true, shift: true, alt: true, meta: true}
+            } else if (this.name === 'onCreate') {
+                globals = {value: true}
             } else if (this.name === 'onValue') {
                 globals = {id: true, value: true, touch: true}
             } else if (this.name === 'onDraw') {

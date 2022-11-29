@@ -232,7 +232,7 @@ class Widget extends EventEmitter {
                 widget: this,
                 property: 'onCreate',
                 code: this.getProp('onCreate'),
-                context: {}
+                context: {value: 0}
             })
         }
 
@@ -337,7 +337,7 @@ class Widget extends EventEmitter {
             index: index
         })
 
-        if (this.scripts.onCreate) this.scripts.onCreate.run({}, {sync: true, send: true, onCreate: true})
+        if (this.scripts.onCreate) this.scripts.onCreate.run({value: this.value}, {sync: true, send: true, onCreate: true})
 
     }
 

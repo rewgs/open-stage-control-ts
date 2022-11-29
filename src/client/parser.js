@@ -87,8 +87,6 @@ var Parser = class Parser {
 
         widgetManager.addWidget(widget)
 
-        widget.created(index)
-
         // set widget's initial state
         var defaultValue = widget.getProp('default'),
             currentValue = widget.getProp('value')
@@ -102,6 +100,8 @@ var Parser = class Parser {
             widget.setValue(defaultValue, {defaultInit: true})
 
         }
+
+        widget.created(index)
 
 
         parentNode.appendChild(widget.container)

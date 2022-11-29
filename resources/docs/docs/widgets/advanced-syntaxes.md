@@ -68,6 +68,7 @@ This syntax creates a custom variable in the widget that can be read and modifie
 This allows loading the content of an external file in a property. If used in a `JS{}` of `#{}` block, it will be seen as a string variable containing the raw content of the file. Changes made to the file be applied automatically.
 
 File paths are resolved in this order:
+
 - in the session's directory
 - in theme's directory
 - in the server's `remote-root` directory if the option is set

@@ -14,6 +14,9 @@
 - custom module
     - expose `global` object that persists accross module reloads.
 
+- scripting
+    - onCreate: expose `value`
+
 ## 1.20.0
 
 - bug fixes
