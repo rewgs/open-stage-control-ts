@@ -43,8 +43,15 @@ $padding: 8rem;
 
 }
 
-.editor-disabled #osc-console.minimized > .toggle-button {
-    display: none;
+.editor-disabled #osc-console.minimized {
+    &:after {
+        // disable hover trap
+        display: none;
+    }
+    > .toggle-button {
+        // disable toggle button
+        display: none;
+    }
 }
 
 osc-console {
