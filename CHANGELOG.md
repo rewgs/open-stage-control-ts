@@ -1,9 +1,14 @@
 # Changelog
 
+## 1.21.1
+
+- misc
+    - add german locales
+
 ## 1.21.0
 
 - bug fixes
-    - custom module: fix autoreload on nested submodules 
+    - custom module: fix autoreload on nested submodules
 
 - launcher
     - print a qrcode when the server starts to help connecting mobile devices
