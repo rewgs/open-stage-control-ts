@@ -1,7 +1,7 @@
 var settings = require('./settings'),
     http = require('http'),
     EventEmitter = require('events').EventEmitter,
-    eventEmitter = new EventEmitter()
+    eventEmitter = new EventEmitter(),
     QRCode = require('qrcode'),
     qrcode = ''
 
@@ -90,7 +90,7 @@ function httpRoute(req, res) {
 
     if (url === '/qrcode'){
         res.setHeader('Content-Type', 'image/svg+xml')
-        var str = qrcode,
+        let str = qrcode,
             buf = Buffer.from && Buffer.from !== Uint8Array.from ? Buffer.from(str) : new Buffer(str)
         res.write(buf)
         res.end()
@@ -120,7 +120,7 @@ function httpRoute(req, res) {
 
                 res.setHeader('Content-Type', 'text/css')
                 if (settings.read('theme')) {
-                    var str = theme.get(),
+                    let str = theme.get(),
                         buf = Buffer.from && Buffer.from !== Uint8Array.from ? Buffer.from(str) : new Buffer(str)
                     res.write(buf)
                 } else {
