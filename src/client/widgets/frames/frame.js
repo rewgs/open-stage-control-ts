@@ -7,7 +7,7 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 
-        return 'Embed a page in a frame (local network only).'
+        return 'Embed a web page in a frame.'
 
     }
 
