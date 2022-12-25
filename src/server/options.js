@@ -106,4 +106,5 @@ module.exports = {
                 'Size must a x,y pair of integers' : true
         }
     },
+    'no-qrcode': {type: 'boolean', describe: 'disable qrcode when the server starts', launcher: false}
 }

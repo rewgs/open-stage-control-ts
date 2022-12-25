@@ -183,6 +183,11 @@ The following options can only be set from a terminal.
 
     Define the built-in client window size, must be a pair of integers separated by a comma (`width,height`).
 
+!!! quote ""
+    #### `no-qrcode`
+
+    Disable qrcode when the server starts.
+
 
 !!! quote ""
     #### `help`

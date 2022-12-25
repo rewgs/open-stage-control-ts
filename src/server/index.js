@@ -89,7 +89,6 @@ function showQRCode(){
     var QRCode = require('qrcode')
 
     if (launcher) {
-        launcher.webContents.send('server-started')
         QRCode.toString(settings.appAddresses().pop(),{type:'svg', small: true, margin: 1}, (err, qr)=>{
             launcher.webContents.send('stdout', '<div class="qrcode">' + qr + '</div>')
         })
@@ -121,7 +120,7 @@ function startServerProcess() {
     var cb = (data)=>{
         if (data.indexOf('(INFO) Server started') > -1) {
             if (!settings.read('no-gui')) openClient()
-            setTimeout(()=>{
+            if (!settings.read('no-qrcode')) setTimeout(()=>{
                 showQRCode()
             })
             serverProcess.stdout.off('data', cb)
@@ -250,6 +249,11 @@ function startLauncher() {
 
     })
 
+    ipcMain.on('showQRCode',function(e, options){
+
+        showQRCode()
+
+    })
 }
 
 
@@ -275,7 +279,7 @@ if (settings.read('docs')) {
     })
 
     if (!process.env.OSC_SERVER_PROCESS) server.eventEmitter.on('serverStarted', ()=>{
-        showQRCode()
+        if (!settings.read('no-qrcode')) showQRCode()
     })
 
 } else {

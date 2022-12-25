@@ -14,6 +14,9 @@ var {ipcRenderer} = require('electron'),
     serverStop = ()=>{
         if (!serverStarting) return
         ipcRenderer.send('stop')
+    },
+    showQRCode = ()=>{
+        ipcRenderer.send('showQRCode')
     }
 
 var start = new MenuItem({
@@ -26,6 +29,11 @@ var stop = new MenuItem({
     click: serverStop,
     accelerator: 'f6'
 })
+var qrcode = new MenuItem({
+    label: 'Show QR code',
+    click: showQRCode,
+    accelerator: 'f7'
+})
 var newWindow = new MenuItem({
     label: 'New window',
     visible: false,
@@ -36,6 +44,7 @@ var newWindow = new MenuItem({
 })
 menu.append(start)
 menu.append(stop)
+menu.append(qrcode)
 menu.append(newWindow)
 menu.append(new MenuItem({
     type: 'separator'
@@ -178,6 +187,7 @@ class Toolbar {
             this.container.classList.add('on')
             start.visible = !serverStarting
             stop.visible = !!serverStarting
+            qrcode.visible = !!serverStarting
             newWindow.visible = !!serverStarting
             menu.popup({window: remote.getCurrentWindow(), x: parseInt(PXSCALE), y: parseInt(40 * PXSCALE)})
         })

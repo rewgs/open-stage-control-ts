@@ -75,6 +75,12 @@ var settings = {
     checkForUpdates: true
 }
 
+// store cli-only options (read-only)
+for (let k in argv) {
+    if (options[k] && options[k].launcher === false) {
+        settings[k] = argv[k]
+    }
+}
 
 
 
@@ -150,6 +156,14 @@ module.exports = {
                 process.send(['settings.write', [key, value]])
             } else {
                 config[key] = value
+                if (config.options) {
+                    // don't save cli-only options
+                    for (var k in config.options) {
+                        if (options[k] && options[k].launcher === false) {
+                            delete config.options[k]
+                        }
+                    }
+                }
                 if (sync) {
                     fs.writeFileSync(configPath, JSON.stringify(config, null, 4))
                 } else {
