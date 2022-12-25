@@ -5,11 +5,14 @@
 - launcher
     - add menu options to show the qr code again
 
+- widgets
+    - image: add support for special value "qrcode" 
+
 - misc
     - add german locales (@ Magnus Reichel)
     - package file names changed to follow debian's convention
     - add a cli option to disable the qr code (`--no-qrcode`)
-    
+
 ## 1.21.0
 
 - bug fixes

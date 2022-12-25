@@ -29,7 +29,8 @@ module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
             value: {
                 value: {type: 'string', value: '', help: [
                     '- File `url` or `path` (relative to the session or theme file location by default, falling back to absolute path)',
-                    '- Base64 encoded image : `data:image/...`'
+                    '- Base64 encoded image : `data:image/...`',
+                    '- Enter "qrcode" to display the server\'s address QR code'
                 ]}
             },
             osc: {

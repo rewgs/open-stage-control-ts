@@ -2,7 +2,8 @@ var settings = require('./settings'),
     http = require('http'),
     EventEmitter = require('events').EventEmitter,
     eventEmitter = new EventEmitter()
-
+    QRCode = require('qrcode'),
+    qrcode = ''
 
 function createServer(route) {
     if (settings.read('use-ssl')) {
@@ -87,7 +88,14 @@ function httpRoute(req, res) {
 
     var url = req.url
 
-    if (url === '/' || url.indexOf('/?') === 0) {
+    if (url === '/qrcode'){
+        res.setHeader('Content-Type', 'image/svg+xml')
+        var str = qrcode,
+            buf = Buffer.from && Buffer.from !== Uint8Array.from ? Buffer.from(str) : new Buffer(str)
+        res.write(buf)
+        res.end()
+
+    } else if (url === '/' || url.indexOf('/?') === 0) {
 
         var ip = req.connection.remoteAddress.replace('::ffff:', '')
 
@@ -195,6 +203,9 @@ function httpCheck(ok, error){
     if (ok) {
         console.log('(INFO) Server started, app available at \n    ' + settings.appAddresses().join('\n    '))
         eventEmitter.emit('serverStarted')
+        QRCode.toString(settings.appAddresses().pop(),{type:'svg', small: true, margin: 1}, (err, qr)=>{
+            qrcode = qr
+        })
     } else {
         if (error) {
             console.error('(ERROR, HTTP) Server setup error: ' + error.message)
