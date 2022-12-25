@@ -3,7 +3,8 @@
 ## 1.21.1
 
 - misc
-    - add german locales
+    - add german locales (@ Magnus Reichel)
+    - package file names changed to follow debian's convention
 
 ## 1.21.0
 
