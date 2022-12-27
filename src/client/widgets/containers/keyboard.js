@@ -42,7 +42,14 @@ class Keyboard extends Panel {
                     '- `toggle` (on/off switches)',
                     '- `tap` (no release)'
                 ]},
-            }
+            },
+            value: {
+                value: {type: 'array', value: '', help: [
+                    'The keyboard widget accepts the following values:',
+                    '- a [note, value] array to set the value of a single key',
+                    '- an array of values with one item per key in the keyboard'
+                ]}
+            },
         })
 
     }
@@ -153,12 +160,23 @@ class Keyboard extends Panel {
 
     setValue(v, options={}) {
 
-        if (!Array.isArray(v) || v.length !== 2) return
-        if (v[1] !== this.getProp('on') && v[1] !== this.getProp('off')) return
+        if (!Array.isArray(v)) return
 
-        var index = v[0] - parseInt(this.getProp('start'))
-        if (this.children[index]) {
-            this.children[index].setValue(v[1] === this.getProp('on') ? 1 : 0, options)
+        if (v.length === this.children.length) {
+            for (var i = 0; i < this.children.length; i++){
+                this.children[i].setValue(v[i] === this.getProp('on') ? 1 : 0, options)
+            }
+        }
+
+        else if (
+            v.length === 2 &&
+            v[0] >= parseInt(this.getProp('start')) && v[0] < 128 &&
+            (v[1] === this.getProp('on') || v[1] === this.getProp('off'))
+        ) {
+            var index = v[0] - parseInt(this.getProp('start'))
+            if (this.children[index]) {
+                this.children[index].setValue(v[1] === this.getProp('on') ? 1 : 0, options)
+            }
         }
 
     }

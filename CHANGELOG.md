@@ -2,11 +2,14 @@
 
 ## 1.21.1
 
+- bug fixes
+    - keyboard widget: `linkId` not working (unable to link 2 keyboard widgets) 
+
 - launcher
     - add menu options to show the qr code again
 
 - widgets
-    - image: add support for special value "qrcode" 
+    - image: add support for special value "qrcode"
 
 - misc
     - add german locales (@ Magnus Reichel)
