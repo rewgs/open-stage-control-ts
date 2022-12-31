@@ -3,10 +3,11 @@
 ## 1.21.1
 
 - bug fixes
-    - keyboard widget: `linkId` not working (unable to link 2 keyboard widgets) 
+    - keyboard widget: `linkId` not working (unable to link 2 keyboard widgets)
 
 - launcher
     - add menu options to show the qr code again
+    - mac: change "List MIDI devices" keyboard shortcut to `Ctrl+m`
 
 - widgets
     - image: add support for special value "qrcode"

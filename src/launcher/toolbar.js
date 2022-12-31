@@ -78,7 +78,7 @@ menu.append(new MenuItem({
     click: ()=>{
         midilist()
     },
-    accelerator: 'CmdOrCtrl + m'
+    accelerator: 'Ctrl + m'
 }))
 menu.append(new MenuItem({type: 'submenu' , label: 'Console', submenu: [
     new MenuItem({
