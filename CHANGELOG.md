@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.21.1
+## 1.22.0
 
 - bug fixes
     - keyboard widget: `linkId` not working (unable to link 2 keyboard widgets)
