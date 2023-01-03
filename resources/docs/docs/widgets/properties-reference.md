@@ -392,6 +392,12 @@
             | <h6 id="keyboard_velocity">velocity<a class="headerlink" href="#keyboard_velocity" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to map the touch coordinates between `off` (top) and `on` (bottom). Requires `on` and `off` to be numbers |
             | <h6 id="keyboard_mode">mode<a class="headerlink" href="#keyboard_mode" title="Permanent link">#</a></h6> | `string` | <code>"push"</code> | Interaction mode:<br/>- `push` (press & release)<br/>- `toggle` (on/off switches)<br/>- `tap` (no release)<br/><br/>Choices: `push`, `toggle`, `tap` |
 
+    === "value"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="keyboard_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#keyboard_value" title="Permanent link">#</a></h6> | `array` | <code>""</code> | The keyboard widget accepts the following values:<br/>- a `[note, value]` array to set the value of a single key where `note` is the note number and `value` is equal to the `on` or `off` property.<br/>- an array of values with one item per key in the keyboard |
+
 ??? api "<div id="patchbay">patchbay<a class="headerlink" href="#patchbay" title="Permanent link">#</a></div>"
     Connect inputs to outputs.
 
@@ -507,7 +513,7 @@
 ## Frames
 
 ??? api "<div id="frame">frame<a class="headerlink" href="#frame" title="Permanent link">#</a></div>"
-    Embed a page in a frame (local network only).
+    Embed a web page in a frame.
 
     === "value"
 
@@ -548,7 +554,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="image_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#image_value" title="Permanent link">#</a></h6> | `string` | <code>""</code> | - File `url` or `path` (relative to the session or theme file location by default, falling back to absolute path)<br/>- Base64 encoded image : `data:image/...` |
+            | <h6 id="image_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#image_value" title="Permanent link">#</a></h6> | `string` | <code>""</code> | - File `url` or `path` (relative to the session or theme file location by default, falling back to absolute path)<br/>- Base64 encoded image : `data:image/...`<br/>- Enter "qrcode" to display the server's address QR code |
 ## Graphs
 
 ??? api "<div id="plot">plot<a class="headerlink" href="#plot" title="Permanent link">#</a></div>"
