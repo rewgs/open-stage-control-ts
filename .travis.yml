@@ -36,8 +36,8 @@ before_deploy:
   - mkdir packages
   - mv open-stage-control-node   open-stage-control_${VERSION}_node
   - mv open-stage-control-win32-x64    open-stage-control_${VERSION}_win32-x64
-  - mv open-stage-control-linux-x64    open-stage-control_${VERSION}_linux-x64
   - mv open-stage-control-linux-x64/*.deb packages/open-stage-control_${VERSION}_amd64.deb
+  - mv open-stage-control-linux-x64    open-stage-control_${VERSION}_linux-x64
   - zip -q -r --symlinks packages/open-stage-control_${VERSION}_osx.zip open-stage-control-darwin-x64/open-stage-control.app
   - zip -q -r packages/open-stage-control_${VERSION}_node.zip     open-stage-control_${VERSION}_node
   - zip -q -r packages/open-stage-control_${VERSION}_win32-x64.zip      open-stage-control_${VERSION}_win32-x64
