@@ -22,14 +22,14 @@ class Slider extends Canvas {
         this.rangeKeys = Object.keys(this.getProp('range')).sort((a,b)=>{
             if (a === 'min' || b === 'max') return -1
             else if (a === 'max' || b === 'min') return 1
-            else return parseInt(a) - parseInt(b)
+            else return parseFloat(a) - parseFloat(b)
         })
         this.rangeVals = []
         this.rangeLabels = []
 
         for (var i in this.rangeKeys) {
             var k = this.rangeKeys[i],
-                key = k == 'min' ? 0 : k == 'max' ? 100 : parseInt(k),
+                key = k == 'min' ? 0 : k == 'max' ? 100 : parseFloat(k),
                 val = typeof this.getProp('range')[k] === 'object' && this.getProp('range')[k] !== null ?
                     this.getProp('range')[k][Object.keys(this.getProp('range')[k])[0]]:
                     this.getProp('range')[k]

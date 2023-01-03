@@ -4,6 +4,7 @@
 
 - bug fixes
     - keyboard widget: `linkId` not working (unable to link 2 keyboard widgets)
+    - slides: issues with ranges containing decimal keys
 
 - launcher
     - add menu options to show the qr code again
