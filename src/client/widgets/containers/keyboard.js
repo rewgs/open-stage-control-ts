@@ -46,7 +46,7 @@ class Keyboard extends Panel {
             value: {
                 value: {type: 'array', value: '', help: [
                     'The keyboard widget accepts the following values:',
-                    '- a [note, value] array to set the value of a single key',
+                    '- a `[note, value]` array to set the value of a single key where `note` is the note number and `value` is equal to the `on` or `off` property.',
                     '- an array of values with one item per key in the keyboard'
                 ]}
             },

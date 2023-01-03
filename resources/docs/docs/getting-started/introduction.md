@@ -20,8 +20,8 @@ The **server** can run on all [platforms supported by Electron](https://www.elec
 
 The **client** is compatible with the following browsers:
 
-- Firefox: version `75`
-- Chromium / Chrome: version `60`
+- Firefox: version `75` and higher
+- Chromium / Chrome: version `60` and higher
 
 iOS devices must be of version `10.3` or higher.
 
