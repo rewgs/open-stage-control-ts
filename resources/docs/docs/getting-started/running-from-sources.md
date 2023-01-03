@@ -47,7 +47,7 @@ npm start [ -- options]
 
 
 !!! warning "MIDI support"
-    When running from sources, MIDI support won't be enabled unless the [MIDI configuration procedure](../midi/midi-configuration/) for "other systems" is followed.
+    When running from sources, MIDI support won't be enabled unless the [MIDI configuration procedure](../../midi/midi-configuration/) for "other systems" is followed.
 
 ## Build documentation
 
