@@ -3,10 +3,10 @@
 
 === "Linux / Windows / OSX"
 
-    Since version `1.7.0`, Open Stage Control comes bundled with built-in MIDI support if you're using the 64bit package for Linux, OSX or Windows.
+    Open Stage Control comes bundled with built-in MIDI support if you're using the official package for Linux, OSX or Windows.
 
 
-=== "Other systems"
+=== "Other systems / Node"
 
     Enabling MIDI support on other systems or when building Open Stage Control from sources requires additional softwares to be installed on the server's system:
 
