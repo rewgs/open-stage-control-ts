@@ -89,7 +89,7 @@ module.exports = {
     inspector_zoom_reset: 'Reset zoom',
     inspector_zoom_ou: 'Zoom out',
     inspector_reset_selection: 'Unselect widget(s)',
-    inspector_toggle_grid: 'Afficher / masquer la grille',
+    inspector_toggle_grid: 'Show/hide the grid',
 
     // nosleep
     nosleep: 'Prevent sleep',
@@ -97,10 +97,10 @@ module.exports = {
     // remote save
     remotesave_open: 'Open (on the server)',
     remotesave_save: 'Save (on the server)',
-    remotesave_overwrite: 'This file already exists, do you want to overwrite it ?',
+    remotesave_overwrite: 'This file already exists, do you want to overwrite it?',
     remotesave_fail: 'The file could not be saved on the server, use "export" instead',
     remotesave_success: 'File saved successfully',
-    remotesave_forbidden: 'You\'re note allowed to save on server, use "export instead"',
+    remotesave_forbidden: 'You\'re note allowed to save on server, use "export" instead',
 
     // server
     server_disconnected: 'The connection to the server has been interrupted',
@@ -112,7 +112,7 @@ module.exports = {
     session_malformed: 'Malformed session file.',
     session_parsingerror: 'Parsing error.',
     session_uploaderror: 'Failed to upload session file.',
-    session_unsaved: 'Your changes will be lost if you close this session without saving, continue ?',
+    session_unsaved: 'Your changes will be lost if you close this session without saving, continue?',
     session_oldversion_title: 'Warning',
     session_oldversion: 'This session was created with an older version of this software, an automatic conversion has been done. Once saved, this session will probably not load correctly with older versions, it is recommended to make a backup copy of it.',
 
