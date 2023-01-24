@@ -38,17 +38,17 @@ module.exports = {
     editor_ace_help_title: 'Code editor keyboard shortcuts',
 
     // loadings
-    loading_upload: 'Uploading file...',
-    loading_newclient: 'New client connecting...',
-    loading_server: 'Connecting server...',
-    loading_session: 'Loading session...',
+    loading_upload: 'Uploading file…',
+    loading_newclient: 'New client connecting…',
+    loading_server: 'Connecting server…',
+    loading_session: 'Loading session…',
 
     // file
     file_open: 'Open',
     file_open_recent: 'Open recent',
     file_open_recent_wait: 'List not loaded yet, please close and reopen the menu',
     file_save: 'Save',
-    file_save_as: 'Save as...',
+    file_save_as: 'Save as…',
     file_backup: 'Save backup',
     file_import: 'Import',
     file_export: 'Export',

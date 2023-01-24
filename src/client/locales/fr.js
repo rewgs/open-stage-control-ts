@@ -37,17 +37,17 @@ module.exports = {
     editor_ace_help_title: 'Raccourcis claviers de l\'éditeur',
 
     // loadings
-    loading_upload: 'Téléversement...',
-    loading_newclient: 'Connexion d\'un nouveau client...',
-    loading_server: 'Connexion au serveur...',
-    loading_session: 'Chargement de la session...',
+    loading_upload: 'Téléversement…',
+    loading_newclient: 'Connexion d\'un nouveau client…',
+    loading_server: 'Connexion au serveur…',
+    loading_session: 'Chargement de la session…',
 
     // file
     file_open: 'Ouvrir',
     file_open_recent: 'Récemment ouvert(s)',
     file_open_recent_wait: 'Liste non chargée, veuillez fermer puis ouvrir le menu à nouveau',
     file_save: 'Enregistrer',
-    file_save_as: 'Enregistrer sous...',
+    file_save_as: 'Enregistrer sous…',
     file_backup: 'Enregistrer une sauvegarde',
     file_import: 'Importer',
     file_export: 'Exporter',

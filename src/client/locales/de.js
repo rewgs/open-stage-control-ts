@@ -38,17 +38,17 @@ module.exports = {
     editor_ace_help_title: 'Tastenkombinationen für den Code-Editor',
 
     // loadings
-    loading_upload: 'Datei wird hochgeladen...',
-    loading_newclient: 'Neuer Client verbindet sich...',
-    loading_server: 'Server verbinden...',
-    loading_session: 'Sitzung laden...',
+    loading_upload: 'Datei wird hochgeladen…',
+    loading_newclient: 'Neuer Client verbindet sich…',
+    loading_server: 'Server verbinden…',
+    loading_session: 'Sitzung laden…',
 
     // file
     file_open: 'Öffnen',
     file_open_recent: 'Kürzlich geöffnet',
     file_open_recent_wait: 'Liste noch nicht geladen, bitte schließen Sie das Menü und öffnen Sie es erneut',
     file_save: 'Speichern',
-    file_save_as: 'Speichern unter...',
+    file_save_as: 'Speichern unter…',
     file_backup: 'Backup speichern',
     file_import: 'Importieren',
     file_export: 'Exportieren',

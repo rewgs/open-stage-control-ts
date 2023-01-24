@@ -38,17 +38,17 @@ module.exports = {
     editor_ace_help_title: 'Skróty klawiszowe edytora kodu',
 
     // loadings
-    loading_upload: 'Wysyłanie pliku...',
-    loading_newclient: 'Nowy klient podłączony...',
-    loading_server: 'Podłączanie do serwera...',
-    loading_session: 'Wczytywanie sesji...',
+    loading_upload: 'Wysyłanie pliku…',
+    loading_newclient: 'Nowy klient podłączony…',
+    loading_server: 'Podłączanie do serwera…',
+    loading_session: 'Wczytywanie sesji…',
 
     // file
     file_open: 'Otwórz',
     file_open_recent: 'Ostatnio otwierane',
     file_open_recent_wait: 'Lista nie jest jeszcze załadowana, zamknij i otwórz ponownie to menu',
     file_save: 'Zapisz',
-    file_save_as: 'Zapisz jako...',
+    file_save_as: 'Zapisz jako…',
     file_backup: 'Zapisz kopię zapasową',
     file_import: 'Importuj',
     file_export: 'Eksportuj',
