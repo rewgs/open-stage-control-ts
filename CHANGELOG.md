@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.22.1
+
+- bug fixes
+    - linkId not working between two encoder widgets
+
 ## 1.22.0
 
 - bug fixes

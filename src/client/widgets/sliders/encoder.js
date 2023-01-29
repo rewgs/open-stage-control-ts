@@ -212,7 +212,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
             this.percent = 50
             this.previousPercent = 50
         } else if (
-            !options.dragged ||
+            !options.dragged &&
             (v !== this.getProp('forth') && v !== this.getProp('back') && (this.getProp('release') === '' && v !== this.getProp('release')))
 
         ) return
@@ -238,9 +238,13 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
         if (sensitivityIgnore) return
 
-        if (this.speed.length) {
+        if (!options.dragged && options.widget && options.widget instanceof Encoder) {
+            this.percent = options.widget.percent
+        }
+
+        if (this.speed && this.speed.length) {
             var s = this.speed.reduce((a,c)=>a+c) / this.speed.length
-            this.speed= []
+            this.speed = []
             this.parsersLocalScope.speed = s
         } else {
             this.parsersLocalScope.speed = 0
