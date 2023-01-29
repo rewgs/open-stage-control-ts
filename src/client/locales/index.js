@@ -2,6 +2,7 @@ var locales = {
     en: require('./en'),
     fr: require('./fr'),
     de: require('./de'),
+    ok: require('./pl'),
     debug: {
         /* empty */
         keyboard_layout: require('./en').keyboard_layout
