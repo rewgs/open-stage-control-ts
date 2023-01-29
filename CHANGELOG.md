@@ -5,6 +5,9 @@
 - bug fixes
     - linkId not working between two encoder widgets
 
+- misc
+    - add polish locales (@ Manz4rk)
+
 ## 1.22.0
 
 - bug fixes
