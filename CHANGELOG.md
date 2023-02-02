@@ -5,6 +5,9 @@
 - bug fixes
     - linkId not working between two encoder widgets
 
+- scripting
+    - expose file browser (from the file widget) as a scripting function
+
 - misc
     - add polish locales (@ Manz4rk)
 

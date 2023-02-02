@@ -5,6 +5,7 @@ var widgetManager = require('../../managers/widgets'),
     {urlParser} = require('../utils'),
     Vm = require('../vm'),
     ipc = require('../../ipc'),
+    uiFilebrowser = require('../../ui/ui-filebrowser'),
     toolbar
 
 
@@ -555,11 +556,33 @@ class ScriptVm extends Vm {
 
         }
 
+
+        this.sandbox.contentWindow.browseFile = (options, callback)=>{
+            this.checkContext('browseFile')
+            if (typeof options === 'function') {
+                callback = options
+                options = {}
+            }
+            if (typeof callback === 'function') {
+                uiFilebrowser({
+                    extension: options.extention || '*',
+                    directory: options.directory || undefined,
+                    loadDir: !!options.allowDir,
+                    save: options.mode === 'save'
+                }, (path)=>{
+                    callback(path.join(path[0][0] === '/' ? '/' : '\\'))
+                })
+            } else {
+                widget.errorProp('script', 'browseFile', 'callback argument must be a function')
+            }
+        }
+
+
         this.globals = {}
 
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
             'setInterval', 'clearInterval', 'setTimeout', 'cthislearTimeout', 'setFocus', 'unfocus' , 'setFocusable', 'setScroll', 'getScroll', 'toolbar',
-            'openUrl', 'getVar', 'setVar', 'runAs', 'reload', 'Image', 'updateCanvas', 'getNavigator']) {
+            'openUrl', 'getVar', 'setVar', 'runAs', 'reload', 'Image', 'updateCanvas', 'getNavigator', 'browseFile']) {
             this.sanitize(this.sandbox.contentWindow[imports])
             this.globals[imports] = true
         }

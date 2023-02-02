@@ -369,3 +369,15 @@ If the event that triggered the script's execution was not initiated by a user i
 #### `getNavigator()`
 
 Returns the instance of [Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
+
+----
+
+#### `browseFile(options, callback)`
+
+Opens the file file browser and pass selected file to a callback function (does not create nor read files by itself).
+
+- `options`: object with the following keys:
+    - `extension`: allowed extension (default: "*")
+    - `directory`: starting directory for browser (default: user's home)
+    - `allowDir`: allow choosing a directory instead of a file (default: false)
+    - `mode`: "save" or "open" 
