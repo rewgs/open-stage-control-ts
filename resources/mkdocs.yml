@@ -35,6 +35,8 @@ nav:
             - docs/getting-started/server-configuration.md
             - docs/getting-started/running-from-sources.md
             - docs/getting-started/running-with-node.md
+        - Tutorials:
+            - docs/tutorials/first-steps.md
         - User interface:
             - docs/user-interface/launcher.md
             - docs/user-interface/client.md
