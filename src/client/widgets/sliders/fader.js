@@ -137,7 +137,7 @@ class Fader extends Slider {
                 (typeof colors === 'object' && Object.keys(colors).length > 1)
             ) {
 
-                var grad = this.ctx.createLinearGradient(0,  this.getProp('horizontal') ? 0 : this.height, 0, this.getProp('horizontal') ? this.width : 0)
+                var grad = this.ctx.createLinearGradient(this.gaugePadding,  this.getProp('horizontal') ? this.gaugePadding : this.height - this.gaugePadding, this.gaugePadding, this.getProp('horizontal') ? this.width - this.gaugePadding : this.gaugePadding)
 
                 try {
                     if (Array.isArray(colors)) {

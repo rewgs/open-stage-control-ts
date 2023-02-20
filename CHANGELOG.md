@@ -4,6 +4,7 @@
 
 - bug fixes
     - linkId not working between two encoder widgets
+    - fader: `gradient` breakpoints not positioned correctly
 
 - scripting
     - expose file browser (from the file widget) as a scripting function
