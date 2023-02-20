@@ -4,7 +4,7 @@
 
 Let's walk through the basic steps to build a simple interface in Open Stage Control, send information to another app, and deploy the interface to remote (even mobile) devices.
 
-Before beginning, you should already have installed Open Stage Control -- see the [Introduction](https://openstagecontrol.ammd.net/docs/getting-started/introduction/).
+Before beginning, you should already have installed Open Stage Control -- see the [Introduction](../getting-started/introduction.md).
 
 Also: This document provides sample patches for SuperCollider, Pure Data and Max/MSP, to receive control data from the Open Stage Control interface. If you do not have any of these tools, I suggest to install [Pure Data](https://puredata.info/downloads/pure-data) because it has the smallest footprint.
 
