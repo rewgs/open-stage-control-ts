@@ -9,6 +9,9 @@
 - scripting
     - expose file browser (from the file widget) as a scripting function
 
+- custom module
+    - don't restrict file extension in `loadJSON()` and `saveJSON` functions 
+
 - misc
     - add polish locales (@ Manz4rk)
 

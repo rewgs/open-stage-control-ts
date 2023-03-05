@@ -34,31 +34,23 @@ class CustomModule {
         } : {
             ...context,
             loadJSON: (url)=>{
-                if (url.split('.').pop() === 'json') {
-                    try {
-                        url = path.resolve(path.dirname(this.filename), url)
-                        var content = fs.readFileSync(url, 'utf8')
-                        if (content[0] === '\ufeff') content = content.slice(1) // remove BOM
-                        return JSON.parse(content)
-                    } catch(e) {
-                        console.error('(ERROR) could not load json file from ' + url)
-                        console.error(e.message)
-                    }
-                } else {
-                    console.error('(ERROR) unauthorized file type for loadJSON')
+                try {
+                    url = path.resolve(path.dirname(this.filename), url)
+                    var content = fs.readFileSync(url, 'utf8')
+                    if (content[0] === '\ufeff') content = content.slice(1) // remove BOM
+                    return JSON.parse(content)
+                } catch(e) {
+                    console.error('(ERROR) could not load json file from ' + url)
+                    console.error(e.message)
                 }
             },
             saveJSON: (url, data)=>{
-                if (url.split('.').pop() === 'json') {
-                    url = path.resolve(path.dirname(this.filename), url)
-                    try {
-                        return fs.writeFileSync(url, JSON.stringify(data, null, '  '))
-                    } catch(e) {
-                        console.error('(ERROR) could not save json file to ' + url)
-                        console.error(e.message)
-                    }
-                } else {
-                    console.error('(ERROR) unauthorized file type for saveJSON')
+                url = path.resolve(path.dirname(this.filename), url)
+                try {
+                    return fs.writeFileSync(url, JSON.stringify(data, null, '  '))
+                } catch(e) {
+                    console.error('(ERROR) could not save json file to ' + url)
+                    console.error(e.message)
                 }
             },
             console: console,
