@@ -148,7 +148,8 @@ osc-inspector-field {
             top:3rem;
             background: var(--color-ui-button);
             line-height: $field-height - 6;
-            box-shadow: 0 0 1rem 0 var(--color-background)
+            box-shadow: 0 0 1rem 0 var(--color-background);
+            border: 0;
         }
         .fullscreen {
             right:3rem;
