@@ -6,6 +6,11 @@
     - linkId not working between two encoder widgets
     - fader: `gradient` breakpoints not positioned correctly
 
+- editor
+    - when focusing the label property with `F2`, select all text in the text area
+    - preserve scroll position in code editor when validating
+
+
 - scripting
     - expose file browser (from the file widget) as a scripting function
 
@@ -14,7 +19,7 @@
 
 - misc
     - add polish locales (@ Manz4rk)
-    - add css classes to some notification popups to allow targetting them with css themes 
+    - add css classes to some notification popups to allow targetting them with css themes
 
 ## 1.22.0
 

@@ -121,7 +121,10 @@ class CodeEditor {
         editor.setValue(input.value)
         editor.textarea.osc_input = input
         editor.selection.setRange({start:0,end:0})
-        editor.gotoLine(0)
+        if (!this.widget || widget.hash !== this.widget.hash) {
+            // preserve active line if widget is the same
+            editor.gotoLine(0)
+        }
         editor.removeAllListeners('focus')
         this.editor.on('focus', (e)=>{
             if (this.middledown) {
@@ -192,16 +195,14 @@ class CodeEditor {
         field.appendChild(this.helpBtn)
         field.appendChild(this.fsBtn)
 
-        setTimeout(()=>{
-            editor.getSession().getUndoManager().reset()
-            editor.resize()
-        })
+        editor.getSession().getUndoManager().reset()
+        editor.resize()
 
 
     }
 
     fullscreen() {
-
+ 
         this.editor.fullscreen = this.field.classList.toggle('fullscreen')
         this.editor.setOptions({maxLines: this.editor.fullscreen ? 0 : 30})
         this.field.style.setProperty('--prefix', this.editor.fullscreen ? '"' + this.widget.getProp('id') + '."' : '')
