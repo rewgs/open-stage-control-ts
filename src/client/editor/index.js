@@ -465,6 +465,7 @@ class Editor {
                 var input = DOM.get(this.inspector.container, 'textarea[name="label"]')[0]
                 if (input) {
                     input.focus()
+                    input.setSelectionRange(0, input.value.length)
                     input.scrollIntoView({block: 'center'})
                 }
                 break
