@@ -6,6 +6,9 @@
     - linkId not working between two encoder widgets
     - fader: `gradient` breakpoints not positioned correctly
 
+- widgets
+    - keyboard: incoming values different than the `off` property are now interpreted as `on`
+
 - editor
     - when focusing the label property with `F2`, select all text in the text area
     - preserve scroll position in code editor when validating

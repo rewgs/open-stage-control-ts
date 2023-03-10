@@ -46,7 +46,7 @@ class Keyboard extends Panel {
             value: {
                 value: {type: 'array', value: '', help: [
                     'The keyboard widget accepts the following values:',
-                    '- a `[note, value]` array to set the value of a single key where `note` is the note number and `value` is equal to the `on` or `off` property.',
+                    '- a `[note, value]` array to set the value of a single key where `note` is the note number and `value` depends on the `on` and `off` properties (any value different from `off` will be interpreted as `on`).',
                     '- an array of values with one item per key in the keyboard'
                 ]}
             },
@@ -164,18 +164,17 @@ class Keyboard extends Panel {
 
         if (v.length === this.children.length) {
             for (var i = 0; i < this.children.length; i++){
-                this.children[i].setValue(v[i] === this.getProp('on') ? 1 : 0, options)
+                this.children[i].setValue(v[i] !== this.getProp('off') ? 1 : 0, options)
             }
         }
 
         else if (
             v.length === 2 &&
-            v[0] >= parseInt(this.getProp('start')) && v[0] < 128 &&
-            (v[1] === this.getProp('on') || v[1] === this.getProp('off'))
+            v[0] >= parseInt(this.getProp('start')) && v[0] < 128
         ) {
             var index = v[0] - parseInt(this.getProp('start'))
             if (this.children[index]) {
-                this.children[index].setValue(v[1] === this.getProp('on') ? 1 : 0, options)
+                this.children[index].setValue(v[1] !== this.getProp('off') ? 1 : 0, options)
             }
         }
 
