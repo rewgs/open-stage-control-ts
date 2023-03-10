@@ -63,6 +63,7 @@ module.exports = {
 
         notifications.add({
             icon: 'wifi',
+            class: 'client-connected',
             message: locales('loading_newclient')
         })
 

@@ -91,6 +91,7 @@ class Ipc extends EventEmitter {
 
             if (notifications && this.disconnected) notifications.add({
                 icon: 'wifi',
+                class: 'server-connected',
                 message: locales('server_connected'),
                 id: 'ipc_state'
             })

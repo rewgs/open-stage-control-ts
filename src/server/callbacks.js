@@ -251,6 +251,7 @@ module.exports =  {
                 ipc.send('notify', {
                     icon: 'save',
                     locale: 'remotesave_success',
+                    class: 'session-save',
                     message: ' ('+ path.basename(data.path) +')'
                 }, clientId)
 

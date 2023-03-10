@@ -10,10 +10,11 @@
     - expose file browser (from the file widget) as a scripting function
 
 - custom module
-    - don't restrict file extension in `loadJSON()` and `saveJSON` functions 
+    - don't restrict file extension in `loadJSON()` and `saveJSON` functions
 
 - misc
     - add polish locales (@ Manz4rk)
+    - add css classes to some notification popups to allow targetting them with css themes 
 
 ## 1.22.0
 

@@ -150,6 +150,7 @@ var StateManager = class StateManager {
             this.set(state, send)
             notifications.add({
                 icon: 'sliders-h',
+                class: 'state-recall',
                 message: locales('state_recallsuccess')
             })
         } catch(e) {
