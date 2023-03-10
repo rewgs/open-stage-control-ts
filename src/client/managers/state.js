@@ -63,7 +63,7 @@ var StateManager = class StateManager {
 
                 for (var j = widgets.length - 1; j >= 0; j--) {
 
-                    if (widgets[j].setValue && !w.noValueState) {
+                    if (widgets[j].setValue && !widgets[j].noValueState) {
 
                         widgets[j].setValue(value, {send:send, sync:true, fromState:true})
 
