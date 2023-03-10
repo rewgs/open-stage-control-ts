@@ -46,6 +46,10 @@ osc-panel-container.right.editor-breakout {
             align-items: center;
             justify-content: center;
             display: flex;
+            span{
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
             i {
                 pointer-events: none;
             }
@@ -64,8 +68,9 @@ osc-panel-container.right.editor-breakout {
                 transform: rotate(45deg);
             }
         }
-        .spacer {
-            flex: 1
+        [data-action="selected-id"] {
+            flex: 1;
+            cursor: default;
         }
     }
 

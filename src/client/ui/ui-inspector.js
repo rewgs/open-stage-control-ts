@@ -31,7 +31,7 @@ class UiInspector extends UiWidget {
                 <div class="btn toolbar-btn" data-action="zoom-out">${raw(icon('magnifying-glass-minus'))}</div>
                 <div class="btn toolbar-btn" data-action="zoom-reset">${raw(icon('magnifying-glass'))}</div>
                 <div class="btn toolbar-btn" data-action="zoom-in">${raw(icon('magnifying-glass-plus'))}</div>
-                <div class="spacer"></div>
+                <div class="btn toolbar-btn" data-action="selected-id"><span></span></div>
                 <div class="btn toolbar-btn" data-action="reset-selection">${raw(icon('border-none'))}</div>
                 <div class="btn toolbar-btn" data-action="toggle-grid">${raw(icon('table-cells'))}</div>
             </div>
@@ -39,8 +39,10 @@ class UiInspector extends UiWidget {
         this.toolbarBtns = {}
         DOM.each(this.toolbar, '.btn', (item)=>{
             var action = item.getAttribute('data-action')
-            item.setAttribute('title',  locales('inspector_' + action.replace('-', '_')))
-            this.toolbarBtns[action] = item
+            if (action) {
+                if (action !== 'selected-id') item.setAttribute('title',  locales('inspector_' + action.replace('-', '_')))
+                this.toolbarBtns[action] = item
+            }
         })
         zoom.on('local-zoom-changed',()=>{
             this.toolbarBtns['zoom-out'].classList.toggle('active', zoom.localZoom < 1)
@@ -163,6 +165,7 @@ class UiInspector extends UiWidget {
         this.clearTimeout = setTimeout(()=>{
             this.widget = null
             this.content.innerHTML = ''
+            this.toolbarBtns['selected-id'].firstChild.innerHTML = ''
             this.mounted = false
             this.clearTimeout = null
             this.colorPicker.close()
@@ -258,6 +261,8 @@ class UiInspector extends UiWidget {
         this.lock = true
 
         morph(this.content, content)
+
+        this.toolbarBtns['selected-id'].firstChild.innerHTML = widgets.map(x=>x.getProp('id')).join(', ')
 
         if (codeEditorFields.length) {
             let fields = DOM.get(this.container, '.has-editor')

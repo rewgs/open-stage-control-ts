@@ -9,7 +9,7 @@
 - editor
     - when focusing the label property with `F2`, select all text in the text area
     - preserve scroll position in code editor when validating
-
+    - display the id of selected widget in the inspector's header
 
 - scripting
     - expose file browser (from the file widget) as a scripting function
