@@ -5,6 +5,7 @@
 - bug fixes
     - linkId not working between two encoder widgets
     - fader: `gradient` breakpoints not positioned correctly
+    - canvas: `onDraw()` called twice when calling `updateCanvas()`
 
 - widgets
     - keyboard: incoming values different than the `off` property are now interpreted as `on`

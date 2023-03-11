@@ -172,8 +172,6 @@ class CanvasWidget extends Canvas {
             cssVars: this.cssVars
         }, {sync: false, send: false})
 
-        this.batchDraw()
-
     }
 
     extraResizeHandle(event) {

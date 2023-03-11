@@ -234,7 +234,7 @@ class ScriptVm extends Vm {
             var widgets = this.resolveId(id)
             for (var i = widgets.length - 1; i >= 0; i--) {
 
-                if (widgets[i].batchDraw) widgets[i].draw()
+                if (widgets[i].batchDraw) widgets[i].batchDraw()
 
             }
 
