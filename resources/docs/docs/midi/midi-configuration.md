@@ -77,6 +77,11 @@ Enable parsing of system exclusive messages (disabled by default).
 
 Enable parsing of midi time code messages (disabled by default).
 
+**`rpn`**
+
+Enable sending and receiving [RPN/NRPN](https://en.wikipedia.org/wiki/NRPN) controls on as single `/rpn` / `/nrpn` messages instead of 3 or 4 control changes that constitute them.
+
+
 **`active_sensing`**
 
 Enable parsing of midi active sensing messages (disabled by default). Active sensing messages will be received as sysex.

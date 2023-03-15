@@ -1,11 +1,14 @@
 # Changelog
 
-## 1.22.1
+## 1.23.0
 
 - bug fixes
     - linkId not working between two encoder widgets
     - fader: `gradient` breakpoints not positioned correctly
     - canvas: `onDraw()` called twice when calling `updateCanvas()`
+
+- midi
+    - optional rpn/nrpn parsing as single messages
 
 - widgets
     - keyboard: incoming values different than the `off` property are now interpreted as `on`

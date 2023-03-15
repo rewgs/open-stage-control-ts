@@ -107,3 +107,24 @@ Polyphonic key pressure event.
 - `pressure`: integer between 0 and 127
 
 ----
+
+
+#### `/rpn channel rpn value`
+
+Registered Parameter Number event.
+
+- `channel`: integer between 1 and 16
+- `rpn`: integer between 0 and 16383
+- `value`: integer between 0 and 16383
+
+----
+
+#### `/nrpn channel nrpn value`
+
+Non-Registered Parameter Number event.
+
+- `channel`: integer between 1 and 16
+- `nrpn`: integer between 0 and 16383
+- `value`: integer between 0 and 16383
+
+----
