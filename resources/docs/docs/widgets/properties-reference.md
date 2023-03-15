@@ -14,7 +14,7 @@
     | --- | --- | --- | --- |
         | <h6 id="lock">lock<a class="headerlink" href="#lock" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to prevent modifying this widget with the editor. This will not prevent deleting the widget or moving it from a container to another. |
         | <h6 id="type">type<a class="headerlink" href="#type" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widget type |
-        | <h6 id="id">id<a class="headerlink" href="#id" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widgets sharing the same `id` will act as clones and update each other's value(s) without sending extra osc messages. |
+        | <h6 id="id">id<a class="headerlink" href="#id" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Widgets sharing the same `id` will act as clones and update each other's value(s) without sending extra osc messages (avoid doing so unless the widgets expect the exact same values). |
         | <h6 id="visible">visible<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visible" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to hide the widget. |
         | <h6 id="interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#interaction" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable pointer interactions. |
         | <h6 id="comments">comments<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#comments" title="Permanent link">#</a></h6> | `string` | <code>""</code> | User comments. |
@@ -396,7 +396,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="keyboard_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#keyboard_value" title="Permanent link">#</a></h6> | `array` | <code>""</code> | The keyboard widget accepts the following values:<br/>- a `[note, value]` array to set the value of a single key where `note` is the note number and `value` is equal to the `on` or `off` property.<br/>- an array of values with one item per key in the keyboard |
+            | <h6 id="keyboard_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#keyboard_value" title="Permanent link">#</a></h6> | `array` | <code>""</code> | The keyboard widget accepts the following values:<br/>- a `[note, value]` array to set the value of a single key where `note` is the note number and `value` depends on the `on` and `off` properties (any value different from `off` will be interpreted as `on`).<br/>- an array of values with one item per key in the keyboard |
 
 ??? api "<div id="patchbay">patchbay<a class="headerlink" href="#patchbay" title="Permanent link">#</a></div>"
     Connect inputs to outputs.
