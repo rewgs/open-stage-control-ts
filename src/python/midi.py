@@ -4,7 +4,7 @@ from utils import *
 from mtc import *
 from rpn import *
 
-ipc_send('version', '1.17.1')
+ipc_send('version', '1.23.0')
 
 argv = argv[argv.index('--params') + 1:]
 
