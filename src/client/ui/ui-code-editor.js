@@ -202,7 +202,7 @@ class CodeEditor {
     }
 
     fullscreen() {
- 
+
         this.editor.fullscreen = this.field.classList.toggle('fullscreen')
         this.editor.setOptions({maxLines: this.editor.fullscreen ? 0 : 30})
         this.field.style.setProperty('--prefix', this.editor.fullscreen ? '"' + this.widget.getProp('id') + '."' : '')
