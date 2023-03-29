@@ -82,7 +82,8 @@
   },
   "optionalDependencies": {
     "electron": "15.1.0",
-    "electron-installer-debian": "3.1.0"
+    "electron-installer-debian": "3.1.0",
+    "electron-installer-redhat": "3.4.0"
   },
   "scripts": {
     "postinstall": "echo '\\033[36m=> Dependencies installed successfully. Run \"npm run build\" to build the assets.\\033[0m\n'",
@@ -91,6 +92,7 @@
     "package": "node scripts/package.js",
     "package-node": "node scripts/package-node.js",
     "deb64": "electron-installer-debian --src dist/open-stage-control-linux-x64/ --arch amd64 --dest dist/open-stage-control-linux-x64/ --icon resources/images/logo.png",
+    "rpm64": "electron-installer-redhat --src dist/open-stage-control-linux-x64/ --arch x86_64 --dest dist/open-stage-control-linux-x64/ --icon resources/images/logo.png",
     "build-css": "node scripts/build-css.js",
     "build-js": "npm run build-launcher-js && npm run build-client-js && npm run build-server-js",
     "build-client-js": "node scripts/build-client.js",

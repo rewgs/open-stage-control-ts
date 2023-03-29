@@ -6,7 +6,7 @@ node_js:
 before_install:
   - sudo dpkg --add-architecture i386
   - sudo apt-get update -qq
-  - sudo apt-get install -qq wine fakeroot xvfb python3.10 python3-pip python3-setuptools
+  - sudo apt-get install -qq wine fakeroot xvfb python3.10 python3-pip python3-setuptools rpm
   - python3 -m pip install mkdocs
   - python3 -m pip install mkdocs-material
 install: npm install
@@ -33,11 +33,13 @@ before_deploy:
   - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-osx && chmod +x osc-midi-osx && echo "true" > osc-midi.json
   - cd $TRAVIS_BUILD_DIR
   - npm run deb64
+  - npm run rpm64
   - cd dist
   - mkdir packages
   - mv open-stage-control-node   open-stage-control_${VERSION}_node
   - mv open-stage-control-win32-x64    open-stage-control_${VERSION}_win32-x64
-  - mv open-stage-control-linux-x64/*.deb packages/open-stage-control_${VERSION}_amd64.deb
+  - mv open-stage-control-linux-x64/*.deb packages/
+  - mv open-stage-control-linux-x64/*.rpm packages/
   - mv open-stage-control-linux-x64    open-stage-control_${VERSION}_linux-x64
   - zip -q -r --symlinks packages/open-stage-control_${VERSION}_osx.zip open-stage-control-darwin-x64/open-stage-control.app
   - zip -q -r packages/open-stage-control_${VERSION}_node.zip     open-stage-control_${VERSION}_node
