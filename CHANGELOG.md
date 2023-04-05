@@ -5,6 +5,9 @@
 - bug fixes
     - widgets: circular value feedback issues
 
+- misc
+    - add linux rpm packages
+
 ## 1.23.0
 
 - bug fixes
