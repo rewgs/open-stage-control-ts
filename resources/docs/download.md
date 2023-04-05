@@ -21,11 +21,12 @@ function text(id,  str) {
 }
 
 var names = {
-    'amd64': 'GNU/Linux Debian (64-bit)',
-    'linux-x64': 'GNU/Linux (64-bit)',
-    'node': 'Node.js',
-    'osx': 'MacOS',
-    'win32-x64': 'Windows (64-bit)'
+    'x86_64.rpm': 'GNU/Linux RPM (64-bit)',
+    'amd64.deb': 'GNU/Linux Debian (64-bit)',
+    'linux-x64.zip': 'GNU/Linux (64-bit)',
+    'node.zip': 'Node.js',
+    'osx.zip': 'MacOS',
+    'win32-x64.zip': 'Windows (64-bit)'
 }
 
 function reqListener () {
@@ -41,10 +42,11 @@ function reqListener () {
             link = document.createElement('a'),
             name = data.assets[i].name
 
-        try {
-            name = names[name.match(/[0-9]+\.[0-9]+\.[0-9]+\-([^\.]+)/)[1]]
-        } catch(e) {
-            console.log(e)
+        for (var k in names) {
+            if (name.includes(k)) {
+                name = names[k]
+                break
+            }
         }
 
         link.innerHTML = '<i class="fa fa-download"></i> ' + name + ' <span class="download-size">(' +  (data.assets[i].size / 1024 / 1024).toFixed(0) + 'M)</span>'
