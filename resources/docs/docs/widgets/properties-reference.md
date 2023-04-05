@@ -239,7 +239,7 @@
             | <h6 id="panel_contain">contain<a class="headerlink" href="#panel_contain" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel. |
             | <h6 id="panel_scroll">scroll<a class="headerlink" href="#panel_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
             | <h6 id="panel_innerPadding">innerPadding<a class="headerlink" href="#panel_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
-            | <h6 id="panel_verticalTabs">verticalTabs<a class="headerlink" href="#panel_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
+            | <h6 id="panel_tabsPosition">tabsPosition<a class="headerlink" href="#panel_tabsPosition" title="Permanent link">#</a></h6> | `string` | <code>"top"</code> | Defines the position of the navigation bar if the panel contains tabs<br/><br/>Choices: `top`, `bottom`, `left`, `right` |
 
     === "panel"
 
@@ -286,6 +286,7 @@
             | <h6 id="modal_contain">contain<a class="headerlink" href="#modal_contain" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel. |
             | <h6 id="modal_scroll">scroll<a class="headerlink" href="#modal_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
             | <h6 id="modal_innerPadding">innerPadding<a class="headerlink" href="#modal_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
+            | <h6 id="modal_tabsPosition">tabsPosition<a class="headerlink" href="#modal_tabsPosition" title="Permanent link">#</a></h6> | `string` | <code>"top"</code> | Defines the position of the navigation bar if the panel contains tabs<br/><br/>Choices: `top`, `bottom`, `left`, `right` |
             | <h6 id="modal_label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/>- Insert icons using the prefix ^ followed by the icon's name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)<br/>- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal` |
             | <h6 id="modal_popupLabel">popupLabel<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_popupLabel" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Alternative label for the modal popup |
             | <h6 id="modal_popupPadding">popupPadding<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_popupPadding" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Modal's inner spacing. |
@@ -346,6 +347,7 @@
             | <h6 id="matrix_contain">contain<a class="headerlink" href="#matrix_contain" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel. |
             | <h6 id="matrix_scroll">scroll<a class="headerlink" href="#matrix_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
             | <h6 id="matrix_innerPadding">innerPadding<a class="headerlink" href="#matrix_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
+            | <h6 id="matrix_tabsPosition">tabsPosition<a class="headerlink" href="#matrix_tabsPosition" title="Permanent link">#</a></h6> | `string` | <code>"top"</code> | Defines the position of the navigation bar if the panel contains tabs<br/><br/>Choices: `top`, `bottom`, `left`, `right` |
 
     === "matrix"
 
@@ -413,7 +415,7 @@
         | --- | --- | --- | --- |
             | <h6 id="patchbay_inputs">inputs<a class="headerlink" href="#patchbay_inputs" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;"input_1",<br/>&nbsp;"input_2"<br/>]</code> | - `Array` of input names : `['input_1', 'input_2']`<br/>- `Object` of `"label_1": "input_1"` pairs (example: `{"label a": "value 1", "label b": "value 2"}`). Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won't be kept<br/><br/><br/><br/>Patchbay inputs can be connected to one or more outputs and will send messages of the following form when they are connected/disconnected: <br/><br/>`/patchbay_address input_x output_x output_y etc`<br/><br/>If no output is connected to the input, the message will be `/patchbay_address input_x`<br/><br/>The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1` |
             | <h6 id="patchbay_outputs">outputs<a class="headerlink" href="#patchbay_outputs" title="Permanent link">#</a></h6> | `array`&vert;<br/>`object` | <code>[<br/>&nbsp;"output_1",<br/>&nbsp;"output_2"<br/>]</code> | List of output values the inputs can connect to (see `inputs`). |
-            | <h6 id="patchbay_exclusive">exclusive<a class="headerlink" href="#patchbay_exclusive" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | If set to `true`, each input will be allowed to have only one connection at a time. |
+            | <h6 id="patchbay_exclusive">exclusive<a class="headerlink" href="#patchbay_exclusive" title="Permanent link">#</a></h6> | `string` | <code>false</code> | - `in`: allows only one connection per input<br/>- `out`: allows only one connection per output<br/>- `both`: allows only one connection per input and output<br/><br/>Choices: `false`, `in`, `out`, `both` |
 
     === "scripting"
 
@@ -451,7 +453,7 @@
             | <h6 id="root_contain">contain<a class="headerlink" href="#root_contain" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel. |
             | <h6 id="root_scroll">scroll<a class="headerlink" href="#root_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
             | <h6 id="root_innerPadding">innerPadding<a class="headerlink" href="#root_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
-            | <h6 id="root_verticalTabs">verticalTabs<a class="headerlink" href="#root_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
+            | <h6 id="root_tabsPosition">tabsPosition<a class="headerlink" href="#root_tabsPosition" title="Permanent link">#</a></h6> | `string` | <code>"top"</code> | Defines the position of the navigation bar if the panel contains tabs<br/><br/>Choices: `top`, `bottom`, `left`, `right` |
             | <h6 id="root_hideMenu">hideMenu<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_hideMenu" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to hide the main menu button. |
 
     === "root"
@@ -488,7 +490,7 @@
             | <h6 id="tab_contain">contain<a class="headerlink" href="#tab_contain" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel. |
             | <h6 id="tab_scroll">scroll<a class="headerlink" href="#tab_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
             | <h6 id="tab_innerPadding">innerPadding<a class="headerlink" href="#tab_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
-            | <h6 id="tab_verticalTabs">verticalTabs<a class="headerlink" href="#tab_verticalTabs" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display for vertical tab layout |
+            | <h6 id="tab_tabsPosition">tabsPosition<a class="headerlink" href="#tab_tabsPosition" title="Permanent link">#</a></h6> | `string` | <code>"top"</code> | Defines the position of the navigation bar if the panel contains tabs<br/><br/>Choices: `top`, `bottom`, `left`, `right` |
             | <h6 id="tab_label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/>- Insert icons using the prefix ^ followed by the icon's name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)<br/>- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal` |
 
     === "tab"
