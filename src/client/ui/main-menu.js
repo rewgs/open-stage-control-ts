@@ -228,8 +228,8 @@ if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
         action:()=>{
             noSleepState = !noSleepState
             if (noSleepState) {
-                if ("wakeLock" in navigator) {
-                    navigator.wakeLock.request("screen").then((l)=>{
+                if ('wakeLock' in navigator) {
+                    navigator.wakeLock.request('screen').then((l)=>{
                         wakeLock = l
                     }).catch((err)=>{
                         console.error(`Could not acquire wake lock:\n${err.name}, ${err.message}`)
@@ -239,9 +239,9 @@ if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
                 }
                 if (wakeLock === null) noSleep.enable()
             } else {
-                if ("wakeLock" in navigator && wakeLock !== null) {
+                if ('wakeLock' in navigator && wakeLock !== null) {
                     wakeLock.release().then(()=>{
-                      wakeLock = null
+                        wakeLock = null
                     })
                 } else {
                     noSleep.disable()
