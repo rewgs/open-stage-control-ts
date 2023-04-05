@@ -33,7 +33,7 @@ class Panel extends Container() {
                 contain: {type: 'boolean', value: true, help:'If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel.'},
                 scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
                 innerPadding: {type : 'boolean', value: true, help: 'Set to `false` to make the `padding` property apply only between children and not at the container\'s inner boundaries.'},
-                verticalTabs: {type: 'boolean', value: false, help: 'Set to `true` to display for vertical tab layout'},
+                tabsPosition: {type: 'string', value: 'top', choices: ['top', 'bottom', 'left', 'right'], help: 'Defines the position of the navigation bar if the panel contains tabs'},
             },
             value: {
                 value: {type: 'integer|array', value: '', help: [
@@ -80,7 +80,7 @@ class Panel extends Container() {
         if (this.getProp('tabs') && this.getProp('tabs').length) {
 
             this.container.classList.add('contains-tabs')
-            this.container.classList.toggle('vertical-tabs', this.getProp('verticalTabs'))
+            this.container.classList.add('tabs-' + this.getProp('tabsPosition'))
 
         } else {
 
@@ -175,7 +175,7 @@ class Panel extends Container() {
 
             this.value = -1
 
-            this.navigation = this.widget.appendChild(html`<div class="navigation ${this.getProp('verticalTabs') ? 'vertical' : ''}"></div>`)
+            this.navigation = this.widget.appendChild(html`<div class="navigation ${'tabs-' + this.getProp('tabsPosition')}"></div>`)
 
             this.children = options.children || new Array(this.getProp('tabs').length)
             for (let i = 0; i < this.children.length; i++) {

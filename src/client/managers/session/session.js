@@ -318,6 +318,10 @@ var converters = [
             if (data.type === 'patchbay' && data.exclusive === true) {
                 data.exclusive = 'in'
             }
+            else if ((data.type === 'panel' || data.type === 'root') && data.verticalTabs === true) {
+                data.tabsPosition = 'left'
+                delete data.verticalTabs
+            }
         }
     }
 ]
