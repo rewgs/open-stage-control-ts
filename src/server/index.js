@@ -86,17 +86,27 @@ function openClient() {
 
 function showQRCode(){
 
-    var QRCode = require('qrcode')
+    var QRCode = require('qrcode'),
+        addresses = settings.appAddresses().filter(a=>!a.includes('127.0.0.1') && !a.includes('localhost'))
 
-    if (launcher) {
-        QRCode.toString(settings.appAddresses().pop(),{type:'svg', small: true, margin: 1}, (err, qr)=>{
-            launcher.webContents.send('stdout', '<div class="qrcode">' + qr + '</div>')
-        })
-    } else {
-        QRCode.toString(settings.appAddresses().pop(),{type:'terminal', small: true}, (err, qr)=>{
-            console.log('\n' + qr.replace(/^/gm, '    '))
-        })
+    for (var add of addresses) {
+        if (launcher) {
+            QRCode.toString(add,{type:'svg', small: true, margin: 1}, (err, qr)=>{
+                launcher.webContents.send('stdout', '<div class="qrcode">' + qr + '</div>')
+            })
+            if (addresses.length > 1) {
+                launcher.webContents.send('stdout', '(' + add + ')')
+            }
+        } else {
+            QRCode.toString(add,{type:'terminal', small: true}, (err, qr)=>{
+                console.log('\n' + qr.replace(/^/gm, '    '))
+            })
+            if (addresses.length > 1) {
+                console.log('    (' + add + ')')
+            }
+        }
     }
+
 }
 
 function startServerProcess() {

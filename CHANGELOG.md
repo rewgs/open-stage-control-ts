@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.23.1
+## 1.24.0
 
 - bug fixes
     - widgets: circular value feedback issues
@@ -13,6 +13,9 @@
 
 - custom module
     - add optional `errorCallback` argument to`loadJSON` and `saveJSON`
+
+- server
+    - print multiple qrcodes if multiple network interfaces are available and prevent printing a qrcode for the localhost address
 
 - misc
     - add linux rpm packages
