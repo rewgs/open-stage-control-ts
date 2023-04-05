@@ -219,15 +219,34 @@ if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
 
     var NoSleep = require('nosleep.js'),
         noSleep = new NoSleep(),
-        noSleepState = false
+        noSleepState = false,
+        wakeLock = null
 
     menuEntries.push({
         label: locales('nosleep'),
         class: ()=>{return 'toggle ' + (noSleepState ? 'on' : 'off')},
         action:()=>{
             noSleepState = !noSleepState
-            if (noSleepState) noSleep.disable()
-            else noSleep.enable()
+            if (noSleepState) {
+                if ("wakeLock" in navigator) {
+                    navigator.wakeLock.request("screen").then((l)=>{
+                        wakeLock = l
+                    }).catch((err)=>{
+                        console.error(`Could not acquire wake lock:\n${err.name}, ${err.message}`)
+                        console.info(`Falling back name}, ${err.message}`)
+                        wakeLock = null
+                    })
+                }
+                if (wakeLock === null) noSleep.enable()
+            } else {
+                if ("wakeLock" in navigator && wakeLock !== null) {
+                    wakeLock.release().then(()=>{
+                      wakeLock = null
+                    })
+                } else {
+                    noSleep.disable()
+                }
+            }
         }
     })
 

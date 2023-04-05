@@ -5,6 +5,7 @@
 - bug fixes
     - widgets: circular value feedback issues
     - editor: `ctrl + e` not working when hitm multiple times without releasing `ctrl`
+    - mobile: "prevent sleep" feature not working 
 
 - widgets
     - patchbay: add `in`, `out` and `both` modes to `exclusive` property
