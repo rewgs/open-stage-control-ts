@@ -6,6 +6,9 @@
     - widgets: circular value feedback issues
     - editor: `ctrl + e` not working when hitm multiple times without releasing `ctrl`
 
+- custom module
+    - add optional `errorCallback` argument to`loadJSON` and `saveJSON`
+
 - misc
     - add linux rpm packages
 

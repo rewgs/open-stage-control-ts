@@ -96,15 +96,23 @@ Returns the server's http addresses.
 
 ----
 
-#### `loadJSON(path)`
+#### `loadJSON(path, errorCallback)`
 
 Loads a json file (path is relative to the custom module location)
 
+- `path`: `string`, path to file (any extension allowed, but the content must be valid JSON)
+- `errorCallback` (optional): `function`, called with the error as argument if the file can't be loaded
+
+
 ----
 
-#### `saveJSON(path, object)`
+#### `saveJSON(path, data, errorCallback)`
 
 Saves an object/array to a json file (path is relative to the custom module location)
+
+- `path`: `string`, path to file (any extension allowed)
+- `data`: `object`, `array` or any value that can be encoded to JSON
+- `errorCallback` (optional): `function`, called with the error as argument if the file can't be loaded
 
 ----
 

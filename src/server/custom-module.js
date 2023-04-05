@@ -33,24 +33,32 @@ class CustomModule {
             require: this.require.bind(this),
         } : {
             ...context,
-            loadJSON: (url)=>{
+            loadJSON: (url, errorCallback)=>{
                 try {
                     url = path.resolve(path.dirname(this.filename), url)
                     var content = fs.readFileSync(url, 'utf8')
                     if (content[0] === '\ufeff') content = content.slice(1) // remove BOM
                     return JSON.parse(content)
                 } catch(e) {
-                    console.error('(ERROR) could not load json file from ' + url)
-                    console.error(e.message)
+                    if (typeof(errorCallback) === 'function') {
+                        errorCallback(e)
+                    } else {
+                        console.error('(ERROR) could not load json file from ' + url)
+                        console.error(e.message)
+                    }
                 }
             },
-            saveJSON: (url, data)=>{
+            saveJSON: (url, data, errorCallback)=>{
                 url = path.resolve(path.dirname(this.filename), url)
                 try {
                     return fs.writeFileSync(url, JSON.stringify(data, null, '  '))
                 } catch(e) {
-                    console.error('(ERROR) could not save json file to ' + url)
-                    console.error(e.message)
+                    if (typeof(errorCallback) === 'function') {
+                        errorCallback(e)
+                    } else {
+                        console.error('(ERROR) could not save json file to ' + url)
+                        console.error(e.message)
+                    }
                 }
             },
             console: console,
