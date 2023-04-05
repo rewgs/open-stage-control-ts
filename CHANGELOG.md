@@ -4,6 +4,7 @@
 
 - bug fixes
     - widgets: circular value feedback issues
+    - editor: `ctrl + e` not working when hitm multiple times without releasing `ctrl`
 
 - misc
     - add linux rpm packages
