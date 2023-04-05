@@ -311,6 +311,14 @@ var converters = [
             }
 
         }
+    },
+    {
+        version: '1.23.0',
+        widget: (data)=>{
+            if (data.type === 'patchbay' && data.exclusive === true) {
+                data.exclusive = 'in'
+            }
+        }
     }
 ]
 

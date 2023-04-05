@@ -6,6 +6,9 @@
     - widgets: circular value feedback issues
     - editor: `ctrl + e` not working when hitm multiple times without releasing `ctrl`
 
+- widgets
+    - patchbay: add `in`, `out` and `both` modes to `exclusive` property
+
 - custom module
     - add optional `errorCallback` argument to`loadJSON` and `saveJSON`
 

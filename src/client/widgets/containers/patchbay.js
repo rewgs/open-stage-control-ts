@@ -39,9 +39,27 @@ class PatchBayNode extends Widget {
             }
         }
 
-        if (this.parent.getProp('exclusive') && this.value.length > 1) {
+        if (
+            (this.parent.getProp('exclusive') === true
+             || this.parent.getProp('exclusive') === 'in'
+             || this.parent.getProp('exclusive') === 'both')
+            && this.value.length > 1
+        ) {
             this.value = [this.value.pop()]
         }
+
+        if (
+            (this.parent.getProp('exclusive') === 'out' || this.parent.getProp('exclusive') === 'both')
+            && this.value.length > 0
+        ) {
+            for (var input of this.parent.inputsWidgets) {
+                if (input !== this && input.value.some(x=>this.value.includes(x))) {
+                    input.setValue(input.value.filter(x=>!this.value.includes(x)), options)
+                }
+            }
+        }
+
+
 
         this.parent.batchDraw()
 
@@ -89,7 +107,11 @@ class PatchBay extends Container(Canvas) {
                     'The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1`'
                 ]},
                 outputs: {type: 'array|object', value: ['output_1', 'output_2'], help: 'List of output values the inputs can connect to (see `inputs`).'},
-                exclusive: {type: 'boolean', value: false, help: 'If set to `true`, each input will be allowed to have only one connection at a time.'},
+                exclusive: {type: 'string', value: false, choices: [false, 'in', 'out', 'both'], help: [
+                    '- `in`: allows only one connection per input',
+                    '- `out`: allows only one connection per output',
+                    '- `both`: allows only one connection per input and output'
+                ]}
             }
         })
 
