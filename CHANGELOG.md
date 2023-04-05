@@ -4,7 +4,7 @@
 
 - bug fixes
     - widgets: circular value feedback issues
-    - editor: `ctrl + e` not working when hitm multiple times without releasing `ctrl`
+    - editor: `ctrl + e` not working when hit multiple times without releasing `ctrl`
     - mobile: "prevent sleep" feature not working
 
 - widgets
