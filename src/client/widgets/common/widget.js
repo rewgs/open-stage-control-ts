@@ -198,6 +198,9 @@ class Widget extends EventEmitter {
         this.mounted = false
         this.visible = true
 
+        this.isValueChanging = false
+        this.valueChangingTimeout = null
+
         this.parsers = {}
         this.parsersLocalScope = options.locals || {}
         this.timeouts = {}
@@ -343,12 +346,18 @@ class Widget extends EventEmitter {
 
     changed(options) {
 
+        // emitting value-changed might trigger feedback from multiple widgets
+        // in which case we'll want to hold on until we're done syncing
+        // and dedupe feedback actions caused by advanced syntaxes
+        // see this.linkedValueChangedCallback in createLinkedPropsBindings()
+        this.isValueChanging = true
         this.trigger('value-changed', {
             widget: this,
             options: options,
             id: this.getProp('id'),
             linkId: this.getProp('linkId')
         })
+        this.isValueChanging = false
 
     }
 
@@ -480,7 +489,14 @@ class Widget extends EventEmitter {
         if (!this.linkedValueChangedCallback && Object.keys(this.linkedPropsValue).length) {
 
             this.linkedValueChangedCallback = (e)=>{
-                this.onLinkedPropsChanged(e, 'value-changed')
+                if (this.isValueChanging) {
+                    clearTimeout(this.valueChangingTimeout)
+                    this.valueChangingTimeout = setTimeout(()=>{
+                        if (!this.removed) this.onLinkedPropsChanged(e, 'value-changed')
+                    })
+                } else {
+                    this.onLinkedPropsChanged(e, 'value-changed')
+                }
             }
 
             widgetManager.on('value-changed', this.linkedValueChangedCallback, {context: this})

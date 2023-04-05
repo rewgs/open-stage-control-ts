@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.23.1
+
+- bug fixes
+    - widgets: circular value feedback issues
+
 ## 1.23.0
 
 - bug fixes
