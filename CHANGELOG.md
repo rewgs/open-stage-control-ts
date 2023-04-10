@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.24.1
+
+- bug fixes
+    - launcher: `Ctrl+M` keyboard shortcut not working
+
 ## 1.24.0
 
 - bug fixes
