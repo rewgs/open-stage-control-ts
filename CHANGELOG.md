@@ -4,6 +4,7 @@
 
 - bug fixes
     - launcher: `Ctrl+M` keyboard shortcut not working
+    - widgets: regression incurring a small delay before resolving a property that depends on a widget's own value
 
 - advanced syntaxes
     - support `@{}` inside `IMPORT{}`

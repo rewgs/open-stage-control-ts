@@ -489,7 +489,7 @@ class Widget extends EventEmitter {
         if (!this.linkedValueChangedCallback && Object.keys(this.linkedPropsValue).length) {
 
             this.linkedValueChangedCallback = (e)=>{
-                if (this.isValueChanging) {
+                if (this.isValueChanging && e.widget !== this) {
                     clearTimeout(this.valueChangingTimeout)
                     this.valueChangingTimeout = setTimeout(()=>{
                         if (!this.removed) this.onLinkedPropsChanged(e, 'value-changed')
