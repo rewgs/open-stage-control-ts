@@ -775,6 +775,11 @@ class Widget extends EventEmitter {
             })
 
             propValue = balancedReplace('IMPORT', '{', '}', propValue, (file)=>{
+
+                file = file.replace(/VAR_[0-9]+/g, (m)=>{
+                    return typeof variables[m] === 'string' ? variables[m] : JSON.stringify(variables[m])
+                })
+
                 if (
                     // remove quotes
                     (file[0] === '"' && file[file.length - 1] === '"') ||

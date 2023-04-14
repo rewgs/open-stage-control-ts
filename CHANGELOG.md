@@ -5,6 +5,9 @@
 - bug fixes
     - launcher: `Ctrl+M` keyboard shortcut not working
 
+- advanced syntaxes
+    - support `@{}` inside `IMPORT{}`
+
 ## 1.24.0
 
 - bug fixes
