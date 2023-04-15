@@ -9,7 +9,7 @@ Client options can be set either with the server's `--client-options` option, or
 | zoom | number | 1 | sets the initial zoom |
 | framerate | number | 60 | limit canvas drawing framerate |
 | desyncCanvas | number | 0 | set to 1 to enable desynchronized canvas (may improve rendering performances) |
-| lang | string | *system_default* | use a different language than the default if available (available languages: en, fr) |
+| lang | string | *system_default* | use a different language than the default if available (available languages: en, fr, de, pl) |
 | consoleLength | number | 300 | sets the maximum number of log messages in the client's console |
 | id | string | *random_id* | client's unique id (use with caution: two clients should never have the same id) |
 | usePercents | 1 / 0 | 0 | sets the editor's "relative units" option  |
