@@ -5,6 +5,7 @@
 - bug fixes
     - launcher: `Ctrl+M` keyboard shortcut not working
     - widgets: regression incurring a small delay before resolving a property that depends on a widget's own value
+    - server: `--client-size` and `--client-position` options not parsed correctly
 
 - advanced syntaxes
     - support `@{}` inside `IMPORT{}`

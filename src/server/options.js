@@ -96,13 +96,13 @@ module.exports = {
     'docs': {type: 'boolean', describe: 'serve documentation website locally and open it with the system\'s default browser', launcher: false},
     'client-position': {type: 'string', describe: 'position of the client window ("x,y" pair of integers)', launcher: false,
         check: (s)=>{
-            return s.match(/^[0-9]+,[0-9]+$/) ?
+            return !s.match(/^[0-9]+,[0-9]+$/) ?
                 'Position must a x,y pair of integers' : true
         }
     },
     'client-size': {type: 'string', describe: 'size of the client window ("width,height" pair of integers)', launcher: false,
         check: (s)=>{
-            return s.match(/^[0-9]+,[0-9]+$/) ?
+            return !s.match(/^[0-9]+,[0-9]+$/) ?
                 'Size must a x,y pair of integers' : true
         }
     },
