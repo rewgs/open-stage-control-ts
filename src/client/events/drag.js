@@ -166,7 +166,7 @@ const domObserver = new MutationObserver(function(mutations) {
         var event = previousPointers[id],
             target = targets[id]
 
-        if (event.pointerType === 'mouse') continue
+        if (!event || event.pointerType === 'mouse') continue
 
         for (var mutation of mutations) {
             for (var node of mutation.removedNodes) {
