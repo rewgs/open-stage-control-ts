@@ -158,7 +158,33 @@ function mouseUpCapture(event){
 
 // Touch events wrappers
 
+// Touchend event is not emitted when target element is removed/detached
+// Watch for DOM mutations and simulate pointerUp if a registered
+// target is removed/detached
+const domObserver = new MutationObserver(function(mutations) {
+    for (var id in targets) {
+        var event = previousPointers[id],
+            target = targets[id]
+
+        if (event.pointerType === 'mouse') continue
+
+        for (var mutation of mutations) {
+            for (var node of mutation.removedNodes) {
+                if (node == target || node.contains(target)){
+                    pointerUpHandler(event)
+                }
+            }
+        }
+    }
+})
+domObserver.active = false
+
 function touchDownCapture(event) {
+
+    if (!domObserver.active) {
+        domObserver.observe(DOM.get('#osc-container')[0], {subtree: true, childList: true})
+        domObserver.active = true
+    }
 
     event.preventDefault()
     for (var i in event.changedTouches) {

@@ -4,6 +4,8 @@
 
 - bug fixes
     - editor: regression breaking widget context menu actions under "Position" submenu
+    - touch devices: touchend event not fired on elements removed/detached during touchstart/touchmove callbacks (caused issues when switching tabs using a button inside a tab)
+
 
 ## 1.24.1
 
