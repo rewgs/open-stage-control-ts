@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.24.2
+
+- bug fixes
+    - editor: regression breaking widget context menu actions under "Position" submenu
+
 ## 1.24.1
 
 - bug fixes

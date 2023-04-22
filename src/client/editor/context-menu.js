@@ -202,28 +202,28 @@ var handleClick = function(event) {
                 {
                     label: locales('editor_back'),
                     action: ()=>{
-                        editor.handleKeyboard('home')
+                        editor.handleKeydown('home')
                     },
                     shortcut: 'Home'
                 },
                 {
                     label: locales('editor_farther'),
                     action: ()=>{
-                        editor.handleKeyboard('pageup')
+                        editor.handleKeydown('pageup')
                     },
                     shortcut: 'Page Up'
                 },
                 {
                     label: locales('editor_closer'),
                     action: ()=>{
-                        editor.handleKeyboard('pagedown')
+                        editor.handleKeydown('pagedown')
                     },
                     shortcut: 'Page Down'
                 },
                 {
                     label: locales('editor_front'),
                     action: ()=>{
-                        editor.handleKeyboard('end')
+                        editor.handleKeydown('end')
                     },
                     shortcut: 'End'
                 }
