@@ -41,6 +41,9 @@ function pointerDownHandler(event) {
     targets[event.pointerId] = target
     previousPointers[event.pointerId] = event
 
+
+    if (event.pointerType !== 'mouse') domObserver.activate()
+
     triggerWidgetEvent(targets[event.pointerId], 'draginit', event)
 
 }
@@ -112,6 +115,12 @@ function pointerUpHandler(event) {
     delete targets[event.pointerId]
     delete previousPointers[event.pointerId]
 
+    if (domObserver.active) {
+        var i = 0
+        for (var k in targets) i++
+        if (i == 0) domObserver.deactivate()
+    }
+
 }
 
 
@@ -178,13 +187,20 @@ const domObserver = new MutationObserver(function(mutations) {
     }
 })
 domObserver.active = false
-
-function touchDownCapture(event) {
-
+domObserver.activate = ()=>{
     if (!domObserver.active) {
         domObserver.observe(DOM.get('#osc-container')[0], {subtree: true, childList: true})
         domObserver.active = true
     }
+}
+domObserver.deactivate = ()=>{
+    if (domObserver.active) {
+        domObserver.disconnect()
+        domObserver.active = false
+    }
+}
+
+function touchDownCapture(event) {
 
     event.preventDefault()
     for (var i in event.changedTouches) {
