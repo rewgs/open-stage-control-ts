@@ -66,10 +66,12 @@ window = {
     WebSocket: Object,
     localStorage: {
         getItem(){return null}
-    },    sessionStorage: {
+    },
+    sessionStorage: {
         getItem(){return null},
             setItem(){},
-        },
+    },
+    MutationObserver: class MutationObserver{}
 }
 
 Object.assign(global, window)
