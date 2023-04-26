@@ -116,9 +116,9 @@ function pointerUpHandler(event) {
     delete previousPointers[event.pointerId]
 
     if (domObserver.active) {
-        var i = 0
-        for (var k in targets) i++
-        if (i == 0) domObserver.deactivate()
+        var t
+        for (var k in targets) {t=targets[k]}
+        if (t === undefined) domObserver.deactivate()
     }
 
 }
