@@ -1,3 +1,5 @@
+var {normalizeDragEvent} = require('../../events/utils')
+
 module.exports = (self, callback, options={})=>{
 
     var lastTapTime = 0,
@@ -23,7 +25,7 @@ module.exports = (self, callback, options={})=>{
 
             // execute callback at next cycle to ensure draginit events are resolved first
             setTimeout(()=>{
-                callback(event.detail)
+                callback(normalizeDragEvent(event.detail))
             }, 0)
             lastTapTime = 0
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.24.3
+
+- bug fixes
+    - multixy: doubleTap not working on touch devices
+    - button: `x` and `y` variables not passed to `onValue` when `doubleTap` is true on touch devices  
+
 ## 1.24.2
 
 - bug fixes
