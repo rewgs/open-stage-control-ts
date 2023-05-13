@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.24.3
+## 1.25.0
 
 - bug fixes
     - multixy: doubleTap not working on touch devices
