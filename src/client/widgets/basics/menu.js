@@ -38,8 +38,14 @@ class Menu extends MenuBase {
                 gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns or a valid value for the css property "grid-template".'},
             },
             class_specific: {
-                toggle: {type: 'boolean', value: false, help: 'Set to `true` to make the menu stay opened after mouse/touch release'},
-                doubleTap: {type: 'boolean', value: false, help: 'Set to `true` to make the menu require a double tap to be opened instead of a single tap'},
+                mode: {type: 'string', value: 'default', choices: ['default', 'toggle', 'swipe', 'doubleTap', 'doubleTap-toggle'], help: [
+                    'Interaction modes:',
+                    '- `default`: opens on touch, closes and changes value on release',
+                    '- `toggle`: opens on click, closes and changes value on next click',
+                    '- `swipe`: opens on touch, changes value when the pointer moves above items, closes on release',
+                    '- `doubleTap`: same as `default` but opens on double tap',
+                    '- `doubleTap-toggle`: same as `toggle` but opens on double tap',
+                ]},
                 values: {type: 'array|object', value: [1, 2, 3], help: [
                     '`Array` of possible values to switch between : `[1,2,3]`',
                     '`Object` of label:value pairs. Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
@@ -80,9 +86,11 @@ class Menu extends MenuBase {
 
         this.selected = -1
 
+        this.mode = String(this.getProp('mode'))
+
         this.parseValues()
 
-        if (this.getProp('doubleTap')) {
+        if (this.mode.includes('doubleTap')) {
 
             doubleTap(this, (e)=>{
                 if (this.opened) return
@@ -91,7 +99,7 @@ class Menu extends MenuBase {
 
             this.on('draginit',(e)=>{
 
-                if (this.opened && this.getProp('toggle')) {
+                if (this.opened && this.mode.includes('toggle')) {
 
                     this.selectValue(e)
                     this.submitValue()
@@ -106,7 +114,7 @@ class Menu extends MenuBase {
 
             this.on('draginit',(e)=>{
 
-                if (this.opened && this.getProp('toggle')) {
+                if (this.opened && this.mode.includes('toggle')) {
 
                     this.selectValue(e)
                     this.submitValue()
@@ -122,18 +130,25 @@ class Menu extends MenuBase {
 
         }
 
-        if (!this.getProp('toggle')) {
+        if (!this.mode.includes('toggle')) {
 
             this.on('drag',(e)=>{
 
                 this.selectValue(e, true)
+                if (this.mode === 'swipe' && this.values[this.selected] !== this.value) {
+                    this.submitValue()
+                }
 
             }, {element: this.widget})
 
             this.on('dragend',()=>{
 
                 if (!this.opened) return
-                this.submitValue()
+                if (this.mode === 'swipe') {
+                    this.close()
+                } else {
+                    this.submitValue()
+                }
 
             }, {element: this.widget})
 
@@ -195,7 +210,7 @@ class Menu extends MenuBase {
 
     submitValue(e) {
 
-        this.close()
+        if (this.mode !== 'swipe') this.close()
         if (this.selected > -1) {
             this.setValue(this.values[this.selected], {send: true, sync: true})
         }

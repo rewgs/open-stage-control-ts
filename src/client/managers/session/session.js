@@ -323,6 +323,22 @@ var converters = [
                 delete data.verticalTabs
             }
         }
+    },
+    {
+        version: '1.24.2',
+        widget: (data)=>{
+            if (data.type === 'menu') {
+                if (data.toggle) {
+                    data.mode = data.doubleTap ? 'toggle' : 'doubleTap-toggle'
+                } else if (data.doubleTap) {
+                    data.mode = 'doubleTap'
+                } else {
+                    data.mode = 'default'
+                }
+                delete data.toggle
+                delete data.doubleTap
+            }
+        }
     }
 ]
 

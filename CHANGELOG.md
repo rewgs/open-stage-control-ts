@@ -10,6 +10,8 @@
 
 - widgets
     - menu: add a background to menu items to help distinguish them
+    - menu: merge different interaction modes into a single `mode` property
+    - menu: add `swipe` mode
 
 ## 1.24.2
 

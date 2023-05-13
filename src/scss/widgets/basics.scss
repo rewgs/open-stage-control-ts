@@ -375,7 +375,7 @@
             &.on div:before {
                 opacity: var(--alpha-fill-on)!important;
             }
-            &.active div:before, &:hover div:before {
+            &.active div:before {
                 opacity: var(--alpha-fill-hover);
             }
 
@@ -428,7 +428,7 @@
                 }
             }
 
-            &.active, &:hover {
+            &.active {
                 div:after, div:after {
                     opacity: var(--alpha-fill-hover);
                 }
