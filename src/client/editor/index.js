@@ -521,7 +521,12 @@ class Editor {
         leftUiSidePanel.enable()
         rightUiSidePanel.enable()
 
+
+        // keyboardJS hack: prevent releaseAllKeys when switching context
+        var locale = keyboardJS._locale
+        keyboardJS._locale = null
         keyboardJS.setContext('editing')
+        keyboardJS._locale = locale
 
         this.oscContainer.addEventListener('mousemove', this.mouveMoveHandler)
         this.oscContainer.addEventListener('mouseleave', this.mouveLeaveHandler)
@@ -538,7 +543,11 @@ class Editor {
         document.body.classList.add('editor-disabled')
         document.body.classList.remove('editor-enabled')
 
+        // keyboardJS hack: prevent releaseAllKeys when switching context
+        var locale = keyboardJS._locale
+        keyboardJS._locale = null
         keyboardJS.setContext('global')
+        keyboardJS._locale = locale
 
         this.oscContainer.removeEventListener('mousemove', this.mouveMoveHandler)
         this.oscContainer.removeEventListener('mouseleave', this.mouveLeaveHandler)

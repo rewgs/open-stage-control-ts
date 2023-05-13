@@ -6,10 +6,6 @@ var html = require('nanohtml'),
     MENU_CONTAINER
 
 
-// monkey patch keyboardJS to prevent loosing track of pressed keys while
-// switching contexts. Works as long as we don't call reset() or pause()
-keyboardJS.releaseAllKeys = ()=>{}
-
 class ContextMenu extends UiWidget {
 
     constructor(options={}){
