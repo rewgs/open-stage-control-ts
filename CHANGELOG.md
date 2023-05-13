@@ -14,7 +14,7 @@
     - menu: add `swipe` mode
 
 - remote control
-    - `/STATE/SET` add optional argument to prevent widgets from sending their value
+    - `/STATE/SET`: add optional argument to prevent widgets from sending their value
 
 ## 1.24.2
 
