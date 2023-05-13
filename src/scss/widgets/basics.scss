@@ -363,13 +363,13 @@
                     top: calc(-1 * var(--size) / 8);
                     border-radius: 100%;
                     pointer-events: none;
-                    box-shadow: 0 0 0 4rem var(--color-fill);
-                    opacity: 0;
+                    box-shadow: 0 0 0 calc(var(--size) / 2.7 - 2rem) var(--color-fill);
+                    opacity: 0.075;
                 }
             }
 
             &.on {
-                color: var(--color-fill);
+                color: var(--color-background);
             }
 
             &.on div:before {
@@ -415,7 +415,7 @@
                 height: 100%;
                 flex: 1;
                 &:after {
-                    opacity: 0;
+                    opacity: 0.075;
                     margin: 0;
                     top:0;left:0;right:0;bottom:0;
                 }

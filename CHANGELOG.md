@@ -8,6 +8,9 @@
     - advanced syntax: update issue with clones using their own value in their properties
     - client: minor keyboard shortcut issues
 
+- widgets
+    - menu: add a background to menu items to help distinguish them
+
 ## 1.24.2
 
 - bug fixes
