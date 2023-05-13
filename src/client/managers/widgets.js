@@ -45,12 +45,17 @@ class WidgetManager extends EventEmitter {
             widgetsByLinkId = linkId ? this.getWidgetByLinkId(linkId) : []
 
         // Widget that share the same id will update each other
-        // without sending any extra osc message
+        // without sending any extra osc message or running scripts
         if (widgetsById.length > 1) {
             let v = widget.getValue()
             for (let i in widgetsById) {
                 if (widgetsById[i] !== widget) {
                     widgetsById[i].setValue(v,{send:false,sync:false, id})
+                    // Because of sync:false, updated widgets that use @{this}
+                    // in their properties wont update them, we trigger it manually
+                    if (widgetsById[i].linkedPropsValue['this']) {
+                        widgetsById[i].onLinkedPropsChanged({id, widget: widgetsById[i], options: {send: false, sync: false, id}}, 'value-changed')
+                    }
                 }
             }
         }

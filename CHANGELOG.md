@@ -5,6 +5,8 @@
 - bug fixes
     - multixy: doubleTap not working on touch devices
     - button: `x` and `y` variables not passed to `onValue` when `doubleTap` is true on touch devices  
+    - advanced syntax: update issue with clones using their own value in their properties
+
 
 ## 1.24.2
 
