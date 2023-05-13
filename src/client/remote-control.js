@@ -206,12 +206,13 @@ var callbacks = {
     },
     '/STATE/SET': function(args) {
 
-        if (Array.isArray(args)) args = args[0]
+        if (!Array.isArray(args)) args = [args]
 
-        var json = args,
-            data = typeof json == 'string' ? JSON.parseFlex(json) : json
+        var json = args[0],
+            data = typeof json == 'string' ? JSON.parseFlex(json) : json,
+            send = !(args[1] === 0 || args[1] === false)
 
-        stateManager.set(data)
+        stateManager.set(data, send)
 
     },
     '/STATE/STORE': function(args) {

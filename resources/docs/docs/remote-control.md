@@ -164,11 +164,12 @@ Sends back the app's state to specified target
 
 ----
 
-#### `/STATE/SET state`
+#### `/STATE/SET state send`
 
 Set widgets' state
 
 - `state`: `string`, json stringified object (`"widget_id": value` pairs)
+- `send` (optional): `boolean`, set to `false` to prevent widgets from sending their values when the state is applied 
 
 
 
