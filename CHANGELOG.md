@@ -7,6 +7,7 @@
     - button: `x` and `y` variables not passed to `onValue` when `doubleTap` is true on touch devices  
     - advanced syntax: update issue with clones using their own value in their properties
     - client: minor keyboard shortcut issues
+    - panel: mitigate client synchronization issue with scrollbars
 
 - widgets
     - menu: add a background to menu items to help distinguish them

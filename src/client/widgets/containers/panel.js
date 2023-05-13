@@ -108,11 +108,11 @@ class Panel extends Container() {
                     }
                     this.iosScrollbars.horizontal.on('value-changed', (e)=>{
                         e.stopPropagation = true
-                        this.widget.scrollLeft = parseInt(e.widget.getValue() * (this.widget.scrollWidth - this.widget.clientWidth))
+                        this.setScroll(parseInt(e.widget.getValue() * (this.widget.scrollWidth - this.widget.clientWidth)), undefined, true)
                     })
                     this.iosScrollbars.vertical.on('value-changed', (e)=>{
                         e.stopPropagation = true
-                        this.widget.scrollTop = parseInt(e.widget.getValue() * (this.widget.scrollHeight - this.widget.clientHeight))
+                        this.setScroll(undefined, parseInt(e.widget.getValue() * (this.widget.scrollWidth - this.widget.clientWidth)), true)
                     })
 
                     this.checkScrollBars = ()=>{
@@ -141,6 +141,8 @@ class Panel extends Container() {
                 this.scroll = [0, 0]
                 this.scrollWidth = 1
                 this.scrollHeight = 1
+                this.settingScroll = false
+                this.settingScrollEnd = null
                 fastdom.measure(()=>{
                     this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
@@ -156,7 +158,15 @@ class Panel extends Container() {
                         if (this.iosScrollbars.vertical._scrollable) this.iosScrollbars.vertical.setValue(y)
                     }
                     if (this.props.type !== 'modal') {
-                        this.setValue([x, y], {sync: true, send:true})
+                        if (this.settingScroll) {
+                            clearTimeout(this.settingScrollEnd)
+                            this.settingScrollEnd = setTimeout(()=>{
+                                this.settingScroll = false
+                            })
+                        } else {
+                            this.setValue([x, y], {sync: true, send:true, fromScroll:true})
+                        }
+
                     }
                 }, {element: this.widget})
 
@@ -296,7 +306,7 @@ class Panel extends Container() {
             this.value = v
             clearTimeout(this.scrollTimeout)
             this.scrollTimeout = setTimeout(()=>{
-                if (this.scroll) this.setScroll(v[0] * this.scrollWidth, v[1] * this.scrollHeight)
+                if (this.scroll) this.setScroll(v[0] * this.scrollWidth, v[1] * this.scrollHeight, !options.fromScroll)
             })
 
             if (options.send) this.sendValue()
@@ -310,10 +320,16 @@ class Panel extends Container() {
 
     }
 
-    setScroll(x, y) {
-
-        if (x !== undefined) this.widget.scrollLeft = this.scroll[0] = x
-        if (y !== undefined) this.widget.scrollTop = this.scroll[1] = y
+    setScroll(x, y, updateDom) {
+        this.settingScroll = true
+        if (x !== undefined) {
+            this.scroll[0] = x
+            if (updateDom) this.widget.scrollLeft = x
+        }
+        if (y !== undefined) {
+            this.scroll[1] = y
+            if (updateDom) this.widget.scrollTop = y
+        }
 
     }
 
