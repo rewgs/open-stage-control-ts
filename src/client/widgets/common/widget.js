@@ -200,6 +200,7 @@ class Widget extends EventEmitter {
 
         this.isValueChanging = false
         this.valueChangingTimeout = null
+        this.valueChangingQueue = {}
 
         this.parsers = {}
         this.parsersLocalScope = options.locals || {}
@@ -491,8 +492,14 @@ class Widget extends EventEmitter {
             this.linkedValueChangedCallback = (e)=>{
                 if (this.isValueChanging && e.widget !== this) {
                     clearTimeout(this.valueChangingTimeout)
+                    this.valueChangingQueue[e.widget.hash] = e
                     this.valueChangingTimeout = setTimeout(()=>{
-                        if (!this.removed) this.onLinkedPropsChanged(e, 'value-changed')
+                        if (!this.removed) {
+                            for (var h in this.valueChangingQueue) {
+                                this.onLinkedPropsChanged(this.valueChangingQueue[h], 'value-changed')
+                            }
+                        }
+                        this.valueChangingQueue = {}
                     })
                 } else {
                     this.onLinkedPropsChanged(e, 'value-changed')
