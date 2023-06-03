@@ -69,7 +69,13 @@ class ScriptVm extends Vm {
             this.checkContext('set')
 
             var widget = this.getWidget()
-            var options = deepCopy(this.getValueOptions())
+            var options = {},
+                valueOptions = this.getValueOptions()
+
+            for (var k in valueOptions) {
+                if (k === 'widget') options[k] = valueOptions[k]
+                else options[k] = deepCopy(valueOptions[k])
+            }
 
             options.fromScript = widget.hash
 
