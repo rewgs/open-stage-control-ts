@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.25.1
+
+- bug fixes
+    - regression in inter-widget sync mechanism
+    - regression breaking `set()` function in scripts
+
 ## 1.25.0
 
 - bug fixes
