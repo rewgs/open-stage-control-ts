@@ -92,9 +92,9 @@ class TextArea extends Widget {
 
     setValue(v, options={} ) {
 
-        this.value = String(v)
+        this.value = v === '' || v === null ? this.getProp('default') : String(v)
 
-        if (this.value === '' || this.value === null) this.value = this.getProp('default')
+        if (this.value === '') this.value = this.getProp('default')
 
         if (this.input.value !== this.value) this.input.value = this.value
 

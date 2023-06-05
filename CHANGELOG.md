@@ -5,6 +5,7 @@
 - bug fixes
     - regression in inter-widget sync mechanism
     - regression breaking `set()` function in scripts
+    - textarea: display nothing instead of "null" when receing no value, null or an empty string
 
 ## 1.25.0
 
