@@ -6,7 +6,7 @@ var path = require('path'),
     address = require('./address')
 
 // This prevents argv parsing from breaking when the app is packaged (executed without 'electron' prefix)
-var firstArgIndex = path.basename(process.argv[0]).match(/electron|node/) ? 2 : 1
+var firstArgIndex = path.basename(process.argv[0]).match(/electron|node|Electron|Node/) ? 2 : 1
 
 if (process.env.OSC_SERVER_PROCESS) firstArgIndex++
 
