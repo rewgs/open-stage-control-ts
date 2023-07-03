@@ -198,8 +198,8 @@ class Input extends Canvas {
 
         this.ctx.fillStyle = this.cssVars.colorText
 
-        // hack ?  prevent weird offset added for unknown reason when font size increases 
-        var offy = this.fontSize / 10;
+        // hack ?  prevent weird offset added for unknown reason when font size increases
+        var offy = this.fontSize / 10
 
         if (this.textAlign == 'center') {
             this.ctx.fillText(v, Math.round(width/2), Math.round(height/2 + offy))
