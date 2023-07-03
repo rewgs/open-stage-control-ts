@@ -43,7 +43,7 @@ class TextArea extends Widget {
         if (this.getProp('interaction')) {
 
             this.input.setAttribute('tabindex', 0)
-            this.on('focus', this.focus.bind(this), {element: this.input})
+            this.on('focus', this.onFocus.bind(this), {element: this.input})
             this.on('blur', (e)=>{
                 this.blur(true)
             }, {element: this.input})
@@ -65,10 +65,16 @@ class TextArea extends Widget {
 
     }
 
-    focus() {
+    onFocus() {
 
         if (this.focused) return
         this.focused = true
+
+    }
+
+    focus() {
+
+        this.input.focus()
 
     }
 

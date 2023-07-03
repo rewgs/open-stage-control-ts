@@ -4,6 +4,7 @@
 
 - bug fixes
     - textarea: escape key not restoring previous value
+    - scripting: `setFocus(id)` not affecting textarea widgets
 
 ## 1.25.1
 
