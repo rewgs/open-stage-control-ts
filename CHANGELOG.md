@@ -5,7 +5,8 @@
 - bug fixes
     - textarea: escape key not restoring previous value
     - scripting: `setFocus(id)` not affecting textarea widgets
-    - led, text, variable: value not synchronized between different clients 
+    - led, text, variable: value not synchronized between different clients
+    - error when running from sources on Mac
 
 ## 1.25.1
 
