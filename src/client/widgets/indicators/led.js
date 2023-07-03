@@ -58,6 +58,7 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true, inter
 
 
         if (options.sync && ret !== false) this.changed(options)
+        if (options.send) this.sendValue(null, {syncOnly: true})
 
     }
 

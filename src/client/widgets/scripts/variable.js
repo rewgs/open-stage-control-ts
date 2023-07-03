@@ -34,6 +34,7 @@ module.exports = class Variable extends StaticProperties(Widget, {interaction: f
         this.value = v
 
         if (options.sync) this.changed(options)
+        if (options.send) this.sendValue(null, {syncOnly: true})
 
     }
 

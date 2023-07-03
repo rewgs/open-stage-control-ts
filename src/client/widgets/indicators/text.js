@@ -65,6 +65,7 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
         }
 
         if (options.sync) this.changed(options)
+        if (options.send) this.sendValue(null, {syncOnly: true})
 
     }
 
