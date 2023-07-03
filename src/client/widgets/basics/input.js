@@ -133,12 +133,12 @@ class Input extends Canvas {
 
     resizeHandle(event){
 
-        if (this.fontSize && event.height !== this.fontSize) {
-            // little hack to prevent flex layout issues
-            // alternate fix is to set css 'height: 100%;' on the canvas element
-            // but it produces a big drawing context for just one line of text.
-            event.height = this.fontSize
-        }
+        // if (this.fontSize && event.height !== this.fontSize) {
+        //     // little hack to prevent flex layout issues
+        //     // alternate fix is to set css 'height: 100%;' on the canvas element
+        //     // but it produces a big drawing context for just one line of text.
+        //     event.height = this.fontSize
+        // }
 
         super.resizeHandle(event)
 
@@ -198,12 +198,15 @@ class Input extends Canvas {
 
         this.ctx.fillStyle = this.cssVars.colorText
 
+        // hack ?  prevent weird offset added for unknown reason when font size increases 
+        var offy = this.fontSize / 10;
+
         if (this.textAlign == 'center') {
-            this.ctx.fillText(v, Math.round(width/2), Math.round(height/2))
+            this.ctx.fillText(v, Math.round(width/2), Math.round(height/2 + offy))
         } else if (this.textAlign == 'right') {
-            this.ctx.fillText(v, width, Math.round(height/2))
+            this.ctx.fillText(v, width, Math.round(height/2 + offy))
         } else {
-            this.ctx.fillText(v, 0, Math.round(height/2))
+            this.ctx.fillText(v, 0, Math.round(height/2 + offy))
         }
 
         this.clearRect = [0, 0, width, height]

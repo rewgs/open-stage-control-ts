@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.25.3
+
+- bug fixes
+     - input: rendering issues with big font sizes
+
 ## 1.25.2
 
 - bug fixes
