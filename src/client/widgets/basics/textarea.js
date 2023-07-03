@@ -57,7 +57,7 @@ class TextArea extends Widget {
                 else if (e.keyCode === 27) {
                     // esc
                     this.blur(false)
-                    this.input.value = this.stringValue
+                    this.input.value = this.value
                 }
             })
 

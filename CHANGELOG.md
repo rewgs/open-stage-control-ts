@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.25.2
+
+- bug fixes
+    - textarea: escape key not restoring previous value
+
 ## 1.25.1
 
 - bug fixes
