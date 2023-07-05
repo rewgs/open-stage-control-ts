@@ -27,12 +27,12 @@ CSS selectors can be used to apply styles to specific elements:
     */
 }
 
-.label {
-    /* style for the .label elements */
+label {
+    /* style for the label elements */
 }
 
-> .label {
-    /* style for the direct child .label element */
+> label {
+    /* style for the direct child label element */
 }
 
 ```
