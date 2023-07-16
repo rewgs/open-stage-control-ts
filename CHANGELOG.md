@@ -4,6 +4,7 @@
 
 - bug fixes
      - input: rendering issues with big font sizes
+     - panel: tab rendering issue when initialized with a non-numeric value 
 
 ## 1.25.2
 

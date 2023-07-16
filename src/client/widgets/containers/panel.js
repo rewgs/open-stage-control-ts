@@ -220,7 +220,7 @@ class Panel extends Container() {
                 e.stopPropagation = true
             })
 
-            this.setValue(this.getProp('value') || 0)
+            this.setValue(Number(this.getProp('value')) || 0)
 
         } else if (this.getProp('widgets') && this.getProp('widgets').length) {
 
