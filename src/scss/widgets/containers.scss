@@ -333,15 +333,24 @@
                 background: var(--color-fill);
                 z-index: 101;
             }
+
+
+        }
+    }
+    &.tabs-top, &.bottom {
+        div {
+            &:last-child {
+                border-right: 0;
+            }
             &:first-child:before {
                 margin-left: 1rem;
             }
             &:last-child:before {
                 margin-right: 1rem;
             }
-
         }
     }
+
 
     &.tabs-left, &.tabs-right {
         flex-direction: column;
@@ -374,13 +383,15 @@
                 background: var(--color-fill);
                 z-index: 101;
             }
+
+            &:last-child {
+                border-bottom:0
+            }
             &:first-child:before {
                 margin-top: 1rem;
-                margin-left: 0;
             }
             &:last-child:before {
                 margin-bottom: 1rem;
-                margin-right: 0;
             }
         }
     }
