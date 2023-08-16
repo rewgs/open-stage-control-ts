@@ -54,7 +54,7 @@ Options can contain `@{}` blocks.
     JS{
         return OSC{address} || {
             "key a": 1,
-            "key b", 2
+            "key b": 2
         }
     }
     ```
