@@ -569,14 +569,28 @@ class ScriptVm extends Vm {
                 callback = options
                 options = {}
             }
+
+
             if (typeof callback === 'function') {
+
+                var widget = this.getWidget(),
+                    valueOptions = this.getValueOptions()
+
                 uiFilebrowser({
                     extension: options.extention || '*',
                     directory: options.directory || undefined,
                     loadDir: !!options.allowDir,
                     save: options.mode === 'save'
                 }, (path)=>{
-                    callback(path.join(path[0][0] === '/' ? '/' : '\\'))
+                    this.setWidget(widget)
+                    this.setValueOptions(valueOptions)
+                    try {
+                        callback(path.join(path[0][0] === '/' ? '/' : '\\'))
+                    } catch(e) {
+                        widget.errorProp('script', 'browseFile', e)
+                    }
+                    this.setWidget()
+                    this.setValueOptions()
                 })
             } else {
                 widget.errorProp('script', 'browseFile', 'callback argument must be a function')

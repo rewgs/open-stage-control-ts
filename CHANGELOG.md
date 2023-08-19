@@ -6,6 +6,7 @@
      - input: rendering issues with big font sizes
      - panel: tab rendering issue when initialized with a non-numeric value
      - panel: minor style issue in tab navigation bar
+     - scripting: scripting functions not working inside `browseFile()` callback
 
 ## 1.25.2
 
