@@ -47,7 +47,6 @@ class Button extends Widget {
                 decoupled: {type: 'boolean', value: false, help: [
                     'Set to `true` make the local feedback update only when it receives a value from an osc/midi message that matches the `on` or `off` property.',
                     'When `decoupled`, the button\'s value is ambiguous: when interacted with, it will send the value that\'s requested (`on` or `off` for `toggle` and `push` modes, `on` for `tap` mode, `null` for `momentary`), otherwise it will return the value received from the feedback message (`on` or `off` property).',
-                    '- `decoupled (toggle mode that only updates its state when it receives a value from an osc/midi message*)`',
                     'From a script property, feedback messages can be simulated with:',
                     '`set("widget_id", value, {external: true})`'
                 ]},
