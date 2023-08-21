@@ -278,7 +278,7 @@ class Button extends Widget {
                 if (options.fromExternal) {
                     this.state = newstate
                     this.decoupledValue.setValue(newstate, {sync: true})
-                } else if (!options.local && this.getProp('mode') === 'push') {
+                } else if ((!options.local || options.fromScript) && this.getProp('mode') === 'push') {
                     if (newstate === 1 && !this.touchActive) {
                         this.touchActive = 1
                         setTimeout(()=>{this.touchActive = 0})
