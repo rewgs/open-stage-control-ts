@@ -80,6 +80,7 @@ class ScriptVm extends Vm {
             options.fromScript = widget.hash
 
             if (options.dragged) options.dragged = false
+            if (options.local) options.local = false
 
             // if (id === options.id) options.sync = false // loop stop
             // if (this.getWidget() === options.widget) options.sync = false // loop stop
