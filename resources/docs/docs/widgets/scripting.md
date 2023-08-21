@@ -380,4 +380,4 @@ Opens the file file browser and pass selected file to a callback function (does 
     - `extension`: allowed extension (default: "*")
     - `directory`: starting directory for browser (default: user's home)
     - `allowDir`: allow choosing a directory instead of a file (default: false)
-    - `mode`: "save" or "open" 
+    - `mode`: "save" or "open"
