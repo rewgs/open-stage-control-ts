@@ -87,7 +87,10 @@ class ScriptVm extends Vm {
             if (extraOptions.send === false) options.send = false
             if (extraOptions.sync === false) options.sync = false
             if (extraOptions.script === false) options.script = false
-            if (extraOptions.external === true) options.fromExternal = true
+            if (extraOptions.external === true) {
+                options.fromExternal = true
+                options.send = false
+            }
 
             var widgets
             if (id.includes('*')) {

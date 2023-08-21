@@ -7,7 +7,8 @@
      - panel: tab rendering issue when initialized with a non-numeric value
      - panel: minor style issue in tab navigation bar
      - scripting: scripting functions not working inside `browseFile()` callback
-
+     - scripting: using `external: true` in `set()` should prevent affected widget from sending any message
+     
 ## 1.25.2
 
 - bug fixes
