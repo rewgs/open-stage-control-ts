@@ -5,6 +5,9 @@
 - bug fixes
     - custom module: `receive()` not passing boolean arguments properly
 
+- editor
+    - display current widget value in the `value` property's help modal
+
 ## 1.25.3
 
 - bug fixes

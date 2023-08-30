@@ -403,8 +403,13 @@ class UiInspector extends UiWidget {
                     ${htmlHelp}
                 </div>
                 <div class="computed">
-                    <p>Computed value: <code class="pre">${computedValue || 'empty'}</code></p>
+                    <p>Computed property: <code class="pre">${computedValue || 'empty'}</code></p>
                 </div>
+                ${name === 'value' ? raw(`
+                    <div class="computed">
+                        <p>Current value: <code class="pre">${JSON.stringify(this.widget.getValue())}</code></p>
+                    </div>
+                `): ''}
             </div>
         `})
 
