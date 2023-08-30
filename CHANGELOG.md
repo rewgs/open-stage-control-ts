@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.25.4
+
+- bug fixes
+    - custom module: `receive()` not passing boolean arguments properly
+
 ## 1.25.3
 
 - bug fixes
@@ -8,7 +13,7 @@
      - panel: minor style issue in tab navigation bar
      - scripting: scripting functions not working inside `browseFile()` callback
      - scripting: using `external: true` in `set()` should prevent affected widget from sending any message
-     - button: inconsistent value in `push` mode with `decoupled` enabled when setting value from script 
+     - button: inconsistent value in `push` mode with `decoupled` enabled when setting value from script
 
 ## 1.25.2
 

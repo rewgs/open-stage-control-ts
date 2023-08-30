@@ -74,11 +74,11 @@ class OscServer {
             case 'number':
                 return {type: 'f', value: arg}
             case 'boolean':
-                return {type: arg ? 'T' : 'F'}
+                return {type: arg ? 'T' : 'F', value: arg}
             case 'string':
-                return {type: 's', value:arg}
+                return {type: 's', value: arg}
             default:
-                return {type: 's', value:JSON.stringify(arg)}
+                return {type: 's', value: JSON.stringify(arg)}
         }
     }
 
