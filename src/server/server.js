@@ -105,6 +105,7 @@ function httpRoute(req, res) {
                 window.IP=${JSON.stringify(ip)}
                 window.ENV=${JSON.stringify(clientOptions)}
                 window.READ_ONLY=${JSON.stringify(settings.read('read-only'))}
+                window.AUTH=\`${(req.headers.authorization || '').replace('Basic ', '').replace('/', '_')}\`
             </script></body>`))
           .pipe(res)
 

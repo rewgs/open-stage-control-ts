@@ -4,6 +4,7 @@
 
 - bug fixes
     - custom module: `receive()` not passing boolean arguments properly
+    - fix `--authentication` on iOS clients
 
 - editor
     - display current widget value in the `value` property's help modal

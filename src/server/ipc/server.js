@@ -16,18 +16,18 @@ class Ipc extends EventEmitter {
 
         this.server.on('connection', (socket, req)=>{
 
+            var url  = req.url.split('/'),
+                auth = url.pop().replace('_', '/'),
+                id = url.pop()
+
             if (settings.read('authentication')) {
-                if (!req.headers.authorization) return
-                if (req.headers.authorization.search('Basic ') !== 0) return
-                var auth = new Buffer(req.headers.authorization.split(' ')[1], 'base64').toString()
-                if (settings.read('authentication') !== auth) {
+                if (settings.read('authentication') !== Buffer.from(auth, 'base64').toString()) {
                     console.log(`(WARNING) Client connexion refused for ${req.connection.remoteAddress} (authentication failed)`)
                     socket.close()
                     return
                 }
             }
 
-            var id = req.url.split('/').pop()
 
             if (!id) return
 

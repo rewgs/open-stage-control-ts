@@ -73,7 +73,7 @@ class Ipc extends EventEmitter {
 
     open() {
 
-        this.socket = new WebSocket(protocol + window.location.host + '/' + uuid)
+        this.socket = new WebSocket(protocol + window.location.host + '/' + uuid + '/' + window.AUTH)
 
         this.socket.onclose = this.socket.onerror = ()=>{
             if (!this.connected()) this.close()
