@@ -9,6 +9,9 @@ var cpr = require('cpr'),
         ['../resources/fonts/', '../app/assets/fonts/'],
         ['../src/html/launcher.html', '../app/launcher/index.html'],
         ['../node_modules/fsevents/fsevents.node', '../app/server/fsevents.node'],
+        ['../node_modules/ace-builds/src-min/worker-css.js', '../app/client/workers/worker-css.js'],
+        ['../node_modules/ace-builds/src-min/worker-html.js', '../app/client/workers/worker-html.js'],
+        ['../node_modules/ace-builds/src-min/worker-javascript.js', '../app/client/workers/worker-javascript.js'],
     ]
 
 for (var i in files) {

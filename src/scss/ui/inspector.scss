@@ -269,8 +269,6 @@ osc-inspector-field .ace_editor {
         background: var(--color-background);
         color: #6a6f7a;
         border-right: 1rem solid var(--color-ui-background);
-        z-index: 10;
-        // padding-top: 1rem;
         line-height: 1.5
     }
     .ace_print-margin {
@@ -295,11 +293,9 @@ osc-inspector-field .ace_editor {
         background: #c6dbae
     }
     .ace_marker-layer .ace_bracket {
-        // margin: 0 0 0 -1rem;
         border: none;
         border-radius: 0;
         margin-top: 1rem;
-        position: relative;
         border-bottom: 1rem solid var(--color-accent)
     }
     .ace_marker-layer .ace_active-line {
@@ -402,7 +398,7 @@ osc-inspector-field .ace_editor {
         margin-left: -1rem;
     }
     .ace_tooltip {
-        left:$padding!important;
+        left:$padding + 1!important;
         max-width: 80%;
         white-space: pre-wrap;
         background: var(--color-context-menu);
@@ -412,25 +408,20 @@ osc-inspector-field .ace_editor {
         border: none;
         border-radius: 0;
     }
-    .ace_info {
-        background: linear-gradient(rgba(black, 0.5), rgba(black, 0.5)), var(--color-text)!important;
-        color: var(--color-background);
+    .ace_gutter {
+        .ace_info {
+            background: linear-gradient(rgba(black, 0.5), rgba(black, 0.5)), var(--color-text)!important;
+            color: var(--color-background);
+        }
+        .ace_warning {
+            background: linear-gradient(rgba(black, 0.5), rgba(black, 0.5)), var(--color-warning);
+            color: var(--color-background);
+        }
+        .ace_error {
+            background: linear-gradient(rgba(black, 0.4), rgba(black, 0.4)), var(--color-error);
+            color: var(--color-background);
+        }
     }
-    .ace_warning {
-        background: linear-gradient(rgba(black, 0.5), rgba(black, 0.5)), var(--color-warning);
-        color: var(--color-background);
-    }
-    .ace_error {
-        background: linear-gradient(rgba(black, 0.4), rgba(black, 0.4)), var(--color-error);
-        color: var(--color-background);
-    }
-    // .ace_search {
-    //     position: fixed;
-    //     top: var(--nav-height);
-    //     margin-top: $padding;
-    //     right: $padding * 2;
-    //     border-radius: 3rem;
-    // }
 }
 
 

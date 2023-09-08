@@ -3,14 +3,16 @@ var UiModal = require('./ui-modal'),
     html = require('nanohtml'),
     raw = require('nanohtml/raw'),
     {icon} = require('../ui/utils'),
-    ace = require('brace'),
+    ace = require('ace-builds/src/ace.js'),
     scriptGlobals = require('../widgets/scripts/script-vm').globals,
     editors = {}, editorModes = {
-        javascript: require('brace/mode/javascript'),
-        css: require('brace/mode/css'),
-        html: require('brace/mode/html'),
+        javascript: require('ace-builds/src/mode-javascript.js'),
+        css: require('ace-builds/src/mode-css.js'),
+        html: require('ace-builds/src/mode-html.js'),
     },
     codeEditorModKey = (navigator.platform || '').match('Mac') ? 'Cmd' : 'Ctrl'
+
+ace.config.set('basePath', '/client/workers/')
 
 class CodeEditor {
 
@@ -60,7 +62,9 @@ class CodeEditor {
 
         this.editor.setOptions({
             autoScrollEditorIntoView: true,
-            fixedWidthGutter: true,
+            copyWithEmptySelection: true,
+            highlightIndentGuides:false,
+            tooltipFollowsMouse: false,
             tabSize: 2,
             maxLines: 30,
             dragEnabled: false,
@@ -84,7 +88,7 @@ class CodeEditor {
         if (language === 'javascript' && syntaxChecker !== false) {
             this.editor.getSession().$worker.send('setOptions', [{
                 asi: true,          // no semicolon
-                esversion: 6,
+                esversion: 7,
                 strict: 'implied',
                 node: false,
                 browser: true,
@@ -94,15 +98,12 @@ class CodeEditor {
             }])
         }
 
-
-        this.middledown = false
-        this.editor.on('mousedown', function(e) {
-            if (e.domEvent.button === 1) this.middledown = true
-        })
-        this.editor.on('mouseup', function(e) {
-            if (e.domEvent.button === 1) this.middledown = false
-        })
-
+        this.container.addEventListener('mousedown', (e)=>{
+            if (e.button === 1) {
+                e.preventDefault()
+                e.stopPropagation()
+            }
+        }, {capture: true})
 
     }
 
@@ -127,10 +128,6 @@ class CodeEditor {
         }
         editor.removeAllListeners('focus')
         this.editor.on('focus', (e)=>{
-            if (this.middledown) {
-                e.preventDefault()
-                return
-            }
             this.parent.focusedInput = this.input
             this.editor.setHighlightActiveLine(true)
             this.editor.setHighlightGutterLine(true)
@@ -141,7 +138,6 @@ class CodeEditor {
                 // this.parent.focusedInput = this.input
                 this.editor.dirty = true
             })
-
             this.editor.on('blur', (e)=>{
                 this.editor.setHighlightActiveLine(false)
                 this.editor.setHighlightGutterLine(false)
