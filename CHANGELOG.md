@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.25.5
+
+- bug fixes
+    - code editor: issue when middle clicking in the editor on linux
+    - code editor: modern js operators such as `**` not recognized 
+
 ## 1.25.4
 
 - bug fixes
