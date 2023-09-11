@@ -80,6 +80,7 @@ class Slider extends Canvas {
         this.on('dragend', this.dragendHandleProxy.bind(this), {element:this.widget, multitouch: options.multitouch})
         this.on('wheel',this.mousewheelHandleProxy.bind(this), {element: this.widget})
 
+        this.steps = null
         this.setSteps()
 
         this.setValue(this.getSpringValue())
@@ -120,7 +121,7 @@ class Slider extends Canvas {
         var direction = e.deltaY > 0 ? -1 : 1,
             increment = e.ctrlKey ? 0.25 : 1
 
-        if (this.getProp('steps')) {
+        if (this.steps) {
             var i = this.steps.indexOf(this.value),
                 val
             if (i === -1) {
@@ -214,7 +215,7 @@ class Slider extends Canvas {
 
         this.value = value
 
-        if (this.getProp('steps')) {
+        if (this.steps) {
 
             var diff = this.steps.map(x => Math.abs(x - this.value)),
                 index = diff.indexOf(Math.min(...diff)),
@@ -237,10 +238,17 @@ class Slider extends Canvas {
 
         if (this.getProp('steps')) {
             var steps = this.getProp('steps')
-            this.steps = Array.isArray(steps) ?
-                steps : typeof steps === 'number' ?
-                    Array(steps).fill(0).map((x, i) => i / (steps - 1) * (this.rangeValsMax - this.rangeValsMin) + this.rangeValsMin)
-                    : this.rangeVals
+            if (steps === 'auto') {
+                this.steps = this.rangeVals
+            } else if (typeof steps === 'number' && steps > 0) {
+                this.steps = Array(steps).fill(0).map((x, i) => i / (steps - 1) * (this.rangeValsMax - this.rangeValsMin) + this.rangeValsMin)
+            } else if (Array.isArray(steps) && step.every(x=>typeof x === 'number')) {
+                this.steps = steps
+            } else {
+                this.steps = null
+            }
+        } else {
+            this.steps = null
         }
 
     }

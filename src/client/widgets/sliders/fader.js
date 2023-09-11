@@ -42,11 +42,11 @@ class Fader extends Slider {
                 ]},
                 logScale: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale. Set to `-1` for exponential scale.'},
                 sensitivity: {type: 'number', value: 1, help: 'Defines the fader\'s sensitivity when `snap` is `false` '},
-                steps: {type: 'string|number|array', value: '', help: [
+                steps: {type: 'number|array|string', value: '', help: [
                     'Restricts the widget\'s value:',
-                    '- `empty` or `0`: use values defined in `range`',
                     '- `number`: define a number of evenly spaced steps',
-                    '- `array`: use arbitrary values',
+                    '- `array` of numbers: use arbitrary values as steps',
+                    '- `auto`: use values defined in `range`'
                 ]},
                 origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the fader\'s gauge'},
             }
@@ -181,7 +181,7 @@ class Fader extends Slider {
         var width = this.getProp('horizontal') ? this.height : this.width,
             height = !this.getProp('horizontal') ? this.height : this.width
 
-        var percent = this.getProp('steps') ? this.valueToPercent(this.value) : this.percent,
+        var percent = this.steps ? this.valueToPercent(this.value) : this.percent,
             d = Math.round(this.percentToCoord(percent)),
             o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,

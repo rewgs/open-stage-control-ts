@@ -44,9 +44,9 @@ module.exports = class Knob extends Slider {
                 sensitivity: {type: 'number', value: 1, help: 'Defines the knob\'s sensitivity when `mode` is not `snap` '},
                 steps: {type: 'string|number|array', value: '', help: [
                     'Restricts the widget\'s value:',
-                    '- `empty` or `0`: use values defined in `range`',
                     '- `number`: define a number of evenly spaced steps',
-                    '- `array`: use arbitrary values',
+                    '- `array` of numbers: use arbitrary values as steps',
+                    '- `auto`: use values defined in `range`'
                 ]},
                 origin: {type: 'number', value: 'auto', help: 'Defines the starting point\'s value of the knob\'s gauge'},
             }
@@ -166,7 +166,7 @@ module.exports = class Knob extends Slider {
 
     draw() {
 
-        var percent = this.getProp('steps') ? this.valueToPercent(this.value) : this.percent,
+        var percent = this.steps ? this.valueToPercent(this.value) : this.percent,
             o = this.percentToAngle(this.valueToPercent(this.originValue)),
             d = this.percentToAngle(percent),
             min = this.percentToAngle(0),
