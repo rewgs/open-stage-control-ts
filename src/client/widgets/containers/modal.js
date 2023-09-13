@@ -98,6 +98,16 @@ class Modal extends Panel {
 
         this.toggle = this.container.appendChild(html`<div class="toggle"></div>`)
 
+        var closer = DOM.get(this.popup, '.closer')[0]
+
+        this.on('fast-click',(e)=>{
+            console.log(e)
+            if ((e.target === this.popup || e.target === closer) && this.value == 1) {
+                e.detail.preventOriginalEvent = true
+                this.setValue(0, {sync:true, send:true})
+            }
+        }, {element: this.container})
+
         if (this.getProp('doubleTap')) {
             doubleTap(this, ()=>{
                 this.setValue(1, {sync:true, send:true})
@@ -111,15 +121,6 @@ class Modal extends Panel {
                 }
             }, {element: this.container})
         }
-
-        var closer = DOM.get(this.popup, '.closer')[0]
-
-        this.on('fast-click',(e)=>{
-            if ((e.target === this.popup || e.target === closer) && this.value == 1) {
-                e.detail.preventOriginalEvent = true
-                this.setValue(0, {sync:true, send:true})
-            }
-        }, {element: this.container})
 
 
         this.escapeKeyHandler = ((e)=>{
