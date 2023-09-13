@@ -7,7 +7,7 @@
     - code editor: modern js operators such as `**` not recognized
     - sliders: prevent error when `steps` is not a number, add `auto` mode for using ranges values as steps (it did not work before)
     - pads, range: value not initialized as an array, causing errors in some cases
-    - modal: not closing properly when `doubleTap` is true
+    - modal: popup not closing when `doubleTap` is true
 
 ## 1.25.4
 
