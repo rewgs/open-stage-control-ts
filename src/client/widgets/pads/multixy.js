@@ -87,8 +87,6 @@ module.exports = class MultiXy extends Pad {
 
         }
 
-        this.value = []
-
         this.padsCoords = []
         this.touchMap = {}
 

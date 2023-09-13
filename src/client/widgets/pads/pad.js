@@ -5,7 +5,7 @@ class Pad extends Canvas {
 
     constructor(options) {
 
-        super({...options, html: html`
+        super({...options, value: [], html: html`
             <inner>
                 <canvas></canvas>
             </inner>

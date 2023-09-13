@@ -14,7 +14,6 @@ class Slider extends Canvas {
 
         this.container.classList.add('design-' + this.getProp('design'))
 
-        this.value = undefined
         this.percent = 0
 
         this.gaugePadding = 0

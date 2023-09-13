@@ -45,7 +45,7 @@ class Range extends Fader {
 
         options.multitouch = true
 
-        super({...options, html: html`
+        super({...options, value: [], html: html`
             <canvas></canvas>
         `})
 

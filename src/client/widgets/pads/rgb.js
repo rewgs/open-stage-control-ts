@@ -40,7 +40,7 @@ module.exports = class Rgb extends Widget {
 
     constructor(options) {
 
-        super({...options, html: html`<inner></inner>`})
+        super({...options, value: [], html: html`<inner></inner>`})
 
         this.container.classList.toggle('contains-alpha', this.getProp('alpha'))
 
@@ -124,8 +124,6 @@ module.exports = class Rgb extends Widget {
 
         }
 
-
-        this.value = []
 
         this.hsb = {h:0,s:0,b:0}
 
