@@ -201,7 +201,7 @@ class Widget extends EventEmitter {
         this.isValueChanging = false
         this.valueChangingTimeout = null
         this.valueChangingQueue = {}
-        this.value = options.value
+        if (options.value !== undefined) this.value = options.value
 
         this.parsers = {}
         this.parsersLocalScope = options.locals || {}
