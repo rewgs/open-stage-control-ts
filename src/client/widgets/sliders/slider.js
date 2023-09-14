@@ -239,7 +239,8 @@ class Slider extends Canvas {
             var steps = this.getProp('steps')
             if (steps === 'auto') {
                 this.steps = this.rangeVals
-            } else if (typeof steps === 'number' && steps > 0) {
+            } else if (typeof steps === 'number' && Math.round(steps) > 0) {
+                steps = Math.round(steps)
                 this.steps = Array(steps).fill(0).map((x, i) => i / (steps - 1) * (this.rangeValsMax - this.rangeValsMin) + this.rangeValsMin)
             } else if (Array.isArray(steps) && step.every(x=>typeof x === 'number')) {
                 this.steps = steps
