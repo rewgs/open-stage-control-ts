@@ -169,7 +169,7 @@ Sends back the app's state to specified target
 Set widgets' state
 
 - `state`: `string`, json stringified object (`"widget_id": value` pairs)
-- `send` (optional): `boolean`, set to `false` to prevent widgets from sending their values when the state is applied 
+- `send` (optional): `boolean`, set to `false` to prevent widgets from sending their values when the state is applied
 
 
 
@@ -203,7 +203,7 @@ Open state file `path.state`.
 
 #### `/STATE/SAVE path.state`
 
-Save state session to `path.state`. If `path.state` is omitted, current session's path is used.
+Save state session to `path.state`.
 
 ----
 
