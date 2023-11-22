@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.26.0
+
+- scripting
+    - `stateSet`: add optional `{send: false}` flag
+
 ## 1.25.5
 
 - bug fixes

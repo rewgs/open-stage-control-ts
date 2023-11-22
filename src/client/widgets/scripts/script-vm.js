@@ -330,12 +330,12 @@ class ScriptVm extends Vm {
 
         }
 
-        this.sandbox.contentWindow.stateSet = (state)=>{
+        this.sandbox.contentWindow.stateSet = (state, extraOptions = {})=>{
 
             this.checkContext('stateSet')
 
             var options = this.getValueOptions()
-            stateManager.set(state, options.send)
+            stateManager.set(state, extraOptions.send === false ? false : options.send)
 
         }
 

@@ -233,9 +233,12 @@ Returns a state object (`id:value`) for matching widget and all their children.
 
 ----
 
-#### `stateSet(state)`
+#### `stateSet(state, options)`
 
 Loads a state object. If the event that triggered the script's execution was initiated by a user interaction, this will make the updated widgets send their value as well.
+
+- `options` (optional): `object`, accepts the following items:
+    - `send: false`: prevents widgets from sending osc messages
 
 ----
 
