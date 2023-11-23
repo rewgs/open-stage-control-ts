@@ -1,6 +1,9 @@
 # Changelog
 
-## 1.26.0
+## 1.25.6
+
+- bug fixes
+    - sliders: error when `steps` is an array
 
 - scripting
     - `stateSet`: add optional `{send: false}` flag

@@ -242,7 +242,7 @@ class Slider extends Canvas {
             } else if (typeof steps === 'number' && Math.round(steps) > 0) {
                 steps = Math.round(steps)
                 this.steps = Array(steps).fill(0).map((x, i) => i / (steps - 1) * (this.rangeValsMax - this.rangeValsMin) + this.rangeValsMin)
-            } else if (Array.isArray(steps) && step.every(x=>typeof x === 'number')) {
+            } else if (Array.isArray(steps) && steps.every(x=>typeof x === 'number')) {
                 this.steps = steps
             } else {
                 this.steps = null
