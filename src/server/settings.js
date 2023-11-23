@@ -115,7 +115,10 @@ if (configPathExists) {
     }
     try {
         config = JSON.parse(fs.readFileSync(configPath,'utf-8'))
-    } catch(e) {}
+    } catch(e) {
+        console.error('(ERROR) Could not read config from file:' + configPath)
+        console.error(e)
+    }
     if (cli) {
         for (let k in config) {
             if (k === 'options') continue
