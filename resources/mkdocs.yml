@@ -37,6 +37,7 @@ nav:
             - docs/getting-started/running-with-node.md
         - Tutorials:
             - docs/tutorials/first-steps.md
+            - docs/tutorials/change-property-with-osc.md
         - User interface:
             - docs/user-interface/launcher.md
             - docs/user-interface/client.md

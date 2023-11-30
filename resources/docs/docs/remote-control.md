@@ -20,10 +20,6 @@ Apply a set of options to an existing widget by replacing the old ones with the 
 - `options` (optional): `string`, [JSON5](https://github.com/json5/json5) stringified object defining extra option flags:
     - `noWarning`: set to `true` to prevent further warning when exiting.
 
-!!! danger "Warning"
-    Editing widgets is cpu expensive; for small and recurrent changes, consider using [osc listeners](./widgets/advanced-syntaxes.md) instead.
-
-
 ----
 
 #### `/EDIT/MERGE id properties options`
