@@ -75,7 +75,7 @@
 
     | property | type |default | description |
     | --- | --- | --- | --- |
-        | <h6 id="onCreate">onCreate<a class="headerlink" href="#onCreate" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
+        | <h6 id="onCreate">onCreate<a class="headerlink" href="#onCreate" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget (and its children) is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
         | <h6 id="onValue">onValue<a class="headerlink" href="#onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 ## Basics
 
@@ -191,7 +191,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="input_asYouType">asYouType<a class="headerlink" href="#input_asYouType" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the input send its value at each keystroke |
-            | <h6 id="input_numeric">numeric<a class="headerlink" href="#input_numeric" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to allow numeric values only and display a numeric keyboard on mobile devices |
+            | <h6 id="input_numeric">numeric<a class="headerlink" href="#input_numeric" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to allow numeric values only and display a numeric keyboard on mobile devices<br/><br/>Can be a number to specify the stepping value for mousewheel interaction (only when the input is focused). |
             | <h6 id="input_validation">validation<a class="headerlink" href="#input_validation" title="Permanent link">#</a></h6> | `string` | <code>""</code> | Regular expression: if the submitted value doesn't match the regular expression, it will be reset to the last valid value.<br/><br/>If leading and trailing slashes are omitted, they will be added automatically and the flag will be set to "gm"<br/><br/>Examples:<br/>- `^[0-9]*$` accepts digits only, any number of them<br/>- `/^[a-zs]{0,10}$/i` accept between 0 and 10 alphabetic characters and spaces (case insensitive) |
             | <h6 id="input_maxLength">maxLength<a class="headerlink" href="#input_maxLength" title="Permanent link">#</a></h6> | `number` | <code>""</code> | Maximum number of characters allowed |
 
@@ -467,6 +467,12 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="root_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#root_value" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>""</code> | If the panel contains tabs, its value defines which tab is selected selected (by index, starting with 0).<br/><br/>If the panel contains widgets and `scroll` is `true`, its value is an array that contains the scrolling state between 0 and 1 for the x and y axis.  |
+
+    === "scripting"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="root_onPreload">onPreload<a class="headerlink" href="#root_onPreload" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed before any other widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 
     === "children"
 
@@ -794,6 +800,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
+            | <h6 id="canvas_onCreate">onCreate<a class="headerlink" href="#canvas_onCreate" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="canvas_onValue">onValue<a class="headerlink" href="#canvas_onValue" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget's value updates. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="canvas_onTouch">onTouch<a class="headerlink" href="#canvas_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
             | <h6 id="canvas_onDraw">onDraw<a class="headerlink" href="#canvas_onDraw" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is redrawn. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
@@ -940,6 +947,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
+            | <h6 id="script_onCreate">onCreate<a class="headerlink" href="#script_onCreate" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="script_onKeyboard">onKeyboard<a class="headerlink" href="#script_onKeyboard" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed whenever the widget receives a keyboard event if `keyBinding` is set). See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
             | <h6 id="script_keyBinding">keyBinding<a class="headerlink" href="#script_keyBinding" title="Permanent link">#</a></h6> | `string`&vert;<br/>`array` | <code>""</code> | Key combo `string` or `array` of strings (see <a href="https://github.com/RobertWHurst/KeyboardJS">KeyboardJS</a> documentation).<br/><br/>If the editor is enabled, some keys / combos will not work.<br/><br/>To process all keystroke events, write `['']` |
             | <h6 id="script_keyRepeat">keyRepeat<a class="headerlink" href="#script_keyRepeat" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to prevent keydown repeats when holding the key combo pressed |
