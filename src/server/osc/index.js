@@ -36,7 +36,7 @@ class OscServer {
                 if (typeof lastArg === 'object' && lastArg !== null && lastArg.clientId !== undefined) {
                     options = args.pop()
                 }
-                this.receiveOsc({host, port, address, args:args.map(x=>this.parseArg(x))}, options.clientId)
+                this.receiveOsc({host, port, address, args:args.map(x=>this.parseArg(x)), cm: 1}, options.clientId)
             },
         }) : {}
 

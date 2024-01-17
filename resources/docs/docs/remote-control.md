@@ -11,8 +11,7 @@ When osc messages are received, the default behavior is to update the value of a
 #### `/EDIT id properties options`
 
 
-Apply a set of options to an existing widget by replacing the old ones with the new ones. This ignores the widget's `lock` property.
-
+Apply a set of options to an existing widget by replacing the old ones with the new ones. This ignores the widget's `lock` property. If sent by a custom module using `receive()`, this command will not be prevented by the server's `read-only` option.
 
 - `id`: `string`, widget's `id`
 - `properties`: `string`, [JSON5](https://github.com/json5/json5) stringified object defining the new properties to merge

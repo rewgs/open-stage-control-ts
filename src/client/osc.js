@@ -69,7 +69,7 @@ var Osc = class Osc extends EventEmitter {
 
         if (data._rawTarget && !CLIENT_SYNC) return
 
-        if (typeof this.remoteControl.exists === 'function' && this.remoteControl.exists(data.address)) this.remoteControl.exec(data.address, data.args)
+        if (typeof this.remoteControl.exists === 'function' && this.remoteControl.exists(data.address)) this.remoteControl.exec(data.address, data.args, data.cm)
 
         var [widgets, restArgs] = widgetManager.getWidgetByAddressAndArgs(data.address, data.args)
 

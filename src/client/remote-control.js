@@ -8,9 +8,9 @@ var {updateWidget} = require('./editor/data-workers'),
     uiConsole = require('./ui/ui-console')
 
 var callbacks = {
-    '/EDIT': function(args) {
+    '/EDIT': function(args, custom_module) {
 
-        if (READ_ONLY) return
+        if (READ_ONLY && !custom_module) return
 
         var [id, json, opts] = args,
             newdata = typeof json == 'string' ? JSON.parseFlex(json) : json,
@@ -40,9 +40,9 @@ var callbacks = {
         if (options.noWarning) editor.unsavedSession = false
 
     },
-    '/EDIT/MERGE': function(args) {
+    '/EDIT/MERGE': function(args, custom_module) {
 
-        if (READ_ONLY) return
+        if (READ_ONLY && !custom_module) return
 
         var [id, json, opts] = args,
             newdata = typeof json == 'string' ? JSON.parseFlex(json) : json,
@@ -70,16 +70,16 @@ var callbacks = {
         if (options.noWarning) editor.unsavedSession = false
 
     },
-    '/EDIT/UNDO': function(args) {
+    '/EDIT/UNDO': function(args, custom_module) {
 
-        if (READ_ONLY) return
+        if (READ_ONLY && !custom_module) return
 
         editor.undo()
 
     },
-    '/EDIT/REDO': function(args) {
+    '/EDIT/REDO': function(args, custom_module) {
 
-        if (READ_ONLY) return
+        if (READ_ONLY && !custom_module) return
 
         editor.redo()
 
@@ -307,9 +307,9 @@ var callbacks = {
 }
 
 module.exports = {
-    exec: function(name, args){
+    exec: function(name, args, custom_module){
         if (callbacks[name]) {
-            callbacks[name](args)
+            callbacks[name](args, custom_module)
         }
     },
     exists: function(name){

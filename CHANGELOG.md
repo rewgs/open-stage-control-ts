@@ -5,6 +5,9 @@
 - bug fixes
     - rare issue that made the last widget(s) in a container disappear when other widgets in the same container had a specific property dependency pattern
 
+- remote control
+    - `/EDIT*` commands sent by a custom module are not affected by the server's `read-only` option anymore  
+
 ## 1.25.6
 
 - bug fixes
