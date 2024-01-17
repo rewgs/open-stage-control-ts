@@ -491,7 +491,7 @@ class Widget extends EventEmitter {
         if (!this.linkedValueChangedCallback && Object.keys(this.linkedPropsValue).length) {
 
             this.linkedValueChangedCallback = (e)=>{
-                if (this.isValueChanging && e.widget !== this) {
+                if (!this.parent.mounted || this.isValueChanging && e.widget !== this) {
                     clearTimeout(this.valueChangingTimeout)
                     this.valueChangingQueue[e.widget.hash] = e
                     this.valueChangingTimeout = setTimeout(()=>{
