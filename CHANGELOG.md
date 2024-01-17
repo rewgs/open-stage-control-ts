@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## 1.25.7
 
 - bug fixes
     - rare issue that made the last widget(s) in a container disappear when other widgets in the same container had a specific property dependency pattern
