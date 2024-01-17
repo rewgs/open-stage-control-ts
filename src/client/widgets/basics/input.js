@@ -20,7 +20,9 @@ class Input extends Canvas {
             },
             class_specific: {
                 asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'},
-                numeric: {type: 'boolean', value: false, help: ['Set to `true` to allow numeric values only and display a numeric keyboard on mobile devices']},
+                numeric: {type: 'boolean|number', value: false, help: [
+                    'Set to `true` to allow numeric values only and display a numeric keyboard on mobile devices',
+                    'Can be a number to specify the stepping value for mousewheel interaction (only when the input is focused).']},
                 validation: {type: 'string', value: '', help: [
                     'Regular expression: if the submitted value doesn\'t match the regular expression, it will be reset to the last valid value.',
                     'If leading and trailing slashes are omitted, they will be added automatically and the flag will be set to "gm"',
@@ -65,6 +67,7 @@ class Input extends Canvas {
                 this.input.type = 'number'
                 this.input.pattern = '[0-9\.]*'
                 this.input.inputMode = 'decimal'
+                this.input.step = parseFloat(this.getProp('numeric')) || 1
             }
 
             if (this.getProp('maxLength') !== '') {

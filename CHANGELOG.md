@@ -8,6 +8,9 @@
 - remote control
     - `/EDIT*` commands sent by a custom module are not affected by the server's `read-only` option anymore  
 
+- widgets
+    - input: allow using a number in `numeric` to specify stepping value for mousewheel interaction
+
 ## 1.25.6
 
 - bug fixes
