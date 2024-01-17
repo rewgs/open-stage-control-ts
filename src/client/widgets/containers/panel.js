@@ -6,6 +6,7 @@ var Container = require('../common/container'),
     setScrollbarColor = require('../../ui/scrollbar-color'),
     iOS13 = require('../../ui/ios') === 13,
     Fader = require('../sliders/fader'), faderDefaults,
+    Script = require('../scripts/script'),
     resize = require('../../events/resize'),
     fastdom = require('fastdom')
 
@@ -55,6 +56,16 @@ class Panel extends Container() {
         super({...options, html: html`<inner></inner>`})
 
         this.childrenType = ''
+
+        if (options.root && this.getProp('onPreload')) {
+            this.scripts.onPreload = new Script({
+                widget: this,
+                property: 'onPreload',
+                code: this.getProp('onPreload'),
+                context: {}
+            })
+            if (this.scripts.onPreload) this.scripts.onPreload.run({}, {})
+        }
 
         this.container.classList.toggle('no-inner-padding', !this.getProp('innerPadding'))
         this.container.classList.toggle('no-scroll', !this.getProp('scroll'))

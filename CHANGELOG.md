@@ -10,6 +10,7 @@
 
 - widgets
     - input: allow using a number in `numeric` to specify stepping value for mousewheel interaction
+    - root: add `onPreload` scripting property
 
 ## 1.25.6
 

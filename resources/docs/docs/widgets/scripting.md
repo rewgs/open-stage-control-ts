@@ -103,6 +103,10 @@ The following variables are available in this context:
 - `meta` (`boolean`): `true` if meta key is pressed
 
 
+### `onPreload`
+
+This script is specific to the root widget, it's called before any other widget is created and can be used to create global variables / functions accessible in other scripts. 
+
 ## Available variables
 
 The following variables and functions are accessible in this context.

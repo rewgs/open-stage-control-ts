@@ -30,6 +30,9 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
                 _separator_root_style: 'Root style',
                 hideMenu: {type: 'boolean', value: false, help: 'Set to `true` to hide the main menu button.'},
 
+            },
+            scripting: {
+                onPreload: {type: 'script', value: '', editor: 'javascript', help: ['Script executed before any other widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
             }
         })
 
