@@ -113,11 +113,20 @@ if (configPathExists) {
     } else {
         configPath = path.join(baseDir, 'config.json')
     }
-    try {
-        config = JSON.parse(fs.readFileSync(configPath,'utf-8'))
-    } catch(e) {
-        console.error('(ERROR) Could not read config from file:' + configPath)
-        console.error(e)
+    if (fs.existsSync(configPath)) {
+        try {
+            config = JSON.parse(fs.readFileSync(configPath,'utf-8'))
+        } catch(e) {
+            console.error('(ERROR) Could not read config from file:' + configPath)
+            console.error(e)
+        }
+    } else {
+        try {
+            fs.writeFileSync(configPath, '{}')
+        } catch(e) {
+            console.error('(ERROR) Could not create config file:' + configPath)
+            console.error(e)
+        }
     }
     if (cli) {
         for (let k in config) {
