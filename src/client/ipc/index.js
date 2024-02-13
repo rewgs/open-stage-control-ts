@@ -123,16 +123,17 @@ class Ipc extends EventEmitter {
         clearTimeout(this.disconnectTimeout)
         this.disconnectTimeout = setTimeout(()=>{
             // delay notification in case reconnection succeeds quickly
-            if (notifications && this.disconnected) notifications.add({
+            if (notifications && !this.connected()) notifications.add({
                 icon: 'wifi',
                 class: 'error',
                 message: locales('server_disconnected'),
                 id: 'ipc_state',
                 duration: Infinity
             })
+            this.disconnected = true
+
         }, reconnectTimeout * 2)
 
-        this.disconnected = true
 
         clearTimeout(this.reconnectTimeout)
         this.reconnectTimeout = setTimeout(()=>{
