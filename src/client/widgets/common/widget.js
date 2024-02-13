@@ -198,9 +198,6 @@ class Widget extends EventEmitter {
         this.mounted = false
         this.visible = true
 
-        this.isValueChanging = false
-        this.valueChangingTimeout = null
-        this.valueChangingQueue = {}
         if (options.value !== undefined) this.value = options.value
 
         this.parsers = {}
@@ -348,18 +345,14 @@ class Widget extends EventEmitter {
 
     changed(options) {
 
-        // emitting value-changed might trigger feedback from multiple widgets
-        // in which case we'll want to hold on until we're done syncing
-        // and dedupe feedback actions caused by advanced syntaxes
-        // see this.linkedValueChangedCallback in createLinkedPropsBindings()
-        this.isValueChanging = true
+        widgetManager.valueChangeLock()
         this.trigger('value-changed', {
             widget: this,
             options: options,
             id: this.getProp('id'),
             linkId: this.getProp('linkId')
         })
-        this.isValueChanging = false
+        widgetManager.valueChangeUnlock()
 
     }
 
@@ -491,27 +484,14 @@ class Widget extends EventEmitter {
         if (!this.linkedValueChangedCallback && Object.keys(this.linkedPropsValue).length) {
 
             this.linkedValueChangedCallback = (e)=>{
-                if (!this.parent.mounted || this.isValueChanging && e.widget !== this) {
-                    clearTimeout(this.valueChangingTimeout)
-                    this.valueChangingQueue[e.widget.hash] = e
-                    this.valueChangingTimeout = setTimeout(()=>{
-                        if (!this.removed) {
-                            for (var h in this.valueChangingQueue) {
-                                this.onLinkedPropsChanged(this.valueChangingQueue[h], 'value-changed')
-                            }
-                        }
-                        this.valueChangingQueue = {}
-                    })
-                } else {
-                    this.onLinkedPropsChanged(e, 'value-changed')
-                }
+                this.onLinkedPropsChanged(e, 'value-changed')
             }
 
-            widgetManager.on('value-changed', this.linkedValueChangedCallback, {context: this})
+            widgetManager.on('value-changed-lazy', this.linkedValueChangedCallback, {context: this})
 
         } else if (this.linkedPropsValueCallback && !Object.keys(this.linkedPropsValue).length) {
 
-            widgetManager.off('value-changed', this.linkedValueChangedCallback)
+            widgetManager.off('value-changed-lazy', this.linkedValueChangedCallback)
             delete this.linkedValueChangedCallback
 
         }

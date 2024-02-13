@@ -43,6 +43,8 @@ function updateWidget(widget, options={}) {
         return
     }
 
+    widgetManager.valueChangeLock()
+
     var reuseChildren = options.reuseChildren !== false && widget instanceof Panel
                         && !(widget instanceof Matrix)
 
@@ -145,6 +147,8 @@ function updateWidget(widget, options={}) {
             }
         }
     }
+
+    widgetManager.valueChangeUnlock()
 
     editor.widgetTree.updateTree(editor.selectedWidgets)
 
