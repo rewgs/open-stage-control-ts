@@ -16,8 +16,10 @@
 
     ??? example "Linux"
 
+        Install `python3-rtmidi` from your distribution's package repository, or if it's not available:
+
         - Install `python3` and `python3-pip` from your distribution's package repository
-        - Install `python-rtmidi` from a terminal by executing this command
+        - Run this command in a terminal
         ```bash
         python3 -m pip install python-rtmidi --upgrade
         ```
