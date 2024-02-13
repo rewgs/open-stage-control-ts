@@ -216,7 +216,7 @@ class ScriptVm extends Vm {
             for (var i = widgets.length - 1; i >= 0; i--) {
 
                 var v = widgets[i].getProp(prop)
-                if (v !== undefined) return v
+                if (v !== undefined) return deepCopy(v)
 
             }
 
