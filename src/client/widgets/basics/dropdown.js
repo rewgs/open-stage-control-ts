@@ -58,6 +58,12 @@ class Dropdown extends MenuBase {
             this.setValue(this.values[this.select.selectedIndex], {sync:true, send:true, fromLocal:true})
         }, {element: this.select})
 
+        this.on('fast-click', (e)=>{
+            // allow resubmitting same value
+            this.select.selectedIndex = -1
+        }, {element: this.select})
+
+
         this.select.selectedIndex = -1
         this.selected = -1
         this.container.classList.add('noselect')
@@ -93,6 +99,10 @@ class Dropdown extends MenuBase {
         if (document.activeElement === this.select && iOS) {
             // force menu close on ios
             this.select.blur()
+        }
+
+        for (var j = 0; j < this.select.options.length; j++) {
+            this.select.options[j].classList.toggle('on', i === j)
         }
 
         if (options.send) this.sendValue()

@@ -538,7 +538,9 @@
         background: var(--color-background);
         opacity: 0;
     }
-
+    option.on {
+        background: var(--color-fill)
+    }
 }
 
 .editor-enabled {

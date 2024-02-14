@@ -6,6 +6,8 @@
     - scripting: `getProp()` now correctly returns a copy of the property if it is an object
     - prevent infinite loop when loading widgets with complex inter-dependencies
 
+- widgets
+    - dropdown: allow resubmitting the same value
 
 ## 1.25.7
 
