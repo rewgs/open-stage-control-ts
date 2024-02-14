@@ -33,7 +33,7 @@ module.exports = class Xy extends Pad {
                 logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale.'},
                 logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
                 axisLock: {type: 'string', value: '', choices: ['', 'x', 'y'], help: [
-                    'Restrict movements to one of the axes only.',
+                    'Restrict movements to one of the axes only unless `Shift` is held.',
                     'When left to the default value, holding `Shift` while dragging will lock the pad according the first movement.'
                 ]},
                 doubleTap: {type: 'boolean|string', value: false, help: [
@@ -98,6 +98,7 @@ module.exports = class Xy extends Pad {
             this.active = true
             this.autoAxisLock = ''
             var axis = this.getProp('axisLock')
+            if (axis !== '' && e.shiftKey) axis = ''
             if (axis !== 'y') this.faders.x.trigger('draginit', {...e, stopPropagation: true})
             if (axis !== 'x') this.faders.y.trigger('draginit', {...e, stopPropagation: true})
             this.dragHandle()
@@ -105,7 +106,8 @@ module.exports = class Xy extends Pad {
 
         this.on('drag',(e)=>{
             var axis = this.getProp('axisLock')
-            if (e.shiftKey && axis === '') {
+            if (axis !== '' && e.shiftKey) axis = ''
+            else if (e.shiftKey && axis === '') {
                 if (this.autoAxisLock === '') {
                     if (Math.abs(e.movementX) > Math.abs(e.movementY)) {
                         this.autoAxisLock = 'x'
@@ -123,6 +125,7 @@ module.exports = class Xy extends Pad {
         this.on('dragend', (e)=>{
             this.active = false
             var axis = this.getProp('axisLock')
+            if (axis !== '' && e.shiftKey) axis = ''
             if (axis !== 'y') this.faders.x.trigger('dragend', {...e, stopPropagation: true})
             if (axis !== 'x') this.faders.y.trigger('dragend', {...e, stopPropagation: true})
             if (this.getProp('spring')) {

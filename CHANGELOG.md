@@ -9,7 +9,7 @@
 - widgets
     - dropdown: allow resubmitting the same value
     - plot: missing `logScaleX` and `logScaleY` properties
-    - xy: add `axisLock` property; allow locking one the axis by holding `Shift` while dragging
+    - xy/multixy: add `axisLock` property; allow locking one the axis by holding `Shift` while dragging if `axisLock` is not set, bypasses it otherwise. 
 
 ## 1.25.7
 

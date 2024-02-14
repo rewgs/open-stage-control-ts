@@ -40,6 +40,10 @@ module.exports = class MultiXy extends Pad {
                 rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
                 logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale.'},
                 logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
+                axisLock: {type: 'string', value: '', choices: ['', 'x', 'y'], help: [
+                    'Restrict movements to one of the axes only.',
+                    'When left to the default value, holding `Shift` while dragging will lock the pad according the first movement.'
+                ]},
                 doubleTap: {type: 'boolean|string', value: false, help: [
                     'Set to `true` to make the fader reset to its default value when receiving a double tap.',
                     'Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>`'
@@ -77,6 +81,7 @@ module.exports = class MultiXy extends Pad {
                 decimals:this.getProp('decimals'),
                 logScaleX:this.getProp('logScaleX'),
                 logScaleY:this.getProp('logScaleY'),
+                axisLock:this.getProp('axisLock'),
                 pointSize: this.getProp('pointSize'),
                 pips: this.getProp('pips') && i == this.npoints-1,
                 sensitivity: this.getProp('sensitivity'),
@@ -336,6 +341,7 @@ module.exports = class MultiXy extends Pad {
                 }
                 return
             case 'spring':
+            case 'axisLock':
                 for (let w of this.pads) {
                     w.cachedProps[propName] = this.getProp(propName)
                     w.onPropChanged(propName, options)
