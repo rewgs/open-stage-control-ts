@@ -8,6 +8,7 @@
 
 - widgets
     - dropdown: allow resubmitting the same value
+    - plot: missing `logScaleX` and `logScaleY` properties
 
 ## 1.25.7
 

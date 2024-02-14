@@ -26,6 +26,8 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
             class_specific: {
                 rangeX: {type: 'object', value: {min: 0, max: 1}, help: 'Defines the min and max values for the x axis'},
                 rangeY: {type: 'object', value: {min: 0, max:1}, help: 'Defines the min and max values for the y axis'},
+                logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale.'},
+                logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
                 origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
             },
             value: {
