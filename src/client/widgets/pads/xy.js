@@ -32,6 +32,10 @@ module.exports = class Xy extends Pad {
                 rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
                 logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale.'},
                 logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
+                axisLock: {type: 'string', value: '', choices: ['', 'x', 'y'], help: [
+                    'Restrict movements to one of the axes only.',
+                    'When left to the default value, holding `Shift` while dragging will lock the pad according the first movement.'
+                ]},
                 doubleTap: {type: 'boolean|string', value: false, help: [
                     'Set to `true` to make the fader reset to its default value when receiving a double tap.',
                     'Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>`'
@@ -88,23 +92,39 @@ module.exports = class Xy extends Pad {
 
         this.active = false
 
+        this.autoAxisLock = ''
+
         this.on('draginit',(e)=>{
             this.active = true
-            this.faders.x.trigger('draginit', {...e, stopPropagation: true})
-            this.faders.y.trigger('draginit', {...e, stopPropagation: true})
+            this.autoAxisLock = ''
+            var axis = this.getProp('axisLock')
+            if (axis !== 'y') this.faders.x.trigger('draginit', {...e, stopPropagation: true})
+            if (axis !== 'x') this.faders.y.trigger('draginit', {...e, stopPropagation: true})
             this.dragHandle()
         }, {element: this.canvas})
 
         this.on('drag',(e)=>{
-            this.faders.x.trigger('drag', e)
-            this.faders.y.trigger('drag', e)
+            var axis = this.getProp('axisLock')
+            if (e.shiftKey && axis === '') {
+                if (this.autoAxisLock === '') {
+                    if (Math.abs(e.movementX) > Math.abs(e.movementY)) {
+                        this.autoAxisLock = 'x'
+                    } else if (Math.abs(e.movementY) > Math.abs(e.movementX)) {
+                        this.autoAxisLock = 'y'
+                    }
+                }
+                axis = this.autoAxisLock
+            }
+            if (axis !== 'y') this.faders.x.trigger('drag', e)
+            if (axis !== 'x') this.faders.y.trigger('drag', e)
             this.dragHandle()
         }, {element: this.canvas})
 
         this.on('dragend', (e)=>{
             this.active = false
-            this.faders.x.trigger('dragend', {...e, stopPropagation: true})
-            this.faders.y.trigger('dragend', {...e, stopPropagation: true})
+            var axis = this.getProp('axisLock')
+            if (axis !== 'y') this.faders.x.trigger('dragend', {...e, stopPropagation: true})
+            if (axis !== 'x') this.faders.y.trigger('dragend', {...e, stopPropagation: true})
             if (this.getProp('spring')) {
                 this.setValue([this.faders.x.getSpringValue(),this.faders.y.getSpringValue()],{sync:true, send:true, spring:true})
             } else {
