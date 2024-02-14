@@ -16,6 +16,7 @@ class Fader extends Slider {
                 _separator_fader_style: 'Fader style',
                 design: {type: 'string', value: 'default', choices: ['default', 'round', 'compact'], help: 'Design style'},
                 knobSize: {type: 'number', value: 'auto', help: 'Fader knob size'},
+                colorKnob: {type: 'string', value: 'auto', help: 'Fader knob color'},
                 horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
                 pips: {type: 'boolean', value: false, help: 'Set to `true` to show range breakpoints (ignored if `design` is `compact`)'},
                 dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
@@ -257,7 +258,7 @@ class Fader extends Slider {
             // flat knob
 
             this.ctx.globalAlpha = 1
-            this.ctx.fillStyle = this.cssVars.colorFill
+            this.ctx.fillStyle = this.cssVars.colorKnob
 
             this.ctx.beginPath()
             d = d / (height - this.gaugePadding) * (height-this.gaugePadding - knobHeight)
@@ -281,7 +282,7 @@ class Fader extends Slider {
 
 
                 this.ctx.globalAlpha = this.cssVars.alphaStroke
-                this.ctx.strokeStyle = this.cssVars.colorStroke
+                this.ctx.strokeStyle = this.cssVars.colorKnob
 
                 this.ctx.beginPath()
                 this.ctx.lineWidth = PXSCALE
@@ -291,7 +292,7 @@ class Fader extends Slider {
             }
 
             this.ctx.globalAlpha = 1
-            this.ctx.fillStyle = this.cssVars.colorStroke
+            this.ctx.fillStyle = this.cssVars.colorKnob
 
             this.ctx.beginPath()
             this.ctx.rect(m - knobWidth / 6, d, knobWidth / 3, PXSCALE)
@@ -302,7 +303,7 @@ class Fader extends Slider {
         } else {
 
             this.ctx.globalAlpha = 1
-            this.ctx.fillStyle = this.cssVars.colorFill
+            this.ctx.fillStyle = this.cssVars.colorKnob
 
             this.ctx.beginPath()
             this.ctx.arc(m, d, knobHeight / 6, 0, 2 * Math.PI)
@@ -311,7 +312,7 @@ class Fader extends Slider {
 
             if (this.cssVars.alphaStroke) {
                 this.ctx.globalAlpha = this.cssVars.alphaStroke
-                this.ctx.fillStyle = this.cssVars.colorFill
+                this.ctx.fillStyle = this.cssVars.colorKnob
 
                 this.ctx.beginPath()
                 this.ctx.arc(m, d, knobHeight / 2, 0, 2 * Math.PI)
@@ -418,7 +419,8 @@ class Fader extends Slider {
 
 
 Fader.cssVariables = Fader.prototype.constructor.cssVariables.concat(
-    {js: 'knobSize', css: '--knob-size', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE}
+    {js: 'knobSize', css: '--knob-size', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE},
+    {js: 'colorKnob', css: '--color-knob'},
 )
 
 module.exports = Fader

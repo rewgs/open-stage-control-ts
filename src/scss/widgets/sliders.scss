@@ -19,7 +19,8 @@
     --widget-padding: 1rem;
     --knob-size: 1rem;
     --line-width: 1rem;
-
+    --color-knob: var(--color-fill);
+    
     canvas {
         text-align: left;
     }
