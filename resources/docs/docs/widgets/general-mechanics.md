@@ -59,4 +59,4 @@ From a client to another, widgets are automatically synchronized if they share t
 - `preArgs`
 - `targets`
 
-Client synchronization can be disabled with the `clientSync` [client option](../client-options.md).
+Client synchronization can be disabled globally with the `clientSync` [client option](../client-options.md). Widgets with `bypass` set to `true` will not send synchronization messages to other clients.
