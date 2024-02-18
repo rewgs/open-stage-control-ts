@@ -299,7 +299,7 @@ class Range extends Fader {
             // flat knob
 
             this.ctx.globalAlpha = 1
-            this.ctx.fillStyle = this.cssVars.colorFill
+            this.ctx.fillStyle = this.cssVars.colorKnob
             var compactAdjust = 1 / (height - this.gaugePadding) * (height-this.gaugePadding - knobHeight)
 
             this.ctx.beginPath()
@@ -331,7 +331,7 @@ class Range extends Fader {
                     this.ctx.fill()
 
                     this.ctx.globalAlpha = this.cssVars.alphaStroke
-                    this.ctx.strokeStyle = this.cssVars.colorStroke
+                    this.ctx.strokeStyle = this.cssVars.colorKnob
                     this.ctx.lineWidth = PXSCALE
 
                     this.ctx.beginPath()
@@ -341,7 +341,7 @@ class Range extends Fader {
                 }
 
                 this.ctx.globalAlpha = 1
-                this.ctx.fillStyle = this.cssVars.colorWidget
+                this.ctx.fillStyle = this.cssVars.colorKnob
 
                 this.ctx.beginPath()
                 this.ctx.rect(m - knobWidth / 6, _d, knobWidth / 3, PXSCALE)
@@ -354,7 +354,7 @@ class Range extends Fader {
         } else {
 
             this.ctx.globalAlpha = 1
-            this.ctx.fillStyle = this.cssVars.colorFill
+            this.ctx.fillStyle = this.cssVars.colorKnob
 
             this.ctx.beginPath()
             this.ctx.arc(m, d, knobHeight / 6, 0, 2 * Math.PI)
@@ -368,7 +368,7 @@ class Range extends Fader {
 
             if (this.cssVars.alphaStroke) {
                 this.ctx.globalAlpha = this.cssVars.alphaStroke
-                this.ctx.fillStyle = this.cssVars.colorFill
+                this.ctx.fillStyle = this.cssVars.colorKnob
 
                 this.ctx.beginPath()
                 this.ctx.arc(m, d, knobHeight / 2, 0, 2 * Math.PI)

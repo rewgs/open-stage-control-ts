@@ -18,6 +18,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
                 pips: null,
                 dashed: null,
                 angle: null,
+                colorKnob: null
             },
             class_specific: {
                 origin: null,
