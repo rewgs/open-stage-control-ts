@@ -5,6 +5,7 @@
 - bug fixes
     - scripting: `getProp()` now correctly returns a copy of the property if it is an object
     - prevent infinite loop when loading widgets with complex inter-dependencies
+    - modal: layout issue on iOS 15+
 
 - widgets
     - dropdown: allow resubmitting the same value

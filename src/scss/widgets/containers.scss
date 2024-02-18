@@ -498,14 +498,11 @@
             z-index: 2;
         }
 
-        z-index: 9999999999999!important;
         overflow: visible;
 
         contain: size;
         @supports not (contain: strict) {
             transform: none; // cancel new stacking context
-            z-index: initial!important; // iOS does it wrong otherwise
-
         }
 
     }
@@ -529,6 +526,7 @@
 
     > .popup {
         padding:0;
+        z-index: 9999999999999!important;
 
         > .popup-wrapper {
             width: var(--width, 100%);
