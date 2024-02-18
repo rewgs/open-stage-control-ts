@@ -192,6 +192,7 @@ class Canvas extends Widget {
             case 'colorWidget':
             case 'colorFill':
             case 'colorStroke':
+            case 'colorKnob':
             case 'alphaStroke':
             case 'alphaFillOff':
             case 'alphaFillOn':

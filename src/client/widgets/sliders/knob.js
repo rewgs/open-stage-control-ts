@@ -1,7 +1,7 @@
 var {clip} = require('../utils'),
     Slider = require('./slider')
 
-module.exports = class Knob extends Slider {
+class Knob extends Slider {
 
     static description() {
 
@@ -18,6 +18,7 @@ module.exports = class Knob extends Slider {
                     'Design style',
                     'Note: "solid" design uses "colorStroke" for the central knob color.'
                 ]},
+                colorKnob: {type: 'string', value: 'auto', help: 'Knob color'},
                 pips: {type: 'boolean', value: false, help: 'Set to `true` to show the scale\'s breakpoints'},
                 dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
                 angle: {type: 'number', value: 270, help: 'Defines the angle\'s width of the knob, in degrees'},
@@ -229,7 +230,7 @@ module.exports = class Knob extends Slider {
             // knob
 
             this.ctx.globalAlpha = 1
-            this.ctx.strokeStyle = this.cssVars.colorFill
+            this.ctx.strokeStyle = this.cssVars.colorKnob
             this.ctx.lineWidth = this.cssVars.lineWidth + .5 * PXSCALE
 
             let r1 = minRadius + this.gaugePadding,
@@ -246,7 +247,7 @@ module.exports = class Knob extends Slider {
             // center
 
             this.ctx.globalAlpha = this.cssVars.alphaStroke
-            this.ctx.fillStyle = this.cssVars.colorStroke
+            this.ctx.fillStyle = this.cssVars.colorKnob
 
             this.ctx.beginPath()
             this.ctx.arc(this.width / 2, this.height / 2, maxRadius / 1.25, 0, 2 * Math.PI)
@@ -318,7 +319,7 @@ module.exports = class Knob extends Slider {
             // knob
 
             this.ctx.globalAlpha = 1
-            this.ctx.strokeStyle = this.cssVars.colorFill
+            this.ctx.strokeStyle = this.cssVars.colorKnob
             this.ctx.lineWidth = this.cssVars.lineWidth
 
             let r1 = minRadius * 1.5,
@@ -371,3 +372,9 @@ module.exports = class Knob extends Slider {
     }
 
 }
+
+Knob.cssVariables = Knob.prototype.constructor.cssVariables.concat(
+    {js: 'colorKnob', css: '--color-knob'}
+)
+
+module.exports = Knob

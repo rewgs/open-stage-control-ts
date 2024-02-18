@@ -2,6 +2,9 @@
 .knob-container,
 .encoder-container,
 .range-container {
+
+    --color-knob: var(--color-fill);
+
     canvas {
         image-rendering: pixelated;
         width: 100%;
@@ -19,7 +22,6 @@
     --widget-padding: 1rem;
     --knob-size: 1rem;
     --line-width: 1rem;
-    --color-knob: var(--color-fill);
     
     canvas {
         text-align: left;
