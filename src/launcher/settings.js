@@ -147,6 +147,21 @@ class Settings {
                     })
                 })
 
+                field.addEventListener('drop', (e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    let paths = []
+                    for (var f of event.dataTransfer.files) {
+                        if (f.path.includes(' ')) {
+                            paths.push('"' + f.path + '"')
+                        } else {
+                            paths.push(f.path)
+                        }
+                    }
+                    input.value = paths.join(' ')
+                    DOM.dispatchEvent(input, 'change')
+                });
+
             }
 
             reset = field.appendChild(html`
