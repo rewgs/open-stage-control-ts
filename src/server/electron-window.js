@@ -63,7 +63,11 @@ module.exports = function(options={}) {
     window.once('ready-to-show', ()=>{
         window.show()
         if (options.id === 'launcher' && settings.read('startMinimized')) {
-            window.minimize()
+            if (process.platform === 'darwin') {
+                window.hide()
+            } else {
+                window.minimize()
+            }
         }
     })
 

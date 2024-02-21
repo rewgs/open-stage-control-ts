@@ -13,6 +13,9 @@
     - xy/multixy: add `axisLock` property; allow locking one the axis by holding `Shift` while dragging if `axisLock` is not set, bypasses it otherwise.
     - knob/fader/range: add `colorKnob` property
 
+- misc
+    - on Mac, start with the launcher window hidden if `Start minimized` is set
+
 ## 1.25.7
 
 - bug fixes
