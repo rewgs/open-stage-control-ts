@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.25.8
+## 1.26.0
 
 - bug fixes
     - scripting: `getProp()` now correctly returns a copy of the property if it is an object
