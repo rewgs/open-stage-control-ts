@@ -160,7 +160,7 @@ class Settings {
                     }
                     input.value = paths.join(' ')
                     DOM.dispatchEvent(input, 'change')
-                });
+                })
 
             }
 
