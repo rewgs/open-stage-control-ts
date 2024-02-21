@@ -18,6 +18,7 @@ class OscServer {
         this.customModuleEventEmitter = new EventEmitter()
         this.customModule = settings.read('custom-module') ? new CustomModule(settings.read('custom-module'), {
             app: this.customModuleEventEmitter,
+            tcpServer: oscTCPServer,
             sendOsc: this.sendOsc.bind(this),
             receiveOsc: this.receiveOsc.bind(this),
             send: (host, port, address, ...args)=>{

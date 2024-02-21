@@ -17,6 +17,9 @@
     - on Mac, start hidden if `Start minimized` is set
     - allow dropping files into file fields
 
+- custom module
+    - expose `tcpServer` to allow monitoring the state of tcp connections
+
 ## 1.25.7
 
 - bug fixes

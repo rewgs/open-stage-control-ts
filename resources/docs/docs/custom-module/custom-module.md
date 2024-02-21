@@ -135,6 +135,22 @@ This function can be used to load native node modules or locally installed modul
 
 ----
 
+#### `tcpServer`
+
+Raw access to the server's [TCP backend](https://github.com/jean-emmanuel/open-stage-control/blob/master/src/server/osc/tcp.js). Can be used to monitor the state of TCP connections:
+
+```js
+for (var ip in tcpServer.clients) {
+    tcpServer.clients[ip].port.on('ready', ()=>{
+        console.log(`TCP connection established with ${ip}:${tcpServer.clients[ip].remotePort}`)
+    })
+    tcpServer.clients[ip].port.on('close', ()=>{
+        console.log(`TCP connection lost with ${ip}:${tcpServer.clients[ip].remotePort}`)
+    })
+}
+```
+
+
 #### Other javascript globals
 
 - `console`
