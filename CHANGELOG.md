@@ -9,6 +9,7 @@
 
 - widgets
     - dropdown: allow resubmitting the same value
+    - switch: allow resubmitting the same value
     - plot: missing `logScaleX` and `logScaleY` properties
     - xy/multixy: add `axisLock` property; allow locking one the axis by holding `Shift` while dragging if `axisLock` is not set, bypasses it otherwise.
     - knob/fader/range: add `colorKnob` property

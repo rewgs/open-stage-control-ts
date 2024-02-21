@@ -57,7 +57,7 @@ class Switch extends MenuBase {
         this.parseValues()
 
 
-        var dragCallback = (e, touchFix)=>{
+        var dragCallback = (e, slide)=>{
 
             var index = 0,
                 node = e.target
@@ -66,7 +66,7 @@ class Switch extends MenuBase {
                 node = e.firstTarget
             }
 
-            if (touchFix && e.isTouch) {
+            if (slide && e.isTouch) {
                 // special traversing touch fix
                 node = document.elementFromPoint(e.clientX, e.clientY)
             }
@@ -81,7 +81,9 @@ class Switch extends MenuBase {
 
             var value = this.values[index]
 
-            if (value !== this.value || this.value === undefined) this.setValue(value, {sync: true, send: true})
+            if (slide && value === this.value) return
+            
+            this.setValue(value, {sync: true, send: true})
 
         }
 
