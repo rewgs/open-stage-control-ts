@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.26.1
+
+- bug fixes
+    - mac: unable to show launcher windows when starting minimized 
+
 ## 1.26.0
 
 - bug fixes

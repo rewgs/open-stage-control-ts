@@ -71,6 +71,12 @@ module.exports = function(options={}) {
         }
     })
 
+    if (options.id === 'launcher' && process.platform === 'darwin' && settings.read('startMinimized')) {
+        app.on('activate', ()=>{
+            if (!window.isDestroyed()) window.show()
+        })
+    }
+
     window.webContents.once('page-title-updated', ()=>{
         if (options.fullscreen) {
             window.webContents.sendInputEvent({keyCode: 'F11', type: 'keyDown'})
