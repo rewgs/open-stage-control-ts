@@ -199,9 +199,9 @@ class Panel extends Container() {
             this.navigation = this.widget.appendChild(html`<div class="navigation ${'tabs-' + this.getProp('tabsPosition')}"></div>`)
 
             this.children = options.children || new Array(this.getProp('tabs').length)
-            var length = this.children.length
+            var tlength = this.children.length
 
-            for (let i = 0; i < length; i++) {
+            for (let i = 0; i < tlength; i++) {
                 if (this.children[i]) {
                     this.widget.appendChild(this.children[i].container)
                     this.children[i].mounted = true
@@ -242,9 +242,9 @@ class Panel extends Container() {
             this.childrenType = 'widget'
 
             this.children = options.children || new Array(this.getProp('widgets').length)
-            var length = this.children.length
+            var wlength = this.children.length
 
-            for (let i = 0; i < length; i++) {
+            for (let i = 0; i < wlength; i++) {
                 if (this.children[i]) {
                     this.widget.appendChild(this.children[i].container)
                     this.children[i].mounted = true
