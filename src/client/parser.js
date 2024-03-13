@@ -43,8 +43,6 @@ var Parser = class Parser {
 
         var props = data
 
-        widgetManager.valueChangeLock()
-
         // Set default widget type
         props.type =  tab ? 'tab' : props.type || 'fader'
 
@@ -108,8 +106,6 @@ var Parser = class Parser {
 
         parentNode.appendChild(widget.container)
         widget.mounted = true
-
-        widgetManager.valueChangeUnlock()
 
         // Editor needs to get the container object
         return widget

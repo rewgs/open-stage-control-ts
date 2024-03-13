@@ -19,9 +19,6 @@ class WidgetManager extends EventEmitter {
 
         this.preArgsSeparator = '||||'
 
-        this.valueChangeLockDepth = 0
-        this.valueChangeQueue = {}
-
         this.on('value-changed', this.onChange.bind(this))
 
         ipc.on('connect', ()=>{
@@ -32,28 +29,9 @@ class WidgetManager extends EventEmitter {
 
     }
 
-    valueChangeLock() {
-        this.valueChangeLockDepth++
-    }
-
-    valueChangeUnlock() {
-        this.valueChangeLockDepth--
-        if (this.valueChangeLockDepth == 0) {
-            for (var h in this.valueChangeQueue) {
-                if (this.valueChangeQueue[h]) this.applyValueChange(this.valueChangeQueue[h])
-            }
-            this.valueChangeQueue = {}
-        }
-    }
-
     onChange(e) {
 
-        if (this.valueChangeLockDepth === 0) this.applyValueChange(e)
-        else this.valueChangeQueue[e.widget.hash] = e
-
-    }
-
-    applyValueChange(e) {
+        if (!e) return
 
         var {id, widget, linkId, options} = e
 
@@ -101,8 +79,6 @@ class WidgetManager extends EventEmitter {
                 this.linkIdLock = []
             }
         }
-
-        this.trigger('value-changed-lazy', e)
     }
 
     createAddressRef(widget, preArgs, address) {

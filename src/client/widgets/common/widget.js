@@ -345,14 +345,12 @@ class Widget extends EventEmitter {
 
     changed(options) {
 
-        widgetManager.valueChangeLock()
         this.trigger('value-changed', {
             widget: this,
             options: options,
             id: this.getProp('id'),
             linkId: this.getProp('linkId')
         })
-        widgetManager.valueChangeUnlock()
 
     }
 
@@ -487,11 +485,11 @@ class Widget extends EventEmitter {
                 this.onLinkedPropsChanged(e, 'value-changed')
             }
 
-            widgetManager.on('value-changed-lazy', this.linkedValueChangedCallback, {context: this})
+            widgetManager.on('value-changed', this.linkedValueChangedCallback, {context: this})
 
         } else if (this.linkedPropsValueCallback && !Object.keys(this.linkedPropsValue).length) {
 
-            widgetManager.off('value-changed-lazy', this.linkedValueChangedCallback)
+            widgetManager.off('value-changed', this.linkedValueChangedCallback)
             delete this.linkedValueChangedCallback
 
         }
