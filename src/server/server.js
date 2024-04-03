@@ -16,8 +16,7 @@ function createServer(route) {
     }
 }
 
-var urlparser   = require('url'),
-    path        = require('path'),
+var path        = require('path'),
     fs          = require('fs'),
     send        = require('send'),
     replaceStream = require('replacestream'),
