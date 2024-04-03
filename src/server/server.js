@@ -158,9 +158,12 @@ function httpRoute(req, res) {
             if (url.match(/.(svg|jpg|jpeg|png|apng|gif|webp|tiff|xbm|bmp|ico|ttf|otf|woff|woff2|html|css|js)(\?[0-9]*)?$/i)) {
 
                 // Resolution order: session path, theme path, absolute path
+                var id
+                if (req.headers.cookie) {
+                    id = (req.headers.cookie.match(/client_id=([^;]+)/) || [])[1]
+                }
 
-                var id = urlparser.parse('?' + req.headers.cookie, true).query.client_id,
-                    resolvedPath = resolvePath(decodeURI(url), id)
+                resolvedPath = resolvePath(decodeURI(url), id)
 
                 if (resolvedPath) {
                     try {

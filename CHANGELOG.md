@@ -1,9 +1,15 @@
 # Changelog
 
+## 1.26.2
+
+- bug fixes
+    - user resources not loading when using an external browser
+    - advanced syntaxes resolution order issue
+
 ## 1.26.1
 
 - bug fixes
-    - mac: unable to show launcher windows when starting minimized 
+    - mac: unable to show launcher windows when starting minimized
 
 ## 1.26.0
 
