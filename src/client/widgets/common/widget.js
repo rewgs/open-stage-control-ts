@@ -925,9 +925,21 @@ class Widget extends EventEmitter {
 
                 if (!this.isDynamicProp(propName)) {
 
-                    if ((!widget || !this.contains(widget)) && !(widget === this && updatedProps.length === 1 && updatedProps[0] === 'value')) {
+                    if (widget && this.contains(widget)) {
+
+                        this.errorProp(propName, '@{}', `a container can't use its child's properties to define non-dynamic properties.`)
+                        continue
+
+                    } else if (widget === this && updatedProps.length === 1 && updatedProps[0] === 'value') {
+
+                        this.errorProp(propName, '@{}', `a widget can't use it's own value to define non-dynamic properties.`)
+                        continue
+
+                    } else {
+
                         reCreate = true
                         break
+
                     }
 
                 } else {

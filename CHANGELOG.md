@@ -6,6 +6,9 @@
     - user resources not loading when using an external browser
     - advanced syntaxes resolution order issue
 
+- advanced syntaxes
+    - display an error in the console in some unsupported advanced syntaxes use cases
+
 ## 1.26.1
 
 - bug fixes
