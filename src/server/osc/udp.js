@@ -14,7 +14,7 @@ oscUDPServer.on('error', function(e) {
     if (e.code === 'EADDRINUSE') {
         console.error(`(ERROR, UDP) could not open port ${oscInPort} (already in use) `)
     } else {
-        console.error(`(ERROR, UDP) ${e.message}`)
+        console.error('(ERROR, UDP)', e)
     }
 })
 
