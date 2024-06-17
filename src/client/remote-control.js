@@ -264,6 +264,11 @@ var callbacks = {
         console.log(args)
 
     },
+    '/SESSION/CREATE': function(args) {
+
+        sessionManager.create()
+
+    },
     '/SESSION/OPEN': function(args) {
 
         if (!Array.isArray(args)) args = [args]

@@ -404,3 +404,53 @@ module.exports = {
     }
 }
 ```
+
+## Dynamic widget creation
+```js
+function create_widgets() {
+    receive('', '', '/EDIT', 'root', {
+        widgets: [{
+            type: 'panel',
+            id: 'my_panel',
+            layout: 'vertical',
+            width: '100%',
+            height: '200%',
+            widgets: [
+                {
+                    type: 'text',
+                    id: 'notice',
+                    value: 'Hello, world!',
+                    width: '100%',
+                },
+                {
+                    type: 'button',
+                    id: 'button',
+                    address: '/foo',
+                    preArgs: [1],
+                },
+            ]
+        }]
+    })
+}
+
+module.exports = {
+    reload: function(){
+        // When reloading this script, recreate all widgets
+        create_widgets()
+    },
+}
+
+// Called when a client is opened
+//
+// This can be omitted if you want to dynamically create additional widgets on top
+// of a session loaded with --load
+app.once('open', () => {
+    app.once('sessionSetPath', (data) => {
+        // Session was created
+        create_widgets()
+    })
+    // Create a new empty session
+    receive('', '', '/SESSION/CREATE')
+})
+
+```
