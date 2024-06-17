@@ -378,6 +378,11 @@ module.exports = {
             if (m.init) m.init()
         }
     },
+    reload: function(){
+        for (var m of submodules) {
+            if (m.reload) m.reload()
+        }
+    },
     oscInFilter: function(data){
 
         for (var m of submodules) {

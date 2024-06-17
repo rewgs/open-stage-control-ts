@@ -16,7 +16,14 @@ Using the server's `custom-module` option, users can load a custom javascript mo
 module.exports = {
 
     init: function(){
-        // this will be executed once when the osc server starts
+        // this will be executed once when the osc server starts after
+        // connections are set up
+        // it is called for the main module only
+    },
+
+    reload: function(){
+        // this will be executed after the custom module is reloaded
+        // it is called for the main module only
     },
 
     oscInFilter:function(data){
@@ -48,7 +55,8 @@ module.exports = {
     },
 
     unload: function(){
-        // this will be executed when the custom module is reloaded
+        // this will be executed before the custom module is reloaded
+        // it is called for all modules, including other loaded modules
     },
 
 }
@@ -168,7 +176,7 @@ for (var ip in tcpServer.clients) {
 
 ## Autoreload
 
-Custom modules (including submodules loaded with `require()`) are reloaded automatically when they are modified. Upon reload, timers (`setTimeout` and `setInterval`) and event listeners (added to the  `app` object) are reset.
+Custom modules (including submodules loaded with `require()`) are reloaded automatically when they are modified. Upon reload, timers (`setTimeout` and `setInterval`) and event listeners (added to the  `app` object) are reset. After each reload the `module.exports.reload()` function (if any) is called.
 
 The `global` object persists accross reloads.
 
