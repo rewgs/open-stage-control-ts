@@ -2,6 +2,9 @@
 
 ##  1.26.3
 
+- bug fixes
+    - app address / qr code not updating when network changes
+
 - custom module
     - provide error backtraces in module.exports functions
 

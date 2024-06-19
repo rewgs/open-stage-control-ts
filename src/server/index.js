@@ -92,7 +92,7 @@ function showQRCode(){
     for (var add of addresses) {
         if (launcher) {
             QRCode.toString(add,{type:'svg', small: true, margin: 1}, (err, qr)=>{
-                launcher.webContents.send('stdout', '<div class="qrcode">' + qr + '</div>')
+                launcher.webContents.send('stdout', '<div class="qrcode" title="' + add + '">' + qr + '</div>')
             })
             if (addresses.length > 1) {
                 launcher.webContents.send('stdout', '(' + add + ')')
