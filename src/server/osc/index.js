@@ -145,14 +145,24 @@ class OscServer {
 
     oscInFilter(data){
         if (this.customModule.oscInFilter) {
-            return this.customModule.oscInFilter(data)
+            try {
+                return this.customModule.oscInFilter(data)
+            } catch(e) {
+                console.error('(ERROR, CUSTOM MODULE)', e)
+                return data
+            }
         } else {
             return data
         }
     }
     oscOutFilter(data){
         if (this.customModule.oscOutFilter) {
-            return this.customModule.oscOutFilter(data)
+            try {
+                return this.customModule.oscOutFilter(data)
+            } catch(e) {
+                console.error('(ERROR, CUSTOM MODULE)', e)
+                return data
+            }
         } else {
             return data
         }
@@ -198,7 +208,11 @@ class OscServer {
         }
 
         if (this.customModule.init) {
-            this.customModule.init()
+            try {
+                this.customModule.init()
+            } catch(e) {
+                console.error('(ERROR, CUSTOM MODULE)', e)
+            }
         }
 
     }

@@ -1,5 +1,10 @@
 # Changelog
 
+##  1.26.3
+
+- custom module
+    - provide error backtraces in module.exports functions
+
 ## 1.26.2
 
 - bug fixes

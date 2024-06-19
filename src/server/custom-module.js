@@ -110,7 +110,7 @@ class CustomModule {
         try {
             code = fs.readFileSync(this.filename, {encoding: 'utf8', flag: 'rs'}) // flag 'rs' to avoid cache issue on windows
         } catch(err) {
-            console.error(`(ERROR) ${this.submodule ? 'Submodule' : 'Custom module'} not found: ${this.filename}`)
+            console.error(`(ERROR, CUSTOM MODULE) module not found: ${this.filename}`)
             return false
         }
 
@@ -129,8 +129,8 @@ class CustomModule {
             })
         } catch(err) {
             loadedModules[this.filename] = null
-            console.error('(ERROR) Custom module loading error')
-            console.error(err)
+            console.error('(ERROR, CUSTOM MODULE) error while loading module')
+            console.log(err)
             return false
         }
 
@@ -153,7 +153,7 @@ class CustomModule {
             try {
                 this.module.exports.unload()
             } catch(e) {
-                console.error('(ERROR) Error while unloading custom module')
+                console.error('(ERROR) Error while unloading custom module', e)
                 console.error(e)
             }
         }

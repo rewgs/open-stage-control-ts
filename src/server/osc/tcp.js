@@ -25,7 +25,7 @@ class OscTCPClient extends EventEmitter {
         this.port = new osc.TCPSocketPort(this.options)
 
         this.port.on('error', (err)=>{
-            console.error(`(ERROR, TCP) ${err.message}`)
+            console.error('(ERROR, TCP)', err)
         })
 
         this.port.on('close', (hadErr)=>{
