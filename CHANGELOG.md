@@ -4,6 +4,7 @@
 
 - bug fixes
     - app address / qr code not updating when network changes
+    - issue after theme auto reload (broken grid, colors not updated)
 
 - custom module
     - provide error backtraces in module.exports functions

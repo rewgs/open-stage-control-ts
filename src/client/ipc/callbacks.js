@@ -95,18 +95,37 @@ module.exports = {
 
     reloadCss: function(){
         var queryString = '?__OSC_ASSET__=1&reload=' + Date.now()
-        DOM.each(document, 'link[rel="stylesheet"][hot-reload]', (el)=>{
-            el.href = el.href.replace(/\?.*|$/, queryString)
-        })
+        var sheets = DOM.get(document, 'link[rel="stylesheet"][hot-reload]')
+        var loaded = 0
 
-        setTimeout(()=>{
-            var root = widgetManager.getWidgetById('root')[0]
-            if (root) root.onPropChanged('color')
-            GRIDWIDTH_CSS =  parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
-            editor.toggleGrid()
-            editor.toggleGrid()
-        },200)
+        for (let stylesheet of sheets) {
+            stylesheet.href = stylesheet.href.replace(/\?.*|$/, queryString)
 
+            // use image hack to catch stylesheet load event
+            let img = document.createElement('img')
+            document.body.appendChild(img)
+
+            img.onerror = img.onload = ()=>{
+                img.onerror = img.onload = null
+                document.body.removeChild(img)
+
+                if (++loaded === sheets.length) {
+                    var root = widgetManager.getWidgetById('root')[0]
+                    if (root) root.onPropChanged('colorWidget')
+                    fastdom.measure(()=>{
+                        GRIDWIDTH_CSS = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
+                        fastdom.mutate(()=>{
+                            editor.toggleGrid()
+                            editor.toggleGrid()
+                        })
+                    })
+                }
+            }
+
+            img.src = stylesheet.href
+
+
+        }
 
     },
 
