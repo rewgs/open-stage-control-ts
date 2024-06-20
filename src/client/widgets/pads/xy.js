@@ -208,7 +208,7 @@ module.exports = class Xy extends Pad {
 
     draw() {
 
-        var pointSize = this.pointSize,
+        var pointSize = this.cssVars.pointSize,
             margin = this.padPadding,
             x = this.faders.x.percentToCoord(this.faders.x.percent),
             y = this.faders.y.percentToCoord(this.faders.y.percent),
@@ -287,7 +287,7 @@ module.exports = class Xy extends Pad {
 
         }
 
-        if (!pipsDrawn) this.clearRect = [x - this.pointSize - 2 * PXSCALE, y - this.pointSize - 2 * PXSCALE, (this.pointSize + PXSCALE) * 4, (this.pointSize + PXSCALE) * 4]
+        if (!pipsDrawn) this.clearRect = [x - pointSize - 2 * PXSCALE, y - pointSize - 2 * PXSCALE, (pointSize + PXSCALE) * 4, (pointSize + PXSCALE) * 4]
 
 
         if (!ephemeral || this.active) {

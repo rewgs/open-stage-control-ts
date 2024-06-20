@@ -30,6 +30,8 @@
 
 .multixy-container {
 
+    --point-size: 20rem;
+
     canvas:not(:first-child) {
         position: absolute;
         top: 0;

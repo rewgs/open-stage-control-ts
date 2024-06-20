@@ -64,7 +64,6 @@ module.exports = class MultiXy extends Pad {
 
         this.npoints = Array.isArray(this.getProp('points')) ? this.getProp('points').length : this.getProp('points') || 0
         this.labels = Array.isArray(this.getProp('points'))
-        this.pointSize = parseInt(this.getProp('pointSize'))
 
         this.preventChildrenTouchState = true
         this.pads = []
@@ -82,7 +81,7 @@ module.exports = class MultiXy extends Pad {
                 logScaleX:this.getProp('logScaleX'),
                 logScaleY:this.getProp('logScaleY'),
                 axisLock:this.getProp('axisLock'),
-                pointSize: this.getProp('pointSize'),
+                pointSize: 'auto',
                 pips: this.getProp('pips') && i == this.npoints-1,
                 sensitivity: this.getProp('sensitivity'),
                 input:false
@@ -249,9 +248,9 @@ module.exports = class MultiXy extends Pad {
     updateHandlesPosition() {
 
         for (var i=0;i<this.npoints;i++) {
-
-            this.padsCoords[i] = [clip(this.pads[i].faders.x.percent,[0,100]) / 100 * (this.width - (this.pointSize * 2 + 2) * PXSCALE) + (this.pointSize + 1) * PXSCALE
-                ,- clip(this.pads[i].faders.y.percent,[0,100]) / 100 * (this.height - (this.pointSize * 2 + 2) * PXSCALE) - (this.pointSize + 1) * PXSCALE]
+            var pointSize = this.pads[i].cssVars.pointSize
+            this.padsCoords[i] = [clip(this.pads[i].faders.x.percent,[0,100]) / 100 * (this.width - (pointSize * 2 + 2) * PXSCALE) + (pointSize + 1) * PXSCALE
+                ,- clip(this.pads[i].faders.y.percent,[0,100]) / 100 * (this.height - (pointSize * 2 + 2) * PXSCALE) - (pointSize + 1) * PXSCALE]
 
         }
 

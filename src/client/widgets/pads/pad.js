@@ -11,8 +11,6 @@ class Pad extends Canvas {
             </inner>
         `})
 
-        this.canvas.style.setProperty('--pointSize', parseInt(this.getProp('pointSize')) + 'rem')
-
     }
 
     cacheCanvasStyle(style) {
@@ -21,16 +19,35 @@ class Pad extends Canvas {
 
         super.cacheCanvasStyle(style)
 
-        this.pointSize = parseFloat(style.getPropertyValue('--pointSize')) * PXSCALE
         this.padPadding = (this.cssVars.padding + this.cssVars.lineWidth) + 2 * PXSCALE
+
+    }
+
+    onPropChanged(propName, options, oldPropValue) {
+
+        var ret = super.onPropChanged(...arguments)
+
+        switch (propName) {
+            case 'pointSize':
+                this.setCssVariables()
+                return
+        }
+
+        return ret
+
 
     }
 
 }
 
+Pad.cssVariables = Pad.prototype.constructor.cssVariables.concat(
+    {js: 'pointSize', css: '--point-size', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE},
+)
+
 Pad.dynamicProps = Pad.prototype.constructor.dynamicProps.filter(n => n !== 'decimals').concat([
     'spring',
-    'axisLock'
+    'axisLock',
+    'pointSize'
 ])
 
 module.exports = Pad

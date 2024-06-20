@@ -6,6 +6,9 @@
     - app address / qr code not updating when network changes
     - issue after theme auto reload (broken grid, colors not updated)
 
+- widgets
+    - pads: expose css variable `--point-size`
+
 - custom module
     - provide error backtraces in module.exports functions
 
