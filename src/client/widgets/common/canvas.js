@@ -203,10 +203,6 @@ class Canvas extends Widget {
                         this.batchDraw()
                     })
                 })
-                // setTimeout(()=>{
-                //     this.cacheCanvasStyle()
-                //     this.batchDraw()
-                // },10)
                 return
             case 'css':
             case 'lineWidth':
