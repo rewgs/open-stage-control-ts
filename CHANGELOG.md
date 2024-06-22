@@ -11,6 +11,10 @@
 
 - custom module
     - provide error backtraces in module.exports functions
+    - add `reload()` callback to provide finer control over the module's lifecycle
+
+- remote control
+    - add /SESSION/CREATE command
 
 ## 1.26.2
 
