@@ -204,7 +204,7 @@ Save state session to `path.state`.
 
 #### `/SESSION/CREATE`
 
-Create a new empty session
+Create a new empty session. Unsaved changes will be lost.
 
 ----
 #### `/SESSION/OPEN path.json`

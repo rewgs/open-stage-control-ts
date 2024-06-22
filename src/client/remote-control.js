@@ -266,6 +266,8 @@ var callbacks = {
     },
     '/SESSION/CREATE': function(args) {
 
+        editor.unsavedSession = false
+
         sessionManager.create()
 
     },
