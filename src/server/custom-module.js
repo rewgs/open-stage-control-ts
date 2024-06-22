@@ -43,7 +43,7 @@ class CustomModule {
                     if (typeof(errorCallback) === 'function') {
                         errorCallback(e)
                     } else {
-                        console.error('(ERROR) could not load json file from ' + url)
+                        console.error('(ERROR, CUSTOM MODULE) could not load json file from ' + url)
                         console.error(e.message)
                     }
                 }
@@ -56,7 +56,7 @@ class CustomModule {
                     if (typeof(errorCallback) === 'function') {
                         errorCallback(e)
                     } else {
-                        console.error('(ERROR) could not save json file to ' + url)
+                        console.error('(ERROR, CUSTOM MODULE) could not save json file to ' + url)
                         console.error(e.message)
                     }
                 }
@@ -110,7 +110,7 @@ class CustomModule {
         try {
             code = fs.readFileSync(this.filename, {encoding: 'utf8', flag: 'rs'}) // flag 'rs' to avoid cache issue on windows
         } catch(err) {
-            console.error(`(ERROR, CUSTOM MODULE) module not found: ${this.filename}`)
+            console.error(`(ERROR, CUSTOM MODULE) Module not found: ${this.filename}`)
             return false
         }
 
@@ -129,7 +129,7 @@ class CustomModule {
             })
         } catch(err) {
             loadedModules[this.filename] = null
-            console.error('(ERROR, CUSTOM MODULE) error while loading module')
+            console.error('(ERROR, CUSTOM MODULE) Error while loading module')
             console.log(err)
             return false
         }
@@ -153,7 +153,7 @@ class CustomModule {
             try {
                 this.module.exports.unload()
             } catch(e) {
-                console.error('(ERROR) Error while unloading custom module', e)
+                console.error('(ERROR, CUSTOM MODULE) Error while calling unload()')
                 console.error(e)
             }
         }
@@ -200,12 +200,12 @@ class CustomModule {
                 try {
                     this.module.exports.reload()
                 } catch(e) {
-                    console.error('(ERROR) Error while calling custom module reload function')
+                    console.error('(ERROR, CUSTOM MODULE) Error while calling custom module reload function')
                     console.error(e)
                 }
             }
         } else {
-            console.error('(ERROR) Failed to reload custom module')
+            console.error('(ERROR, CUSTOM MODULE) Failed to reload custom module')
             this.unload()
         }
     }
