@@ -202,6 +202,11 @@ Save state session to `path.state`.
 
 ----
 
+#### `/SESSION/CREATE`
+
+Create a new empty session
+
+----
 #### `/SESSION/OPEN path.json`
 
 Open session file `path.json`.
