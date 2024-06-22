@@ -195,6 +195,15 @@ class CustomModule {
         console.log('(INFO) Reloading custom module...')
         if (this.load()) {
             console.log('(INFO) Custom module reloaded successfully')
+
+            if (this.module.exports && this.module.exports.reload) {
+                try {
+                    this.module.exports.reload()
+                } catch(e) {
+                    console.error('(ERROR) Error while calling custom module reload function')
+                    console.error(e)
+                }
+            }
         } else {
             console.error('(ERROR) Failed to reload custom module')
             this.unload()
