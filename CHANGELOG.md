@@ -12,6 +12,7 @@
 - custom module
     - provide error backtraces in module.exports functions
     - add `reload()` callback to provide finer control over the module's lifecycle
+    - add `stop()` callback (runs when the server stops)
 
 - remote control
     - add /SESSION/CREATE command

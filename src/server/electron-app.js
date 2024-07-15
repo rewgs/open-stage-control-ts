@@ -115,9 +115,6 @@ if (process.platform === 'darwin') {
     )
 }
 
-app.on('before-quit',()=>{
-    process.exit()
-})
 
 app.on('ready',()=>{
     var menu = Menu.buildFromTemplate(template)

@@ -175,21 +175,21 @@ function startServerProcess() {
 function stopServerProcess() {
 
     if (settings.read('no-gui')) {
-        if (serverProcess) serverProcess.kill()
+        if (serverProcess) serverProcess.kill('SIGINT')
         return
     }
 
     var toClose = [...clientWindows].filter(w=>w && !w.isDestroyed()),
         closed = 0
 
-    if (toClose.length === 0) serverProcess.kill()
+    if (toClose.length === 0) serverProcess.kill('SIGINT')
 
     for (var w of toClose) {
         w.on('closed', ()=>{
             closed++
             if (closed === toClose.length) {
                 clientWindows = []
-                if (serverProcess) serverProcess.kill()
+                if (serverProcess) serverProcess.kill('SIGINT')
             }
         })
         w.close()
@@ -283,10 +283,26 @@ if (settings.read('docs')) {
     server.bindCallbacks(callbacks)
 
     serverStarted = true
-    process.on('exit',()=>{
-        if (osc.midi) osc.midi.stop()
+
+    var closeServer = ()=>{
+        osc.server.stop()
         zeroconf.unpublishAll()
-    })
+    }
+
+    try {
+        let {app} = require('electron')
+        app.on('ready', ()=>{
+            process.on('SIGINT', function() {
+                closeServer()
+                process.exit(0)
+            })
+        })
+    } catch(e) {
+        process.on('SIGINT', function() {
+            closeServer()
+            process.exit(0)
+        })
+    }
 
     if (!process.env.OSC_SERVER_PROCESS) server.eventEmitter.on('serverStarted', ()=>{
         if (!settings.read('no-qrcode')) showQRCode()
@@ -299,8 +315,17 @@ if (settings.read('docs')) {
     // - node process: server (node mode in a forked process)
 
     app = require('./electron-app')
-    process.on('exit',()=>{
-        if (serverProcess) serverProcess.kill()
+
+    app.on('ready', ()=>{
+        process.on('SIGINT', function() {
+            if (serverProcess) serverProcess.kill('SIGINT')
+            process.exit(0)
+        })
+    })
+
+    app.on('before-quit',()=>{
+        console.log('PARENT PROCESS QUIT')
+        if (serverProcess) serverProcess.kill('SIGINT')
     })
 
 

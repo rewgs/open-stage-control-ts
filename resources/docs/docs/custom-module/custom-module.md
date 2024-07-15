@@ -10,6 +10,7 @@ Using the server's `custom-module` option, users can load a custom javascript mo
 // Do whatever you want
 // initialize variables
 // declare functions
+// listen to app events
 // load modules
 // etc
 
@@ -18,6 +19,11 @@ module.exports = {
     init: function(){
         // this will be executed once when the osc server starts after
         // connections are set up
+        // it is called for the main module only
+    },
+
+    stop: function(){
+        // this will be executed once when the osc server stops
         // it is called for the main module only
     },
 

@@ -217,6 +217,13 @@ class OscServer {
 
     }
 
+    stop() {
+
+        if (this.customModule.stop) this.customModule.stop()
+        if (midi) midi.stop()
+
+    }
+
 
 }
 

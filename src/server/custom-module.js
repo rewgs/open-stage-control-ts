@@ -210,6 +210,18 @@ class CustomModule {
         }
     }
 
+    stop() {
+
+        if (this.module.exports && this.module.exports.stop) {
+            try {
+                this.module.exports.stop()
+            } catch(e) {
+                console.error('(ERROR, CUSTOM MODULE) Error while calling custom module stop function')
+                console.error(e)
+            }
+        }
+    }
+
     setTimeout(fn, t) {
         var timeout = setTimeout(fn, t)
         this.timeouts.push(timeout)
