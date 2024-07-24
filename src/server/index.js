@@ -324,7 +324,6 @@ if (settings.read('docs')) {
     })
 
     app.on('before-quit',()=>{
-        console.log('PARENT PROCESS QUIT')
         if (serverProcess) serverProcess.kill('SIGINT')
     })
 
