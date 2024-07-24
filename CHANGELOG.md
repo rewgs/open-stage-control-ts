@@ -17,6 +17,9 @@
 - remote control
     - add /SESSION/CREATE command
 
+- client
+  - file browser now remembers the last displayed directory
+
 ## 1.26.2
 
 - bug fixes

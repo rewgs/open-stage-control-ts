@@ -492,7 +492,7 @@ module.exports =  {
         // remote file browser backend
 
         if (data.path) data.path[0] = resolveHomeDir(data.path[0])
-        else data.path = [resolveHomeDir('~/')]
+        else data.path = [settings.read('last-dir') || resolveHomeDir('~/')]
 
         var p = path.resolve(...data.path),
             root = resolveHomeDir(settings.read('remote-root'))
@@ -546,6 +546,7 @@ module.exports =  {
                     path: p,
                     files: list
                 }, clientId)
+                settings.write('last-dir', p, false, false)
             }
         })
 
