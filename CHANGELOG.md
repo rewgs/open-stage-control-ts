@@ -1,6 +1,6 @@
 # Changelog
 
-##  1.26.3
+##  1.27.0
 
 - bug fixes
     - app address / qr code not updating when network changes
