@@ -94,6 +94,9 @@ module.exports = {
     // nosleep
     nosleep: 'Prevent sleep',
 
+    // notifications
+    notifications: 'Notifications',
+    
     // remote save
     remotesave_open: 'Open (on the server)',
     remotesave_save: 'Save (on the server)',

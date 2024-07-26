@@ -211,6 +211,13 @@ var menuEntries = [
             if (fullscreen.isEnabled) fullscreen.toggle()
         },
         shortcut: 'f11'
+    },
+    {
+        label: locales('notifications'),
+        class: ()=>{return 'toggle ' + (notifications.visible ? 'on' : 'off')},
+        action: ()=>{
+            notifications.setVisibility(!notifications.visible)
+        }
     }
 
 ]

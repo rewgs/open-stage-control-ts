@@ -94,6 +94,9 @@ module.exports = {
     // nosleep
     nosleep: 'Nie pozwalaj na uśpienie ekranu',
 
+    // notifications
+    notifications: 'Powiadomienia',
+
     // remote save
     remotesave_open: 'Otwórz (na serwerze)',
     remotesave_save: 'Sapisz (na serwerze)',

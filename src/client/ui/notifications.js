@@ -63,6 +63,9 @@ class Notifications extends UiWidget {
         this.toasts = []
 
         this.loop = null
+        this.visible = undefined
+
+        this.setVisibility(ENV.notifications != 0)
 
         this.container.addEventListener('fast-click', (e)=>{
             for (var toast of this.toasts) {
@@ -123,6 +126,13 @@ class Notifications extends UiWidget {
 
     }
 
+
+    setVisibility(v) {
+
+        this.visible = v
+        this.container.style.display = v ? '' : 'none'
+
+    }
 
 }
 

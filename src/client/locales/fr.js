@@ -94,6 +94,9 @@ module.exports = {
     // nosleep
     nosleep: 'Empêcher la veille',
 
+    // notifications
+    notifications: 'Notifications',
+
     // remote save
     remotesave_open: 'Ouvrir (sur le serveur)',
     remotesave_save: 'Enregistrer (sur le serveur)',

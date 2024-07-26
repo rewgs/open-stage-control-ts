@@ -30,6 +30,7 @@
     - Clear console: remove logged messages from the console
 - Virtual keyboard: (desktop only) toggle virtual keyboard (displayed only when a text input is in focus, except for code editors in the inspector)
 - Fullscreen: toggle fullscreen
+- Notifications: toggle visibility of notifications
 - Prevent sleep (mobile only): attempt to prevent device from going to sleep when idle
 
 ## 2. Sidepanels
