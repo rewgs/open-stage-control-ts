@@ -233,7 +233,6 @@ if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
                         wakeLock = l
                     }).catch((err)=>{
                         console.error(`Could not acquire wake lock:\n${err.name}, ${err.message}`)
-                        console.info(`Falling back name}, ${err.message}`)
                         wakeLock = null
                     })
                 }
