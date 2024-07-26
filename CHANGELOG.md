@@ -18,10 +18,10 @@
     - add /SESSION/CREATE command
 
 - client
-  - file browser now remembers the last displayed directory
-  - allow dismissing notifications by clicking on them
-  - allow toggling notifications globally from main menu
-  - add `notifications` client option
+    - file browser now remembers the last displayed directory
+    - allow dismissing notifications by clicking on them
+    - allow toggling notifications globally from main menu
+    - add `notifications` client option
 
 ## 1.26.2
 
