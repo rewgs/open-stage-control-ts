@@ -19,6 +19,7 @@
 
 - client
   - file browser now remembers the last displayed directory
+  - allow dismissing notifications by clicking on them
 
 ## 1.26.2
 

@@ -42,7 +42,7 @@ It is the main component, it contains all the widgets and takes all the availabl
 
 ## 4. Notifications
 
-Notifications appear in the lower right corner, they are usually used to convey server status information.
+Notifications appear in the lower right corner, they are usually used to convey server status information and can be dismissed with a single click.
 
 ## 5. Modals
 

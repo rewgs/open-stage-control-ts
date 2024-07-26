@@ -1,5 +1,6 @@
 var html = require('nanohtml'),
-    morph = require('nanomorph')
+    morph = require('nanomorph'),
+    UiWidget = require('./ui-widget')
 
 
 var DEFAULT_DURATION = 3500
@@ -53,14 +54,21 @@ class Toast {
 
 }
 
-class Notifications {
+class Notifications extends UiWidget {
 
-    constructor() {
+    constructor(options) {
 
-        this.container = DOM.get('#notifications')[0]
+        super(options)
+
         this.toasts = []
 
         this.loop = null
+
+        this.container.addEventListener('fast-click', (e)=>{
+            for (var toast of this.toasts) {
+                if (toast.html.contains(e.target)) this.remove(toast)
+            }
+        })
 
     }
 
@@ -118,4 +126,4 @@ class Notifications {
 
 }
 
-module.exports = new Notifications()
+module.exports = new Notifications({selector: '#notifications'})
