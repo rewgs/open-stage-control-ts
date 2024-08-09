@@ -20,7 +20,7 @@ module.exports = class OscReceiver {
         this.parent = parent
         this.propNames = [propName]
         this.usePreArgs = usePreArgs
-        this.bindedCallback = this.callback.bind(this)
+        this.boundCallback = this.callback.bind(this)
         this.prefix = ''
         this.setAddress(address)
 
@@ -30,7 +30,7 @@ module.exports = class OscReceiver {
 
         if (this.address !== address) {
 
-            if (this.address) osc.off(this.prefix + this.address, this.bindedCallback, this.parent)
+            if (this.address) osc.off(this.prefix + this.address, this.boundCallback, this.parent)
 
             if (address) this.address = address
 
@@ -44,7 +44,7 @@ module.exports = class OscReceiver {
                 if (this.prefix[this.prefix.length - 1] !== '/') this.prefix += '/'
             }
 
-            osc.on(this.prefix + this.address, this.bindedCallback, {context: this.parent})
+            osc.on(this.prefix + this.address, this.boundCallback, {context: this.parent})
 
         }
 

@@ -54,7 +54,7 @@ class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dot
         this.watchDuration = 1000 * this.getProp('duration')
         this.ticks = 0
 
-        this.bindedLoop = this.loop.bind(this)
+        this.boundLoop = this.loop.bind(this)
 
     }
 
@@ -63,7 +63,7 @@ class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dot
         this.clock = Date.now()
         if (!this.looping && !this.getProp('freeze')) {
             this.lastUpdate = Date.now()
-            canvasQueue.on('frame', this.bindedLoop)
+            canvasQueue.on('frame', this.boundLoop)
             if (!canvasQueue.running) canvasQueue.startLoop()
             this.looping = true
             this.ticks = 0
@@ -74,7 +74,7 @@ class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dot
 
         if (this.looping) {
 
-            canvasQueue.off('frame', this.bindedLoop)
+            canvasQueue.off('frame', this.boundLoop)
             this.looping = false
 
         }

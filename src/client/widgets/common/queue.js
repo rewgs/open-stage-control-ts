@@ -11,7 +11,7 @@ class CanvasQueue extends EventEmitter{
         this.running = false
         this.frameLength = 1000 / CANVAS_FRAMERATE
         this.lastFrame = 0
-        this.bindedLoop = this.loop.bind(this)
+        this.boundLoop = this.loop.bind(this)
 
     }
 
@@ -27,7 +27,7 @@ class CanvasQueue extends EventEmitter{
 
         this.running = true
         this.flushed = 0
-        requestAnimationFrame(this.bindedLoop)
+        requestAnimationFrame(this.boundLoop)
 
     }
 
@@ -49,7 +49,7 @@ class CanvasQueue extends EventEmitter{
             return
         }
 
-        requestAnimationFrame(this.bindedLoop)
+        requestAnimationFrame(this.boundLoop)
 
         var delta = timestamp - this.lastFrame
 

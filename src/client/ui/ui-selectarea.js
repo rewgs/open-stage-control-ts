@@ -18,9 +18,9 @@ class UiSelectArea {
         this.selector = selector
         this.callback = callback
 
-        this.bindedMousedown = this.mousedown.bind(this)
-        this.bindedMousemove = this.mousemove.bind(this)
-        this.bindedMouseup = this.mouseup.bind(this)
+        this.boundMousedown = this.mousedown.bind(this)
+        this.boundMousemove = this.mousemove.bind(this)
+        this.boundMouseup = this.mouseup.bind(this)
 
     }
 
@@ -109,17 +109,17 @@ class UiSelectArea {
 
     enable() {
 
-        document.addEventListener('pointerdown',  this.bindedMousedown)
-        document.addEventListener('pointermove', this.bindedMousemove, true)
-        document.addEventListener('pointerup', this.bindedMouseup)
+        document.addEventListener('pointerdown',  this.boundMousedown)
+        document.addEventListener('pointermove', this.boundMousemove, true)
+        document.addEventListener('pointerup', this.boundMouseup)
 
     }
 
     disable() {
 
-        document.removeEventListener('pointerdown',  this.bindedMousedown)
-        document.removeEventListener('pointermove', this.bindedMousemove, true)
-        document.removeEventListener('pointerup', this.bindedMouseup)
+        document.removeEventListener('pointerdown',  this.boundMousedown)
+        document.removeEventListener('pointermove', this.boundMousemove, true)
+        document.removeEventListener('pointerup', this.boundMouseup)
 
     }
 
