@@ -38,5 +38,6 @@ if (screenfull.isEnabled && !iOS) {
 
 }
 
+window.ELECTRON_FULLSCREEN = ()=>{fullscreen.toggle()}
 
 module.exports = fullscreen

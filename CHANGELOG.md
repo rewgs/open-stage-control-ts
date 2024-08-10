@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.27.1
+
+- bug fixes
+  - server: `fullscreen` option not working when `read-only` is set
+
 ##  1.27.0
 
 - bug fixes
