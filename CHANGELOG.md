@@ -4,6 +4,7 @@
 
 - bug fixes
   - server: `fullscreen` option not working when `read-only` is set
+  - led and text widgets not client-syncing  
 
 ##  1.27.0
 

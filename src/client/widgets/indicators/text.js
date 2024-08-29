@@ -3,7 +3,7 @@ var {iconify} = require('../../ui/utils'),
     html = require('nanohtml'),
     StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Text extends StaticProperties(Widget, {bypass: true, interaction: false}) {
+module.exports = class Text extends StaticProperties(Widget, {interaction: false}) {
 
     static description() {
 
@@ -27,7 +27,6 @@ module.exports = class Text extends StaticProperties(Widget, {bypass: true, inte
             },
             osc: {
                 typeTags: null,
-                bypass: null,
                 ignoreDefaults: null
             }
         })

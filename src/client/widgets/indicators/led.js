@@ -3,7 +3,7 @@ var {mapToScale} = require('../utils'),
     html = require('nanohtml'),
     StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Led extends StaticProperties(Widget, {bypass: true, interaction: false}) {
+module.exports = class Led extends StaticProperties(Widget, {interaction: false}) {
 
     static description() {
 
@@ -36,7 +36,6 @@ module.exports = class Led extends StaticProperties(Widget, {bypass: true, inter
             osc: {
                 decimals: null,
                 typeTags: null,
-                bypass: null,
                 ignoreDefaults: null
             }
         })
