@@ -99,12 +99,13 @@ class PatchBay extends Container(Canvas) {
             class_specific: {
                 inputs: {type: 'array|object', value: ['input_1', 'input_2'], help: [
                     '- `Array` of input names : `[\'input_1\', \'input_2\']`',
-                    '- `Object` of `"label_1": "input_1"` pairs (example: `{"label a": "value 1", "label b": "value 2"}`). Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
+                    '- `Object` of `"label_1": "input_1"` pairs (example: `{"label a": "name 1", "label b": "name 2"}`). Numeric labels must be prepended or appended with a white space (or any other non-numeric character) otherwise the order of the values won\'t be kept',
                     '',
                     'Patchbay inputs can be connected to one or more outputs and will send messages of the following form when they are connected/disconnected: ',
                     '`/patchbay_address input_x output_x output_y etc`',
                     'If no output is connected to the input, the message will be `/patchbay_address input_x`',
-                    'The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1`'
+                    'The inputs values can be consumed with the property inheritance syntax: `@{patchbay_id/input_1}` returns an array of output names connected to `input_1`.',
+                    'To change connections via scripting, one must target the input nodes as follows: `set(\'patchbay_id/input_name\', [\'output_x\', \'output_y\'])`'
                 ]},
                 outputs: {type: 'array|object', value: ['output_1', 'output_2'], help: 'List of output values the inputs can connect to (see `inputs`).'},
                 exclusive: {type: 'string', value: false, choices: [false, 'in', 'out', 'both'], help: [
