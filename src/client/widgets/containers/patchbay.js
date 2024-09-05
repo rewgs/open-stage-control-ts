@@ -170,6 +170,7 @@ class PatchBay extends Container(Canvas) {
                     id: this.getProp('id') + '/' + this.inputs[k],
                     address: '#{@{parent.address} == "auto" ? "/" + @{parent.id} : @{parent.address}}',
                     target: '@{parent.target}',
+                    ignoreDefaults: '@{parent.ignoreDefaults}',
                     preArgs: this.inputs[k],
                     bypass: '@{parent.bypass}',
                     label: k

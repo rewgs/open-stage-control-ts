@@ -5,7 +5,8 @@
 - bug fixes
   - server: `fullscreen` option not working when `read-only` is set
   - led and text widgets not client-syncing  
-  - patchbay: address not working properly when set to `auto`
+  - patchbay: `address` not working properly when set to `auto`
+  - patchbay: `ignoreDefaults` not working properly
 
 ##  1.27.0
 
