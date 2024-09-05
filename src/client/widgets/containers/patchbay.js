@@ -167,7 +167,7 @@ class PatchBay extends Container(Canvas) {
                 data: {
                     type: 'patchbaynode',
                     id: this.getProp('id') + '/' + this.inputs[k],
-                    address: '@{parent.address}',
+                    address: '#{@{parent.address} == "auto" ? "/" + @{parent.id} : @{parent.address}}',
                     target: '@{parent.target}',
                     preArgs: this.inputs[k],
                     bypass: '@{parent.bypass}',
