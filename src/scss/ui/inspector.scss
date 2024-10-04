@@ -691,7 +691,7 @@ osc-inspector-color {
     $padding: 2rem;
     border: 1rem solid var(--color-ui-button);
     overflow: hidden;
-
+    --point-size: 10rem;
     .widget {
         background: var(--color-ui-background);
         flex: 1;

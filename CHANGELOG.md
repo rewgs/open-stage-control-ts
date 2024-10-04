@@ -7,6 +7,7 @@
   - led and text widgets not client-syncing  
   - patchbay: `address` not working properly when set to `auto`
   - patchbay: `ignoreDefaults` not working properly
+  - editor: missing position indicator in color picker pad
 
 ##  1.27.0
 
