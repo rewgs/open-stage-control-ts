@@ -9,6 +9,10 @@
   - patchbay: `ignoreDefaults` not working properly
   - editor: missing position indicator in color picker pad
 
+- mobile
+  - apply root's (or themes) background color the the browser's topbar when possible
+
+
 ##  1.27.0
 
 - bug fixes

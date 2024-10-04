@@ -1,5 +1,5 @@
 var UiWidget = require('./ui-widget'),
-    setScrollbarColor = require('./scrollbar-color')
+    {setScrollbarColor} = require('./utils')
 
 class UiWorkspace extends UiWidget {
 

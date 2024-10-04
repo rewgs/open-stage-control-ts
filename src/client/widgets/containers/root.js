@@ -1,5 +1,6 @@
 var Panel = require('./panel'),
     StaticProperties = require('../mixins/static_properties'),
+    {updateMobileThemeColor} = require('../../ui/utils'),
     mainMenu
 
 class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'root'}) {
@@ -84,6 +85,9 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
             case 'hideMenu':
                 this.checkMenuVisibility()
                 return
+            case 'colorBg':
+                updateMobileThemeColor()
+
         }
 
     }
@@ -97,6 +101,12 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
 
     }
 
+    setCssVariables() {
+
+        super.setCssVariables()
+        updateMobileThemeColor()
+
+    }
 
 }
 

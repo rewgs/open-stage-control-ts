@@ -9,7 +9,8 @@ var utils = require('../ui/utils'),
     uiLoading = require('../ui/ui-loading'),
     notifications = require('../ui/notifications'),
     raw = require('nanohtml/raw'),
-    backup = require('../backup')
+    backup = require('../backup'),
+    {updateMobileThemeColor} = require('../ui/utils')
 
 module.exports = {
 
@@ -119,6 +120,7 @@ module.exports = {
                             editor.toggleGrid()
                         })
                     })
+                    updateMobileThemeColor()
                 }
             }
 
