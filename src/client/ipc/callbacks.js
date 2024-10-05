@@ -120,7 +120,7 @@ module.exports = {
                             editor.toggleGrid()
                         })
                     })
-                    updateMobileThemeColor()
+                    updateMobileThemeColor(root)
                 }
             }
 

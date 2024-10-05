@@ -86,7 +86,7 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
                 this.checkMenuVisibility()
                 return
             case 'colorBg':
-                updateMobileThemeColor()
+                updateMobileThemeColor(this)
 
         }
 
@@ -104,7 +104,7 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
     setCssVariables() {
 
         super.setCssVariables()
-        updateMobileThemeColor()
+        updateMobileThemeColor(this)
 
     }
 
