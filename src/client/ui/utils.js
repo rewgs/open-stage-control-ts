@@ -1,6 +1,6 @@
 var chroma = require('chroma-js'),
     fastdom = require('fastdom'),
-    widgetManager = require('../managers/widgets')
+    widgetManager
 
 module.exports = {
 
@@ -44,6 +44,8 @@ module.exports = {
     },
 
     updateMobileThemeColor: function(){
+
+        if (!widgetManager) widgetManager = require('../managers/widgets')
 
         fastdom.measure(()=>{
             var root = widgetManager.getWidgetById('root')[0]
