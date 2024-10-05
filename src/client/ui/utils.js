@@ -46,11 +46,11 @@ module.exports = {
 
         fastdom.measure(()=>{
 
-            var style = window.getComputedStyle(root ? root.widget : document.documentElement)
+            var style = window.getComputedStyle(root ? root.widget : document.documentElement),
+                color = style.getPropertyValue('--color-background').trim()
 
             fastdom.mutate(()=>{
 
-                var color = style.getPropertyValue('--color-background').trim()
                 try {
                     for (var el of DOM.get('meta[name="theme-color"], meta[name="apple-mobile-web-app-status-bar-style"]')) {
                         el.setAttribute('content', color)
