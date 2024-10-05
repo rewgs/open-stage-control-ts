@@ -51,11 +51,9 @@ module.exports = {
 
             fastdom.mutate(()=>{
 
-                try {
-                    for (var el of DOM.get('meta[name="theme-color"], meta[name="apple-mobile-web-app-status-bar-style"]')) {
-                        el.setAttribute('content', color)
-                    }
-                } catch(e) {}
+                for (var el of DOM.get('meta[name="theme-color"], meta[name="apple-mobile-web-app-status-bar-style"]')) {
+                    el.setAttribute('content', color)
+                }
 
             })
 
