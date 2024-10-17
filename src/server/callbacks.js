@@ -491,8 +491,16 @@ module.exports =  {
     listDir(data, clientId) {
         // remote file browser backend
 
-        if (data.path) data.path[0] = resolveHomeDir(data.path[0])
-        else data.path = [settings.read('last-dir') || resolveHomeDir('~/')]
+        if (data.path) {
+            // path is requested
+            data.path[0] = resolveHomeDir(data.path[0])
+        } else if (settings.read('last-dir') && fs.existsSync(settings.read('last-dir'))) {
+            // attempt to use last visited directory
+            data.path = [settings.read('last-dir')]
+        } else {
+            // default directory fallback
+            data.path = [resolveHomeDir('~/')]
+        }
 
         var p = path.resolve(...data.path),
             root = resolveHomeDir(settings.read('remote-root'))

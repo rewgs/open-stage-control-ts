@@ -8,6 +8,7 @@
   - patchbay: `address` not working properly when set to `auto`
   - patchbay: `ignoreDefaults` not working properly
   - editor: missing position indicator in color picker pad
+  - file browser: fallback to home directory when last visited directory is not accessible
 
 - mobile
   - apply root's (or themes) background color the the browser's topbar when possible
