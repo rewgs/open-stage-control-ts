@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.27.2
+
+- client
+    - show 3-dots menu in read-only mode with access to allowed items (e.g fullscreen)
+    - hide console in read-only mode
+
 ## 1.27.1
 
 - bug fixes

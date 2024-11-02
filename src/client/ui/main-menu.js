@@ -15,6 +15,7 @@ var menuEntries = [
 
     {
         label: locales('session'),
+        disabled: READ_ONLY,
         action: [
             {
                 label: locales('session_new'),
@@ -79,6 +80,7 @@ var menuEntries = [
     },
     {
         label: locales('state'),
+        disabled: READ_ONLY,
         class: ()=>{return sessionManager.session === null ? 'disabled' : ''},
         action: [
             {
@@ -130,6 +132,7 @@ var menuEntries = [
     },
     {
         label: locales('editor'),
+        disabled: READ_ONLY,
         class: ()=>{return sessionManager.session === null ? 'disabled' : ''},
         action: [
             {
@@ -177,6 +180,7 @@ var menuEntries = [
     },
     {
         label: locales('console'),
+        disabled: READ_ONLY,
         action: [
             {
                 label: locales('console_enabled'),

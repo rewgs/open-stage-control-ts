@@ -105,7 +105,7 @@ class UiConsole extends UiSidePanel {
             this.inputSize()
         })
 
-        this.enable()
+        if (!READ_ONLY) this.enable()
 
     }
 

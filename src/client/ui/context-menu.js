@@ -82,17 +82,27 @@ class ContextMenu extends UiWidget {
                     iclass = typeof action.class === 'function' ? action    .class() : action.class,
                     item = html`<div class="item has-sub ${iclass || ''}" tabIndex="1">${raw(label)}</div>`
 
-                item.appendChild(submenu)
+                if (action.disabled) {
+
+                    item.classList.add('disabled')
+
+                } else {
+
+                    item.appendChild(submenu)
+
+                    this.parse(action.action, submenu, parentReadonly || action.readOnly)
+
+                }
+
                 node.appendChild(item)
-
-                this.parse(action.action, submenu)
-
 
             } else {
 
                 let label = typeof action.label === 'function' ? action.label() : action.label,
                     iclass = typeof action.class === 'function' ? action.class() : action.class,
                     item = html`<div class="item ${iclass || ''}">${raw(label)}</div>`
+
+                if (action.disabled) item.classList.add('disabled')
 
                 item._action = action.action
                 node.appendChild(item)
@@ -185,6 +195,8 @@ class ContextMenu extends UiWidget {
     bindShortcuts(actions) {
 
         for (let action of actions) {
+
+            if (action.disabled) continue
 
             if (Array.isArray(action.action)) {
 
