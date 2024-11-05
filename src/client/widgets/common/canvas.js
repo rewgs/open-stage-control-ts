@@ -225,6 +225,8 @@ class Canvas extends Widget {
 
     onRemove() {
         this.off('resize')
+        this.canvas.width = 0
+        this.canvas.height = 0
         super.onRemove()
     }
 
