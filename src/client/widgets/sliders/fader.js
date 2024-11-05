@@ -415,6 +415,16 @@ class Fader extends Slider {
 
     }
 
+    onRemove() {
+
+        if (this.pips) {
+            this.pips.width = 0
+            this.pips.height = 0
+        }
+        super.onRemove()
+
+    }
+
 }
 
 
