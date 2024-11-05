@@ -90,7 +90,7 @@ class ContextMenu extends UiWidget {
 
                     item.appendChild(submenu)
 
-                    this.parse(action.action, submenu, parentReadonly || action.readOnly)
+                    this.parse(action.action, submenu)
 
                 }
 
