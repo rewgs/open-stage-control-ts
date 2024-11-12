@@ -6,6 +6,9 @@
     - show 3-dots menu in read-only mode with access to allowed items (e.g fullscreen)
     - hide console in read-only mode
 
+- widgets
+    - matrix: don't implicitely override children's `label`, do it explicitely in `props`' default
+
 ## 1.27.1
 
 - bug fixes
