@@ -2,6 +2,9 @@
 
 ## 1.27.2
 
+- bug fixes
+    - multixy: `default` not applied when points are named
+
 - client
     - show 3-dots menu in read-only mode with access to allowed items (e.g fullscreen)
     - hide console in read-only mode
