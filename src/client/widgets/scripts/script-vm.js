@@ -305,7 +305,7 @@ class ScriptVm extends Vm {
                     callback(xhr.responseText)
                 }
             }
-            xhr.onerror = (e)=>err('httpGet error (' + url + '): ' + xhr.statusText)
+            xhr.onerror = (e)=>err(`httpGet error (${url}): ${xhr.status} ${xhr.statusText}`)
             xhr.send(null)
 
         }
