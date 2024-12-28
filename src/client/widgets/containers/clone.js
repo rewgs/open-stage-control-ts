@@ -96,8 +96,12 @@ class Clone extends Container() {
         }, {context: this})
 
         widgetManager.on('prop-changed', (e)=>{
+            // watch for prop changes initiated by the editor
+            // Other changes (from advanced syntaxes) are already
+            // handled by standard widget mechanicsé
 
             if (!this.cloneTarget) return
+            if (!e.options.fromEditor) return
 
             if (e.widget === this.cloneTarget || this.cloneTarget.contains(e.widget)) {
 

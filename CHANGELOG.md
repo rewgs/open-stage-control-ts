@@ -4,6 +4,7 @@
 
 - bug fixes
     - multixy: `default` not applied when points are named
+    - clone: avoid some unnecessary property checks
 
 - client
     - show 3-dots menu in read-only mode with access to allowed items (e.g fullscreen)
