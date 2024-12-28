@@ -72,7 +72,7 @@ class Widget extends EventEmitter {
                 ]},
                 width: {type: 'number|percentage', value: 'auto', help: 'Widget width'},
                 height: {type: 'number|percentage', value: 'auto', help: 'Widget height'},
-                expand: {type: 'boolean|number', value: 'false', help: 'If parent\'s layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically.'},
+                expand: {type: 'boolean|number', value: false, help: 'If parent\'s layout is `vertical` or `horizontal`, set this to `true` to stretch the widget to use available space automatically.'},
             },
             style: {
                 colorText: {type: 'string', value: 'auto', help: 'Text color. Set to "auto" to inherit from parent widget.'},
