@@ -206,6 +206,13 @@ class Canvas extends Widget {
                 })
                 return
             case 'css':
+                if (!/\/\*\s*noresize\s*\*\//.test(this.getProp('css'))) resize.check(this.canvas, true)
+                fastdom.measure(()=>{
+                    this.cacheCanvasStyle()
+                    fastdom.mutate(()=>{
+                        this.batchDraw()
+                    })
+                })
             case 'lineWidth':
             case 'padding':
                 resize.check(this.canvas, true)
