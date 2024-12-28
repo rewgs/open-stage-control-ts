@@ -28,12 +28,6 @@ var OSCProps = [
     'bypass'
 ]
 
-var dummyDOM
-
-DOM.ready(()=>{
-    dummyDOM = html`<div></div>`
-})
-
 setTimeout(()=>{
     updateWidget = require('../../editor/data-workers').updateWidget
     uiConsole = require('../../ui/ui-console')
@@ -1170,21 +1164,12 @@ class Widget extends EventEmitter {
             if (css.includes('{')) {
 
                 scopedCss = scopeCss(css, prefix)
-                try {
 
-                    dummyDOM.style = css
-                    unScopedCss = dummyDOM.getAttribute('style') || ''
-
-                } catch(err) {
-
-                    // fallback for browser that don't allow assigning "style" property
-                    css
-                    .replace(/\{[^}]*\}/g, '')
-                    .replace(/^[^@#.]*:.*/gm, (m)=>{
-                        unScopedCss += m[m.length - 1] === ';' ? m : m + ';'
-                    })
-
-                }
+                css
+                .replace(/\{[^}]*\}/g, '')
+                .replace(/^[^@#.]*:.*/gm, (m)=>{
+                    unScopedCss += m[m.length - 1] === ';' ? m : m + ';'
+                })
 
                 if (scopedCss.indexOf('@keyframes') > -1) scopedCss = scopedCss.replace(new RegExp(prefix + '\\s+([0-9]+%|to|from)', 'g'), ' $1')
                 if (scopedCss.indexOf('&') > -1) scopedCss = scopedCss.replace(new RegExp(prefix + '\\s&', 'g'), prefix)
