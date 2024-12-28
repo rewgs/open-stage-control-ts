@@ -101,7 +101,7 @@ class Clone extends Container() {
             // handled by standard widget mechanicsé
 
             if (!this.cloneTarget) return
-            if (!e.options.fromEditor) return
+            if (!e.options || !e.options.fromEditor) return
 
             if (e.widget === this.cloneTarget || this.cloneTarget.contains(e.widget)) {
 
