@@ -5,6 +5,7 @@
 - bug fixes
     - multixy: `default` not applied when points are named
     - clone: avoid some unnecessary property checks
+    - clone: prevent missing editions in target properties (e.g. VAR{} renamed with the same return value)
 
 - client
     - show 3-dots menu in read-only mode with access to allowed items (e.g fullscreen)

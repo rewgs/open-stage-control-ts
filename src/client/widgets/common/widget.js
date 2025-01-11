@@ -915,7 +915,9 @@ class Widget extends EventEmitter {
             let propValue = this.resolveProp(propName, undefined, false),
                 oldPropValue = this.getProp(propName)
 
-            if (!deepEqual(oldPropValue, propValue)) {
+            if (!deepEqual(oldPropValue, propValue) || (options && options.fromEditor)) {
+                // forced if initiated by the editor to make sure advanced syntax changes don't go unnoticed by clone
+                // (a VAR{} may be renamed without its return value to change immediately)
 
                 if (!this.isDynamicProp(propName)) {
 
