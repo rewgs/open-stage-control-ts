@@ -90,6 +90,8 @@ Send osc/midi message to connected clients. `host` and `port` can be specified t
 - `args`: value or `{type: "OSC_TYPE_LETTER", value: VALUE}` `object` (objects that don't match this format will simply be turned to a JSON string).
 - `options` (optional): set to `{clientId: id}` to define which client receives the message (where `id` is the client's id as retrieved from `app` events or `oscOutFilter`)
 
+For convenience, `host` and `port` can be provided both as single string argument joined with a colon.
+
 ----
 
 #### `send(host, port, address, ...args)`

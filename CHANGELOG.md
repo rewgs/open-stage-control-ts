@@ -14,6 +14,9 @@
 - widgets
     - matrix: don't implicitely override children's `label`, do it explicitely in `props`' default
 
+- custom module
+    - `receive()` and `send()` now accept `host` and `port` to be provided as a single string argument joined by a colon. 
+
 ## 1.27.1
 
 - bug fixes

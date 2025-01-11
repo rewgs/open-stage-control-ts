@@ -22,6 +22,14 @@ class OscServer {
             sendOsc: this.sendOsc.bind(this),
             receiveOsc: this.receiveOsc.bind(this),
             send: (host, port, address, ...args)=>{
+                if (host.indexOf(':') > -1) {
+                    args.unshift(address)
+                    address = port
+                    var split = host.split(':')
+                    host = split[0]
+                    port = parseInt(split[1])
+                }
+
                 this.sendOsc({host, port, address, args:args.map(x=>this.parseArg(x))})
             },
             receive: (host, port, address, ...args)=>{
@@ -31,6 +39,12 @@ class OscServer {
                     if (port !== undefined) args.unshift(port)
                     address = host
                     host = port = undefined
+                } else if (host.indexOf(':') > -1) {
+                    args.unshift(address)
+                    address = port
+                    var split = host.split(':')
+                    host = split[0]
+                    port = parseInt(split[1])
                 }
                 var lastArg = args[args.length - 1],
                     options = {}
