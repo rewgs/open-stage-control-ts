@@ -408,6 +408,7 @@ class Widget extends EventEmitter {
         ||  propNames.some(n => linkedProps.includes(n))
         ) {
             this.createPropsCache()
+            return true
         }
 
     }
@@ -915,9 +916,7 @@ class Widget extends EventEmitter {
             let propValue = this.resolveProp(propName, undefined, false),
                 oldPropValue = this.getProp(propName)
 
-            if (!deepEqual(oldPropValue, propValue) || (options && options.fromEditor)) {
-                // forced if initiated by the editor to make sure advanced syntax changes don't go unnoticed by clone
-                // (a VAR{} may be renamed without its return value to change immediately)
+            if (!deepEqual(oldPropValue, propValue)) {
 
                 if (!this.isDynamicProp(propName)) {
 
@@ -972,7 +971,21 @@ class Widget extends EventEmitter {
         }
 
         if (options && options.fromEditor) {
-            this.checkLinkedProps(propNames)
+
+            // update advanced syntax bindings if its an edition
+            if (this.checkLinkedProps(propNames)) {
+
+                // emit prop-changed event if not already
+                // to make sure an advanced syntax changes don't go unnoticed by clone
+                var unNotified = propNames.filter(n => !changedProps.includes(n))
+                widgetManager.trigger('prop-changed', {
+                    id: this.getProp('id'),
+                    props: unNotified,
+                    widget: this,
+                    options: options
+                })
+            }
+
         }
 
     }
