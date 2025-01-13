@@ -11,10 +11,6 @@ before_install:
   - python3 -m pip install mkdocs-material
 install: npm install
 before_deploy:
-  - yes | gem update --system --force
-  - gem install bundler
-  - gem install uri
-  - gem install logger
 deploy:
   provider: releases
   api-key:
@@ -25,6 +21,8 @@ deploy:
   on:
     tags: true
 before_deploy:
+  - yes | gem update --system --force
+  - gem install uri
   - export VERSION=$(sed -nE 's/^\s*"version":\ "(.*?)",$/\1/p' package.json)
   - npm run build-docs
   - npm run package -- --all
