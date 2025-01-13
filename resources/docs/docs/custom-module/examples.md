@@ -435,22 +435,36 @@ function create_widgets() {
 
 module.exports = {
     reload: function(){
-        // When reloading this script, recreate all widgets
+        // Create widgets whenever the custom modules is edited
         create_widgets()
     },
 }
 
-// Called when a client is opened
-//
-// This can be omitted if you want to dynamically create additional widgets on top
-// of a session loaded with --load
-app.once('open', () => {
-    app.once('sessionSetPath', (data) => {
-        // Session was created
-        create_widgets()
-    })
-    // Create a new empty session
-    receive('', '', '/SESSION/CREATE')
+// Create widgets whenever an existing session is loaded
+app.on('sessionOpened', ()=>{
+    create_widgets()
 })
 
+// And when a new session is created
+app.on('sessionSetPath', (e)=>{
+    if (e.path === '') {
+        create_widgets()
+    }
+})
 ```
+
+
+## Simple bridge
+
+```js
+module.exports = {
+
+    oscInFilter: function(data) {
+
+        // pass through incoming messages directly to another application 
+        send('127.0.0.1', 12345, data.address, ...args)
+
+        return data // let original message reach clients / widgets
+    }
+
+}
