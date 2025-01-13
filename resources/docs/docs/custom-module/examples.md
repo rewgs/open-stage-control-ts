@@ -461,10 +461,11 @@ module.exports = {
 
     oscInFilter: function(data) {
 
-        // pass through incoming messages directly to another application 
+        // pass through incoming messages directly to another application
         send('127.0.0.1', 12345, data.address, ...args)
 
         return data // let original message reach clients / widgets
     }
 
 }
+```
