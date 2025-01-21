@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.27.3
+
+- bug fixes
+    - fader: glitch with large `lineWidth` values in default design mode
+
 ## 1.27.2
 
 - bug fixes

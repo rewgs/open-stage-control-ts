@@ -298,7 +298,8 @@ class Fader extends Slider {
             this.ctx.rect(m - knobWidth / 6, d, knobWidth / 3, PXSCALE)
             this.ctx.fill()
 
-            this.clearRect = [m - knobWidth / 2 - PXSCALE, this.gaugePadding - knobHeight / 2  - PXSCALE, knobWidth + 2 * PXSCALE, height - 2 * this.gaugePadding + knobHeight + 2 * PXSCALE]
+            var clearWidth = Math.max(knobWidth, this.cssVars.lineWidth)
+            this.clearRect = [m - clearWidth / 2 - PXSCALE, this.gaugePadding - knobHeight / 2  - PXSCALE, clearWidth + 2 * PXSCALE, height - 2 * this.gaugePadding + knobHeight + 2 * PXSCALE]
 
         } else {
 
