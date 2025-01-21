@@ -20,20 +20,20 @@
     - matrix: don't implicitely override children's `label`, do it explicitely in `props`' default
 
 - custom module
-    - `receive()` and `send()` now accept `host` and `port` to be provided as a single string argument joined by a colon 
+    - `receive()` and `send()` now accept `host` and `port` to be provided as a single string argument joined by a colon
 
 ## 1.27.1
 
 - bug fixes
-  - server: `fullscreen` option not working when `read-only` is set
-  - led and text widgets not client-syncing  
-  - patchbay: `address` not working properly when set to `auto`
-  - patchbay: `ignoreDefaults` not working properly
-  - editor: missing position indicator in color picker pad
-  - file browser: fallback to home directory when last visited directory is not accessible
+    - server: `fullscreen` option not working when `read-only` is set
+    - led and text widgets not client-syncing  
+    - patchbay: `address` not working properly when set to `auto`
+    - patchbay: `ignoreDefaults` not working properly
+    - editor: missing position indicator in color picker pad
+    - file browser: fallback to home directory when last visited directory is not accessible
 
 - mobile
-  - apply root's (or themes) background color the the browser's topbar when possible
+    - apply root's (or themes) background color the the browser's topbar when possible
 
 
 ##  1.27.0
