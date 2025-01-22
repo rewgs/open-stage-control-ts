@@ -978,7 +978,7 @@ class Widget extends EventEmitter {
                 // emit prop-changed event if not already
                 // to make sure an advanced syntax changes don't go unnoticed by clone
                 var unNotified = propNames.filter(n => !changedProps.includes(n))
-                widgetManager.trigger('prop-changed', {
+                widgetManager.trigger('prop-changed-maybe', {
                     id: this.getProp('id'),
                     props: unNotified,
                     widget: this,

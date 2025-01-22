@@ -95,7 +95,7 @@ class Clone extends Container() {
 
         }, {context: this})
 
-        widgetManager.on('prop-changed', (e)=>{
+        var onPropChanged = (e)=>{
             // watch for prop changes initiated by the editor
             // Other changes (from advanced syntaxes) are already
             // handled by standard widget mechanicsé
@@ -109,7 +109,12 @@ class Clone extends Container() {
 
             }
 
-        }, {context: this})
+        }
+
+        widgetManager.on('prop-changed', onPropChanged, {context: this})
+
+        // see common/widget.js @ updateProps()
+        widgetManager.on('prop-changed-maybe', onPropChanged, {context: this})
 
         this.on('widget-created', (e)=>{
 
