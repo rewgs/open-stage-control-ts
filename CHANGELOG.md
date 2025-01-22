@@ -3,6 +3,7 @@
 ## 1.27.3
 
 - bug fixes
+    - regression causing circular loop errors upon certain editions
     - fader: glitch with large `lineWidth` values in default design mode
 
 ## 1.27.2
