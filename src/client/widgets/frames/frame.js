@@ -7,7 +7,7 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 
-        return 'Embed a web page in a frame.'
+        return 'Embed a web page in a frame. Note: some websites do not allow this.'
 
     }
 
