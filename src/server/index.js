@@ -208,6 +208,9 @@ function startLauncher() {
         address = 'file://' + path.resolve(__dirname + '/../launcher/' + 'index.html'),
         {ipcMain} = require('electron')
 
+    // @electron/remote won't work without this hack
+    process.mainModule = {require}
+
     require('@electron/remote/main').initialize()
 
     app.on('ready',function(){
