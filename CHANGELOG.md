@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+- bug fixes
+    - fader: pips drawing issue causing small a position offset or errors with some browsers
+
 ## 1.27.3
 
 - bug fixes

@@ -66,6 +66,7 @@ class Fader extends Slider {
         this.container.classList.toggle('horizontal', this.getProp('horizontal'))
 
         this.gaugeGradient = null
+        this.shouldDrawPips = false
 
         var dashed = this.getProp('dashed')
         this.dashed = dashed ? Array.isArray(dashed) ? dashed.map(x=>parseFloat(x)) : [1, 1] : false
@@ -172,7 +173,7 @@ class Fader extends Slider {
 
         super.cacheCanvasStyle(style)
 
-        if (this.getProp('pips') && this.getProp('design') !== 'compact') this.drawPips()
+        if (this.getProp('pips') && this.getProp('design') !== 'compact') this.shouldDrawPips = true
 
     }
 
@@ -322,6 +323,11 @@ class Fader extends Slider {
 
             this.clearRect = [m - knobHeight / 2 - PXSCALE, this.gaugePadding - knobHeight / 2  - PXSCALE, knobHeight + 2 * PXSCALE, height - 2 * this.gaugePadding + knobHeight + 2 * PXSCALE]
 
+        }
+
+        if (this.shouldDrawPips) {
+            this.drawPips()
+            this.shouldDrawPips = false
         }
 
         if (this.getProp('pips') && !compact) {
