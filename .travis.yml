@@ -36,6 +36,8 @@ before_deploy:
   - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-windows.exe && chmod +x osc-midi-windows.exe && echo "true" > osc-midi.json
   - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-darwin-x64/open-stage-control.app/Contents/Resources/app/server
   - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-osx && chmod +x osc-midi-osx && echo "true" > osc-midi.json
+  - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-darwin-arm64/open-stage-control.app/Contents/Resources/app/server
+  - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-osx && chmod +x osc-midi-osx && echo "true" > osc-midi.json
   - cd $TRAVIS_BUILD_DIR
   - mkdir dist/packages
   - npm run deb64
@@ -46,7 +48,8 @@ before_deploy:
   - mv open-stage-control-win32-x64    open-stage-control_${VERSION}_win32-x64
   - mv open-stage-control-linux-x64/*.rpm packages/
   - mv open-stage-control-linux-x64    open-stage-control_${VERSION}_linux-x64
-  - zip -q -r --symlinks packages/open-stage-control_${VERSION}_osx.zip open-stage-control-darwin-x64/open-stage-control.app
+  - zip -q -r --symlinks packages/open-stage-control_${VERSION}_osx-x64.zip open-stage-control-darwin-x64/open-stage-control.app
+  - zip -q -r --symlinks packages/open-stage-control_${VERSION}_osx-arm64.zip open-stage-control-darwin-arm64/open-stage-control.app
   - zip -q -r packages/open-stage-control_${VERSION}_node.zip     open-stage-control_${VERSION}_node
   - zip -q -r packages/open-stage-control_${VERSION}_win32-x64.zip      open-stage-control_${VERSION}_win32-x64
   - zip -q -r packages/open-stage-control_${VERSION}_linux-x64.zip      open-stage-control_${VERSION}_linux-x64
