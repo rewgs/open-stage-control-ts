@@ -460,8 +460,7 @@ class ScriptVm extends Vm {
 
                 if (widgets.length) {
                     setTimeout(()=>{
-
-                        widgets[0].widget.focus()
+                        if (widgets[0].focus) widgets[0].focus()
                     })
                 }
             }
