@@ -1,9 +1,10 @@
 # Changelog
 
-## next
+## 1.27.4
 
 - bug fixes
     - fader: pips drawing issue causing small a position offset or errors with some browsers
+    - script: setFocus not working with textarea widgets
 
 ## 1.27.3
 
