@@ -1199,9 +1199,11 @@ class Widget extends EventEmitter {
 
 
             var style = (unScopedCss ? prefix + '{' + unScopedCss + '}\n' : '') + scopedCss
+            style = style.trim()
 
             if (this.style) {
-                this.style.innerText = style
+                if (style) this.style.innerText = style
+                else this.container.removeChild(this.style)
             } else if (scopedCss.length || unScopedCss.length){
                 this.style = html`<style>${style}</style>`
                 this.container.insertBefore(this.style, this.container.childNodes[0] || null)
