@@ -48,7 +48,7 @@ before_deploy:
   - mv open-stage-control-linux-x64/*.rpm packages/
   - mv open-stage-control-linux-x64    open-stage-control_${VERSION}_linux-x64
   - zip -q -r --symlinks packages/open-stage-control_${VERSION}_osx-x64.zip open-stage-control-darwin-x64/open-stage-control.app
-  - zip -q -r --symlinks packages/open-stage-control_${VERSION}_osx-arm64.zip open-stage-control-darwin-arm64/open-stage-control.app
+  # - zip -q -r --symlinks packages/open-stage-control_${VERSION}_osx-arm64.zip open-stage-control-darwin-arm64/open-stage-control.app
   - zip -q -r packages/open-stage-control_${VERSION}_node.zip     open-stage-control_${VERSION}_node
   - zip -q -r packages/open-stage-control_${VERSION}_win32-x64.zip      open-stage-control_${VERSION}_win32-x64
   - zip -q -r packages/open-stage-control_${VERSION}_linux-x64.zip      open-stage-control_${VERSION}_linux-x64
