@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.27.5
+
+- bug fixes
+    - patchbay: layout issue
+
 ## 1.27.4
 
 - bug fixes
