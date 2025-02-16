@@ -4,7 +4,7 @@
 
 - bug fixes
     - patchbay: layout issue
-    - widget: regression causing error when emptying the css property
+    - widget: regression causing error when emptying the css property and leaving only class declarations
 
 ## 1.27.4
 
