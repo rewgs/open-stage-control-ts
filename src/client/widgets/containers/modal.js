@@ -181,6 +181,8 @@ class Modal extends Panel {
     fixParents() {
 
         var parent = this.parent,
+            scrollX = 0,
+            scrollY = 0,
             stop = this.getProp('ignoreTabs') ? /root/ : /root|tab/
 
         while (parent && parent.props && !String(parent.getProp('type')).match(stop)) {
@@ -190,9 +192,19 @@ class Modal extends Panel {
             else if (parent.modalBreakout === 0) parent.container.classList.remove('modal-breakout')
             else parent.modalBreakout = 0
 
+            scrollX += parent.widget.scrollLeft
+            scrollY += parent.widget.scrollTop
+
             parent = parent.parent
         }
 
+        scrollX += parent.widget.scrollLeft
+        scrollY += parent.widget.scrollTop
+
+        if (this.getProp('relative')) {
+            this.container.style.setProperty('--parent-scroll-x', scrollX + 'px')
+            this.container.style.setProperty('--parent-scroll-y', scrollY + 'px')
+        }
 
         this.modalBreakout += (this.value ? 1 : -1)
         if (this.modalBreakout > 0) this.container.classList.add('modal-breakout')

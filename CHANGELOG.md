@@ -5,6 +5,8 @@
 - bug fixes
     - patchbay: layout issue
     - widget: regression causing error when emptying the css property and leaving only class declarations
+    - modal: incorrect position in scrolled containers when `relative` is `true`
+    - menu: incorrect position in scrlled containers depending on menu's alignment 
 
 ## 1.27.4
 

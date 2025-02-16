@@ -566,6 +566,8 @@
 
     }
 
+    --parent-scroll-x:0;
+    --parent-scroll-y:0;
     &.relative {
         > .popup {
             left: auto;
@@ -574,8 +576,8 @@
             bottom: auto;
             width: var(--width, 100%);
             height: var(--height, 100%);
-            margin-top: calc(-1 * var(--widget-spacing));
-            margin-left: calc(-1 * var(--widget-spacing));
+            margin-top: calc(-1 * var(--widget-spacing) - var(--parent-scroll-y));
+            margin-left: calc(-1 * var(--widget-spacing) - var(--parent-scroll-x));
             padding: var(--widget-spacing);
             align-items:flex-start;
             justify-content: flex-start;

@@ -291,8 +291,7 @@
         position: fixed;
         z-index: 999999999;
 
-        margin-left: calc(-1 * var(--parent-scroll-x));
-        margin-top: calc(-1 * var(--parent-scroll-y));
+        transform: translate(calc(-1 * var(--parent-scroll-x)), calc(-1 * var(--parent-scroll-y)));
 
         overflow: hidden;
 
