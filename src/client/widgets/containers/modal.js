@@ -123,7 +123,7 @@ class Modal extends Panel {
 
 
         this.escapeKeyHandler = ((e)=>{
-            if (e.keyCode==27) this.setValue(0, {sync:true, send:true})
+            if (e.key == 'Escape') this.setValue(0, {sync:true, send:true})
         }).bind(this)
 
         this.value = 0

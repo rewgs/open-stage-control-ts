@@ -40,7 +40,7 @@ class CodeEditor {
         this.closeKey = ((e)=>{
             // this handler may remain dangling if closing with ctrl+enter
             // we ignore this as it has no effect
-            if (e.keyCode !== 27) return
+            if (e.key != 'Escape') return
             this.field.classList.remove('fullscreen')
             this.editor.setOptions({maxLines: 30})
             this.editor.fullscreen = false
@@ -52,7 +52,7 @@ class CodeEditor {
 
         this.closeClick = ((e)=>{
             if (e.target === this.field) {
-                this.closeKey({keyCode: 27})
+                this.closeKey({key: 'Escape'})
             }
         }).bind(this)
 

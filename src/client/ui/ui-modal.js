@@ -56,13 +56,13 @@ class UiModal extends UiWidget {
 
         if (this.escKey) {
             this.escKeyHandler = ((e)=>{
-                if (e.keyCode==27) this.close()
+                if (e.key == 'Escape') this.close()
             }).bind(this)
         }
 
         if (this.enterKey) {
             this.enterKeyHandler = ((e)=>{
-                if (e.keyCode == 13) this.enterKey.call(this, e)
+                if (e.key == 'Enter') this.enterKey.call(this, e)
             }).bind(this)
         }
 

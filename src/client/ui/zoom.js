@@ -31,12 +31,12 @@ class Zoom extends EventEmitter {
         document.addEventListener('keydown', (event)=>{
             if (event[mod]) {
 
-                if (event.keyCode == 96 || event.keyCode == 48) {
+                if (event.key == 'DOM_VK_0' || event.key == 'Numpad0') {
                     this.setGlobalZoom(INITIALZOOM)
                     this.setLocalZoom(1)
                 }
-                else if (event.keyCode == 107 || event.keyCode == 109) {
-                    this.setGlobalZoom((event.keyCode == 107 ? 0.1 : -0.1) + PXSCALE)
+                else if (event.key == '+' || event.key == '-') {
+                    this.setGlobalZoom((event.key == '+' ? 0.1 : -0.1) + PXSCALE)
                 }
 
             }

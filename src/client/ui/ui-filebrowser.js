@@ -95,7 +95,7 @@ module.exports = function UiFilebrowser(options, callback) {
 
     function keyDownHandler(e){
 
-        if (e.keyCode === 13) {
+        if (e.key == 'Enter') {
             if (save) {
                 document.addEventListener('keyup', keyUpHandler)
             } else {
@@ -103,7 +103,7 @@ module.exports = function UiFilebrowser(options, callback) {
             }
         } else if (e.target === saveInput) {
             return
-        } else if (e.keyCode === 8) {
+        } else if (e.key == 'DOM_VK_BACK_SPACE') {
             list.childNodes[0].firstElementChild.checked = true
             submit()
         } else if (e.key.length === 1) {
@@ -131,7 +131,7 @@ module.exports = function UiFilebrowser(options, callback) {
     }
     function keyUpHandler(e){
 
-        if (e.keyCode === 13) {
+        if (e.key == 'Enter') {
             setTimeout(submit, 100)
             document.removeEventListener('keyup', keyUpHandler)
         }

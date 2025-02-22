@@ -90,8 +90,8 @@ class Input extends Canvas {
             }
 
             this.input.addEventListener('keydown', (e)=>{
-                if (e.keyCode === 13) this.blur() // enter
-                else if (e.keyCode === 27) this.blur(false) // esc
+                if (e.key == 'Enter') this.blur()
+                else if (e.key == 'Escape') this.blur(false)
                 else if (asYouType) {
                     setTimeout(()=>{
                         this.inputChange()

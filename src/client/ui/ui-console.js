@@ -69,10 +69,10 @@ class UiConsole extends UiSidePanel {
         this.widget.hash = 'CONSOLE'
 
         this.input.addEventListener('keydown', (event)=>{
-            if (event.keyCode === 13 && !event.shiftKey) {
+            if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault()
                 this.inputValidate()
-            } else if (event.keyCode === 38) {
+            } else if (event.key == 'ArrowUp') {
                 if (this.cursor < this.history.length - 1) {
 
                     if (this.input.value.substr(0, this.input.selectionStart).split('\n').length !== 1) return
@@ -81,7 +81,7 @@ class UiConsole extends UiSidePanel {
                     this.input.value = this.history[this.cursor]
                     event.preventDefault()
                 }
-            } else if (event.keyCode === 40) {
+            } else if (event.key == 'ArrowDown') {
                 if (this.cursor > 0) {
                     var nLines = this.input.value.split('\n').length
                     if (this.input.value.substr(0, this.input.selectionStart).split('\n').length !== nLines) return
@@ -90,7 +90,7 @@ class UiConsole extends UiSidePanel {
                     this.input.value = this.history[this.cursor]
                     event.preventDefault()
                 }
-            } else if (event.keyCode === 9 && this.input.value !== '') {
+            } else if (event.key == 'DOM_VK_TAB' && this.input.value !== '') {
                 var cur = this.input.selectionStart,
                     val = this.input.value
                 this.input.value = val.slice(0, cur) + '  ' + val.slice(cur)

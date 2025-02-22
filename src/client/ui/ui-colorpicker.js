@@ -46,11 +46,11 @@ class ColorPicker extends UiWidget {
         this.opened = 0
 
         this.escKeyHandler = ((e)=>{
-            if (e.keyCode==27) this.close()
+            if (e.key == 'Escape') this.close()
         }).bind(this)
 
         this.enterKeyHandler = ((e)=>{
-            if (e.keyCode == 13) this.confirm()
+            if (e.key == 'Enter') this.confirm()
         }).bind(this)
 
     }

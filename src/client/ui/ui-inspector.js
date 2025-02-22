@@ -330,7 +330,7 @@ class UiInspector extends UiWidget {
 
         if (event.target.tagName === 'TEXTAREA') {
 
-            if (event.keyCode === 13 &&
+            if (event.key == 'Enter' &&
                 ((!event.shiftKey && !event.target._ace) ||
                 (event[codeEditorModKey] && event.target._ace))
             ) {
@@ -338,7 +338,7 @@ class UiInspector extends UiWidget {
                 event.preventDefault()
                 DOM.dispatchEvent(event.target, 'change')
 
-            } else if (event.keyCode === 27) {
+            } else if (event.key == 'Escape') {
 
                 event.preventDefault()
                 event.target.value = event.target.textContent

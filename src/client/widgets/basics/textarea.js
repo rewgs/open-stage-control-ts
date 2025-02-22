@@ -49,12 +49,12 @@ class TextArea extends Widget {
             }, {element: this.input})
 
             this.input.addEventListener('keydown', (e)=>{
-                if (e.keyCode === 13 && !e.shiftKey) {
+                if (e.key == 'Enter' && !e.shiftKey) {
                     // enter
                     e.preventDefault()
                     this.blur()
                 }
-                else if (e.keyCode === 27) {
+                else if (e.key == 'Escape') {
                     // esc
                     this.blur(false)
                     this.input.value = this.value
