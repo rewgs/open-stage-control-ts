@@ -91,7 +91,7 @@ class ScriptWidget extends Widget {
 
         if (e.type === 'keydown' && !this.getProp('keyRepeat')) e.preventRepeat()
 
-        e.preventDefault()
+        if (e.preventDefault) e.preventDefault()
 
         this.scripts.onKeyboard.run({
             type: e.type,
