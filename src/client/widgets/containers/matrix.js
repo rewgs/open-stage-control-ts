@@ -27,7 +27,7 @@ class Matrix extends Panel {
             },
             style: {
                 layout: {type: 'string', value: 'horizontal', choices: ['horizontal', 'vertical', 'grid'], help: 'Defines how children are laid out.'},
-                verticalTabs: null,
+                tabsPosition: null,
             }
         })
 
