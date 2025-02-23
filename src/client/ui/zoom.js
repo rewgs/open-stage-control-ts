@@ -8,22 +8,30 @@ class Zoom extends EventEmitter {
         super()
 
         this.localZoom = 1
+        this.lastWheelZoom = 0
 
         document.addEventListener('wheel', (event)=>{
             if (event.ctrlKey) event.preventDefault()
-            if (event[mod]) {
 
-                event.preventDefault()
+            var now = Date.now()
+            if (now - this.lastWheelZoom > 50) {
 
-                if (event.deltaY === 0) return
+                if (event[mod]) {
 
-                let d = - event.deltaY / (10 * Math.abs(event.deltaY))
-                if (!isNaN(d)) this.setGlobalZoom(d + PXSCALE)
-            }
-            if (event.altKey) {
-                event.preventDefault()
-                let d = - event.deltaY / (10 * Math.abs(event.deltaY)) * 2
-                if (!isNaN(d)) this.setLocalZoom(d + this.localZoom)
+                    event.preventDefault()
+
+                    if (event.deltaY === 0) return
+
+                    let d = - event.deltaY / (10 * Math.abs(event.deltaY))
+                    if (!isNaN(d)) this.setGlobalZoom(d + PXSCALE)
+                }
+                if (event.altKey) {
+                    event.preventDefault()
+                    let d = - event.deltaY / (10 * Math.abs(event.deltaY)) * 2
+                    if (!isNaN(d)) this.setLocalZoom(d + this.localZoom)
+                }
+
+                this.lastWheelZoom = now
             }
 
         }, {passive: false})
@@ -31,16 +39,22 @@ class Zoom extends EventEmitter {
         document.addEventListener('keydown', (event)=>{
             if (event[mod]) {
 
-                if (event.key == 'DOM_VK_0' || event.key == 'Numpad0') {
+                if (event.key == 'DOM_VK_0' || event.key == 'Numpad0'|| event.code == 'Digit0') {
+                    event.preventDefault()
                     this.setGlobalZoom(INITIALZOOM)
                     this.setLocalZoom(1)
                 }
-                else if (event.key == '+' || event.key == '-') {
-                    this.setGlobalZoom((event.key == '+' ? 0.1 : -0.1) + PXSCALE)
+                else if (event.key == '+' || event.key == '=') {
+                    event.preventDefault()
+                    this.setGlobalZoom(PXSCALE + 0.1)
+                }
+                else if (event.key == '-') {
+                    event.preventDefault()
+                    this.setGlobalZoom(PXSCALE - 0.1)
                 }
 
             }
-        }, {passive: true})
+        }, {passive: false})
 
     }
 

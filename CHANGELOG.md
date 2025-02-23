@@ -1,12 +1,16 @@
 # Changelog
 
+- bug fixes
+    - ui: global zoom (CmdOrCtrl + scroll / + / - / 0) issues and conflits with native browser zoom;
+    - ui: limit ctrl + scroll zoom speed
+
 ## 1.27.5
 
 - bug fixes
     - patchbay: layout issue
     - widget: regression causing error when emptying the css property and leaving only class declarations
     - modal: incorrect position in scrolled containers when `relative` is `true`
-    - menu: incorrect position in scrlled containers depending on menu's alignment 
+    - menu: incorrect position in scrlled containers depending on menu's alignment
 
 ## 1.27.4
 
