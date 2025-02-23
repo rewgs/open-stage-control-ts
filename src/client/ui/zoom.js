@@ -44,11 +44,11 @@ class Zoom extends EventEmitter {
                     this.setGlobalZoom(INITIALZOOM)
                     this.setLocalZoom(1)
                 }
-                else if (event.key == '+' || event.key == '=') {
+                else if (event.key == '+' || event.key == '=' || event.keyCode === 107) {
                     event.preventDefault()
                     this.setGlobalZoom(PXSCALE + 0.1)
                 }
-                else if (event.key == '-') {
+                else if (event.key == '-' || event.keyCode === 109) {
                     event.preventDefault()
                     this.setGlobalZoom(PXSCALE - 0.1)
                 }
