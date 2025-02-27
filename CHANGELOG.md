@@ -4,6 +4,9 @@
     - ui: global zoom (CmdOrCtrl + scroll / + / - / 0) issues and conflits with native browser zoom;
     - ui: limit ctrl + scroll zoom speed
 
+- widgets
+    - fader: add `touchZone` property to allow restricting interaction to a part of the widget
+
 ## 1.27.5
 
 - bug fixes

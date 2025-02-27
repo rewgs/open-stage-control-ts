@@ -30,6 +30,12 @@ class Fader extends Slider {
             },
             class_specific: {
                 snap: {type: 'boolean', value: false, help: 'By default, dragging the widget will modify it\'s value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position'},
+                touchZone: {type: 'string', value: 'any', choices: ['any', 'knob', 'gauge'], help: [
+                    'Restrict interaction to a part of the widget:',
+                    '- `all`: touching the widget anywhere will start an interaction',
+                    '- `knob`: touching the knob will start an interaction',
+                    '- `gauge`: touching anywhere in the knob\'s moving range will start an interaction'
+                ]},
                 spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
                 doubleTap: {type: 'boolean', value: false, help: [
                     'Set to `true` to make the fader reset to its `default` value when receiving a double tap.',
@@ -77,6 +83,11 @@ class Fader extends Slider {
 
         super.draginitHandle(...arguments)
 
+        if (!this.shouldDrag(e)) {
+            e.cancelDragEvent = true
+            return
+        }
+
         this.percent = clip(this.percent,[0,100])
 
         if (!(e.traversing || this.getProp('snap'))  || e.ctrlKey) return
@@ -101,6 +112,48 @@ class Fader extends Slider {
             this.percent + (-e.movementY / (this.height - padding * 2)) * 100  / e.inertia * this.getProp('sensitivity')
 
         this.setValue(this.percentToValue(this.percent), {send:true,sync:true,dragged:true})
+
+    }
+
+    shouldDrag(e) {
+
+        var zone = this.getProp('dragZone'),
+            design = this.getProp('design'),
+            horizontal = this.getProp('horizontal')
+
+        if (zone == 'any' || design == 'compact') return true
+
+        var x = e.offsetX,
+            y = e.offsetY,
+            percent = this.steps ? this.valueToPercent(this.value) : this.percent,
+            d = Math.round(this.percentToCoord(percent)),
+            m = horizontal ? this.height / 2 : this.width / 2,
+            knobHeight = this.cssVars.knobSize,
+            knobWidth = design ? knobHeight : knobHeight * .6
+
+        if (horizontal) [knobWidth, knobHeight] = [knobHeight, knobWidth]
+
+        // add extra tolerance pixels
+        knobWidth += 2 * PXSCALE
+        knobHeight += 2 * PXSCALE
+
+        var knobX = (horizontal ? d : m) - knobWidth / 2,
+            knobY = (horizontal ? m : d) - knobHeight / 2,
+            condition
+
+        if (horizontal) {
+            condition = ((x >= knobX && x <= knobX + knobWidth) || zone == 'gauge') &&
+                        y >= knobY && y <= knobY + knobHeight
+        } else {
+            condition = x >= knobX && x <= knobX + knobWidth &&
+                        ((y >= knobY && y <= knobY + knobHeight) || zone == 'gauge')
+        }
+
+        if (condition) {
+            return true
+        } else {
+            return false
+        }
 
     }
 
