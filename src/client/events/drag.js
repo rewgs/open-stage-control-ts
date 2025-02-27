@@ -46,6 +46,10 @@ function pointerDownHandler(event) {
 
     triggerWidgetEvent(targets[event.pointerId], 'draginit', event)
 
+    if (event.cancelDragEvent) clearPointer(event)
+
+    return event
+
 }
 
 function pointerMoveHandler(event) {
@@ -111,6 +115,12 @@ function pointerUpHandler(event) {
     event = normalizeDragEvent(event, previousPointers[event.pointerId])
 
     triggerWidgetEvent(targets[event.pointerId], 'dragend', event)
+
+    clearPointer(event)
+
+}
+
+function clearPointer(event) {
 
     delete targets[event.pointerId]
     delete previousPointers[event.pointerId]
@@ -202,7 +212,7 @@ domObserver.deactivate = ()=>{
 
 function touchDownCapture(event) {
 
-    event.preventDefault()
+    var preventDefault = true
     for (var i in event.changedTouches) {
         if (isNaN(i) || !event.changedTouches[i]) continue
         var touchEvent = event.changedTouches[i]
@@ -213,8 +223,11 @@ function touchDownCapture(event) {
 
         touchEvent.pointerId = touchEvent.identifier
 
-        pointerDownHandler(touchEvent)
+        touchEvent = pointerDownHandler(touchEvent)
+
+        if (touchEvent.cancelDragEvent) preventDefault = false
     }
+    if (preventDefault) event.preventDefault()
 }
 
 function touchMoveCapture(event) {
@@ -302,7 +315,6 @@ module.exports = {
 
         var {element, multitouch} = options
 
-        element.style.touchAction = 'none'
         element.addEventListener('touchstart', touchDownCapture, false)
         element._drag_widget = this
         element._drag_multitouch = multitouch
