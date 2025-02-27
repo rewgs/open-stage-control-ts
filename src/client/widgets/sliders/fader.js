@@ -30,11 +30,12 @@ class Fader extends Slider {
             },
             class_specific: {
                 snap: {type: 'boolean', value: false, help: 'By default, dragging the widget will modify it\'s value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position'},
-                touchZone: {type: 'string', value: 'any', choices: ['all', 'knob', 'gauge'], help: [
+                touchZone: {type: 'string', value: 'all', choices: ['all', 'knob', 'gauge'], help: [
                     'Restrict interaction to a part of the widget:',
                     '- `all`: touching the widget anywhere will start an interaction',
                     '- `knob`: touching the knob will start an interaction',
-                    '- `gauge`: touching anywhere in the knob\'s moving range will start an interaction'
+                    '- `gauge`: touching anywhere in the knob\'s moving range will start an interaction',
+                    'This setting is ignored in containers with `traversing` set to `true`'
                 ]},
                 spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
                 doubleTap: {type: 'boolean', value: false, help: [
@@ -83,7 +84,7 @@ class Fader extends Slider {
 
         super.draginitHandle(...arguments)
 
-        if (!this.shouldDrag(e)) {
+        if (!e.traversing && !this.shouldDrag(e)) {
             e.cancelDragEvent = true
             return
         }
@@ -117,9 +118,10 @@ class Fader extends Slider {
 
     shouldDrag(e) {
 
-        var zone = this.getProp('dragZone'),
+        var zone = this.getProp('touchZone'),
             design = this.getProp('design'),
-            horizontal = this.getProp('horizontal')
+            horizontal = this.getProp('horizontal'),
+            snap = this.getProp('snap')
 
         if (zone == 'all' || design == 'compact') return true
 
@@ -142,11 +144,11 @@ class Fader extends Slider {
             condition
 
         if (horizontal) {
-            condition = ((x >= knobX && x <= knobX + knobWidth) || zone == 'gauge') &&
+            condition = ((x >= knobX && x <= knobX + knobWidth) || (zone == 'gauge' || snap)) &&
                         y >= knobY && y <= knobY + knobHeight
         } else {
             condition = x >= knobX && x <= knobX + knobWidth &&
-                        ((y >= knobY && y <= knobY + knobHeight) || zone == 'gauge')
+                        ((y >= knobY && y <= knobY + knobHeight) || (zone == 'gauge' || snap))
         }
 
         if (condition) {
