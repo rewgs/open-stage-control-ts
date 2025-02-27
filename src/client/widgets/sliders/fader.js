@@ -30,7 +30,7 @@ class Fader extends Slider {
             },
             class_specific: {
                 snap: {type: 'boolean', value: false, help: 'By default, dragging the widget will modify it\'s value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position'},
-                touchZone: {type: 'string', value: 'any', choices: ['any', 'knob', 'gauge'], help: [
+                touchZone: {type: 'string', value: 'any', choices: ['all', 'knob', 'gauge'], help: [
                     'Restrict interaction to a part of the widget:',
                     '- `all`: touching the widget anywhere will start an interaction',
                     '- `knob`: touching the knob will start an interaction',
@@ -121,7 +121,7 @@ class Fader extends Slider {
             design = this.getProp('design'),
             horizontal = this.getProp('horizontal')
 
-        if (zone == 'any' || design == 'compact') return true
+        if (zone == 'all' || design == 'compact') return true
 
         var x = e.offsetX,
             y = e.offsetY,
