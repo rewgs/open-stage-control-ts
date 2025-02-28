@@ -133,7 +133,9 @@ class OscServer {
 
             }
 
-            if (debug) console.log('\x1b[35m(DEBUG, OSC) Out: ',{address:data.address, args: data.args}, 'To: ' + data.host + ':' + data.port, '\x1b[0m')
+            if (debug) {
+                console.log('\x1b[35m(DEBUG, OSC) Out: ', `{ address: '${data.address}', args: `, data.args, '} To: ' + data.host + ':' + data.port, '\x1b[0m')
+            }
 
         }
 
