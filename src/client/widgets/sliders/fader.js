@@ -123,7 +123,8 @@ class Fader extends Slider {
             horizontal = this.getProp('horizontal'),
             snap = this.getProp('snap')
 
-        if (zone == 'all' || design == 'compact') return true
+        if (zone == 'all') return true
+        if (design == 'compact' && zone == 'gauge') return true
 
         var x = e.offsetX,
             y = e.offsetY,
@@ -132,6 +133,8 @@ class Fader extends Slider {
             m = horizontal ? this.height / 2 : this.width / 2,
             knobHeight = this.cssVars.knobSize,
             knobWidth = design ? knobHeight : knobHeight * .6
+
+        if (design == 'compact') knobWidth = this.width
 
         if (horizontal) [knobWidth, knobHeight] = [knobHeight, knobWidth]
 
