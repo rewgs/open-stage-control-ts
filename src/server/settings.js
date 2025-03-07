@@ -3,7 +3,7 @@ var path = require('path'),
     yargs = require('yargs'),
     infos = require('../../package.json'),
     options = require('./options'),
-    address = require('./address')
+    address = require('./address'),
     argv = process.argv.slice()
 
 // Note : on windows, electron stops parsing after the first argument containing a colon
