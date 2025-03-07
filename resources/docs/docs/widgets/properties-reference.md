@@ -285,7 +285,6 @@
             | <h6 id="modal_contain">contain<a class="headerlink" href="#modal_contain" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel. |
             | <h6 id="modal_scroll">scroll<a class="headerlink" href="#modal_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
             | <h6 id="modal_innerPadding">innerPadding<a class="headerlink" href="#modal_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
-            | <h6 id="modal_tabsPosition">tabsPosition<a class="headerlink" href="#modal_tabsPosition" title="Permanent link">#</a></h6> | `string` | <code>"top"</code> | Defines the position of the navigation bar if the panel contains tabs<br/><br/>Choices: `top`, `bottom`, `left`, `right` |
             | <h6 id="modal_label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Set to `false` to hide completely<br/>- Insert icons using the prefix ^ followed by the icon's name : `^play`, `^pause`, etc (see https://fontawesome.com/icons?d=gallery&s=solid&m=free)<br/>- Icons can be transformed with the following suffixes: `.flip-[horizontal|vertical|both]`, `.rotate-[90|180|270]`, `.spin`, `.pulse`. Example: `^play.flip-horizontal` |
             | <h6 id="modal_popupLabel">popupLabel<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_popupLabel" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Alternative label for the modal popup |
             | <h6 id="modal_popupPadding">popupPadding<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_popupPadding" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Modal's inner spacing. |
@@ -346,7 +345,6 @@
             | <h6 id="matrix_contain">contain<a class="headerlink" href="#matrix_contain" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel. |
             | <h6 id="matrix_scroll">scroll<a class="headerlink" href="#matrix_scroll" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to disable scrollbars |
             | <h6 id="matrix_innerPadding">innerPadding<a class="headerlink" href="#matrix_innerPadding" title="Permanent link">#</a></h6> | `boolean` | <code>true</code> | Set to `false` to make the `padding` property apply only between children and not at the container's inner boundaries. |
-            | <h6 id="matrix_tabsPosition">tabsPosition<a class="headerlink" href="#matrix_tabsPosition" title="Permanent link">#</a></h6> | `string` | <code>"top"</code> | Defines the position of the navigation bar if the panel contains tabs<br/><br/>Choices: `top`, `bottom`, `left`, `right` |
 
     === "matrix"
 
@@ -520,7 +518,7 @@
 ## Frames
 
 ??? api "<div id="frame">frame<a class="headerlink" href="#frame" title="Permanent link">#</a></div>"
-    Embed a web page in a frame.
+    Embed a web page in a frame. Note: some websites do not allow this.
 
     === "value"
 
@@ -835,6 +833,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="fader_snap">snap<a class="headerlink" href="#fader_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, dragging the widget will modify it's value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position |
+            | <h6 id="fader_touchZone">touchZone<a class="headerlink" href="#fader_touchZone" title="Permanent link">#</a></h6> | `string` | <code>"all"</code> | Restrict interaction to a part of the widget:<br/>- `all`: touching the widget anywhere will start an interaction<br/>- `knob`: touching the knob will start an interaction<br/>- `gauge`: touching anywhere in the knob's moving range will start an interaction<br/><br/>This setting is ignored in containers with `traversing` set to `true`<br/><br/>Choices: `all`, `knob`, `gauge` |
             | <h6 id="fader_spring">spring<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#fader_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
             | <h6 id="fader_doubleTap">doubleTap<a class="headerlink" href="#fader_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
             | <h6 id="fader_range">range<a class="headerlink" href="#fader_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
@@ -935,6 +934,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="range_snap">snap<a class="headerlink" href="#range_snap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | By default, dragging the widget will modify it's value starting from its last value. Setting this to `true` will make it snap directly to the mouse/touch position |
+            | <h6 id="range_touchZone">touchZone<a class="headerlink" href="#range_touchZone" title="Permanent link">#</a></h6> | `string` | <code>"all"</code> | Restrict interaction to a part of the widget:<br/>- `all`: touching the widget anywhere will start an interaction<br/>- `knob`: touching the knob will start an interaction<br/>- `gauge`: touching anywhere in the knob's moving range will start an interaction<br/><br/>This setting is ignored in containers with `traversing` set to `true`<br/><br/>Choices: `all`, `knob`, `gauge` |
             | <h6 id="range_spring">spring<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#range_spring" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | When set to `true`, the widget will go back to its `default` value when released |
             | <h6 id="range_doubleTap">doubleTap<a class="headerlink" href="#range_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
             | <h6 id="range_range">range<a class="headerlink" href="#range_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
