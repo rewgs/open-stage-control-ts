@@ -4,19 +4,23 @@ var path = require('path'),
     infos = require('../../package.json'),
     options = require('./options'),
     address = require('./address')
+    argv = process.argv.slice()
 
-// This prevents argv parsing from breaking when the app is packaged (executed without 'electron' prefix)
-var firstArgIndex = path.basename(process.argv[0]).match(/electron|node|Electron|Node/) ? 2 : 1
-
-if (process.env.OSC_SERVER_PROCESS) firstArgIndex++
-
-// on windows, electron stops parsing after the first argument containing a colon
+// Note : on windows, electron stops parsing after the first argument containing a colon
 // https://github.com/electron/electron/pull/13039
 // windows cli users need to add a double dash (--) before their options to avoid that
 // it must be stripped to let yargs work normally
-if (process.argv[firstArgIndex] === '--') process.argv.splice(firstArgIndex, 1)
 
-var argv = yargs(process.argv.slice(firstArgIndex))
+// rmeove all args before the first actual cli arg
+while (argv.length) {
+    if (argv[0][0] != '-' || argv[0][0] == '--') {
+        argv.splice(0, 1)
+    } else if (argv[0][0] == '-' ) {
+        break
+    }
+}
+
+argv = yargs(argv)
     .parserConfiguration({'boolean-negation': false})
     .help('help').usage('\nUsage:\n  $0 [options]').alias('h', 'help')
     .options(options)

@@ -3,6 +3,7 @@
 - bug fixes
     - ui: global zoom (CmdOrCtrl + scroll / + / - / 0) issues and conflits with native browser zoom;
     - ui: limit ctrl + scroll zoom speed
+    - broken cli when `ELECTRON_RUN_AS_NODE` is set
 
 - widgets
     - fader: add `touchZone` property to allow restricting interaction to a part of the widget
