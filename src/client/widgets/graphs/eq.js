@@ -31,6 +31,8 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
                 rangeX: {type: 'object', value: {min: 20, max: 22000}, help: 'Defines the min and max values for the x axis (in Hz, logarithmic scale)'},
                 rangeY: {type: 'object', value: {min:-6, max:6}, help: 'Defines the min and max values for the y axis (in dB)'},
                 origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
+                logScaleX: null,
+                logScaleY: null
             },
             osc: {
                 decimals: null,
