@@ -24,7 +24,7 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
                     '- `q`: number (Q factor, default: 1)',
                     '- `gain`: number (default: 0)',
                     '- `on`: boolean (default: true)',
-                    '- `poles`: if `type` is "highpass" or "lowpass", indicates the number of poles for the filter (if omitted or 0, a biquad filter with Q factor is used)',
+                    '- `poles`: if `type` is "highpass" or "lowpass", indicates the number of poles for the filter (if omitted or 0, a biquad filter with Q factor is used). Set to 1 for 6dB/otaves roll-off, 2 for 12dB/octaves, etc.',
                     'See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode'
 
                 ]},
@@ -165,19 +165,19 @@ function biquadResponse(options, frequencyHz, filterResponse) {
             b2 = (1 - K / q + K * K) * norm
             break
 
-        case "lowpass-1p":
-			b1 = Math.exp(-2.0 * Math.PI * (frequency / Fs))
+        case 'lowpass-1p':
+            b1 = Math.exp(-2.0 * Math.PI * (frequency / Fs))
             a0 = 1.0 - b1
             b1 = -b1
-			a1 = a2 = b2 = 0
-			break
+            a1 = a2 = b2 = 0
+            break
 
-        case "highpass-1p":
-			b1 = -Math.exp(-2.0 * Math.PI * (0.5 - frequency / Fs))
+        case 'highpass-1p':
+            b1 = -Math.exp(-2.0 * Math.PI * (0.5 - frequency / Fs))
             a0 = 1.0 + b1
             b1 = -b1
-			a1 = a2 = b2 = 0
-			break
+            a1 = a2 = b2 = 0
+            break
 
         case 'bandpass':
             norm = 1 / (1 + K / q + K * K)
