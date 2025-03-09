@@ -137,7 +137,6 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
                 if (i < length - 2 && this.value[i] === previousValue && this.value[i+1] === previousValue) {
                     continue
                 }
-
                 nx = mapToScale(i, [0, this.value.length - 1], [padding, this.width - padding], decimals, this.logScaleX, true)
                 ny = mapToScale(this.value[i], [this.rangeY.min, this.rangeY.max], [this.height - 2 * PXSCALE - padding, 2 * PXSCALE + padding], decimals, this.logScaleY, true)
 

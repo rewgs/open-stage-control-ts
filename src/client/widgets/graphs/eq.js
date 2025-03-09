@@ -24,11 +24,16 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
                     '- `q`: number (Q factor, default: 1)',
                     '- `gain`: number (default: 0)',
                     '- `on`: boolean (default: true)',
+                    '- `poles`: if `type` is "highpass" or "lowpass", indicates the number of poles for the filter (if omitted or 0, a biquad filter with Q factor is used)',
                     'See https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode'
 
                 ]},
                 pips: {type: 'boolean', value: true, help: 'Set to false to hide the scale'},
-                rangeX: {type: 'object', value: {min: 20, max: 22000}, help: 'Defines the min and max values for the x axis (in Hz, logarithmic scale)'},
+                rangeX: {type: 'object', value: {min: 20, max: 22000}, help: [
+                    'Defines the min and max values for the x axis (in Hz, logarithmic scale)',
+                    'The sampling frequency used to compute the response curve will be 2 * rangeX.max',
+
+                ]},
                 rangeY: {type: 'object', value: {min:-6, max:6}, help: 'Defines the min and max values for the y axis (in dB)'},
                 origin: {type: 'number|boolean', value: 'auto', help: 'Defines the y axis origin. Set to `false` to disable it'},
                 logScaleX: null,
@@ -56,7 +61,8 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
 
         var resolution = this.width,
             frequencyHz = new Float32Array(resolution),
-            filterResponse = new Float32Array(resolution).fill(0)
+            filterResponse = new Float32Array(resolution).fill(0),
+            Fs = this.getProp('rangeX').max * 2
 
         for (let i = 0; i < resolution; ++i) {
             frequencyHz[i] = mapToScale(i, [0, this.width], [this.getProp('rangeX').min, this.getProp('rangeX').max], -1, true)
@@ -66,13 +72,21 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
 
             if (filter.on !== undefined && !filter.on) continue
 
+            var poles = 1,
+                type = filter.type
+
+            if ((type === 'lowpass' || type === 'highpass') && filter.poles !== undefined && filter.poles !== 0) {
+                poles = Math.max(parseInt(filter.poles), 1)
+                type += '-1p'
+            }
+
             biquadResponse({
-                type: filter.type || 'peak',
+                type: type || 'peak',
                 gain: filter.gain || 0,
                 frequency: filter.freq || 1000,
-                q: filter.q || 1
+                q: filter.q || 1,
+                poles, Fs
             }, frequencyHz, filterResponse)
-
         }
 
         this.setValue(filterResponse, {sync: true})
@@ -122,11 +136,10 @@ module.exports = Eq
 
 
 // biquadResponse
-// Based on code by Nigel Redmon Dec 14, 2010 njr
+// Based on code by Nigel Redmon @ https://www.earlevel.com
 function biquadResponse(options, frequencyHz, filterResponse) {
 
-    var {type, frequency, q, gain} = options,
-        Fs = 44100,
+    var {type, frequency, q, gain, Fs, poles} = options,
         len = frequencyHz.length,
         a0, a1, a2, b1, b2,norm
 
@@ -151,6 +164,20 @@ function biquadResponse(options, frequencyHz, filterResponse) {
             b1 = 2 * (K * K - 1) * norm
             b2 = (1 - K / q + K * K) * norm
             break
+
+        case "lowpass-1p":
+			b1 = Math.exp(-2.0 * Math.PI * (frequency / Fs))
+            a0 = 1.0 - b1
+            b1 = -b1
+			a1 = a2 = b2 = 0
+			break
+
+        case "highpass-1p":
+			b1 = -Math.exp(-2.0 * Math.PI * (0.5 - frequency / Fs))
+            a0 = 1.0 + b1
+            b1 = -b1
+			a1 = a2 = b2 = 0
+			break
 
         case 'bandpass':
             norm = 1 / (1 + K / q + K * K)
@@ -234,10 +261,9 @@ function biquadResponse(options, frequencyHz, filterResponse) {
                 Math.log(Math.pow(1 + b1 + b2, 2) - 4 * (b1 + 4 * b2 + b1 * b2) * phi + 16 * b2 * phi *phi)
 
         y = y * 10 / Math.LN10
-
         // if (y == -Infinity) y = -200
 
-        filterResponse[i] += y
+        filterResponse[i] += y * poles
 
     }
 
