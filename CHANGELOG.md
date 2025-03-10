@@ -10,7 +10,8 @@
     - eq: add support for n-poles lowpass and highpass filters with the filter's `poles` property
     - eq: adapt sampling frequency to the x-axis range
     - xy/multixy: add `auto` choice to to `axisLock` (locks on the first moved axis)
-    
+    - file: `extension` can now be an array of strings
+
 ## 1.27.5
 
 - bug fixes
@@ -18,6 +19,7 @@
     - widget: regression causing error when emptying the css property and leaving only class declarations
     - modal: incorrect position in scrolled containers when `relative` is `true`
     - menu: incorrect position in scrlled containers depending on menu's alignment
+    - button: `locals.touchCoords` not updated upon release and incorrect when `doubleTap` is set
 
 ## 1.27.4
 

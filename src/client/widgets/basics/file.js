@@ -21,7 +21,7 @@ module.exports = class File extends Widget {
             },
             class_specific: {
                 directory: {type: 'string', value: 'auto', help: 'Default browsing directory'},
-                extension: {type: 'string', value: '*', help: 'Only display files with this extension'},
+                extension: {type: 'string|array', value: '*', help: 'Only display files with this extension. Multiple extensions can be specified with an array of strings (`["jpg", "jpeg"]`)'},
                 allowDir:  {type: 'boolean', value: false, help: 'Allow selecting a folder (by pressing "open" when no file is selected)'}
             }
         })
@@ -43,12 +43,18 @@ module.exports = class File extends Widget {
         if (this.getProp('hidePath')) this.widget.classList.add('hide-path')
 
         this.text = DOM.get(this.widget, '.text')[0]
+
+        var ext = this.getProp('extension')
+        if (Array.isArray(ext)) {
+            ext = '(' + ext.join('|') + ')'
+        }
+
         this.on('fast-click', (e)=>{
 
             if (e.capturedByEditor === true) return
 
             uiFilebrowser({
-                extension: this.getProp('extension').replace(/^\.?(.*)$/, '$1'),
+                extension: ext.replace(/^\.?(.*)$/, '$1'),
                 directory: this.getProp('directory') === 'auto' ? undefined : this.getProp('directory'),
                 loadDir: this.getProp('allowDir'),
                 save: this.getProp('mode') === 'save'
