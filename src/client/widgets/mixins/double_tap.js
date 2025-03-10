@@ -24,8 +24,10 @@ module.exports = (self, callback, options={})=>{
         ) {
 
             // execute callback at next cycle to ensure draginit events are resolved first
+            // normalize event now or offset gets lost
+            var e = normalizeDragEvent(event.detail)
             setTimeout(()=>{
-                callback(normalizeDragEvent(event.detail))
+                callback(e)
             }, 0)
             lastTapTime = 0
 

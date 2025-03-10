@@ -94,7 +94,12 @@ class Button extends Widget {
                 doubleTap(this, (e)=>{
 
                     this.touchActive = true
-                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX, local:true})
+
+                    if (this.exposeTouchCoords) {
+                        this.parsersLocalScope.touchCoords = [e.offsetX / this.buttonSize[0], 1 - e.offsetY / this.buttonSize[1]]
+                    }
+
+                    this.setValue(this.getProp('on'), {sync: true, send: true, local:true})
 
                     if (tap) this.container.classList.add('active')
 
@@ -107,13 +112,29 @@ class Button extends Widget {
                     if (this.touchActive) return
 
                     this.touchActive = true
-                    this.setValue(this.getProp('on'), {sync: true, send: true, y: e.offsetY, x: e.offsetX, local:true})
+
+                    if (this.exposeTouchCoords) {
+                        this.parsersLocalScope.touchCoords = [e.offsetX / this.buttonSize[0], 1 - e.offsetY / this.buttonSize[1]]
+                    }
+
+                    this.setValue(this.getProp('on'), {sync: true, send: true, local:true})
 
                     if (tap) this.container.classList.add('active')
 
 
                 }, {element: this.container})
 
+            }
+
+            if (this.exposeTouchCoords) {
+                this.on('drag',(e)=>{
+
+                    if (!this.touchActive) return
+
+                    this.parsersLocalScope.touchCoords[0] += e.movementX / this.buttonSize[0]
+                    this.parsersLocalScope.touchCoords[1] += e.movementY / this.buttonSize[1]
+
+                }, {element: this.container})
             }
 
             this.on('dragend',()=>{
@@ -297,12 +318,6 @@ class Button extends Widget {
 
             }
 
-
-            if (this.exposeTouchCoords) {
-                if (options.y !== undefined) {
-                    this.parsersLocalScope.touchCoords = [options.x / this.buttonSize[0], 1 - options.y / this.buttonSize[1]]
-                }
-            }
 
             if (options.local || !options.fromExternal) this.localSet = true
 
