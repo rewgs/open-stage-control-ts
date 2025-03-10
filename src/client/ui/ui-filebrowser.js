@@ -103,7 +103,7 @@ module.exports = function UiFilebrowser(options, callback) {
             }
         } else if (e.target === saveInput) {
             return
-        } else if (e.key == 'DOM_VK_BACK_SPACE') {
+        } else if (e.key == 'DOM_VK_BACK_SPACE' || e.keyCode === 8) {
             list.childNodes[0].firstElementChild.checked = true
             submit()
         } else if (e.key.length === 1) {
