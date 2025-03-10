@@ -9,7 +9,8 @@
     - fader: add `touchZone` property to allow restricting interaction to a part of the widget
     - eq: add support for n-poles lowpass and highpass filters with the filter's `poles` property
     - eq: adapt sampling frequency to the x-axis range
-
+    - xy/multixy: add `auto` choice to to `axisLock` (locks on the first moved axis)
+    
 ## 1.27.5
 
 - bug fixes

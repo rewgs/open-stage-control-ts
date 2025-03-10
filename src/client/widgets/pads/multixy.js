@@ -40,7 +40,7 @@ module.exports = class MultiXy extends Pad {
                 rangeY: {type: 'object', value: {min:0,max:1}, help: 'Defines the min and max values for the y axis'},
                 logScaleX: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the x axis. Set to `-1` for exponential scale.'},
                 logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
-                axisLock: {type: 'string', value: '', choices: ['', 'x', 'y'], help: [
+                axisLock: {type: 'string', value: '', choices: ['', 'auto', 'x', 'y'], help: [
                     'Restrict movements to one of the axes only.',
                     'When left to the default value, holding `Shift` while dragging will lock the pad according the first movement.'
                 ]},
