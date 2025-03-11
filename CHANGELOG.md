@@ -11,6 +11,7 @@
     - eq: adapt sampling frequency to the x-axis range
     - xy/multixy: add `auto` choice to to `axisLock` (locks on the first moved axis)
     - file: `extension` can now be an array of strings
+    - plot/eq: smoother curves
 
 ## 1.27.5
 
