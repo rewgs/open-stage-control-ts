@@ -31,9 +31,10 @@ class Knob extends Slider {
                     '- `snap-alt`: alternative snap mode that allow jumping from `range.min` to `range.max`. `sensitivity` is ignored with this mode.',
                 ]},
                 spring: {type: 'boolean', value: false, help: 'When set to `true`, the widget will go back to its `default` value when released'},
-                doubleTap: {type: 'boolean', value: false, help: [
+                doubleTap: {type: 'boolean|string', value: false, choices: [false, true, 'script'], help: [
                     'Set to `true` to make the knob reset to its `default` value when receiving a double tap.',
-                    'Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)'
+                    'Can be an osc address, in which case the widget will just send an osc message with no value (but `preArgs` included).',
+                    'If set to "script", `onTouch` will be called with `event.type` set to `doubleTap`. '
                 ]},
                 range: {type: 'object', value: {min:0,max:1}, help: [
                     'Defines the breakpoints of the fader\'s scale:',

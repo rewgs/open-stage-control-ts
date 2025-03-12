@@ -36,9 +36,10 @@ module.exports = class Xy extends Pad {
                     'Restrict movements to one of the axes only unless `Shift` is held.',
                     'When left empty, holding `Shift` while dragging will lock the pad according the first movement. `auto` will do the opposite.'
                 ]},
-                doubleTap: {type: 'boolean|string', value: false, help: [
-                    'Set to `true` to make the fader reset to its default value when receiving a double tap.',
-                    'Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>`'
+                doubleTap: {type: 'boolean|string', value: false, choices: [false, true, 'script'], help: [
+                    'Set to `true` to make the knob reset to its `default` value when receiving a double tap.',
+                    'Can be an osc address, in which case the widget will just send an osc message with no value (but `preArgs` included).',
+                    'If set to "script", `onTouch` will be called with `event.type` set to `doubleTap`. '
                 ]},
                 sensitivity: {type: 'number', value: 1, help: 'Defines the pad\'s sensitivity when `snap` is `false` '},
             }
@@ -142,6 +143,16 @@ module.exports = class Xy extends Pad {
                 doubleTap(this, ()=>{
                     this.sendValue({v:null, address: this.getProp('doubleTap')})
                 }, {element: this.widget})
+
+            } else if (this.getProp('doubleTap') == 'script') {
+
+                doubleTap(this, ()=>{
+                    this.scripts.onTouch.run({
+                        event: {type: 'doubleTap'},
+                        value: this.value
+                    }, {sync: true, send: true})
+                }, {element: this.widget})
+
 
             } else {
 

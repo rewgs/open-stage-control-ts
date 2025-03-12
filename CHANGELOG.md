@@ -12,6 +12,7 @@
     - xy/multixy: add `auto` choice to to `axisLock` (locks on the first moved axis)
     - file: `extension` can now be an array of strings
     - plot/eq: smoother curves
+    - sliders/pads: `doubleTap` can now be `"stript"`, in which case `onTouch` will be called with `event.type` set to `doubleTap` 
 
 ## 1.27.5
 

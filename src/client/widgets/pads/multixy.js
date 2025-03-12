@@ -44,9 +44,10 @@ module.exports = class MultiXy extends Pad {
                     'Restrict movements to one of the axes only.',
                     'When left empty, holding `Shift` while dragging will lock the pad according the first movement. `auto` will do the opposite.'
                 ]},
-                doubleTap: {type: 'boolean|string', value: false, help: [
-                    'Set to `true` to make the fader reset to its default value when receiving a double tap.',
-                    'Can also be an osc address, which case the widget will just send an osc message: `/<doubleTap> <preArgs>`'
+                doubleTap: {type: 'boolean|string', value: false, choices: [false, true, 'script'], help: [
+                    'Set to `true` to make the knob reset to its `default` value when receiving a double tap.',
+                    'Can be an osc address, in which case the widget will just send an osc message with no value (but `preArgs` included).',
+                    'If set to "script", `onTouch` will be called with `event.type` set to `doubleTap`. '
                 ]},
                 sensitivity: {type: 'number', value: 1, help: 'Defines the pad\'s sensitivity when `snap` is `false` '},
             }
@@ -195,7 +196,16 @@ module.exports = class MultiXy extends Pad {
                     }
 
                     var pad = this.pads[id]
-                    pad.setValue([pad.faders.x.getSpringValue(), pad.faders.y.getSpringValue()], { sync: true, send: true, spring: true, doubleTap: true })
+
+                    if (this.getProp('doubleTap') == 'script') {
+                        this.scripts.onTouch.run({
+                            event: {type: 'doubleTap', handle: id},
+                            value: this.value
+                        }, {sync: true, send: true})
+                    } else {
+                        pad.setValue([pad.faders.x.getSpringValue(), pad.faders.y.getSpringValue()], { sync: true, send: true, spring: true, doubleTap: true })
+                    }
+
                 }, { element: this.widget})
 
             }

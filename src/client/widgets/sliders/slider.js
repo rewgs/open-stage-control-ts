@@ -61,6 +61,17 @@ class Slider extends Canvas {
                     this.sendValue({v:null, address: this.getProp('doubleTap')})
                 }, {element: this.widget})
 
+            }
+            if (this.getProp('doubleTap') == 'script') {
+
+                doubleTap(this, ()=>{
+                    this.scripts.onTouch.run({
+                        event: {type: 'doubleTap'},
+                        value: this.value
+                    }, {sync: true, send: true})
+                }, {element: this.widget})
+
+
             } else {
 
                 doubleTap(this, ()=>{
