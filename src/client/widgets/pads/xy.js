@@ -223,7 +223,6 @@ module.exports = class Xy extends Pad {
         if (!this.visible) return
 
         var pointSize = this.cssVars.pointSize,
-            margin = this.padPadding,
             x = this.faders.x.percentToCoord(this.faders.x.percent),
             y = this.faders.y.percentToCoord(this.faders.y.percent),
             ephemeral = this.getProp('ephemeral')
