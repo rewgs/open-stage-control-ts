@@ -243,7 +243,7 @@ module.exports = class Xy extends Pad {
 
         if (this.getProp('pips'))  this.drawPips()
         else {
-            // this.clearRect = [x - pointSize - 2 * PXSCALE, y - pointSize - 2 * PXSCALE, (pointSize + PXSCALE) * 4, (pointSize + PXSCALE) * 4]
+            this.clearRect = [[x - pointSize - 2 * PXSCALE, y - pointSize - 2 * PXSCALE, (pointSize + 2 * PXSCALE) * 2, (pointSize + 2 * PXSCALE) * 2]]
         }
 
         if (!ephemeral || this.active) {
@@ -263,7 +263,7 @@ module.exports = class Xy extends Pad {
 
                 if (!this.getProp('pips'))  {
                     var length = this.fontSize * t.length
-                    // this.clearRect.push([x - length / 2, y - this.fontSize / 2, length, this.fontSize + 2 * PXSCALE])
+                    this.clearRect.push([x - length / 2, y - this.fontSize / 2, length, this.fontSize + 2 * PXSCALE])
                 }
 
             }
