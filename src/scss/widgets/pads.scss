@@ -32,7 +32,7 @@
 
     --point-size: 20rem;
 
-    canvas:not(:first-child) {
+    canvas {
         position: absolute;
         top: 0;
         left: 0;
@@ -139,7 +139,7 @@
    .html {
        pointer-events: auto;
    }
-   
+
    inner {
        position: relative;
        flex: 1;

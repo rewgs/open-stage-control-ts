@@ -34,7 +34,7 @@ class CanvasQueue extends EventEmitter{
     flush() {
 
         for (var h in this.queue) {
-            if (this.queue[h].width > 0 && this.queue[h].height > 0) {
+            if (this.queue[h].width > 0 && this.queue[h].height > 0 && this.queue[h].visible) {
                 this.queue[h].draw()
             }
         }

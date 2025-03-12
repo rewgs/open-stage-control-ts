@@ -8,7 +8,7 @@ var Pad = require('./pad'),
 var xyDefaults = Xy.defaults()._props()
 
 
-module.exports = class MultiXy extends Pad {
+class MultiXy extends Pad {
 
     static description() {
 
@@ -30,6 +30,17 @@ module.exports = class MultiXy extends Pad {
                 points: {type: 'integer|array', value: 2, help: [
                     'Defines the number of points on the pad',
                     'Can be an array of strings that will be used as labels for the points (ex: `[\'A\', \'B\']`)'
+                ]},
+                pointsAttr: {type: 'object', value: [], help: [
+                    'Defines per-point properties that are otherwise inherited from the multixy. Must be an array of objects (one per point) that may contain the following keys:',
+                    '- visible (visibility and interactability)',
+                    '- colorFill (background color)',
+                    '- colorStroke (outline color)',
+                    '- colorText (label color)',
+                    '- color (shorthand for colorFill and colorStroke)',
+                    '- alphaFillOn (background opacity)',
+                    '- pointSize',
+                    '- label'
                 ]},
                 snap: {type: 'boolean', value: false, help: [
                     'By default, the points are dragged from their initial position.',
@@ -64,7 +75,6 @@ module.exports = class MultiXy extends Pad {
         super(options)
 
         this.npoints = Array.isArray(this.getProp('points')) ? this.getProp('points').length : this.getProp('points') || 0
-        this.labels = Array.isArray(this.getProp('points'))
 
         this.preventChildrenTouchState = true
         this.pads = []
@@ -83,7 +93,7 @@ module.exports = class MultiXy extends Pad {
                 logScaleY:this.getProp('logScaleY'),
                 axisLock:this.getProp('axisLock'),
                 pointSize: 'auto',
-                pips: this.getProp('pips') && i == this.npoints-1,
+                pips: false,
                 sensitivity: this.getProp('sensitivity'),
                 input:false
             }, parent: this})
@@ -91,6 +101,12 @@ module.exports = class MultiXy extends Pad {
             this.widget.append(this.pads[i].canvas)
 
         }
+
+        // tiny hack for pips until there's a proper range refactoring
+        this.faders = this.pads[0].faders
+
+        this.pointsAttr = []
+        this.updatePadsAttr()
 
         this.padsCoords = []
         this.touchMap = {}
@@ -108,6 +124,7 @@ module.exports = class MultiXy extends Pad {
                 for (var i in this.pads) {
 
                     if (Object.values(this.touchMap).indexOf(i) != -1) continue
+                    if (!this.pads[i].getProp('visible')) continue
 
                     ndiff = Math.abs(e.offsetX -  this.padsCoords[i][0]) + Math.abs(e.offsetY - (this.padsCoords[i][1] + this.height))
 
@@ -115,6 +132,7 @@ module.exports = class MultiXy extends Pad {
                         id = i
                         diff = ndiff
                     }
+
 
                 }
 
@@ -131,8 +149,6 @@ module.exports = class MultiXy extends Pad {
 
             this.pads[id].trigger('draginit', e)
             this.pads[id].touched = 1
-
-            if (this.getProp('ephemeral')) this.batchDraw()
 
         }, {element: this.widget, multitouch: true})
 
@@ -162,8 +178,6 @@ module.exports = class MultiXy extends Pad {
             this.trigger('touch', {stopPropagation: true, touch: [parseInt(this.touchMap[e.pointerId]), 0]})
 
             delete this.touchMap[e.pointerId]
-
-            if (this.getProp('ephemeral')) this.batchDraw()
 
         }, {element: this.widget, multitouch: true})
 
@@ -241,8 +255,8 @@ module.exports = class MultiXy extends Pad {
         super.cacheCanvasStyle(style)
         for (var k in this.pads) {
             this.pads[k].cacheCanvasStyle()
-            this.pads[k].batchDraw()
         }
+        this.batchDraw()
 
     }
 
@@ -252,6 +266,7 @@ module.exports = class MultiXy extends Pad {
         for (var k in this.pads) {
             this.pads[k].setVisibility()
         }
+        this.batchDraw()
 
     }
 
@@ -270,25 +285,7 @@ module.exports = class MultiXy extends Pad {
 
         this.clear()
 
-        this.clearRect = []
-
-        for (var i=0;i<this.npoints;i++) {
-
-            if (this.pads[i].getProp('ephemeral') && !this.pads[i].active) continue
-
-            var margin = this.padPadding,
-                x = clip(this.pads[i].faders.x.percent,[0,100]) / 100 * (this.width - 2 * margin) + margin,
-                y = (100 - clip(this.pads[i].faders.y.percent,[0,100])) / 100 * (this.height - 2 * margin) + margin,
-                t = (this.labels ? this.getProp('points')[i] : i) + '',
-                length = this.fontSize * t.length
-
-            this.ctx.fillStyle = this.pads[i].cssVars.colorText
-            this.ctx.globalAlpha = this.cssVars.alphaPips
-            this.ctx.fillText(t, x + 0.5 * PXSCALE, y + PXSCALE)
-
-            this.clearRect.push([x - length / 2, y - this.fontSize / 2, length, this.fontSize + 2 * PXSCALE])
-
-        }
+        if (this.getProp('pips')) this.drawPips()
 
     }
 
@@ -319,7 +316,6 @@ module.exports = class MultiXy extends Pad {
         }
 
         this.updateHandlesPosition()
-        this.batchDraw()
 
         for (let i=0;i<this.npoints * 2;i=i+2) {
             [this.value[i],this.value[i+1]]  = this.pads[i/2].getValue()
@@ -330,11 +326,64 @@ module.exports = class MultiXy extends Pad {
 
     }
 
+    updatePadsAttr(options) {
+
+        var attrs = this.getProp('pointsAttr')
+        if (!Array.isArray(attrs)) attrs = []
+
+        this.pointsAttr = []
+
+        var legacyLabels =  Array.isArray(this.getProp('points'))
+
+        for (var i = 0; i < this.npoints; i++) {
+
+            var a = attrs[i] || {}
+            this.pointsAttr[i] = {}
+
+            // color alias
+            if (a.color !== undefined) {
+                if (a.colorFill === undefined) a.colorFill = a.color
+                if (a.colorStroke === undefined) a.colorStroke = a.color
+            }
+
+            if (a.label === undefined) {
+                a.label = legacyLabels ? this.getProp('points')[i] : String(i)
+            }
+
+            for (var n of ['visible', 'axisLock', 'spring', 'colorFill', 'colorStroke', 'colorText', 'alphaFillOn', 'pointSize', 'label']) {
+                this.pointsAttr[i][n] = a[n] === undefined ? this.getProp(n) : a[n]
+
+                if (this.pads[i].cachedProps[n] !==  this.pointsAttr[i][n]) {
+                    this.pads[i].cachedProps[n] = this.pointsAttr[i][n]
+                    this.pads[i].onPropChanged(n, options)
+
+                    var cssVar = this.constructor.cssVariables.find(x=>x.js==n)
+                    if (cssVar) {
+                        this.pads[i].canvas.style.setProperty(cssVar.css, this.pointsAttr[i][n] == 'auto' ? '' : this.pointsAttr[i][n])
+                    }
+
+                    if (n == 'visible') {
+                        this.pads[i].canvas.style.setProperty('opacity', this.pointsAttr[i][n] ? 1 : 0)
+                    }
+
+                }
+            }
+        }
+
+
+    }
+
     onPropChanged(propName, options, oldPropValue) {
 
         if (super.onPropChanged(...arguments)) return true
 
         switch (propName) {
+
+            case 'padding':
+                for (let w of this.pads) {
+                    w.onPropChanged(propName)
+                }
+                return
 
             case 'colorText':
             case 'colorWidget':
@@ -343,19 +392,11 @@ module.exports = class MultiXy extends Pad {
             case 'alphaStroke':
             case 'alphaFillOff':
             case 'alphaFillOn':
-            case 'padding':
-            case 'lineWidth':
-                for (let w of this.pads) {
-                    w.onPropChanged(propName)
-                }
-                return
+            case 'pointsAttr':
             case 'spring':
+            case 'pointSize':
             case 'axisLock':
-                for (let w of this.pads) {
-                    w.cachedProps[propName] = this.getProp(propName)
-                    w.onPropChanged(propName, options)
-                }
-                this.batchDraw()
+                this.updatePadsAttr()
                 return
         }
 
@@ -369,3 +410,10 @@ module.exports = class MultiXy extends Pad {
     }
 
 }
+
+
+MultiXy.dynamicProps = MultiXy.prototype.constructor.dynamicProps.filter(n => n !== 'decimals').concat([
+    'pointsAttr',
+])
+
+module.exports = MultiXy

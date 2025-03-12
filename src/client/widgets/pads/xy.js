@@ -21,6 +21,7 @@ module.exports = class Xy extends Pad {
                 pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size'},
                 ephemeral: {type: 'boolean', value: false, help: 'When set to `true`, the point will be drawn only while touched.'},
                 pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
+                label: {type: 'string', value: '', help: 'Text displayed in the handle'}
             },
             class_specific: {
                 snap: {type: 'boolean', value: false, help: [
@@ -219,6 +220,8 @@ module.exports = class Xy extends Pad {
 
     draw() {
 
+        if (!this.visible) return
+
         var pointSize = this.cssVars.pointSize,
             margin = this.padPadding,
             x = this.faders.x.percentToCoord(this.faders.x.percent),
@@ -238,68 +241,10 @@ module.exports = class Xy extends Pad {
 
 
 
-
-        var pipsDrawn = false
-        if (this.getProp('pips')) {
-
-            var pipTexts = margin >= this.fontSize * 1.5
-
-            this.ctx.lineWidth = PXSCALE
-            this.ctx.fillStyle = this.cssVars.colorText
-            this.ctx.strokeStyle = this.cssVars.colorStroke
-            this.ctx.globalAlpha = this.cssVars.alphaPips
-            this.ctx.beginPath()
-
-            for (let i in this.faders.x.rangeKeys) {
-
-                let pip = this.faders.x.rangeKeys[i],
-                    px = Math.round(0.5 * this.faders.x.percentToCoord(pip)) * 2
-
-                if (parseInt(px) === px) px -= 0.5
-
-                if (pipTexts) {
-                    this.ctx.textAlign = 'center'
-                    let label = this.faders.x.rangeLabels[i]
-                    this.ctx.fillText(label, px, this.height - margin / 2)
-                    pipsDrawn = true
-                }
-
-                if (pip == 0 || pip == 100) continue
-                this.ctx.moveTo(px, margin - PXSCALE)
-                this.ctx.lineTo(px, this.height - margin + PXSCALE)
-                pipsDrawn = true
-
-
-            }
-            for (let i in this.faders.y.rangeKeys) {
-
-                let pip = this.faders.y.rangeKeys[i],
-                    py = Math.round(0.5 * this.faders.y.percentToCoord(pip)) * 2
-
-                if (parseInt(py) === py) py -= 0.5
-
-                if (pipTexts) {
-                    this.ctx.textAlign = 'right'
-                    let label = this.faders.y.rangeLabels[i]
-                    this.ctx.fillText(label, margin / 2 + this.fontSize / 2, py)
-                    pipsDrawn = true
-                }
-
-                if (pip == 0 || pip == 100) continue
-                this.ctx.moveTo(margin - PXSCALE, py)
-                this.ctx.lineTo(this.width - margin + PXSCALE, py)
-                pipsDrawn = true
-
-
-            }
-
-            this.ctx.globalAlpha = this.cssVars.alphaFillOn
-            this.ctx.stroke()
-
+        if (this.getProp('pips'))  this.drawPips()
+        else {
+            // this.clearRect = [x - pointSize - 2 * PXSCALE, y - pointSize - 2 * PXSCALE, (pointSize + PXSCALE) * 4, (pointSize + PXSCALE) * 4]
         }
-
-        if (!pipsDrawn) this.clearRect = [x - pointSize - 2 * PXSCALE, y - pointSize - 2 * PXSCALE, (pointSize + PXSCALE) * 4, (pointSize + PXSCALE) * 4]
-
 
         if (!ephemeral || this.active) {
             this.ctx.strokeStyle = this.cssVars.colorStroke
@@ -308,6 +253,20 @@ module.exports = class Xy extends Pad {
             this.ctx.beginPath()
             this.ctx.arc(x, y, pointSize, Math.PI * 2, false)
             this.ctx.stroke()
+
+            var t = this.getProp('label')
+            if (t) {
+                this.ctx.fillStyle = this.cssVars.colorText
+                this.ctx.globalAlpha = 1
+                this.ctx.textAlign = 'center'
+                this.ctx.fillText(t, x + 0.5 * PXSCALE, y + PXSCALE)
+
+                if (!this.getProp('pips'))  {
+                    var length = this.fontSize * t.length
+                    // this.clearRect.push([x - length / 2, y - this.fontSize / 2, length, this.fontSize + 2 * PXSCALE])
+                }
+
+            }
         }
 
 
@@ -320,6 +279,9 @@ module.exports = class Xy extends Pad {
 
         switch (propName) {
 
+            case 'label':
+                this.batchDraw()
+                return
             case 'spring':
                 if (this.getProp('spring') && !this.touched) this.setValue([this.faders.x.getSpringValue(),this.faders.y.getSpringValue()], {...options})
                 return

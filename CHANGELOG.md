@@ -12,7 +12,9 @@
     - xy/multixy: add `auto` choice to `axisLock` (locks on the first moved axis)
     - file: `extension` can now be an array of strings
     - plot/eq: smoother curves
-    - sliders/pads: `doubleTap` can now be `"script"`, in which case `onTouch` will be called with `event.type` set to `doubleTap` 
+    - sliders/pads: `doubleTap` can now be `"script"`, in which case `onTouch` will be called with `event.type` set to `doubleTap`
+    - xy: add `label` property
+    - multixy: add `padsAttr` property for per-pad customization
 
 ## 1.27.5
 
