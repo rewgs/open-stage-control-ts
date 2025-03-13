@@ -15,6 +15,7 @@
     - sliders/pads: `doubleTap` can now be `"script"`, in which case `onTouch` will be called with `event.type` set to `doubleTap`
     - xy: add `label` property
     - multixy: add `padsAttr` property for per-pad customization
+    - panel: `tabsPosition` can now be `hidden`
 
 ## 1.27.5
 

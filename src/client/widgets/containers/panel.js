@@ -34,7 +34,7 @@ class Panel extends Container() {
                 contain: {type: 'boolean', value: true, help:'If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel.'},
                 scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
                 innerPadding: {type : 'boolean', value: true, help: 'Set to `false` to make the `padding` property apply only between children and not at the container\'s inner boundaries.'},
-                tabsPosition: {type: 'string', value: 'top', choices: ['top', 'bottom', 'left', 'right'], help: 'Defines the position of the navigation bar if the panel contains tabs'},
+                tabsPosition: {type: 'string', value: 'top', choices: ['top', 'bottom', 'left', 'right', 'hidden'], help: 'Defines the position of the navigation bar if the panel contains tabs'},
             },
             value: {
                 value: {type: 'integer|array', value: '', help: [
