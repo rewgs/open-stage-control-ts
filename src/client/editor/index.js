@@ -455,6 +455,7 @@ class Editor {
                 break
             case 'f2':
                 if (!this.selectedWidgets.length) return
+                if (this.selectedWidgets[0].props.top === undefined) return
                 if (!this.inspector.expandedCategories.includes('style')) {
                     var header = DOM.get(this.inspector.container, '.category-header[data-name="style"]')[0]
                     if (header) {
