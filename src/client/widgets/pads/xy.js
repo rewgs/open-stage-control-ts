@@ -18,7 +18,7 @@ module.exports = class Xy extends Pad {
         var defaults = super.defaults().extend({
             style: {
                 _separator_xy_style: 'Xy style',
-                pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size'},
+                pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size (may be in %)'},
                 ephemeral: {type: 'boolean', value: false, help: 'When set to `true`, the point will be drawn only while touched.'},
                 pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
                 label: {type: 'string', value: '', help: 'Text displayed in the handle'}
@@ -222,13 +222,12 @@ module.exports = class Xy extends Pad {
 
         if (!this.visible) return
 
-        var pointSize = this.cssVars.pointSize,
+        var pointSize = this.pointSize,
             x = this.faders.x.percentToCoord(this.faders.x.percent),
             y = this.faders.y.percentToCoord(this.faders.y.percent),
             ephemeral = this.getProp('ephemeral')
 
         this.clear()
-
 
         if (!ephemeral || this.active) {
             this.ctx.fillStyle = this.cssVars.colorFill

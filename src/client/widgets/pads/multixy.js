@@ -22,7 +22,7 @@ class MultiXy extends Pad {
         var defaults = super.defaults().extend({
             style: {
                 _separator_xy_style: 'Xy style',
-                pointSize: {type: 'integer', value: 20, help: 'Defines the points\' size'},
+                pointSize: {type: 'integer', value: 20, help: 'Defines the points\' default size (may be in %)'},
                 ephemeral: {type: 'boolean', value: false, help: 'When set to `true`, the points will be drawn only while touched.'},
                 pips: {type: 'boolean', value: true, help: 'Set to `false` to hide the scale'},
             },
@@ -273,7 +273,7 @@ class MultiXy extends Pad {
     updateHandlesPosition() {
 
         for (var i=0;i<this.npoints;i++) {
-            var pointSize = this.pads[i].cssVars.pointSize
+            var pointSize = this.pads[i].pointSize
             this.padsCoords[i] = [clip(this.pads[i].faders.x.percent,[0,100]) / 100 * (this.width - (pointSize * 2 + 2) * PXSCALE) + (pointSize + 1) * PXSCALE
                 ,- clip(this.pads[i].faders.y.percent,[0,100]) / 100 * (this.height - (pointSize * 2 + 2) * PXSCALE) - (pointSize + 1) * PXSCALE]
 

@@ -20,6 +20,7 @@ class Pad extends Canvas {
         super.cacheCanvasStyle(style)
 
         this.padPadding = (this.cssVars.padding + this.cssVars.lineWidth) + 2 * PXSCALE
+        this.pointSize = parseFloat(this.cssVars.pointSize) * (this.cssVars.pointSize.indexOf('%') > -1 ? this.width / 100 : PXSCALE)
 
     }
 
@@ -96,7 +97,7 @@ class Pad extends Canvas {
 }
 
 Pad.cssVariables = Pad.prototype.constructor.cssVariables.concat(
-    {js: 'pointSize', css: '--point-size', toCss: x=>parseFloat(x) + 'rem', toJs: x=>parseFloat(x) * PXSCALE},
+    {js: 'pointSize', css: '--point-size'},
 )
 
 Pad.dynamicProps = Pad.prototype.constructor.dynamicProps.filter(n => n !== 'decimals').concat([

@@ -16,6 +16,7 @@
     - xy: add `label` property
     - multixy: add `padsAttr` property for per-pad customization
     - panel: `tabsPosition` can now be `hidden`
+    - pads: support percents in `pointSize`
 
 ## 1.27.5
 
