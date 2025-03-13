@@ -6,6 +6,8 @@ class Vm {
 
     constructor() {
 
+        this.widget = []
+
         if (!globals) {
             var sessionManager
             globals = {
@@ -55,6 +57,19 @@ class Vm {
 
         // detach sandbox
         document.documentElement.removeChild(this.sandbox)
+
+    }
+
+    setWidget(widget) {
+
+        if (!widget) this.widget.pop()
+        else this.widget.push(widget)
+
+    }
+
+    getWidget() {
+
+        return this.widget[this.widget.length - 1]
 
     }
 

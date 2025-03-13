@@ -16,7 +16,6 @@ class ScriptVm extends Vm {
         super()
 
         this.valueOptions = []
-        this.widget = []
 
     }
 
@@ -30,19 +29,6 @@ class ScriptVm extends Vm {
 
         if (!options) this.valueOptions.pop()
         else this.valueOptions.push(options)
-
-    }
-
-    setWidget(widget) {
-
-        if (!widget) this.widget.pop()
-        else this.widget.push(widget)
-
-    }
-
-    getWidget() {
-
-        return this.widget[this.widget.length - 1]
 
     }
 
