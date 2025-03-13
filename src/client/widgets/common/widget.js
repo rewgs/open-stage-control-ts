@@ -836,7 +836,15 @@ class Widget extends EventEmitter {
 
                     if (!this.parsers[code]) this.parsers[code] = vm.compile(code, defaultScope)
 
-                    let r = this.parsers[code](jsScope, this.parsersLocalScope)
+                    let r
+                    vm.setWidget(this)
+                    try {
+                        r = this.parsers[code](jsScope, this.parsersLocalScope)
+                    } catch (err) {
+                        vm.setWidget()
+                        throw err
+                    }
+                    vm.setWidget()
 
                     if (r === undefined) r = ''
 
@@ -852,7 +860,15 @@ class Widget extends EventEmitter {
 
                     if (!this.parsers[code]) this.parsers[code] = vm.compile('return ' + code.trim(), defaultScope)
 
-                    let r = this.parsers[code](jsScope, this.parsersLocalScope)
+                    let r
+                    vm.setWidget(this)
+                    try {
+                        r = this.parsers[code](jsScope, this.parsersLocalScope)
+                    } catch (err) {
+                        vm.setWidget()
+                        throw err
+                    }
+                    vm.setWidget()
 
                     if (r === undefined) r = ''
 

@@ -75,7 +75,13 @@ class Vm {
 
     registerGlobals() {
 
-        this.sandbox.contentWindow.console = console
+        this.sandbox.contentWindow.console = {
+            ...console,
+            log: (msg)=>{
+                this.getWidget().log(msg)
+            }
+        }
+
         this.sandbox.contentWindow.setTimeout =
         this.sandbox.contentWindow.setInterval = ()=>{
             throw 'setTimeout and setInterval can\'t be used in the JS sandbox'
