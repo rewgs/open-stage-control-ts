@@ -240,6 +240,22 @@ class UiTree extends UiWidget {
 
     }
 
+    showWidgetInSession(widget) {
+        
+        var parent = widget
+        while (parent !== widgetManager) {
+            if (parent.getProp('type') === 'tab') parent.parent.setValue(parent.parent.children.indexOf(parent), {sync: true, send: true})
+            else if (parent.getProp('type') === 'modal') parent.setValue(1, {sync: true, send: true})
+            parent = parent.parent
+        }
+        widget.container.classList.add('editor-blink')
+        widget.container.scrollIntoView({block: 'center'})
+        setTimeout(()=>{
+            widget.container.classList.remove('editor-blink')
+        }, 800)
+
+    }
+
     select() {
 
         // hint selection in folded containers

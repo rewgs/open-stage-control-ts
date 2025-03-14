@@ -210,6 +210,7 @@ class Editor {
                 'home',
                 'end',
                 't',
+                'r',
                 'f2',
                 'h',
                 'mod + f'
@@ -452,7 +453,13 @@ class Editor {
                 if (!this.selectedWidgets.length) return
                 this.widgetTree.showWidget(editor.selectedWidgets[0])
                 this.widgetTree.blinkSelected()
-
+                break
+            case 'r':
+                if (!this.selectedWidgets.length) return
+                for (let w of editor.selectedWidgets) {
+                    this.widgetTree.showWidgetInSession(w)
+                }
+                this.widgetTree.showWidget(editor.selectedWidgets[0])
                 break
             case 'f2':
                 if (!this.selectedWidgets.length) return
