@@ -499,7 +499,7 @@ class Editor {
 
         if (
             this.inspector.helpModalOpened ||
-            (e && e.target && e.target.tagName.match(/INPUT|TEXTAREA|SELECT/))
+            (e && e.target && e.target.tagName && e.target.tagName.match(/INPUT|TEXTAREA|SELECT/))
         ) return
 
         if (e) e.preventDefault()
