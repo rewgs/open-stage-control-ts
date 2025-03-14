@@ -112,7 +112,7 @@ var handleClick = function(event) {
                         editor.widgetTree.showWidgetInSession(w)
                     }
                 },
-                shortcut: 'r'
+                shortcut: 'y'
             })
 
         }

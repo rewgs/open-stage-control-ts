@@ -102,7 +102,7 @@ Multiple widgets can be edited at once.
     | ++left++ | Select current widget's parent |
     | ++right++ | Select current widget's first child |
     | ++t++ | Show selected widget(s) in the project tree |
-    | ++r++ | Show selected widget(s) in the session |
+    | ++y++ | Show selected widget(s) in the session |
     | ++ctrl+f++ | Focus search input in project tree |
     | ++"Home"++ | Send selected widget to back |
     | ++"Page Up"++ | Send selected widget farther |
@@ -144,7 +144,7 @@ Multiple widgets can be edited at once.
     | ++left++ | Select current widget's parent |
     | ++right++ | Select current widget's first child |
     | ++t++ | Show selected widget in the project tree |
-    | ++r++ | Show selected widget(s) in the session |
+    | ++y++ | Show selected widget(s) in the session |
     | ++cmd+f++ | Focus search input in project tree |
     | ++"Home"++ | Send selected widget to back |
     | ++"Page Up"++ | Send selected widget farther |

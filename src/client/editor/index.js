@@ -210,7 +210,7 @@ class Editor {
                 'home',
                 'end',
                 't',
-                'r',
+                'y',
                 'f2',
                 'h',
                 'mod + f'
@@ -454,7 +454,7 @@ class Editor {
                 this.widgetTree.showWidget(editor.selectedWidgets[0])
                 this.widgetTree.blinkSelected()
                 break
-            case 'r':
+            case 'y':
                 if (!this.selectedWidgets.length) return
                 for (let w of editor.selectedWidgets) {
                     this.widgetTree.showWidgetInSession(w)
