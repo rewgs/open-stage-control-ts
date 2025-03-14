@@ -487,6 +487,7 @@ class Editor {
                 document.body.classList.add('editor-hide-selection')
                 break
             case 'mod + f':
+                if (this.widgetTree.parent.minimized) this.widgetTree.parent.restore()
                 this.widgetTree.filter.focus()
                 break
 
