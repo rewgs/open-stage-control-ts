@@ -255,6 +255,7 @@ class MultiXy extends Pad {
         super.cacheCanvasStyle(style)
         for (var k in this.pads) {
             this.pads[k].cacheCanvasStyle()
+            this.pads[k].batchDraw()
         }
         this.batchDraw()
 
