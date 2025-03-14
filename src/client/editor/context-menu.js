@@ -30,6 +30,10 @@ var handleClick = function(event) {
 
     if (!targetWidget) return
 
+    while (targetWidget._not_editable && targetWidget.parent) {
+        targetWidget = targetWidget.parent
+    }
+
     // if the widget is not already selected
     if (!targetWidget.container.classList.contains('editing') || event.detail.ctrlKey || event.detail.shiftKey) {
         // add a flag to the original event to prevent draginit
