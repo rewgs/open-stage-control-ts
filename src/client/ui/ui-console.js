@@ -161,8 +161,6 @@ class UiConsole extends UiSidePanel {
             node.textContent = message
         }
 
-        if (type !== 'error' && node.textContent.match(/error/i)) node.classList.add('error')
-
         node.scrollIntoView()
 
         if (++this.length > this.maxLength) this.purge()
