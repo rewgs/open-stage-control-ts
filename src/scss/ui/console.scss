@@ -58,7 +58,7 @@ osc-console {
     height: 100%;
     padding: $padding 0;
     overflow-y: auto;
-    border-bottom: 1rem solid rgba(255,255,255,0.1);
+    border-bottom: 1rem dotted rgba(255,255,255,0.2);
     user-select: text;
 }
 
@@ -104,6 +104,7 @@ osc-console-message {
         &.undefined {
             // color: var(--color-text)
             opacity: 0.5;
+            border-bottom: 1rem dotted rgba(255,255,255,0.20);
         }
 
         &.value {
