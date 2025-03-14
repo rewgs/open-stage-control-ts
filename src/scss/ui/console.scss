@@ -56,49 +56,53 @@ $padding: 8rem;
 
 osc-console {
     height: 100%;
-    padding: $padding;
+    padding: $padding 0;
     overflow-y: auto;
-    border-bottom: 1rem solid var(--color-background);
+    border-bottom: 1rem solid rgba(255,255,255,0.1);
     user-select: text;
 }
 
 osc-console-message {
+
     user-select: text;
     cursor: text;
     display: block;
     white-space: pre-line;
     position: relative;
-    padding-left: 10rem;
+    padding-left: $padding + 18rem;
+    padding-right: $padding;
+    padding-bottom: 6rem;
+    border-bottom: 1rem dotted rgba(255,255,255,0.1);
     &:before {
         font-family: FontAwesome;
-        width: 6rem;
+        width: 12rem;
         display: inline-block;
         text-align: center;
         position: absolute;
-        left: 0;
+        left: $padding;
+        top:1rem;
     }
-    &.log:before, &.error:before {
-        content: "";
-        border-left: 2rem solid;
-        top: 0;
-        bottom: 0;
-        left: 2rem;
-        opacity: 0.75;
+    &.log:before {
+        content: "\f105\f105"
     }
     &.error {
         color: var(--color-error);
+        &:before {
+            content: "x"
+        }
     }
     &.input {
         &:before {
-            content: "\f105";
+            content: "\f105\f105";
         }
     }
     &.output {
         &:before {
-            content: "\f104"
+            content: "\f104\f104"
         }
 
         &.undefined {
+            // color: var(--color-text)
             opacity: 0.5;
         }
 
@@ -107,6 +111,7 @@ osc-console-message {
             opacity: 1;
         }
     }
+
 
     margin-bottom: 4rem;
 
@@ -117,7 +122,8 @@ osc-console-message {
     .edit-widget {
         cursor: pointer;
         display: inline-block;
-        padding: 2rem;
+        position: relative;
+        // padding: 2rem;
         border-radius: 2rem;
         &.editing {
             background: var(--color-ui-foreground);
@@ -141,22 +147,22 @@ osc-console-input {
     padding-left: 10rem;
 
     &:before {
-        content: "\f105";
+        content: "\f105\f105";
         font-family: FontAwesome;
-        width: 6rem;
+        width: 16rem;
         display: inline-block;
         text-align: center;
         position: absolute;
         left: 0;
-        line-height: $field-height - 8rem;
+        line-height: $field-height - 6rem;
         padding: 4rem 6rem;
         color: var(--color-accent);
     }
     textarea {
         font-family: $font-mono;
 
-        line-height: $field-height - 8rem;
-        padding: 4rem 6rem;
+        line-height: $field-height - 6rem;
+        padding: 4rem 16rem;
         flex: 1;
         overflow-x: auto;
         overflow-y: hidden;
