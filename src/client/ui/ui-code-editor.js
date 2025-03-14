@@ -157,15 +157,15 @@ class CodeEditor {
             if (pos.row === undefined || pos.column === undefined) this.editor.gotoLine(0)
 
             this.typing = false
-            setCommandEnabled(this.editor, "indent", false)
-            setCommandEnabled(this.editor, "outdent", false)
+            setCommandEnabled(this.editor, 'indent', false)
+            setCommandEnabled(this.editor, 'outdent', false)
 
             this.editor.on('changeSelection', ()=>{
                 if (this.typing) return
                 let pos = this.editor.getCursorPosition()
                 if (pos.row || pos.column) {
-                    setCommandEnabled(this.editor, "indent", true)
-                    setCommandEnabled(this.editor, "outdent", true)
+                    setCommandEnabled(this.editor, 'indent', true)
+                    setCommandEnabled(this.editor, 'outdent', true)
                 }
                 this.typing = true
             })

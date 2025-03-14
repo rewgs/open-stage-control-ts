@@ -344,7 +344,7 @@ class UiInspector extends UiWidget {
 
             }
 
-        } else  if ((event.key == 'Enter' || event.key == ' ') && event.target.classList.contains('category-header')) {
+        } else  if ((event.key == 'Enter' || event.key == ' ') && event.target.classList.contains('category-header')) {
 
             event.preventDefault()
             DOM.dispatchEvent(event.target, 'fast-click', {})
