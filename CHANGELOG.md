@@ -4,6 +4,7 @@
     - ui: global zoom (CmdOrCtrl + scroll / + / - / 0) issues and conflits with native browser zoom;
     - ui: limit ctrl + scroll zoom speed
     - broken cli when `ELECTRON_RUN_AS_NODE` is set
+    - inspector: input bug when a code editor was focused using the tab key
 
 - widgets
     - fader: add `touchZone` property to allow restricting interaction to a part of the widget
@@ -17,6 +18,16 @@
     - multixy: add `padsAttr` property for per-pad customization
     - panel: `tabsPosition` can now be `hidden`
     - pads: support percents in `pointSize`
+
+- scripting
+    - `console.log` now always print the id of the widget that called it
+
+- editor
+    - inspector: tab key navigation now works, property categories can be fold/unfold with enter/space when focused
+    - inspector: `F2` now focuses the `html` property in the inpector if `label` is not present
+    - tree: add `mod + f` to focus the search input
+
+
 
 ## 1.27.5
 
