@@ -26,7 +26,7 @@
     "@babel/polyfill": "7.12.1",
     "@babel/preset-env": "7.18.0",
     "@electron/remote": "2.0.8",
-    "ace-builds": "1.24.1",
+    "ace-builds": "1.39.0",
     "ansi-html": "0.0.9",
     "babelify": "10.0.0",
     "balanced-match": "2.0.0",

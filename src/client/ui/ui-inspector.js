@@ -185,7 +185,6 @@ class UiInspector extends UiWidget {
         var widget = widgets[0],
             lock = widgets.some(w=>w.getProp('lock')),
             props = defaults[widget.props.type],
-            tabIndex = 1000,
             codeEditorFields = []
 
         this.widget = widget
@@ -202,7 +201,7 @@ class UiInspector extends UiWidget {
             if (widgets.length > 1 && categoryName === 'class_specific') categoryLabel = 'shared properties'
 
             category.appendChild(html`
-                <div class="category-header" data-name="${categoryName}">${categoryLabel}${categoryName === 'widget' && widgets.length > 1 ? `s (${widgets.length})` : ''}</div>
+                <div class="category-header" tabIndex="0" data-name="${categoryName}">${categoryLabel}${categoryName === 'widget' && widgets.length > 1 ? `s (${widgets.length})` : ''}</div>
             `)
 
             let notEmpty
@@ -235,7 +234,6 @@ class UiInspector extends UiWidget {
                         name: propName,
                         value: widget.props[propName],
                         default: def,
-                        tabIndex: tabIndex++
                     }).container
                     if (first) field.classList.add('first-child')
 
@@ -345,6 +343,11 @@ class UiInspector extends UiWidget {
                 event.target.blur()
 
             }
+
+        } else  if ((event.key == 'Enter' || event.key == ' ') && event.target.classList.contains('category-header')) {
+
+            event.preventDefault()
+            DOM.dispatchEvent(event.target, 'fast-click', {})
 
         }
 

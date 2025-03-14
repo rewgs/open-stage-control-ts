@@ -30,14 +30,14 @@ class UiInspectorField extends UiWidget {
 
         if (this.widget.props.type == 'tab' || this.widget.props.type == 'root') {
             this.container.appendChild(html`
-                <textarea tabIndex="${this.tabIndex}" class="no-keybinding" name="${this.name}" rows="1" disabled>${this.value}</textarea>
+                <textarea tabIndex="0" class="no-keybinding" name="${this.name}" rows="1" disabled>${this.value}</textarea>
             `)
             return
         }
 
         this.createInput()
 
-        var select = html`<select tabIndex="${this.tabIndex}" class="no-keybinding" name="${this.name}"/>`
+        var select = html`<select tabIndex="-1" class="no-keybinding" name="${this.name}"/>`
 
         for (let cname in categories) {
 
@@ -64,7 +64,7 @@ class UiInspectorField extends UiWidget {
                 JSON.stringify(this.value, null, '  ').replace(/\n\s\s\s\s/g, ' ').replace(/\n\s\s(\}|\])/g, ' $1') : this.value
 
 
-        let input = html`<textarea tabIndex="${this.tabIndex}" class="no-keybinding" name="${this.name}" rows="${stringValue.split('\n').length}"></textarea>`
+        let input = html`<textarea tabIndex="0" class="no-keybinding" name="${this.name}" rows="${stringValue.split('\n').length}"></textarea>`
 
         if (this.name === 'id' && this.widget.props.type === 'root') input.disabled = true
 
@@ -80,7 +80,7 @@ class UiInspectorField extends UiWidget {
         if (this.default.choices) {
 
             let wrapper = html`<osc-inspector-select></osc-inspector-select>`,
-                select = wrapper.appendChild(html`<select class="no-keybinding" name="${this.name}"/>`)
+                select = wrapper.appendChild(html`<select tabIndex="-1" class="no-keybinding" name="${this.name}"/>`)
             for (let choice of this.default.choices) {
                 select.appendChild(html`<option ${choice == this.value ? 'selected' : ''} value="${choice}">${choice}</option>`)
             }

@@ -464,6 +464,10 @@ osc-inspector-category {
             top:1rem;
         }
 
+        &:focus, &:active {
+            text-decoration: underline
+        }
+
     }
 
     .separator {

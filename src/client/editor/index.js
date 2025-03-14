@@ -211,7 +211,8 @@ class Editor {
                 'end',
                 't',
                 'f2',
-                'h'
+                'h',
+                'mod + f'
             ]
 
             for (let c of combos) {
@@ -455,7 +456,7 @@ class Editor {
                 break
             case 'f2':
                 if (!this.selectedWidgets.length) return
-                if (this.selectedWidgets[0].props.top === undefined) return
+                if (this.selectedWidgets[0].props.label === undefined && this.selectedWidgets[0].props.html === undefined) return
                 if (!this.inspector.expandedCategories.includes('style')) {
                     var header = DOM.get(this.inspector.container, '.category-header[data-name="style"]')[0]
                     if (header) {
@@ -463,15 +464,23 @@ class Editor {
                         this.inspector.expandedCategories.push('style')
                     }
                 }
-                var input = DOM.get(this.inspector.container, 'textarea[name="label"]')[0]
+                var labelProp = this.selectedWidgets[0].props.label === undefined ? 'html' : 'label'
+                var input = DOM.get(this.inspector.container, `textarea[name="${labelProp}"]`)[0]
                 if (input) {
-                    input.focus()
-                    input.setSelectionRange(0, input.value.length)
-                    input.scrollIntoView({block: 'center'})
+                    if (input._ace_input) {
+                        input._ace_input.focus()
+                    } else {
+                        input.focus()
+                        input.setSelectionRange(0, input.value.length)
+                        input.scrollIntoView({block: 'center'})
+                    }
                 }
                 break
             case 'h':
                 document.body.classList.add('editor-hide-selection')
+                break
+            case 'mod + f':
+                this.widgetTree.filter.focus()
                 break
 
         }
@@ -483,7 +492,7 @@ class Editor {
 
         if (
             this.inspector.helpModalOpened ||
-            e && e.target && e.target.tagName.match(/INPUT|TEXTAREA|SELECT/)
+            (e && e.target && e.target.tagName.match(/INPUT|TEXTAREA|SELECT/))
         ) return
 
         if (e) e.preventDefault()

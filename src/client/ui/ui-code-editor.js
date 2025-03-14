@@ -14,6 +14,15 @@ var UiModal = require('./ui-modal'),
 
 ace.config.set('basePath', '/client/workers/')
 
+function setCommandEnabled(editor, name, enabled) {
+    var command = editor.commands.byName[name]
+    if (!command.bindKeyOriginal)
+        command.bindKeyOriginal = command.bindKey
+    command.bindKey = enabled ? command.bindKeyOriginal : null
+    editor.commands.addCommand(command)
+}
+
+
 class CodeEditor {
 
     constructor(parent, name, language, syntaxChecker) {
@@ -119,24 +128,46 @@ class CodeEditor {
         editor.fullscreen = false
         input.style.display = 'none'
         input._ace_input = editor.textarea
+        input.tabIndex = -1
+
         editor.setValue(input.value)
         editor.textarea.osc_input = input
+        editor.textarea.tabIndex = 0
         editor.selection.setRange({start:0,end:0})
         if (!this.widget || widget.hash !== this.widget.hash) {
             // preserve active line if widget is the same
             editor.gotoLine(0)
         }
+
         editor.removeAllListeners('focus')
         this.editor.on('focus', (e)=>{
             this.parent.focusedInput = this.input
             this.editor.setHighlightActiveLine(true)
             this.editor.setHighlightGutterLine(true)
+
             this.editor.removeAllListeners('blur')
             this.editor.removeAllListeners('change')
+            this.editor.removeAllListeners('changeSelection')
             this.editor.on('change', (e)=>{
                 this.input.value = this.editor.getValue()
-                // this.parent.focusedInput = this.input
                 this.editor.dirty = true
+            })
+
+            var pos = this.editor.getCursorPosition()
+            if (pos.row === undefined || pos.column === undefined) this.editor.gotoLine(0)
+
+            this.typing = false
+            setCommandEnabled(this.editor, "indent", false)
+            setCommandEnabled(this.editor, "outdent", false)
+
+            this.editor.on('changeSelection', ()=>{
+                if (this.typing) return
+                let pos = this.editor.getCursorPosition()
+                if (pos.row || pos.column) {
+                    setCommandEnabled(this.editor, "indent", true)
+                    setCommandEnabled(this.editor, "outdent", true)
+                }
+                this.typing = true
             })
             this.editor.on('blur', (e)=>{
                 this.editor.setHighlightActiveLine(false)
