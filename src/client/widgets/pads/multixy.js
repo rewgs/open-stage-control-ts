@@ -119,25 +119,9 @@ class MultiXy extends Pad {
 
             if (!this.touchMap[e.pointerId]) {
 
-                var ndiff, diff = -1
-
-                for (var i in this.pads) {
-
-                    if (Object.values(this.touchMap).indexOf(i) != -1) continue
-                    if (!this.pads[i].getProp('visible')) continue
-
-                    ndiff = Math.abs(e.offsetX -  this.padsCoords[i][0]) + Math.abs(e.offsetY - (this.padsCoords[i][1] + this.height))
-
-                    if (diff == -1 || ndiff < diff) {
-                        id = i
-                        diff = ndiff
-                    }
-
-
-                }
+                id = this.getPadIdFromCoords(e.offsetX, e.offsetY)
 
                 this.touchMap[e.pointerId] = id
-
 
             }
 
@@ -232,6 +216,29 @@ class MultiXy extends Pad {
         }
 
         this.setValue(v)
+
+    }
+
+    getPadIdFromCoords(x, y) {
+
+        var ndiff, diff = -1,
+            id
+
+        for (var i in this.pads) {
+
+            if (Object.values(this.touchMap).indexOf(i) != -1) continue
+            if (!this.pads[i].getProp('visible')) continue
+
+            ndiff = Math.abs(x -  this.padsCoords[i][0]) + Math.abs(y - (this.padsCoords[i][1] + this.height))
+
+            if (diff == -1 || ndiff < diff) {
+                id = i
+                diff = ndiff
+            }
+
+        }
+
+        return id
 
     }
 
