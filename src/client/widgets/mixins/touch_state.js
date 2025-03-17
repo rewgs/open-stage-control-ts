@@ -14,12 +14,13 @@ module.exports = (self, options)=>{
 
     self.on('dragend', (e)=>{
         if (self.touched == 1) {
-            self.touched = 0
 
             if (self.setValueTouchedQueue !== undefined) {
                 self.setValue(...self.setValueTouchedQueue)
                 self.setValueTouchedQueue = undefined
             }
+
+            self.touched = 0
 
             self.trigger('touch', {stopPropagation: true, touch: 0})
 
