@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.28.0
+
 - bug fixes
     - ui: global zoom (CmdOrCtrl + scroll / + / - / 0) issues and conflits with native browser zoom;
     - ui: limit ctrl + scroll zoom speed
