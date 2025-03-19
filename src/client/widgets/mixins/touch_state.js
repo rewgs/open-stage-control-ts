@@ -6,6 +6,10 @@ module.exports = (self, options)=>{
     self.setValueTouchedQueue = undefined
 
     self.on('draginit',(e)=>{
+        if (self.shouldDrag && !self.shouldDrag(e)) {
+            e.cancelDragEvent = true
+            return
+        }
         self.touched += 1
         if (self.touched == 1) {
             self.trigger('touch', {stopPropagation: true, touch: 1})
