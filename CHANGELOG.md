@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.28.1
+
+- bug fixes
+    - eq: `highpass` filter not working as expected with `poles` set
+
 ## 1.28.0
 
 - bug fixes
