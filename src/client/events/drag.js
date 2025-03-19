@@ -10,7 +10,7 @@ function pointerDownHandler(event) {
 
     if (!event.target._drag_multitouch) {
         for (var i in targets) {
-            if (targets[i] == event.target) return
+            if (targets[i] == event.target) return event
         }
     }
 
