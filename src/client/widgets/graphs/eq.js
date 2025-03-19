@@ -166,10 +166,15 @@ function biquadResponse(options, frequencyHz, filterResponse) {
             break
 
         case 'lowpass-1p':
-            b1 = Math.exp(-2.0 * Math.PI * (frequency / Fs))
-            a0 = 1.0 - b1
-            b1 = -b1
-            a1 = a2 = b2 = 0
+            // b1 = Math.exp(-2.0 * Math.PI * (frequency / Fs))
+            // a0 = 1.0 - b1
+            // b1 = -b1
+            // a1 = a2 = b2 = 0
+            // using lowpass 1p1z instead
+            norm = 1 / (1 / K + 1)
+            a0 = a1 = norm
+            b1 = (1 - 1 / K) * norm
+            a2 = b2 = 0
             break
 
         case 'highpass-1p':
