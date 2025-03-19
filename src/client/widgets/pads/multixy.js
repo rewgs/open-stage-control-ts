@@ -111,6 +111,23 @@ class MultiXy extends Pad {
         this.padsCoords = []
         this.touchMap = {}
 
+        this.on('dragend',(e)=>{
+
+            var i = this.touchMap[e.pointerId]
+
+            if (!i) return
+
+            e.stopPropagation = true
+
+            this.pads[i].touched = 0
+            this.pads[i].trigger('dragend', e)
+
+            this.trigger('touch', {stopPropagation: true, touch: [parseInt(this.touchMap[e.pointerId]), 0]})
+
+            delete this.touchMap[e.pointerId]
+
+        }, {element: this.widget, multitouch: true})
+
         touchstate(this, {element: this.widget, multitouch: true})
 
         this.on('draginit',(e)=>{
@@ -145,23 +162,6 @@ class MultiXy extends Pad {
             e.inertia = 1 // cancel mutlifinger inertia
 
             this.pads[i].trigger('drag', e)
-
-        }, {element: this.widget, multitouch: true})
-
-        this.on('dragend',(e)=>{
-
-            var i = this.touchMap[e.pointerId]
-
-            if (!i) return
-
-            e.stopPropagation = true
-
-            this.pads[i].touched = 0
-            this.pads[i].trigger('dragend', e)
-
-            this.trigger('touch', {stopPropagation: true, touch: [parseInt(this.touchMap[e.pointerId]), 0]})
-
-            delete this.touchMap[e.pointerId]
 
         }, {element: this.widget, multitouch: true})
 
