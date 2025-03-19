@@ -6,6 +6,7 @@
     - eq: `highpass` filter not working as expected with `poles` set
     - fader: `touchZone` not applied to `doubleTap` events
     - fader: `touchZone` not affecting mousewheel interactions
+    - fader: regression causing issues with `onTouch` scripts
 
 ## 1.28.0
 
