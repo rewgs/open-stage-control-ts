@@ -6,6 +6,8 @@ module.exports = (self, options)=>{
     self.setValueTouchedQueue = undefined
 
     self.on('draginit',(e)=>{
+        self.setValueTouchedQueue = undefined
+
         if (self.shouldDrag && !self.shouldDrag(e)) {
             e.cancelDragEvent = true
             return
@@ -34,6 +36,7 @@ module.exports = (self, options)=>{
 
     self.onRemove = ()=>{
         if (self.touched > 0) {
+            self.setValueTouchedQueue = undefined
             self.trigger('touch', {stopPropagation: true, touch: 0})
         }
         self.__proto__.onRemove.call(self)
