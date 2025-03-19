@@ -125,6 +125,7 @@ class Fader extends Slider {
             snap = this.getProp('snap')
 
         if (zone == 'all') return true
+        if (e.type == 'wheel' && zone == 'knob') zone = 'gauge'
         if (design == 'compact' && zone == 'gauge') return true
 
         var x = e.offsetX,

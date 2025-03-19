@@ -57,14 +57,16 @@ class Slider extends Canvas {
 
             if (typeof this.getProp('doubleTap') === 'string' && this.getProp('doubleTap')[0] === '/') {
 
-                doubleTap(this, ()=>{
+                doubleTap(this, (e)=>{
+                    if (!this.shouldDrag(e)) return
                     this.sendValue({v:null, address: this.getProp('doubleTap')})
                 }, {element: this.widget})
 
             }
             if (this.getProp('doubleTap') == 'script') {
 
-                doubleTap(this, ()=>{
+                doubleTap(this, (e)=>{
+                    if (!this.shouldDrag(e)) return
                     this.scripts.onTouch.run({
                         event: {type: 'doubleTap'},
                         value: this.value
@@ -74,7 +76,8 @@ class Slider extends Canvas {
 
             } else {
 
-                doubleTap(this, ()=>{
+                doubleTap(this, (e)=>{
+                    if (!this.shouldDrag(e)) return
                     this.setValue(this.getSpringValue(),{sync:true, send:true, fromLocal:true, doubleTap:true})
                 }, {element: this.widget})
 
@@ -94,6 +97,12 @@ class Slider extends Canvas {
         this.setSteps()
 
         this.setValue(this.getSpringValue())
+
+    }
+
+    shouldDrag(e) {
+
+        return true
 
     }
 
@@ -123,7 +132,7 @@ class Slider extends Canvas {
 
     mousewheelHandle(e) {
 
-        if (e.deltaX || this.getProp('spring')) return
+        if (e.deltaX || this.getProp('spring') || !this.shouldDrag(e)) return
 
         e.preventDefault()
         e.stopPropagation()
