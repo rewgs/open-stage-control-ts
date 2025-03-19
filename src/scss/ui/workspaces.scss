@@ -254,6 +254,10 @@ osc-panel-container {
         }
     }
 
+    &.disabled {
+        pointer-events: none;
+    }
+
     &.disabled .toggle-button {
         display: none;
     }
