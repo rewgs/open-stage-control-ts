@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.28.4
+
+- bug fixes
+    - multixy: error when `points` is `0` (or empty array)
+
 ## 1.28.3
 
 - bug fixes

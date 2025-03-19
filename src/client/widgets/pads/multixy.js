@@ -74,7 +74,7 @@ class MultiXy extends Pad {
 
         super(options)
 
-        this.npoints = Array.isArray(this.getProp('points')) ? this.getProp('points').length : this.getProp('points') || 0
+        this.npoints = Math.max(Array.isArray(this.getProp('points')) ? this.getProp('points').length : this.getProp('points') || 1, 1)
 
         this.preventChildrenTouchState = true
         this.pads = []
