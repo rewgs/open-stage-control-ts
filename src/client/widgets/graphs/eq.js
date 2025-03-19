@@ -178,11 +178,11 @@ function biquadResponse(options, frequencyHz, filterResponse) {
             // b1 = -b1
             // a1 = a2 = b2 = 0
             // using highpass 1p1z instead
-            norm = 1 / (K + 1);
-            a0 = norm;
-            a1 = -norm;
-            b1 = (K - 1) * norm;
-            a2 = b2 = 0;
+            norm = 1 / (K + 1)
+            a0 = norm
+            a1 = -norm
+            b1 = (K - 1) * norm
+            a2 = b2 = 0
             break
 
         case 'bandpass':
