@@ -4,7 +4,6 @@
 
 - bug fixes
     - eq: `highpass` filter not working as expected with `poles` set
-    - eq: pointsAttr not updating dynamically
     - fader: `touchZone` not applied to `doubleTap` events
     - fader: `touchZone` not affecting mousewheel interactions
     - fader: regression causing issues with `onTouch` scripts
