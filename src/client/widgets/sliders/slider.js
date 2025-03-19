@@ -226,7 +226,12 @@ class Slider extends Canvas {
     setValue(v,options={}) {
 
         if (typeof v != 'number') return
-        if (this.touched && !options.dragged && !options.doubleTap) return this.setValueTouchedQueue = [v, options]
+        if (
+            this.touched &&
+            !options.dragged &&
+            !options.doubleTap &&
+            options.fromScript !== this.hash
+        ) return this.setValueTouchedQueue = [v, options]
 
         var value = clip(v,[this.rangeValsMin,this.rangeValsMax])
 
