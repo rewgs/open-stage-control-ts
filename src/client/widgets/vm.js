@@ -77,8 +77,9 @@ class Vm {
 
         this.sandbox.contentWindow.console = {
             ...console,
-            log: (msg)=>{
-                this.getWidget().log(msg)
+            log: (...msg)=>{
+                msg = msg.map(m => typeof m == 'object' ? JSON.stringify(m) : m)
+                this.getWidget().log(msg.join(' '))
             }
         }
 
