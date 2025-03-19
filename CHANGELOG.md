@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.28.2
+
+- bug fixes
+    - regression in feedback handling (unfixes multixy/range simultaneous spring issue temporarily)
+
 ## 1.28.1
 
 - bug fixes
@@ -16,6 +21,7 @@
     - broken cli when `ELECTRON_RUN_AS_NODE` is set
     - inspector: input bug when a code editor was focused using the tab key
     - inspector: prevent editing non-editable widgets (e.g matrix items) when clicking on their ids in error logs
+    - multixy/range: simultaneous touch releases not working correctly when `spring` is set and feedback values are received shortly after being sent
 
 - widgets
     - fader: add `touchZone` property to allow restricting interaction to a part of the widget
