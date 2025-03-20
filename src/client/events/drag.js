@@ -6,7 +6,7 @@ var targets = {},
 
 function pointerDownHandler(event) {
 
-    if (event.capturedByEditor || event.touchPunch) return
+    if (event.capturedByEditor || event.touchPunch) return event
 
     if (!event.target._drag_multitouch) {
         for (var i in targets) {
@@ -18,7 +18,7 @@ function pointerDownHandler(event) {
 
     var target = closestDragContainer(event.target)
 
-    if (!target) return
+    if (!target) return event
 
     if (event.traversingStack) {
 
