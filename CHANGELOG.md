@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.29.0
+
+- widgets
+    - add `onTouch` to all container widgets
+    - allow starting a traversing gesture outside a touchable widget
+
 ## 1.28.4
 
 - bug fixes
