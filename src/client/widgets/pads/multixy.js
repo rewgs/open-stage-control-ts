@@ -119,8 +119,6 @@ class MultiXy extends Pad {
 
             if (!i) return
 
-            e.stopPropagation = true
-
             this.pads[i].touched = 0
             this.pads[i].trigger('dragend', e)
 
@@ -145,8 +143,6 @@ class MultiXy extends Pad {
             }
 
             if (!id) return
-
-            e.stopPropagation = true
 
             this.trigger('touch', {stopPropagation: true, touch: [parseInt(id), 1]})
 

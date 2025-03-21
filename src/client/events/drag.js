@@ -15,6 +15,7 @@ function pointerDownHandler(event) {
     }
 
     event = normalizeDragEvent(event)
+    event.stopPropagation = true
 
     var target = closestDragContainer(event.target)
 
@@ -113,6 +114,7 @@ function pointerMoveHandler(event) {
 function pointerUpHandler(event) {
 
     event = normalizeDragEvent(event, previousPointers[event.pointerId])
+    event.stopPropagation = true
 
     triggerWidgetEvent(targets[event.pointerId], 'dragend', event)
 
@@ -157,6 +159,7 @@ function pointerUpFilter(event) {
 
 function mouseDownCapture(event) {
     if (event.pointerType === 'touch') return
+    event.stopPropagation()
     // event.pointerId = 'mouse'
     pointerDownHandler(event)
 }
@@ -213,6 +216,9 @@ domObserver.deactivate = ()=>{
 function touchDownCapture(event) {
 
     var preventDefault = true
+
+    event.stopPropagation()
+
     for (var i in event.changedTouches) {
         if (isNaN(i) || !event.changedTouches[i]) continue
         var touchEvent = event.changedTouches[i]
@@ -225,7 +231,8 @@ function touchDownCapture(event) {
 
         touchEvent = pointerDownHandler(touchEvent)
 
-        if (touchEvent.cancelDragEvent) preventDefault = false
+        // allow scroll if drag is cancelled or widget is a container
+        if (touchEvent.cancelDragEvent || touchEvent.allowScroll) preventDefault = false
     }
     if (preventDefault) event.preventDefault()
 }
@@ -261,6 +268,20 @@ function touchUpCapture(event) {
 }
 
 
+
+function ancestorDragContainers(target) {
+    var containers = [],
+        container = target
+    while (container !== null) {
+        if (container._drag_widget) {
+            containers.splice(0, 0, container._drag_widget)
+            if (container._drag_widget.root) break
+        }
+        container = container.parentNode
+    }
+    return containers
+}
+
 function closestDragContainer(target) {
     var container = target
     while (container !== null) {
@@ -276,8 +297,18 @@ function closestDragContainer(target) {
 // Callback trigger
 
 function triggerWidgetEvent(target, name, event) {
-    var container = closestDragContainer(target)
-    if (container) container._drag_widget.trigger(name, event)
+
+    // trigger drag events from parent to child
+    var widgets = ancestorDragContainers(target),
+        widget
+
+    for (widget of widgets) {
+        widget.trigger(name, event)
+        if (event.preventDefault) break
+    }
+
+    // if child is a container, let it scroll
+    if (widget && widget.scroll) event.allowScroll = true
 }
 
 // init

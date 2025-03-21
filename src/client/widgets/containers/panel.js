@@ -45,6 +45,9 @@ class Panel extends Container() {
             children: {
                 widgets: {type: 'array', value: [], help: 'Each element of the array must be a widget object. A panel cannot contain widgets and tabs simultaneously.'},
                 tabs: {type: 'array', value: [], help: 'Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously'},
+            },
+            scripting: {
+                onTouch: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the session is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
             }
         })
 
@@ -267,6 +270,12 @@ class Panel extends Container() {
 
         if (this.getProp('traversing')) this.setTraversing()
 
+        if (this.getProp('onTouch')) {
+            this.on('draginit',(e)=>this.onTouch(e, 'start'), {element: this.container, multitouch: true})
+            this.on('drag',(e)=>this.onTouch(e, 'move'), {element: this.container, multitouch: true})
+            this.on('dragend',(e)=>this.onTouch(e, 'stop'), {element: this.container, multitouch: true})
+        }
+
     }
 
     createNavigation() {
@@ -345,6 +354,30 @@ class Panel extends Container() {
             this.scroll[1] = y
             if (updateDom) this.widget.scrollTop = y
         }
+
+    }
+
+    onTouch(e, name) {
+
+        var event = {...e}
+        delete event.firstTarget
+
+        event.targetName = event.target.getAttribute('name')
+        event.targetTagName = event.target.tagName
+
+        var w = widgetManager.getWidgetByElement(event.target)
+        if (w) event.target = w === this ? 'this' : w.getProp('id')
+        else event.target = null
+
+        event.type = name
+
+        this.scripts.onTouch.run({
+            value: this.value,
+            event: event
+        }, {sync: true, send: true})
+
+        if (name != 'stop' && event.preventDefault) e.preventDefault = true
+        if (event.allowScroll) e.allowScroll = true
 
     }
 

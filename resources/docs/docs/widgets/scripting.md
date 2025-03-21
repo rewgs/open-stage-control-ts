@@ -78,7 +78,15 @@ This script has access to the same variables and functions as the `script` prope
     - `type`: `"start"` or `"stop"`
     - `handle`: `undefined` if the event concerns the widget, `integer` if it concerns one of it's handles (`multixy` and `range` widgets only)
 
-Note: the [canvas](../canvas/) widgets exposes more informations in its `onTouch` script.
+[Canvas](../canvas/) and containers expose more informations in their `onTouch` script.
+
+??? infos "Containers onTouch"
+
+    Containers (root, panel, etc) can monitor touch events happening inside them, it works like with [Canvas](../canvas/#ontouch), with a few differences:
+
+    - setting `event.preventDefault` to `true` will prevent the event from reaching widgets in the container ('start' and 'move' events only)
+    - setting `event.allowScroll` to `true` will allow touch scrolling where it would normally be prevented ('start' event only)
+    - `width` and `height` are undefined
 
 ### `onDraw`
 

@@ -42,6 +42,7 @@ This script has access to the same variables and functions as the `script` prope
     - `targetTagName`: tag name of the html element under the pointer
     - `offsetX`, `offsetY`: touch coordinates in pixels, relative to the html element under the pointer
     - `movementX`, `movementY`: movement of the pointer in pixels since the last event
+    - `pageX`, `pageY`: touch coordinates in pixels, relative to the page
     - `pointerId`: unique identifier used to differentiate fingers in multitouch situation
     - `altKey`, `ctrlKey`, `shiftKey`: keyboard modifier states
     - `force`: amount of pressure applied to the touch surface between `0` and `1` (see [Touch.force](https://developer.mozilla.org/en-US/docs/Web/API/Touch/force)). Equals `0` if the API is not supported or if no pressure information is found.
