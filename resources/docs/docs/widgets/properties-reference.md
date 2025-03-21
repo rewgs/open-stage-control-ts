@@ -253,6 +253,12 @@
         | --- | --- | --- | --- |
             | <h6 id="panel_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#panel_value" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>""</code> | If the panel contains tabs, its value defines which tab is selected selected (by index, starting with 0).<br/><br/>If the panel contains widgets and `scroll` is `true`, its value is an array that contains the scrolling state between 0 and 1 for the x and y axis.  |
 
+    === "scripting"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="panel_onTouch">onTouch<a class="headerlink" href="#panel_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the session is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
+
     === "children"
 
         | property | type |default | description |
@@ -302,6 +308,12 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="modal_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#modal_value" title="Permanent link">#</a></h6> | `integer` | <code>""</code> | Defines the modal's state:`0` for closed, `1` for opened |
+
+    === "scripting"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="modal_onTouch">onTouch<a class="headerlink" href="#modal_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the session is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
 
     === "children"
 
@@ -361,6 +373,12 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="matrix_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#matrix_value" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>""</code> | If the panel contains tabs, its value defines which tab is selected selected (by index, starting with 0).<br/><br/>If the panel contains widgets and `scroll` is `true`, its value is an array that contains the scrolling state between 0 and 1 for the x and y axis.  |
+
+    === "scripting"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="matrix_onTouch">onTouch<a class="headerlink" href="#matrix_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the session is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
 
     === "children"
 
@@ -470,6 +488,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
+            | <h6 id="root_onTouch">onTouch<a class="headerlink" href="#root_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the session is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
             | <h6 id="root_onPreload">onPreload<a class="headerlink" href="#root_onPreload" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed before any other widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>. |
 
     === "children"
@@ -508,6 +527,12 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="tab_value">value<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#tab_value" title="Permanent link">#</a></h6> | `integer`&vert;<br/>`array` | <code>""</code> | If the panel contains tabs, its value defines which tab is selected selected (by index, starting with 0).<br/><br/>If the panel contains widgets and `scroll` is `true`, its value is an array that contains the scrolling state between 0 and 1 for the x and y axis.  |
+
+    === "scripting"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="tab_onTouch">onTouch<a class="headerlink" href="#tab_onTouch" title="Permanent link">#</a></h6> | `script` | <code>""</code> | Script executed when the session is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>. |
 
     === "children"
 
