@@ -162,7 +162,7 @@ class Range extends Fader {
 
         if (!i) return
 
-        e.inertia = 1 // cancel multifinger inertia
+        e.fingers = 1 // cancel multifinger inertia
 
         if (e.shiftKey) {
             this.faders[0].trigger('drag', e)

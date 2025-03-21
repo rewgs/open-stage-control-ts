@@ -108,10 +108,10 @@ class Fader extends Slider {
 
         var padding = this.gaugePadding
         if (this.getProp('design') === 'compact') padding += this.cssVars.knobSize / 2
-
+        var inertia = e.fingers > 1 || e.ctrlKey ? 10 : e.inertia
         this.percent = this.getProp('horizontal')?
-            this.percent + ( e.movementX / (this.width - padding * 2)) * 100 / e.inertia * this.getProp('sensitivity'):
-            this.percent + (-e.movementY / (this.height - padding * 2)) * 100  / e.inertia * this.getProp('sensitivity')
+            this.percent + ( e.movementX / (this.width - padding * 2)) * 100 / inertia * this.getProp('sensitivity'):
+            this.percent + (-e.movementY / (this.height - padding * 2)) * 100  / inertia * this.getProp('sensitivity')
 
         this.setValue(this.percentToValue(this.percent), {send:true,sync:true,dragged:true})
 

@@ -157,7 +157,7 @@ class MultiXy extends Pad {
 
             if (!i) return
 
-            e.inertia = 1 // cancel mutlifinger inertia
+            e.fingers = 1 // cancel mutlifinger inertia
 
             this.pads[i].trigger('drag', e)
 

@@ -262,15 +262,10 @@ function touchMoveCapture(event) {
     for (var i in event.changedTouches) {
         if (isNaN(i) || !event.changedTouches[i]) continue
         var touchEvent = event.changedTouches[i]
-
-        var fingers = 0
+        touchEvent.fingers = 0
         for (var j in event.touches) {
             if (event.touches[j].target && event.touches[j].target.isSameNode(touchEvent.target)) {
-                fingers += 1
-                if (fingers == 2) {
-                    touchEvent.inertia = 10
-                    break
-                }
+                touchEvent.fingers += 1
             }
         }
 

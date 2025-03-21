@@ -376,6 +376,8 @@ class Panel extends Container() {
             event: event
         }, {sync: true, send: true})
 
+        e.inertia = event.inertia
+
         if (name != 'stop' && event.preventDefault) e.preventDefault = true
         if (event.allowScroll) e.allowScroll = true
 

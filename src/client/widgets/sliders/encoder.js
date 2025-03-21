@@ -112,10 +112,11 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
     dragHandle(e) {
 
         // knob.js without clipping + extra case for snap
+        var inertia = e.fingers > 1 || e.ctrlKey ? 10 : e.inertia
 
         if ((this.getProp('mode') === 'vertical' && !e.traversing)) {
             // vertical
-            this.setPercent(this.percent + (-100 * e.movementY / this.height) * this.getProp('sensitivity') / e.inertia)
+            this.setPercent(this.percent + (-100 * e.movementY / this.height) * this.getProp('sensitivity') / inertia)
 
         } else {
             // snap or circular
@@ -124,7 +125,7 @@ module.exports = class Encoder extends StaticProperties(Knob, {angle: 360, range
 
             var diff = this.angleToPercent(this.coordsToAngle(offsetX, offsetY), true) - this.angleToPercent(this.coordsToAngle(this.lastOffsetX, this.lastOffsetY), true)
             if (Math.abs(diff) < 50 && diff !== 0) {
-                diff = diff * this.getProp('sensitivity') / e.inertia
+                diff = diff * this.getProp('sensitivity') / inertia
                 this.setPercent(this.percent + diff)
             }
 
