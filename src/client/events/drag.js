@@ -385,7 +385,7 @@ module.exports = {
             if (event.ctrlKey) return
             if (!event.traversingStack) event.traversingStack = {firstType: '', stack: []}
             event.traversingStack.stack.push({
-                container: element,
+                container: element.parentNode,
                 mode: traversing,
                 type: traversingType
             })
