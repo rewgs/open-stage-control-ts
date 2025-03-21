@@ -376,7 +376,7 @@ class Panel extends Container() {
             event: event
         }, {sync: true, send: true})
 
-        e.inertia = event.inertia
+        e.inertia = parseFloat(event.inertia) || 1
 
         if (name != 'stop' && event.preventDefault) e.preventDefault = true
         if (event.allowScroll) e.allowScroll = true

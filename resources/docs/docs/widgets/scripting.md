@@ -86,6 +86,7 @@ This script has access to the same variables and functions as the `script` prope
 
     - setting `event.preventDefault` to `true` will prevent the event from reaching widgets in the container ('start' and 'move' events only)
     - setting `event.allowScroll` to `true` will allow touch scrolling where it would normally be prevented ('start' event only)
+    - setting `event.inertia` will affect 'move' events (works like widget `sensitivity` in reverse (1 = normal, 10 = slow move))
     - `width` and `height` are undefined
 
     Containers with `traversing` enabled change how touch events are emitted:
