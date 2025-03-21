@@ -6,6 +6,8 @@ var Container = (Class=Widget)=> class extends Class {
 
         super(options)
 
+        this.isContainer = true
+
         this.on('widget-created', (e)=>{
 
             if (e.widget.parent === this) {

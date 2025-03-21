@@ -26,13 +26,16 @@ function pointerDownHandler(event) {
         var widget = target._drag_widget,
             local = event.traversingStack.stack[event.traversingStack.stack.length - 1]
 
-        if (widget.getProp) event.traversingStack.firstType = widget.getProp('type')
+        if (widget.getProp) {
+            // if first touched widget is a container, wait until another widget is touched while moving
+            event.traversingStack.firstType = widget.isContainer ? '?' : widget.getProp('type')
+        }
 
         if (local.mode === TRAVERSING_SAMEWIDGET) {
             if (local.type === '') {
                 local.type = event.traversingStack.firstType
             }
-            event.traversing = local.type === event.traversingStack.firstType
+            event.traversing = local.type === event.traversingStack.firstType || event.traversingStack.firstType === '?'
         } else {
             event.traversing = true
         }
@@ -68,7 +71,10 @@ function pointerMoveHandler(event) {
 
         if (target) target = closestDragContainer(target)
 
-        var local = null
+        var local = null,
+            containersOnly = false,
+            backupTarget = target
+
         if (target && event.traversingStack) {
             for (var i = event.traversingStack.stack.length - 1; i > -1; i--) {
                 if (event.traversingStack.stack[i].container.contains(target)) {
@@ -78,8 +84,9 @@ function pointerMoveHandler(event) {
             }
             if (!local) {
                 target = null
-            } else if (local.mode === TRAVERSING_SAMEWIDGET && local.type) {
+            } else if (local.mode === TRAVERSING_SAMEWIDGET) {
                 var widget = target._drag_widget
+                if (local.type === '?' && widget.getProp && !widget.isContainer) local.type = widget.getProp('type')
                 if (widget.getProp && local.type !== widget.getProp('type')) target = null
             }
         }
@@ -91,13 +98,27 @@ function pointerMoveHandler(event) {
             resetEventOffset(event, target)
         }
 
-        if (previousTarget !== target) {
+        if (previousTarget !== target && !containersOnly) {
             triggerWidgetEvent(previousTarget, 'dragend', event)
         }
 
 
-        if (target && event.traversing) {
-            triggerWidgetEvent(target, previousTarget !== target ? 'draginit' : 'drag', event)
+        if (target) {
+
+            if (previousTarget === target) {
+
+                triggerWidgetEvent(target, 'drag', event)
+
+            } else  {
+                triggerWidgetEvent(target, 'draginit', event)
+
+            }
+
+        } else {
+
+            // notify container of move events if no draggable widget is under the pointer
+            triggerWidgetEvent(backupTarget, 'drag', event, true)
+
         }
 
         targets[event.pointerId] = target
@@ -296,13 +317,14 @@ function closestDragContainer(target) {
 
 // Callback trigger
 
-function triggerWidgetEvent(target, name, event) {
+function triggerWidgetEvent(target, name, event, containersOnly) {
 
     // trigger drag events from parent to child
     var widgets = ancestorDragContainers(target),
         widget
 
     for (widget of widgets) {
+        if (containersOnly && !widget.isContainer) continue
         widget.trigger(name, event)
         if (event.preventDefault) break
     }

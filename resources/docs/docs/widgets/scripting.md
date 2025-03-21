@@ -88,6 +88,12 @@ This script has access to the same variables and functions as the `script` prope
     - setting `event.allowScroll` to `true` will allow touch scrolling where it would normally be prevented ('start' event only)
     - `width` and `height` are undefined
 
+    Containers with `traversing` enabled change how touch events are emitted:
+
+    - a new 'stop' event is emitted whenever the gestures exits a touchable widget
+    - a new 'start' event is emitted whenever the gestures enters a touchable widget
+
+
 ### `onDraw`
 
 See [canvas](../canvas/).
