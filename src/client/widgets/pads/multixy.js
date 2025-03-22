@@ -76,7 +76,7 @@ class MultiXy extends Pad {
 
         this.npoints = Array.isArray(this.getProp('points')) ? this.getProp('points').length : parseInt(this.getProp('points'))
 
-        if (isNaN(this.npoints) || this.points < 1) this.npoints = 1
+        if (isNaN(this.npoints) || this.npoints < 1) this.npoints = 1
 
         this.preventChildrenTouchState = true
         this.pads = []
