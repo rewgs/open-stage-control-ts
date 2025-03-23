@@ -198,6 +198,7 @@ class Canvas extends Widget {
             case 'alphaFillOn':
             case 'colorBg':
             case 'pointSize':
+            case 'knobSize':
                 fastdom.measure(()=>{
                     this.cacheCanvasStyle()
                     fastdom.mutate(()=>{

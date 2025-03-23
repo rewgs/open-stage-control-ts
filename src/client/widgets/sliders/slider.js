@@ -291,6 +291,7 @@ class Slider extends Canvas {
                 if (this.getProp('spring') && !this.touched) this.setValue(this.getSpringValue(), {...options})
                 return
             case 'colorKnob':
+            case 'knobSize':
                 this.setCssVariables()
                 return
 
@@ -312,7 +313,8 @@ Slider.dynamicProps = Slider.prototype.constructor.dynamicProps
         'spring',
         'sensitivity',
         'default',
-        'colorKnob'
+        'colorKnob',
+        'knobSize'
     ])
 
 module.exports = Slider
