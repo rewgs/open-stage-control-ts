@@ -362,8 +362,8 @@ class Panel extends Container() {
         var event = {...e}
         delete event.firstTarget
 
-        event.targetName = event.target.getAttribute('name')
-        event.targetTagName = event.target.tagName
+        event.targetName = event.target ? event.target.getAttribute('name') : ''
+        event.targetTagName = event.target ? event.target.tagName : ''
 
         var w = widgetManager.getWidgetByElement(event.target)
         if (w) event.target = w === this ? 'this' : w.getProp('id')
