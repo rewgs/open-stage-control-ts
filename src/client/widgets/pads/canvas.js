@@ -93,38 +93,9 @@ class CanvasWidget extends Canvas {
                 }
             })
 
-            var touchCb = (e, type)=>{
-
-                var event = {...e}
-                delete event.firstTarget
-                event.targetName = event.target.getAttribute('name')
-                event.targetTagName = event.target.tagName
-                var w = widgetManager.getWidgetByElement(event.target)
-                if (w) event.target = w === this ? 'this' : w.getProp('id')
-                else event.target = null
-                event.type = type
-
-                this.scripts.onTouch.run({
-                    value: this.value,
-                    width: this.width,
-                    height: this.height,
-                    event: event,
-                }, {sync: true, send: true})
-
-                this.batchDraw()
-            }
-
-            this.on('draginit',(e)=>{
-                touchCb(e, 'start')
-            }, {element: this.container, multitouch: true})
-
-            this.on('drag',(e)=>{
-                touchCb(e, 'move')
-            }, {element: this.container, multitouch: true})
-
-            this.on('dragend',(e)=>{
-                touchCb(e, 'stop')
-            }, {element: this.container, multitouch: true})
+            this.on('draginit',(e)=>this.onTouch(e, 'start'), {element: this.container, multitouch: true})
+            this.on('drag',(e)=>this.onTouch(e, 'move'), {element: this.container, multitouch: true})
+            this.on('dragend',(e)=>this.onTouch(e, 'stop'), {element: this.container, multitouch: true})
 
         }
 
@@ -137,6 +108,31 @@ class CanvasWidget extends Canvas {
         }
 
     }
+
+    onTouch(e, name) {
+
+        var event = {...e}
+        delete event.firstTarget
+
+        event.targetName = event.target ? event.target.getAttribute('name') : ''
+        event.targetTagName = event.target ? event.target.tagName : ''
+
+        var w = widgetManager.getWidgetByElement(event.target)
+        if (w) event.target = w === this ? 'this' : w.getProp('id')
+        else event.target = null
+
+        event.type = name
+
+        this.scripts.onTouch.run({
+            value: this.value,
+            width: this.width,
+            height: this.height,
+            event: event,
+        }, {sync: true, send: true})
+
+        this.batchDraw()
+
+   }
 
     setValue(v, options={}) {
 
