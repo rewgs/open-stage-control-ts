@@ -132,7 +132,7 @@ class CanvasWidget extends Canvas {
 
         this.batchDraw()
 
-   }
+    }
 
     setValue(v, options={}) {
 
