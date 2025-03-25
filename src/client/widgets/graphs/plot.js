@@ -3,7 +3,7 @@ var {mapToScale} = require('../utils'),
     html = require('nanohtml'),
     StaticProperties = require('../mixins/static_properties')
 
-module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, interaction: false}) {
+module.exports = class Plot extends StaticProperties(Canvas, {bypass: true}) {
 
     static description() {
 
@@ -15,7 +15,7 @@ module.exports = class Plot extends StaticProperties(Canvas, {bypass: true, inte
 
         return super.defaults().extend({
             widget: {
-                interaction: null
+                interaction: {value: false}
             },
             style: {
                 _separator_plot_style: 'Plot style',

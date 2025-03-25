@@ -1,9 +1,8 @@
 var {mapToScale} = require('../utils'),
     Widget = require('../common/widget'),
-    html = require('nanohtml'),
-    StaticProperties = require('../mixins/static_properties')
+    html = require('nanohtml')
 
-module.exports = class Led extends StaticProperties(Widget, {interaction: false}) {
+module.exports = class Led extends Widget {
 
     static description() {
 
@@ -15,7 +14,7 @@ module.exports = class Led extends StaticProperties(Widget, {interaction: false}
 
         return super.defaults().extend({
             widget: {
-                interaction: null
+                interaction: {value: false}
             },
             class_specific: {
                 mode: {type: 'string', value: 'intensity', choices: ['intensity', 'color'], help: 'Defines how value is interpreted (see `value`)'},

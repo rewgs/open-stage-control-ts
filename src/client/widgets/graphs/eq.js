@@ -14,7 +14,7 @@ class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smoo
 
         return super.defaults().extend({
             widget: {
-                interaction: null
+                interaction: {value: false}
             },
             class_specific: {
                 filters: {type: 'array', value: '', help: [

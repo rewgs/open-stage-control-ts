@@ -1,9 +1,8 @@
 var {iconify} = require('../../ui/utils'),
     Widget = require('../common/widget'),
-    html = require('nanohtml'),
-    StaticProperties = require('../mixins/static_properties')
+    html = require('nanohtml')
 
-module.exports = class Text extends StaticProperties(Widget, {interaction: false}) {
+module.exports = class Text extends Widget {
 
     static description() {
 
@@ -15,7 +14,7 @@ module.exports = class Text extends StaticProperties(Widget, {interaction: false
 
         return super.defaults().extend({
             widget: {
-                interaction: null
+                interaction: {value: false}
             },
             style: {
                 _separator_text_style: 'Text style',

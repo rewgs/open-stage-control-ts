@@ -4,7 +4,7 @@ var {clip} = require('../utils'),
     canvasQueue = require('../common/queue')
 
 
-class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false, interaction: false}) {
+class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false}) {
 
     static description() {
 
@@ -16,7 +16,7 @@ class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dot
 
         return super.defaults().extend({
             widget: {
-                interaction: null
+                interaction: {value: false}
             },
             style: {
                 bars: null,
