@@ -590,6 +590,12 @@
 ??? api "<div id="plot">plot<a class="headerlink" href="#plot" title="Permanent link">#</a></div>"
     XY coordinates plot.
 
+    === "widget"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="plot_interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#plot_interaction" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `false` to disable pointer interactions. |
+
     === "style"
 
         | property | type |default | description |
@@ -624,6 +630,12 @@
 ??? api "<div id="eq">eq<a class="headerlink" href="#eq" title="Permanent link">#</a></div>"
     Draws logarithmic frequency response from an array of filter objects.
 
+    === "widget"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="eq_interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#eq_interaction" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `false` to disable pointer interactions. |
+
     === "style"
 
         | property | type |default | description |
@@ -657,6 +669,12 @@
 
 ??? api "<div id="visualizer">visualizer<a class="headerlink" href="#visualizer" title="Permanent link">#</a></div>"
     Display its value over time.
+
+    === "widget"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="visualizer_interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#visualizer_interaction" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `false` to disable pointer interactions. |
 
     === "style"
 
@@ -694,6 +712,12 @@
 ??? api "<div id="led">led<a class="headerlink" href="#led" title="Permanent link">#</a></div>"
     Intensity display.
 
+    === "widget"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="led_interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#led_interaction" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `false` to disable pointer interactions. |
+
     === "led"
 
         | property | type |default | description |
@@ -711,6 +735,12 @@
 
 ??? api "<div id="text">text<a class="headerlink" href="#text" title="Permanent link">#</a></div>"
     Display text.
+
+    === "widget"
+
+        | property | type |default | description |
+        | --- | --- | --- | --- |
+            | <h6 id="text_interaction">interaction<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#text_interaction" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `false` to disable pointer interactions. |
 
     === "style"
 
@@ -846,7 +876,7 @@
         | --- | --- | --- | --- |
             | <h6 id="fader_css">css<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#fader_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Some style-related properties can be set or read from css using css variables:<br/>- `--color-background`: `colorBg`<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--widget-padding`: `padding`<br/>- `--line-width`: `lineWidth`<br/>- `--border-radius`: `borderRadius`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--alpha-pips`: `alphaPips`<br/>- `--alpha-pips-text`: `alphaPipsText`<br/><br/>Canvas-based widget have their computed width and height available as css variables (read-only):<br/>- `--widget-width`<br/>- `--widget-height` |
             | <h6 id="fader_design">design<a class="headerlink" href="#fader_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Choices: `default`, `round`, `compact` |
-            | <h6 id="fader_knobSize">knobSize<a class="headerlink" href="#fader_knobSize" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fader knob size |
+            | <h6 id="fader_knobSize">knobSize<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#fader_knobSize" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fader knob size |
             | <h6 id="fader_colorKnob">colorKnob<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#fader_colorKnob" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Fader knob color |
             | <h6 id="fader_horizontal">horizontal<a class="headerlink" href="#fader_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
             | <h6 id="fader_pips">pips<a class="headerlink" href="#fader_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show range breakpoints (ignored if `design` is `compact`) |
@@ -922,7 +952,7 @@
         | property | type |default | description |
         | --- | --- | --- | --- |
             | <h6 id="encoder_mode">mode<a class="headerlink" href="#encoder_mode" title="Permanent link">#</a></h6> | `string` | <code>"circular"</code> | - `circular`: relative move in circular motion<br/>- `snap`: snap to touch position and move in vertical motion<br/>- `vertical`: relative move in vertical motion<br/><br/>Choices: `circular`, `snap`, `vertical` |
-            | <h6 id="encoder_doubleTap">doubleTap<a class="headerlink" href="#encoder_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`) |
+            | <h6 id="encoder_doubleTap">doubleTap<a class="headerlink" href="#encoder_doubleTap" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to make the fader reset to its `default` value when receiving a double tap.<br/><br/>Can also be an osc address, in which case the widget will just send an osc message (`/<doubleTap> <preArgs>`)<br/><br/>Choices: `false`, `true`, `script` |
             | <h6 id="encoder_range">range<a class="headerlink" href="#encoder_range" title="Permanent link">#</a></h6> | `object` | <code>\{<br/>&nbsp;"min": 0,<br/>&nbsp;"max": 1<br/>}</code> | Defines the breakpoints of the fader's scale:<br/>- keys can be percentages and/or `min` / `max`<br/>- values can be `number` or `object` if a custom label is needed<br/><br/>Example: (`{min:{"-inf": 0}, "50%": 0.25, max: {"+inf": 1}}`) |
             | <h6 id="encoder_logScale">logScale<a class="headerlink" href="#encoder_logScale" title="Permanent link">#</a></h6> | `boolean`&vert;<br/>`number` | <code>false</code> | Set to `true` to use logarithmic scale. Set to `-1` for exponential scale. |
             | <h6 id="encoder_sensitivity">sensitivity<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#encoder_sensitivity" title="Permanent link">#</a></h6> | `number` | <code>1</code> | When set between 0 and 1, reduces the encoder's verbosity |
@@ -947,7 +977,7 @@
         | --- | --- | --- | --- |
             | <h6 id="range_css">css<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#range_css" title="Permanent link">#</a></h6> | `string` | <code>""</code> | CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.<br/><br/>Some style-related properties can be set or read from css using css variables:<br/>- `--color-background`: `colorBg`<br/>- `--color-widget`: `colorWidget`<br/>- `--color-fill`: `colorFill`<br/>- `--color-stroke`: `colorStroke`<br/>- `--color-text`: `colorText`<br/>- `--widget-padding`: `padding`<br/>- `--line-width`: `lineWidth`<br/>- `--border-radius`: `borderRadius`<br/>- `--alpha-fill-on`: `alphaFillOn`<br/>- `--alpha-fill-off`: `alphaFillOff`<br/>- `--alpha-stroke`: `alphaStroke`<br/>- `--alpha-pips`: `alphaPips`<br/>- `--alpha-pips-text`: `alphaPipsText`<br/><br/>Canvas-based widget have their computed width and height available as css variables (read-only):<br/>- `--widget-width`<br/>- `--widget-height` |
             | <h6 id="range_design">design<a class="headerlink" href="#range_design" title="Permanent link">#</a></h6> | `string` | <code>"default"</code> | Design style<br/><br/>Choices: `default`, `round`, `compact` |
-            | <h6 id="range_knobSize">knobSize<a class="headerlink" href="#range_knobSize" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fader knob size |
+            | <h6 id="range_knobSize">knobSize<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#range_knobSize" title="Permanent link">#</a></h6> | `number` | <code>"auto"</code> | Fader knob size |
             | <h6 id="range_colorKnob">colorKnob<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#range_colorKnob" title="Permanent link">#</a></h6> | `string` | <code>"auto"</code> | Fader knob color |
             | <h6 id="range_horizontal">horizontal<a class="headerlink" href="#range_horizontal" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to display the fader horizontally |
             | <h6 id="range_pips">pips<a class="headerlink" href="#range_pips" title="Permanent link">#</a></h6> | `boolean` | <code>false</code> | Set to `true` to show range breakpoints (ignored if `design` is `compact`) |

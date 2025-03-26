@@ -91,8 +91,8 @@ This script has access to the same variables and functions as the `script` prope
 
     Containers with `traversing` enabled change how touch events are emitted:
 
-    - a new 'stop' event is emitted whenever the gestures exits a touchable widget
-    - a new 'start' event is emitted whenever the gestures enters a touchable widget
+    - a new 'stop' event is emitted whenever the pointer exits a touchable widget while pressed.
+    - a new 'start' event is emitted whenever the pointer enters a touchable widget while pressed.
 
 
 ### `onDraw`
