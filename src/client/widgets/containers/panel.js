@@ -359,15 +359,19 @@ class Panel extends Container() {
 
     onTouch(e, name) {
 
-        var event = {...e}
-        delete event.firstTarget
+        var event = {...e},
+            w
 
         event.targetName = event.target ? event.target.getAttribute('name') : ''
         event.targetTagName = event.target ? event.target.tagName : ''
 
-        var w = widgetManager.getWidgetByElement(event.target)
+        w = widgetManager.getWidgetByElement(event.target)
         if (w) event.target = w === this ? 'this' : w.getProp('id')
         else event.target = null
+
+        w = widgetManager.getWidgetByElement(event.firstTarget)
+        if (w) event.firstTarget = w === this ? 'this' : w.getProp('id')
+        else event.firstTarget = null
 
         event.type = name
 
