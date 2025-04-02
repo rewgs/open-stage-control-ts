@@ -516,7 +516,9 @@ module.exports =  {
 
                     if (error) {
 
-                        ipc.send('notify', {class: 'error', message: 'Failed to list available drives.'}, clientId)
+                        ipc.send('notify', {class: 'error', message: 'Failed to list available drives (see server console).'}, clientId)
+                        console.error('(ERROR) Failed to list available drives.')
+                        console.error(error.stack)
 
                     } else {
 
