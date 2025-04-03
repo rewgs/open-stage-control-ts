@@ -2,6 +2,9 @@
 
 ## 1.29.0
 
+- bug fixes
+    - file browser: drive listing failing on recent windows
+
 - widgets
     - add `onTouch` to all container widgets
     - allow starting a traversing gesture outside a touchable widget

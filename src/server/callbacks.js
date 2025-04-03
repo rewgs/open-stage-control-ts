@@ -512,8 +512,7 @@ module.exports =  {
             // Drive list hack on windows
             if (data.path.length === 2 && data.path[1] === '..' && (data.path[0].match(/^[A-Z]:\\$/) || data.path[0] === '\\')) {
 
-                // child_process.exec('wmic logicaldisk get name', (error, stdout) => {
-                child_process.exec('(get-wmiobject win32_volume | ? { $_.DriveType -eq 3 } | % { get-psdrive $_.DriveLetter[0] }).Root', {shell: 'powershell.exe'}, (error, stdout) => {
+                child_process.exec('(get-wmiobject win32_volume | ? { $_.DriveType -eq 3 } | % { get-psdrive $_.DriveLetter[0] }).Root -join " "', {shell: 'powershell.exe'}, (error, stdout) => {
 
                     if (error) {
 
