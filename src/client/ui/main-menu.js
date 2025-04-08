@@ -210,6 +210,7 @@ var menuEntries = [
     },
     {
         label: locales('fullscreen'),
+        disabled: KIOSK && navigator.userAgent.match(/OpenStageControl/), // built-in electron client only
         class: ()=>{return 'toggle ' + (fullscreen.isFullscreen ? 'on' : 'off')},
         action: ()=>{
             if (fullscreen.isEnabled) fullscreen.toggle()

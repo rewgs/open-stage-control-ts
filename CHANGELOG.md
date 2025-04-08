@@ -5,6 +5,7 @@
 - bug fixes
     - file browser: drive listing failing on recent windows
     - root: `hideMenu` not working when `--read-only` is set
+    - combining `--read-only` and `--fullscreen` now disables `F11` on built-in client
 
 - widgets
     - add `onTouch` to all container widgets
