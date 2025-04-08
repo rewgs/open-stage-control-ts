@@ -4,6 +4,7 @@
 
 - bug fixes
     - file browser: drive listing failing on recent windows
+    - root: `hideMenu` not working when `--read-only` is set
 
 - widgets
     - add `onTouch` to all container widgets
