@@ -82,8 +82,6 @@ This script has access to the same variables and functions as the `script` prope
 
 ??? infos "Containers onTouch"
 
-    *Currently only available in v1.29.0-beta*
-
     Containers (root, panel, etc) can monitor touch events happening inside them, it works like with [Canvas](../canvas/#ontouch), with a few differences:
 
     - `event.firstTarget` will return the id of the first touched widget
