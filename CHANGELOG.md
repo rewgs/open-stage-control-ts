@@ -6,6 +6,7 @@
     - file browser: drive listing failing on recent windows
     - root: `hideMenu` not working when `--read-only` is set
     - combining `--read-only` and `--fullscreen` now disables `F11` on built-in client
+    - regression breaking `pips` for range widget
 
 - widgets
     - add `onTouch` to all container widgets
