@@ -445,9 +445,7 @@ class ScriptVm extends Vm {
                 var widgets = this.resolveId(id)
 
                 if (widgets.length) {
-                    setTimeout(()=>{
-                        if (widgets[0].focus) widgets[0].focus()
-                    })
+                    if (widgets[0].focus) widgets[0].focus()
                 }
             }
 
