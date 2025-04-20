@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 1.29.1
+## 1.29.1 / 1.29.2
 
 - bug fixes
     - scripting: `setFocus` not working on iOS
