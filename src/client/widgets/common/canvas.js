@@ -101,7 +101,10 @@ class Canvas extends Widget {
                 this.hasSize = true
                 this.setVisibility()
             }
-            this.draw()
+
+            if (this.width > 0 && this.height > 0 && this.visible) {
+                this.draw()
+            }
 
         })
 
