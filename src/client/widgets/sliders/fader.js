@@ -390,7 +390,7 @@ class Fader extends Slider {
             this.shouldDrawPips = false
         }
 
-        if (this.getProp('pips') && !compact) {
+        if (this.pips) {
             this.ctx.globalAlpha = 1
             this.ctx.drawImage(this.pips, 0, 0)
             if (!compact) this.clearRect = [this.clearRect, [m + knobWidth / 2, 0, 12 * PXSCALE + this.pipsTextSize, height]]

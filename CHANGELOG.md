@@ -5,6 +5,7 @@
 
 - bug fixes
     - scripting: `setFocus` not working on iOS
+    - fader/range: drawing error with `pips` enabled
 
 ## 1.29.0
 
