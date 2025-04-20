@@ -401,7 +401,7 @@ class Fader extends Slider {
 
     drawPips() {
 
-        this.pips = this.canvas.cloneNode()
+        this.pips = this.pips || this.canvas.cloneNode()
         this.pips.width = this.getProp('horizontal') ? this.height : this.width
         this.pips.height = !this.getProp('horizontal') ? this.height : this.width
         this.pipsTextSize = this.fontSize
