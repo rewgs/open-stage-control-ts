@@ -1,4 +1,3 @@
-// var sass = require('node-sass'),
 var sass = require("sass"),
   path = require("path"),
   fs = require("fs");
