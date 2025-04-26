@@ -1,0 +1,2 @@
+-   Change `require` to `import`.
+-   Change `var` to `let` or `const` where applicable.

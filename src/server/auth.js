@@ -1,22 +1,25 @@
-var settings = require('./settings'),
-    auth = null
+// var settings = require('./settings'),
 
-if (settings.read('authentication')) {
+import "http-auth";
 
-    var [name, pwd] = settings.read('authentication').split(':'),
-        httpAuth = require('http-auth')
+import "./settings";
 
-    auth = httpAuth.basic(
-        {
-            realm: 'Open Stage Control'
-        },
-        (username, password, callback) => {
-            // Custom authentication method.
-            callback(username === name && password === pwd)
-        }
-    )
+auth = null;
 
+if (settings.read("authentication")) {
+    var [name, pwd] = settings.read("authentication").split(":"),
+        // Moving this to top.
+        // httpAuth = require("http-auth");
+
+        auth = httpAuth.basic(
+            {
+                realm: "Open Stage Control",
+            },
+            (username, password, callback) => {
+                // Custom authentication method.
+                callback(username === name && password === pwd);
+            }
+        );
 }
 
-
-module.exports = auth
+module.exports = auth;
